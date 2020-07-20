@@ -465,6 +465,7 @@ class CreateAccountActivity  : AppCompatActivity() {
 
         intent.putExtra("fullName", etNameValue)
         intent.putExtra("username", etUsernameValue)
+        intent.putExtra("email", etEmailValue)
         intent.putExtra("phone", etPhoneValue)
         intent.putExtra("password", etPasswordValue)
 

@@ -39,7 +39,10 @@ dependencies {
     //Login Buttons
     implementation 'com.shaishavgandhi:login-buttons:1.0.0'
     // firebase
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
     implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

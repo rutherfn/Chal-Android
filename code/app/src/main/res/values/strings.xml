@@ -13,6 +13,7 @@
     <string name="done">Done</string>
     <string name="email">Email</string>
     <string name="error_creating_create_account_fields">One of the require fields are incorrect. Press OK to try again.</string>
+    <string name="error_creating_account_firebase">Error Creating Account. Please Check Your Internet Connection</string>
     <string name="error_name">No name entered</string>
     <string name="error_username">No username entered</string>
     <string name="error_email">Email is not valid</string>
@@ -26,6 +27,7 @@
     <string name="full_name">Full Name</string>
     <string name="in_order_to_reset_password">in order to reset password</string>
     <string name="loading">Loading</string>
+    <string name="loading_account">Loading Your Account... </string>
     <string name="login_text"><u>Log In</u></string>
     <string name="name">Name</string>
     <string name="ok">OK</string>
@@ -44,6 +46,7 @@
     <string name="social_media_instagram_content_desc">Social Media Icon Instagram</string>
     <string name="social_media_facebook_content_desc">Social Media Icon Facebook</string>
     <string name="social_media_twitter_content_desc">Social Media Icon Twitter</string>
+    <string name="successful">Successful</string>
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
     <string name="username">Username</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>

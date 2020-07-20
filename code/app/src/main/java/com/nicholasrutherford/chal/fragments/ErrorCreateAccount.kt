@@ -8,7 +8,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.activitys.accounts.CreateAccountActivity
+import com.nicholasrutherford.chal.activitys.accounts.UploadPhotoActivity
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
@@ -35,6 +38,7 @@ class ErrorCreateAccount : DialogFragment() {
         setupIds()
         setTypefaceAndTextColor()
         okBtnListener()
+        setTextForActivityDialogAlert()
     }
 
     private fun setupIds() {
@@ -52,6 +56,16 @@ class ErrorCreateAccount : DialogFragment() {
 
             helper.setTextViewColor(it, tvErrorCreating, R.color.colorPrimary)
             helper.setTextViewColor(it, btnOk, R.color.colorBlack)
+        }
+    }
+
+    private fun setTextForActivityDialogAlert() {
+        if(activity == CreateAccountActivity::class.java) {
+            tvErrorCreating.text = getText(R.string.error_creating_create_account_fields)
+        }
+        if(activity == UploadPhotoActivity::class.java) {
+            // could be multiple reasons why firebase does not work, find a way to get why
+            tvErrorCreating.text = getText(R.string.error_creating_account_firebase)
         }
     }
 

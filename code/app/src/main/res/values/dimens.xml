@@ -44,8 +44,11 @@
     <dimen name="iv_username_error_width">25dp</dimen>
     <dimen name="iv_password_error_height">25dp</dimen>
     <dimen name="iv_password_error_width">25dp</dimen>
+    <dimen name="success_create_account_width">50dp</dimen>
+    <dimen name="success_create_account_height">50dp</dimen>
     <dimen name="error_create_account_width">50dp</dimen>
     <dimen name="error_create_account_height">50dp</dimen>
+    <dimen name="success_require_field_width">700dp</dimen>
     <dimen name="error_require_field_width">700dp</dimen>
     <dimen name="iv_take_a_picture_width">200dp</dimen>
     <dimen name="iv_take_a_picture_height">200dp</dimen>
