@@ -2,11 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nicholasrutherford.chal">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/chalappicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/chalappicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activitys.SplashActivity">
@@ -17,9 +19,32 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".activitys.accounts.LoginActivity"
+            android:windowSoftInputMode="adjustPan">
 
         </activity>
+
+        <activity android:name=".activitys.accounts.SignUpActivity">
+        </activity>
+
+        <activity android:name=".activitys.accounts.SocialMediaWebActivity">
+
+        </activity>
+
+        <activity android:name=".activitys.accounts.ForgotPasswordActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+
+        <activity android:name=".activitys.accounts.CreateAccountActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity android:name=".activitys.accounts.UploadPhotoActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
     </application>
 
 </manifest>

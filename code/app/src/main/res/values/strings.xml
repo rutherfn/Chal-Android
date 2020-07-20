@@ -1,3 +1,51 @@
 <resources>
-    <string name="app_name">chal</string>
+    <string name="app_name">Chal.</string>
+
+    <string name="add_photo_later">Add Photo Later</string>
+    <string name="account">Account</string>
+    <string name="already_have_a_account_text">Already have a account?</string>
+    <string name="clear_photo">Clear Photo</string>
+    <string name="click_me_to_take_a_picture">Click Me To Take A Picture</string>
+    <string name="continue_creating">Continue</string>
+    <string name="choose_from_library">Choose From Library</string>
+    <string name="create">Create</string>
+    <string name="do_not_have_account">Don\'t Have A Account?</string>
+    <string name="done">Done</string>
+    <string name="email">Email</string>
+    <string name="error_creating_create_account_fields">One of the require fields are incorrect. Press OK to try again.</string>
+    <string name="error_name">No name entered</string>
+    <string name="error_username">No username entered</string>
+    <string name="error_email">Email is not valid</string>
+    <string name="error_email_entered">No email is entered</string>
+    <string name="error_phone">Phone must not be more then 10 digits long.</string>
+    <string name="error_phone_not_valid">Phone number not valid.</string>
+    <string name="error_password">One capital letter and one number.</string>
+    <string name="fake_phone">414323312</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="forgot_your_password">Forgot Your Password></string>
+    <string name="full_name">Full Name</string>
+    <string name="in_order_to_reset_password">in order to reset password</string>
+    <string name="loading">Loading</string>
+    <string name="login_text"><u>Log In</u></string>
+    <string name="name">Name</string>
+    <string name="ok">OK</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="please_enter_your_email">Please Enter Your Email</string>
+    <string name="primary_logo_content_desc">Primary Logo For Chal.</string>
+    <string name="sign_into_your_account_text">Sign into your account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up_underline"><u>Sign Up</u></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_slogan_message"> App Slogan Message Here</string>
+    <string name="sign_up_facebook_button_text">Continue With Facebook</string>
+    <string name="sign_up_phone_button_text">Continue With Phone</string>
+    <string name="sign_up_email_button_text">Continue With Email</string>
+    <string name="social_media_instagram_content_desc">Social Media Icon Instagram</string>
+    <string name="social_media_facebook_content_desc">Social Media Icon Facebook</string>
+    <string name="social_media_twitter_content_desc">Social Media Icon Twitter</string>
+    <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
+    <string name="username">Username</string>
+    <string name="welcome_to_chal_text">Welcome to chal</string>
+
 </resources>
