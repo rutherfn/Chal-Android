@@ -2,8 +2,13 @@
     <string name="app_name">Chal.</string>
 
     <string name="add_photo_later">Add Photo Later</string>
+    <string name="active_challenges">ACTIVE</string>
     <string name="account">Account</string>
     <string name="already_have_a_account_text">Already have a account?</string>
+    <string name="sample_challenge_title">Sample Challenge</string>
+    <string name="category_fitness">Fitness</string>
+    <string name="category_education">Education</string>
+    <string name="category_travel">Education</string>
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
     <string name="clear_photo">Clear Photo</string>
     <string name="click_me_to_take_a_picture">Click Me To Take A Picture</string>
@@ -26,6 +31,7 @@
     <string name="error_phone_not_valid">Phone number not valid.</string>
     <string name="error_password">One capital letter and one number.</string>
     <string name="home_bottom_nav">HOME</string>
+    <string name="last_updated">Last Updated</string>
     <string name="find_friends_nav">FIND FRIENDS</string>
     <string name="fake_phone">414323312</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
@@ -44,6 +50,7 @@
     <string name="please_check_email">Please Check Your Email</string>
     <string name="please_enter_your_email">Please Enter Your Email</string>
     <string name="primary_logo_content_desc">Primary Logo For Chal.</string>
+    <string name="search_challenges">SEARCH</string>
     <string name="settings_bottom_nav">SETTINGS</string>
     <string name="sign_into_your_account_text">Sign into your account</string>
     <string name="sign_in">Sign In</string>
@@ -57,6 +64,7 @@
     <string name="social_media_facebook_content_desc">Social Media Icon Facebook</string>
     <string name="social_media_twitter_content_desc">Social Media Icon Twitter</string>
     <string name="successful">Successful</string>
+    <string name="teaser_challenge">Teaser Challenge</string>
     <string name="to_reset_password">To Reset Password.</string>
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
     <string name="username">Username</string>

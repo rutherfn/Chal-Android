@@ -16,9 +16,4 @@
         android:icon="@drawable/ic_friend"
         android:title="@string/find_friends_nav"/>
 
-    <item
-        android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_setting"
-        android:title="@string/settings_bottom_nav"/>
-
 </menu>

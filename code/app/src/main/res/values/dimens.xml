@@ -34,7 +34,10 @@
     <dimen name="email_sign_in_width">35dp</dimen>
     <dimen name="email_sign_in_height">35dp</dimen>
     <dimen name="password_sign_in_height">35dp</dimen>
+    <dimen name="cv_active_challenges_height">80dp</dimen>
+    <dimen name="cv_active_challenges_width">80dp</dimen>
     <dimen name="password_sign_in_width">35dp</dimen>
+    <dimen name="iv_user_news_feed_height">50dp</dimen>
     <dimen name="iv_sign_in_primary_height">200dp</dimen>
     <dimen name="iv_name_error_height">25dp</dimen>
     <dimen name="iv_name_error_width">25dp</dimen>

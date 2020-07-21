@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.nicholasrutherford.chal.R
@@ -27,6 +28,8 @@ class AskForPhoneNumberActivity : AppCompatActivity() {
 
     private val helper = Helper()
     private val typeface = Typeface()
+
+    private lateinit var auth: FirebaseAuth
 
     private lateinit var mCallbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
@@ -73,6 +76,9 @@ class AskForPhoneNumberActivity : AppCompatActivity() {
     }
 
     private fun verificationCallbacks() {
+
+        auth = FirebaseAuth.getInstance()
+
         mCallbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             override fun onVerificationCompleted(p0: PhoneAuthCredential) {

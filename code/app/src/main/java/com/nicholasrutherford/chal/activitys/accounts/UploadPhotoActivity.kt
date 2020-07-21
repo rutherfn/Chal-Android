@@ -1,6 +1,7 @@
 package com.nicholasrutherford.chal.activitys.accounts
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
@@ -145,6 +146,9 @@ class UploadPhotoActivity : AppCompatActivity() {
         btnContinueUpload.setOnClickListener {
             attemptToCreateUserWithEmailAndPassword()
         }
+        btnAddPhotoLater.setOnClickListener {
+            addStockPhoto()
+        }
 
     }
 
@@ -169,6 +173,11 @@ class UploadPhotoActivity : AppCompatActivity() {
             //system os is < marshmallow
             openCamera()
         }
+    }
+
+    @SuppressLint("NewApi")
+    private fun addStockPhoto() {
+        cvTakeAPhoto.setBackgroundDrawable(getDrawable(R.drawable.ic_user))
     }
 
     private fun openCamera() {
@@ -215,12 +224,18 @@ class UploadPhotoActivity : AppCompatActivity() {
 
         ref.setValue(newUser)
             .addOnSuccessListener {
+                sendUserAQuickEmailVerification()
                 loadingDialog.dismiss()
                 successCreateAccountDialog.show(fm, "SuccessCreateAccountDialog")
             }.addOnFailureListener {
                 loadingDialog.dismiss()
                 errorCreateAccountDialog.show(fm, "ErrorCreatingAccountDialog")
             }
+    }
+
+    private fun sendUserAQuickEmailVerification() {
+        val user = FirebaseAuth.getInstance().currentUser
+        user!!.sendEmailVerification()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

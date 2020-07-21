@@ -42,7 +42,7 @@ class SocialMediaWebActivity : AppCompatActivity() {
     fun setupWebAndToolbar() {
         setSupportActionBar(tbWebView)
 
-        supportActionBar!!.title = "Return To Chal"
+        supportActionBar!!.title = ""
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         wvSocial.webViewClient = WebViewClient()
 

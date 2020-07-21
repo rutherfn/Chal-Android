@@ -9,4 +9,8 @@
         android:id="@+id/navigation_log_out"
         android:title="@string/log_out"/>
 
+    <item
+        android:id="@+id/navigation_settings"
+        android:title="Settings"/>
+
 </menu>

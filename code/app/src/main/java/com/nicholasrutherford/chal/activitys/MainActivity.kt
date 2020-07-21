@@ -9,13 +9,13 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
 import com.nicholasrutherford.chal.fragments.ChallengesFragment
 import com.nicholasrutherford.chal.fragments.HomeFragment
+import com.nicholasrutherford.chal.fragments.SuggestedFriendsFragment
 import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
 
 
@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private val homeFragment = HomeFragment()
     private val challengesFragment = ChallengesFragment()
+    private val suggestedFriendsFragment = SuggestedFriendsFragment()
 
     private val loadingDialog = LoadingDialog()
 
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(tbMain)
+        tbMain.title = ""
     }
 
     private fun setupHomeForFirstToLoad() {
@@ -82,11 +84,15 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_home -> {
                         supportFragmentManager.beginTransaction().replace(R.id.container, homeFragment, homeFragment.javaClass.simpleName)
                             .commit()
-                        println("Get Home")
                         return true
                     }
                     R.id.navigation_challenges -> {
                         supportFragmentManager.beginTransaction().replace(R.id.container, challengesFragment, challengesFragment.javaClass.simpleName)
+                            .commit()
+                        return true
+                    }
+                    R.id.navigation_find_friends -> {
+                        supportFragmentManager.beginTransaction().replace(R.id.container, suggestedFriendsFragment, suggestedFriendsFragment.javaClass.simpleName)
                             .commit()
                         return true
                     }
@@ -125,6 +131,12 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
+    private fun startSettingsActivity() {
+        val intent = Intent(applicationContext, SettingsActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
@@ -132,6 +144,8 @@ class MainActivity : AppCompatActivity() {
 
         } else if(id == R.id.navigation_log_out) {
             attemptToLogoutUser()
+        } else if (id == R.id.navigation_settings) {
+            startSettingsActivity()
         }
         return super.onOptionsItemSelected(item)
     }
