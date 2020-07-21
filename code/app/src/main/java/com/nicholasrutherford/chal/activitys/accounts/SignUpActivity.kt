@@ -20,6 +20,7 @@ class SignUpActivity: AppCompatActivity() {
     lateinit var tvLogin: TextView
     lateinit var ivSignInLogo: ImageView
     lateinit var btnSignUpFacebook: FacebookButton
+    private lateinit var btnSignUpPhone: Button
     lateinit var btnSignUpRegular: Button
     lateinit var ivTwitter: ImageView
     lateinit var ivFacebook: ImageView
@@ -48,7 +49,9 @@ class SignUpActivity: AppCompatActivity() {
         tvAlreadyHaveAccount = findViewById(R.id.tvAlreadyHaveAccount)
 
         tvLogin = findViewById(R.id.tvLogin)
+
         btnSignUpFacebook = findViewById(R.id.btnSignUpFacebook)
+        btnSignUpPhone = findViewById(R.id.btnSignUpPhone)
         btnSignUpRegular = findViewById(R.id.btnSignUpRegular)
 
         ivTwitter = findViewById(R.id.ivTwitter)
@@ -95,6 +98,12 @@ class SignUpActivity: AppCompatActivity() {
         btnSignUpRegular.setOnClickListener {
             sendUserToCreateAccount()
         }
+
+        btnSignUpPhone.setOnClickListener {
+            sendUserToAskForPhoneNumber()
+        }
+
+
     }
 
     private fun socialListeners() {
@@ -131,6 +140,25 @@ class SignUpActivity: AppCompatActivity() {
 
         startActivity(intent)
         finish()
+    }
+
+    private fun sendUserToAskForPhoneNumber() {
+        val intent = Intent(applicationContext, AskForPhoneNumberActivity::class.java)
+
+        startActivity(intent)
+        finish()
+    }
+
+    private fun startLoginActivity() {
+        val intent = Intent(applicationContext, LoginActivity::class.java)
+
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onBackPressed() {
+        startLoginActivity()
+        super.onBackPressed()
     }
 
 }

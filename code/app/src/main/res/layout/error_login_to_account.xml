@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivErrorLoginAccount"
+        android:layout_width="@dimen/error_login_account_height"
+        android:layout_height="@dimen/error_login_account_width"
+        android:background="@drawable/ic_error"
+        android:layout_marginTop="@dimen/margin_20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvErrorLoggingIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:textSize="@dimen/header_text_size"
+        android:textAlignment="center"
+        android:text="@string/cant_login_error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivErrorLoginAccount" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="@dimen/error_require_field_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_button"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:textSize="@dimen/header_text_size"
+        android:text="@string/ok"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvErrorLoggingIn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

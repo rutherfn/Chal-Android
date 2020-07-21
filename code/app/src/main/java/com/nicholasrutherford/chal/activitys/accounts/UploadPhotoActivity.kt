@@ -19,9 +19,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.fragments.ErrorCreateAccount
-import com.nicholasrutherford.chal.fragments.LoadingDialog
-import com.nicholasrutherford.chal.fragments.SuccessCreateAccountDialog
+import com.nicholasrutherford.chal.fragments.dialogs.ErrorCreateAccountDialog
+import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
+import com.nicholasrutherford.chal.fragments.dialogs.SuccessCreateAccountDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.models.UserAccount
@@ -56,7 +56,7 @@ class UploadPhotoActivity : AppCompatActivity() {
 
     private var loadingDialog = LoadingDialog()
     private var successCreateAccountDialog = SuccessCreateAccountDialog()
-    private var errorCreateAccountDialog = ErrorCreateAccount()
+    private var errorCreateAccountDialog = ErrorCreateAccountDialog()
     private val fm = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,7 +143,7 @@ class UploadPhotoActivity : AppCompatActivity() {
         }
 
         btnContinueUpload.setOnClickListener {
-            uploadImageToFirebaseStorage()
+            attemptToCreateUserWithEmailAndPassword()
         }
 
     }
@@ -189,6 +189,24 @@ class UploadPhotoActivity : AppCompatActivity() {
         startActivityForResult(intent, 0)
     }
 
+    private fun attemptToCreateUserWithEmailAndPassword() {
+
+        loadingDialog.show(fm, "LoadingDialog")
+
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) {  task ->
+
+                if(task.isSuccessful) {
+                    uploadImageToFirebaseStorage()
+                }
+
+            }.addOnFailureListener{
+                println("Error with creating account")
+                loadingDialog.dismiss()
+                // failed to create user for whatever reason
+            }
+    }
+
     private fun attemptToCreateUserFirebase(profileImageurl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
@@ -224,7 +242,6 @@ class UploadPhotoActivity : AppCompatActivity() {
     private fun uploadImageToFirebaseStorage() {
         if(selectedPhotoUri ==  null) return
 
-        loadingDialog.show(fm, "LoadingDialog")
         var filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
 
@@ -237,6 +254,8 @@ class UploadPhotoActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
+                loadingDialog.dismiss()
+                println("Failed uploading image up")
                 // it failed for some reason
             }
     }

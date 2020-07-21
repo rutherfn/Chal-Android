@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -13,8 +14,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.fragments.ErrorCreateAccount
-import com.nicholasrutherford.chal.fragments.LoadingDialog
+import com.nicholasrutherford.chal.fragments.dialogs.ErrorCreateAccountDialog
+import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import de.hdodenhof.circleimageview.CircleImageView
@@ -67,8 +68,10 @@ class CreateAccountActivity  : AppCompatActivity() {
     private var etPasswordValue = ""
     private var isEmptyEmail = false
 
-    private var loadingDialog = LoadingDialog()
-    private var errorCreateAccount = ErrorCreateAccount()
+    private var loadingDialog =
+        LoadingDialog()
+    private var errorCreateAccount =
+        ErrorCreateAccountDialog()
     private val fm = supportFragmentManager
 
     private val typeface = Typeface()
@@ -483,6 +486,27 @@ class CreateAccountActivity  : AppCompatActivity() {
         btContinueCreating.setOnClickListener {
             attemptToCreateAccount()
         }
+    }
+
+    private fun startSignUpActivity() {
+        val intent = Intent(applicationContext, SignUpActivity::class.java)
+
+        startActivity(intent)
+        finish()
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        if(item.itemId == android.R.id.home) {
+            startSignUpActivity()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+
+    override fun onBackPressed() {
+        startSignUpActivity()
+        super.onBackPressed()
     }
 
 }

@@ -6,12 +6,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.fragments.dialogs.ErrorCreateAccountDialog
+import com.nicholasrutherford.chal.fragments.dialogs.ErrorLoginToAccount
+import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
+import com.nicholasrutherford.chal.fragments.dialogs.SuccessCreateAccountDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
@@ -36,6 +39,12 @@ class LoginActivity : AppCompatActivity() {
 
     private var typeface = Typeface()
     private var helper = Helper()
+
+    private var errorLoginToAccountDialog = ErrorLoginToAccount()
+    private var errorLogInAccountDueToFieldsDialog = ErrorCreateAccountDialog()
+    private var loadingDialog = LoadingDialog()
+    private var loadingAccountDialog = SuccessCreateAccountDialog()
+    private val fm = supportFragmentManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -156,6 +165,10 @@ class LoginActivity : AppCompatActivity() {
         ivErrorEmail.visibility = View.GONE
     }
 
+    private fun isEmailError(): Boolean {
+        return ivErrorEmail.visibility == View.VISIBLE && tvErrorEmail.visibility == View.VISIBLE
+    }
+
     private fun checkIfEmailIsEnteredCorrectly() {
         etEmail.addTextChangedListener (object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
@@ -181,11 +194,49 @@ class LoginActivity : AppCompatActivity() {
         }
 
     private fun attemptToSignUserIntoFirebase() {
+
         helper.hideSoftKeyBoard(this)
-        clearEditTextFields()
+
+        if(isEmailError()) {
+            errorLogInAccountDueToFieldsDialog.show(fm, "ErrorLogInAccountDueToFieldsDialog")
+        } else {
+
+            loadingDialog.show(fm, "LoadingDialog")
+
+            val email = etEmail.text.toString()
+            val password = etPassword.text.toString()
+
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    if (!it.isSuccessful) return@addOnCompleteListener
+
+                    loadingDialog.dismiss()
+
+                    loadingAccountDialog.show(fm, "LoadingAccountDialog")
+                }
+                .addOnFailureListener {
+
+                    loadingDialog.dismiss()
+
+                    errorLoginToAccountDialog.show(fm, "ErrorLoginToAccountDialog")
+
+                    etEmail.text.clear()
+                    etPassword.text.clear()
+                }
+
+        }
+
         println("Attempt to sign in to firebase user account")
 
         // logic follows for firebase events
+    }
+
+    private fun startupMainActivity() {
+        clearEditTextFields()
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 
     private fun clearEditTextFields() {

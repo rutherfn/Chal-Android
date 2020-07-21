@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
 import com.nicholasrutherford.chal.activitys.accounts.SignUpActivity
@@ -13,6 +14,7 @@ class SplashActivity : AppCompatActivity() {
 
     // declarations
     private lateinit var ivSplash: ImageView
+    private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun setupIds() {
+        mAuth = FirebaseAuth.getInstance()
         ivSplash = findViewById(R.id.ivSplashLogo)
     }
 
@@ -34,8 +37,8 @@ class SplashActivity : AppCompatActivity() {
         ivSplash.setImageResource(R.drawable.primary_logo)
     }
 
-    private fun startSignUpActivity() {
-        val intent = Intent(applicationContext, SignUpActivity::class.java)
+    private fun startMainActivity() {
+        val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -49,8 +52,19 @@ class SplashActivity : AppCompatActivity() {
     private fun timerForNewActivity() {
         val handler = Handler()
         handler.postDelayed({
-            startLoginActivity()
+            checkIfUserIsSignedInOrNot()
         }, 5000)
+    }
+
+    private fun checkIfUserIsSignedInOrNot() {
+        val currentUser = mAuth!!.currentUser
+
+        if(currentUser == null) {
+            startLoginActivity()
+        } else {
+            startMainActivity()
+        }
+
     }
 
 }

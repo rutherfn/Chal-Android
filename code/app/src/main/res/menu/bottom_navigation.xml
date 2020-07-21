@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home_bottom_nav"/>
+
+    <item
+        android:id="@+id/navigation_challenges"
+        android:icon="@drawable/ic_challenge"
+        android:title="@string/challenges_bottom_nav"/>
+
+    <item
+        android:id="@+id/navigation_find_friends"
+        android:icon="@drawable/ic_friend"
+        android:title="@string/find_friends_nav"/>
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/settings_bottom_nav"/>
+
+</menu>

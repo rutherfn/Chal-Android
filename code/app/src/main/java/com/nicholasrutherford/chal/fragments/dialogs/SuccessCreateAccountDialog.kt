@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments
+package com.nicholasrutherford.chal.fragments.dialogs
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
@@ -42,6 +42,10 @@ class SuccessCreateAccountDialog : DialogFragment() {
         tvLoadingYourAccount = mView!!.findViewById(R.id.tvLoadingYourAccount)
     }
 
+    private fun checkWhichTextViewToSet() {
+
+    }
+
     private fun setTypefaceAndTextColor() {
         context?.let {
 
@@ -53,19 +57,22 @@ class SuccessCreateAccountDialog : DialogFragment() {
         }
     }
 
-    private fun startOnBoardActivity() {
+    private fun startMainActivity() {
         context?.let {
-            val intent = Intent(it.applicationContext, LoginActivity::class.java)
+            val intent = Intent(it.applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
     }
 
     private fun countdownTimerForNewActivity() {
-        val timer = object: CountDownTimer(7000, 100) {
+
+        val timer = object: CountDownTimer(3000, 100) {
 
             override fun onTick(millisUntilFinished: Long) {}
 
-            override fun onFinish() { startOnBoardActivity()}
+            override fun onFinish() {
+                startMainActivity()
+            }
         }
         timer.start()
 

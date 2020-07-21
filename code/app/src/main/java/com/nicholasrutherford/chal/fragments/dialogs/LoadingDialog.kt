@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments
+package com.nicholasrutherford.chal.fragments.dialogs
 
 import android.annotation.SuppressLint
 import android.os.Bundle

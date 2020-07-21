@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/ivPhoneHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/iv_phone_header_width"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/chalappicon" />
+
+    <TextView
+        android:id="@+id/tvMayIAsk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/may_i_ask"
+        android:textColor="@color/colorSmokeWhite"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="@dimen/sub_header_text_size"
+        android:layout_marginTop="@dimen/margin_20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPhoneHeader" />
+
+    <EditText
+        android:id="@+id/etPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:ems="13"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:backgroundTint="@color/colorBlack"
+        android:hint="@string/fake_phone"
+        android:windowSoftInputMode="adjustPan"
+        android:textColor="@color/colorSmokeWhite"
+        android:textAlignment="center"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/tvMayIAsk"
+        app:layout_constraintStart_toStartOf="@+id/tvMayIAsk"
+        app:layout_constraintTop_toBottomOf="@+id/tvMayIAsk" />
+
+    <ImageView
+        android:id="@+id/ivPhoneNumber"
+        android:layout_width="@dimen/phone_width"
+        android:layout_height="@dimen/phone_height"
+        android:background="@drawable/ic_phone"
+        app:layout_constraintBottom_toBottomOf="@+id/etPhoneNumber"
+        app:layout_constraintEnd_toStartOf="@+id/etPhoneNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etPhoneNumber" />
+
+    <Button
+        android:id="@+id/btnContinuePhone"
+        android:layout_width="@dimen/btn_continue_creating_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:text="@string/continue_creating"
+        app:layout_constraintEnd_toEndOf="@+id/etPhoneNumber"
+        app:layout_constraintStart_toStartOf="@+id/etPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

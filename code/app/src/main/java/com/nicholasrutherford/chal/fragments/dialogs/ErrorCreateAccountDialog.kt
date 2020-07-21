@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments
+package com.nicholasrutherford.chal.fragments.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +8,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
-import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.CreateAccountActivity
 import com.nicholasrutherford.chal.activitys.accounts.UploadPhotoActivity
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class ErrorCreateAccount : DialogFragment() {
+class ErrorCreateAccountDialog : DialogFragment() {
 
     // declarations
     private var mView: View? = null

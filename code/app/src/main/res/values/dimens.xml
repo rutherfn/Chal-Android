@@ -48,6 +48,8 @@
     <dimen name="success_create_account_height">50dp</dimen>
     <dimen name="error_create_account_width">50dp</dimen>
     <dimen name="error_create_account_height">50dp</dimen>
+    <dimen name="error_login_account_height">70dp</dimen>
+    <dimen name="error_login_account_width">70dp</dimen>
     <dimen name="success_require_field_width">700dp</dimen>
     <dimen name="error_require_field_width">700dp</dimen>
     <dimen name="iv_take_a_picture_width">200dp</dimen>
@@ -57,6 +59,10 @@
     <dimen name="btn_add_profile_image_later_width">280dp</dimen>
     <dimen name="btn_clear_photo_width">280dp</dimen>
     <dimen name="btn_continue_creating_width">280dp</dimen>
+    <dimen name="iv_phone_header_width">400dp</dimen>
+    <dimen name="phone_width">20dp</dimen>
+    <dimen name="phone_height">20dp</dimen>
+    <dimen name="btn_continue_phone_width">300dp</dimen>
 
     <!-- Buttons Unique Sizes -->
     <dimen name="button_sign_up_size">300sp</dimen>
