@@ -5,6 +5,9 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: "kotlin-kapt"
 
 android {
+    viewBinding {
+        enabled = true
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 

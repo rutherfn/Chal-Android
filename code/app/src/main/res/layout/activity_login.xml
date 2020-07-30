@@ -13,7 +13,7 @@
     <ImageView
         android:id="@+id/ivSignInPrimaryLogo"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/iv_sign_in_primary_height"
+        android:layout_height="@dimen/iv_sign_in_height"
         android:contentDescription="@string/primary_logo_content_desc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:ems="15"
+            android:ems="17"
             android:imeOptions="actionDone"
             android:maxLines="1"
             android:singleLine="true"
@@ -70,16 +70,6 @@
             android:inputType="textEmailAddress"
             app:layout_constraintStart_toStartOf="@+id/tvEmail"
             app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
-
-        <ImageView
-        android:id="@+id/ivEmail"
-        android:layout_width="@dimen/email_sign_in_height"
-        android:layout_height="@dimen/email_sign_in_height"
-        android:background="@drawable/ic_email"
-        app:layout_constraintBottom_toBottomOf="@+id/etEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etEmail"
-        app:layout_constraintTop_toTopOf="@+id/etEmail" />
 
         <TextView
             android:id="@+id/tvPassword"
@@ -97,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16dp"
-        android:ems="15"
+        android:ems="17"
         android:imeOptions="actionDone"
         android:maxLines="1"
         android:backgroundTint="@color/colorBlack"
@@ -107,16 +97,6 @@
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="@+id/tvPassword"
         app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
-
-    <ImageView
-        android:id="@+id/ivPassword"
-        android:layout_width="@dimen/email_sign_in_height"
-        android:layout_height="@dimen/email_sign_in_width"
-        android:background="@drawable/ic_password"
-        app:layout_constraintBottom_toBottomOf="@+id/etPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etPassword"
-        app:layout_constraintTop_toTopOf="@+id/etPassword" />
 
     <Button
         android:id="@+id/btLogIn"

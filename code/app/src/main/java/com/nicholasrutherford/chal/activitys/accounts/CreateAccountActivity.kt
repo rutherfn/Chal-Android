@@ -7,60 +7,18 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.databinding.ActivityCreateAccountBinding
 import com.nicholasrutherford.chal.fragments.dialogs.ErrorCreateAccountDialog
 import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
-import de.hdodenhof.circleimageview.CircleImageView
-
 
 class CreateAccountActivity  : AppCompatActivity() {
 
     // declarations
-    private lateinit var tbCreateAccount: Toolbar
-    private lateinit var tvCreate: TextView
-    private lateinit var tvAccount: TextView
-    private lateinit var cvChalLogo: CircleImageView
-
-    private lateinit var tvName: TextView
-    private lateinit var etName: EditText
-    private lateinit var ivName: ImageView
-    private lateinit var ivErrorName: ImageView
-    private lateinit var tvErrorName: TextView
-
-    private lateinit var tvUser: TextView
-    private lateinit var etUsername: EditText
-    private lateinit var ivUsername: ImageView
-    private lateinit var ivErrorUsername: ImageView
-    private lateinit var tvErrorUsername: TextView
-
-    private lateinit var tvEmail: TextView
-    private lateinit var etEmail: EditText
-    private lateinit var ivEmail: ImageView
-    private lateinit var ivErrorEmail: ImageView
-    private lateinit var tvErrorEmail: TextView
-
-    private lateinit var tvPhone: TextView
-    private lateinit var etPhone: EditText
-    private lateinit var ivPhone: ImageView
-    private lateinit var ivErrorPhone: ImageView
-    private lateinit var tvErrorPhone: TextView
-
-    private lateinit var tvPassword: TextView
-    private lateinit var etPassword: EditText
-    private lateinit var ivPassword: ImageView
-    private lateinit var ivErrorPassword: ImageView
-    private lateinit var tvErrorPassword: TextView
-
-    private lateinit var btContinueCreating: Button
-
     private var etNameValue = ""
     private var etUsernameValue = ""
     private var etEmailValue = ""
@@ -79,216 +37,174 @@ class CreateAccountActivity  : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_account)
-        main()
+        val binding = ActivityCreateAccountBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        main(binding)
     }
 
 
-    private fun main() {
-        setupView()
-        editTextFieldListeners()
-        listenersForCloseKeyboard()
-        createAccountListener()
+    private fun main(binding: ActivityCreateAccountBinding) {
+        setupView(binding)
+        editTextFieldListeners(binding)
+        listenersForCloseKeyboard(binding)
+        createAccountListener(binding)
     }
 
-    private fun setupView() {
-        setUpIds()
-        hideAllErrorsOnStartup()
-        setupToolbar()
-        setupTypeface()
-        setupTextViewsColor()
+    private fun setupView(binding: ActivityCreateAccountBinding) {
+        hideAllErrorsOnStartup(binding)
+        setupToolbar(binding)
+        setupTypeface(binding)
+        setupTextViewsColor(binding)
     }
 
-    private fun setUpIds() {
+    private fun hideAllErrorsOnStartup(binding: ActivityCreateAccountBinding) {
 
-        tbCreateAccount = findViewById(R.id.tbCreateAccount)
-        tvCreate = findViewById(R.id.tvCreate)
-        tvAccount = findViewById(R.id.tvAccount)
+        hideErrorsName(binding)
 
-        cvChalLogo = findViewById(R.id.cvChalLogo)
+        hideErrorsUsername(binding)
 
-        tvName = findViewById(R.id.tvName)
-        etName = findViewById(R.id.etName)
-        ivName = findViewById(R.id.ivName)
-        ivErrorName = findViewById(R.id.ivErrorName)
-        tvErrorName = findViewById(R.id.tvErrorName)
+        hideErrorEmails(binding)
 
-        tvUser = findViewById(R.id.tvUser)
-        etUsername = findViewById(R.id.etUsername)
-        ivUsername = findViewById(R.id.ivUsername)
-        ivErrorUsername = findViewById(R.id.ivErrorUsername)
-        tvErrorUsername = findViewById(R.id.tvErrorUsername)
+        hideErrorsPhone(binding)
 
-        tvEmail = findViewById(R.id.tvEmail)
-        etEmail = findViewById(R.id.etEmail)
-        ivEmail = findViewById(R.id.ivEmail)
-        tvErrorEmail = findViewById(R.id.tvErrorEmail)
-        ivErrorEmail = findViewById(R.id.ivErrorEmail)
-
-        tvPhone = findViewById(R.id.tvPhone)
-        etPhone = findViewById(R.id.etPhone)
-        ivPhone = findViewById(R.id.ivPhone)
-        ivErrorPhone = findViewById(R.id.ivErrorPhone)
-        tvErrorPhone = findViewById(R.id.tvErrorPhone)
-
-        tvPassword = findViewById(R.id.tvPassword)
-        etPassword = findViewById(R.id.etPassword)
-        ivPassword = findViewById(R.id.ivPassword)
-        ivErrorPassword = findViewById(R.id.ivErrorPassword)
-        tvErrorPassword = findViewById(R.id.tvErrorPassword)
-
-        btContinueCreating = findViewById(R.id.btContinueCreating)
-
+        hideErrorPassword(binding)
     }
 
-    private fun hideAllErrorsOnStartup() {
-
-        hideErrorsName()
-
-        hideErrorsUsername()
-
-        hideErrorEmails()
-
-        hideErrorsPhone()
-
-        hideErrorPassword()
+    private fun hideErrorsName(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorName.visibility = View.GONE
+        binding.tvErrorName.visibility = View.GONE
     }
 
-    private fun hideErrorsName() {
-        ivErrorName.visibility = View.GONE
-        tvErrorName.visibility = View.GONE
+    private fun showErrorsName(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorName.visibility = View.VISIBLE
+        binding.tvErrorName.visibility = View.VISIBLE
     }
 
-    private fun showErrorsName() {
-        ivErrorName.visibility = View.VISIBLE
-        tvErrorName.visibility = View.VISIBLE
+    private fun hideErrorsUsername(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorUsername.visibility = View.GONE
+        binding.tvErrorUsername.visibility = View.GONE
     }
 
-    private fun hideErrorsUsername() {
-        ivErrorUsername.visibility = View.GONE
-        tvErrorUsername.visibility = View.GONE
+    private fun showErrorsUsername(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorUsername.visibility = View.VISIBLE
+        binding.tvErrorUsername.visibility = View.VISIBLE
     }
 
-    private fun showErrorsUsername() {
-        ivErrorUsername.visibility = View.VISIBLE
-        tvErrorUsername.visibility = View.VISIBLE
+    private fun showErrorsEmailEmpty(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorEmail.visibility = View.VISIBLE
+        binding.tvErrorEmail.visibility = View.VISIBLE
+
+        binding.tvErrorEmail.text = getString(R.string.error_email_entered)
     }
 
-    private fun showErrorsEmailEmpty() {
-        ivErrorEmail.visibility = View.VISIBLE
-        tvErrorEmail.visibility = View.VISIBLE
+    private fun showErrorsEmailNotValid(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorEmail.visibility = View.VISIBLE
+        binding.tvErrorEmail.visibility = View.VISIBLE
 
-        tvErrorEmail.text = getString(R.string.error_email_entered)
+        binding.tvErrorEmail.text = getString(R.string.error_email)
     }
 
-    private fun showErrorsEmailNotValid() {
-        ivErrorEmail.visibility = View.VISIBLE
-        tvErrorEmail.visibility = View.VISIBLE
-
-        tvErrorEmail.text = getString(R.string.error_email)
+    private fun hideErrorEmails(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorEmail.visibility = View.GONE
+        binding.tvErrorEmail.visibility = View.GONE
     }
 
-    private fun hideErrorEmails() {
-        ivErrorEmail.visibility = View.GONE
-        tvErrorEmail.visibility = View.GONE
+    private fun showErrorsPhoneNotCorrectFormat(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorPhone.visibility = View.VISIBLE
+        binding.tvErrorPhone.visibility = View.VISIBLE
+
+        binding.tvErrorPhone.text = getText(R.string.error_phone_not_valid)
     }
 
-    private fun showErrorsPhoneNotCorrectFormat() {
-        ivErrorPhone.visibility = View.VISIBLE
-        tvErrorPhone.visibility = View.VISIBLE
-
-        tvErrorPhone.text = getText(R.string.error_phone_not_valid)
+    private fun hideErrorsPhone(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorPhone.visibility = View.GONE
+        binding.tvErrorPhone.visibility = View.GONE
     }
 
-    private fun hideErrorsPhone() {
-        ivErrorPhone.visibility = View.GONE
-        tvErrorPhone.visibility = View.GONE
+    private fun showErrorPassword(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorPassword.visibility = View.VISIBLE
+        binding.tvErrorPassword.visibility = View.VISIBLE
+
+        binding.tvErrorPassword.text = getText(R.string.error_password)
     }
 
-    private fun showErrorPassword() {
-        ivErrorPassword.visibility = View.VISIBLE
-        tvErrorPassword.visibility = View.VISIBLE
-
-        tvErrorPassword.text = getText(R.string.error_password)
+    private fun hideErrorPassword(binding: ActivityCreateAccountBinding) {
+        binding.ivErrorPassword.visibility = View.GONE
+        binding.tvErrorPassword.visibility = View.GONE
     }
 
-    private fun hideErrorPassword() {
-        ivErrorPassword.visibility = View.GONE
-        tvErrorPassword.visibility = View.GONE
-    }
-
-    private fun setupToolbar() {
-        setSupportActionBar(tbCreateAccount)
+    private fun setupToolbar(binding: ActivityCreateAccountBinding) {
+        setSupportActionBar(binding.tbCreateAccount)
 
         supportActionBar!!.title = ""
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun setupTypeface() {
-        typeface.setTypefaceForHeaderBold(tvCreate, baseContext)
-        typeface.setTypefaceForHeaderBold(tvAccount, baseContext)
+    private fun setupTypeface(binding: ActivityCreateAccountBinding) {
+        typeface.setTypefaceForHeaderBold(binding.tvCreate, baseContext)
+        typeface.setTypefaceForHeaderBold(binding.tvAccount, baseContext)
 
-        typeface.setTypefaceForSubHeaderBold(tvName, baseContext)
-        typeface.setTypefaceForBodyBold(tvErrorName, baseContext)
+        typeface.setTypefaceForSubHeaderBold(binding.tvName, baseContext)
+        typeface.setTypefaceForBodyBold(binding.tvErrorName, baseContext)
 
-        typeface.setTypefaceForSubHeaderBold(tvUser, baseContext)
-        typeface.setTypefaceForBodyBold(tvErrorUsername, baseContext)
+        typeface.setTypefaceForSubHeaderBold(binding.tvUser, baseContext)
+        typeface.setTypefaceForBodyBold(binding.tvErrorUsername, baseContext)
 
-        typeface.setTypefaceForSubHeaderBold(tvEmail, baseContext)
-        typeface.setTypefaceForBodyBold(tvErrorEmail, baseContext)
+        typeface.setTypefaceForSubHeaderBold(binding.tvEmail, baseContext)
+        typeface.setTypefaceForBodyBold(binding.tvErrorEmail, baseContext)
 
-        typeface.setTypefaceForSubHeaderBold(tvPhone, baseContext)
-        typeface.setTypefaceForBodyBold(tvErrorPhone, baseContext)
+        typeface.setTypefaceForSubHeaderBold(binding.tvPhone, baseContext)
+        typeface.setTypefaceForBodyBold(binding.tvErrorPhone, baseContext)
 
-        typeface.setTypefaceForSubHeaderBold(tvPassword, baseContext)
-        typeface.setTypefaceForBodyBold(tvErrorPassword, baseContext)
+        typeface.setTypefaceForSubHeaderBold(binding.tvPassword, baseContext)
+        typeface.setTypefaceForBodyBold(binding.tvErrorPassword, baseContext)
 
-        typeface.setTypefaceForSubHeaderBold(btContinueCreating, baseContext)
+        typeface.setTypefaceForSubHeaderBold(binding.btContinueCreating, baseContext)
     }
 
-    private fun setupTextViewsColor() {
-        helper.setTextViewColor(baseContext, tvCreate, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, tvAccount, R.color.colorPrimary)
+    private fun setupTextViewsColor(binding: ActivityCreateAccountBinding) {
+        helper.setTextViewColor(baseContext, binding.tvCreate, R.color.colorPrimary)
+        helper.setTextViewColor(baseContext, binding.tvAccount, R.color.colorPrimary)
 
-        helper.setTextViewColor(baseContext,tvName, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, tvErrorName, R.color.colorBlack)
+        helper.setTextViewColor(baseContext, binding.tvName, R.color.colorPrimary)
+        helper.setTextViewColor(baseContext, binding.tvErrorName, R.color.colorBlack)
 
-        helper.setTextViewColor(baseContext,tvUser, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, tvErrorUsername, R.color.colorBlack)
+        helper.setTextViewColor(baseContext, binding.tvUser, R.color.colorPrimary)
+        helper.setTextViewColor(baseContext, binding.tvErrorUsername, R.color.colorBlack)
 
-        helper.setTextViewColor(baseContext,tvEmail, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, tvErrorEmail, R.color.colorBlack)
+        helper.setTextViewColor(baseContext, binding.tvEmail, R.color.colorPrimary)
+        helper.setTextViewColor(baseContext, binding.tvErrorEmail, R.color.colorBlack)
 
-        helper.setTextViewColor(baseContext,tvPhone, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, tvErrorPhone, R.color.colorBlack)
+        helper.setTextViewColor(baseContext, binding.tvPhone, R.color.colorPrimary)
+        helper.setTextViewColor(baseContext, binding.tvErrorPhone, R.color.colorBlack)
 
-        helper.setTextViewColor(baseContext,tvPassword, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, tvErrorPassword, R.color.colorBlack)
+        helper.setTextViewColor(baseContext, binding.tvPassword, R.color.colorPrimary)
+        helper.setTextViewColor(baseContext, binding.tvErrorPassword, R.color.colorBlack)
 
-        helper.setTextViewColor(baseContext, btContinueCreating, R.color.colorBlack)
+        helper.setTextViewColor(baseContext, binding.btContinueCreating, R.color.colorBlack)
 
     }
 
-    private fun setEditTextValues() {
-        etNameValue = etName.text.toString()
-        etUsernameValue = etUsername.text.toString()
-        etEmailValue = etEmail.text.toString()
-        etPhoneValue = etPhone.text.toString()
-        etPasswordValue = etPassword.text.toString()
+    private fun setEditTextValues(binding: ActivityCreateAccountBinding) {
+        etNameValue = binding.etName.text.toString()
+        etUsernameValue = binding.etUsername.text.toString()
+        etEmailValue = binding.etEmail.text.toString()
+        etPhoneValue = binding.etPhone.text.toString()
+        etPasswordValue = binding.etPassword.text.toString()
     }
 
-    private fun listenersForCloseKeyboard() {
-        closeKeyboardIfUserHitsDone(etName)
-        closeKeyboardIfUserHitsDone(etUsername)
-        closeKeyboardIfUserHitsDone(etEmail)
-        closeKeyboardIfUserHitsDone(etPhone)
-        closeKeyboardIfUserHitsDone(etPassword)
+    private fun listenersForCloseKeyboard(binding: ActivityCreateAccountBinding) {
+        closeKeyboardIfUserHitsDone(binding.etName)
+        closeKeyboardIfUserHitsDone(binding.etUsername)
+        closeKeyboardIfUserHitsDone(binding.etEmail)
+        closeKeyboardIfUserHitsDone(binding.etPhone)
+        closeKeyboardIfUserHitsDone(binding.etPassword)
     }
 
-    private fun editTextFieldListeners() {
+    private fun editTextFieldListeners(binding: ActivityCreateAccountBinding) {
 
-        etName.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) { checkIfNameIsCorrect() }
+        binding.etName.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) { checkIfNameIsCorrect(binding) }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -296,8 +212,8 @@ class CreateAccountActivity  : AppCompatActivity() {
 
         })
 
-        etUsername.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) { checkIfUsernameIsCorrect() }
+        binding.etUsername.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) { checkIfUsernameIsCorrect(binding) }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -305,9 +221,9 @@ class CreateAccountActivity  : AppCompatActivity() {
 
         })
 
-        etEmail.addTextChangedListener(object: TextWatcher{
+        binding.etEmail.addTextChangedListener(object: TextWatcher{
 
-            override fun afterTextChanged(s: Editable?) { checkIfEmailIsCorrect() }
+            override fun afterTextChanged(s: Editable?) { checkIfEmailIsCorrect(binding) }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
 
@@ -315,8 +231,8 @@ class CreateAccountActivity  : AppCompatActivity() {
 
         })
 
-        etPhone.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) { checkIfPhoneIsCorrect() }
+        binding.etPhone.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) { checkIfPhoneIsCorrect(binding) }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -324,8 +240,8 @@ class CreateAccountActivity  : AppCompatActivity() {
 
         })
 
-        etPassword.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) { checkIfPasswordIsCorrect() }
+        binding.etPassword.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) { checkIfPasswordIsCorrect(binding) }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -334,47 +250,47 @@ class CreateAccountActivity  : AppCompatActivity() {
         })
     }
 
-    private fun checkIfNameIsCorrect() {
-        if(!isNameCorrectFormat()) {
-            showErrorsName()
+    private fun checkIfNameIsCorrect(binding: ActivityCreateAccountBinding) {
+        if(!isNameCorrectFormat(binding)) {
+            showErrorsName(binding)
         } else {
-            hideErrorsName()
+            hideErrorsName(binding)
         }
     }
 
-    private fun isNameCorrectFormat(): Boolean {
-        setEditTextValues()
+    private fun isNameCorrectFormat(binding: ActivityCreateAccountBinding): Boolean {
+        setEditTextValues(binding)
 
         return etNameValue != ""
     }
 
-    private fun checkIfUsernameIsCorrect() {
-        if(!isUsernameCorrectFormat()) {
-            showErrorsUsername()
+    private fun checkIfUsernameIsCorrect(binding: ActivityCreateAccountBinding) {
+        if(!isUsernameCorrectFormat(binding)) {
+            showErrorsUsername(binding)
         } else {
-            hideErrorsUsername()
+            hideErrorsUsername(binding)
         }
     }
 
-    private fun isUsernameCorrectFormat(): Boolean {
-        setEditTextValues()
+    private fun isUsernameCorrectFormat(binding: ActivityCreateAccountBinding): Boolean {
+        setEditTextValues(binding)
 
         return etUsernameValue != ""
     }
 
-    private fun checkIfEmailIsCorrect() {
+    private fun checkIfEmailIsCorrect(binding: ActivityCreateAccountBinding) {
 
-        if(!isEmailCorrectFormat() && isEmptyEmail) {
-            showErrorsEmailEmpty()
-        } else if(!isEmailCorrectFormat() && !isEmptyEmail) {
-            showErrorsEmailNotValid()
-        } else if(isEmailCorrectFormat() && !isEmptyEmail) {
-            hideErrorEmails()
+        if(!isEmailCorrectFormat(binding) && isEmptyEmail) {
+            showErrorsEmailEmpty(binding)
+        } else if(!isEmailCorrectFormat(binding) && !isEmptyEmail) {
+            showErrorsEmailNotValid(binding)
+        } else if(isEmailCorrectFormat(binding) && !isEmptyEmail) {
+            hideErrorEmails(binding)
         }
     }
 
-    private fun isEmailCorrectFormat() : Boolean {
-        setEditTextValues()
+    private fun isEmailCorrectFormat(binding: ActivityCreateAccountBinding) : Boolean {
+        setEditTextValues(binding)
 
         return if(etEmailValue.contains("@") && etEmailValue.contains(".com")) {
             isEmptyEmail = false
@@ -388,32 +304,32 @@ class CreateAccountActivity  : AppCompatActivity() {
         }
     }
 
-    private fun checkIfPhoneIsCorrect() {
-        if(!isPhoneCorrectFormat()) {
-            showErrorsPhoneNotCorrectFormat()
+    private fun checkIfPhoneIsCorrect(binding: ActivityCreateAccountBinding) {
+        if(!isPhoneCorrectFormat(binding)) {
+            showErrorsPhoneNotCorrectFormat(binding)
         } else {
-            hideErrorsPhone()
+            hideErrorsPhone(binding)
         }
     }
 
-    private fun isPhoneCorrectFormat(): Boolean {
+    private fun isPhoneCorrectFormat(binding: ActivityCreateAccountBinding): Boolean {
 
-        setEditTextValues()
+        setEditTextValues(binding)
 
         return !etPhoneValue.contains("-")
     }
 
-    private fun checkIfPasswordIsCorrect() {
-        if(!isPasswordCorrectFormat()) {
-            showErrorPassword()
+    private fun checkIfPasswordIsCorrect(binding: ActivityCreateAccountBinding) {
+        if(!isPasswordCorrectFormat(binding)) {
+            showErrorPassword(binding)
         } else {
-            hideErrorPassword()
+            hideErrorPassword(binding)
         }
     }
 
-    private fun isPasswordCorrectFormat() : Boolean {
+    private fun isPasswordCorrectFormat(binding: ActivityCreateAccountBinding) : Boolean {
 
-        setEditTextValues()
+        setEditTextValues(binding)
 
         val hasUpperCase = etPasswordValue != etPasswordValue.toLowerCase()
 
@@ -429,40 +345,41 @@ class CreateAccountActivity  : AppCompatActivity() {
         }
     }
 
-    private fun isAllFieldsEnteredCorrectly(): Boolean {
-        return isEmailCorrectFormat() && isNameCorrectFormat() && isUsernameCorrectFormat() && isPhoneCorrectFormat() && isPasswordCorrectFormat()
+    private fun isAllFieldsEnteredCorrectly(binding: ActivityCreateAccountBinding): Boolean {
+        return isEmailCorrectFormat(binding) && isNameCorrectFormat(binding) && isUsernameCorrectFormat(binding)
+                && isPhoneCorrectFormat(binding) && isPasswordCorrectFormat(binding)
     }
 
-    private fun clearAllEditTexts() {
-        etName.text.clear()
-        etUsername.text.clear()
-        etEmail.text.clear()
-        etPhone.text.clear()
-        etPassword.text.clear()
+    private fun clearAllEditTexts(binding: ActivityCreateAccountBinding) {
+        binding.etName.text.clear()
+        binding.etUsername.text.clear()
+        binding.etEmail.text.clear()
+        binding.etPhone.text.clear()
+        binding.etPassword.text.clear()
     }
 
-    private fun attemptToCreateAccount() {
+    private fun attemptToCreateAccount(binding: ActivityCreateAccountBinding) {
 
-        if(this.isAllFieldsEnteredCorrectly()) {
+        if(this.isAllFieldsEnteredCorrectly(binding)) {
             loadingDialog.show(fm, "LoadingDialog")
             loadingDialog.dismiss()
-            startUploadPhotoActivity()
+            startUploadPhotoActivity(binding)
         } else {
 
-            checkIfNameIsCorrect()
-            checkIfUsernameIsCorrect()
+            checkIfNameIsCorrect(binding)
+            checkIfUsernameIsCorrect(binding)
 
-            checkIfEmailIsCorrect()
-            checkIfPhoneIsCorrect()
-            checkIfPasswordIsCorrect()
+            checkIfEmailIsCorrect(binding)
+            checkIfPhoneIsCorrect(binding)
+            checkIfPasswordIsCorrect(binding)
 
             errorCreateAccount.show(fm, "ErrorCreateAccountDialog")
         }
     }
 
-    private fun saveUserIntentForNextScreen(): Intent {
+    private fun saveUserIntentForNextScreen(binding: ActivityCreateAccountBinding): Intent {
 
-        setEditTextValues()
+        setEditTextValues(binding)
 
         val intent = Intent(this@CreateAccountActivity, UploadPhotoActivity::class.java)
 
@@ -477,14 +394,14 @@ class CreateAccountActivity  : AppCompatActivity() {
         return intent
     }
 
-    private fun startUploadPhotoActivity() {
-        startActivity(saveUserIntentForNextScreen())
+    private fun startUploadPhotoActivity(binding: ActivityCreateAccountBinding) {
+        startActivity(saveUserIntentForNextScreen(binding))
     }
 
-    private fun createAccountListener() {
+    private fun createAccountListener(binding: ActivityCreateAccountBinding) {
 
-        btContinueCreating.setOnClickListener {
-            attemptToCreateAccount()
+        binding.btContinueCreating.setOnClickListener {
+            attemptToCreateAccount(binding)
         }
     }
 

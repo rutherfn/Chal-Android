@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/colorSmokeWhite"
     android:layout_height="match_parent"
@@ -11,91 +12,81 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbCreateAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbCreateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/margin_20dp"
-        android:text="@string/create"
-        android:textSize="@dimen/header_text_size"
-        app:layout_constraintStart_toStartOf="@id/tbCreateAccount"
-        app:layout_constraintTop_toBottomOf="@+id/tbCreateAccount" />
+        <TextView
+            android:id="@+id/tvCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/create"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="@id/tbCreateAccount"
+            app:layout_constraintTop_toBottomOf="@+id/tbCreateAccount" />
 
-    <TextView
-        android:id="@+id/tvAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/account"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:textSize="@dimen/header_text_size"
-        app:layout_constraintEnd_toEndOf="@+id/tvCreate"
-        app:layout_constraintStart_toStartOf="@+id/tvCreate"
-        app:layout_constraintTop_toBottomOf="@+id/tvCreate" />
+        <TextView
+            android:id="@+id/tvAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/account"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintEnd_toEndOf="@+id/tvCreate"
+            app:layout_constraintStart_toStartOf="@+id/tvCreate"
+            app:layout_constraintTop_toBottomOf="@+id/tvCreate" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/cvChalLogo"
-        android:layout_width="@dimen/cv_chal_primary_height"
-        android:layout_height="@dimen/cv_chal_primary_width"
-        android:layout_marginEnd="@dimen/margin_20dp"
-        android:src="@mipmap/chalappicon"
-        app:layout_constraintBottom_toBottomOf="@+id/tvAccount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvCreate" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cvChalLogo"
+            android:layout_width="@dimen/cv_chal_primary_height"
+            android:layout_height="@dimen/cv_chal_primary_width"
+            android:layout_marginEnd="@dimen/margin_20dp"
+            android:src="@mipmap/chalappicon"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAccount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvCreate" />
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20dp"
-        android:layout_marginStart="@dimen/margin_10dp"
-        android:text="@string/name"
-        android:textSize="@dimen/sub_header_text_size"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAccount" />
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/name"
+            android:textSize="@dimen/sub_header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAccount" />
 
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:ems="13"
-        android:imeOptions="actionDone"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:backgroundTint="@color/colorBlack"
-        android:hint="@string/full_name"
-        android:windowSoftInputMode="adjustPan"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/tvName"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
-
-    <ImageView
-        android:id="@+id/ivName"
-        android:layout_width="@dimen/name_create_account_width"
-        android:layout_height="@dimen/name_create_account_height"
-        android:background="@drawable/ic_user"
-        app:layout_constraintBottom_toBottomOf="@+id/etName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etName"
-        app:layout_constraintTop_toTopOf="@+id/etName" />
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:backgroundTint="@color/colorBlack"
+            android:ems="17"
+            android:hint="@string/full_name"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:windowSoftInputMode="adjustPan"
+            app:layout_constraintStart_toStartOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
         <ImageView
             android:id="@+id/ivErrorName"
             android:layout_width="@dimen/iv_name_error_height"
             android:layout_height="@dimen/iv_name_error_width"
-            android:background="@drawable/ic_error"
             android:layout_marginTop="@dimen/margin_6dp"
+            android:background="@drawable/ic_error"
             app:layout_constraintStart_toStartOf="@+id/etName"
             app:layout_constraintTop_toBottomOf="@+id/etName" />
 
@@ -109,49 +100,39 @@
             app:layout_constraintStart_toEndOf="@+id/ivErrorName"
             app:layout_constraintTop_toTopOf="@+id/ivErrorName" />
 
-    <TextView
-        android:id="@+id/tvUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/sub_header_text_size"
-        android:text="@string/username"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/margin_20dp"
-        app:layout_constraintStart_toStartOf="@+id/ivErrorName"
-        app:layout_constraintTop_toBottomOf="@+id/ivErrorName" />
+        <TextView
+            android:id="@+id/tvUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/username"
+            android:textSize="@dimen/sub_header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/ivErrorName"
+            app:layout_constraintTop_toBottomOf="@+id/ivErrorName" />
 
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:ems="13"
-        android:imeOptions="actionDone"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:backgroundTint="@color/colorBlack"
-        android:hint="@string/username"
-        android:windowSoftInputMode="adjustPan"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/tvUser"
-        app:layout_constraintTop_toBottomOf="@+id/tvUser" />
-
-    <ImageView
-        android:id="@+id/ivUsername"
-        android:layout_width="@dimen/username_create_account_width"
-        android:layout_height="@dimen/username_create_account_height"
-        android:background="@drawable/ic_username"
-        app:layout_constraintBottom_toBottomOf="@+id/etUsername"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etUsername"
-        app:layout_constraintTop_toTopOf="@+id/etUsername" />
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:backgroundTint="@color/colorBlack"
+            android:ems="17"
+            android:hint="@string/username"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:windowSoftInputMode="adjustPan"
+            app:layout_constraintStart_toStartOf="@+id/tvUser"
+            app:layout_constraintTop_toBottomOf="@+id/tvUser" />
 
         <ImageView
             android:id="@+id/ivErrorUsername"
             android:layout_width="@dimen/iv_name_error_height"
             android:layout_height="@dimen/iv_name_error_width"
-            android:background="@drawable/ic_error"
             android:layout_marginTop="@dimen/margin_6dp"
+            android:background="@drawable/ic_error"
             app:layout_constraintStart_toStartOf="@+id/etUsername"
             app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 
@@ -165,117 +146,97 @@
             app:layout_constraintStart_toEndOf="@+id/ivErrorUsername"
             app:layout_constraintTop_toTopOf="@+id/ivErrorUsername" />
 
-    <TextView
-        android:id="@+id/tvEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/sub_header_text_size"
-        android:text="@string/email"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/margin_20dp"
-        app:layout_constraintStart_toStartOf="@+id/ivErrorUsername"
-        app:layout_constraintTop_toBottomOf="@+id/ivErrorUsername" />
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/email"
+            android:textSize="@dimen/sub_header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/ivErrorUsername"
+            app:layout_constraintTop_toBottomOf="@+id/ivErrorUsername" />
 
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:ems="13"
-        android:imeOptions="actionDone"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:backgroundTint="@color/colorBlack"
-        android:hint="@string/email"
-        android:windowSoftInputMode="adjustPan"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/tvEmail"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:backgroundTint="@color/colorBlack"
+            android:ems="17"
+            android:hint="@string/email"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:windowSoftInputMode="adjustPan"
+            app:layout_constraintStart_toStartOf="@+id/tvEmail"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-    <ImageView
-        android:id="@+id/ivEmail"
-        android:layout_width="@dimen/email_create_account_width"
-        android:layout_height="@dimen/email_create_account_height"
-        android:background="@drawable/ic_email"
-        app:layout_constraintBottom_toBottomOf="@+id/etEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etEmail"
-        app:layout_constraintTop_toTopOf="@+id/etEmail" />
+        <ImageView
+            android:id="@+id/ivErrorEmail"
+            android:layout_width="@dimen/iv_email_error_height"
+            android:layout_height="@dimen/iv_email_error_width"
+            android:layout_marginTop="@dimen/margin_6dp"
+            android:background="@drawable/ic_error"
+            app:layout_constraintStart_toStartOf="@+id/etEmail"
+            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
-    <ImageView
-        android:id="@+id/ivErrorEmail"
-        android:layout_width="@dimen/iv_email_error_height"
-        android:layout_height="@dimen/iv_email_error_width"
-        android:background="@drawable/ic_error"
-        android:layout_marginTop="@dimen/margin_6dp"
-        app:layout_constraintStart_toStartOf="@+id/etEmail"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+        <TextView
+            android:id="@+id/tvErrorEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:text="@string/error_email"
+            app:layout_constraintBottom_toBottomOf="@+id/ivErrorEmail"
+            app:layout_constraintStart_toEndOf="@+id/ivErrorEmail"
+            app:layout_constraintTop_toTopOf="@+id/ivErrorEmail" />
 
-    <TextView
-        android:id="@+id/tvErrorEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_10dp"
-        android:text="@string/error_email"
-        app:layout_constraintBottom_toBottomOf="@+id/ivErrorEmail"
-        app:layout_constraintStart_toEndOf="@+id/ivErrorEmail"
-        app:layout_constraintTop_toTopOf="@+id/ivErrorEmail" />
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/phone"
+            android:textSize="@dimen/sub_header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/ivErrorEmail"
+            app:layout_constraintTop_toBottomOf="@+id/ivErrorEmail" />
 
-    <TextView
-        android:id="@+id/tvPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/sub_header_text_size"
-        android:text="@string/phone"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/margin_20dp"
-        app:layout_constraintStart_toStartOf="@+id/ivErrorEmail"
-        app:layout_constraintTop_toBottomOf="@+id/ivErrorEmail" />
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:backgroundTint="@color/colorBlack"
+            android:ems="17"
+            android:hint="@string/fake_phone"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:windowSoftInputMode="adjustPan"
+            app:layout_constraintStart_toStartOf="@+id/tvPhone"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
 
-    <EditText
-        android:id="@+id/etPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:ems="13"
-        android:imeOptions="actionDone"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:backgroundTint="@color/colorBlack"
-        android:hint="@string/fake_phone"
-        android:windowSoftInputMode="adjustPan"
-        android:inputType="phone"
-        app:layout_constraintStart_toStartOf="@+id/tvPhone"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
+        <ImageView
+            android:id="@+id/ivErrorPhone"
+            android:layout_width="@dimen/iv_email_error_height"
+            android:layout_height="@dimen/iv_email_error_width"
+            android:layout_marginTop="@dimen/margin_6dp"
+            android:background="@drawable/ic_error"
+            app:layout_constraintStart_toStartOf="@+id/etPhone"
+            app:layout_constraintTop_toBottomOf="@+id/etPhone" />
 
-    <ImageView
-        android:id="@+id/ivPhone"
-        android:layout_width="@dimen/phone_create_account_width"
-        android:layout_height="@dimen/phone_create_account_height"
-        android:background="@drawable/ic_phone"
-        app:layout_constraintBottom_toBottomOf="@+id/etPhone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etPhone"
-        app:layout_constraintTop_toTopOf="@+id/etPhone" />
-
-    <ImageView
-        android:id="@+id/ivErrorPhone"
-        android:layout_width="@dimen/iv_email_error_height"
-        android:layout_height="@dimen/iv_email_error_width"
-        android:background="@drawable/ic_error"
-        android:layout_marginTop="@dimen/margin_6dp"
-        app:layout_constraintStart_toStartOf="@+id/etPhone"
-        app:layout_constraintTop_toBottomOf="@+id/etPhone" />
-
-    <TextView
-        android:id="@+id/tvErrorPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_10dp"
-        android:text="@string/error_phone"
-        app:layout_constraintBottom_toBottomOf="@+id/ivErrorPhone"
-        app:layout_constraintStart_toEndOf="@+id/ivErrorPhone"
-        app:layout_constraintTop_toTopOf="@+id/ivErrorPhone" />
+        <TextView
+            android:id="@+id/tvErrorPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:text="@string/error_phone"
+            app:layout_constraintBottom_toBottomOf="@+id/ivErrorPhone"
+            app:layout_constraintStart_toEndOf="@+id/ivErrorPhone"
+            app:layout_constraintTop_toTopOf="@+id/ivErrorPhone" />
 
         <TextView
             android:id="@+id/tvPassword"
@@ -293,33 +254,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16dp"
-            android:ems="13"
+            android:backgroundTint="@color/colorBlack"
+            android:ems="17"
+            android:hint="@string/password"
             android:imeOptions="actionDone"
+            android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
-            android:backgroundTint="@color/colorBlack"
-            android:hint="@string/password"
             android:windowSoftInputMode="adjustPan"
-            android:inputType="textPassword"
             app:layout_constraintStart_toStartOf="@+id/tvPassword"
             app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
-
-        <ImageView
-            android:id="@+id/ivPassword"
-            android:layout_width="@dimen/password_create_account_width"
-            android:layout_height="@dimen/password_create_account_height"
-            android:background="@drawable/ic_password"
-            app:layout_constraintBottom_toBottomOf="@+id/etPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/etPassword"
-            app:layout_constraintTop_toTopOf="@+id/etPassword" />
 
         <ImageView
             android:id="@+id/ivErrorPassword"
             android:layout_width="@dimen/iv_password_error_height"
             android:layout_height="@dimen/iv_password_error_width"
-            android:background="@drawable/ic_error"
             android:layout_marginTop="@dimen/margin_6dp"
+            android:background="@drawable/ic_error"
             app:layout_constraintStart_toStartOf="@+id/etPassword"
             app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
@@ -337,10 +288,10 @@
             android:id="@+id/btContinueCreating"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:background="@drawable/corner_button"
             android:text="@string/continue_creating"
             android:textSize="@dimen/sub_header_text_size"
-            android:layout_marginTop="@dimen/margin_20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
