@@ -10,9 +10,9 @@ import com.nicholasrutherford.chal.recycler.viewholders.ActiveChallengesViewHold
 
 class ActiveChallenges(private val mContext: Context, private val activeChallengesList: MutableList<ChallengeResponse>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.active_challenges_layout, parent, false)
-        return ActiveChallengesViewHolder(
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.active_challenges_layout, parent, false)
+                return ActiveChallengesViewHolder(
             itemView,
             mContext,
             activeChallengesList

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/padding_30dp"
+    android:paddingBottom="@dimen/margin_16dp">
+
+    <androidx.cardview.widget.CardView
+        android:background="@color/colorSmokeWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cvProfile"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:background="@drawable/willplaceholder"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Will Shelton"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/header_text_size"
+        android:layout_marginLeft="@dimen/margin_8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cvProfile"
+        app:layout_constraintStart_toEndOf="@+id/cvProfile"
+        app:layout_constraintTop_toTopOf="@+id/cvProfile" />
+
+    <ImageView
+        android:id="@+id/ivChallengePost"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvProfile" />
+
+    <TextView
+        android:id="@+id/tvChallengePostTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:textSize="@dimen/sub_header_text_size"
+        android:text="Challenge Post 1: "
+        app:layout_constraintStart_toStartOf="@+id/ivChallengePost"
+        app:layout_constraintTop_toBottomOf="@+id/ivChallengePost" />
+
+    <TextView
+        android:id="@+id/tvChallengePostBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/body_text_size"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:text="Here is what the challenge does for this challenge post"
+        app:layout_constraintStart_toStartOf="@+id/tvChallengePostTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvChallengePostTitle" />
+
+    <TextView
+        android:id="@+id/tvViewAllComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:textSize="@dimen/body_text_size"
+        android:text="View All 200 Comments"
+        android:textColor="#D3D3D3"
+        app:layout_constraintStart_toStartOf="@+id/tvChallengePostBody"
+        app:layout_constraintTop_toBottomOf="@+id/tvChallengePostBody" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

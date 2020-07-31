@@ -6,6 +6,10 @@
         android:title="@string/debug"/>
 
     <item
+        android:id="@+id/navigation_profile"
+        android:title="Profile" />
+
+    <item
         android:id="@+id/navigation_log_out"
         android:title="@string/log_out"/>
 

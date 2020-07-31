@@ -90,7 +90,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun setupToolbar() {
         setSupportActionBar(tbSettings)
 
-        supportActionBar!!.title = ""
+        supportActionBar!!.title = "Settings"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -114,23 +114,23 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun setupRecyclerViewToAdapters() {
 
-        profileArrayList.add("My Profile")
+        profileArrayList.add("• My Profile")
 
         if(!isVerified) {
-            profileArrayList.add("Activate Account")
+            profileArrayList.add("• Activate Account")
         }
 
-        profileArrayList.add("Notifications")
-        profileArrayList.add("Preferences")
+        profileArrayList.add("• Notifications")
+        profileArrayList.add("• Preferences")
 
-        helpArrayList.add("Email Us")
-        helpArrayList.add("Troubleshooting")
-        helpArrayList.add("End Uer Agreement")
-        helpArrayList.add("Rate our app")
+        helpArrayList.add("• Email Us")
+        helpArrayList.add("• Troubleshooting")
+        helpArrayList.add("• End Uer Agreement")
+        helpArrayList.add("• Rate our app")
 
-        phoneSettingArrayList.add("View Permissions")
-        phoneSettingArrayList.add("Dark Mode")
-        phoneSettingArrayList.add("Other Stuff")
+        phoneSettingArrayList.add("• View Permissions")
+        phoneSettingArrayList.add("• Dark Mode")
+        phoneSettingArrayList.add("• Other Stuff")
 
         rvPhoneSettings.layoutManager = LinearLayoutManager(baseContext)
         rvHelp.layoutManager = LinearLayoutManager(baseContext)

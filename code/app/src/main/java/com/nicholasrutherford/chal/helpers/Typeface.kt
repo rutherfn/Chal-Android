@@ -7,22 +7,22 @@ import android.widget.TextView
 class Typeface {
 
     fun setTypefaceForHeaderBold(textView: TextView, context: Context) {
-        val typefaceHeaderBold = Typeface.createFromAsset(context.assets, "font/AlegreyaSC-Bold.otf")
+        val typefaceHeaderBold = Typeface.createFromAsset(context.assets, "font/ClinicaPro-Italic.otf")
         textView.typeface = typefaceHeaderBold
     }
 
     fun setTypefaceForHeaderRegular(textView: TextView, context: Context) {
-        val typefaceHeaderRegular = Typeface.createFromAsset(context.assets, "font/Alegreya-Regular.otf")
+        val typefaceHeaderRegular = Typeface.createFromAsset(context.assets, "font/ClinicaPro-Regular.otf")
         textView.typeface = typefaceHeaderRegular
     }
 
     fun setTypefaceForSubHeaderBold(textView: TextView, context: Context) {
-        val typefaceSubHeaderBold = Typeface.createFromAsset(context.assets, "font/Domine-Bold.ttf")
+        val typefaceSubHeaderBold = Typeface.createFromAsset(context.assets, "font/NotoMono-Regular.ttf")
         textView.typeface = typefaceSubHeaderBold
     }
 
     fun setTypefaceForSubHeaderRegular(textView: TextView, context: Context) {
-        val typefaceSubHeaderRegular = Typeface.createFromAsset(context.assets, "font/Domine-Regular.ttf")
+        val typefaceSubHeaderRegular = Typeface.createFromAsset(context.assets, "font/NotoMono-Regular.ttf")
         textView.typeface = typefaceSubHeaderRegular
     }
 
