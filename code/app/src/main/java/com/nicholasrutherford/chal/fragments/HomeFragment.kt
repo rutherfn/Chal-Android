@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.activitys.SettingsActivity
-import com.nicholasrutherford.chal.activitys.accounts.SignUpActivity
 import com.nicholasrutherford.chal.databinding.FragmentHomeBinding
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface

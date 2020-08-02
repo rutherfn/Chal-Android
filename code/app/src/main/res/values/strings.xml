@@ -10,6 +10,7 @@
     <string name="category_education">Education</string>
     <string name="category_travel">Education</string>
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
+    <string name="completed_challenges">COMPLETED</string>
     <string name="clear_photo">Clear Photo</string>
     <string name="click_me_to_take_a_picture">Click Me To Take A Picture</string>
     <string name="continue_creating">Continue</string>

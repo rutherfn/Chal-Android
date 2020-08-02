@@ -1,30 +1,18 @@
-<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+        <include
             android:id="@+id/tbProfile"
-            android:background="@color/colorSmokeWhite"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-        <TextView
-            android:id="@+id/tvHomeTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="will.shelton"
-            android:textSize="20dp"
-            android:layout_marginStart="@dimen/margin_16dp"
-            android:textColor="@color/colorBlack"
-            android:layout_centerVertical="true" />
-
-        </androidx.appcompat.widget.Toolbar>
+            android:layout_height="50dp"
+            layout="@layout/toolbar_layout" />
 
         <include
             android:id="@+id/layoutProfile"
@@ -32,12 +20,25 @@
             android:layout_height="match_parent"
             layout="@layout/profile_layout" />
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            app:menu="@menu/challenges_profile_menu"
+            android:layout_marginTop="@dimen/margin_4dp"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorSmokeWhite">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProfile"
-                android:layout_marginTop="@dimen/margin_10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
+        </androidx.core.widget.NestedScrollView>
+
     </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>
