@@ -84,17 +84,11 @@
 
         </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/btnLogOutSettings"
+        <include
+            android:id="@+id/layoutButtonsSettings"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="@dimen/margin_2dp"
-            android:background="@drawable/corner_button"
-            android:text="Log Out"
-            android:textStyle="bold">
-
-        </Button>
+            layout="@layout/buttons_settings_layout" />
 
     </LinearLayout>
 

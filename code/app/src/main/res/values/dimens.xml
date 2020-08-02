@@ -82,6 +82,7 @@
 
     <!-- Buttons Unique Sizes -->
     <dimen name="button_sign_up_size">300sp</dimen>
+    <dimen name="button_settings_width">300sp</dimen>
 
     <!-- Margins -->
     <dimen name="margin_2dp">2dp</dimen>

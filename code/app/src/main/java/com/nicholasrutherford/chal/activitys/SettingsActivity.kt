@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
 import com.nicholasrutherford.chal.databinding.ActivitySettingsBinding
+import com.nicholasrutherford.chal.fragments.DebugFragment
 import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
@@ -18,6 +19,8 @@ import com.nicholasrutherford.chal.recycler.adapters.SettingsAdapter
 class SettingsActivity : AppCompatActivity() {
 
     private var binding: ActivitySettingsBinding? = null
+
+    private val debugFragment = DebugFragment()
 
     private val profileArrayList = ArrayList<String>()
     private val helpArrayList = ArrayList<String>()
@@ -60,11 +63,15 @@ class SettingsActivity : AppCompatActivity() {
     private fun setupView() { setupTypefaceAndTextViewsColors() }
 
     private fun setupToolbar() {
-        binding?.tbSettings?.ibBack?.visibleOrGone = false
-        binding?.tbSettings?.tvSubTitle?.visibleOrGone = true
+        binding?.tbSettings?.ibBack?.visibleOrGone = true
+        binding?.tbSettings?.tvSubTitle?.visibleOrGone = false
 
         applicationContext.let { binding?.tbSettings?.tvTitle?.let { it1 -> typeface.setTypefaceForHeaderBold(it1, it) } }
+
+        toolbarBackCloseListener()
     }
+
+    private fun toolbarBackCloseListener() { binding?.tbSettings?.ibBack?.setOnClickListener { startMainActivity() } }
 
     private fun setupTypefaceAndTextViewsColors() {
 
@@ -79,8 +86,12 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun clickListeners() {
 
-        binding?.btnLogOutSettings?.setOnClickListener {
+        binding?.layoutButtonsSettings?.btnLogout?.setOnClickListener {
             attemptToLogoutUser()
+        }
+
+        binding?.layoutButtonsSettings?.btnDebug?.setOnClickListener {
+            showDebugFragment()
         }
     }
 
@@ -97,7 +108,7 @@ class SettingsActivity : AppCompatActivity() {
 
         helpArrayList.add("• Email Us")
         helpArrayList.add("• Troubleshooting")
-        helpArrayList.add("• End Uer Agreement")
+        helpArrayList.add("• End User Agreement")
         helpArrayList.add("• Rate our app")
 
         phoneSettingArrayList.add("• View Permissions")
@@ -132,6 +143,11 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
         timer.start()
+    }
+
+    private fun showDebugFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.container, debugFragment, debugFragment.javaClass.simpleName)
+            .commit()
     }
 
     private fun startLoginActivity() {
