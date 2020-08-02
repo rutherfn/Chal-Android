@@ -9,7 +9,7 @@
     android:layout_height="130dp">
 
     <ImageView
-        android:id="@+id/info_text"
+        android:id="@+id/ivChallenges"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"/>

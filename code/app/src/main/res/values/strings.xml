@@ -41,10 +41,14 @@
     <string name="last_updated">Last Updated</string>
     <string name="search_navigation">SEARCH</string>
     <string name="fake_phone">414323312</string>
+    <string name="filler_hash_tag_one"><u>#MuscleGains</u></string>
+    <string name="filler_hash_tag_two"><u>#PushMyself</u></string>
+    <string name="filler_hash_tag_three"><u>#Motiviation</u></string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="forgot_your_password">Forgot Your Password></string>
     <string name="full_name">Full Name</string>
     <string name="in_order_to_reset_password">in order to reset password</string>
+    <string name="join_challenge"><u> Join Challenge!</u></string>
     <string name="log_out">Log out</string>
     <string name="loading">Loading</string>
     <string name="loading_account">Loading Your Account… </string>

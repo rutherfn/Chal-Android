@@ -6,15 +6,30 @@
     android:layout_width="match_parent"
     android:layout_height="50dp">
 
+
+    <ImageButton
+        android:id="@+id/ibBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="?attr/homeAsUpIndicator"
+        android:tint="@color/colorSmokeWhite"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_10dp"
         android:text="will.shelton"
         android:textSize="@dimen/sub_header_text_size"
+        android:textColor="@color/colorSmokeWhite"
+        android:layout_marginLeft="@dimen/margin_10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ibBack"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -23,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_10dp"
         android:text="Settings"
+        android:textColor="@color/colorSmokeWhite"
         android:textSize="@dimen/body_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"

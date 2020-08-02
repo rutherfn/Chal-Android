@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.recycler.viewholders.ProfileSettingsViewHolder
 
-class ProfileSettings(private val mContext: Context, private val listOfSubProfiles: ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SettingsAdapter(private val mContext: Context, private val listOfSubProfiles: ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.settings_regular_layout, parent, false)

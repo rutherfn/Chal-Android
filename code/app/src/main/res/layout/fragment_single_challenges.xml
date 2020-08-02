@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/tbSingleChallenge"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            layout="@layout/toolbar_header_picture_layout" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorSmokeWhite">
+
+            <include
+                android:id="@+id/layoutSingleChallengeFullLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/single_challenge_full_layout"/>
+
+    </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

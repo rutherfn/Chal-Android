@@ -2,56 +2,39 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp">
-
-    <ImageView
-        android:id="@+id/ivHeader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/workingout" />
+    android:layout_height="50dp">
 
     <ImageButton
         android:id="@+id/ibBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:tint="@color/colorSmokeWhite"
         android:src="?attr/homeAsUpIndicator"
         android:layout_marginTop="@dimen/margin_10dp"
         android:layout_marginStart="@dimen/margin_10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivHeader" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_10dp"
-        android:text="100Day Challenge "
-        android:textColor="@color/colorSmokeWhite"
+        android:text="will.shelton"
+        android:layout_marginLeft="@dimen/margin_4dp"
         android:textSize="@dimen/sub_header_text_size"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/ibBack"
         app:layout_constraintStart_toEndOf="@+id/ibBack"
         app:layout_constraintTop_toTopOf="@+id/ibBack" />
 
     <TextView
+        android:id="@+id/tvSubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_10dp"
-        android:text="More Info"
-        android:textColor="@color/colorSmokeWhite"
+        android:text="Settings"
         android:textSize="@dimen/body_text_size"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvTitle" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

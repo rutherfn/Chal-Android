@@ -5,14 +5,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.databinding.ProfileChallengesBinding
-import com.nicholasrutherford.chal.recycler.viewholders.MyProfileViewHolder
+import com.nicholasrutherford.chal.fragments.MyProfileFragment
+import com.nicholasrutherford.chal.recycler.viewholders.SettingsViewHolder
 import com.nicholasrutherford.chal.viewmodels.MyProfileViewModel
 
-class MyProfileAdapter (private val viewModel: MyProfileViewModel, private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MyProfileAdapter (private val viewModel: MyProfileViewModel, private val mContext: Context, private val fragment: MyProfileFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ProfileChallengesBinding.inflate(inflater, parent, false)
-        return MyProfileViewHolder(binding, viewModel)
+        return SettingsViewHolder(binding, viewModel, mContext, fragment)
     }
 
     override fun getItemCount(): Int {
@@ -20,7 +21,7 @@ class MyProfileAdapter (private val viewModel: MyProfileViewModel, private val m
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder is MyProfileViewHolder) {
+        if(holder is SettingsViewHolder) {
             holder.bind(position)
         }
     }

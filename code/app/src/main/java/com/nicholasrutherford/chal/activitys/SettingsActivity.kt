@@ -3,39 +3,29 @@ package com.nicholasrutherford.chal.activitys
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.MenuItem
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
+import com.nicholasrutherford.chal.databinding.ActivitySettingsBinding
 import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.recycler.adapters.ProfileSettings
+import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.nicholasrutherford.chal.recycler.adapters.SettingsAdapter
 
 class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var tbSettings: Toolbar
-    private lateinit var tvProfile: TextView
-    private lateinit var rvProfile: RecyclerView
-    private lateinit var tvHelp: TextView
-    private lateinit var rvHelp: RecyclerView
-    private lateinit var tvPhoneSettings: TextView
-    private lateinit var rvPhoneSettings: RecyclerView
-    private lateinit var btnLogoutSettings: Button
+    private var binding: ActivitySettingsBinding? = null
 
     private val profileArrayList = ArrayList<String>()
     private val helpArrayList = ArrayList<String>()
     private val phoneSettingArrayList = ArrayList<String>()
 
-    private var adapterSettingsProfile: ProfileSettings? = null
-    private var adapterSettingsProfileTwo: ProfileSettings? = null
-    private var adapterSettingsProfileThree: ProfileSettings? = null
+    private var adapterSettingsAdapter: SettingsAdapter? = null
+    private var adapterSettingsTwoAdapter: SettingsAdapter? = null
+    private var adapterSettingsThreeAdapter: SettingsAdapter? = null
 
     private val fm = supportFragmentManager
     private val loadingDialog = LoadingDialog()
@@ -49,65 +39,47 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.settings)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
         main()
     }
 
     private fun main() {
-
         setupView()
+
+        setupToolbar()
+
+        mAuth = FirebaseAuth.getInstance()
+        isVerified = mAuth!!.currentUser!!.isEmailVerified
 
         clickListeners()
 
         setupRecyclerViewToAdapters()
     }
 
-    private fun setupView() {
-
-        setupIds()
-
-        setupTypefaceAndTextViewsColors()
-    }
-
-    private fun setupIds() {
-
-        mAuth = FirebaseAuth.getInstance()
-
-        isVerified = mAuth!!.currentUser!!.isEmailVerified
-
-        tbSettings = findViewById(R.id.tbSettings)
-        tvProfile = findViewById(R.id.tvProfile)
-        rvProfile = findViewById(R.id.rvProfile)
-        tvHelp = findViewById(R.id.tvHelp)
-        rvHelp = findViewById(R.id.rvHelp)
-        tvPhoneSettings = findViewById(R.id.tvPhoneSettings)
-        rvPhoneSettings = findViewById(R.id.rvPhoneSettings)
-        btnLogoutSettings = findViewById(R.id.btnLogOutSettings)
-
-        setupToolbar()
-    }
+    private fun setupView() { setupTypefaceAndTextViewsColors() }
 
     private fun setupToolbar() {
-        setSupportActionBar(tbSettings)
+        binding?.tbSettings?.ibBack?.visibleOrGone = false
+        binding?.tbSettings?.tvSubTitle?.visibleOrGone = true
 
-        supportActionBar!!.title = "Settings"
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        applicationContext.let { binding?.tbSettings?.tvTitle?.let { it1 -> typeface.setTypefaceForHeaderBold(it1, it) } }
     }
 
     private fun setupTypefaceAndTextViewsColors() {
 
-        typeface.setTypefaceForHeaderBold(tvProfile, baseContext)
-        typeface.setTypefaceForHeaderBold(tvHelp, baseContext)
-        typeface.setTypefaceForHeaderBold(tvPhoneSettings, baseContext)
+        typeface.setTypefaceForHeaderBold(binding!!.tvProfile, baseContext)
+        typeface.setTypefaceForHeaderBold(binding!!.tvHelp, baseContext)
+        typeface.setTypefaceForHeaderBold(binding!!.tvPhoneSettings, baseContext)
 
-        helper.setTextViewColor(baseContext, tvProfile, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, tvHelp, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, tvPhoneSettings, R.color.colorPrimary)
+        helper.setTextViewColor(baseContext, binding!!.tvProfile, R.color.colorPrimary)
+        helper.setTextViewColor(baseContext, binding!!.tvHelp, R.color.colorPrimary)
+        helper.setTextViewColor(baseContext, binding!!.tvPhoneSettings, R.color.colorPrimary)
     }
 
     private fun clickListeners() {
 
-        btnLogoutSettings.setOnClickListener {
+        binding?.btnLogOutSettings?.setOnClickListener {
             attemptToLogoutUser()
         }
     }
@@ -130,19 +102,18 @@ class SettingsActivity : AppCompatActivity() {
 
         phoneSettingArrayList.add("• View Permissions")
         phoneSettingArrayList.add("• Dark Mode")
-        phoneSettingArrayList.add("• Other Stuff")
 
-        rvPhoneSettings.layoutManager = LinearLayoutManager(baseContext)
-        rvHelp.layoutManager = LinearLayoutManager(baseContext)
-        rvProfile.layoutManager = LinearLayoutManager(baseContext)
+        binding?.rvPhoneSettings?.layoutManager = LinearLayoutManager(baseContext)
+        binding?.rvHelp?.layoutManager = LinearLayoutManager(baseContext)
+        binding?.rvProfile?.layoutManager = LinearLayoutManager(baseContext)
 
-        adapterSettingsProfile = ProfileSettings(applicationContext,profileArrayList)
-        adapterSettingsProfileTwo = ProfileSettings(applicationContext,helpArrayList)
-        adapterSettingsProfileThree = ProfileSettings(applicationContext,phoneSettingArrayList)
+        adapterSettingsAdapter = SettingsAdapter(applicationContext,profileArrayList)
+        adapterSettingsTwoAdapter = SettingsAdapter(applicationContext,helpArrayList)
+        adapterSettingsThreeAdapter = SettingsAdapter(applicationContext,phoneSettingArrayList)
 
-        rvProfile.adapter = adapterSettingsProfile
-        rvHelp.adapter = adapterSettingsProfileTwo
-        rvPhoneSettings.adapter = adapterSettingsProfileThree
+        binding?.rvProfile?.adapter = adapterSettingsAdapter
+        binding?.rvHelp?.adapter = adapterSettingsTwoAdapter
+        binding?.rvPhoneSettings?.adapter = adapterSettingsThreeAdapter
     }
 
     private fun attemptToLogoutUser() {
@@ -174,14 +145,6 @@ class SettingsActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean =
-        if(item.itemId == android.R.id.home) {
-            startMainActivity()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
 
     override fun onBackPressed() {
         startMainActivity()

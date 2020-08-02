@@ -17,6 +17,7 @@ import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.recycler.adapters.HomeAdapter
 import com.nicholasrutherford.chal.viewmodels.HomeViewModel
+import com.squareup.picasso.Picasso
 
 class HomeFragment : Fragment() {
 

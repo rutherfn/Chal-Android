@@ -7,15 +7,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+        <include
             android:id="@+id/tbSettings"
             android:layout_width="match_parent"
-            android:textSize="@dimen/header_text_size"
-            android:textStyle="bold"
-            android:background="@color/colorPrimary"
-            android:layout_height="match_parent">
-
-        </androidx.appcompat.widget.Toolbar>
+            android:layout_height="50dp"
+            layout="@layout/toolbar_layout" />
 
         <TextView
             android:id="@+id/tvProfile"

@@ -2,94 +2,206 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="@dimen/card_view_wall_height"
         android:layout_marginTop="@dimen/margin_20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cvProfile"
+            android:layout_height="@dimen/cv_next_height"
+            android:layout_width="@dimen/cv_wall_profile_width"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8dp"
+            android:text="Will Shelton"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/wall_header_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/cvProfile"
+            app:layout_constraintStart_toEndOf="@+id/cvProfile"
+            app:layout_constraintTop_toTopOf="@+id/cvProfile" />
+
+        <ImageView
+            android:id="@+id/ivShare"
+            android:layout_width="@dimen/iv_share_height"
+            android:layout_height="@dimen/iv_share_width"
+            android:background="@drawable/ic_share"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvFullName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cvProfile" />
+
+        <TextView
+            android:id="@+id/tvTimeUpdated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_6dp"
+            android:text="Last Updated 2 Mins Ago"
+            android:textSize="@dimen/wall_sub_header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tvFullName"
+            app:layout_constraintTop_toBottomOf="@+id/tvFullName" />
+
+        <TextView
+            android:id="@+id/tvHashTagOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filler_hash_tag_one"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/wall_hash_tag_size"
+            android:layout_marginTop="@dimen/margin_6dp"
+            app:layout_constraintStart_toStartOf="@+id/tvTimeUpdated"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimeUpdated" />
+
+        <TextView
+            android:id="@+id/tvHashTagTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/wall_hash_tag_size"
+            android:textColor="@color/colorBlue"
+            android:text="@string/filler_hash_tag_two"
+            android:layout_marginStart="@dimen/margin_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvHashTagOne"
+            app:layout_constraintStart_toEndOf="@+id/tvHashTagOne"
+            app:layout_constraintTop_toTopOf="@+id/tvHashTagOne" />
+
+        <TextView
+            android:id="@+id/tvHashTagThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/wall_hash_tag_size"
+            android:text="@string/filler_hash_tag_three"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:textColor="@color/colorBlue"
+            app:layout_constraintBottom_toBottomOf="@+id/tvHashTagTwo"
+            app:layout_constraintStart_toEndOf="@+id/tvHashTagTwo"
+            app:layout_constraintTop_toTopOf="@+id/tvHashTagTwo" />
+
+        <ImageView
+            android:id="@+id/ivChallengePost"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/wall_iv_challenge_post_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHashTagOne" />
+
+        <TextView
+            android:id="@+id/tvChallengeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#100 Days Challenge"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/wall_sub_header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/ivChallengePost"
+            app:layout_constraintTop_toBottomOf="@+id/ivChallengePost" />
+
+        <TextView
+            android:id="@+id/tvChallengeDurationLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration Left: 11 Days"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:textSize="@dimen/wall_body_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintStart_toStartOf="@+id/tvChallengeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvChallengeTitle" />
+
+        <TextView
+            android:id="@+id/tvChallengePostTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Challenge Post 1: "
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:textSize="@dimen/wall_sub_header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/tvChallengeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvChallengeDurationLeft" />
+
+        <TextView
+            android:id="@+id/tvChallengePostBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="Here is what the challenge does for this challenge post"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/wall_body_text_size"
+            app:layout_constraintStart_toStartOf="@+id/tvChallengePostTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvChallengePostTitle" />
+
+
+        <ImageView
+            android:id="@+id/ivLikes"
+            android:layout_width="@dimen/iv_like_height"
+            android:layout_height="@dimen/iv_like_width"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:background="@drawable/ic_like"
+            app:layout_constraintStart_toStartOf="@+id/tvChallengePostBody"
+            app:layout_constraintTop_toBottomOf="@+id/tvChallengePostBody" />
+
+        <TextView
+            android:id="@+id/tvCurrentLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:text="Current Likes: 1112"
+            android:textStyle="bold"
+            android:textSize="@dimen/wall_body_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/ivLikes"
+            app:layout_constraintStart_toEndOf="@+id/ivLikes"
+            app:layout_constraintTop_toTopOf="@+id/ivLikes" />
+
+        <TextView
+            android:id="@+id/tvViewAllComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="View All 200 Comments"
+            android:textColor="#D3D3D3"
+            android:textSize="@dimen/wall_body_text_size"
+            app:layout_constraintStart_toStartOf="@+id/ivLikes"
+            app:layout_constraintTop_toBottomOf="@+id/tvCurrentLikes" />
+
+        <TextView
+            android:id="@+id/tvViewChallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/join_challenge"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/wall_body_text_size"
+            app:layout_constraintStart_toStartOf="@+id/tvViewAllComments"
+            app:layout_constraintTop_toBottomOf="@+id/tvViewAllComments" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/cvProfile"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
-        android:background="@drawable/willplaceholder"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:layout_marginLeft="@dimen/margin_10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Will Shelton"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/header_text_size"
-        android:layout_marginLeft="@dimen/margin_8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cvProfile"
-        app:layout_constraintStart_toEndOf="@+id/cvProfile"
-        app:layout_constraintTop_toTopOf="@+id/cvProfile" />
-
-    <ImageView
-        android:id="@+id/ivChallengePost"
-        android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvProfile" />
-
-    <TextView
-        android:id="@+id/tvChallengePostTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:layout_marginLeft="@dimen/margin_10dp"
-        android:textSize="@dimen/sub_header_text_size"
-        android:text="Challenge Post 1: "
-        app:layout_constraintStart_toStartOf="@+id/ivChallengePost"
-        app:layout_constraintTop_toBottomOf="@+id/ivChallengePost" />
-
-    <TextView
-        android:id="@+id/tvChallengePostBody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/body_text_size"
-        android:layout_marginTop="@dimen/margin_20dp"
-        android:text="Here is what the challenge does for this challenge post"
-        app:layout_constraintStart_toStartOf="@+id/tvChallengePostTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvChallengePostTitle" />
-
-    <TextView
-        android:id="@+id/tvViewAllComments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20dp"
-        android:textSize="@dimen/body_text_size"
-        android:text="View All 200 Comments"
-        android:textColor="#D3D3D3"
-        app:layout_constraintStart_toStartOf="@+id/tvChallengePostBody"
-        app:layout_constraintTop_toBottomOf="@+id/tvChallengePostBody" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
