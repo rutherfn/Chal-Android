@@ -38,7 +38,7 @@
     <string name="error_password">One capital letter and one number.</string>
     <string name="home_bottom_nav">HOME</string>
     <string name="last_updated">Last Updated</string>
-    <string name="find_friends_nav">FIND FRIENDS</string>
+    <string name="search_navigation">SEARCH</string>
     <string name="fake_phone">414323312</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="forgot_your_password">Forgot Your Password></string>

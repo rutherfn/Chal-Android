@@ -1,19 +1,16 @@
 package com.nicholasrutherford.chal.activitys
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
+import com.nicholasrutherford.chal.databinding.ActivityMainBinding
 import com.nicholasrutherford.chal.fragments.*
 import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
 import com.nicholasrutherford.chal.helpers.visibleOrGone
@@ -29,44 +26,34 @@ class MainActivity : AppCompatActivity() {
     private val debugFragment = DebugFragment()
     private val myProfileFragment = MyProfileFragment()
 
+    var binding : ActivityMainBinding? = null
+
     private val loadingDialog = LoadingDialog()
 
-    private lateinit var clContainer: ConstraintLayout
-    private lateinit var tbMain: Toolbar
-    private lateinit var btNavigation: BottomNavigationView
-    private lateinit var flMainContainer: FrameLayout
     private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        main()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
+        main(binding!!)
     }
 
-    private fun main() {
-        setupView()
+    private fun main(binding: ActivityMainBinding) {
+        setupView(binding)
 
         setupHomeForFirstToLoad()
 
-        setupBottomNavigation()
+        setupBottomNavigation(binding)
     }
 
-    private fun setupView() {
-        setupIds()
-        setupToolbar()
+    private fun setupView(binding: ActivityMainBinding) {
+        setupToolbar(binding)
     }
 
-    private fun setupIds() {
-        mAuth = FirebaseAuth.getInstance()
-  //      clContainer = findViewById(R.id.clContainer)
-        tbMain = findViewById(R.id.tbMain)
-        btNavigation = findViewById(R.id.bvNavigation)
-//        flMainContainer = findViewById(R.id.flMainContainer)
-    }
-
-    private fun setupToolbar() {
-        setSupportActionBar(tbMain)
-        tbMain.title = ""
+    private fun setupToolbar(binding: ActivityMainBinding) {
+        setSupportActionBar(binding.tbMain)
+        binding.tbMain.title = ""
     }
 
     private fun setupHomeForFirstToLoad() {
@@ -74,8 +61,8 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun setupBottomNavigation() {
-        btNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+    private fun setupBottomNavigation(binding: ActivityMainBinding) {
+        binding.bvNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
     private val mOnNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener =
@@ -86,22 +73,22 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_home -> {
                         supportFragmentManager.beginTransaction().replace(R.id.container, homeFragment, homeFragment.javaClass.simpleName)
                             .commit()
-                        btNavigation.visibleOrGone = true
-                        tbMain.visibleOrGone = false
+                        binding?.bvNavigation?.visibleOrGone = true
+                        binding?.tbMain?.visibleOrGone = false
                         return true
                     }
                     R.id.navigation_challenges -> {
                         supportFragmentManager.beginTransaction().replace(R.id.container, challengesFragment, challengesFragment.javaClass.simpleName)
                             .commit()
-                        btNavigation.visibleOrGone = true
-                        tbMain.visibleOrGone = true
+                        binding?.bvNavigation?.visibleOrGone = true
+                        binding?.tbMain?.visibleOrGone = true
                         return true
                     }
-                    R.id.navigation_find_friends -> {
+                    R.id.navigation_search -> {
                         supportFragmentManager.beginTransaction().replace(R.id.container, suggestedFriendsFragment, suggestedFriendsFragment.javaClass.simpleName)
                             .commit()
-                        btNavigation.visibleOrGone = true
-                        tbMain.visibleOrGone = true
+                        binding?.bvNavigation?.visibleOrGone = true
+                        binding?.tbMain?.visibleOrGone = true
                         return true
                     }
 
@@ -151,8 +138,8 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_debug -> {
                 supportFragmentManager.beginTransaction().replace(R.id.container, debugFragment, debugFragment.javaClass.simpleName)
                     .commit()
-                tbMain.visibleOrGone = true
-                btNavigation.visibleOrGone = false
+                binding?.tbMain?.visibleOrGone = true
+                binding?.bvNavigation?.visibleOrGone = false
             }
             R.id.navigation_log_out -> {
                 attemptToLogoutUser()
@@ -163,8 +150,8 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_profile -> {
                 supportFragmentManager.beginTransaction().replace(R.id.container, myProfileFragment, myProfileFragment.javaClass.simpleName)
                     .commit()
-                btNavigation.visibleOrGone = true
-                tbMain.visibleOrGone = false
+                binding?.bvNavigation?.visibleOrGone = true
+                binding?.tbMain?.visibleOrGone = false
             }
         }
         return super.onOptionsItemSelected(item)
