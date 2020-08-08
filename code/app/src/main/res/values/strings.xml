@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name"></string>
-
+    <string name="app_name">chal</string>
     <string name="add_photo_later">Add Photo Later</string>
     <string name="active_challenges">ACTIVE</string>
     <string name="account">Account</string>
@@ -25,9 +24,11 @@
     </string-array>
     <string name="debug_option_typefaces">• Switch Typefaces</string>
     <string name="debug_option_change_colors">• Change Colors</string>
+    <string name="debug_password_title">Please Enter Debug Password In Order To Continue</string>
     <string name="done">Done</string>
     <string name="email">Email</string>
-    <string name="email_Sent">Email Sent!</string>
+    <string name="email_sent">Email Sent!</string>
+    <string name="error_content_desc_creating_account">Error Creating Account</string>
     <string name="error_creating_create_account_fields">One of the require fields are incorrect. Press OK to try again.</string>
     <string name="error_creating_account_firebase">Error Creating Account. Please Check Your Internet Connection</string>
     <string name="error_name">No name entered</string>
@@ -49,6 +50,10 @@
     <string name="full_name">Full Name</string>
     <string name="in_order_to_reset_password">in order to reset password</string>
     <string name="join_challenge"><u> Join Challenge!</u></string>
+    <string-array name="listOfTypefaces">
+        <item>@string/debug_option_typefaces</item>
+        <item>@string/debug_option_change_colors</item>
+    </string-array>
     <string name="log_out">Log out</string>
     <string name="loading">Loading</string>
     <string name="loading_account">Loading Your Account… </string>
@@ -80,5 +85,18 @@
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
     <string name="username">Username</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
-
+    <string name="typeface_1">ClinicaPro-Italic</string>
+    <string name="typeface_1_location">dd</string>
+    <string name="typeface_2">ClinicaPro-Regular</string>
+    <string name="typeface_3">NotoSans-Bold</string>
+    <string name="typeface_4">NotoSans-Regular</string>
+    <string name="typeface_5">OpenSans-Bold</string>
+    <string name="typeface_6">OpenSans-Italic</string>
+    <string name="typeface_7">OpenSans-Regular</string>
+    <string name="typeface_8">Roboto-Bold</string>
+    <string name="typeface_9">Roboto-Italic</string>
+    <string name="typeface_10">Roboto-Light</string>
+    <string name="typeface_11">Roboto-Regular</string>
+    <string name="typeface_12">UniNeue-HeavyItalic</string>
+    <string name="typeface_13">UniNeue-Light</string>
 </resources>

@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.models.responses.ChallengeResponse
+import com.nicholasrutherford.chal.data.responses.ChallengeResponse
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.active_challenges_layout.view.*
 
 class ActiveChallengesViewHolder(itemView: View, private val mContext: Context, private val activeChallengesList: MutableList<ChallengeResponse>?) : RecyclerView.ViewHolder(itemView) {
 

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
-import com.nicholasrutherford.chal.models.responses.ChallengeResponse
+import com.nicholasrutherford.chal.data.responses.ChallengeResponse
 import com.nicholasrutherford.chal.recycler.adapters.SearchChallenges
 import com.nicholasrutherford.chal.recycler.adapters.ActiveChallenges
 

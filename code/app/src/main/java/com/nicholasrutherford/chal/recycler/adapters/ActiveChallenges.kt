@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.models.responses.ChallengeResponse
+import com.nicholasrutherford.chal.data.responses.ChallengeResponse
 import com.nicholasrutherford.chal.recycler.viewholders.ActiveChallengesViewHolder
 
 class ActiveChallenges(private val mContext: Context, private val activeChallengesList: MutableList<ChallengeResponse>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

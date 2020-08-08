@@ -1,7 +1,7 @@
 package com.nicholasrutherford.chal.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.nicholasrutherford.chal.models.debug.Debug
+import com.nicholasrutherford.chal.data.debug.Debug
 import com.nicholasrutherford.chal.viewstate.DebugViewState
 
 class DebugViewModel(private val listOfOptions: Array<String>) : ViewModel() {
@@ -24,7 +24,6 @@ class DebugViewModel(private val listOfOptions: Array<String>) : ViewModel() {
     inner class DebugViewStateImpl() : DebugViewState {
         override val debugModeVisible = false
         override val debugOptionsList = ArrayList<Debug>()
-        //  override val debugOptionsList: MutableList<Debug>? = MutableList<Debug>
     }
 
 }

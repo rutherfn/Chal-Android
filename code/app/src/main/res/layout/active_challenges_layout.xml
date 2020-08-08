@@ -32,6 +32,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_20dp"
+                android:layout_marginLeft="@dimen/margin_20dp"
                 android:text="@string/sample_challenge_title"
                 android:textSize="@dimen/sub_header_text_size"
                 android:textStyle="bold"

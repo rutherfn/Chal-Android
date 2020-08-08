@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.models.responses
+package com.nicholasrutherford.chal.data.responses
 
 data class ChallengeResponse(
     val id: Int,

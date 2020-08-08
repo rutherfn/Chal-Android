@@ -25,7 +25,7 @@ import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
 import com.nicholasrutherford.chal.fragments.dialogs.SuccessCreateAccountDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.models.UserAccount
+import com.nicholasrutherford.chal.data.UserAccount
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 

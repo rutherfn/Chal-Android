@@ -17,7 +17,6 @@ import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.recycler.adapters.HomeAdapter
 import com.nicholasrutherford.chal.viewmodels.HomeViewModel
-import com.squareup.picasso.Picasso
 
 class HomeFragment : Fragment() {
 
@@ -80,9 +79,9 @@ class HomeFragment : Fragment() {
 
         binding.rvHome.layoutManager = LinearLayoutManager(activity)
 
-        val viewModel = HomeViewModel()
+        val viewModel = activity?.let { HomeViewModel(it) }
 
-        homeAdapter = context?.let { HomeAdapter(viewModel, it) }
+        homeAdapter = context?.let { HomeAdapter(viewModel!!, it) }
         binding.rvHome.adapter = homeAdapter
     }
 

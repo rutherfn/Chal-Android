@@ -20,8 +20,6 @@ class SettingsActivity : AppCompatActivity() {
 
     private var binding: ActivitySettingsBinding? = null
 
-    private val debugFragment = DebugFragment()
-
     private val profileArrayList = ArrayList<String>()
     private val helpArrayList = ArrayList<String>()
     private val phoneSettingArrayList = ArrayList<String>()
@@ -91,7 +89,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         binding?.layoutButtonsSettings?.btnDebug?.setOnClickListener {
-            showDebugFragment()
+            startDebugActivity()
         }
     }
 
@@ -145,11 +143,6 @@ class SettingsActivity : AppCompatActivity() {
         timer.start()
     }
 
-    private fun showDebugFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.container, debugFragment, debugFragment.javaClass.simpleName)
-            .commit()
-    }
-
     private fun startLoginActivity() {
         val intent = Intent(applicationContext, LoginActivity::class.java)
         startActivity(intent)
@@ -158,6 +151,12 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun startMainActivity() {
         val intent = Intent(applicationContext, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun startDebugActivity() {
+        val intent = Intent(applicationContext, DebugActivity::class.java)
         startActivity(intent)
         finish()
     }

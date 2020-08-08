@@ -16,6 +16,7 @@ import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
 import com.nicholasrutherford.chal.fragments.dialogs.SuccessCreateAccountDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
+import com.nicholasrutherford.chal.viewmodels.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
 
@@ -23,16 +24,18 @@ class LoginActivity : AppCompatActivity() {
     private var typeface = Typeface()
     private var helper = Helper()
 
+    private var viewModel: LoginViewModel? = null
+
     private var errorLoginToAccountDialog = ErrorLoginToAccount()
     private var errorLogInAccountDueToFieldsDialog = ErrorCreateAccountDialog()
     private var loadingDialog = LoadingDialog()
     private var loadingAccountDialog = SuccessCreateAccountDialog()
     private val fm = supportFragmentManager
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityLoginBinding.inflate(layoutInflater)
+        viewModel = LoginViewModel(applicationContext)
         setContentView(binding.root)
         main(binding)
     }
@@ -49,33 +52,35 @@ class LoginActivity : AppCompatActivity() {
         setUpTextViewColors(binding)
     }
 
-    private fun setUpTypeface(binding: ActivityLoginBinding) {
-        typeface.setTypefaceForHeaderBold(binding.tvTitle, baseContext)
-        typeface.setTypefaceForHeaderRegular(binding.tvSubTitle, baseContext)
+    private fun setUpTypeface(binding: ActivityLoginBinding) { // ui stuff here
+        typeface.setHeaderTypefaceBold(binding.tvTitle, baseContext, viewModel?.viewState?.configurationEntity?.primaryHeaderTypefaceBold!!)
 
-        typeface.setTypefaceForBodyBold(binding.tvEmail, baseContext)
-        typeface.setTypefaceForBodyBold(binding.tvPassword, baseContext)
+        typeface.setTypefaceForBoldBody(binding.tvEmail, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceBold!!)
+        typeface.setTypefaceForBoldBody(binding.tvPassword, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceBold!!)
 
-        typeface.setTypefaceForHeaderBold(binding.btLogIn, baseContext)
+        typeface.setHeaderTypefaceBold(binding.btLogIn, baseContext, viewModel?.viewState?.configurationEntity?.primaryHeaderTypefaceBold!!)
 
-        typeface.setTypefaceForBodyItalic(binding.tvForgotPassword, baseContext)
-        typeface.setTypefaceForBodyLight(binding.tvDoNotHaveAccount, baseContext)
-        typeface.setTypefaceForBodyBold(binding.tvSignUp, baseContext)
-        typeface.setTypefaceForSubHeaderBold(binding.tvErrorEmail, baseContext)
+        typeface.setTypefaceForItalicBody(binding.tvForgotPassword, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceItalic!!)
+        typeface.setTypefaceForLightBody(binding.tvDoNotHaveAccount, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceItalic!!)
+        typeface.setTypefaceForBoldBody(binding.tvSignUp, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceBold!!)
+        typeface.setTypefaceForBoldSubHeader(binding.tvErrorEmail, baseContext, viewModel?.viewState?.configurationEntity?.subHeaderTypefaceBold!!)
     }
 
     private fun setUpTextViewColors(binding: ActivityLoginBinding) { // if its dark mode setup normal colors else another one when we get to it
-        helper.setTextViewColor(baseContext, binding.tvTitle, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, binding.tvSubTitle, R.color.colorBlack)
+        val primaryColor = viewModel?.viewState?.configurationEntity?.primaryColor!!
+        val secondaryColor = viewModel?.viewState?.configurationEntity?.secondaryColor!!
 
-        helper.setTextViewColor(baseContext, binding.tvEmail, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, binding.tvPassword, R.color.colorPrimary)
+        helper.setTextViewColorWithString(baseContext, binding.tvTitle, primaryColor)
+        helper.setTextViewColorWithString(baseContext, binding.tvSubTitle, secondaryColor)
 
-        helper.setTextViewColor(baseContext, binding.btLogIn, R.color.colorBlack)
+        helper.setTextViewColorWithString(baseContext, binding.tvEmail, primaryColor)
+        helper.setTextViewColorWithString(baseContext, binding.tvPassword, primaryColor)
+
+        helper.setTextViewColor(baseContext, binding.btLogIn, R.color.colorSmokeWhite)
 
         helper.setTextViewColor(baseContext, binding.tvForgotPassword, R.color.colorBlue)
 
-        helper.setTextViewColor(baseContext, binding.tvDoNotHaveAccount, R.color.colorBlack)
+        helper.setTextViewColorWithString(baseContext, binding.tvDoNotHaveAccount, secondaryColor)
         helper.setTextViewColor(baseContext, binding.tvSignUp, R.color.colorBlue)
 
         helper.setTextViewColor(baseContext, binding.tvErrorEmail, R.color.colorBlack)
@@ -119,11 +124,15 @@ class LoginActivity : AppCompatActivity() {
     private fun showErrorEmail(binding: ActivityLoginBinding) {
         binding.tvErrorEmail.visibility = View.VISIBLE
         binding.ivErrorEmail.visibility = View.VISIBLE
+
+        viewModel?.isEmailErrorVisible()
     }
 
     private fun dismissErrorEmail(binding: ActivityLoginBinding) {
         binding.tvErrorEmail.visibility = View.GONE
         binding.ivErrorEmail.visibility = View.GONE
+
+        viewModel?.isEmailErrorNotVisible()
     }
 
     private fun isEmailError(binding: ActivityLoginBinding): Boolean {
@@ -188,11 +197,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // logic follows for firebase events
-    }
-
-    private fun clearEditTextFields(binding: ActivityLoginBinding) {
-        binding.etEmail.text.clear()
-        binding.etPassword.text.clear()
     }
 
     private fun startSignUpActivity() {

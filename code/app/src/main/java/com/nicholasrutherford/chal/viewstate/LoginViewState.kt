@@ -2,7 +2,8 @@ package com.nicholasrutherford.chal.viewstate
 
 import com.nicholasrutherford.chal.room.entity.ConfigurationEntity
 
-interface HomeViewState  : ViewState {
+interface LoginViewState : ViewState {
     var configurationEntity: ConfigurationEntity
-    val isWallVisible: Boolean
+    var emailErrorImageVisible: Boolean
+    var emailErrorTextVisible: Boolean
 }

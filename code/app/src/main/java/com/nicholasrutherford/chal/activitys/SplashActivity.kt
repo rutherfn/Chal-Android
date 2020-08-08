@@ -3,38 +3,35 @@ package com.nicholasrutherford.chal.activitys
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
-import com.nicholasrutherford.chal.activitys.accounts.SignUpActivity
+import com.nicholasrutherford.chal.databinding.ActivitySplashBinding
+import com.nicholasrutherford.chal.viewmodels.SplashViewModel
 
 class SplashActivity : AppCompatActivity() {
 
     // declarations
-    private lateinit var ivSplash: ImageView
     private var mAuth: FirebaseAuth? = null
+    private var viewModel: SplashViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        main()
+        val binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        main(binding)
     }
 
-    private fun main() {
-        setupIds()
-        setSplashImage()
+    private fun main(binding: ActivitySplashBinding) {
+        viewModel = SplashViewModel(applicationContext)
+        mAuth = FirebaseAuth.getInstance()
+        setSplashImage(binding)
         timerForNewActivity()
     }
 
-    private fun setupIds() {
-        mAuth = FirebaseAuth.getInstance()
-        ivSplash = findViewById(R.id.ivSplashLogo)
-    }
-
-    private fun setSplashImage() {
-        ivSplash.setImageResource(R.drawable.primary_logo)
+    private fun setSplashImage(binding: ActivitySplashBinding) {
+        viewModel?.viewState?.splashImageRes?.let { binding.ivSplashLogo.setImageResource(it) }
     }
 
     private fun startMainActivity() {

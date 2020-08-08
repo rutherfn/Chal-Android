@@ -13,28 +13,28 @@ class HomeViewHolder (private var binding: HomeWallLayoutBinding, private val vi
     private val typeface = Typeface()
 
     fun bind(position: Int) {
-
         binding.tvChallengeTitle.text = "# 100 Day Fitness Challenge"
         binding.tvChallengeDurationLeft.text = "Challenge Duration - 2 Days Left"
         binding.tvChallengePostTitle.text = "In Class Today!"
         binding.tvChallengePostBody.text = "Spent today in class! Trying to work on my fitness one day at a time"
 
-        typeface.setTypefaceForHeaderBold(binding.tvFullName, context)
-        typeface.setTypefaceForSubHeaderRegular(binding.tvTimeUpdated, context)
+        typeface.setHeaderTypefaceBold(binding.tvFullName, context, viewModel.viewState.configurationEntity.primaryHeaderTypefaceBold)
 
-        typeface.setTypefaceForBodyBold(binding.tvHashTagOne, context)
-        typeface.setTypefaceForBodyBold(binding.tvHashTagTwo, context)
-        typeface.setTypefaceForBodyBold(binding.tvHashTagThree, context)
+        typeface.setTypefaceForRegularSubHeader(binding.tvTimeUpdated, context, viewModel.viewState.configurationEntity.subHeaderTypeface)
 
-        typeface.setTypefaceForSubHeaderBold(binding.tvChallengeTitle, context)
-        typeface.setTypefaceForBodyRegular(binding.tvChallengeDurationLeft, context)
+        typeface.setTypefaceForBoldBody(binding.tvHashTagOne, context, viewModel.viewState.configurationEntity.bodyTypefaceBold)
+        typeface.setTypefaceForBoldBody(binding.tvHashTagTwo, context, viewModel.viewState.configurationEntity.bodyTypefaceBold)
+        typeface.setTypefaceForBoldBody(binding.tvHashTagThree, context, viewModel.viewState.configurationEntity.bodyTypefaceBold)
 
-        typeface.setTypefaceForSubHeaderBold(binding.tvChallengePostTitle, context)
-        typeface.setTypefaceForBodyRegular(binding.tvChallengePostBody, context)
-        typeface.setTypefaceForBodyRegular(binding.tvCurrentLikes, context)
+        typeface.setTypefaceForBoldSubHeader(binding.tvChallengeTitle, context, viewModel.viewState.configurationEntity.subHeaderTypefaceBold)
+        typeface.setTypefaceForRegularBody(binding.tvChallengeDurationLeft, context, viewModel.viewState.configurationEntity.bodyTypeface)
 
-        typeface.setTypefaceForBodyRegular(binding.tvViewAllComments, context)
-        typeface.setTypefaceForBodyRegular(binding.tvViewChallenge, context)
+        typeface.setTypefaceForBoldSubHeader(binding.tvChallengePostTitle, context, viewModel.viewState.configurationEntity.subHeaderTypefaceBold)
+        typeface.setTypefaceForRegularBody(binding.tvChallengePostBody, context, viewModel.viewState.configurationEntity.bodyTypeface)
+        typeface.setTypefaceForRegularBody(binding.tvCurrentLikes, context, viewModel.viewState.configurationEntity.bodyTypeface)
+
+        typeface.setTypefaceForRegularBody(binding.tvViewAllComments, context, viewModel.viewState.configurationEntity.bodyTypeface)
+        typeface.setTypefaceForRegularBody(binding.tvViewChallenge, context, viewModel.viewState.configurationEntity.bodyTypeface)
 
         Picasso.get().load(R.drawable.willplaceholder).into(binding.cvProfile)
 

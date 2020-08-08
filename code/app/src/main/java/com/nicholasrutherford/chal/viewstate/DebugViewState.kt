@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.viewstate
 
-import com.nicholasrutherford.chal.models.debug.Debug
+import com.nicholasrutherford.chal.data.debug.Debug
 
 interface DebugViewState : ViewState {
 
