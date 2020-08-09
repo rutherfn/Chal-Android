@@ -19,15 +19,17 @@
     <string name="do_not_have_account">Don\'t Have A Account?</string>
     <string name="debug">Debug</string>
     <string-array name="debugOptions">
-        <item>@string/debug_option_typefaces</item>
+        <item>@string/debug_option_fonts</item>
         <item>@string/debug_option_change_colors</item>
     </string-array>
-    <string name="debug_option_typefaces">• Switch Typefaces</string>
+    <string name="debug_incorrect_password">Incorrect Password!</string>
+    <string name="debug_option_fonts">• Switch Fonts</string>
     <string name="debug_option_change_colors">• Change Colors</string>
-    <string name="debug_password_title">Please Enter Debug Password In Order To Continue</string>
+    <string name="debug_password_title">Please Enter Password In Order To Continue</string>
     <string name="done">Done</string>
     <string name="email">Email</string>
     <string name="email_sent">Email Sent!</string>
+    <string name="iv_error_content_description_debug_password">Image View for not the correct password debug mode error</string>
     <string name="error_content_desc_creating_account">Error Creating Account</string>
     <string name="error_creating_create_account_fields">One of the require fields are incorrect. Press OK to try again.</string>
     <string name="error_creating_account_firebase">Error Creating Account. Please Check Your Internet Connection</string>

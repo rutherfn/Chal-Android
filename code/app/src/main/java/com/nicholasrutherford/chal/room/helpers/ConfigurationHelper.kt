@@ -22,4 +22,5 @@ class ConfigurationHelper(context: Context) {
     private suspend fun insertConfigurationData(configurationEntity: ConfigurationEntity) {
         db.androidDebugDao().insertAll(configurationEntity)
     }
+
 }
