@@ -192,7 +192,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         etTypeEmail.visibility = View.GONE
         btDone.visibility = View.GONE
 
-        tvForgotPassword.text = getString(R.string.email_Sent)
+        tvForgotPassword.text = getString(R.string.email_sent)
         tvPleasEnterYour.text = getString(R.string.please_check_email)
         tvToResetPassword.text = getString(R.string.to_reset_password)
     }
