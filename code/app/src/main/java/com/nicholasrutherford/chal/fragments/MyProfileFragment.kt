@@ -54,13 +54,10 @@ class MyProfileFragment : Fragment() {
 
     private fun setupToolbar(binding: FragmentProfileBinding, screenContext: Context) {
         typeface.setTypefaceForHeaderBold(binding.tbProfile.tvTitle, screenContext)
-        typeface.setTypefaceForBodyBold(binding.tbProfile.tvSubTitle, screenContext)
 
         helper.setTextViewColor(screenContext, binding.tbProfile.tvTitle, R.color.colorSmokeWhite)
-        helper.setTextViewColor(screenContext, binding.tbProfile.tvSubTitle, R.color.colorSmokeWhite)
 
         binding.tbProfile.tvTitle.text = "will.shelton"
-        binding.tbProfile.tvSubTitle.text = "Edit Profile"
     }
 
 }

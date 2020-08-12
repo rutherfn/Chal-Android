@@ -11,7 +11,7 @@
             android:id="@+id/tbSettings"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            layout="@layout/toolbar_layout" />
+            layout="@layout/home_toolbar_layout" />
 
         <TextView
             android:id="@+id/tvProfile"

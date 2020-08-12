@@ -65,7 +65,6 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         binding?.tbSettings?.ibBack?.visibleOrGone = true
-        binding?.tbSettings?.tvSubTitle?.visibleOrGone = false
 
         applicationContext.let { binding?.tbSettings?.tvTitle?.let { it1 -> typeface.setTypefaceForHeaderBold(it1, it) } }
 

@@ -12,7 +12,7 @@
             android:id="@+id/tbProfile"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            layout="@layout/toolbar_layout" />
+            layout="@layout/home_toolbar_layout" />
 
         <include
             android:id="@+id/layoutProfile"

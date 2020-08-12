@@ -17,6 +17,7 @@ import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.recycler.adapters.HomeAdapter
 import com.nicholasrutherford.chal.viewmodels.HomeViewModel
+import com.squareup.picasso.Picasso
 
 class HomeFragment : Fragment() {
 
@@ -39,18 +40,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupToolbar(binding: FragmentHomeBinding) {
+        Picasso.get().load(R.drawable.willplaceholder).into(binding.tbHome.cvProfile)
         context?.let {
             typeface.setTypefaceForHeaderBold(binding.tbHome.tvTitle, it)
-            typeface.setTypefaceForBodyBold(binding.tbHome.tvSubTitle, it)
 
             helper.setTextViewColor(it, binding.tbHome.tvTitle, R.color.colorSmokeWhite)
-            helper.setTextViewColor(it, binding.tbHome.tvSubTitle, R.color.colorSmokeWhite)
         }
     }
 
     private fun toolbarClickListeners(binding: FragmentHomeBinding) {
         binding.tbHome.tvTitle.setOnClickListener { showProfileFragment() }
-        binding.tbHome.tvSubTitle.setOnClickListener { startSettingsUpActivity() }
+     //   binding.tbHome.tvSubTitle.setOnClickListener { startSettingsUpActivity() }
     }
 
     private fun showProfileFragment() {
