@@ -19,15 +19,15 @@
     <string name="do_not_have_account">Don\'t Have A Account?</string>
     <string name="debug">Debug</string>
     <string-array name="debugOptions">
-        <item>@string/debug_option_typefaces</item>
-        <item>@string/debug_option_change_colors</item>
+        <item>@string/debug_change_configuration</item>
     </string-array>
-    <string name="debug_option_typefaces">• Switch Typefaces</string>
-    <string name="debug_option_change_colors">• Change Colors</string>
-    <string name="debug_password_title">Please Enter Debug Password In Order To Continue</string>
+    <string name="debug_incorrect_password">Incorrect Password!</string>
+    <string name="debug_change_configuration">•  Change App Configurations</string>
+    <string name="debug_password_title">Please Enter Password In Order To Continue</string>
     <string name="done">Done</string>
     <string name="email">Email</string>
     <string name="email_sent">Email Sent!</string>
+    <string name="iv_error_content_description_debug_password">Image View for not the correct password debug mode error</string>
     <string name="error_content_desc_creating_account">Error Creating Account</string>
     <string name="error_creating_create_account_fields">One of the require fields are incorrect. Press OK to try again.</string>
     <string name="error_creating_account_firebase">Error Creating Account. Please Check Your Internet Connection</string>
@@ -38,6 +38,7 @@
     <string name="error_phone">Phone must not be more then 10 digits long.</string>
     <string name="error_phone_not_valid">Phone number not valid.</string>
     <string name="error_password">One capital letter and one number.</string>
+    <string name="header_font_bold_text_title">Header Bold Font</string>
     <string name="home_bottom_nav">HOME</string>
     <string name="last_updated">Last Updated</string>
     <string name="search_navigation">SEARCH</string>
@@ -50,9 +51,37 @@
     <string name="full_name">Full Name</string>
     <string name="in_order_to_reset_password">in order to reset password</string>
     <string name="join_challenge"><u> Join Challenge!</u></string>
-    <string-array name="listOfTypefaces">
-        <item>@string/debug_option_typefaces</item>
-        <item>@string/debug_option_change_colors</item>
+    <string-array name="listOfFonts">
+        <item>@string/font_1</item>
+        <item>@string/font_2</item>
+        <item>@string/font_3</item>
+        <item>@string/font_4</item>
+        <item>@string/font_5</item>
+        <item>@string/font_6</item>
+        <item>@string/font_7</item>
+        <item>@string/font_8</item>
+        <item>@string/font_9</item>
+        <item>@string/font_10</item>
+        <item>@string/font_11</item>
+        <item>@string/font_12</item>
+        <item>@string/font_13</item>
+        <item>@string/font_14</item>
+    </string-array>
+    <string-array name="listOfFontsLocations">
+        <item>@string/font_1_location</item>
+        <item>@string/font_2_location</item>
+        <item>@string/font_3_location</item>
+        <item>@string/font_4_location</item>
+        <item>@string/font_5_location</item>
+        <item>@string/font_6_location</item>
+        <item>@string/font_7_location</item>
+        <item>@string/font_8_location</item>
+        <item>@string/font_9_location</item>
+        <item>@string/font_10_location</item>
+        <item>@string/font_11_location</item>
+        <item>@string/font_12_location</item>
+        <item>@string/font_13_location</item>
+        <item>@string/font_14_location</item>
     </string-array>
     <string name="log_out">Log out</string>
     <string name="loading">Loading</string>
@@ -66,6 +95,7 @@
     <string name="please_check_email">Please Check Your Email</string>
     <string name="please_enter_your_email">Please Enter Your Email</string>
     <string name="primary_logo_content_desc">Primary Logo For Chal.</string>
+    <string name="restart">Restart</string>
     <string name="search_challenges">SEARCH</string>
     <string name="settings_bottom_nav">SETTINGS</string>
     <string name="sign_into_your_account_text">Sign into your account</string>
@@ -85,18 +115,32 @@
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
     <string name="username">Username</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
-    <string name="typeface_1">ClinicaPro-Italic</string>
-    <string name="typeface_1_location">dd</string>
-    <string name="typeface_2">ClinicaPro-Regular</string>
-    <string name="typeface_3">NotoSans-Bold</string>
-    <string name="typeface_4">NotoSans-Regular</string>
-    <string name="typeface_5">OpenSans-Bold</string>
-    <string name="typeface_6">OpenSans-Italic</string>
-    <string name="typeface_7">OpenSans-Regular</string>
-    <string name="typeface_8">Roboto-Bold</string>
-    <string name="typeface_9">Roboto-Italic</string>
-    <string name="typeface_10">Roboto-Light</string>
-    <string name="typeface_11">Roboto-Regular</string>
-    <string name="typeface_12">UniNeue-HeavyItalic</string>
-    <string name="typeface_13">UniNeue-Light</string>
+    <string name="font_1">ClinicaPro-Italic</string>
+    <string name="font_1_location">font/ClinicaPro-Italic.otf</string>
+    <string name="font_2">ClinicaPro-Regular</string>
+    <string name="font_2_location">font/ClinicaPro-Regular.otf</string>
+    <string name="font_3">NotoSans-Bold</string>
+    <string name="font_3_location">font/NotoSans-Bold.ttf</string>
+    <string name="font_4">NotoSans-Regular</string>
+    <string name="font_4_location">font/NotoSans-Regular.ttf</string>
+    <string name="font_5">OpenSans-Bold</string>
+    <string name="font_5_location">font/OpenSans-Bold.ttf</string>
+    <string name="font_6">OpenSans-Italic</string>
+    <string name="font_6_location">font/OpenSans-Italic.ttf</string>
+    <string name="font_7">OpenSans-Light</string>
+    <string name="font_7_location">font/OpenSans-Light.ttf</string>
+    <string name="font_8">OpenSans-Regular</string>
+    <string name="font_8_location">font/OpenSans-Regular.ttf</string>
+    <string name="font_9">Roboto-Bold</string>
+    <string name="font_9_location">font/Roboto-Bold.ttf</string>
+    <string name="font_10">Roboto-Italic</string>
+    <string name="font_10_location">font/Roboto-Italic.ttf</string>
+    <string name="font_11">Roboto-Light</string>
+    <string name="font_11_location">font/Roboto-Light.ttf</string>
+    <string name="font_12">Roboto-Regular</string>
+    <string name="font_12_location">font/Roboto-Regular.ttf</string>
+    <string name="font_13">UniNeue-HeavyItalic</string>
+    <string name="font_13_location">font/UniNeue-HeavyItalic.otf</string>
+    <string name="font_14">UniNeue-Light</string>
+    <string name="font_14_location">font/UniNeue-Light.otf</string>
 </resources>

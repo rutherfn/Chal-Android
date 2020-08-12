@@ -12,7 +12,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
 import com.nicholasrutherford.chal.fragments.*
-import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
+import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 
 
@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     var binding : ActivityMainBinding? = null
 
-    private val loadingDialog = LoadingDialog()
+    private val loadingDialog =
+        LoadingDialogFragement()
 
     private var mAuth: FirebaseAuth? = null
 

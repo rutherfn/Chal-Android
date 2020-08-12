@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityLoginBinding
-import com.nicholasrutherford.chal.fragments.dialogs.ErrorCreateAccountDialog
-import com.nicholasrutherford.chal.fragments.dialogs.ErrorLoginToAccount
-import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
-import com.nicholasrutherford.chal.fragments.dialogs.SuccessCreateAccountDialog
+import com.nicholasrutherford.chal.dialogfragments.ErrorCreateAccountDialogFragment
+import com.nicholasrutherford.chal.dialogfragments.ErrorLoginToAccountDialogFragment
+import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
+import com.nicholasrutherford.chal.dialogfragments.SuccessCreateAccountDialogFragement
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.viewmodels.LoginViewModel
@@ -26,10 +26,14 @@ class LoginActivity : AppCompatActivity() {
 
     private var viewModel: LoginViewModel? = null
 
-    private var errorLoginToAccountDialog = ErrorLoginToAccount()
-    private var errorLogInAccountDueToFieldsDialog = ErrorCreateAccountDialog()
-    private var loadingDialog = LoadingDialog()
-    private var loadingAccountDialog = SuccessCreateAccountDialog()
+    private var errorLoginToAccountDialog =
+        ErrorLoginToAccountDialogFragment()
+    private var errorLogInAccountDueToFieldsDialog =
+        ErrorCreateAccountDialogFragment()
+    private var loadingDialog =
+        LoadingDialogFragement()
+    private var loadingAccountDialog =
+        SuccessCreateAccountDialogFragement()
     private val fm = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {

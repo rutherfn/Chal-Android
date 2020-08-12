@@ -15,6 +15,7 @@ android {
         applicationId "com.nicholasrutherford.chal"
         minSdkVersion 16
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
 
@@ -47,6 +48,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     // Lifecycles only (without ViewModel or LiveData)
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    // color picker
+    implementation 'com.github.yukuku:ambilwarna:2.0.1'
 
     // circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'

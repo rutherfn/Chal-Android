@@ -20,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.fragments.dialogs.ErrorCreateAccountDialog
-import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
-import com.nicholasrutherford.chal.fragments.dialogs.SuccessCreateAccountDialog
+import com.nicholasrutherford.chal.dialogfragments.ErrorCreateAccountDialogFragment
+import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
+import com.nicholasrutherford.chal.dialogfragments.SuccessCreateAccountDialogFragement
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.data.UserAccount
@@ -55,9 +55,12 @@ class UploadPhotoActivity : AppCompatActivity() {
     private val typeface = Typeface()
     private val helper = Helper()
 
-    private var loadingDialog = LoadingDialog()
-    private var successCreateAccountDialog = SuccessCreateAccountDialog()
-    private var errorCreateAccountDialog = ErrorCreateAccountDialog()
+    private var loadingDialog =
+        LoadingDialogFragement()
+    private var successCreateAccountDialog =
+        SuccessCreateAccountDialogFragement()
+    private var errorCreateAccountDialog =
+        ErrorCreateAccountDialogFragment()
     private val fm = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {

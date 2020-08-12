@@ -9,8 +9,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
 import com.nicholasrutherford.chal.databinding.ActivitySettingsBinding
-import com.nicholasrutherford.chal.fragments.DebugFragment
-import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
+import com.nicholasrutherford.chal.dialogfragments.DebugPasswordDialogFragment
+import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
@@ -29,7 +29,10 @@ class SettingsActivity : AppCompatActivity() {
     private var adapterSettingsThreeAdapter: SettingsAdapter? = null
 
     private val fm = supportFragmentManager
-    private val loadingDialog = LoadingDialog()
+    private val debugPasswordDialog =
+        DebugPasswordDialogFragment()
+    private val loadingDialog =
+        LoadingDialogFragement()
 
     private var mAuth: FirebaseAuth? = null
 
@@ -89,7 +92,8 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         binding?.layoutButtonsSettings?.btnDebug?.setOnClickListener {
-            startDebugActivity()
+            debugPasswordDialog.show(fm, "debugPasswordDialogFragment")
+           // startDebugActivity()
         }
     }
 
@@ -151,12 +155,6 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun startMainActivity() {
         val intent = Intent(applicationContext, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun startDebugActivity() {
-        val intent = Intent(applicationContext, DebugActivity::class.java)
         startActivity(intent)
         finish()
     }
