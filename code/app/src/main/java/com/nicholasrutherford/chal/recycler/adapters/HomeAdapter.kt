@@ -17,7 +17,7 @@ class HomeAdapter(private val viewModel: HomeViewModel, private val mContext: Co
     }
 
     override fun getItemCount(): Int {
-        return 40
+        return 5
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
