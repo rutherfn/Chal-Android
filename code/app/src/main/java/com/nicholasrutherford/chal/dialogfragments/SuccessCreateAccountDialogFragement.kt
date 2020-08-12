@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments.dialogs
+package com.nicholasrutherford.chal.dialogfragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class SuccessCreateAccountDialog : DialogFragment() {
+class SuccessCreateAccountDialogFragement : DialogFragment() {
 
     // declarations
     private var mView: View? = null

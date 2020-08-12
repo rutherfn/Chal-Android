@@ -8,28 +8,52 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentDebugBinding
+import com.nicholasrutherford.chal.fragments.debug.ChangeFontsAndColorsFragment
 import com.nicholasrutherford.chal.recycler.adapters.DebugAdapter
 import com.nicholasrutherford.chal.viewmodels.DebugViewModel
 
-class DebugFragment : Fragment() {
+class DebugFragment : Fragment(), FragmentExt {
 
+    private val changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
     private var debugAdapter: DebugAdapter? = null
+    private var binding: FragmentDebugBinding? = null
+    private var optionsList: Array<out String>? = null
+    private var viewModel: DebugViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentDebugBinding.inflate(layoutInflater)
-        val optionsList = resources.getStringArray(R.array.debugOptions)
-        main(binding, optionsList)
-        return binding.root
+        binding = FragmentDebugBinding.inflate(layoutInflater)
+        optionsList = resources.getStringArray(R.array.debugOptions)
+        bind()
+        updateFragment()
+        clickListeners()
+        return binding?.root
     }
 
-    private fun main(binding: FragmentDebugBinding, optionsList: Array<String>) {
-        binding.rvDebug.isNestedScrollingEnabled = false
+    override fun bind() {
+        binding?.rvDebug?.isNestedScrollingEnabled = false
+        binding?.rvDebug?.layoutManager = LinearLayoutManager(activity)
 
-        binding.rvDebug.layoutManager = LinearLayoutManager(activity)
+        viewModel = context?.let { fragmentManager?.let { it1 ->
+            DebugViewModel(it, it1, containerId(), changeFontsAndColorsFragment, optionsList) } }
 
-        val viewModel = DebugViewModel(optionsList)
+        debugAdapter = context?.let { viewModel?.let { it1 -> DebugAdapter(it1, it) } }
+        binding?.rvDebug?.adapter = debugAdapter
+    }
 
-        debugAdapter = context?.let { DebugAdapter(viewModel, it) }
-        binding.rvDebug.adapter = debugAdapter
+    override fun updateFragment() {
+        binding?.btnImplementChanges?.text = viewModel?.viewState?.buttonRestartChangesValue
+    }
+
+    override fun clickListeners() {
+
+      //  binding?.c
+//        binding?.btnImplementChanges?.setOnClickListener { fragmentManager?.let { it -> viewModel?.viewState?.container?.let { it1 ->
+//            debugNavigationImpl.showDebugFragment(it,
+//                it1, changeFontsAndColorsFragment)
+//        } } }
+    }
+
+    override fun containerId(): Int {
+        return R.id.container
     }
 }

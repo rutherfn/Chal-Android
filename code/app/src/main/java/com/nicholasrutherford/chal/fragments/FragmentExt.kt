@@ -1,6 +1,8 @@
 package com.nicholasrutherford.chal.fragments
 
-interface Fragment {
+interface FragmentExt {
+    fun bind()
     fun updateFragment()
     fun clickListeners()
+    fun containerId(): Int
 }

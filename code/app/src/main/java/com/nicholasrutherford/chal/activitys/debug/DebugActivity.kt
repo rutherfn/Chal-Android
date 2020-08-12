@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.activitys
+package com.nicholasrutherford.chal.activitys.debug
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

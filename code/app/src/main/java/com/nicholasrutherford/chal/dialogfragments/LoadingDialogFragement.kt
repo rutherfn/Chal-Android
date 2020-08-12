@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments.dialogs
+package com.nicholasrutherford.chal.dialogfragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,7 +12,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class LoadingDialog : DialogFragment() {
+class LoadingDialogFragement : DialogFragment() {
 
     // declarations
     private var mView: View? = null

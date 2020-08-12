@@ -11,8 +11,8 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityCreateAccountBinding
-import com.nicholasrutherford.chal.fragments.dialogs.ErrorCreateAccountDialog
-import com.nicholasrutherford.chal.fragments.dialogs.LoadingDialog
+import com.nicholasrutherford.chal.dialogfragments.ErrorCreateAccountDialogFragment
+import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
@@ -27,9 +27,9 @@ class CreateAccountActivity  : AppCompatActivity() {
     private var isEmptyEmail = false
 
     private var loadingDialog =
-        LoadingDialog()
+        LoadingDialogFragement()
     private var errorCreateAccount =
-        ErrorCreateAccountDialog()
+        ErrorCreateAccountDialogFragment()
     private val fm = supportFragmentManager
 
     private val typeface = Typeface()

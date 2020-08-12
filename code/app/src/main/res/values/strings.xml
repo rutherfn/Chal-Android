@@ -19,12 +19,10 @@
     <string name="do_not_have_account">Don\'t Have A Account?</string>
     <string name="debug">Debug</string>
     <string-array name="debugOptions">
-        <item>@string/debug_option_fonts</item>
-        <item>@string/debug_option_change_colors</item>
+        <item>@string/debug_change_configuration</item>
     </string-array>
     <string name="debug_incorrect_password">Incorrect Password!</string>
-    <string name="debug_option_fonts">• Switch Fonts</string>
-    <string name="debug_option_change_colors">• Change Colors</string>
+    <string name="debug_change_configuration">•  Change App Configurations</string>
     <string name="debug_password_title">Please Enter Password In Order To Continue</string>
     <string name="done">Done</string>
     <string name="email">Email</string>
@@ -40,6 +38,7 @@
     <string name="error_phone">Phone must not be more then 10 digits long.</string>
     <string name="error_phone_not_valid">Phone number not valid.</string>
     <string name="error_password">One capital letter and one number.</string>
+    <string name="header_font_bold_text_title">Header Bold Font</string>
     <string name="home_bottom_nav">HOME</string>
     <string name="last_updated">Last Updated</string>
     <string name="search_navigation">SEARCH</string>
@@ -96,6 +95,7 @@
     <string name="please_check_email">Please Check Your Email</string>
     <string name="please_enter_your_email">Please Enter Your Email</string>
     <string name="primary_logo_content_desc">Primary Logo For Chal.</string>
+    <string name="restart">Restart</string>
     <string name="search_challenges">SEARCH</string>
     <string name="settings_bottom_nav">SETTINGS</string>
     <string name="sign_into_your_account_text">Sign into your account</string>

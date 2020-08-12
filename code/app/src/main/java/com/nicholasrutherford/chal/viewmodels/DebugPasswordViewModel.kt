@@ -3,14 +3,17 @@ package com.nicholasrutherford.chal.viewmodels
 import android.content.Context
 import android.content.Intent
 import android.widget.EditText
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
-import com.nicholasrutherford.chal.activitys.DebugActivity
-import com.nicholasrutherford.chal.fragments.dialogs.DebugPasswordDialogFragment
+import com.nicholasrutherford.chal.activitys.debug.DebugActivity
+import com.nicholasrutherford.chal.dialogfragments.DebugPasswordDialogFragment
 import com.nicholasrutherford.chal.helpers.Helper
+import com.nicholasrutherford.chal.navigation.debugpassword.DebugPasswordDialogNavigationImpl
 import com.nicholasrutherford.chal.viewstate.DebugPasswordViewState
 
-class DebugPasswordViewModel(private val context: Context, private val fragment: DebugPasswordDialogFragment) : ViewModel() {
+class DebugPasswordViewModel(private val fragmentActivity: FragmentActivity, private val context: Context, private val fragment: DebugPasswordDialogFragment, private val debugActivity: DebugActivity) : ViewModel() {
 
+    private val debugPasswordNavigationImpl = DebugPasswordDialogNavigationImpl()
     val viewState = DebugPasswordViewStateImpl()
     val helper = Helper()
 
@@ -29,7 +32,7 @@ class DebugPasswordViewModel(private val context: Context, private val fragment:
 
     private fun setUserPasswordEntryValue(etDebugPassword: EditText) { viewState.userPasswordEntryValue = etDebugPassword.text.toString() }
 
-    fun checkIfPasswordEnteredIsCorrect() {
+    private fun checkIfPasswordEnteredIsCorrect() {
         viewState.isUserCorrect = viewState.userPasswordEntryValue == viewState.debugExistingPasswordValue
         determineErrorIsVisibleOrNot()
     }
@@ -42,12 +45,7 @@ class DebugPasswordViewModel(private val context: Context, private val fragment:
         }
     }
 
-    private fun startDebugActivity() {
-        context.let {
-            val intent = Intent(it.applicationContext, DebugActivity::class.java)
-            context.startActivity(intent)
-        }
-    }
+    private fun startDebugActivity() { debugPasswordNavigationImpl.startDebugActivity(context, fragmentActivity, debugActivity )}
 
     inner class DebugPasswordViewStateImpl(): DebugPasswordViewState {
         override var userPasswordEntryValue = ""
