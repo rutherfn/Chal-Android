@@ -15,7 +15,6 @@ import com.nicholasrutherford.chal.fragments.*
 import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 
-
 class MainActivity : AppCompatActivity() {
 
     private val fm = supportFragmentManager

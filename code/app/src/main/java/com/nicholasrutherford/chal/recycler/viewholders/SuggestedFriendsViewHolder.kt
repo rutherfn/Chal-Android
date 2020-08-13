@@ -8,10 +8,11 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.SearchPeople
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
+import com.nicholasrutherford.chal.viewmodels.SearchPeopleViewModel
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class SuggestedFriendsViewHolder (itemView: View, private val mContext: Context,private var searchPeopleList: ArrayList<SearchPeople>, private var filterSearchPeopleList: ArrayList<SearchPeople> ) : RecyclerView.ViewHolder(itemView) {
+class SuggestedFriendsViewHolder(itemView: View, private val mContext: Context, private var searchPeopleList: ArrayList<SearchPeople>, private var filterSearchPeopleList: ArrayList<SearchPeople>, private var viewModel: SearchPeopleViewModel?) : RecyclerView.ViewHolder(itemView) {
 
     // declarations
     private val cvUserFirebase: CircleImageView = itemView.findViewById(R.id.cvUserFirebase)
@@ -37,6 +38,13 @@ class SuggestedFriendsViewHolder (itemView: View, private val mContext: Context,
             .into(cvUserFirebase)
         tvUserFullName.text = filterSearchPeopleList[i].firstName.plus(" ").plus(filterSearchPeopleList[i].lastName)
         tvSubText.text = filterSearchPeopleList[i].reasonSuggested
+        clickListeners()
+    }
+
+    fun clickListeners() {
+        cvUserFirebase.setOnClickListener {
+            viewModel?.searchPeopleClicked()
+        }
     }
 
 }

@@ -9,8 +9,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cvProfile"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35sp"
+        android:layout_height="35sp"
         android:layout_marginLeft="@dimen/margin_10dp"
         android:layout_marginStart="@dimen/margin_10dp"
         app:layout_constraintBottom_toBottomOf="parent"

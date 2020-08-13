@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:background="@color/colorSmokeWhite"
+    android:layout_width="match_parent"
     android:paddingBottom="@dimen/padding_10dp"
     android:layout_height="wrap_content">
 
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
-        android:text="Will Shelton"
+        android:text="Nicholas Rutherford"
         android:layout_marginTop="@dimen/margin_8dp"
         android:textSize="@dimen/header_text_size"
         app:layout_constraintEnd_toEndOf="@+id/cvProfilePicture"
@@ -34,9 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
+        android:text="20, Milwaukee. WI"
         android:textColor="@color/colorBlack"
-        android:text="24, Milwaukee. WI"
         android:textSize="@dimen/sub_header_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/tvProfileFullName"
         app:layout_constraintStart_toStartOf="@+id/tvProfileFullName"
         app:layout_constraintTop_toBottomOf="@+id/tvProfileFullName" />
 
@@ -48,6 +49,7 @@
         android:paddingLeft="@dimen/padding_10dp"
         android:paddingRight="@dimen/padding_10dp"
         android:text="TextView"
+        android:gravity="center_horizontal"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/body_text_size"
@@ -56,13 +58,26 @@
         app:layout_constraintTop_toBottomOf="@+id/tvProfileSubInfo" />
 
     <Button
-        android:id="@+id/btnViewFriends"
-        android:layout_width="200dp"
+        android:id="@+id/btnSendMessage"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/corner_button"
-        android:text="View Friends"
+        android:text="Send Message"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
         android:textColor="@color/colorSmokeWhite"
-        app:layout_constraintEnd_toEndOf="@+id/tvBodyMessage"
         app:layout_constraintStart_toStartOf="@+id/tvBodyMessage"
         app:layout_constraintTop_toBottomOf="@+id/tvBodyMessage" />
+
+    <Button
+        android:id="@+id/btnAddFriend"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_button"
+        android:text="Add Friend"
+        android:textColor="@color/colorSmokeWhite"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnSendMessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

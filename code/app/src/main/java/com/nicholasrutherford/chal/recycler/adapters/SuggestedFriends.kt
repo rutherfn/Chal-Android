@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.SearchPeople
 import com.nicholasrutherford.chal.recycler.viewholders.SuggestedFriendsViewHolder
+import com.nicholasrutherford.chal.viewmodels.SearchPeopleViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SuggestedFriends(private val mContext: Context, private val searchPeopleList: ArrayList<SearchPeople>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
+class SuggestedFriends(private val mContext: Context, private val searchPeopleList: ArrayList<SearchPeople>, private var viewModel: SearchPeopleViewModel?) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     var filterPeopleList = ArrayList<SearchPeople>()
 
@@ -22,7 +23,8 @@ class SuggestedFriends(private val mContext: Context, private val searchPeopleLi
             itemView,
             mContext,
             searchPeopleList,
-            filterPeopleList
+            filterPeopleList,
+            viewModel
         )
     }
 

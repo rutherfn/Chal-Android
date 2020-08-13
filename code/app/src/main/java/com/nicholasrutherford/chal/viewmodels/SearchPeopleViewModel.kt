@@ -1,11 +1,16 @@
 package com.nicholasrutherford.chal.viewmodels
 
 import android.content.Context
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.data.responses.SearchPeople
+import com.nicholasrutherford.chal.fragments.OtherUserProfileFragment
+import com.nicholasrutherford.chal.navigation.searchPeople.SearchPeopleFragmentNavigationImpl
 import com.nicholasrutherford.chal.viewstate.SearchPeopleViewState
 
-class SearchPeopleViewModel(private val context: Context) : ViewModel() {
+class SearchPeopleViewModel(private val bottomNavigationView: BottomNavigationView, private val context: Context, private val fragmentManager: FragmentManager, private val containerId: Int, private val fragment: OtherUserProfileFragment) : ViewModel() {
+    private val searchPeopleNavigationImpl = SearchPeopleFragmentNavigationImpl()
     val viewState = SearchPeopleViewStateImpl()
 
     fun returnSampleDataOfPeople(): ArrayList<SearchPeople> {
@@ -34,8 +39,14 @@ class SearchPeopleViewModel(private val context: Context) : ViewModel() {
         return data
     }
 
+    fun searchPeopleClicked() {
+        viewState.searchPeopleClicked = true
+        searchPeopleNavigationImpl.showOtherUserProfileFragment(bottomNavigationView, viewState.searchPeopleClicked, fragmentManager, containerId, fragment)
+    }
+
     inner class SearchPeopleViewStateImpl: SearchPeopleViewState {
         override val searchPeopleList = returnSampleDataOfPeople()
+        override var searchPeopleClicked = false
     }
 
 }
