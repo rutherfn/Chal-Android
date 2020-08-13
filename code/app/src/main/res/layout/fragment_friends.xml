@@ -8,17 +8,36 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <include
+            android:id="@+id/tbSearch"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            layout="@layout/search_toolbar" />
+
+        <include
+            android:id="@+id/tbSearchFilter"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            layout="@layout/search_results_toolbar" />
+
         <SearchView
             android:id="@+id/svFriends"
             android:layout_width="fill_parent"
             android:tooltipText="Suggested fRIENDS"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/margin_10dp"
             android:layout_height="50dp" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFriends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

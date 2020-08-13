@@ -9,16 +9,16 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/tbProfile"
+            android:id="@+id/tbOtherUserProfile"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            layout="@layout/toolbar_my_profile" />
+            layout="@layout/toolbar_other_user_profile" />
 
         <include
             android:id="@+id/layoutProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            layout="@layout/profile_layout" />
+            layout="@layout/other_users_profile_layout" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
