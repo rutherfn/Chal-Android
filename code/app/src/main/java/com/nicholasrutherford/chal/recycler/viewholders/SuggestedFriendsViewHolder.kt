@@ -5,12 +5,13 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.data.responses.SearchPeople
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class SuggestedFriendsViewHolder (itemView: View, private val mContext: Context) : RecyclerView.ViewHolder(itemView) {
+class SuggestedFriendsViewHolder (itemView: View, private val mContext: Context,private var searchPeopleList: ArrayList<SearchPeople>, private var filterSearchPeopleList: ArrayList<SearchPeople> ) : RecyclerView.ViewHolder(itemView) {
 
     // declarations
     private val cvUserFirebase: CircleImageView = itemView.findViewById(R.id.cvUserFirebase)
@@ -20,7 +21,11 @@ class SuggestedFriendsViewHolder (itemView: View, private val mContext: Context)
     private val typeface = Typeface()
     private val helper = Helper()
 
-    fun main(context: Context) {
+    init {
+        filterSearchPeopleList = searchPeopleList
+    }
+
+    fun main(context: Context, i: Int) {
 
         typeface.setTypefaceForSubHeaderBold(tvUserFullName, context)
         typeface.setTypefaceForBodyItalic(tvSubText, context)
@@ -28,10 +33,10 @@ class SuggestedFriendsViewHolder (itemView: View, private val mContext: Context)
         helper.setTextViewColor(context, tvUserFullName, R.color.colorPrimary)
         helper.setTextViewColor(context, tvSubText, R.color.colorBlack)
 
-        Picasso.get().load("https://images.squarespace-cdn.com/content/v1/571681753c44d835a440c8b5/1505504729161-1UJ19XWMXEC49USEI8XB/ke17ZwdGBToddI8pDm48kKXUMXbOAS9uLKnw2cR7RqNZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIl5fwWS02sClU08YhH79XKOzn_YMhvFfehdbF3LHEgY8KMshLAGzx4R3EDFOm1kBS/joepoeschl.jpg")
+        Picasso.get().load(filterSearchPeopleList[i].profileImageValue)
             .into(cvUserFirebase)
-        tvUserFullName.text = "Joe Poeschl "
-        tvSubText.text = "Because you like design..."
+        tvUserFullName.text = filterSearchPeopleList[i].firstName.plus(" ").plus(filterSearchPeopleList[i].lastName)
+        tvSubText.text = filterSearchPeopleList[i].reasonSuggested
     }
 
 }

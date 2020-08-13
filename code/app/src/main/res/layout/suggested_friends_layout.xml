@@ -21,7 +21,6 @@
         android:id="@+id/cvUserFirebase"
         android:layout_width="50sp"
         android:layout_height="50sp"
-        android:background="@drawable/ic_user"
         android:layout_marginTop="@dimen/margin_20dp"
         android:layout_marginLeft="@dimen/margin_20dp"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:paddingBottom="@dimen/padding_10dp"
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -41,7 +42,7 @@
     <TextView
         android:id="@+id/tvBodyMessage"
         android:layout_width="fill_parent"
-        android:layout_height="90dp"
+        android:layout_height="60dp"
         android:layout_marginTop="@dimen/margin_10dp"
         android:paddingLeft="@dimen/padding_10dp"
         android:paddingRight="@dimen/padding_10dp"
@@ -52,4 +53,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvProfileSubInfo" />
+
+    <Button
+        android:id="@+id/btnViewFriends"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_button"
+        android:text="View Friends"
+        android:textColor="@color/colorSmokeWhite"
+        app:layout_constraintEnd_toEndOf="@+id/tvBodyMessage"
+        app:layout_constraintStart_toStartOf="@+id/tvBodyMessage"
+        app:layout_constraintTop_toBottomOf="@+id/tvBodyMessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

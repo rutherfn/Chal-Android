@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val homeFragment = HomeFragment()
     private val challengesFragment = ChallengesFragment()
-    private val suggestedFriendsFragment = SuggestedFriendsFragment()
+    private val suggestedFriendsFragment = SearchPeopleFragment()
     private val debugFragment = DebugFragment()
     private val myProfileFragment = MyProfileFragment()
 
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                         supportFragmentManager.beginTransaction().replace(R.id.container, suggestedFriendsFragment, suggestedFriendsFragment.javaClass.simpleName)
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
-                        binding?.tbMain?.visibleOrGone = true
+                        binding?.tbMain?.visibleOrGone = false
                         return true
                     }
 
