@@ -11,8 +11,8 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityCreateAccountBinding
-import com.nicholasrutherford.chal.dialogfragments.ErrorCreateAccountDialogFragment
-import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
+import com.nicholasrutherford.chal.fragments.errorCreateAccountDialog
+import com.nicholasrutherford.chal.fragments.loadingDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
@@ -26,10 +26,6 @@ class CreateAccountActivity  : AppCompatActivity() {
     private var etPasswordValue = ""
     private var isEmptyEmail = false
 
-    private var loadingDialog =
-        LoadingDialogFragement()
-    private var errorCreateAccount =
-        ErrorCreateAccountDialogFragment()
     private val fm = supportFragmentManager
 
     private val typeface = Typeface()
@@ -373,7 +369,7 @@ class CreateAccountActivity  : AppCompatActivity() {
             checkIfPhoneIsCorrect(binding)
             checkIfPasswordIsCorrect(binding)
 
-            errorCreateAccount.show(fm, "ErrorCreateAccountDialog")
+            errorCreateAccountDialog.show(fm, "ErrorCreateAccountDialog")
         }
     }
 

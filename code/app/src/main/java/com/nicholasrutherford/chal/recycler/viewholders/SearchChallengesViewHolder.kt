@@ -9,7 +9,7 @@ import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.data.responses.ChallengeResponse
 
-class SearchChallengesViewHolder (itemView: View, private val mContext: Context, private val searchChallengesList: MutableList<ChallengeResponse>?) : RecyclerView.ViewHolder(itemView) {
+class SearchChallengesViewHolder (itemView: View, private val mContext: Context) : RecyclerView.ViewHolder(itemView) {
 
     private val tvChallengesViews: TextView = itemView.findViewById(R.id.tvChallengeViews)
     private val tvChallengeDuration: TextView = itemView.findViewById(R.id.tvChallengesDuration)
@@ -22,7 +22,7 @@ class SearchChallengesViewHolder (itemView: View, private val mContext: Context,
     private val listOfDurations : ArrayList<String> = ArrayList()
     private val listOfChallenges : ArrayList<String> = ArrayList()
 
-    fun main(context: Context, pos: Int, searchChallengesList: MutableList<ChallengeResponse>?) {
+    fun main(context: Context, pos: Int) {
 
         listOfViews.clear()
 
@@ -40,33 +40,37 @@ class SearchChallengesViewHolder (itemView: View, private val mContext: Context,
         listOfViews.add("555")
         listOfViews.add("11")
 
-        listOfDurations.add("15 Day")
-        listOfDurations.add("15 Day")
-        listOfDurations.add("15 Day")
-        listOfDurations.add("30 Day")
-        listOfDurations.add("30 Day")
-        listOfDurations.add("30 Day")
-        listOfDurations.add("30 Day")
-        listOfDurations.add("30 Day")
-        listOfDurations.add("30 Day")
-        listOfDurations.add("30 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
+        listOfDurations.add("7 Day")
 
         listOfChallenges.add("#Pushup Challenge")
-        listOfChallenges.add("#Fit Challenge")
-        listOfChallenges.add("#LegFit Challenge")
+        listOfChallenges.add("#New Woman Challenge")
+        listOfChallenges.add("#Hydration Challenge")
         listOfChallenges.add("#Pushup Challenge")
-        listOfChallenges.add("#Fit Challenge")
-        listOfChallenges.add("#LegFit Challenge")
+        listOfChallenges.add("#New Woman Challenge")
+        listOfChallenges.add("#Hydration Challenge")
         listOfChallenges.add("#Pushup Challenge")
-        listOfChallenges.add("#Fit Challenge")
-        listOfChallenges.add("#LegFit Challenge")
-
+        listOfChallenges.add("#New Woman Challenge")
+        listOfChallenges.add("#Hydration Challenge")
+        listOfChallenges.add("#Pushup Challenge")
+        listOfChallenges.add("#New Woman Challenge")
+        listOfChallenges.add("#Hydration Challenge")
 
         typeface.setTypefaceForSubHeaderBold(tvChallengesViews, context)
         typeface.setTypefaceForBodyBold(tvChallengeDuration, context)
         typeface.setTypefaceForBodyBold(tvChallenge, context)
 
-        tvChallengesViews.text = listOfViews[pos]
+        //tvChallengesViews.text = listOfViews[pos]
         tvChallenge.text = listOfChallenges[pos]
         tvChallengeDuration.text = listOfDurations[pos]
     }

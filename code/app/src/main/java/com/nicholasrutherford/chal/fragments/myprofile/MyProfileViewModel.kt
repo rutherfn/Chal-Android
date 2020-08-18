@@ -1,7 +1,6 @@
-package com.nicholasrutherford.chal.viewmodels
+package com.nicholasrutherford.chal.fragments.myprofile
 
 import androidx.lifecycle.ViewModel
-import com.nicholasrutherford.chal.viewstate.MyProfileViewState
 
 class MyProfileViewModel() : ViewModel() {
 
@@ -16,7 +15,8 @@ class MyProfileViewModel() : ViewModel() {
 
     }
 
-    inner class MyProfileViewStateImpl() : MyProfileViewState {
+    inner class MyProfileViewStateImpl() :
+        MyProfileViewState {
         override val profileVisible = false
     }
 }

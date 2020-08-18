@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="50dp">
@@ -18,5 +19,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTbProfileUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nick.rutherford"
+        android:textStyle="bold"
+        android:textSize="@dimen/sub_header_text_size"
+        android:textColor="@color/colorWhite"
+        android:padding="@dimen/padding_4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ibBack"
+        app:layout_constraintStart_toEndOf="@+id/ibBack"
+        app:layout_constraintTop_toTopOf="@+id/ibBack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,12 +20,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.dialogfragments.ErrorCreateAccountDialogFragment
-import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
-import com.nicholasrutherford.chal.dialogfragments.SuccessCreateAccountDialogFragement
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.data.UserAccount
+import com.nicholasrutherford.chal.fragments.errorCreateAccountDialog
+import com.nicholasrutherford.chal.fragments.loadingAccountDialog
+import com.nicholasrutherford.chal.fragments.loadingDialog
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
@@ -54,13 +54,6 @@ class UploadPhotoActivity : AppCompatActivity() {
 
     private val typeface = Typeface()
     private val helper = Helper()
-
-    private var loadingDialog =
-        LoadingDialogFragement()
-    private var successCreateAccountDialog =
-        SuccessCreateAccountDialogFragement()
-    private var errorCreateAccountDialog =
-        ErrorCreateAccountDialogFragment()
     private val fm = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -229,7 +222,7 @@ class UploadPhotoActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 sendUserAQuickEmailVerification()
                 loadingDialog.dismiss()
-                successCreateAccountDialog.show(fm, "SuccessCreateAccountDialog")
+                loadingAccountDialog.show(fm, "SuccessCreateAccountDialog")
             }.addOnFailureListener {
                 loadingDialog.dismiss()
                 errorCreateAccountDialog.show(fm, "ErrorCreatingAccountDialog")
@@ -245,8 +238,7 @@ class UploadPhotoActivity : AppCompatActivity() {
         //called when user presses ALLOW or DENY from Permission Request Popup
         when(requestCode){
             PERMISSION_CODE -> {
-                if (grantResults.size > 0 && grantResults[0] ==
-                    PackageManager.PERMISSION_GRANTED){
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     //permission from popup was granted
                     openCamera()
                 }

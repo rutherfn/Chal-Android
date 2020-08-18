@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.databinding.ProfileChallengesBinding
-import com.nicholasrutherford.chal.fragments.MyProfileFragment
+import com.nicholasrutherford.chal.fragments.myprofile.MyProfileFragment
 import com.nicholasrutherford.chal.recycler.viewholders.SettingsViewHolder
-import com.nicholasrutherford.chal.viewmodels.MyProfileViewModel
+import com.nicholasrutherford.chal.fragments.myprofile.MyProfileViewModel
 
 class MyProfileAdapter (private val viewModel: MyProfileViewModel, private val mContext: Context, private val fragment: MyProfileFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

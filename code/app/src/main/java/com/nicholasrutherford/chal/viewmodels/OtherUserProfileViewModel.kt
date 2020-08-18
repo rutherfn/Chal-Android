@@ -1,12 +1,16 @@
 package com.nicholasrutherford.chal.viewmodels
 
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.data.responses.UserProfilePreview
+import com.nicholasrutherford.chal.fragments.searchPeopleFragment
+import com.nicholasrutherford.chal.navigation.otheruserprofile.OtherUserProfileNavigationImpl
 import com.nicholasrutherford.chal.viewstate.OtherUserProfileViewState
 
-class OtherUserProfileViewModel() : ViewModel() {
+class OtherUserProfileViewModel(private val fragmentManager: FragmentManager, private val container: Int, private val bottomNavigationView: BottomNavigationView) : ViewModel() {
 
- //   private val otherUserProfileNavigationImpl = OtherUserProfileNavigationImpl()
+    private val otherUserProfileNavigationImpl = OtherUserProfileNavigationImpl()
 
     var viewState = OtherUserProfileViewStateImpl()
 
@@ -19,7 +23,7 @@ class OtherUserProfileViewModel() : ViewModel() {
 
     fun onBackClicked() {
         viewState.backClicked = true
- //       otherUserProfileNavigationImpl.showSearchPeopleFragment(viewState.backClicked, fragmentManager, container, searchPeopleFragment)
+        otherUserProfileNavigationImpl.showSearchPeopleFragment(viewState.backClicked, fragmentManager, container, bottomNavigationView)
     }
 
     inner class OtherUserProfileViewStateImpl: OtherUserProfileViewState {

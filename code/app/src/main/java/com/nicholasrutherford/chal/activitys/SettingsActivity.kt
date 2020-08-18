@@ -9,8 +9,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
 import com.nicholasrutherford.chal.databinding.ActivitySettingsBinding
-import com.nicholasrutherford.chal.dialogfragments.DebugPasswordDialogFragment
-import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
+import com.nicholasrutherford.chal.fragments.debugPasswordDialog
+import com.nicholasrutherford.chal.fragments.loadingDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
@@ -29,10 +29,6 @@ class SettingsActivity : AppCompatActivity() {
     private var adapterSettingsThreeAdapter: SettingsAdapter? = null
 
     private val fm = supportFragmentManager
-    private val debugPasswordDialog =
-        DebugPasswordDialogFragment()
-    private val loadingDialog =
-        LoadingDialogFragement()
 
     private var mAuth: FirebaseAuth? = null
 

@@ -22,7 +22,6 @@ class SearchPeopleFragment() : Fragment(), FragmentExt {
 
     private var typeface = Typeface()
     private var helper = Helper()
-    private var otherUserProfileFragment = OtherUserProfileFragment()
     private var binding: FragmentFriendsBinding? = null
     private var viewModel: SearchPeopleViewModel? = null
     private var adapterSuggestedFriends: SuggestedFriends? = null
@@ -52,8 +51,6 @@ class SearchPeopleFragment() : Fragment(), FragmentExt {
                 viewModel
             )
         } }
-
-        println(viewModel?.viewState?.searchPeopleList?.size)
 
         binding?.rvFriends?.adapter = adapterSuggestedFriends
     }

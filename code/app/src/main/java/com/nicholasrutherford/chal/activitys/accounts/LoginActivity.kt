@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityLoginBinding
-import com.nicholasrutherford.chal.dialogfragments.ErrorCreateAccountDialogFragment
-import com.nicholasrutherford.chal.dialogfragments.ErrorLoginToAccountDialogFragment
-import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
-import com.nicholasrutherford.chal.dialogfragments.SuccessCreateAccountDialogFragement
+import com.nicholasrutherford.chal.fragments.errorCreateAccountDialog
+import com.nicholasrutherford.chal.fragments.errorLoginAccountDialog
+import com.nicholasrutherford.chal.fragments.loadingAccountDialog
+import com.nicholasrutherford.chal.fragments.loadingDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.viewmodels.LoginViewModel
@@ -25,15 +25,6 @@ class LoginActivity : AppCompatActivity() {
     private var helper = Helper()
 
     private var viewModel: LoginViewModel? = null
-
-    private var errorLoginToAccountDialog =
-        ErrorLoginToAccountDialogFragment()
-    private var errorLogInAccountDueToFieldsDialog =
-        ErrorCreateAccountDialogFragment()
-    private var loadingDialog =
-        LoadingDialogFragement()
-    private var loadingAccountDialog =
-        SuccessCreateAccountDialogFragement()
     private val fm = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -172,7 +163,7 @@ class LoginActivity : AppCompatActivity() {
         helper.hideSoftKeyBoard(this)
 
         if(isEmailError(binding)) {
-            errorLogInAccountDueToFieldsDialog.show(fm, "ErrorLogInAccountDueToFieldsDialog")
+            errorCreateAccountDialog.show(fm, "ErrorLogInAccountDueToFieldsDialog")
         } else {
 
             loadingDialog.show(fm, "LoadingDialog")
@@ -192,7 +183,7 @@ class LoginActivity : AppCompatActivity() {
 
                     loadingDialog.dismiss()
 
-                    errorLoginToAccountDialog.show(fm, "ErrorLoginToAccountDialog")
+                    errorLoginAccountDialog.show(fm, "ErrorLoginToAccountDialog")
 
                     binding.etEmail.text.clear()
                     binding.etPassword.text.clear()

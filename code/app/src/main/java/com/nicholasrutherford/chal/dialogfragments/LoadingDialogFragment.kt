@@ -12,7 +12,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class LoadingDialogFragement : DialogFragment() {
+class LoadingDialogFragment : DialogFragment() {
 
     // declarations
     private var mView: View? = null

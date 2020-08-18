@@ -1,6 +1,7 @@
-package com.nicholasrutherford.chal.viewstate
+package com.nicholasrutherford.chal.fragments.debug.debugmenu
 
 import com.nicholasrutherford.chal.data.debug.Debug
+import com.nicholasrutherford.chal.viewstate.ViewState
 
 interface DebugViewState : ViewState {
     val isChangeConfigurationsClicked: Boolean

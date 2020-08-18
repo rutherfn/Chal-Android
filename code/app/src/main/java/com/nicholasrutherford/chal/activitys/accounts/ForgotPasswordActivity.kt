@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.dialogfragments.ErrorCreateAccountDialogFragment
-import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
+import com.nicholasrutherford.chal.fragments.errorCreateAccountDialog
+import com.nicholasrutherford.chal.fragments.loadingDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
@@ -38,12 +38,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private var helper = Helper()
 
     private val fm = supportFragmentManager
-
-    private val errorCreateAccountDialog =
-        ErrorCreateAccountDialogFragment()
-    private val loadingDialog =
-        LoadingDialogFragement()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -167,7 +161,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val resetEmail = etTypeEmail.text.toString()
 
         if(isEmailError()) {
-
             errorCreateAccountDialog.show(fm, "errorResetDialog")
         }
 

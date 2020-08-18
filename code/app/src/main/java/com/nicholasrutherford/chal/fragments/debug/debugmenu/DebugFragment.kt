@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments
+package com.nicholasrutherford.chal.fragments.debug.debugmenu
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentDebugBinding
-import com.nicholasrutherford.chal.fragments.debug.ChangeFontsAndColorsFragment
+import com.nicholasrutherford.chal.fragments.FragmentExt
+import com.nicholasrutherford.chal.fragments.changeFontsAndColorsFragment
 import com.nicholasrutherford.chal.recycler.adapters.DebugAdapter
-import com.nicholasrutherford.chal.viewmodels.DebugViewModel
 
-class DebugFragment : Fragment(), FragmentExt {
+class DebugFragment : Fragment(),
+    FragmentExt {
 
-    private val changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
     private var debugAdapter: DebugAdapter? = null
     private var binding: FragmentDebugBinding? = null
     private var optionsList: Array<out String>? = null
@@ -34,7 +34,11 @@ class DebugFragment : Fragment(), FragmentExt {
         binding?.rvDebug?.layoutManager = LinearLayoutManager(activity)
 
         viewModel = context?.let { fragmentManager?.let { it1 ->
-            DebugViewModel(it, it1, containerId(), changeFontsAndColorsFragment, optionsList) } }
+            DebugViewModel(
+                it, it1, containerId(),
+                changeFontsAndColorsFragment, optionsList
+            )
+        } }
 
         debugAdapter = context?.let { viewModel?.let { it1 -> DebugAdapter(it1, it) } }
         binding?.rvDebug?.adapter = debugAdapter

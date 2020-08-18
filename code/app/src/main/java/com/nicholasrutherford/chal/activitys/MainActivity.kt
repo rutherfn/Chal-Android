@@ -12,23 +12,13 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
 import com.nicholasrutherford.chal.fragments.*
-import com.nicholasrutherford.chal.dialogfragments.LoadingDialogFragement
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 
 class MainActivity : AppCompatActivity() {
 
     private val fm = supportFragmentManager
 
-    private val homeFragment = HomeFragment()
-    private val challengesFragment = ChallengesFragment()
-    private val suggestedFriendsFragment = SearchPeopleFragment()
-    private val debugFragment = DebugFragment()
-    private val myProfileFragment = MyProfileFragment()
-
     var binding : ActivityMainBinding? = null
-
-    private val loadingDialog =
-        LoadingDialogFragement()
 
     private var mAuth: FirebaseAuth? = null
 
@@ -81,11 +71,11 @@ class MainActivity : AppCompatActivity() {
                         supportFragmentManager.beginTransaction().replace(R.id.container, challengesFragment, challengesFragment.javaClass.simpleName)
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
-                        binding?.tbMain?.visibleOrGone = true
+                        binding?.tbMain?.visibleOrGone = false
                         return true
                     }
                     R.id.navigation_search -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container, suggestedFriendsFragment, suggestedFriendsFragment.javaClass.simpleName)
+                        supportFragmentManager.beginTransaction().replace(R.id.container, searchPeopleFragment, searchPeopleFragment.javaClass.simpleName)
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
                         binding?.tbMain?.visibleOrGone = false

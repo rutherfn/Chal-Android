@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ProfileChallengesBinding
-import com.nicholasrutherford.chal.fragments.MyProfileFragment
-import com.nicholasrutherford.chal.viewmodels.MyProfileViewModel
-import kotlinx.android.synthetic.main.activity_main.view.*
+import com.nicholasrutherford.chal.fragments.myprofile.MyProfileFragment
+import com.nicholasrutherford.chal.fragments.singleChallengeFragment
+import com.nicholasrutherford.chal.fragments.myprofile.MyProfileViewModel
 
 class SettingsViewHolder(private val binding: ProfileChallengesBinding, private val viewModel: MyProfileViewModel, private val mContext: Context, private val fragment: MyProfileFragment) : RecyclerView.ViewHolder(binding.root) {
 
@@ -23,7 +23,7 @@ class SettingsViewHolder(private val binding: ProfileChallengesBinding, private 
 
     private fun showSingleChallengeFragment() {
         fragment.fragmentManager?.beginTransaction()
-            ?.replace(R.id.container, fragment.singleChallengeFragment, fragment.singleChallengeFragment::javaClass.name)
+            ?.replace(R.id.container, singleChallengeFragment, singleChallengeFragment::javaClass.name)
             ?.commit()
     }
 

@@ -4,11 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityDebugBinding
-import com.nicholasrutherford.chal.fragments.DebugFragment
+import com.nicholasrutherford.chal.fragments.debug.debugmenu.DebugFragment
 
 class DebugActivity  : AppCompatActivity() {
 
-    private val debugFragment = DebugFragment()
+    private val debugFragment =
+        DebugFragment()
 
     var binding : ActivityDebugBinding? = null
 

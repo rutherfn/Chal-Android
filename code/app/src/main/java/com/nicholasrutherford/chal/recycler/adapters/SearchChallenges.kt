@@ -8,24 +8,23 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.ChallengeResponse
 import com.nicholasrutherford.chal.recycler.viewholders.SearchChallengesViewHolder
 
-class SearchChallenges(private val mContext: Context, private val searchChallengesList: MutableList<ChallengeResponse>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchChallenges(private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.search_challenges, parent, false)
         return SearchChallengesViewHolder(
             itemView,
-            mContext,
-           searchChallengesList
+            mContext
         )
     }
 
     override fun getItemCount(): Int {
-        return 9
+        return 12
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is SearchChallengesViewHolder) {
-            holder.main(mContext, position, searchChallengesList)
+            holder.main(mContext, position)
         }
     }
 

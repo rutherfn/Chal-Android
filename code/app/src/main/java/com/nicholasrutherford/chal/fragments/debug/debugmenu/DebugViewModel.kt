@@ -1,15 +1,14 @@
-package com.nicholasrutherford.chal.viewmodels
+package com.nicholasrutherford.chal.fragments.debug.debugmenu
 
 import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.debug.Debug
-import com.nicholasrutherford.chal.fragments.debug.ChangeFontsAndColorsFragment
+import com.nicholasrutherford.chal.fragments.debug.changecfontscolors.ChangeFontsAndColorsFragment
 import com.nicholasrutherford.chal.navigation.debug.DebugNavigationImpl
-import com.nicholasrutherford.chal.viewstate.DebugViewState
 
-class DebugViewModel(private val context: Context, private val fragmentManager: FragmentManager, private val containerId: Int, private val fragment: ChangeFontsAndColorsFragment,  private val listOfOptions: Array<out String>?) : ViewModel() {
+class DebugViewModel(private val context: Context, private val fragmentManager: FragmentManager, private val containerId: Int, private val fragment: ChangeFontsAndColorsFragment, private val listOfOptions: Array<out String>?) : ViewModel() {
 
     // declarations
     val viewState = DebugViewStateImpl()
@@ -39,7 +38,8 @@ class DebugViewModel(private val context: Context, private val fragmentManager: 
         return viewState.debugOptionsList
     }
 
-    inner class DebugViewStateImpl() : DebugViewState {
+    inner class DebugViewStateImpl() :
+        DebugViewState {
         override var isChangeConfigurationsClicked = false
         override val container = R.id.container
         override val buttonRestartChangesValue = "Restart"

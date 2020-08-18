@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments.debug
+package com.nicholasrutherford.chal.fragments.debug.changecfontscolors
 
 import android.os.Bundle
 import android.view.LayoutInflater

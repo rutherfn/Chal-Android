@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.DebugLayoutBinding
 import com.nicholasrutherford.chal.helpers.visibleOrGone
-import com.nicholasrutherford.chal.viewmodels.DebugViewModel
+import com.nicholasrutherford.chal.fragments.debug.debugmenu.DebugViewModel
 
 class DebugViewHolder(private var binding: DebugLayoutBinding, private var viewModel: DebugViewModel) : RecyclerView.ViewHolder(binding.root) {
 

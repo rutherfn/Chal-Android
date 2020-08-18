@@ -13,7 +13,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class SuccessCreateAccountDialogFragement : DialogFragment() {
+class SuccessCreateAccountDialogFragment : DialogFragment() {
 
     // declarations
     private var mView: View? = null
@@ -61,6 +61,7 @@ class SuccessCreateAccountDialogFragement : DialogFragment() {
         context?.let {
             val intent = Intent(it.applicationContext, MainActivity::class.java)
             startActivity(intent)
+            dismiss()
         }
     }
 

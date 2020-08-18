@@ -24,7 +24,6 @@ class HomeFragment : Fragment() {
     private var homeAdapter: HomeAdapter? = null
     private var typeface = Typeface()
     private var helper = Helper()
-    private val myProfileFragment = MyProfileFragment()
 
     private var screenContext: Context? = null
 

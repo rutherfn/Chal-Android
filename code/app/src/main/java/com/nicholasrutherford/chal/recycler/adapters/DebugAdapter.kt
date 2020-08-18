@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.databinding.DebugLayoutBinding
 import com.nicholasrutherford.chal.recycler.viewholders.DebugViewHolder
-import com.nicholasrutherford.chal.viewmodels.DebugViewModel
+import com.nicholasrutherford.chal.fragments.debug.debugmenu.DebugViewModel
 
 class DebugAdapter(private val viewModel: DebugViewModel, private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
