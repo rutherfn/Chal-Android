@@ -1,0 +1,79 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <include
+    android:id="@+id/tbEditProfile"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    layout="@layout/toolbar_edit_profile_layout" />
+
+        <include
+            android:id="@+id/editFirstNameLayout"
+            layout="@layout/edit_profile_single_field_layout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_height="match_parent" />
+
+        <include
+        android:id="@+id/editLastNameLayout"
+        layout="@layout/edit_profile_single_field_layout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/emailLayout"
+            layout="@layout/edit_profile_single_field_email_layout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/passwordLayout"
+            layout="@layout/edit_profile_single_field_password_layout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/currentLocationLayout"
+            layout="@layout/edit_profile_single_field_location_layout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/currentDateOfBirthLayout"
+            layout="@layout/edit_profile_single_field_layout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/sloganMessageLayout"
+            layout="@layout/edit_profile_single_field_slogan_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp" />
+
+        <include
+            android:id="@+id/profileImageLayout"
+            layout="@layout/edit_profile_single_field_profile_picture_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp" />
+
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

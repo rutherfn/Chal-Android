@@ -7,16 +7,15 @@ import com.nicholasrutherford.chal.fragments.myprofile.MyProfileFragment
 
 // regular fragments
 public var challengesFragment = ChallengesFragment()
-public var debugFragment =
-    DebugFragment()
+public var debugFragment = DebugFragment()
 public var homeFragment = HomeFragment()
-public var changeFontsAndColorsFragment =
-    ChangeFontsAndColorsFragment()
+public var changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
 public var otherUserProfileFragment = OtherUserProfileFragment()
-public var myProfileFragment =
-    MyProfileFragment()
+public var myProfileFragment = MyProfileFragment()
 public var singleChallengeFragment = SingleChallengeFragment()
 public var searchPeopleFragment = SearchPeopleFragment()
+public var editProfileFragment = EditProfileFragment()
+//public var sear
 
 // alerts fragments
 public var debugPasswordDialog = DebugPasswordDialogFragment()

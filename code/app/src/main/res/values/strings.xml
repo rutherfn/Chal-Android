@@ -42,6 +42,7 @@
     <string name="home_bottom_nav">HOME</string>
     <string name="last_updated">Last Updated</string>
     <string name="search_navigation">SEARCH</string>
+    <string name="setting_navigation">SETTING</string>
     <string name="fake_phone">414323312</string>
     <string name="filler_hash_tag_one"><u>#MuscleGains</u></string>
     <string name="filler_hash_tag_two"><u>#PushMyself</u></string>

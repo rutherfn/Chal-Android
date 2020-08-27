@@ -81,6 +81,13 @@ class MainActivity : AppCompatActivity() {
                         binding?.tbMain?.visibleOrGone = false
                         return true
                     }
+                    R.id.navigation_search -> {
+                        supportFragmentManager.beginTransaction().replace(R.id.container, searchPeopleFragment, searchPeopleFragment.javaClass.simpleName)
+                            .commit()
+                        binding?.bvNavigation?.visibleOrGone = true
+                        binding?.tbMain?.visibleOrGone = false
+                        return true
+                    }
 
                 }
                 return false

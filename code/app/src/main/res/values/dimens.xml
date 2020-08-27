@@ -6,6 +6,7 @@
     <dimen name="sub_header_text_size">20sp</dimen>
     <dimen name="body_text_size">17sp</dimen>
     <dimen name="sub_body_text_size">9sp</dimen>
+    <dimen name="et_label_text_size">16sp</dimen>
 
     <dimen name="wall_header_text_size">22sp</dimen>
     <dimen name="wall_sub_header_text_size">19sp</dimen>
@@ -18,7 +19,7 @@
     <!-- Images Unique Sizes -->
     <dimen name="iv_close_width">30dp</dimen>
     <dimen name="iv_close_height">30dp</dimen>
-    <dimen name="card_view_wall_height">590dp</dimen>
+    <dimen name="card_view_wall_height">525dp</dimen>
     <dimen name="cv_wall_profile_height">40dp</dimen>
     <dimen name="cv_wall_profile_width">40dp</dimen>
     <dimen name="cv_next_height">50dp</dimen>

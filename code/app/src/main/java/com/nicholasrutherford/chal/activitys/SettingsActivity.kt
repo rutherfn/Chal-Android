@@ -125,7 +125,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun attemptToLogoutUser() {
-
         loadingDialog.show(fm, "LoadingDialog")
 
         val timer = object: CountDownTimer(3000, 100) {

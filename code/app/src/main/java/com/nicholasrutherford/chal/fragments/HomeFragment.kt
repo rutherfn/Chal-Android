@@ -24,7 +24,6 @@ class HomeFragment : Fragment() {
     private var homeAdapter: HomeAdapter? = null
     private var typeface = Typeface()
     private var helper = Helper()
-
     private var screenContext: Context? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,7 +48,7 @@ class HomeFragment : Fragment() {
 
     private fun toolbarClickListeners(binding: FragmentHomeBinding) {
         binding.tbHome.tvTitle.setOnClickListener { showProfileFragment() }
-     //   binding.tbHome.tvSubTitle.setOnClickListener { startSettingsUpActivity() }
+        //binding.tbHome.ivPlus.setOnClickListener { showEditProfileFragment() }
     }
 
     private fun showProfileFragment() {

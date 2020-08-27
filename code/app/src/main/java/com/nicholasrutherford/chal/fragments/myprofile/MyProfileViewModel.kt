@@ -15,8 +15,5 @@ class MyProfileViewModel() : ViewModel() {
 
     }
 
-    inner class MyProfileViewStateImpl() :
-        MyProfileViewState {
-        override val profileVisible = false
-    }
+    inner class MyProfileViewStateImpl() : MyProfileViewState { override val profileVisible = false }
 }

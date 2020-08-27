@@ -19,7 +19,7 @@ class SearchChallenges(private val mContext: Context) : RecyclerView.Adapter<Rec
     }
 
     override fun getItemCount(): Int {
-        return 12
+        return 15
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

@@ -15,6 +15,12 @@
             layout="@layout/toolbar_my_profile" />
 
         <include
+            android:id="@+id/bannerMexsage"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            layout="@layout/banner_alert_layout" />
+
+        <include
             android:id="@+id/layoutProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

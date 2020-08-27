@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_friend"
         android:title="@string/search_navigation"/>
 
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/setting_navigation"/>
+
 </menu>
