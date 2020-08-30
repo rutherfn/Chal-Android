@@ -2,6 +2,8 @@ package com.nicholasrutherford.chal.recycler.viewholders
 
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.data.isExpired
+import com.nicholasrutherford.chal.data.isWarning
 import com.nicholasrutherford.chal.databinding.DebugLayoutBinding
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.fragments.debug.debugmenu.DebugViewModel
@@ -17,7 +19,8 @@ class DebugViewHolder(private var binding: DebugLayoutBinding, private var viewM
 
     private fun clickListeners(position: Int) {
         binding.clDebug.setOnClickListener {
-            viewModel.changeConfigurationsClicked(R.string.debug_change_configuration.toString(), position)
+            isExpired = true
+            isWarning = true
         }
     }
 

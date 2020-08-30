@@ -81,8 +81,8 @@ class MainActivity : AppCompatActivity() {
                         binding?.tbMain?.visibleOrGone = false
                         return true
                     }
-                    R.id.navigation_search -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container, searchPeopleFragment, searchPeopleFragment.javaClass.simpleName)
+                    R.id.navigation_setting -> {
+                        supportFragmentManager.beginTransaction().replace(R.id.container, settingFragment, settingFragment.javaClass.simpleName)
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
                         binding?.tbMain?.visibleOrGone = false
@@ -123,12 +123,6 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun startSettingsActivity() {
-        val intent = Intent(applicationContext, SettingsActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -140,9 +134,6 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navigation_log_out -> {
                 attemptToLogoutUser()
-            }
-            R.id.navigation_settings -> {
-                startSettingsActivity()
             }
             R.id.navigation_profile -> {
                 supportFragmentManager.beginTransaction().replace(R.id.container, myProfileFragment, myProfileFragment.javaClass.simpleName)

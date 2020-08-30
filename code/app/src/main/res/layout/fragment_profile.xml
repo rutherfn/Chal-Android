@@ -18,7 +18,42 @@
             android:id="@+id/bannerMexsage"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="@dimen/margin_2dp"
             layout="@layout/banner_alert_layout" />
+
+        <include
+            android:id="@+id/bannerMessageChallengeAdded"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            layout="@layout/banner_alert_layout" />
+
+        <include
+            android:id="@+id/bannerMessageDayOneChallenge"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/margin_2dp"
+            layout="@layout/banner_alert_layout" />
+
+        <include
+            android:id="@+id/bannerMessagePostCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/margin_2dp"
+            layout="@layout/banner_alert_layout" />
+
+        <include
+            android:id="@+id/bannerMessageWarningLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/margin_2dp"
+            layout="@layout/banner_alert_layout_warning"  />
+
+        <include
+            android:id="@+id/bannerMessageExpiredLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/margin_2dp"
+            layout="@layout/banner_alert_layout_expired"  />
 
         <include
             android:id="@+id/layoutProfile"
@@ -27,6 +62,7 @@
             layout="@layout/profile_layout" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/btChallenges"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFFFFF"

@@ -1,7 +1,6 @@
 package com.nicholasrutherford.chal.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.MainActivity
-import com.nicholasrutherford.chal.activitys.SettingsActivity
 import com.nicholasrutherford.chal.databinding.FragmentHomeBinding
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
@@ -48,6 +46,7 @@ class HomeFragment : Fragment() {
 
     private fun toolbarClickListeners(binding: FragmentHomeBinding) {
         binding.tbHome.tvTitle.setOnClickListener { showProfileFragment() }
+        binding?.tbHome.ivPlus.setOnClickListener { showChallengePostFragment() }
         //binding.tbHome.ivPlus.setOnClickListener { showEditProfileFragment() }
     }
 
@@ -61,11 +60,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun startSettingsUpActivity() {
-        val intent = Intent(screenContext, SettingsActivity::class.java)
+    private fun showChallengePostFragment() {
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.container, challengePostFragment, challengePostFragment::javaClass.name)
+            ?.commit()
 
-        startActivity(intent)
-        activity?.finish()
+        if(screenContext != null) {
+            (activity as MainActivity).binding?.bvNavigation?.visibleOrGone = false
+        }
     }
 
     private fun main(binding: FragmentHomeBinding) {

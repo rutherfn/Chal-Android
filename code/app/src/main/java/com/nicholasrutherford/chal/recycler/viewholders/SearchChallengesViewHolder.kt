@@ -102,6 +102,7 @@ class SearchChallengesViewHolder (itemView: View, private val mContext: Context)
         tvChallenge.text = listOfChallenges[pos]
         tvChallengeDuration.text = listOfDurations[pos]
         Picasso.get().load(listOfImages[pos]).into(ivSearchChallenge)
+
     }
 
 }

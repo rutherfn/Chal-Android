@@ -19,6 +19,8 @@
     <string name="do_not_have_account">Don\'t Have A Account?</string>
     <string name="debug">Debug</string>
     <string-array name="debugOptions">
+        <item>Warning</item>
+        <item>Expired</item>
         <item>@string/debug_change_configuration</item>
     </string-array>
     <string name="debug_incorrect_password">Incorrect Password!</string>

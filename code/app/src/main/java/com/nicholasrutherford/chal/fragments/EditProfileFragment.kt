@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.data.isGrateful
 import com.nicholasrutherford.chal.data.isUserProfileUpdated
 import com.nicholasrutherford.chal.databinding.EditProfileLayoutBinding
 import com.nicholasrutherford.chal.helpers.Typeface

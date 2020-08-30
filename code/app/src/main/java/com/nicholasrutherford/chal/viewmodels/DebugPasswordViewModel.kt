@@ -1,7 +1,6 @@
 package com.nicholasrutherford.chal.viewmodels
 
 import android.content.Context
-import android.content.Intent
 import android.widget.EditText
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
