@@ -1,13 +1,14 @@
 package com.nicholasrutherford.chal.fragments
 
 import com.nicholasrutherford.chal.dialogfragments.*
-import com.nicholasrutherford.chal.fragments.challenges.ChallengesFragment
+import com.nicholasrutherford.chal.screens.challenges.ChallengesFragment
 import com.nicholasrutherford.chal.fragments.debug.changecfontscolors.ChangeFontsAndColorsFragment
 import com.nicholasrutherford.chal.fragments.debug.debugmenu.DebugFragment
 import com.nicholasrutherford.chal.fragments.myfriends.MyFriendsFragment
 import com.nicholasrutherford.chal.fragments.myprofile.MyProfileFragment
 import com.nicholasrutherford.chal.fragments.postprogress.ChallengePostFragment
 import com.nicholasrutherford.chal.fragments.settings.SettingsFragment
+import com.nicholasrutherford.chal.screens.home.HomeFragment
 
 // regular fragments
 public var challengesFragment =

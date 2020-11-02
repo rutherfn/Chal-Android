@@ -15,7 +15,7 @@ class MyFriendsAdapter(private val mContext: Context): RecyclerView.Adapter<Recy
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return 1
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

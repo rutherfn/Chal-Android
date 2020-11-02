@@ -13,6 +13,12 @@
             android:layout_height="50dp"
             layout="@layout/home_toolbar_layout" />
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srlHome"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

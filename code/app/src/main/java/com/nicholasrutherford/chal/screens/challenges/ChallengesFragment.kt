@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments.challenges
+package com.nicholasrutherford.chal.screens.challenges
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentChallengesBinding
-import com.nicholasrutherford.chal.fragments.editProfileFragment
 import com.nicholasrutherford.chal.fragments.singleChallengeFragment
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone

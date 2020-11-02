@@ -14,11 +14,7 @@ class MyFriendsViewHolder(private var context: Context, private var binding: Fri
 
     fun bind(position: Int) {
         listOfNames.add("Nick Rutherford")
-        listOfNames.add("Shawn Spartz")
-        listOfNames.add("Sami Weber")
         listOfUsers.add("https://pbs.twimg.com/profile_images/971963353106010113/HSOt7Yvd_400x400.jpg")
-        listOfUsers.add("https://www.cioapplications.com/newstransfer/upload/ai3jmgradient370.jpg")
-        listOfUsers.add("https://media.creativemornings.com/uploads/user/avatar/124117/IMG_0432.JPG")
 
         Picasso.get().load(listOfUsers[position]).into(binding.cvFriends)
         binding.tvProfileName.text = listOfNames[position]

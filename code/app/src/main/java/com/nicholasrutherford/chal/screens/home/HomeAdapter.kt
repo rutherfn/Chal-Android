@@ -1,12 +1,10 @@
-package com.nicholasrutherford.chal.recycler.adapters
+package com.nicholasrutherford.chal.screens.home
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.databinding.HomeWallLayoutBinding
-import com.nicholasrutherford.chal.recycler.viewholders.HomeViewHolder
-import com.nicholasrutherford.chal.viewmodels.HomeViewModel
 
 class HomeAdapter(private val viewModel: HomeViewModel, private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -17,7 +15,7 @@ class HomeAdapter(private val viewModel: HomeViewModel, private val mContext: Co
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 3
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
