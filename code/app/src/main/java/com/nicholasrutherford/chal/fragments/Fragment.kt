@@ -11,24 +11,22 @@ import com.nicholasrutherford.chal.fragments.settings.SettingsFragment
 import com.nicholasrutherford.chal.screens.home.HomeFragment
 
 // regular fragments
-public var challengesFragment =
-    ChallengesFragment()
-public var debugFragment = DebugFragment()
-public var homeFragment = HomeFragment()
-public var changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
-public var otherUserProfileFragment = OtherUserProfileFragment()
-public var myProfileFragment = MyProfileFragment()
-public var singleChallengeFragment = SingleChallengeFragment()
-public var searchPeopleFragment = SearchPeopleFragment()
-public var editProfileFragment = EditProfileFragment()
-public var myFriendsFragment = MyFriendsFragment()
-public var settingFragment = SettingsFragment()
-public var challengePostFragment = ChallengePostFragment()
-//public var sear
+var challengesFragment = ChallengesFragment()
+var debugFragment = DebugFragment()
+var homeFragment = HomeFragment()
+var changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
+var otherUserProfileFragment = OtherUserProfileFragment()
+var myProfileFragment = MyProfileFragment()
+var singleChallengeFragment = SingleChallengeFragment()
+var searchPeopleFragment = SearchPeopleFragment()
+var editProfileFragment = EditProfileFragment()
+var myFriendsFragment = MyFriendsFragment()
+var settingFragment = SettingsFragment()
+var challengePostFragment = ChallengePostFragment()
 
 // alerts fragments
-public var debugPasswordDialog = DebugPasswordDialogFragment()
-public var errorCreateAccountDialog = ErrorCreateAccountDialogFragment()
-public var errorLoginAccountDialog = ErrorLoginToAccountDialogFragment()
-public var loadingDialog = LoadingDialogFragment()
-public var loadingAccountDialog = SuccessCreateAccountDialogFragment()
+var debugPasswordDialog = DebugPasswordDialogFragment()
+var errorCreateAccountDialog = ErrorCreateAccountDialogFragment()
+var errorLoginAccountDialog = ErrorLoginToAccountDialogFragment()
+var loadingDialog = LoadingDialogFragment()
+var loadingAccountDialog = SuccessCreateAccountDialogFragment()

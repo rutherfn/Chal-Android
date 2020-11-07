@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun setSplashImage(binding: ActivitySplashBinding) {
-        viewModel?.viewState?.splashImageRes?.let { binding.ivSplashLogo.setImageResource(it) }
+       // binding.ivSplashLogo.setImageResource(viewModel?.viewState?.splashImageRes)
     }
 
     private fun startMainActivity() {

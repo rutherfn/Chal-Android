@@ -25,7 +25,7 @@ class SplashViewModel(context: Context)  : ViewModel() {
     }
 
     inner class SplashViewModelImpl : SplashViewState {
-        override var splashImageRes =  R.drawable.primary_logo
+        override var splashImageRes: Int =  R.drawable.circle
     }
 
     }
