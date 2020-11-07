@@ -48,17 +48,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setUpTypeface(binding: ActivityLoginBinding) { // ui stuff here
-        typeface.setHeaderTypefaceBold(binding.tvTitle, baseContext, viewModel?.viewState?.configurationEntity?.primaryHeaderTypefaceBold!!)
+        typeface.setTypefaceForHeaderBold(binding.tvTitle, baseContext)
 
-        typeface.setTypefaceForBoldBody(binding.tvEmail, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceBold!!)
-        typeface.setTypefaceForBoldBody(binding.tvPassword, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceBold!!)
+        typeface.setTypefaceForBodyBold(binding.tvEmail, baseContext)
+        typeface.setTypefaceForBodyBold(binding.tvPassword, baseContext)
 
-        typeface.setHeaderTypefaceBold(binding.btLogIn, baseContext, viewModel?.viewState?.configurationEntity?.primaryHeaderTypefaceBold!!)
+        typeface.setTypefaceForHeaderBold(binding.btLogIn, baseContext)
 
-        typeface.setTypefaceForItalicBody(binding.tvForgotPassword, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceItalic!!)
-        typeface.setTypefaceForLightBody(binding.tvDoNotHaveAccount, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceItalic!!)
-        typeface.setTypefaceForBoldBody(binding.tvSignUp, baseContext, viewModel?.viewState?.configurationEntity?.bodyTypefaceBold!!)
-        typeface.setTypefaceForBoldSubHeader(binding.tvErrorEmail, baseContext, viewModel?.viewState?.configurationEntity?.subHeaderTypefaceBold!!)
+        typeface.setTypefaceForBodyItalic(binding.tvForgotPassword, baseContext)
+        typeface.setTypefaceForLightBody(binding.tvDoNotHaveAccount, baseContext)
+        typeface.setTypefaceForBodyBold(binding.tvSignUp, baseContext)
+        typeface.setTypefaceForSubHeaderBold(binding.tvErrorEmail, baseContext)
     }
 
     private fun setUpTextViewColors(binding: ActivityLoginBinding) { // if its dark mode setup normal colors else another one when we get to it

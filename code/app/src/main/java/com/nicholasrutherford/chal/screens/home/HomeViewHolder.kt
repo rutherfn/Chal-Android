@@ -60,20 +60,21 @@ class HomeViewHolder (private var binding: HomeWallLayoutBinding, private val vi
         Picasso.get().load(listOfUsers[position]).into(binding.cvProfile)
         Picasso.get().load(listOfImages[position]).into(binding.ivChallengePost)
         binding.tvViewChallenge.text = listOfHashTags[position]
+
         binding.ivLikes.visibleOrGone = false
         binding.tvCurrentLikes.visibleOrGone = false
         binding.tvViewAllComments.visibleOrGone = false
 
-        typeface.setHeaderTypefaceBold(binding.tvFullName, context, viewModel.viewState.configurationEntity.primaryHeaderTypefaceBold)
+        typeface.setTypefaceForHeaderBold(binding.tvFullName, context)
 
-        typeface.setTypefaceForRegularSubHeader(binding.tvTimeUpdated, context, viewModel.viewState.configurationEntity.subHeaderTypeface)
+        typeface.setTypefaceForSubHeaderRegular(binding.tvTimeUpdated, context)
 
-        typeface.setTypefaceForBoldSubHeader(binding.tvChallengePostTitle, context, viewModel.viewState.configurationEntity.subHeaderTypefaceBold)
-        typeface.setTypefaceForRegularBody(binding.tvChallengePostBody, context, viewModel.viewState.configurationEntity.bodyTypeface)
-        typeface.setTypefaceForRegularBody(binding.tvCurrentLikes, context, viewModel.viewState.configurationEntity.bodyTypeface)
+        typeface.setTypefaceForSubHeaderBold(binding.tvChallengePostTitle, context)
+        typeface.setTypefaceForRegularBody(binding.tvChallengePostBody, context)
+        typeface.setTypefaceForRegularBody(binding.tvCurrentLikes, context)
 
-        typeface.setTypefaceForRegularBody(binding.tvViewAllComments, context, viewModel.viewState.configurationEntity.bodyTypeface)
-        typeface.setTypefaceForRegularBody(binding.tvViewChallenge, context, viewModel.viewState.configurationEntity.bodyTypeface)
+        typeface.setTypefaceForRegularBody(binding.tvViewAllComments, context)
+        typeface.setTypefaceForRegularBody(binding.tvViewChallenge, context)
         clickListeners()
     }
 
