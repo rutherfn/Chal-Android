@@ -13,7 +13,7 @@
     <string name="clear_photo">Clear Photo</string>
     <string name="click_me_to_take_a_picture">Click Me To Take A Picture</string>
     <string name="continue_creating">Continue</string>
-    <string name="challenges_bottom_nav">CHALLENGES</string>
+    <string name="challenges_bottom_nav">Challenges</string>
     <string name="choose_from_library">Choose From Library</string>
     <string name="create">Create</string>
     <string name="do_not_have_account">Don\'t Have A Account?</string>
@@ -41,10 +41,10 @@
     <string name="error_phone_not_valid">Phone number not valid.</string>
     <string name="error_password">One capital letter and one number.</string>
     <string name="header_font_bold_text_title">Header Bold Font</string>
-    <string name="home_bottom_nav">HOME</string>
     <string name="last_updated">Last Updated</string>
+    <string name="more_navigation">More</string>
+    <string name="my_feed_bottom_nav">My Feed</string>
     <string name="search_navigation">SEARCH</string>
-    <string name="setting_navigation">SETTING</string>
     <string name="fake_phone">414323312</string>
     <string name="filler_hash_tag_one"><u>#MuscleGains</u></string>
     <string name="filler_hash_tag_two"><u>#PushMyself</u></string>
