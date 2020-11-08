@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/navigation_challenges"
-        android:icon="@drawable/ic_challenge"
+        android:icon="@drawable/ic_calendar"
         android:title="@string/challenges_bottom_nav"/>
 
     <item
         android:id="@+id/navigation_more"
-        android:icon="@drawable/ic_setting"
+        android:icon="@drawable/ic_more"
         android:title="@string/more_navigation"/>
 
 </menu>
