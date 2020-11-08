@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
                 when (item.itemId) {
-                    R.id.navigation_home -> {
+                    R.id.navigation_my_feed-> {
                         supportFragmentManager.beginTransaction().replace(R.id.container, homeFragment, homeFragment.javaClass.simpleName)
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
@@ -74,14 +74,14 @@ class MainActivity : AppCompatActivity() {
                         binding?.tbMain?.visibleOrGone = false
                         return true
                     }
-                    R.id.navigation_search -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container, searchPeopleFragment, searchPeopleFragment.javaClass.simpleName)
-                            .commit()
-                        binding?.bvNavigation?.visibleOrGone = true
-                        binding?.tbMain?.visibleOrGone = false
-                        return true
-                    }
-                    R.id.navigation_setting -> {
+//                    R.id.navigation_search -> {
+//                        supportFragmentManager.beginTransaction().replace(R.id.container, searchPeopleFragment, searchPeopleFragment.javaClass.simpleName)
+//                            .commit()
+//                        binding?.bvNavigation?.visibleOrGone = true
+//                        binding?.tbMain?.visibleOrGone = false
+//                        return true
+//                    }
+                    R.id.navigation_more -> {
                         supportFragmentManager.beginTransaction().replace(R.id.container, settingFragment, settingFragment.javaClass.simpleName)
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
