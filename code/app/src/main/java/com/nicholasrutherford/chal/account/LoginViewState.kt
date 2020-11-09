@@ -1,5 +1,6 @@
-package com.nicholasrutherford.chal.viewstate
+package com.nicholasrutherford.chal.account
 
+import com.nicholasrutherford.chal.viewstate.ViewState
 import com.nicholasrutherford.chal.room.entity.ConfigurationEntity
 
 interface LoginViewState : ViewState {

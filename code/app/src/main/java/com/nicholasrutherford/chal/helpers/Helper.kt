@@ -12,12 +12,10 @@ import androidx.fragment.app.FragmentActivity
 
 class Helper {
 
+    public val APP_CONTEXT = this
+
     fun setTextViewColor(context: Context, textView: TextView, color: Int) { // helper method?
         textView.setTextColor(ContextCompat.getColor(context, color))
-    }
-
-    fun setTextViewColorWithString(context: Context, textView: TextView, color: String) { // helper method?
-        textView.setTextColor(Color.parseColor(color))
     }
 
     fun hideSoftKeyBoard(activity: Activity) {

@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activitys.accounts.LoginActivity"
+        <activity android:name=".account.LoginActivity"
             android:windowSoftInputMode="adjustPan">
 
         </activity>

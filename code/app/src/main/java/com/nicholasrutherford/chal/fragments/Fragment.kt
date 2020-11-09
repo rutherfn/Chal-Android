@@ -1,5 +1,7 @@
 package com.nicholasrutherford.chal.fragments
 
+import android.content.Context
+import com.nicholasrutherford.chal.account.LoginFragment
 import com.nicholasrutherford.chal.dialogfragments.*
 import com.nicholasrutherford.chal.screens.challenges.ChallengesFragment
 import com.nicholasrutherford.chal.fragments.debug.changecfontscolors.ChangeFontsAndColorsFragment
@@ -11,22 +13,23 @@ import com.nicholasrutherford.chal.fragments.settings.SettingsFragment
 import com.nicholasrutherford.chal.screens.home.HomeFragment
 
 // regular fragments
-var challengesFragment = ChallengesFragment()
-var debugFragment = DebugFragment()
-var homeFragment = HomeFragment()
-var changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
-var otherUserProfileFragment = OtherUserProfileFragment()
-var myProfileFragment = MyProfileFragment()
-var singleChallengeFragment = SingleChallengeFragment()
-var searchPeopleFragment = SearchPeopleFragment()
-var editProfileFragment = EditProfileFragment()
-var myFriendsFragment = MyFriendsFragment()
-var settingFragment = SettingsFragment()
-var challengePostFragment = ChallengePostFragment()
+val changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
+val challengesFragment = ChallengesFragment()
+val challengePostFragment = ChallengePostFragment()
+val debugFragment = DebugFragment()
+val editProfileFragment = EditProfileFragment()
+val homeFragment = HomeFragment()
+fun loginFragment(appContext: Context) = LoginFragment(appContext)
+val myFriendsFragment = MyFriendsFragment()
+val myProfileFragment = MyProfileFragment()
+val otherUserProfileFragment = OtherUserProfileFragment()
+val searchPeopleFragment = SearchPeopleFragment()
+val singleChallengeFragment = SingleChallengeFragment()
+val settingFragment = SettingsFragment()
 
 // alerts fragments
-var debugPasswordDialog = DebugPasswordDialogFragment()
-var errorCreateAccountDialog = ErrorCreateAccountDialogFragment()
-var errorLoginAccountDialog = ErrorLoginToAccountDialogFragment()
-var loadingDialog = LoadingDialogFragment()
-var loadingAccountDialog = SuccessCreateAccountDialogFragment()
+val debugPasswordDialog = DebugPasswordDialogFragment()
+val errorCreateAccountDialog = ErrorCreateAccountDialogFragment()
+val errorLoginAccountDialog = ErrorLoginToAccountDialogFragment()
+val loadingAccountDialog = SuccessCreateAccountDialogFragment()
+val loadingDialog = LoadingDialogFragment()

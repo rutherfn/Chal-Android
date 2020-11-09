@@ -46,6 +46,12 @@ class DebugPasswordDialogFragment : DialogFragment(), FragmentExt {
         binding?.ivClose?.setOnClickListener {viewModel?.onCloseClicked()}
     }
 
+    override fun updateColors() {
+    }
+
+    override fun updateTypefaces() {
+    }
+
     override fun containerId(): Int {
         return R.id.container
     }

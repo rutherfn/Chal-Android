@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.accounts.LoginActivity
+import com.nicholasrutherford.chal.account.LoginActivity
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
 import com.nicholasrutherford.chal.fragments.*
 import com.nicholasrutherford.chal.helpers.visibleOrGone
