@@ -24,7 +24,7 @@
         </activity>
 
         <activity android:name=".account.LoginActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
 
