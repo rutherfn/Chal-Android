@@ -80,7 +80,7 @@
             android:hint="@string/username"
             android:autofillHints="@string/username"
             android:imeOptions="actionDone"
-            android:inputType="text"
+            android:inputType="none"
             android:maxLines="1"
             android:singleLine="true"
             android:windowSoftInputMode="adjustPan"

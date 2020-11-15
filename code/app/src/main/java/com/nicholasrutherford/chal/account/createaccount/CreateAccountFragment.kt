@@ -113,11 +113,11 @@ class CreateAccountFragment(private val activity: CreateAccountActivity, private
     }
 
     override fun clickListeners(bind: FragmentCreateAccountBinding) {
-        val username = bind.etUsername.text.toString()
-        val email = bind.etEmail.text.toString()
-        val password = bind.etPassword.text.toString()
 
         bind.btnContinueCreating.setOnClickListener {
+            val username = bind.etUsername.text.toString()
+            val email = bind.etEmail.text.toString()
+            val password = bind.etPassword.text.toString()
             viewModel.onClickOnContinue(email, username, password)
         }
     }

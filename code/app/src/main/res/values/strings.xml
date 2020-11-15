@@ -31,10 +31,12 @@
     <string name="email_sent">Email Sent!</string>
     <string name="iv_error_content_description_debug_password">Image View for not the correct password debug mode error</string>
     <string name="error_cant_log_in">Unable To Log In </string>
+    <string name="error_cant_create_account">Unable To Create Account</string>
     <string name="error_content_desc_creating_account">Error Creating Account</string>
     <string name="error_creating_create_account_fields">One of the require fields are incorrect. Press OK to try again.</string>
     <string name="error_creating_account_firebase">Error Creating Account. Please Check Your Internet Connection</string>
     <string name="error_login_no_account_associated_with_email">No account associated with this email. Please create an account for this email.</string>
+    <string name="error_fields_are_not_correct_create_account">One of the fields are empty or do not meet our requirements. Please try again.</string>
     <string name="error_fields_are_not_correct_log_in">One of the fields if not both are empty, please check your email and password and try again.</string>
     <string name="error_fields_not_entered_login">Email and or password are not entered. Please check your email and password and try again.</string>
     <string name="error_no_internet_log_in">Please connect to internet in order to log into your account.</string>

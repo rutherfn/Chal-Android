@@ -27,7 +27,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        navigation.signUp(this)
+        navigation.login(this)
     }
 
 }
