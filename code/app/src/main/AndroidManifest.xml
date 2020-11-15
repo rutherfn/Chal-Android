@@ -32,16 +32,14 @@
         </activity>
 
         <activity android:name=".activitys.accounts.SocialMediaWebActivity">
+        </activity>
 
+        <activity android:name=".account.createaccount.CreateAccountActivity"
+            android:windowSoftInputMode="adjustResize">
         </activity>
 
         <activity android:name=".activitys.accounts.ForgotPasswordActivity"
             android:windowSoftInputMode="adjustPan">
-        </activity>
-
-        <activity android:name=".activitys.accounts.CreateAccountActivity"
-            android:windowSoftInputMode="adjustPan">
-
         </activity>
 
         <activity android:name=".activitys.accounts.UploadPhotoActivity"

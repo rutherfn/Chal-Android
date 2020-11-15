@@ -1,6 +1,8 @@
 package com.nicholasrutherford.chal.fragments
 
 import android.content.Context
+import com.nicholasrutherford.chal.account.createaccount.CreateAccountFragment
+import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity
 import com.nicholasrutherford.chal.account.signup.SignUpFragment
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.login.LoginFragment
@@ -19,6 +21,7 @@ import com.nicholasrutherford.chal.screens.home.HomeFragment
 val changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
 val challengesFragment = ChallengesFragment()
 val challengePostFragment = ChallengePostFragment()
+fun createAccountFragment(activity: CreateAccountActivity, context: Context) = CreateAccountFragment(activity, context)
 val debugFragment = DebugFragment()
 val editProfileFragment = EditProfileFragment()
 val homeFragment = HomeFragment()

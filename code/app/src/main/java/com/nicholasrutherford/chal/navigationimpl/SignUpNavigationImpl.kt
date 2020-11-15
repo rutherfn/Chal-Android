@@ -1,10 +1,10 @@
 package com.nicholasrutherford.chal.navigationimpl
 
 import android.content.Intent
+import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.signup.SignUpNavigation
 import com.nicholasrutherford.chal.account.signup.SignUpActivity
-import com.nicholasrutherford.chal.activitys.accounts.CreateAccountActivity
 import com.nicholasrutherford.chal.activitys.accounts.SocialMediaWebActivity
 
 class SignUpNavigationImpl : SignUpNavigation {

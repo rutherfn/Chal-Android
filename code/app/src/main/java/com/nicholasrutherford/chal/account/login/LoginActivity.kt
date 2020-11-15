@@ -17,7 +17,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loadLoginFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.containerLogin, loginFragment(this,applicationContext), loginFragment(this,applicationContext).javaClass.simpleName)
+        supportFragmentManager.beginTransaction().replace(R.id.containerLogin, loginFragment(this,applicationContext),
+            loginFragment(this,applicationContext).javaClass.simpleName)
             .commit()
     }
 
