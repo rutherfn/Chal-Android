@@ -4,10 +4,10 @@
     android:id="@+id/cnsSplashScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activitys.SplashActivity"
+    tools:context=".splash.SplashActivity"
     tools:ignore="PrivateResource">
 
     <ImageView
