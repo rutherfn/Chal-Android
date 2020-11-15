@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.account.signup.SignUpActivity
 import com.nicholasrutherford.chal.databinding.ActivityCreateAccountBinding
 import com.nicholasrutherford.chal.fragments.errorCreateAccountDialog
 import com.nicholasrutherford.chal.fragments.loadingDialog

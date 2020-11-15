@@ -26,10 +26,9 @@
 
         <activity android:name=".account.login.LoginActivity"
             android:windowSoftInputMode="adjustResize">
-
         </activity>
-
-        <activity android:name=".activitys.accounts.SignUpActivity">
+        
+        <activity android:name=".account.signup.SignUpActivity">
         </activity>
 
         <activity android:name=".activitys.accounts.SocialMediaWebActivity">
@@ -46,10 +45,6 @@
         </activity>
 
         <activity android:name=".activitys.accounts.UploadPhotoActivity"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
-
-        <activity android:name=".activitys.accounts.AskForPhoneNumberActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
 

@@ -110,13 +110,13 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up_underline"><u>Sign Up</u></string>
     <string name="sign_up">Sign Up</string>
-    <string name="sign_up_slogan_message"> App Slogan Message Here</string>
+    <string name="sign_up_slogan_message">Start your Chal!</string>
     <string name="sign_up_facebook_button_text">Continue With Facebook</string>
     <string name="sign_up_phone_button_text">Continue With Phone</string>
     <string name="sign_up_email_button_text">Continue With Email</string>
     <string name="social_media_instagram_content_desc">Social Media Icon Instagram</string>
     <string name="social_media_facebook_content_desc">Social Media Icon Facebook</string>
-    <string name="social_media_twitter_content_desc">Social Media Icon Twitter</string>
+    <string name="social_media_linkedin_content_desc">Social Media Icon Linkedin</string>
     <string name="successful">Successful</string>
     <string name="teaser_challenge">Teaser Challenge</string>
     <string name="to_reset_password">To Reset Password.</string>

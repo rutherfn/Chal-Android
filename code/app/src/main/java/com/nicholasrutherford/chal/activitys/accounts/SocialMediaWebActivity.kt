@@ -54,7 +54,7 @@ class SocialMediaWebActivity : AppCompatActivity() {
     private fun loadUrlToWebView() {
         val isFacebook = intent.getBooleanExtra("isFacebook", false)
         val isGram = intent.getBooleanExtra("isGram",false)
-        val isTwitter = intent.getBooleanExtra("isTwitter", false)
+        val isLinkedin = intent.getBooleanExtra("isLinkedin", false)
 
         when {
             isFacebook -> {
@@ -63,7 +63,7 @@ class SocialMediaWebActivity : AppCompatActivity() {
             isGram -> {
                 wvSocial.loadUrl(INST_GRAM_LINK)
             }
-            isTwitter -> {
+            isLinkedin -> {
                 wvSocial.loadUrl(TWITTER_LINK)
             }
         }

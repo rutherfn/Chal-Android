@@ -9,9 +9,9 @@ import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.login.LoginNavigation
+import com.nicholasrutherford.chal.account.signup.SignUpActivity
 import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.activitys.accounts.ForgotPasswordActivity
-import com.nicholasrutherford.chal.activitys.accounts.SignUpActivity
 
 class LoginNavigationImpl : LoginNavigation {
 
