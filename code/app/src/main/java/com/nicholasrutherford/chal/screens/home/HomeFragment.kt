@@ -75,6 +75,12 @@ class HomeFragment : Fragment(), FragmentExt {
         binding?.tbHome?.ivPlus?.setOnClickListener {  navigation.showChallengePostFragment(fragmentManager!!, containerId(), btNavigation!!) }
     }
 
+    override fun updateColors() {
+    }
+
+    override fun updateTypefaces() {
+    }
+
     override fun containerId(): Int {
         return R.id.container
     }

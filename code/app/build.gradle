@@ -34,6 +34,9 @@ android {
 dependencies {
     def lifecycle_version = "2.2.0"
 
+    // co routines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0'
+
     // swipe refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
@@ -79,4 +82,7 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
+
+    // AC Progress
+    implementation 'cc.cloudist.acplibrary:library:1.2.1'
 }

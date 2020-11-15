@@ -176,6 +176,12 @@ class EditProfileFragment : Fragment(), FragmentExt {
         }
     }
 
+    override fun updateColors() {
+    }
+
+    override fun updateTypefaces() {
+    }
+
     override fun containerId(): Int {
         return R.id.container
     }

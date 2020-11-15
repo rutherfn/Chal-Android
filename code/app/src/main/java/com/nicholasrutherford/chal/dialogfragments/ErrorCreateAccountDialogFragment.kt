@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.accounts.CreateAccountActivity
-import com.nicholasrutherford.chal.activitys.accounts.UploadPhotoActivity
+import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity
+import com.nicholasrutherford.chal.account.uploadprofilepicture.UploadPhotoActivity
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 

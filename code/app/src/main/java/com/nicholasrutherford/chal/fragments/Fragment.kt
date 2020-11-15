@@ -1,5 +1,12 @@
 package com.nicholasrutherford.chal.fragments
 
+import android.content.Context
+import com.nicholasrutherford.chal.account.createaccount.CreateAccountFragment
+import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity
+import com.nicholasrutherford.chal.account.signup.SignUpFragment
+import com.nicholasrutherford.chal.account.login.LoginActivity
+import com.nicholasrutherford.chal.account.login.LoginFragment
+import com.nicholasrutherford.chal.account.signup.SignUpActivity
 import com.nicholasrutherford.chal.dialogfragments.*
 import com.nicholasrutherford.chal.screens.challenges.ChallengesFragment
 import com.nicholasrutherford.chal.fragments.debug.changecfontscolors.ChangeFontsAndColorsFragment
@@ -11,22 +18,25 @@ import com.nicholasrutherford.chal.fragments.settings.SettingsFragment
 import com.nicholasrutherford.chal.screens.home.HomeFragment
 
 // regular fragments
-var challengesFragment = ChallengesFragment()
-var debugFragment = DebugFragment()
-var homeFragment = HomeFragment()
-var changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
-var otherUserProfileFragment = OtherUserProfileFragment()
-var myProfileFragment = MyProfileFragment()
-var singleChallengeFragment = SingleChallengeFragment()
-var searchPeopleFragment = SearchPeopleFragment()
-var editProfileFragment = EditProfileFragment()
-var myFriendsFragment = MyFriendsFragment()
-var settingFragment = SettingsFragment()
-var challengePostFragment = ChallengePostFragment()
+val changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
+val challengesFragment = ChallengesFragment()
+val challengePostFragment = ChallengePostFragment()
+fun createAccountFragment(activity: CreateAccountActivity, context: Context) = CreateAccountFragment(activity, context)
+val debugFragment = DebugFragment()
+val editProfileFragment = EditProfileFragment()
+val homeFragment = HomeFragment()
+fun loginFragment(activity: LoginActivity, appContext: Context) = LoginFragment(activity,appContext)
+val myFriendsFragment = MyFriendsFragment()
+val myProfileFragment = MyProfileFragment()
+val otherUserProfileFragment = OtherUserProfileFragment()
+val searchPeopleFragment = SearchPeopleFragment()
+fun signUpFragment(activity: SignUpActivity, appContext: Context) = SignUpFragment(activity, appContext)
+val singleChallengeFragment = SingleChallengeFragment()
+val settingFragment = SettingsFragment()
 
 // alerts fragments
-var debugPasswordDialog = DebugPasswordDialogFragment()
-var errorCreateAccountDialog = ErrorCreateAccountDialogFragment()
-var errorLoginAccountDialog = ErrorLoginToAccountDialogFragment()
-var loadingDialog = LoadingDialogFragment()
-var loadingAccountDialog = SuccessCreateAccountDialogFragment()
+val debugPasswordDialog = DebugPasswordDialogFragment()
+val errorCreateAccountDialog = ErrorCreateAccountDialogFragment()
+val errorLoginAccountDialog = ErrorLoginToAccountDialogFragment()
+val loadingAccountDialog = SuccessCreateAccountDialogFragment()
+val loadingDialog = LoadingDialogFragment()
