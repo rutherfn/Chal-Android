@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.activitys.accounts
+package com.nicholasrutherford.chal.account.forgotpassword
 
 import android.content.Intent
 import android.os.Bundle

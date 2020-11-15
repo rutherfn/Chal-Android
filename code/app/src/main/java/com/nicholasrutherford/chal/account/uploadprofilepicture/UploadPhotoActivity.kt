@@ -1,50 +1,44 @@
-package com.nicholasrutherford.chal.activitys.accounts
+package com.nicholasrutherford.chal.account.uploadprofilepicture
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import cc.cloudist.acplibrary.ACProgressConstant
+import cc.cloudist.acplibrary.ACProgressFlower
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.data.realdata.*
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.data.UserAccount
-import com.nicholasrutherford.chal.fragments.errorCreateAccountDialog
-import com.nicholasrutherford.chal.fragments.loadingAccountDialog
-import com.nicholasrutherford.chal.fragments.loadingDialog
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class UploadPhotoActivity : AppCompatActivity() {
 
     // declarations
-    private lateinit var tbUploadPhoto: Toolbar
-    private lateinit var tvClickMe: TextView
+    private var flowerLoadingDialog: ACProgressFlower? = null
     private lateinit var cvTakeAPhoto: CircleImageView
     private lateinit var tvTakeAPictureOrChooseFromLibrary: TextView
     private lateinit var btnChooseFromLibrary: Button
-    private lateinit var btnAddPhotoLater: Button
-    private lateinit var btnClearPhoto: Button
     private lateinit var btnContinueUpload: Button
 
-    private var fullName = ""
-    private var userName = ""
+    private var username = ""
     private var email = ""
-    private var phone = ""
     private var password = ""
 
     private val PERMISSION_CODE = 1000;
@@ -64,68 +58,51 @@ class UploadPhotoActivity : AppCompatActivity() {
 
     private fun main() {
         setupView()
-        //retrieveDataFromCreateActivity()
+        retrieveDataFromCreateActivity()
         listenersForUpload()
       //  attemptToCreateUserFirebase()
     }
 
     private fun setupView() {
         setupIds()
-        btnClearPhoto.visibility = View.GONE
-        setupUploadPhotoToolbar()
         setTypeface()
-        setTextViewsColor()
+    }
+
+    fun showAcProgress() {
+        flowerLoadingDialog = ACProgressFlower.Builder(this)
+            .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+            .themeColor(Color.WHITE)
+            .fadeColor(Color.DKGRAY).build()
+
+        flowerLoadingDialog?.let {acProgressFlower ->
+            acProgressFlower.show()
+        }
+    }
+
+    fun hideAcProgress() {
+        flowerLoadingDialog?.let {acProgressFlower ->
+            acProgressFlower.dismiss()
+        }
     }
 
     private fun setupIds() {
-
-        tbUploadPhoto = findViewById(R.id.tbUploadPhoto)
-        tvClickMe = findViewById(R.id.tvClickMe)
         cvTakeAPhoto = findViewById(R.id.cvTakeAPhoto)
         tvTakeAPictureOrChooseFromLibrary = findViewById(R.id.tvTakeAPictureOrChooseFromLibrary)
 
         btnChooseFromLibrary = findViewById(R.id.btnChooseFormLibrary)
-        btnAddPhotoLater = findViewById(R.id.btnAddPhotoLater)
-        btnClearPhoto = findViewById(R.id.btnClearPhoto)
         btnContinueUpload = findViewById(R.id.btnContinueUpload)
     }
 
-    private fun setupUploadPhotoToolbar() {
-
-        setSupportActionBar(tbUploadPhoto)
-
-        supportActionBar!!.title = "Back"
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-    }
-
     private fun setTypeface() {
-
-        typeface.setTypefaceForHeaderBold(tvClickMe, baseContext)
         typeface.setTypefaceForSubHeaderRegular(tvTakeAPictureOrChooseFromLibrary, baseContext)
 
         typeface.setTypefaceForBodyBold(btnChooseFromLibrary, baseContext)
-        typeface.setTypefaceForBodyBold(btnAddPhotoLater, baseContext)
-        typeface.setTypefaceForBodyBold(btnClearPhoto, baseContext)
         typeface.setTypefaceForBodyBold(btnContinueUpload, baseContext)
     }
 
-    private fun setTextViewsColor() {
-
-        helper.setTextViewColor(baseContext, tvClickMe, R.color.colorPrimary)
-        helper.setTextViewColor(baseContext, tvTakeAPictureOrChooseFromLibrary, R.color.colorPrimary)
-
-        helper.setTextViewColor(baseContext, btnChooseFromLibrary, R.color.colorBlack)
-        helper.setTextViewColor(baseContext, btnAddPhotoLater, R.color.colorBlack)
-        helper.setTextViewColor(baseContext, btnClearPhoto, R.color.colorBlack)
-        helper.setTextViewColor(baseContext, btnContinueUpload, R.color.colorBlack)
-    }
-
     private fun retrieveDataFromCreateActivity() {
-
-        fullName = intent.getStringExtra("fullName")
-        userName = intent.getStringExtra("username")
+        username = intent.getStringExtra("username")
         email = intent.getStringExtra("email")
-        phone = intent.getStringExtra("phone")
         password = intent.getStringExtra("password")
     }
 
@@ -141,9 +118,6 @@ class UploadPhotoActivity : AppCompatActivity() {
 
         btnContinueUpload.setOnClickListener {
             attemptToCreateUserWithEmailAndPassword()
-        }
-        btnAddPhotoLater.setOnClickListener {
-            addStockPhoto()
         }
 
     }
@@ -171,11 +145,6 @@ class UploadPhotoActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("NewApi")
-    private fun addStockPhoto() {
-        cvTakeAPhoto.setBackgroundDrawable(getDrawable(R.drawable.ic_user))
-    }
-
     private fun openCamera() {
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "New Picture")
@@ -196,36 +165,60 @@ class UploadPhotoActivity : AppCompatActivity() {
 
     private fun attemptToCreateUserWithEmailAndPassword() {
 
-        loadingDialog.show(fm, "LoadingDialog")
+        showAcProgress()
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) {  task ->
 
                 if(task.isSuccessful) {
+                    println("it works")
                     uploadImageToFirebaseStorage()
                 }
 
             }.addOnFailureListener{
-                println("Error with creating account")
-                loadingDialog.dismiss()
+                println("error here")
+                hideAcProgress()
+                // show a error alert here
                 // failed to create user for whatever reason
             }
     }
 
-    private fun attemptToCreateUserFirebase(profileImageurl: String) {
+    private fun attemptToCreateUserFirebase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        val newUser = UserAccount(fullName, userName, "nicholasrutherford121@gmail.com", "", "mr.cool12", "")
+        val friends = CurrentFriends(0, "", "", "")
+        val friendsList: ArrayList<CurrentFriends> = ArrayList()
+
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        val currentDate = sdf.format(Date())
+
+        val comments = Comments(0, "", "", "", 0)
+        val commentsList: ArrayList<Comments> = ArrayList()
+
+        commentsList.add(comments)
+
+        val activeChallengesPosts = ActiveChallengesPosts(0, "", "", 0, "", 0, commentsList)
+        val activeChallengesPostList: ArrayList<ActiveChallengesPosts> = ArrayList()
+
+        activeChallengesPostList.add(activeChallengesPosts)
+
+        val activeChallenges = ActiveChallenges(0, "", "", 0, currentDate, 0, "", activeChallengesPostList)
+        val activeChallengesList: ArrayList<ActiveChallenges> = ArrayList()
+
+        activeChallengesList.add(activeChallenges)
+
+        friendsList.add(friends)
+        val newUser = Account(0, username, email, profileImageUrl, password, "", "", "", 0, friendsList, activeChallengesList)
 
         ref.setValue(newUser)
             .addOnSuccessListener {
                 sendUserAQuickEmailVerification()
-                loadingDialog.dismiss()
-                loadingAccountDialog.show(fm, "SuccessCreateAccountDialog")
+                hideAcProgress()
+                // switch to main activity with onboarding?
             }.addOnFailureListener {
-                loadingDialog.dismiss()
-                errorCreateAccountDialog.show(fm, "ErrorCreatingAccountDialog")
+                hideAcProgress()
+                // give me a error saying we cant create the account for some odd reason
             }
     }
 
@@ -264,7 +257,7 @@ class UploadPhotoActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                loadingDialog.dismiss()
+                hideAcProgress()
                 println("Failed uploading image up")
                 // it failed for some reason
             }

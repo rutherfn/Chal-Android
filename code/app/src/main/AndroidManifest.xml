@@ -31,18 +31,18 @@
         <activity android:name=".account.signup.SignUpActivity">
         </activity>
 
-        <activity android:name=".activitys.accounts.SocialMediaWebActivity">
+        <activity android:name=".account.socialmedia.SocialMediaWebActivity">
         </activity>
 
         <activity android:name=".account.createaccount.CreateAccountActivity"
             android:windowSoftInputMode="adjustResize">
         </activity>
 
-        <activity android:name=".activitys.accounts.ForgotPasswordActivity"
+        <activity android:name=".account.forgotpassword.ForgotPasswordActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-        <activity android:name=".activitys.accounts.UploadPhotoActivity"
+        <activity android:name=".account.uploadprofilepicture.UploadPhotoActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
 

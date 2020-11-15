@@ -5,7 +5,7 @@ import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.signup.SignUpNavigation
 import com.nicholasrutherford.chal.account.signup.SignUpActivity
-import com.nicholasrutherford.chal.activitys.accounts.SocialMediaWebActivity
+import com.nicholasrutherford.chal.account.socialmedia.SocialMediaWebActivity
 
 class SignUpNavigationImpl : SignUpNavigation {
     override fun login(signUpActivity: SignUpActivity) {

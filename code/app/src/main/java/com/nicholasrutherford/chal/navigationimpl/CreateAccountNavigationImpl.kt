@@ -9,7 +9,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountNavigation
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity
 import com.nicholasrutherford.chal.account.login.LoginActivity
-import com.nicholasrutherford.chal.activitys.accounts.UploadPhotoActivity
+import com.nicholasrutherford.chal.account.uploadprofilepicture.UploadPhotoActivity
 
 class CreateAccountNavigationImpl : CreateAccountNavigation {
 
@@ -25,7 +25,7 @@ class CreateAccountNavigationImpl : CreateAccountNavigation {
     override fun uploadPhoto(userName: String, email: String, password: String, createAccountActivity: CreateAccountActivity) {
         val intent = Intent(createAccountActivity.applicationContext, UploadPhotoActivity::class.java)
 
-        intent.putExtra("userName", userName)
+        intent.putExtra("username", userName)
         intent.putExtra("email", email)
         intent.putExtra("password", password)
 

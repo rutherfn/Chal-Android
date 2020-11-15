@@ -11,7 +11,7 @@ import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.login.LoginNavigation
 import com.nicholasrutherford.chal.account.signup.SignUpActivity
 import com.nicholasrutherford.chal.activitys.MainActivity
-import com.nicholasrutherford.chal.activitys.accounts.ForgotPasswordActivity
+import com.nicholasrutherford.chal.account.forgotpassword.ForgotPasswordActivity
 
 class LoginNavigationImpl : LoginNavigation {
 

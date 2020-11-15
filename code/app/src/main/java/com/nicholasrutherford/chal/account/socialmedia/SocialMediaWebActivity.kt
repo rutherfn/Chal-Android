@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.activitys.accounts
+package com.nicholasrutherford.chal.account.socialmedia
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,8 +9,6 @@ import androidx.appcompat.widget.Toolbar
 import com.nicholasrutherford.chal.R
 
 class SocialMediaWebActivity : AppCompatActivity() {
-
-    // declartions
 
     companion object Social {
         const val INST_GRAM_LINK = "https://www.instagram.com/nicholasrutherford/?hl=en"
