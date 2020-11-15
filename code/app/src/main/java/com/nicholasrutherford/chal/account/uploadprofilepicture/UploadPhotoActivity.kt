@@ -2,6 +2,7 @@ package com.nicholasrutherford.chal.account.uploadprofilepicture
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -20,8 +21,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.data.realdata.*
-import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
@@ -47,8 +48,6 @@ class UploadPhotoActivity : AppCompatActivity() {
     private var selectedPhotoUri: Uri? = null
 
     private val typeface = Typeface()
-    private val helper = Helper()
-    private val fm = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +65,24 @@ class UploadPhotoActivity : AppCompatActivity() {
     private fun setupView() {
         setupIds()
         setTypeface()
+    }
+
+    fun showAlertErrorCreateAccount() {
+        val errorCreateAccountDialogBuilder = AlertDialog.Builder(this)
+
+        errorCreateAccountDialogBuilder.setMessage("Issue creating your account. Please try again!")
+
+            .setCancelable(false)
+
+            .setPositiveButton(this.getString(R.string.ok)) { dialog, _ ->
+                dialog.cancel()
+            }
+
+        val errorAlert = errorCreateAccountDialogBuilder.create()
+
+        errorAlert.setTitle(this.getString(R.string.error_cant_create_account))
+
+        errorAlert.show()
     }
 
     fun showAcProgress() {
@@ -171,13 +188,12 @@ class UploadPhotoActivity : AppCompatActivity() {
             .addOnCompleteListener(this) {  task ->
 
                 if(task.isSuccessful) {
-                    println("it works")
                     uploadImageToFirebaseStorage()
                 }
 
             }.addOnFailureListener{
-                println("error here")
                 hideAcProgress()
+                showAlertErrorCreateAccount()
                 // show a error alert here
                 // failed to create user for whatever reason
             }
@@ -215,9 +231,15 @@ class UploadPhotoActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 sendUserAQuickEmailVerification()
                 hideAcProgress()
-                // switch to main activity with onboarding?
+
+                // start main activity
+                val intent = Intent(this.applicationContext, MainActivity::class.java)
+
+                startActivity(intent)
+                finish()
             }.addOnFailureListener {
                 hideAcProgress()
+                showAlertErrorCreateAccount()
                 // give me a error saying we cant create the account for some odd reason
             }
     }
@@ -258,7 +280,7 @@ class UploadPhotoActivity : AppCompatActivity() {
             }
             .addOnFailureListener {
                 hideAcProgress()
-                println("Failed uploading image up")
+                showAlertErrorCreateAccount()
                 // it failed for some reason
             }
     }
