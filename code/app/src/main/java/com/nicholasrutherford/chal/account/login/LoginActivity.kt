@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.account
+package com.nicholasrutherford.chal.account.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -2,13 +2,10 @@ package com.nicholasrutherford.chal.helpers
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
+import java.io.IOException
 
 class Helper {
 
@@ -16,8 +13,10 @@ class Helper {
         textView.setTextColor(ContextCompat.getColor(context, color))
     }
 
-    fun setTextViewColorWithString(context: Context, textView: TextView, color: String) { // helper method?
-        textView.setTextColor(Color.parseColor(color))
+    @Throws(InterruptedException::class, IOException::class) // responsible for checking internet connection, by hitting google.com. If it cant hit it, return back false
+    fun isConnected(): Boolean {
+        val command = "ping -c 1 google.com"
+        return Runtime.getRuntime().exec(command).waitFor() == 0
     }
 
     fun hideSoftKeyBoard(activity: Activity) {

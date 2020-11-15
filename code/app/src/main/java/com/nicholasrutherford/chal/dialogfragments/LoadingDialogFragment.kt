@@ -1,6 +1,7 @@
 package com.nicholasrutherford.chal.dialogfragments
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,11 @@ class LoadingDialogFragment : DialogFragment() {
     private lateinit var pbLoading: ProgressBar
     private lateinit var tvLoading: TextView
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         mView = inflater.inflate(R.layout.loading_dialog, container, false)
         isCancelable = false
         main()
@@ -32,19 +37,24 @@ class LoadingDialogFragment : DialogFragment() {
         setupIds()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NO_FRAME, android.R.style.Theme_Holo_Light);
+    }
+
     private fun setupIds() {
-        pbLoading = mView!!.findViewById(R.id.pbLoading)
-        tvLoading = mView!!.findViewById(R.id.tvLoading)
+//        pbLoading = mView!!.findViewById(R.id.pbLoading)
+//        tvLoading = mView!!.findViewById(R.id.tvLoading)
         setupLoadingAndProgress()
     }
 
     @SuppressLint("ResourceAsColor")
     private fun setupLoadingAndProgress() {
 
-        context?.let {
-            typeface.setTypefaceForHeaderBold(tvLoading, it)
-            helper.setTextViewColor(it,tvLoading, R.color.colorPrimary)
-        }
+//        context?.let {
+//            typeface.setTypefaceForHeaderBold(tvLoading, it)
+//            helper.setTextViewColor(it,tvLoading, R.color.colorPrimary)
+//        }
 
     //    DrawableCompat.setTint(pbLoading.progressDrawable, R.color.colorBlack);
     }

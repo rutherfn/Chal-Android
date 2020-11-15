@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.account.LoginActivity
+import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.fragments.errorCreateAccountDialog
 import com.nicholasrutherford.chal.fragments.loadingDialog
 import com.nicholasrutherford.chal.helpers.Helper

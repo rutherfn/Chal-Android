@@ -1,8 +1,8 @@
 package com.nicholasrutherford.chal.fragments
 
 import android.content.Context
-import com.nicholasrutherford.chal.account.LoginActivity
-import com.nicholasrutherford.chal.account.LoginFragment
+import com.nicholasrutherford.chal.account.login.LoginActivity
+import com.nicholasrutherford.chal.account.login.LoginFragment
 import com.nicholasrutherford.chal.dialogfragments.*
 import com.nicholasrutherford.chal.screens.challenges.ChallengesFragment
 import com.nicholasrutherford.chal.fragments.debug.changecfontscolors.ChangeFontsAndColorsFragment
@@ -20,7 +20,7 @@ val challengePostFragment = ChallengePostFragment()
 val debugFragment = DebugFragment()
 val editProfileFragment = EditProfileFragment()
 val homeFragment = HomeFragment()
-fun loginFragment(activity: LoginActivity,appContext: Context) = LoginFragment(activity,appContext)
+fun loginFragment(activity: LoginActivity, appContext: Context) = LoginFragment(activity,appContext)
 val myFriendsFragment = MyFriendsFragment()
 val myProfileFragment = MyProfileFragment()
 val otherUserProfileFragment = OtherUserProfileFragment()

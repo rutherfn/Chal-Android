@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.nicholasrutherford.chal.account.LoginActivity
+import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.databinding.ActivitySplashBinding
 import com.nicholasrutherford.chal.viewmodels.SplashViewModel
 

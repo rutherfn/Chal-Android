@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.account.LoginActivity
+import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.shaishavgandhi.loginbuttons.FacebookButton

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.account.LoginActivity
+import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.databinding.FragmentSettingsLayoutBinding
 import com.nicholasrutherford.chal.fragments.FragmentExt
 import com.nicholasrutherford.chal.fragments.debugPasswordDialog
