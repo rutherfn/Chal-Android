@@ -4,11 +4,13 @@
     <string name="active_challenges">ACTIVE</string>
     <string name="account">Account</string>
     <string name="already_have_a_account_text">Already have a account?</string>
+    <string name="app_menu">App Menu</string>
     <string name="sample_challenge_title">Sample Challenge</string>
     <string name="category_fitness">Fitness</string>
     <string name="category_education">Education</string>
     <string name="category_travel">Education</string>
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
+    <string name="close">CLOSE</string>
     <string name="completed_challenges">COMPLETED</string>
     <string name="clear_photo">Clear Photo</string>
     <string name="click_me_to_take_a_picture">Click Me To Take A Picture</string>

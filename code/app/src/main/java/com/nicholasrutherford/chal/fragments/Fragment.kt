@@ -14,7 +14,7 @@ import com.nicholasrutherford.chal.fragments.debug.debugmenu.DebugFragment
 import com.nicholasrutherford.chal.fragments.myfriends.MyFriendsFragment
 import com.nicholasrutherford.chal.fragments.myprofile.MyProfileFragment
 import com.nicholasrutherford.chal.fragments.postprogress.ChallengePostFragment
-import com.nicholasrutherford.chal.fragments.settings.SettingsFragment
+import com.nicholasrutherford.chal.main.SettingsFragment
 import com.nicholasrutherford.chal.screens.home.HomeFragment
 
 // regular fragments

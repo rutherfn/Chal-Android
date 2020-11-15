@@ -1,6 +1,8 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
 
+    <dimen name="cl_toolbar_more_height">45dp</dimen>
+
     <!-- Defaults Across App -->
     <dimen name="header_text_size">30sp</dimen>
     <dimen name="sub_header_text_size">20sp</dimen>
@@ -12,6 +14,8 @@
     <dimen name="wall_sub_header_text_size">19sp</dimen>
     <dimen name="wall_body_text_size">16sp</dimen>
     <dimen name="wall_hash_tag_size">13sp</dimen>
+
+    <dimen name="more_close_text_size">10dp</dimen>
 
     <!-- Elements Unique Text Sizes -->
     <dimen name="button_text_size">20sp</dimen>
@@ -90,6 +94,12 @@
     <!-- Buttons Unique Sizes -->
     <dimen name="button_sign_up_size">300sp</dimen>
     <dimen name="button_settings_width">300sp</dimen>
+    <dimen name="ib_more_back_height">35sp</dimen>
+    <dimen name="ib_more_back_width">35sp</dimen>
+    <dimen name="iv_background_close_height">45dp</dimen>
+    <dimen name="iv_background_close_width">45dp</dimen>
+    <dimen name="iv_more_close_height">10dp</dimen>
+    <dimen name="iv_more_close_width">10dp</dimen>
 
     <!-- Margins -->
     <dimen name="margin_2dp">2dp</dimen>

@@ -8,4 +8,5 @@
     <color name="colorBlue">#0000EE</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGreen">#4BB543</color>
+    <color name="colorSecondary">#730014</color>
 </resources>

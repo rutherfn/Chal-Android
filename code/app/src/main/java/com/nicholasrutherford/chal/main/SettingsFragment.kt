@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments.settings
+package com.nicholasrutherford.chal.main
 
 import android.content.Intent
 import android.os.Bundle
