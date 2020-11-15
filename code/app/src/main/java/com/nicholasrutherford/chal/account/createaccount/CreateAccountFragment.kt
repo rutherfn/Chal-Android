@@ -117,7 +117,7 @@ class CreateAccountFragment(private val activity: CreateAccountActivity, private
         val email = bind.etEmail.text.toString()
         val password = bind.etPassword.text.toString()
 
-        bind.btContinueCreating.setOnClickListener {
+        bind.btnContinueCreating.setOnClickListener {
             viewModel.onClickOnContinue(email, username, password)
         }
     }

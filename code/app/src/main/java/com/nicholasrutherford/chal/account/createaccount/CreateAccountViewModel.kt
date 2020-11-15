@@ -105,7 +105,7 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
     }
 
     private fun isAllFieldsEnteredCorrectly() : Boolean {
-        return viewState.usernameErrorVisible && viewState.emailErrorVisible && viewState.passwordErrorVisible
+        return !viewState.usernameErrorVisible && !viewState.emailErrorVisible && !viewState.passwordErrorVisible
     }
 
     fun onClickOnContinue(email: String, username: String, password: String) {
@@ -115,6 +115,7 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
         // if one of them are, tell them to use a different one(they should not be able to continue the workflow,
         // if that error occurs.
         if(isAllFieldsEnteredCorrectly()) {
+            println("here we go")
             navigation.showAcProgress(createAccountActivity)
 
             val timer = object : CountDownTimer(1000, 100) {
@@ -131,6 +132,7 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
 
             // show a loading animation, and then take the user back to where they want to go
         } else {
+            println("here we go nope")
             navigation.showAcProgress(createAccountActivity)
             showOrDismissErrorEmail(email)
             showOrDismissErrorUsername(username)

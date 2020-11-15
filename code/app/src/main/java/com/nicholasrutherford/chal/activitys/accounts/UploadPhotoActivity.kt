@@ -64,7 +64,7 @@ class UploadPhotoActivity : AppCompatActivity() {
 
     private fun main() {
         setupView()
-        retrieveDataFromCreateActivity()
+        //retrieveDataFromCreateActivity()
         listenersForUpload()
       //  attemptToCreateUserFirebase()
     }
@@ -216,7 +216,7 @@ class UploadPhotoActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        val newUser = UserAccount(fullName, userName, email, phone, password, profileImageurl)
+        val newUser = UserAccount(fullName, userName, "nicholasrutherford121@gmail.com", "", "mr.cool12", "")
 
         ref.setValue(newUser)
             .addOnSuccessListener {

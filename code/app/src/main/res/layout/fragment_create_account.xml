@@ -214,7 +214,7 @@
             app:layout_constraintTop_toTopOf="@+id/ivErrorPassword" />
 
         <Button
-            android:id="@+id/btContinueCreating"
+            android:id="@+id/btnContinueCreating"
             android:layout_width="300sp"
             android:layout_height="wrap_content"
             android:background="@drawable/corner_button"
