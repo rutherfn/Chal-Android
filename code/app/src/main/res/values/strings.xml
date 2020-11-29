@@ -9,6 +9,7 @@
     <string name="category_fitness">Fitness</string>
     <string name="category_education">Education</string>
     <string name="category_travel">Education</string>
+    <string name="chal_menu">Chal Menu</string>
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
     <string name="close">CLOSE</string>
     <string name="completed_challenges">COMPLETED</string>

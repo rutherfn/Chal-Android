@@ -3,6 +3,9 @@
 
     <dimen name="cl_toolbar_more_height">45dp</dimen>
 
+    <dimen name="chal_horz_line_height">2dp</dimen>
+    <dimen name="chal_horz_line_weight">350dp</dimen>
+
     <!-- Defaults Across App -->
     <dimen name="header_text_size">30sp</dimen>
     <dimen name="sub_header_text_size">20sp</dimen>
