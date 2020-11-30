@@ -9,13 +9,14 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentMoreBinding
 import com.nicholasrutherford.chal.ext.MoreFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class MoreFragment(private val appContext: Context): Fragment(), MoreFragmentExtension {
+class MoreFragment(private val mainActivity: MainActivity, private val appContext: Context): Fragment(), MoreFragmentExtension {
 
-    private val viewModel = MoreViewModel(appContext)
+    private val viewModel = MoreViewModel(mainActivity, appContext)
     private val typeface = Typeface()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -69,7 +70,7 @@ class MoreFragment(private val appContext: Context): Fragment(), MoreFragmentExt
             // we should load in the challenges ;ayout
         }
         bind.clMore.btnSignOutAccount.setOnClickListener {
-            // sign the user out and take them back to the home page
+            viewModel.onSignOutAccountClicked()
         }
     }
 
