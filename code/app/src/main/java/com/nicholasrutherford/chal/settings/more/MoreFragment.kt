@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentMoreBinding
 import com.nicholasrutherford.chal.ext.MoreFragmentExtension
-import com.squareup.picasso.Picasso
 import com.nicholasrutherford.chal.helpers.Typeface
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class MoreFragment(private val appContext: Context): Fragment(), MoreFragmentExtension {
 
@@ -22,16 +20,10 @@ class MoreFragment(private val appContext: Context): Fragment(), MoreFragmentExt
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentMoreBinding.inflate(layoutInflater)
-        main(bind)
         updateTypefaces(bind)
+        clickListeners(bind)
         updateView(bind)
         return bind.root
-    }
-
-    override fun main(bind: FragmentMoreBinding) {
-        viewModel.testData()
-        // call the method here to update firebase instance
-        Picasso.get().load(R.drawable.willplaceholder).into(bind.clMore.cvMyProfilePic)
     }
 
     override fun updateTypefaces(bind: FragmentMoreBinding) {
@@ -82,7 +74,11 @@ class MoreFragment(private val appContext: Context): Fragment(), MoreFragmentExt
     }
 
     override fun updateView(bind: FragmentMoreBinding) {
-        // set the drawable to firebase icon android
+        val options = RequestOptions()
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.placeholder)
+
+        Glide.with(this).load(viewModel.viewState.profilePictureDirectory).apply(options).into(bind.clMore.cvMyProfilePic)
     }
 
 }

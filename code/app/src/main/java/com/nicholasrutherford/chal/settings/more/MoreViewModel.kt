@@ -3,19 +3,17 @@ package com.nicholasrutherford.chal.settings.more
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.firebase.read.ReadProfileDetailsFirebase
-import com.nicholasrutherford.chal.firebase.sharedpref.WriteFirebaseSharedPref
 
-class MoreViewModel(private val appContext: Context) : ViewModel() {
+class MoreViewModel(appContext: Context) : ViewModel() {
+
+    val viewState = MoreViewStateImpl()
 
     private val readProfileDetailsFirebase = ReadProfileDetailsFirebase(appContext)
-    private val writeProfileDetailsFirebase = WriteFirebaseSharedPref(appContext)
 
-    fun testData() {
-        println(readProfileDetailsFirebase.getAge())
-        println(readProfileDetailsFirebase.getBio())
-
-        writeProfileDetailsFirebase.clearAllSharePrefs()
-
+    init {
+        readProfileDetailsFirebase.getUserProfilePicture()?.let { userProfilePicture ->
+            viewState.profilePictureDirectory = userProfilePicture
+        }
     }
 
     inner class MoreViewStateImpl: MoreViewState{
