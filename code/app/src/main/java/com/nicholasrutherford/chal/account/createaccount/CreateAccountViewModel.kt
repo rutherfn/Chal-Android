@@ -19,8 +19,6 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
     private var isPasswordEmpty: Boolean = false
     private var isPasswordCorrectFormat: Boolean = false
 
-    private var isUsernameEmpty: Boolean = false
-
     private val navigation = CreateAccountNavigationImpl()
 
     val viewState = CreateAccountViewStateImpl()
@@ -155,9 +153,7 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
 
     inner class CreateAccountViewStateImpl: CreateAccountViewState {
         override var usernameErrorVisible = false
-
         override var emailErrorVisible = false
-
         override var passwordErrorVisible = false
 }
 

@@ -1,4 +1,5 @@
 <resources>
+    <string name="all_rights_reserved">All Rights Reserved, Chal LLC 2020</string>
     <string name="app_name">chal</string>
     <string name="add_photo_later">Add Photo Later</string>
     <string name="active_challenges">ACTIVE</string>
@@ -9,7 +10,9 @@
     <string name="category_fitness">Fitness</string>
     <string name="category_education">Education</string>
     <string name="category_travel">Education</string>
+    <string name="challenges">Challenges</string>
     <string name="chal_menu">Chal Menu</string>
+    <string name="chat">Chat</string>
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
     <string name="close">CLOSE</string>
     <string name="completed_challenges">COMPLETED</string>
@@ -102,6 +105,8 @@
     <string name="login_text">Log In</string>
     <string name="name">Name</string>
     <string name="may_i_ask">May i ask for your phone number?</string>
+    <string name="my_feed">My Feed</string>
+    <string name="my_profile">My Profile</string>
     <string name="ok">OK</string>
     <string name="password">Password</string>
     <string name="phone">Phone</string>
@@ -111,6 +116,7 @@
     <string name="restart">Restart</string>
     <string name="search_challenges">SEARCH</string>
     <string name="settings_bottom_nav">SETTINGS</string>
+    <string name="settings">Settings</string>
     <string name="sign_into_your_account_text">Sign into your account</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up_underline"><u>Sign Up</u></string>
@@ -128,6 +134,7 @@
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
     <string name="try_again">Try Again</string>
     <string name="username">Username</string>
+    <string name="upload_post">Upload Post</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
     <string name="font_1">ClinicaPro-Italic</string>
     <string name="font_1_location">font/ClinicaPro-Italic.otf</string>

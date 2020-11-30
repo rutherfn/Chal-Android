@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 //                        return true
 //                    }
                     R.id.navigation_more -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container, settingFragment, settingFragment.javaClass.simpleName)
+                        supportFragmentManager.beginTransaction().replace(R.id.container, moreFragment(applicationContext), moreFragment(applicationContext).javaClass.simpleName)
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
                         binding?.tbMain?.visibleOrGone = false

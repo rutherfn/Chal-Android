@@ -23,6 +23,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.data.realdata.*
+import com.nicholasrutherford.chal.firebase.read.ReadProfileDetailsFirebase
 import com.nicholasrutherford.chal.helpers.Typeface
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
@@ -230,6 +231,7 @@ class UploadPhotoActivity : AppCompatActivity() {
         ref.setValue(newUser)
             .addOnSuccessListener {
                 sendUserAQuickEmailVerification()
+                initStarterFirebaseData()
                 hideAcProgress()
 
                 // start main activity
@@ -247,6 +249,20 @@ class UploadPhotoActivity : AppCompatActivity() {
     private fun sendUserAQuickEmailVerification() {
         val user = FirebaseAuth.getInstance().currentUser
         user!!.sendEmailVerification()
+    }
+
+    private fun initStarterFirebaseData() {
+        val readProfileDetailsFirebase = ReadProfileDetailsFirebase(applicationContext)
+
+        readProfileDetailsFirebase.getAge()
+        readProfileDetailsFirebase.getBio()
+        readProfileDetailsFirebase.getEmail()
+        readProfileDetailsFirebase.getFirstName()
+        readProfileDetailsFirebase.getId()
+        readProfileDetailsFirebase.getLastName()
+        readProfileDetailsFirebase.getPassword()
+        readProfileDetailsFirebase.getUserProfilePicture()
+        readProfileDetailsFirebase.getUsername()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

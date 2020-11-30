@@ -14,8 +14,9 @@ import com.nicholasrutherford.chal.fragments.debug.debugmenu.DebugFragment
 import com.nicholasrutherford.chal.fragments.myfriends.MyFriendsFragment
 import com.nicholasrutherford.chal.fragments.myprofile.MyProfileFragment
 import com.nicholasrutherford.chal.fragments.postprogress.ChallengePostFragment
-import com.nicholasrutherford.chal.main.SettingsFragment
+import com.nicholasrutherford.chal.settings.SettingsFragment
 import com.nicholasrutherford.chal.screens.home.HomeFragment
+import com.nicholasrutherford.chal.settings.more.MoreFragment
 
 // regular fragments
 val changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
@@ -28,6 +29,7 @@ val homeFragment = HomeFragment()
 fun loginFragment(activity: LoginActivity, appContext: Context) = LoginFragment(activity,appContext)
 val myFriendsFragment = MyFriendsFragment()
 val myProfileFragment = MyProfileFragment()
+fun moreFragment(context: Context) = MoreFragment(context)
 val otherUserProfileFragment = OtherUserProfileFragment()
 val searchPeopleFragment = SearchPeopleFragment()
 fun signUpFragment(activity: SignUpActivity, appContext: Context) = SignUpFragment(activity, appContext)

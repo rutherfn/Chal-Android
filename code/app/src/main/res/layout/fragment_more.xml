@@ -1,0 +1,47 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/tbMore"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            layout="@layout/more_toolbar_layout"
+            />
+
+        <include
+            android:id="@+id/clSvMore"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            layout="@layout/search_view_home"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            android:background="@color/colorSettings"
+            android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/clMore"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/more_layout"
+                />
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</LinearLayout>

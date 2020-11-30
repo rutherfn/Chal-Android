@@ -35,7 +35,7 @@
     <ImageView
         android:id="@+id/ivBackgroundClose"
         android:layout_width="@dimen/iv_background_close_width"
-        android:layout_height="@dimen/iv_background_close_height"
+        android:layout_height="fill_parent"
         android:background="@color/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

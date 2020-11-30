@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.main
+package com.nicholasrutherford.chal.settings
 
 import android.content.Intent
 import android.os.Bundle
