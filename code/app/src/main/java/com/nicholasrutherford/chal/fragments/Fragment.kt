@@ -15,6 +15,7 @@ import com.nicholasrutherford.chal.fragments.debug.debugmenu.DebugFragment
 import com.nicholasrutherford.chal.fragments.myfriends.MyFriendsFragment
 import com.nicholasrutherford.chal.fragments.myprofile.MyProfileFragment
 import com.nicholasrutherford.chal.fragments.postprogress.ChallengePostFragment
+import com.nicholasrutherford.chal.profile.editprofile.EditMyProfileFragment
 import com.nicholasrutherford.chal.settings.SettingsFragment
 import com.nicholasrutherford.chal.screens.home.HomeFragment
 import com.nicholasrutherford.chal.settings.more.MoreFragment
@@ -24,6 +25,7 @@ val changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
 val challengesFragment = ChallengesFragment()
 val challengePostFragment = ChallengePostFragment()
 fun createAccountFragment(activity: CreateAccountActivity, context: Context) = CreateAccountFragment(activity, context)
+fun editMyProfileFragment(activity: MainActivity, context: Context) = EditMyProfileFragment(activity, context)
 val debugFragment = DebugFragment()
 val editProfileFragment = EditProfileFragment()
 val homeFragment = HomeFragment()
@@ -31,6 +33,11 @@ fun loginFragment(activity: LoginActivity, appContext: Context) = LoginFragment(
 val myFriendsFragment = MyFriendsFragment()
 val myProfileFragment = MyProfileFragment()
 fun moreFragment(mainActivity: MainActivity, context: Context) = MoreFragment(mainActivity, context)
+fun profileFragment(mainActivity: MainActivity, context: Context) =
+    com.nicholasrutherford.chal.profile.profiles.ProfileFragment(
+        mainActivity,
+        context
+    )
 val otherUserProfileFragment = OtherUserProfileFragment()
 val searchPeopleFragment = SearchPeopleFragment()
 fun signUpFragment(activity: SignUpActivity, appContext: Context) = SignUpFragment(activity, appContext)

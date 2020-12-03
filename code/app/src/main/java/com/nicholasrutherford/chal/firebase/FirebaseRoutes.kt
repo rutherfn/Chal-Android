@@ -18,4 +18,4 @@ const val USERNAME = "username"
 
 // route for json array objects
 const val ACTIVE_CHALLENGES = "activeChallenges"
-const val FRIENDS = "friends"
+const val FRIENDS = "/friends"

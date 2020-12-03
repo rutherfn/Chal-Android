@@ -1,6 +1,9 @@
 package com.nicholasrutherford.chal.firebase.read
 
-interface FirebaseReadGeneralExtension {
+import com.nicholasrutherford.chal.data.realdata.ActiveChallenges
+import com.nicholasrutherford.chal.data.realdata.CurrentFriends
+
+interface FirebaseReadExtension {
     fun getAge(): Int?
     fun getBio(): String?
     fun getEmail(): String?
@@ -10,4 +13,7 @@ interface FirebaseReadGeneralExtension {
     fun getPassword(): String?
     fun getUserProfilePicture(): String?
     fun getUsername(): String?
+
+    fun getCurrentUserFriends(): List<CurrentFriends>
+    fun getActiveUserChallenges()
 }

@@ -8,19 +8,28 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentMoreBinding
-import com.nicholasrutherford.chal.ext.MoreFragmentExtension
+import com.nicholasrutherford.chal.ext.more.MoreFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class MoreFragment(private val mainActivity: MainActivity, private val appContext: Context): Fragment(), MoreFragmentExtension {
+class MoreFragment(private val mainActivity: MainActivity, private val appContext: Context): Fragment(),
+    MoreFragmentExtension {
 
-    private val viewModel = MoreViewModel(mainActivity, appContext)
+    private var viewModel: MoreViewModel? = null
+    private var btNavigation: BottomNavigationView? = null
     private val typeface = Typeface()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentMoreBinding.inflate(layoutInflater)
+        btNavigation = (activity as MainActivity).binding?.bvNavigation
+        btNavigation?.let { bottomNavigationView ->
+            viewModel = fragmentManager?.let { fragmentManager ->
+                MoreViewModel(mainActivity, appContext, fragmentManager, containerId(), bottomNavigationView)
+            }
+        }
         updateTypefaces(bind)
         clickListeners(bind)
         updateView(bind)
@@ -41,6 +50,10 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
         typeface.setTypefaceForSubHeaderRegular(bind.clMore.tvAllRightsReserved, appContext)
     }
 
+    override fun containerId(): Int {
+        return R.id.container
+    }
+
     override fun clickListeners(bind: FragmentMoreBinding) {
         bind.tbMore.ibMoreBack.setOnClickListener {
             // take the user to the my feed menu
@@ -52,6 +65,9 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
             // ideally we should hide the menu here, and show the search view layout once its implemented
         }
         bind.clMore.cvMyProfile.setOnClickListener {
+            viewModel?.let { moreViewModel ->
+                moreViewModel.onMyProfileClicked()
+            }
             // we should load in the users profile fragment
         }
         bind.clMore.cvUploadPost.setOnClickListener {
@@ -70,7 +86,9 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
             // we should load in the challenges ;ayout
         }
         bind.clMore.btnSignOutAccount.setOnClickListener {
-            viewModel.onSignOutAccountClicked()
+            viewModel?.let { moreViewModel ->
+                moreViewModel.onSignOutAccountClicked()
+            }
         }
     }
 
@@ -79,7 +97,10 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
             .placeholder(R.drawable.placeholder)
             .error(R.drawable.placeholder)
 
-        Glide.with(this).load(viewModel.viewState.profilePictureDirectory).apply(options).into(bind.clMore.cvMyProfilePic)
+        viewModel?.let { moreViewModel ->
+            Glide.with(this).load(moreViewModel.viewState.profilePictureDirectory).apply(options)
+                .into(bind.clMore.cvMyProfilePic)
+        }
     }
 
 }

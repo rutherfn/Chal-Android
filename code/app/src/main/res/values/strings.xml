@@ -6,6 +6,7 @@
     <string name="account">Account</string>
     <string name="already_have_a_account_text">Already have a account?</string>
     <string name="app_menu">App Menu</string>
+    <string name="bio">Bio</string>
     <string name="sample_challenge_title">Sample Challenge</string>
     <string name="category_fitness">Fitness</string>
     <string name="category_education">Education</string>
@@ -17,6 +18,7 @@
     <string name="close">CLOSE</string>
     <string name="completed_challenges">COMPLETED</string>
     <string name="clear_photo">Clear Photo</string>
+    <string name="click_here_to_add_a_description"><u>Click Here</u> To Add A Description</string>
     <string name="click_me_to_take_a_picture">Click Me To Take A Picture</string>
     <string name="continue_creating">Continue</string>
     <string name="challenges_bottom_nav">Challenges</string>
@@ -33,6 +35,11 @@
     <string name="debug_change_configuration">•  Change App Configurations</string>
     <string name="debug_password_title">Please Enter Password In Order To Continue</string>
     <string name="done">Done</string>
+    <string name="edit">Edit</string>
+    <string name="edit_first_name">Edit First Name</string>
+    <string name="edit_my_profile">Edit My Profile</string>\
+    <string name="edit_my_profile_description">To <b>edit your profile, </b> edit the fields down below.</string>
+    <string name="edit_username">Edit Username</string>
     <string name="email">Email</string>
     <string name="email_sent">Email Sent!</string>
     <string name="iv_error_content_description_debug_password">Image View for not the correct password debug mode error</string>
@@ -53,6 +60,7 @@
     <string name="error_phone">Phone must not be more then 10 digits long.</string>
     <string name="error_phone_not_valid">Phone number not valid.</string>
     <string name="error_password">One capital letter and one number.</string>
+    <string name="first_name">First Name</string>
     <string name="header_font_bold_text_title">Header Bold Font</string>
     <string name="last_updated">Last Updated</string>
     <string name="more_navigation">More</string>
@@ -99,12 +107,14 @@
         <item>@string/font_13_location</item>
         <item>@string/font_14_location</item>
     </string-array>
+    <string name="last_name">Last Name</string>
     <string name="log_out">Log out</string>
     <string name="loading">Loading</string>
     <string name="loading_account">Loading Your Account… </string>
     <string name="login_text">Log In</string>
     <string name="name">Name</string>
     <string name="may_i_ask">May i ask for your phone number?</string>
+    <string name="my_challenges">My Challlenges</string>
     <string name="my_feed">My Feed</string>
     <string name="my_profile">My Profile</string>
     <string name="ok">OK</string>
@@ -134,6 +144,7 @@
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
     <string name="try_again">Try Again</string>
     <string name="username">Username</string>
+    <string name="upload">Upload</string>
     <string name="upload_post">Upload Post</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
     <string name="font_1">ClinicaPro-Italic</string>

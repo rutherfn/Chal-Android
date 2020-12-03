@@ -11,7 +11,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
-import com.nicholasrutherford.chal.ext.LoginFragmentExtension
+import com.nicholasrutherford.chal.ext.login.LoginFragmentExtension
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone

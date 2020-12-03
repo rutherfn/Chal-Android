@@ -2,7 +2,6 @@ package com.nicholasrutherford.chal.navigation.otheruserprofile
 
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.fragments.SearchPeopleFragment
 import com.nicholasrutherford.chal.fragments.searchPeopleFragment
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 

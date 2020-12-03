@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.ext
+package com.nicholasrutherford.chal.ext.createaccount
 
 import com.nicholasrutherford.chal.databinding.FragmentCreateAccountBinding
 

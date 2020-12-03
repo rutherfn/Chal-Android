@@ -12,7 +12,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.databinding.FragmentCreateAccountBinding
-import com.nicholasrutherford.chal.ext.CreateAccountFragmentExtension
+import com.nicholasrutherford.chal.ext.createaccount.CreateAccountFragmentExtension
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CreateAccountFragment(private val activity: CreateAccountActivity, private val appContext: Context) : Fragment(),
-        CreateAccountFragmentExtension {
+    CreateAccountFragmentExtension {
 
     private val viewModel = CreateAccountViewModel(activity, appContext)
     private val typeface = Typeface()

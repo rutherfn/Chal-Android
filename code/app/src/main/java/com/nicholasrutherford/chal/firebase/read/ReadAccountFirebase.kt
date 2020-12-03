@@ -6,14 +6,19 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.nicholasrutherford.chal.data.realdata.ActiveChallenges
+import com.nicholasrutherford.chal.data.realdata.CurrentFriends
 import com.nicholasrutherford.chal.firebase.*
 import com.nicholasrutherford.chal.firebase.sharedpref.ReadFirebaseSharePref
 import com.nicholasrutherford.chal.firebase.sharedpref.WriteFirebaseSharedPref
 
-class ReadProfileDetailsFirebase(private val appContext: Context) : FirebaseReadGeneralExtension {
+
+class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
 
     private val writeFirebaseSharePref = WriteFirebaseSharedPref(appContext)
     private val readFirebaseSharedPref = ReadFirebaseSharePref(appContext)
+
+    private val currentFirendsList: ArrayList<CurrentFriends> = ArrayList()
 
     val uid = FirebaseAuth.getInstance().uid ?: ""
     val ref = FirebaseDatabase.getInstance().getReference(USERS)
@@ -27,7 +32,6 @@ class ReadProfileDetailsFirebase(private val appContext: Context) : FirebaseRead
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val ageSnapshot = snapshot.child(AGE).value.toString()
-
                     writeFirebaseSharePref.writeSharedPrefsAge(ageSnapshot.toInt())
                 } else {
                     writeFirebaseSharePref.writeSharedPrefsAge(0)
@@ -196,6 +200,32 @@ class ReadProfileDetailsFirebase(private val appContext: Context) : FirebaseRead
 
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseUsername()
+    }
+
+    override fun getActiveUserChallenges() {
+        ref.child("$uid/activeChallenges").addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                println("error")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val activeChallengesList: ArrayList<ActiveChallenges> = ArrayList()
+                if (snapshot.exists()) {
+                    for (activeChallenge in snapshot.children) {
+                        val userChallenge = activeChallenge.getValue(ActiveChallenges::class.java)
+                        println(userChallenge!!.description)
+                        activeChallengesList.add(userChallenge!!)
+                    }
+                } else {
+                    println("does not exist")
+                }
+            }
+
+        })
+    }
+
+    override fun getCurrentUserFriends(): List<CurrentFriends> {
+        return currentFirendsList
     }
 
 }

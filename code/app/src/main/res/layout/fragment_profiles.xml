@@ -1,6 +1,7 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -8,26 +9,26 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/tbMore"
+            android:id="@+id/tbProfilePost"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            layout="@layout/more_toolbar_layout"
+            layout="@layout/post_toolbar_layout"
             />
 
         <include
-            android:id="@+id/clSvMore"
+            android:id="@+id/clSvProfile"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             layout="@layout/search_view_home"
             />
 
-            <include
-                android:id="@+id/clMore"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                layout="@layout/more_layout"
-                />
+        <include
+            android:id="@+id/clProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/my_profile_layout"
+            />
 
-</LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

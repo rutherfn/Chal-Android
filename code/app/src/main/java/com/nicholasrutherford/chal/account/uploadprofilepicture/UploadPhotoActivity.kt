@@ -23,7 +23,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.data.realdata.*
-import com.nicholasrutherford.chal.firebase.read.ReadProfileDetailsFirebase
+import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.helpers.Typeface
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
@@ -224,6 +224,7 @@ class UploadPhotoActivity : AppCompatActivity() {
         val activeChallengesList: ArrayList<ActiveChallenges> = ArrayList()
 
         activeChallengesList.add(activeChallenges)
+        activeChallengesList.add(activeChallenges)
 
         friendsList.add(friends)
         val newUser = Account(0, username, email, profileImageUrl, password, "", "", "", 0, friendsList, activeChallengesList)
@@ -252,17 +253,17 @@ class UploadPhotoActivity : AppCompatActivity() {
     }
 
     private fun initStarterFirebaseData() {
-        val readProfileDetailsFirebase = ReadProfileDetailsFirebase(applicationContext)
+        val readAccountFirebase = ReadAccountFirebase(applicationContext)
 
-        readProfileDetailsFirebase.getAge()
-        readProfileDetailsFirebase.getBio()
-        readProfileDetailsFirebase.getEmail()
-        readProfileDetailsFirebase.getFirstName()
-        readProfileDetailsFirebase.getId()
-        readProfileDetailsFirebase.getLastName()
-        readProfileDetailsFirebase.getPassword()
-        readProfileDetailsFirebase.getUserProfilePicture()
-        readProfileDetailsFirebase.getUsername()
+        readAccountFirebase.getAge()
+        readAccountFirebase.getBio()
+        readAccountFirebase.getEmail()
+        readAccountFirebase.getFirstName()
+        readAccountFirebase.getId()
+        readAccountFirebase.getLastName()
+        readAccountFirebase.getPassword()
+        readAccountFirebase.getUserProfilePicture()
+        readAccountFirebase.getUsername()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
