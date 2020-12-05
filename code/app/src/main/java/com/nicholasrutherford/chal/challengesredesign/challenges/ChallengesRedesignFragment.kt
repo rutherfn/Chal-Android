@@ -56,12 +56,20 @@ class ChallengesRedesignFragment (private val mainActivity: MainActivity, privat
     override fun bindAdapter(bind: FragmentRedesignChallengesBinding) {
         bind.rvRedesignChallenges.isNestedScrollingEnabled = false
         bind.rvRedesignChallenges.layoutManager = LinearLayoutManager(activity)
-        viewModel?.let { challengesRedesignViewModel ->
-            challengesRedesignAdapter =
-                ChallengesRedesignAdapter(
-                    challengesRedesignViewModel,
-                    appContext
-                )
+        btNavigation?.let { bottomNavigationView ->
+            fragmentManager?.let { fragmentManager ->
+                viewModel?.let { challengesRedesignViewModel ->
+                    challengesRedesignAdapter =
+                        ChallengesRedesignAdapter(
+                            mainActivity,
+                            challengesRedesignViewModel,
+                            appContext,
+                            fragmentManager,
+                            containerId(),
+                            bottomNavigationView
+                        )
+                }
+            }
         }
         bind.rvRedesignChallenges.adapter = challengesRedesignAdapter
     }

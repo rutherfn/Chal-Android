@@ -47,7 +47,7 @@ class MoreViewModel(private val mainActivity: MainActivity, private val appConte
     }
 
     fun onMyProfileClicked() {
-        navigation.showMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView )
+        navigation.showMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView)
     }
 
     inner class MoreViewStateImpl: MoreViewState {

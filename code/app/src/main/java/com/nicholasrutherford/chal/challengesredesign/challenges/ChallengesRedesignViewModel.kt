@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
+import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeRedesignNavigationImpl
 
 class ChallengesRedesignViewModel(private val mainActivity: MainActivity, private val appContext: Context,
                                   private val fragmentManager: FragmentManager, private val container: Int,
@@ -13,6 +14,7 @@ class ChallengesRedesignViewModel(private val mainActivity: MainActivity, privat
 ) : ViewModel() {
 
     val viewState = ChallengesRedesignViewStateImpl()
+    val challengesRedesignNavigationImpl = ChallengeRedesignNavigationImpl()
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
 
     init {

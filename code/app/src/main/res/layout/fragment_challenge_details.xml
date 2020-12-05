@@ -8,10 +8,10 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/tbRedesignChallenges"
+            android:id="@+id/tbRedesignChallengeDetails"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            layout="@layout/toolbar_challenges_post"
+            layout="@layout/more_toolbar_layout"
             />
 
         <include
@@ -37,6 +37,12 @@
                     android:layout_height="match_parent"
                     android:baselineAligned="false"
                     />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvRelatedChallenges"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
 
 <!--                <androidx.recyclerview.widget.RecyclerView-->
 <!--                    android:id="@+id/rvRedesignChallenges"-->
