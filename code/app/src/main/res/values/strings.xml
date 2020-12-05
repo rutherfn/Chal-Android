@@ -1,4 +1,5 @@
 <resources>
+    <string name="active">Active(%s)</string>
     <string name="all_rights_reserved">All Rights Reserved, Chal LLC 2020</string>
     <string name="app_name">chal</string>
     <string name="add_photo_later">Add Photo Later</string>
@@ -12,10 +13,12 @@
     <string name="category_education">Education</string>
     <string name="category_travel">Education</string>
     <string name="challenges">Challenges</string>
+    <string name="challenge_description">A <b>new you begins here!</b> Browse through the different categories below to find the <b>#chal </b>journey that youd like to embark on.</string>
     <string name="chal_menu">Chal Menu</string>
     <string name="chat">Chat</string>
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
     <string name="close">CLOSE</string>
+    <string name="completed">Completed</string>
     <string name="completed_challenges">COMPLETED</string>
     <string name="clear_photo">Clear Photo</string>
     <string name="click_here_to_add_a_description"><u>Click Here</u> To Add A Description</string>

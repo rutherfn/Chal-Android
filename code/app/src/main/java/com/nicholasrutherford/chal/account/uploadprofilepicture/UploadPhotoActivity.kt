@@ -220,7 +220,7 @@ class UploadPhotoActivity : AppCompatActivity() {
 
         activeChallengesPostList.add(activeChallengesPosts)
 
-        val activeChallenges = ActiveChallenges(0, "", "", 0, currentDate, 0, "", activeChallengesPostList)
+        val activeChallenges = ActiveChallenges(0, "", "", 0, currentDate, 0, "", false, activeChallengesPostList)
         val activeChallengesList: ArrayList<ActiveChallenges> = ArrayList()
 
         activeChallengesList.add(activeChallenges)

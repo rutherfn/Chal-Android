@@ -2,7 +2,6 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/colorSmokeWhite"
     android:layout_height="wrap_content"
@@ -140,7 +139,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etLastName" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/etBio"
         android:layout_width="354dp"
         android:layout_height="wrap_content"
         android:ems="17"
@@ -161,9 +160,9 @@
         android:textAllCaps="false"
         android:textColor="@color/colorSmokeWhite"
         android:textSize="@dimen/body_text_size"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintEnd_toEndOf="@+id/etBio"
+        app:layout_constraintStart_toStartOf="@+id/etBio"
+        app:layout_constraintTop_toBottomOf="@+id/etBio" />
 
     <TextView
         android:id="@+id/tvCancelEditProfile"

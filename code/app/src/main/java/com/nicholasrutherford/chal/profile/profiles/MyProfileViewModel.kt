@@ -26,7 +26,7 @@ class MyProfileViewModel(private val mainActivity: MainActivity, private val app
     private fun setupProfilePage() {
         navigation.showAcProgress(mainActivity)
 
-        viewState.age = readProfiledDetailsFirebase.getAge()
+       viewState.age = readProfiledDetailsFirebase.getAge()
 
         viewState.description = readProfiledDetailsFirebase.getBio()
         if (viewState.description?.isEmpty()!!) {

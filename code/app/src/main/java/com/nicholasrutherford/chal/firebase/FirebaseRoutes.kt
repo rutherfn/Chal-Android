@@ -16,6 +16,7 @@ const val PASSWORD = "password"
 const val PROFILE_IMAGE = "profileImage"
 const val USERNAME = "username"
 
+
 // route for json array objects
 const val ACTIVE_CHALLENGES = "activeChallenges"
 const val FRIENDS = "/friends"

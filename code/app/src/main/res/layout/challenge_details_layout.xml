@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivChallengesDetailsHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/challenges_details_background_height"
+        android:background="@drawable/challengesamplethree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/ivChallengesDetailsHeaderBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/challenges_details_background_height"
+        android:alpha="0.8"
+        android:background="@color/colorLightBlue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/ivChallengeCategory"
+        android:layout_width="@dimen/challenges_details_image_height"
+        android:layout_height="@dimen/challenges_details_image_width"
+        android:background="@drawable/ic_health_white"
+        android:layout_marginTop="@dimen/padding_30dp"
+        android:layout_marginStart="@dimen/margin_6dp"
+        android:layout_marginLeft="@dimen/margin_6dp"
+        android:padding="@dimen/padding_10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvChallengeCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Health And Fitness"
+        android:textStyle="italic"
+        android:textColor="@color/colorSmokeWhite"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivChallengeCategory"
+        app:layout_constraintStart_toEndOf="@+id/ivChallengeCategory"
+        app:layout_constraintTop_toTopOf="@+id/ivChallengeCategory"
+        />
+
+    <TextView
+        android:id="@+id/tvChallengeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_10dp"
+        android:text="7 Days Of Mediation"
+        android:textColor="@color/colorSmokeWhite"
+        android:textSize="@dimen/header_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ivChallengeCategory"
+        app:layout_constraintTop_toBottomOf="@+id/ivChallengeCategory" />
+
+    <TextView
+        android:id="@+id/tvChallengeDescDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4dp"
+        android:padding="@dimen/padding_10dp"
+        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy elrmod temport invidunt ut voluptua. At vero eos et accusam eltisto duo doloroes et ea rebum."
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/body_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvChallengeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvChallengeTitle" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="390dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSmokeWhite"
+        android:padding="@dimen/padding_10dp"
+        android:text="Join Challenge"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/body_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/ivChallengesDetailsHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvChallengeDescDetails" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

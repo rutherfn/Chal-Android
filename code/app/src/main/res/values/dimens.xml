@@ -14,6 +14,7 @@
     <dimen name="body_text_size">17sp</dimen>
     <dimen name="profile_menu_edit_text_size">14sp</dimen>
     <dimen name="sub_body_text_size">9sp</dimen>
+    <dimen name="sub_body_challenge_text_size">12sp</dimen>
     <dimen name="card_menu_text_size">15sp</dimen>
     <dimen name="et_label_text_size">16sp</dimen>
 
@@ -28,6 +29,10 @@
     <dimen name="button_text_size">20sp</dimen>
 
     <!-- Images Unique Sizes -->
+    <dimen name="challenge_icon_height">115dp</dimen>
+    <dimen name="challenge_icon_width">115dp</dimen>
+    <dimen name="cv_challenge_icon_height">30dp</dimen>
+    <dimen name="cv_challenge_icon_width">30dp</dimen>
     <dimen name="profile_my_fiends_image_height">20dp</dimen>
     <dimen name="profile_my_fiends_image_width">20dp</dimen>
     <dimen name="profile_challenge_image_height">20dp</dimen>
@@ -111,7 +116,11 @@
     <dimen name="profile_image_edit_width">17dp</dimen>
     <dimen name="profile_picture_image_height">100dp</dimen>
     <dimen name="profile_picture_image_width">100dp</dimen>
-    <dimen name="edit_profile_picture_background_height">100dp</dimen>
+    <dimen name="challenges_background_height">190dp</dimen>
+    <dimen name="challenges_details_background_height">320dp</dimen>
+    <dimen name="edit_profile_picture_background_height">115dp</dimen>
+    <dimen name="challenges_details_image_height">30dp</dimen>
+    <dimen name="challenges_details_image_width">30dp</dimen>
 
     <!-- Buttons Unique Sizes -->
     <dimen name="button_sign_up_size">300sp</dimen>

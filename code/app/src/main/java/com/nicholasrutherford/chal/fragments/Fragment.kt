@@ -8,6 +8,7 @@ import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.login.LoginFragment
 import com.nicholasrutherford.chal.account.signup.SignUpActivity
 import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedesignFragment
 import com.nicholasrutherford.chal.dialogfragments.*
 import com.nicholasrutherford.chal.screens.challenges.ChallengesFragment
 import com.nicholasrutherford.chal.fragments.debug.changecfontscolors.ChangeFontsAndColorsFragment
@@ -24,6 +25,11 @@ import com.nicholasrutherford.chal.settings.more.MoreFragment
 val changeFontsAndColorsFragment = ChangeFontsAndColorsFragment()
 val challengesFragment = ChallengesFragment()
 val challengePostFragment = ChallengePostFragment()
+fun challengesRedesignFragment(mainActivity: MainActivity, appContext: Context) =
+    ChallengesRedesignFragment(
+        mainActivity,
+        appContext
+    )
 fun createAccountFragment(activity: CreateAccountActivity, context: Context) = CreateAccountFragment(activity, context)
 fun editMyProfileFragment(activity: MainActivity, context: Context) = EditMyProfileFragment(activity, context)
 val debugFragment = DebugFragment()

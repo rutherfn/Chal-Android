@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     >
 
     <ImageView
@@ -162,5 +163,32 @@
         app:layout_constraintEnd_toStartOf="@+id/tvProfileMyFriends"
         app:layout_constraintTop_toTopOf="@+id/tvProfileMyFriends"
         />
+
+    <Button
+        android:id="@+id/btnActive"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/margin_18dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_18dp"
+        android:textColor="@color/colorBlack"
+        android:background="@color/colorLightGray"
+        android:text="@string/active"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfile"
+        />
+
+    <Button
+        android:id="@+id/btnCompleted"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:text="@string/completed"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:layout_marginEnd="@dimen/margin_18dp"
+        android:layout_marginRight="@dimen/margin_18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnActive"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnActive" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                         return true
                     }
                     R.id.navigation_challenges -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container, challengesFragment, challengesFragment.javaClass.simpleName)
+                        supportFragmentManager.beginTransaction().replace(R.id.container, challengesRedesignFragment(this@MainActivity, applicationContext), challengesRedesignFragment(this@MainActivity, applicationContext).javaClass.simpleName)
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
                         binding?.tbMain?.visibleOrGone = false
