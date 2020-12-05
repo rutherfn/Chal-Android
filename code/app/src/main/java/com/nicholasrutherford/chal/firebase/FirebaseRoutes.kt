@@ -16,7 +16,17 @@ const val PASSWORD = "password"
 const val PROFILE_IMAGE = "profileImage"
 const val USERNAME = "username"
 
+const val ACTIVE_CHALLENGES = "/activeChallenges/"
+const val CATEGORY_NAME = "categoryName"
+const val DESCRIPTION = "description"
+const val ID_ACTIVE_CHALLENGES = "id"
+const val NAME = "name"
+const val NUMBER_OF_DAYS_OF_CHALLENGE = "numberOfDaysOfChallenge"
+const val TIME_CHANGE_EXPIRE = "timeChallengeExpire"
+const val USER_CURRENT_DAY = "userCurrentDay"
 
-// route for json array objects
-const val ACTIVE_CHALLENGES = "activeChallenges"
-const val FRIENDS = "/friends"
+
+const val FRIENDS = "/friends/"
+const val EMAIL_FRIENDS = "email"
+const val ID_FRIENDS = "id"
+const val USERNAME_FRIENDS = "username"

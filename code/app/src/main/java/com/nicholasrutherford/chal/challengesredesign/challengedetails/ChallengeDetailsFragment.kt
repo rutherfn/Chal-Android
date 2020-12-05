@@ -68,6 +68,9 @@ class ChallengeDetailsFragment (private val mainActivity: MainActivity, private 
     }
 
     override fun clickListeners(bind: FragmentChallengeDetailsBinding) {
+        bind.clDetailsChallengeHeader.btnJoinChallenge.setOnClickListener {
+            viewModel?.onJoinChallengeClicked()
+        }
     }
 
     override fun updateView(bind: FragmentChallengeDetailsBinding) {

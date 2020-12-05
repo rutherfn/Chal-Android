@@ -8,6 +8,5 @@ data class ActiveChallenges(
     val timeChallengeExpire: String= "",
     val userCurrentDay: Int = 0,
     val categoryName: String = "",
-    val isRealChallenge: Boolean = false,
     val activeChallengesPosts: List<ActiveChallengesPosts>? = null
 )

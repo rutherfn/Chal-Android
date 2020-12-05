@@ -1,6 +1,5 @@
 package com.nicholasrutherford.chal.firebase.read
 
-import com.nicholasrutherford.chal.data.realdata.ActiveChallenges
 import com.nicholasrutherford.chal.data.realdata.CurrentFriends
 
 interface FirebaseReadExtension {
