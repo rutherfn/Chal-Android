@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.viewstate
 
+import com.nicholasrutherford.chal.ViewState
 import com.nicholasrutherford.chal.room.entity.ConfigurationEntity
 
 interface ChangeFontsAndColorsViewState : ViewState {

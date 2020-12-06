@@ -116,20 +116,4 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-            R.id.navigation_log_out -> {
-                attemptToLogoutUser()
-            }
-            R.id.navigation_profile -> {
-                supportFragmentManager.beginTransaction().replace(R.id.container, myProfileFragment, myProfileFragment.javaClass.simpleName)
-                    .commit()
-                binding?.bvNavigation?.visibleOrGone = true
-                binding?.tbMain?.visibleOrGone = false
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 }

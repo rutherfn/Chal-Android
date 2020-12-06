@@ -1,5 +1,7 @@
 package com.nicholasrutherford.chal.viewstate
 
+import com.nicholasrutherford.chal.ViewState
+
 interface SettingsViewState : ViewState {
     var isMyProfileClicked: Boolean
     var isNotificationsClicked: Boolean

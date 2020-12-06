@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.challengesredesign.challenges
 
-import com.nicholasrutherford.chal.viewstate.ViewState
+import com.nicholasrutherford.chal.ViewState
 
 interface ChallengesRedesignViewState : ViewState {
     var toolbarName: String

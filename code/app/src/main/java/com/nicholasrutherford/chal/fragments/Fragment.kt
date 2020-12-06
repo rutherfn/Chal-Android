@@ -11,18 +11,11 @@ import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.challengesredesign.challengedetails.ChallengeDetailsFragment
 import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedesignFragment
 import com.nicholasrutherford.chal.dialogfragments.*
-import com.nicholasrutherford.chal.screens.challenges.ChallengesFragment
-import com.nicholasrutherford.chal.fragments.myfriends.MyFriendsFragment
-import com.nicholasrutherford.chal.fragments.myprofile.MyProfileFragment
-import com.nicholasrutherford.chal.fragments.postprogress.ChallengePostFragment
 import com.nicholasrutherford.chal.newsfeed.NewsFeedRedesignFragment
 import com.nicholasrutherford.chal.profile.editprofile.EditMyProfileFragment
-import com.nicholasrutherford.chal.screens.home.HomeFragment
 import com.nicholasrutherford.chal.settings.more.MoreFragment
 
 // regular fragments
-val challengesFragment = ChallengesFragment()
-val challengePostFragment = ChallengePostFragment()
 fun challengeDetailsFragment(mainActivity: MainActivity, appContext: Context) = ChallengeDetailsFragment(mainActivity, appContext)
 fun challengesRedesignFragment(mainActivity: MainActivity, appContext: Context) =
     ChallengesRedesignFragment(
@@ -31,11 +24,7 @@ fun challengesRedesignFragment(mainActivity: MainActivity, appContext: Context) 
     )
 fun createAccountFragment(activity: CreateAccountActivity, context: Context) = CreateAccountFragment(activity, context)
 fun editMyProfileFragment(activity: MainActivity, context: Context) = EditMyProfileFragment(activity, context)
-val editProfileFragment = EditProfileFragment()
-val homeFragment = HomeFragment()
 fun loginFragment(activity: LoginActivity, appContext: Context) = LoginFragment(activity,appContext)
-val myFriendsFragment = MyFriendsFragment()
-val myProfileFragment = MyProfileFragment()
 fun newsFeedRedesignFragment(mainActivity: MainActivity, appContext: Context) = NewsFeedRedesignFragment(mainActivity, appContext)
 fun moreFragment(mainActivity: MainActivity, context: Context) = MoreFragment(mainActivity, context)
 fun profileFragment(mainActivity: MainActivity, context: Context) =
@@ -43,10 +32,7 @@ fun profileFragment(mainActivity: MainActivity, context: Context) =
         mainActivity,
         context
     )
-val otherUserProfileFragment = OtherUserProfileFragment()
-val searchPeopleFragment = SearchPeopleFragment()
 fun signUpFragment(activity: SignUpActivity, appContext: Context) = SignUpFragment(activity, appContext)
-val singleChallengeFragment = SingleChallengeFragment()
 
 // alerts fragments
 val errorCreateAccountDialog = ErrorCreateAccountDialogFragment()

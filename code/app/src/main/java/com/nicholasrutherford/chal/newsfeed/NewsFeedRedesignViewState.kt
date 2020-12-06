@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.newsfeed
 
-import com.nicholasrutherford.chal.viewstate.ViewState
+import com.nicholasrutherford.chal.ViewState
 
 interface NewsFeedRedesignViewState : ViewState {
     var toolbarName: String
