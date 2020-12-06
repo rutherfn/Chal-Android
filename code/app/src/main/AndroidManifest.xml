@@ -46,7 +46,7 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-        <activity android:name=".activitys.MainActivity"
+        <activity android:name=".MainActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan">
         </activity>

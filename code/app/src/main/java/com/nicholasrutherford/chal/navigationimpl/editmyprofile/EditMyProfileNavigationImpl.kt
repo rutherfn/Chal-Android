@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentManager
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.activitys.MainActivity
-import com.nicholasrutherford.chal.fragments.profileFragment
+import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.profileFragment
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.profile.editprofile.EditMyProfileNavigation
 
@@ -19,8 +19,15 @@ class EditMyProfileNavigationImpl : EditMyProfileNavigation {
         if (isClicked) {
             bottomNavigationView.visibleOrGone = true
             fragmentManager.beginTransaction()
-                .replace(id, profileFragment(activity, context),
-                    profileFragment(activity, context)::javaClass.name)
+                .replace(id,
+                    profileFragment(
+                        activity,
+                        context
+                    ),
+                    profileFragment(
+                        activity,
+                        context
+                    )::javaClass.name)
                 .commit()
         }
     }

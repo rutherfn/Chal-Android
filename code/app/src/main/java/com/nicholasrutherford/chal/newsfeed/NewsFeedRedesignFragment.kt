@@ -9,12 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
 import com.nicholasrutherford.chal.ext.newsfeed.NewsFeedRedesignFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
         NewsFeedRedesignFragmentExtension {

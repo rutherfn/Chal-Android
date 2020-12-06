@@ -9,11 +9,10 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentEditProfileBinding
 import com.nicholasrutherford.chal.ext.editprofile.EditProfileExtension
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.squareup.picasso.Picasso
 
 class EditMyProfileFragment(private val mainActivity: MainActivity, private val appContext: Context): Fragment(), EditProfileExtension {
 

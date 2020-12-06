@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentChallengeDetailsBinding
 import com.nicholasrutherford.chal.ext.challengedetails.ChallengeDetailsFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface

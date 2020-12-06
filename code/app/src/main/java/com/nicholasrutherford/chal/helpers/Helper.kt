@@ -9,10 +9,6 @@ import java.io.IOException
 
 class Helper {
 
-    fun setTextViewColor(context: Context, textView: TextView, color: Int) { // helper method?
-        textView.setTextColor(ContextCompat.getColor(context, color))
-    }
-
     @Throws(InterruptedException::class, IOException::class) // responsible for checking internet connection, by hitting google.com. If it cant hit it, return back false
     fun isConnected(): Boolean {
         val command = "ping -c 1 google.com"

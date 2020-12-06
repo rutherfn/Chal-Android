@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentProfilesBinding
 import com.nicholasrutherford.chal.ext.profile.ProfileFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface

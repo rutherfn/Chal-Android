@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.data.realdata.*
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.helpers.Typeface

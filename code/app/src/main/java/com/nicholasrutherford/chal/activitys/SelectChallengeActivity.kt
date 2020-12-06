@@ -1,3 +1,0 @@
-package com.nicholasrutherford.chal.activitys
-
-class SelectChallengeActivity

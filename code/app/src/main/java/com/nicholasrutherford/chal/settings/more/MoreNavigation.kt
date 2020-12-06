@@ -3,7 +3,7 @@ package com.nicholasrutherford.chal.settings.more
 import android.content.Context
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 
 interface MoreNavigation {
     fun login(mainActivity: MainActivity, context: Context)

@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.navigationimpl
+package com.nicholasrutherford.chal.navigationimpl.signup
 
 import android.content.Intent
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity

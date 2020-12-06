@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.fragments
+package com.nicholasrutherford.chal
 
 import android.content.Context
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountFragment
@@ -7,10 +7,8 @@ import com.nicholasrutherford.chal.account.signup.SignUpFragment
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.login.LoginFragment
 import com.nicholasrutherford.chal.account.signup.SignUpActivity
-import com.nicholasrutherford.chal.activitys.MainActivity
 import com.nicholasrutherford.chal.challengesredesign.challengedetails.ChallengeDetailsFragment
 import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedesignFragment
-import com.nicholasrutherford.chal.dialogfragments.*
 import com.nicholasrutherford.chal.newsfeed.NewsFeedRedesignFragment
 import com.nicholasrutherford.chal.profile.editprofile.EditMyProfileFragment
 import com.nicholasrutherford.chal.settings.more.MoreFragment
@@ -34,6 +32,4 @@ fun profileFragment(mainActivity: MainActivity, context: Context) =
     )
 fun signUpFragment(activity: SignUpActivity, appContext: Context) = SignUpFragment(activity, appContext)
 
-// alerts fragments
-val errorCreateAccountDialog = ErrorCreateAccountDialogFragment()
-val loadingDialog = LoadingDialogFragment()
+// alerts fragments should get there own file

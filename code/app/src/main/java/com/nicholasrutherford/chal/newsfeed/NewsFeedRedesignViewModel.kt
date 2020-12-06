@@ -9,9 +9,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.nicholasrutherford.chal.activitys.MainActivity
-import com.nicholasrutherford.chal.data.realdata.Account
-import com.nicholasrutherford.chal.data.realdata.ActiveChallenges
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 

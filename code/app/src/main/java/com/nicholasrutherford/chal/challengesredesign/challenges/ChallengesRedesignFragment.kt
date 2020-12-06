@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentRedesignChallengesBinding
 import com.nicholasrutherford.chal.ext.challengesredesign.ChallengesRedesignFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface

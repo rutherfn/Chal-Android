@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.viewstate
+package com.nicholasrutherford.chal.splash
 
 import com.nicholasrutherford.chal.ViewState
 

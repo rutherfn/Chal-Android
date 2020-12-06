@@ -5,9 +5,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
-import com.nicholasrutherford.chal.navigationimpl.MyProfileNavigationImpl
+import com.nicholasrutherford.chal.navigationimpl.myprofile.MyProfileNavigationImpl
 
 class MyProfileViewModel(private val mainActivity: MainActivity, private val appContext: Context,
                          private val fragmentManager: FragmentManager, private val container: Int,
@@ -15,7 +15,8 @@ class MyProfileViewModel(private val mainActivity: MainActivity, private val app
 ) : ViewModel() {
 
     val viewState = MyProfileViewStateImpl()
-    val navigation = MyProfileNavigationImpl()
+    val navigation =
+        MyProfileNavigationImpl()
 
     private val readProfiledDetailsFirebase = ReadAccountFirebase(appContext)
 

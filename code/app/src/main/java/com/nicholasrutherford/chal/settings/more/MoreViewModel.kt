@@ -5,10 +5,10 @@ import android.os.CountDownTimer
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.firebase.logUserOut
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
-import com.nicholasrutherford.chal.navigationimpl.MoreNavigationImpl
+import com.nicholasrutherford.chal.navigationimpl.more.MoreNavigationImpl
 
 const val MILLIS_IN_FUTURE = 3000
 const val COUNT_DOWN_INTERVAL = 100
@@ -18,7 +18,8 @@ class MoreViewModel(private val mainActivity: MainActivity, private val appConte
                     private val bottomNavigationView: BottomNavigationView) : ViewModel() {
 
     val viewState = MoreViewStateImpl()
-    val navigation = MoreNavigationImpl()
+    val navigation =
+        MoreNavigationImpl()
 
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
 

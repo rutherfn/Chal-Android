@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.navigationimpl
+package com.nicholasrutherford.chal.navigationimpl.more
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,8 @@ import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.account.login.LoginActivity
-import com.nicholasrutherford.chal.activitys.MainActivity
-import com.nicholasrutherford.chal.fragments.profileFragment
+import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.profileFragment
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.settings.more.MoreNavigation
 
@@ -37,7 +37,11 @@ class MoreNavigationImpl : MoreNavigation {
         if (isClicked) {
             bottomNavigationView.visibleOrGone = true
             fragmentManager.beginTransaction()
-                .replace(id, profileFragment(activity, context),
+                .replace(id,
+                    profileFragment(
+                        activity,
+                        context
+                    ),
                 profileFragment(activity, context)::javaClass.name)
                 .commit()
         }

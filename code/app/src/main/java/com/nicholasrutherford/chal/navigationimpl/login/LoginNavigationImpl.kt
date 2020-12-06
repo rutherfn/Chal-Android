@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.navigationimpl
+package com.nicholasrutherford.chal.navigationimpl.login
 
 import android.app.AlertDialog
 import android.content.Context
@@ -10,7 +10,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.login.LoginNavigation
 import com.nicholasrutherford.chal.account.signup.SignUpActivity
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.account.forgotpassword.ForgotPasswordActivity
 
 class LoginNavigationImpl : LoginNavigation {

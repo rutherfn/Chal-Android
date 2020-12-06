@@ -3,7 +3,7 @@ package com.nicholasrutherford.chal.navigationimpl.challengeredesign
 import android.graphics.Color
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.challengesredesign.challengedetails.ChallengeDetailsNavigation
 
 class ChallengeDetailsNavigationImpl : ChallengeDetailsNavigation {

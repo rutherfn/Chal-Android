@@ -1,8 +1,8 @@
-package com.nicholasrutherford.chal.navigationimpl
+package com.nicholasrutherford.chal.navigationimpl.splash
 
 import android.content.Intent
 import com.nicholasrutherford.chal.account.login.LoginActivity
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.splash.SplashActivity
 import com.nicholasrutherford.chal.splash.SplashNavigation
 

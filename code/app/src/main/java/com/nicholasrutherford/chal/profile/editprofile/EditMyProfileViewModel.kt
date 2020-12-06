@@ -2,19 +2,18 @@ package com.nicholasrutherford.chal.profile.editprofile
 
 import android.content.Context
 import android.os.CountDownTimer
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.activitys.MainActivity
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.WriteAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.editmyprofile.EditMyProfileNavigationImpl
 
 class EditMyProfileViewModel(private val mainActivity: MainActivity, private val appContext: Context,
-                    private val fragmentManager: FragmentManager, private val container: Int,
-                    private val bottomNavigationView: BottomNavigationView
+                             private val fragmentManager: FragmentManager, private val container: Int,
+                             private val bottomNavigationView: BottomNavigationView
 ) : ViewModel() {
 
     val viewState = EditMyProfileViewStateImpl()

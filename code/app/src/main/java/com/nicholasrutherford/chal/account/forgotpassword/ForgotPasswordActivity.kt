@@ -16,8 +16,6 @@ import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.login.LoginActivity
-import com.nicholasrutherford.chal.fragments.errorCreateAccountDialog
-import com.nicholasrutherford.chal.fragments.loadingDialog
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 
@@ -161,13 +159,13 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         val resetEmail = etTypeEmail.text.toString()
 
-        if(isEmailError()) {
-            errorCreateAccountDialog.show(fm, "errorResetDialog")
+        if(isEmailError()) { // show a alert error  here
+
         }
 
         else {
 
-            loadingDialog.show(fm, "loadingDialog")
+            // loading alert
 
             val auth = FirebaseAuth.getInstance()
 
@@ -175,9 +173,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
 
                     if(task.isSuccessful) {
-
+                        // loading alert hide it
                         updateView()
-                        loadingDialog.dismiss()
                     }
                 }
         }
