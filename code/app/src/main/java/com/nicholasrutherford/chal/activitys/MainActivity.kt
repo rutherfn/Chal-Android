@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupHomeForFirstToLoad() {
-        supportFragmentManager.beginTransaction().replace(R.id.container, homeFragment, homeFragment.javaClass.simpleName)
+        supportFragmentManager.beginTransaction().replace(R.id.container, newsFeedRedesignFragment(this@MainActivity, applicationContext), newsFeedRedesignFragment(this@MainActivity, applicationContext).javaClass.simpleName)
             .commit()
     }
 
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
                 when (item.itemId) {
                     R.id.navigation_my_feed-> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container, homeFragment, homeFragment.javaClass.simpleName)
+                        supportFragmentManager.beginTransaction().replace(R.id.container, newsFeedRedesignFragment(this@MainActivity, applicationContext), newsFeedRedesignFragment(this@MainActivity, applicationContext).javaClass.simpleName)
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
                         binding?.tbMain?.visibleOrGone = false
@@ -74,13 +74,6 @@ class MainActivity : AppCompatActivity() {
                         binding?.tbMain?.visibleOrGone = false
                         return true
                     }
-//                    R.id.navigation_search -> {
-//                        supportFragmentManager.beginTransaction().replace(R.id.container, searchPeopleFragment, searchPeopleFragment.javaClass.simpleName)
-//                            .commit()
-//                        binding?.bvNavigation?.visibleOrGone = true
-//                        binding?.tbMain?.visibleOrGone = false
-//                        return true
-//                    }
                     R.id.navigation_more -> {
                         supportFragmentManager.beginTransaction().replace(R.id.container, moreFragment(this@MainActivity, applicationContext), moreFragment(this@MainActivity, applicationContext).javaClass.simpleName)
                             .commit()
@@ -126,12 +119,6 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.navigation_debug -> {
-                supportFragmentManager.beginTransaction().replace(R.id.container, debugFragment, debugFragment.javaClass.simpleName)
-                    .commit()
-                binding?.tbMain?.visibleOrGone = true
-                binding?.bvNavigation?.visibleOrGone = false
-            }
             R.id.navigation_log_out -> {
                 attemptToLogoutUser()
             }

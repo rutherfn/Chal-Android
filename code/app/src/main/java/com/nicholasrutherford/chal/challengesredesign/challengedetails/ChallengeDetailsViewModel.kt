@@ -1,6 +1,7 @@
 package com.nicholasrutherford.chal.challengesredesign.challengedetails
 
 import android.content.Context
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,6 +16,8 @@ import com.nicholasrutherford.chal.firebase.NUMBER_OF_DAYS_OF_CHALLENGE
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.activechallenge.WriteActiveChallengeFirebase
+import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeDetailsNavigationImpl
+import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeRedesignNavigationImpl
 import java.util.*
 
 const val STARTER_INDEX = "0"
@@ -29,6 +32,8 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
     private val writeActiveChallengesFirebase = WriteActiveChallengeFirebase()
 
     val uid = FirebaseAuth.getInstance().uid ?: ""
+
+    private var navigation = ChallengeDetailsNavigationImpl()
     val ref = FirebaseDatabase.getInstance().getReference(USERS)
 
     init {
@@ -52,6 +57,7 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
     }
 
     fun onJoinChallengeClicked() {
+        navigation.showAcProgress(mainActivity)
         ref.child("$uid$ACTIVE_CHALLENGES$STARTER_INDEX/$NUMBER_OF_DAYS_OF_CHALLENGE").addValueEventListener(object: ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 println("error")
@@ -69,12 +75,21 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
                         writeActiveChallengesFirebase.writeTimeChallengeExpire(STARTER_INDEX, getDaysAgo(7))
                         writeActiveChallengesFirebase.writeUserCurrentDay(STARTER_INDEX, 0)
                         // enroll them in the challenge
+                        navigation.hideAcProgress()
+
+                        Toast.makeText(appContext, "Enrolled in Challenge!",
+                            Toast.LENGTH_LONG).show()
                     } else {
-                        // your already enrolled get out of
+                        navigation.hideAcProgress()
+
+                        Toast.makeText(appContext, "Your already in this challenge!",
+                            Toast.LENGTH_LONG).show()
                     }
 
                 } else {
-                    println("does not exist")
+                    navigation.hideAcProgress()
+                    Toast.makeText(appContext, "Error!",
+                        Toast.LENGTH_LONG).show()
                 }
             }
 
