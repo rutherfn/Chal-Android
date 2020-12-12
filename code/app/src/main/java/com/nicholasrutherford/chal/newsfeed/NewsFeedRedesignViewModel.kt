@@ -4,29 +4,24 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.nicholasrutherford.chal.MainActivity
-import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
+import com.nicholasrutherford.chal.room.entity.firebasekey.FirebaseKeyEntity
 
-class NewsFeedRedesignViewModel (private val mainActivity: MainActivity, private val appContext: Context,
-                                 private val fragmentManager: FragmentManager, private val container: Int,
-                                 private val bottomNavigationView: BottomNavigationView
+class NewsFeedRedesignViewModel(
+    private val mainActivity: MainActivity,
+    private val appContext: Context,
+    private val fragmentManager: FragmentManager,
+    private val container: Int,
+    private val bottomNavigationView: BottomNavigationView,
+    private val firebaseKeys: List<FirebaseKeyEntity>
 ) : ViewModel() {
-
-    val uid = FirebaseAuth.getInstance().uid ?: ""
-    val ref = FirebaseDatabase.getInstance().getReference(USERS)
 
     val viewState = NewsFeedRedesignViewStateImpl()
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
 
     init {
         initViewStateOnLoad()
-        fetchKeys()
     }
 
     fun initViewStateOnLoad() {
@@ -36,25 +31,6 @@ class NewsFeedRedesignViewModel (private val mainActivity: MainActivity, private
         readProfileDetailsFirebase.getUserProfilePicture()?.let { profilePicture ->
             viewState.toolbarImage = profilePicture
         }
-    }
-
-    fun fetchKeys() {
-        ref.addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {
-                println("error")
-            }
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (activeChallenge in snapshot.children) {
-                        println(activeChallenge.key)
-                    }
-                } else {
-                    println("does not exist")
-                }
-            }
-
-        })
     }
 
     inner class NewsFeedRedesignViewStateImpl: NewsFeedRedesignViewState {

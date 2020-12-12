@@ -2,40 +2,34 @@ package com.nicholasrutherford.chal.splash
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.navigationimpl.splash.SplashNavigationImpl
-import com.nicholasrutherford.chal.room.StarterTableEntries
-import com.nicholasrutherford.chal.room.helpers.ConfigurationHelper
-import kotlinx.coroutines.launch
 import android.os.Handler
+import androidx.lifecycle.viewModelScope
+import com.nicholasrutherford.chal.ChalRoom
+import com.nicholasrutherford.chal.room.helpers.FirebaseKeysViewModelHelper
 
 class SplashViewModel(context: Context, private val activity: SplashActivity)  : ViewModel() {
-
-    private var mAuth: FirebaseAuth? = null
-    private val starterTableEntries = StarterTableEntries()
-    private val navigation =
-        SplashNavigationImpl()
+    private val navigation = SplashNavigationImpl()
     var viewState = SplashViewModelImpl()
-    private val androidDebugHelper = ConfigurationHelper(context)
 
     init {
-        mAuth = FirebaseAuth.getInstance()
-        attemptToInitConfigIfUpdated()
-        checkIfUserIsSignedIn()
+        val firebaseKeysHelper = FirebaseKeysViewModelHelper(
+            application = activity.application,
+            viewModelScope = viewModelScope
+        )
+        val chalRoom = ChalRoom(activity.application)
+        firebaseKeysHelper.fetchLatestKeys(chalRoom)
+
+        checkIfUserIsSignedIn(firebaseKeysHelper)
     }
 
-    private fun attemptToInitConfigIfUpdated() {
-        viewModelScope.launch { androidDebugHelper.initDebugOnSplashIfEmpty(starterTableEntries.configurationStarterEntry) }
-    }
-
-    private fun checkIfUserIsSignedIn() {
+    private fun checkIfUserIsSignedIn(firebaseKeysViewModelHelper: FirebaseKeysViewModelHelper) {
         val handler = Handler()
         handler.postDelayed({
-            val user = mAuth!!.currentUser
+            val user = firebaseKeysViewModelHelper.mAuth?.currentUser ?: null
 
-            if(user == null) {
+            if (user == null) {
                 navigation.login(activity)
             } else {
                 navigation.home(activity)
@@ -43,9 +37,8 @@ class SplashViewModel(context: Context, private val activity: SplashActivity)  :
         }, 5000)
     }
 
-    inner class SplashViewModelImpl :
-        SplashViewState {
-        override var splashImageRes: Int =  R.mipmap.chalappicon
+    inner class SplashViewModelImpl : SplashViewState {
+        override var splashImageRes: Int = R.mipmap.chalappicon
     }
 
-    }
+}
