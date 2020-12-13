@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 
 class LoginFragment(activity: LoginActivity, private val appContext: Context) : Fragment(),
     LoginFragmentExtension {
+
     private val viewModel = LoginViewModel(activity, appContext)
     private val typeface = Typeface()
     private val helper = Helper()

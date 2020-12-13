@@ -125,7 +125,6 @@ class UploadPhotoActivity : AppCompatActivity() {
     }
 
     private fun listenersForUpload() {
-
         cvTakeAPhoto.setOnClickListener {
             attemptToTakeAPictureForUser()
         }

@@ -1,0 +1,3 @@
+package com.nicholasrutherford.chal.account.uploadprofilepicture
+
+class UploadPhotoFragment 
