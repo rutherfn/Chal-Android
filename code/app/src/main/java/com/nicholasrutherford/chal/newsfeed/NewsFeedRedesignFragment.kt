@@ -17,7 +17,7 @@ import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
 import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.room.entity.activechallenges.ActiveChallengesEntity
+import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -31,15 +31,15 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
     private var btNavigation: BottomNavigationView? = null
     private var viewModel: NewsFeedRedesignViewModel? = null
 
-    private val _allActiveChallenges = MutableStateFlow(listOf<ActiveChallengesEntity>())
-    val allActiveChallenges: StateFlow<List<ActiveChallengesEntity>> = _allActiveChallenges
+    private val _allChallengesPosts = MutableStateFlow(listOf<ChallengesPostsEntity>())
+    private val allChallengesPosts: StateFlow<List<ChallengesPostsEntity>> = _allChallengesPosts
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentRedesignMyFeedBinding.inflate(layoutInflater)
-        newsListActiveChallengesUpdate()
+        newsListActiveChallengesPostsUpdate()
 
         lifecycleScope.launch {
-            allActiveChallenges?.collect {
+            allChallengesPosts?.collect {
                 initViewModel(it)
                 bindAdapter(bind)
             }
@@ -87,13 +87,15 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
         }
     }
 
-    fun newsListActiveChallengesUpdate() {
+    fun newsListActiveChallengesPostsUpdate() {
         val chalRoom  = ChalRoom(mainActivity.application)
 
         lifecycleScope.launch {
             chalRoom.userRepository.readAllUsersRegular().forEach { users ->
-                users.activeChallengeEntities?.let { activeChallengesList ->
-                    _allActiveChallenges.value = activeChallengesList
+                users.activeChallengeEntities?.forEach { challengesPosts ->
+                    challengesPosts.activeChallengesPosts?.let { challengesPostsList ->
+                        _allChallengesPosts.value = challengesPostsList
+                    }
                 }
             }
         }
@@ -102,8 +104,8 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
     override fun convertFirebaseKeysEntity() {
     }
 
-    override fun initViewModel(activeChallengesList: List<ActiveChallengesEntity>) {
-        viewModel = NewsFeedRedesignViewModel(mainActivity, appContext, activeChallengesList)
+    override fun initViewModel(activeChallengesPostsList: List<ChallengesPostsEntity>) {
+        viewModel = NewsFeedRedesignViewModel(mainActivity, appContext, activeChallengesPostsList)
     }
 
 }

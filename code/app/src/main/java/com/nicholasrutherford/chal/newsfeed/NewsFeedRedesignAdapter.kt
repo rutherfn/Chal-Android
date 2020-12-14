@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.databinding.RedesignMyFeedLayoutBinding
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.helpers.visibleOrGone
-import com.squareup.picasso.Picasso
 
 class NewsFeedRedesignAdapter (private val context: Context, private val viewModel: NewsFeedRedesignViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -18,7 +16,7 @@ class NewsFeedRedesignAdapter (private val context: Context, private val viewMod
     }
 
     override fun getItemCount(): Int {
-        return viewModel.activeChallengesList?.size ?: 0
+        return viewModel.activeChallengesPostsList?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
