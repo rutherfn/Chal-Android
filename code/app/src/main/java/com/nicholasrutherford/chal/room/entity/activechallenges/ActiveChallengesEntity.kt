@@ -25,5 +25,5 @@ data class ActiveChallengesEntity(
     var categoryName: String,
     @ColumnInfo(name = "activeChallengesPosts")
     @TypeConverters(ChallengesPostsConverter::class)
-    var activeChallengesPosts: List<ChallengesPostsEntity>
+    var activeChallengesPosts: List<ChallengesPostsEntity>?
 )

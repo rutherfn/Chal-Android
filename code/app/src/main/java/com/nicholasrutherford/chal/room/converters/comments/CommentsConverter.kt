@@ -17,7 +17,7 @@ class CommentsConverter {
             return Collections.emptyList()
         }
 
-        val listType = object : TypeToken<ArrayList<String>>() {}.type
+        val listType = object : TypeToken<ArrayList<CommentsEntity>>() {}.type
         return gson.fromJson(data, listType)
     }
 

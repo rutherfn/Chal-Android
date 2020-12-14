@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.nicholasrutherford.chal.data.realdata.Comments
 import com.nicholasrutherford.chal.room.converters.activechallenges.CurrentActiveChallengesConverters
 import com.nicholasrutherford.chal.room.converters.challengesposts.ChallengesPostsConverter
 import com.nicholasrutherford.chal.room.converters.comments.CommentsConverter
@@ -21,7 +20,7 @@ import com.nicholasrutherford.chal.room.entity.user.UserEntity
 
 @Database(
     entities = [ActiveChallengesEntity::class, ChallengesPostsEntity::class,  ConfigurationEntity::class, CommentsEntity::class,  FirebaseKeyEntity::class, FriendsEntity::class,  UserEntity::class],
-    version = 2,
+    version = 6,
     exportSchema = false
 )
 @TypeConverters(ChallengesPostsConverter::class, CommentsConverter::class,  CurrentActiveChallengesConverters::class, CurrentFriendsListConverter::class)

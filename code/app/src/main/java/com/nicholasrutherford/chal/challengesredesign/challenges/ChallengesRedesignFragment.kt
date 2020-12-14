@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
@@ -83,7 +85,15 @@ class ChallengesRedesignFragment (private val mainActivity: MainActivity, privat
 
     override fun updateView(bind: FragmentRedesignChallengesBinding) {
         bind.tbRedesignChallenges.tvTitle.text = viewModel?.viewState?.toolbarName
-        Picasso.get().load(viewModel?.viewState?.toolbarImage).into(bind.tbRedesignChallenges.cvProfile)
+
+        val options = RequestOptions()
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.placeholder)
+
+        viewModel?.let { challengesViewModel ->
+            Glide.with(this).load(challengesViewModel.viewState.toolbarImage).apply(options)
+                .into(bind.tbRedesignChallenges.cvProfile)
+        }
 
         // temporary
         Picasso.get().load("https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg")

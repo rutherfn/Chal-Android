@@ -18,7 +18,7 @@ class ChallengesPostsConverter {
             return Collections.emptyList()
         }
 
-        val listType = object : TypeToken<ArrayList<String>>() {}.type
+        val listType = object : TypeToken<ArrayList<ChallengesPostsEntity>>() {}.type
         return gson.fromJson(data, listType)
     }
 

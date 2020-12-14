@@ -23,5 +23,5 @@ data class ChallengesPostsEntity(
     var currentDay: Int,
     @ColumnInfo(name = "comments")
     @TypeConverters(CommentsConverter::class)
-    var comments: List<CommentsEntity>
+    var comments: List<CommentsEntity>?
 )

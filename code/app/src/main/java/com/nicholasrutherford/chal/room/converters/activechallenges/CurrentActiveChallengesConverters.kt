@@ -18,7 +18,7 @@ class CurrentActiveChallengesConverters {
             return Collections.emptyList()
         }
 
-        val listType = object : TypeToken<ArrayList<String>>() {}.type
+        val listType = object : TypeToken<ArrayList<ActiveChallengesEntity>>() {}.type
         return gson.fromJson(data, listType)
     }
 

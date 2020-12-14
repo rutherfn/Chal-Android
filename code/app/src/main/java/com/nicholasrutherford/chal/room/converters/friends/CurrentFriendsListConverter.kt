@@ -17,7 +17,7 @@ class CurrentFriendsListConverter {
             return Collections.emptyList()
         }
 
-        val listType = object : TypeToken<ArrayList<String>>() {}.type
+        val listType = object : TypeToken<ArrayList<FriendsEntity>>() {}.type
         return gson.fromJson(data, listType)
     }
 
