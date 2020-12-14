@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.ext.newsfeed
+package com.nicholasrutherford.chal.ext.fragments.newsfeed
 
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
 import com.nicholasrutherford.chal.room.entity.firebasekey.FirebaseKeyEntity

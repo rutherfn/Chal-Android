@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.ext.login
+package com.nicholasrutherford.chal.ext.fragments.login
 
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
 

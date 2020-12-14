@@ -122,7 +122,7 @@ class LoginViewModel(private val loginActivity: LoginActivity, private val appCo
     }
 
     class LoginViewStateImpl: LoginViewState {
-        override var emailErrorImageVisible = false
-        override var emailErrorTextVisible = false
+        override var emailErrorImageVisible: Boolean = false
+        override var emailErrorTextVisible: Boolean = false
     }
 }

@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentChallengeDetailsBinding
-import com.nicholasrutherford.chal.ext.challengedetails.ChallengeDetailsFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.challengedetails.ChallengeDetailsFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 
 class ChallengeDetailsFragment (private val mainActivity: MainActivity, private val appContext: Context): Fragment(),

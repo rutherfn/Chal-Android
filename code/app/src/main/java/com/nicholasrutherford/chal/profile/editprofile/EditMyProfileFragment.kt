@@ -11,7 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentEditProfileBinding
-import com.nicholasrutherford.chal.ext.editprofile.EditProfileExtension
+import com.nicholasrutherford.chal.ext.fragments.editprofile.EditProfileExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 
 class EditMyProfileFragment(private val mainActivity: MainActivity, private val appContext: Context): Fragment(), EditProfileExtension {

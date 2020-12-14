@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.ext.challengedetails
+package com.nicholasrutherford.chal.ext.fragments.challengedetails
 
 import com.nicholasrutherford.chal.databinding.FragmentChallengeDetailsBinding
 

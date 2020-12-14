@@ -61,7 +61,7 @@ class LoginNavigationImpl : LoginNavigation {
     }
 
     override fun hideAcProgress() {
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.dismiss()
         }
     }

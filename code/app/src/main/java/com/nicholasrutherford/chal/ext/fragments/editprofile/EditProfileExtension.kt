@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.ext.editprofile
+package com.nicholasrutherford.chal.ext.fragments.editprofile
 
 import com.nicholasrutherford.chal.databinding.FragmentEditProfileBinding
 

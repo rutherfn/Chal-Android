@@ -3,7 +3,10 @@ package com.nicholasrutherford.chal.firebase
 // will do for now, stock image if user does not have a profile picture
 const val DEFAULT_PROFILE_IMAGE = "https://www.dovercourt.org/wp-content/uploads/2019/11/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg"
 
-const val USERS = "/users/" // realtime database route
+fun bindUserId (uid: String?): String { return "/users/$uid" }
+fun bindUserImageFile (fileName: String): String { return "/images/$fileName" }
+
+const val USERS = "/users/"
 
 // route for general info
 const val AGE = "age"

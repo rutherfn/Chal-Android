@@ -12,7 +12,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.databinding.FragmentCreateAccountBinding
-import com.nicholasrutherford.chal.ext.createaccount.CreateAccountFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.createaccount.CreateAccountFragmentExtension
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone

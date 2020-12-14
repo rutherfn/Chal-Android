@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.ext.forgotpassword
+package com.nicholasrutherford.chal.ext.fragments.forgotpassword
 
 import com.nicholasrutherford.chal.databinding.FragmentForgotPasswordBinding
 

@@ -42,7 +42,7 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-        <activity android:name=".account.uploadprofilepicture.UploadPhotoActivity"
+        <activity android:name=".account.uploadphoto.UploadPhotoActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
 

@@ -9,7 +9,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountNavigation
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity
 import com.nicholasrutherford.chal.account.login.LoginActivity
-import com.nicholasrutherford.chal.account.uploadprofilepicture.UploadPhotoActivity
+import com.nicholasrutherford.chal.account.uploadphoto.UploadPhotoActivity
 
 class CreateAccountNavigationImpl : CreateAccountNavigation {
 

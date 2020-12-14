@@ -31,8 +31,8 @@ data class UserEntity(
     var age: Int,
     @ColumnInfo(name = "currentFriends")
     @TypeConverters(CurrentFriendsListConverter::class)
-    var currentFriends: List<FriendsEntity>,
+    var currentFriends: List<FriendsEntity>?,
     @ColumnInfo(name = "currentActiveChallenges")
     @TypeConverters(CurrentActiveChallengesConverters::class)
-    var activeChallengeEntities: List<ActiveChallengesEntity>
+    var activeChallengeEntities: List<ActiveChallengesEntity>?
 )

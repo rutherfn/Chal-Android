@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.ext.more
+package com.nicholasrutherford.chal.ext.fragments.more
 
 import com.nicholasrutherford.chal.databinding.FragmentMoreBinding
 

@@ -13,7 +13,7 @@ import com.nicholasrutherford.chal.ChalRoom
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
-import com.nicholasrutherford.chal.ext.newsfeed.NewsFeedRedesignFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.room.entity.firebasekey.FirebaseKeyEntity
 

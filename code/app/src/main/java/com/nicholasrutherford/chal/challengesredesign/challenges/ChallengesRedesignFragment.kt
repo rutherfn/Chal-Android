@@ -11,7 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentRedesignChallengesBinding
-import com.nicholasrutherford.chal.ext.challengesredesign.ChallengesRedesignFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.challengesredesign.ChallengesRedesignFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.squareup.picasso.Picasso
 

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nicholasrutherford.chal.databinding.FragmentSignUpBinding
-import com.nicholasrutherford.chal.ext.signup.SignUpFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.signup.SignUpFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.navigationimpl.signup.SignUpNavigationImpl
 

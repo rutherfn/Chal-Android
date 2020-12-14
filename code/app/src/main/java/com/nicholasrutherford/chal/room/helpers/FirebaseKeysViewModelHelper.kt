@@ -1,6 +1,5 @@
 package com.nicholasrutherford.chal.room.helpers
 
-import android.app.Application
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -12,10 +11,7 @@ import com.nicholasrutherford.chal.room.entity.firebasekey.FirebaseKeyEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class FirebaseKeysViewModelHelper(
-    val application: Application,
-    val viewModelScope: CoroutineScope
-) {
+class FirebaseKeysViewModelHelper(val viewModelScope: CoroutineScope) {
 
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
 

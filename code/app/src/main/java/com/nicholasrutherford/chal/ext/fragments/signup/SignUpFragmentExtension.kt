@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.ext.signup
+package com.nicholasrutherford.chal.ext.fragments.signup
 
 import com.nicholasrutherford.chal.databinding.FragmentSignUpBinding
 

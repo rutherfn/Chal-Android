@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.ext.challengesredesign
+package com.nicholasrutherford.chal.ext.fragments.challengesredesign
 
 import com.nicholasrutherford.chal.databinding.FragmentRedesignChallengesBinding
 

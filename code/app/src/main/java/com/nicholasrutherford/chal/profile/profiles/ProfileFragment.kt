@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentProfilesBinding
-import com.nicholasrutherford.chal.ext.profile.ProfileFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.profile.ProfileFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.squareup.picasso.Picasso
 

@@ -14,10 +14,7 @@ class SplashViewModel(context: Context, private val activity: SplashActivity)  :
     var viewState = SplashViewModelImpl()
 
     init {
-        val firebaseKeysHelper = FirebaseKeysViewModelHelper(
-            application = activity.application,
-            viewModelScope = viewModelScope
-        )
+        val firebaseKeysHelper = FirebaseKeysViewModelHelper(viewModelScope = viewModelScope)
         val chalRoom = ChalRoom(activity.application)
         firebaseKeysHelper.fetchLatestKeys(chalRoom)
 
