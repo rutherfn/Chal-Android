@@ -118,9 +118,11 @@
     <dimen name="profile_picture_image_width">100dp</dimen>
     <dimen name="challenges_background_height">190dp</dimen>
     <dimen name="challenges_details_background_height">320dp</dimen>
+    <dimen name="post_progress_picture_background_height">170dp</dimen>
     <dimen name="edit_profile_picture_background_height">115dp</dimen>
     <dimen name="challenges_details_image_height">30dp</dimen>
     <dimen name="challenges_details_image_width">30dp</dimen>
+    <dimen name="spinner_post_progress_width">354</dimen>
 
     <!-- Buttons Unique Sizes -->
     <dimen name="button_sign_up_size">300sp</dimen>

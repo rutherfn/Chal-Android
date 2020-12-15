@@ -88,7 +88,7 @@
         android:padding="@dimen/padding_6dp"
         android:textStyle="bold"
         android:textSize="@dimen/sub_header_text_size"
-        android:text="7 DAYS OF MEDITATION - HEALTH AND WELLNESS"
+        android:text="7 DAYS OF Meditation - HEALTH AND WELLNESS"
         app:layout_constraintStart_toStartOf="@+id/btnDayOfChallenge"
         app:layout_constraintTop_toBottomOf="@+id/btnDayOfChallenge"
         />

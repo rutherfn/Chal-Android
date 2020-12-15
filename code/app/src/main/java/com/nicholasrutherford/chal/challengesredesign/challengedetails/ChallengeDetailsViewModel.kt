@@ -103,7 +103,7 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
 
         writeActiveChallengesFirebase.writeCategoryName(STARTER_INDEX, "Health & Fitness")
         writeActiveChallengesFirebase.writeBio(STARTER_INDEX, "lorem ipsum dolor sit amet, consetetur spadiscing elitr, sed diam noumy elfrmod tempert invidunt vu volumpant. At vero eas et accusam eltistro duo doloroes et eu rebum")
-        writeActiveChallengesFirebase.writeName(STARTER_INDEX,"7 Days Of Mediation")
+        writeActiveChallengesFirebase.writeName(STARTER_INDEX,"7 Days Of Meditation")
         writeActiveChallengesFirebase.writeNumberOfDaysInChallenge(STARTER_INDEX, 7)
         writeActiveChallengesFirebase.writeTimeChallengeExpire(STARTER_INDEX, getDaysAgo(7))
         writeActiveChallengesFirebase.writeUserCurrentDay(STARTER_INDEX, 0)
