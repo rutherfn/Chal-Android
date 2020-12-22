@@ -9,6 +9,9 @@ interface FirebaseKeyDao {
     @Query("SELECT * FROM firebase_Keys")
     fun readAllKeys(): LiveData<List<FirebaseKeyEntity>>
 
+    @Query("SELECT * FROM firebase_Keys")
+    suspend fun readAllKeysRegular(): List<FirebaseKeyEntity>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addKey(firebaseKey: FirebaseKeyEntity)
 

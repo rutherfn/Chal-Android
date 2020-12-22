@@ -49,7 +49,6 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
         clickListeners(bind)
         updateView(bind)
 
-        // test functionality
         return bind.root
     }
     override fun bindAdapter(bind: FragmentRedesignMyFeedBinding) {

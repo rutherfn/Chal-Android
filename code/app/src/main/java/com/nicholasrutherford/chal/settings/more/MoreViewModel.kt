@@ -47,9 +47,9 @@ class MoreViewModel(private val mainActivity: MainActivity, private val appConte
         timer.start()
     }
 
-    fun onMyProfileClicked() {
-        navigation.showMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView)
-    }
+    fun onUploadProgressClicked() { navigation.showProgressUpload(mainActivity, appContext, true, container) }
+
+    fun onMyProfileClicked() = navigation.showMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView)
 
     inner class MoreViewStateImpl: MoreViewState {
         override var profilePictureDirectory = ""

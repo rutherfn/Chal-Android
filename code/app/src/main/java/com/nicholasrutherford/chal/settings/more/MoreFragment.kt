@@ -71,7 +71,9 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
             // we should load in the users profile fragment
         }
         bind.clMore.cvUploadPost.setOnClickListener {
-            // we should load in the upload post layout
+            viewModel?.let { moreViewModel ->
+                moreViewModel.onUploadProgressClicked()
+            }
         }
         bind.clMore.cvSettings.setOnClickListener {
             //load in the settings layout

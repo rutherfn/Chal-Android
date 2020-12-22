@@ -9,6 +9,8 @@ import com.nicholasrutherford.chal.ChalRoom
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.room.entity.firebasekey.FirebaseKeyEntity
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class FirebaseKeysViewModelHelper(val viewModelScope: CoroutineScope) {
@@ -16,6 +18,9 @@ class FirebaseKeysViewModelHelper(val viewModelScope: CoroutineScope) {
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
 
     var mAuth: FirebaseAuth? = null
+
+    val _allKeys = MutableStateFlow((listOf<FirebaseKeyEntity>()))
+    val allKeys: StateFlow<List<FirebaseKeyEntity>> = _allKeys
 
     init {
         mAuth = FirebaseAuth.getInstance()
@@ -41,6 +46,9 @@ class FirebaseKeysViewModelHelper(val viewModelScope: CoroutineScope) {
                             )
                         }
                     }
+                    viewModelScope.launch {
+                        _allKeys.value = chalRoom.firebaseKeyRepository.readAllKeysRegular()
+                    }
                 } else {
                     println("we have no users in our account error")
                 }
@@ -48,6 +56,7 @@ class FirebaseKeysViewModelHelper(val viewModelScope: CoroutineScope) {
             }
 
         })
+
     }
 
     fun addFirebaseKey(firebaseKeyEntity: FirebaseKeyEntity, chalRoom: ChalRoom) {

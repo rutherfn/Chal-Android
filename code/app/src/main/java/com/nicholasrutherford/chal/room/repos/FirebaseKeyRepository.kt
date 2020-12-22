@@ -8,6 +8,8 @@ class FirebaseKeyRepository(private val firebaseKeyDao: FirebaseKeyDao) {
 
     val readAllKeys: LiveData<List<FirebaseKeyEntity>> = firebaseKeyDao.readAllKeys()
 
+    suspend fun readAllKeysRegular() = firebaseKeyDao.readAllKeysRegular()
+
     suspend fun addFirebaseKey(keyEntity: FirebaseKeyEntity) {
         firebaseKeyDao.addKey(keyEntity)
     }
