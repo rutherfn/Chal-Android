@@ -2,6 +2,7 @@ package com.nicholasrutherford.chal.splash
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.nicholasrutherford.chal.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
@@ -11,6 +12,7 @@ class SplashActivity : AppCompatActivity() {
         val binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val viewModel = SplashViewModel(applicationContext, this)
+
         binding.ivSplashLogo.setImageResource(viewModel.viewState.splashImageRes)
     }
 

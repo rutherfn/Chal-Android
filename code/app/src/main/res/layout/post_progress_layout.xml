@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:background="@color/colorSmokeWhite"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/padding_10dp"
+    android:fillViewport="true"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivPostProgress"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/post_progress_picture_background_height"
+            android:alpha="0.6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/ivMyEditProfileBackground"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/post_progress_picture_background_height"
+            android:alpha="0.9"
+            android:background="@color/colorLightBlue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvPostProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:padding="@dimen/padding_6dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:text="@string/post_your_progress"
+            android:textColor="@color/colorSmokeWhite"
+            android:textSize="@dimen/header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvPostProgressDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_6dp"
+            android:text="@string/post_your_progress_description"
+            android:textColor="@color/colorSmokeWhite"
+            android:textSize="@dimen/body_text_size"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivPostProgress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvPostProgress"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostProgress"
+            />
+
+        <TextView
+            android:id="@+id/tvSelectChallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_26dp"
+            android:text="@string/select_challenge"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:padding="@dimen/padding_6dp"
+            android:textSize="@dimen/sub_header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/tvPostProgressDescription"
+            app:layout_constraintTop_toBottomOf="@+id/ivPostProgress"
+            />
+
+        <Spinner
+            android:id="@+id/spSelectChallenge"
+            android:layout_width="@dimen/spinner_post_progress_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_6dp"
+            app:layout_constraintStart_toStartOf="@+id/tvSelectChallenge"
+            app:layout_constraintTop_toBottomOf="@+id/tvSelectChallenge"
+            />
+
+        <TextView
+            android:id="@+id/tvSelectCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/select_category"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:padding="@dimen/padding_6dp"
+            android:textSize="@dimen/sub_header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/spSelectChallenge"
+            app:layout_constraintTop_toBottomOf="@+id/spSelectChallenge"
+            />
+
+        <Spinner
+            android:id="@+id/spSelectCategory"
+            android:layout_width="@dimen/spinner_post_progress_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_6dp"
+            app:layout_constraintStart_toStartOf="@+id/tvSelectCategory"
+            app:layout_constraintTop_toBottomOf="@+id/tvSelectCategory"
+            />
+
+        <TextView
+            android:id="@+id/tvAddCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/add_caption"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:padding="@dimen/padding_6dp"
+            android:textSize="@dimen/sub_header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/spSelectCategory"
+            app:layout_constraintTop_toBottomOf="@+id/spSelectCategory"
+            />
+
+        <EditText
+            android:id="@+id/etAddCaption"
+            android:layout_width="354dp"
+            android:layout_height="wrap_content"
+            android:ems="17"
+            android:layout_marginTop="@dimen/margin_6dp"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            app:layout_constraintStart_toStartOf="@+id/tvAddCaption"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddCaption"
+            />
+
+        <TextView
+            android:id="@+id/tvUploadImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/upload_image"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:padding="@dimen/padding_6dp"
+            android:textSize="@dimen/sub_header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/etAddCaption"
+            app:layout_constraintTop_toBottomOf="@+id/etAddCaption"
+            />
+
+        <ImageView
+            android:id="@+id/ivUploadImage"
+            android:layout_width="wrap_content"
+            android:layout_height="135dp"
+            android:layout_marginTop="@dimen/margin_4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvUploadImage"
+            app:srcCompat="@drawable/placeholder"
+            />
+
+        <Button
+            android:id="@+id/btnPostProgressToMyFeed"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:text="@string/post_progress_to_my_feed"
+            android:padding="@dimen/padding_10dp"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sub_header_text_size"
+            app:layout_constraintEnd_toEndOf="@+id/ivUploadImage"
+            app:layout_constraintStart_toStartOf="@+id/ivUploadImage"
+            app:layout_constraintTop_toBottomOf="@+id/ivUploadImage"
+            />
+
+        <Button
+            android:id="@+id/btnCancelAndDiscardPost"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorSmokeWhite"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/cancel_and_discard_post"
+            android:padding="@dimen/padding_10dp"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sub_header_text_size"
+            app:layout_constraintEnd_toEndOf="@+id/btnPostProgressToMyFeed"
+            app:layout_constraintStart_toStartOf="@+id/btnPostProgressToMyFeed"
+            app:layout_constraintTop_toBottomOf="@+id/btnPostProgressToMyFeed" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

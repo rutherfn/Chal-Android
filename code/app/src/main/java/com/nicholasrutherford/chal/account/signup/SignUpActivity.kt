@@ -4,12 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivitySignupBinding
-import com.nicholasrutherford.chal.fragments.signUpFragment
-import com.nicholasrutherford.chal.navigationimpl.SignUpNavigationImpl
+import com.nicholasrutherford.chal.signUpFragment
+import com.nicholasrutherford.chal.navigationimpl.signup.SignUpNavigationImpl
 
 class SignUpActivity : AppCompatActivity() {
     private var binding: ActivitySignupBinding? = null
-    private val navigation = SignUpNavigationImpl()
+    private val navigation =
+        SignUpNavigationImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +20,11 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun loadSignUpFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.containerSignUp, signUpFragment(this, applicationContext), signUpFragment(this, applicationContext).javaClass.simpleName)
+        supportFragmentManager.beginTransaction().replace(R.id.containerSignUp,
+            signUpFragment(this, applicationContext), signUpFragment(
+                this,
+                applicationContext
+            ).javaClass.simpleName)
             .commit()
     }
 

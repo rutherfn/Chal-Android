@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.CountDownTimer
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.navigationimpl.CreateAccountNavigationImpl
+import com.nicholasrutherford.chal.navigationimpl.creatreaccount.CreateAccountNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -19,9 +19,8 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
     private var isPasswordEmpty: Boolean = false
     private var isPasswordCorrectFormat: Boolean = false
 
-    private var isUsernameEmpty: Boolean = false
-
-    private val navigation = CreateAccountNavigationImpl()
+    private val navigation =
+        CreateAccountNavigationImpl()
 
     val viewState = CreateAccountViewStateImpl()
 
@@ -155,9 +154,7 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
 
     inner class CreateAccountViewStateImpl: CreateAccountViewState {
         override var usernameErrorVisible = false
-
         override var emailErrorVisible = false
-
         override var passwordErrorVisible = false
 }
 

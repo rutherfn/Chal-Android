@@ -4,13 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityCreateAccountBinding
-import com.nicholasrutherford.chal.fragments.createAccountFragment
-import com.nicholasrutherford.chal.navigationimpl.CreateAccountNavigationImpl
+import com.nicholasrutherford.chal.createAccountFragment
+import com.nicholasrutherford.chal.navigationimpl.creatreaccount.CreateAccountNavigationImpl
 
 class CreateAccountActivity : AppCompatActivity() {
     private val fm = supportFragmentManager
     private var binding: ActivityCreateAccountBinding? = null
-    private var navigation = CreateAccountNavigationImpl()
+    private var navigation =
+        CreateAccountNavigationImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,8 +21,15 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun loadCreateAccountFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.containerCreateAccount, createAccountFragment(this, applicationContext),
-        createAccountFragment(this, applicationContext).javaClass.simpleName)
+        supportFragmentManager.beginTransaction().replace(R.id.containerCreateAccount,
+            createAccountFragment(
+                this,
+                applicationContext
+            ),
+        createAccountFragment(
+            this,
+            applicationContext
+        ).javaClass.simpleName)
             .commit()
     }
 

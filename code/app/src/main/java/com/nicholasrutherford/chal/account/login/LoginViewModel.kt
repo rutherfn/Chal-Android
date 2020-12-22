@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.helpers.Helper
-import com.nicholasrutherford.chal.navigationimpl.LoginNavigationImpl
+import com.nicholasrutherford.chal.navigationimpl.login.LoginNavigationImpl
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +20,8 @@ class LoginViewModel(private val loginActivity: LoginActivity, private val appCo
 
     val viewState = LoginViewStateImpl()
 
-    private val navigation = LoginNavigationImpl()
+    private val navigation =
+        LoginNavigationImpl()
     private val helper = Helper()
 
     private var alertErrorMessage: String = ""
@@ -121,7 +122,7 @@ class LoginViewModel(private val loginActivity: LoginActivity, private val appCo
     }
 
     class LoginViewStateImpl: LoginViewState {
-        override var emailErrorImageVisible = false
-        override var emailErrorTextVisible = false
+        override var emailErrorImageVisible: Boolean = false
+        override var emailErrorTextVisible: Boolean = false
     }
 }

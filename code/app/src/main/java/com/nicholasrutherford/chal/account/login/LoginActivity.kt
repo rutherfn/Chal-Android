@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityLoginBinding
-import com.nicholasrutherford.chal.fragments.loginFragment
+import com.nicholasrutherford.chal.loginFragment
 
 class LoginActivity : AppCompatActivity() {
     private var binding: ActivityLoginBinding? = null
@@ -17,8 +17,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loadLoginFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.containerLogin, loginFragment(this,applicationContext),
-            loginFragment(this,applicationContext).javaClass.simpleName)
+        supportFragmentManager.beginTransaction().replace(R.id.containerLogin,
+            loginFragment(this, applicationContext),
+            loginFragment(this, applicationContext).javaClass.simpleName)
             .commit()
     }
 

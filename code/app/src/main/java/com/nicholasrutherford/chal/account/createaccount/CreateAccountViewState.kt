@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.account.createaccount
 
-import com.nicholasrutherford.chal.viewstate.ViewState
+import com.nicholasrutherford.chal.ViewState
 
 interface CreateAccountViewState : ViewState {
     var usernameErrorVisible: Boolean

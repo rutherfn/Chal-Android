@@ -64,6 +64,10 @@ dependencies {
     // picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
     //Login Buttons
     implementation 'com.shaishavgandhi:login-buttons:1.0.0'
 
@@ -77,6 +81,9 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     // room
     implementation "androidx.room:room-runtime:2.2.5"

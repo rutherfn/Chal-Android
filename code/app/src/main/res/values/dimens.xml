@@ -1,11 +1,21 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
 
+    <dimen name="cl_toolbar_more_height">45dp</dimen>
+    <dimen name="cl_toolbar_post_height">60dp</dimen>
+
+    <dimen name="chal_horz_line_height">2dp</dimen>
+    <dimen name="chal_horz_line_weight">350dp</dimen>
+
     <!-- Defaults Across App -->
     <dimen name="header_text_size">30sp</dimen>
+    <dimen name="sub_header_2_text_size">24sp</dimen>
     <dimen name="sub_header_text_size">20sp</dimen>
     <dimen name="body_text_size">17sp</dimen>
+    <dimen name="profile_menu_edit_text_size">14sp</dimen>
     <dimen name="sub_body_text_size">9sp</dimen>
+    <dimen name="sub_body_challenge_text_size">12sp</dimen>
+    <dimen name="card_menu_text_size">15sp</dimen>
     <dimen name="et_label_text_size">16sp</dimen>
 
     <dimen name="wall_header_text_size">22sp</dimen>
@@ -13,10 +23,26 @@
     <dimen name="wall_body_text_size">16sp</dimen>
     <dimen name="wall_hash_tag_size">13sp</dimen>
 
+    <dimen name="more_close_text_size">10dp</dimen>
+
     <!-- Elements Unique Text Sizes -->
     <dimen name="button_text_size">20sp</dimen>
 
     <!-- Images Unique Sizes -->
+    <dimen name="challenge_icon_height">115dp</dimen>
+    <dimen name="challenge_icon_width">115dp</dimen>
+    <dimen name="cv_challenge_icon_height">30dp</dimen>
+    <dimen name="cv_challenge_icon_width">30dp</dimen>
+    <dimen name="profile_my_fiends_image_height">20dp</dimen>
+    <dimen name="profile_my_fiends_image_width">20dp</dimen>
+    <dimen name="profile_challenge_image_height">20dp</dimen>
+    <dimen name="profile_challenge_image_width">20dp</dimen>
+    <dimen name="profile_image_height">320dp</dimen>
+    <dimen name="more_images_height">50dp</dimen>
+    <dimen name="more_images_width">50dp</dimen>
+    <dimen name="card_view_more_corner_radius">10dp</dimen>
+    <dimen name="card_view_more_height">107dp</dimen>
+    <dimen name="card_view_more_width">165dp</dimen>
     <dimen name="iv_close_width">30dp</dimen>
     <dimen name="iv_close_height">30dp</dimen>
     <dimen name="card_view_wall_height">525dp</dimen>
@@ -86,10 +112,31 @@
     <dimen name="phone_width">20dp</dimen>
     <dimen name="phone_height">20dp</dimen>
     <dimen name="btn_continue_phone_width">300dp</dimen>
+    <dimen name="profile_image_edit_height">17dp</dimen>
+    <dimen name="profile_image_edit_width">17dp</dimen>
+    <dimen name="profile_picture_image_height">100dp</dimen>
+    <dimen name="profile_picture_image_width">100dp</dimen>
+    <dimen name="challenges_background_height">190dp</dimen>
+    <dimen name="challenges_details_background_height">320dp</dimen>
+    <dimen name="post_progress_picture_background_height">170dp</dimen>
+    <dimen name="edit_profile_picture_background_height">115dp</dimen>
+    <dimen name="challenges_details_image_height">30dp</dimen>
+    <dimen name="challenges_details_image_width">30dp</dimen>
+    <dimen name="spinner_post_progress_width">354dp</dimen>
 
     <!-- Buttons Unique Sizes -->
     <dimen name="button_sign_up_size">300sp</dimen>
     <dimen name="button_settings_width">300sp</dimen>
+    <dimen name="ib_more_back_height">35sp</dimen>
+    <dimen name="ib_more_back_width">35sp</dimen>
+    <dimen name="iv_background_close_height">45dp</dimen>
+    <dimen name="iv_background_close_width">45dp</dimen>
+    <dimen name="iv_background_upload_height">45dp</dimen>
+    <dimen name="iv_background_upload_width">45dp</dimen>
+    <dimen name="iv_more_close_height">10dp</dimen>
+    <dimen name="iv_more_close_width">10dp</dimen>
+    <dimen name="iv_upload_height">15dp</dimen>
+    <dimen name="iv_upload_width">15dp</dimen>
 
     <!-- Margins -->
     <dimen name="margin_2dp">2dp</dimen>
@@ -107,6 +154,8 @@
     <dimen name="margin_26dp">26dp</dimen>
     <dimen name="margin_28dp">28dp</dimen>
     <dimen name="margin_30dp">30dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_60dp">60dp</dimen>
 
     <!-- Padding -->
     <dimen name="padding_2dp">2dp</dimen>
