@@ -74,6 +74,7 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
     }
 
     override fun updateView(bind: FragmentRedesignMyFeedBinding) {
+        bind.clEndOfChallenges.tvEndOfChallenges.text = "You reached the end of the feed"
         bind.tbRedesignChallenges.tvTitle.text = viewModel?.viewState?.toolbarName
 
         val options = RequestOptions()
@@ -91,6 +92,7 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
 
         lifecycleScope.launch {
             chalRoom.userRepository.readAllUsersRegular().forEach { users ->
+                println(users.username)
                 users.activeChallengeEntities?.forEach { challengesPosts ->
                     challengesPosts.activeChallengesPosts?.let { challengesPostsList ->
                         _allChallengesPosts.value = challengesPostsList

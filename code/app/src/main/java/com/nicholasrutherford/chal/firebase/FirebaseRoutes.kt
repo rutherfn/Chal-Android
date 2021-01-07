@@ -28,6 +28,15 @@ const val NUMBER_OF_DAYS_OF_CHALLENGE = "numberOfDaysOfChallenge"
 const val TIME_CHANGE_EXPIRE = "timeChallengeExpire"
 const val USER_CURRENT_DAY = "userCurrentDay"
 
+const val ACTIVE_CHALLENGES_POSTS = "/activeChallengesPosts/"
+const val ID_ACTIVE_CHALLENGES_POST = "id"
+const val TITLE_ACTIVE_CHALLENGES_POST = "title"
+const val DESCRIPTION_ACTIVE_CHALLENGES_POST = "description"
+const val CATEGORY_ACTIVE_CHALLENGES_POST = "category"
+const val IMAGE_ACTIVE_CHALLENENGES_POST = "image"
+const val CURRENT_DAY_ACTIVE_CHALLENGES_POST = "currentDay"
+
+// comments here
 
 const val FRIENDS = "/friends/"
 const val EMAIL_FRIENDS = "email"

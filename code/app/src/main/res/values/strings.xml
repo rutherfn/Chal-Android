@@ -122,6 +122,7 @@
     <string name="my_challenges">My Challlenges</string>
     <string name="my_feed">My Feed</string>
     <string name="my_profile">My Profile</string>
+    <string name="no">No</string>
     <string name="ok">OK</string>
     <string name="password">Password</string>
     <string name="phone">Phone</string>
@@ -158,6 +159,7 @@
     <string name="upload_image">Upload Image</string>
     <string name="upload_post">Upload Post</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
+    <string name="yes">Yes</string>
     <string name="font_1">ClinicaPro-Italic</string>
     <string name="font_1_location">font/ClinicaPro-Italic.otf</string>
     <string name="font_2">ClinicaPro-Regular</string>

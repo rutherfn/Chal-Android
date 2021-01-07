@@ -2,9 +2,13 @@ package com.nicholasrutherford.chal.newsfeed
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.nicholasrutherford.chal.ChalRoom
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
+import com.nicholasrutherford.chal.room.entity.user.UserEntity
+import kotlinx.coroutines.launch
 
 class NewsFeedRedesignViewModel(private val mainActivity: MainActivity,
                                 private val appContext: Context,
@@ -23,6 +27,15 @@ class NewsFeedRedesignViewModel(private val mainActivity: MainActivity,
         }
         readProfileDetailsFirebase.getUserProfilePicture()?.let { profilePicture ->
             viewState.toolbarImage = profilePicture
+        }
+    }
+
+    private fun test() {
+        val chalRoom = ChalRoom(mainActivity.application)
+        viewModelScope.launch {
+            val user = chalRoom.userRepository.getUser(viewState.toolbarName)
+
+            println(user.username)
         }
     }
 

@@ -13,7 +13,7 @@ import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.profileFragment
 import com.nicholasrutherford.chal.helpers.visibleOrGone
-import com.nicholasrutherford.chal.progressUploadFragment
+import com.nicholasrutherford.chal.progressupload.ProgressUploadActivity
 import com.nicholasrutherford.chal.settings.more.MoreNavigation
 
 class MoreNavigationImpl : MoreNavigation {
@@ -51,6 +51,11 @@ class MoreNavigationImpl : MoreNavigation {
         }
     }
 
+    override fun showProgress(mainActivity: MainActivity, context: Context) {
+        val intent = Intent(context, ProgressUploadActivity::class.java)
+        mainActivity.startActivity(intent)
+    }
+
     override fun showMyProfile(activity: MainActivity, context: Context, isClicked: Boolean, fragmentManager: FragmentManager, id: Int, bottomNavigationView: BottomNavigationView) {
         if (isClicked) {
             bottomNavigationView.visibleOrGone = true
@@ -61,21 +66,6 @@ class MoreNavigationImpl : MoreNavigation {
                         context
                     ),
                 profileFragment(activity, context)::javaClass.name)
-                .commit()
-        }
-    }
-
-    override fun showProgressUpload(activity: MainActivity, context: Context, isClicked: Boolean, id: Int) {
-        val btNavigation = (activity as MainActivity).binding?.bvNavigation
-
-        if (isClicked) {
-            btNavigation?.visibleOrGone = true
-            activity.supportFragmentManager.beginTransaction()
-                .replace(id,
-                progressUploadFragment(
-                    activity, context
-                ),
-                progressUploadFragment(activity, context)::javaClass.name)
                 .commit()
         }
     }

@@ -51,6 +51,10 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
 
+        <activity android:name=".progressupload.ProgressUploadActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+
     </application>
 
 </manifest>

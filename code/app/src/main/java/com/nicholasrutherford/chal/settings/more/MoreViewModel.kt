@@ -47,7 +47,7 @@ class MoreViewModel(private val mainActivity: MainActivity, private val appConte
         timer.start()
     }
 
-    fun onUploadProgressClicked() { navigation.showProgressUpload(mainActivity, appContext, true, container) }
+    fun onUploadProgressClicked() { navigation.showProgress(mainActivity, appContext) }
 
     fun onMyProfileClicked() = navigation.showMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView)
 

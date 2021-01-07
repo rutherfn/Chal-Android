@@ -23,6 +23,7 @@ import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeDet
 import com.nicholasrutherford.chal.room.entity.activechallenges.ActiveChallengesEntity
 import com.nicholasrutherford.chal.room.entity.user.UserEntity
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 
 const val STARTER_INDEX = "0"
@@ -62,7 +63,6 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
     }
 
     fun onJoinChallengeClicked() {
-        navigation.showAcProgress(mainActivity)
         ref.child("$uid$ACTIVE_CHALLENGES$STARTER_INDEX/$NUMBER_OF_DAYS_OF_CHALLENGE").addValueEventListener(object: ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 println("error")
@@ -75,8 +75,6 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
                     if (snapshot.toInt() == 0) {
                         enrollUserIntoChallenge()
                     } else {
-                        navigation.hideAcProgress()
-
                         Toast.makeText(appContext, "Your already in this challenge!",
                             Toast.LENGTH_LONG).show()
                     }
@@ -90,6 +88,8 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
     }
 
     fun enrollUserIntoChallenge() {
+        val simpleDateFormat = SimpleDateFormat("EEE", Locale.ENGLISH)
+        val date = Date()
         var activeChallenge = ActiveChallenges(
             id = 0,
             name = "7 Dyas Of Mediation",
@@ -132,8 +132,9 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
 
         viewModelScope.launch {
             val user = chalRoom.userRepository.getUser(viewState.toolbarName)
+
             chalRoom.userRepository.updateUser(UserEntity(
-                id = user.id,
+                id = 11,
                 username = user.username,
                 email = user.email,
                 profileImageUrl = user.profileImageUrl,
