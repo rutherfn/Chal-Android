@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
 import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.testfairy.TestFairy
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         main(binding!!)
+        TestFairy.begin(this, "SDK-aPjHEtM8");
     }
 
     private fun main(binding: ActivityMainBinding) {
