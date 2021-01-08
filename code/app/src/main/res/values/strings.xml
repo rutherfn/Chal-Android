@@ -9,6 +9,10 @@
     <string name="already_have_a_account_text">Already have a account?</string>
     <string name="app_menu">App Menu</string>
     <string name="bio">Bio</string>
+    <string name="bug_descrption">Bug Description</string>
+    <string name="bug_report_title">Report A Bug</string>
+    <string name="bug_priority_level">Bug Priority Level</string>
+    <string name="bug_title">Bug Title</string>
     <string name="sample_challenge_title">Sample Challenge</string>
     <string name="cancel_and_discard_post">Cancel and Discard Post</string>
     <string name="category_fitness">Fitness</string>
@@ -133,6 +137,8 @@
     <string name="please_enter_your_email">Please Enter Your Email</string>
     <string name="primary_logo_content_desc">Primary Logo For Chal.</string>
     <string name="restart">Restart</string>
+    <string name="reporter_name">Reporter Name</string>
+    <string name="report_bug">Report Bug</string>
     <string name="select_category">Select Category</string>
     <string name="search_challenges">SEARCH</string>
     <string name="select_challenge">Select Challenge</string>

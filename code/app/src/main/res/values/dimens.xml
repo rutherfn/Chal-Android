@@ -123,9 +123,11 @@
     <dimen name="challenges_details_image_height">30dp</dimen>
     <dimen name="challenges_details_image_width">30dp</dimen>
     <dimen name="spinner_post_progress_width">354dp</dimen>
+    <dimen name="spinner_report_bug_width">354dp</dimen>
 
     <!-- Buttons Unique Sizes -->
     <dimen name="button_sign_up_size">300sp</dimen>
+    <dimen name="button_report_bug_width">250dp</dimen>
     <dimen name="button_settings_width">300sp</dimen>
     <dimen name="ib_more_back_height">35sp</dimen>
     <dimen name="ib_more_back_width">35sp</dimen>
