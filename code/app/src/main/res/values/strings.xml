@@ -166,6 +166,7 @@
     <string name="upload_post">Upload Post</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
     <string name="yes">Yes</string>
+    <string name="you_reached_the_end_of_the_feed">You reached the end of the feed</string>
     <string name="font_1">ClinicaPro-Italic</string>
     <string name="font_1_location">font/ClinicaPro-Italic.otf</string>
     <string name="font_2">ClinicaPro-Regular</string>

@@ -10,9 +10,7 @@ import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEn
 import com.nicholasrutherford.chal.room.entity.user.UserEntity
 import kotlinx.coroutines.launch
 
-class NewsFeedRedesignViewModel(private val mainActivity: MainActivity,
-                                private val appContext: Context,
-                                val activeChallengesPostsList: List<ChallengesPostsEntity>?) : ViewModel() {
+class NewsFeedRedesignViewModel(private val mainActivity: MainActivity, appContext: Context, val activeChallengesPostsList: List<ChallengesPostsEntity>?) : ViewModel() {
 
     val viewState = NewsFeedRedesignViewStateImpl()
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
@@ -21,7 +19,7 @@ class NewsFeedRedesignViewModel(private val mainActivity: MainActivity,
         initViewStateOnLoad()
     }
 
-    fun initViewStateOnLoad() {
+    private fun initViewStateOnLoad() {
         readProfileDetailsFirebase.getUsername()?.let { userName ->
             viewState.toolbarName = userName
         }

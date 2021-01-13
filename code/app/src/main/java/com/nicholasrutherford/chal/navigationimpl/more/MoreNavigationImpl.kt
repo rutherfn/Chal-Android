@@ -14,7 +14,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.profileFragment
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.progressupload.ProgressUploadActivity
-import com.nicholasrutherford.chal.settings.more.MoreNavigation
+import com.nicholasrutherford.chal.more.MoreNavigation
 
 class MoreNavigationImpl : MoreNavigation {
 

@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.settings.more
+package com.nicholasrutherford.chal.more
 
 import com.nicholasrutherford.chal.ViewState
 

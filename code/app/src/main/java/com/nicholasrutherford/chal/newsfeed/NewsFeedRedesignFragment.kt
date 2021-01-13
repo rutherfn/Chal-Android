@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.ChalRoom
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
@@ -28,7 +27,6 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
 
     private var newsFeedRedesignAdapter: NewsFeedRedesignAdapter? = null
     private val typeface = Typeface()
-    private var btNavigation: BottomNavigationView? = null
     private var viewModel: NewsFeedRedesignViewModel? = null
 
     private val _allChallengesPosts = MutableStateFlow(listOf<ChallengesPostsEntity>())
@@ -39,8 +37,8 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
         newsListActiveChallengesPostsUpdate()
 
         lifecycleScope.launch {
-            allChallengesPosts?.collect {
-                initViewModel(it)
+            allChallengesPosts.collect { challengesPosts ->
+                initViewModel(challengesPosts)
                 bindAdapter(bind)
             }
         }
@@ -62,29 +60,12 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
     }
 
     override fun updateTypefaces(bind: FragmentRedesignMyFeedBinding) {
-        typeface.setTypefaceForHeaderBold(bind.tbRedesignChallenges.tvTitle, appContext)
-        typeface.setTypefaceForSubHeaderBold(bind.clEndOfChallenges.tvEndOfChallenges, appContext)
-    }
-
-    override fun clickListeners(bind: FragmentRedesignMyFeedBinding) {
+        typeface.setTypefaceForHeaderBold(bind.tbMyFeed.tvTitle, appContext)
+        typeface.setTypefaceForSubHeaderBold(bind.clEndOfFeed.tvEndOfFeed, appContext)
     }
 
     override fun containerId(): Int {
         return R.id.container
-    }
-
-    override fun updateView(bind: FragmentRedesignMyFeedBinding) {
-        bind.clEndOfChallenges.tvEndOfChallenges.text = "You reached the end of the feed"
-        bind.tbRedesignChallenges.tvTitle.text = viewModel?.viewState?.toolbarName
-
-        val options = RequestOptions()
-            .placeholder(R.drawable.placeholder)
-            .error(R.drawable.placeholder)
-
-        viewModel?.let { newsFeedViewModel ->
-            Glide.with(this).load(newsFeedViewModel.viewState.toolbarImage).apply(options)
-                .into(bind.tbRedesignChallenges.cvProfile)
-        }
     }
 
     fun newsListActiveChallengesPostsUpdate() {
@@ -107,6 +88,28 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
 
     override fun initViewModel(activeChallengesPostsList: List<ChallengesPostsEntity>) {
         viewModel = NewsFeedRedesignViewModel(mainActivity, appContext, activeChallengesPostsList)
+    }
+
+    override fun clickListeners(bind: FragmentRedesignMyFeedBinding) {
+        bind.tbMyFeed.cvProfile.setOnClickListener {
+
+        }
+        bind.tbMyFeed.tvTitle.setOnClickListener {
+
+        }
+    }
+
+    override fun updateView(bind: FragmentRedesignMyFeedBinding) {
+        bind.tbMyFeed.tvTitle.text = viewModel?.viewState?.toolbarName
+
+        val options = RequestOptions()
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.placeholder)
+
+        viewModel?.let { newsFeedViewModel ->
+            Glide.with(this).load(newsFeedViewModel.viewState.toolbarImage).apply(options)
+                .into(bind.tbMyFeed.cvProfile)
+        }
     }
 
 }

@@ -8,17 +8,10 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/tbMyFeed"
+            android:id="@+id/tbBugReport"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            layout="@layout/toolbar_my_feed"
-            />
-
-        <include
-            android:id="@+id/clSvMyFeed"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            layout="@layout/search_view_home"
+            layout="@layout/toolbar_challenges_post"
             />
 
         <androidx.core.widget.NestedScrollView
@@ -30,14 +23,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvNewsFeedRedesign"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
                 <include
-                    android:id="@+id/clEndOfFeed"
-                    layout="@layout/end_of_feed_layout"
+                    android:id="@+id/clBugReport"
+                    layout="@layout/bug_report_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:baselineAligned="false"

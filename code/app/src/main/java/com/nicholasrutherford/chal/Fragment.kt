@@ -9,13 +9,15 @@ import com.nicholasrutherford.chal.account.signup.SignUpFragment
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.login.LoginFragment
 import com.nicholasrutherford.chal.account.signup.SignUpActivity
+import com.nicholasrutherford.chal.bugreport.BugReportFragment
 import com.nicholasrutherford.chal.challengesredesign.challengedetails.ChallengeDetailsFragment
 import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedesignFragment
 import com.nicholasrutherford.chal.newsfeed.NewsFeedRedesignFragment
 import com.nicholasrutherford.chal.profile.editprofile.EditMyProfileFragment
 import com.nicholasrutherford.chal.profile.profiles.ProfileFragment
-import com.nicholasrutherford.chal.settings.more.MoreFragment
+import com.nicholasrutherford.chal.more.MoreFragment
 
+fun bugReportFragment(mainActivity: MainActivity, appContext: Context) = BugReportFragment(mainActivity, appContext)
 fun challengeDetailsFragment(mainActivity: MainActivity, appContext: Context) = ChallengeDetailsFragment(mainActivity, appContext)
 fun challengesRedesignFragment(mainActivity: MainActivity, appContext: Context) = ChallengesRedesignFragment(mainActivity, appContext)
 fun createAccountFragment(activity: CreateAccountActivity, context: Context) = CreateAccountFragment(activity, context)
