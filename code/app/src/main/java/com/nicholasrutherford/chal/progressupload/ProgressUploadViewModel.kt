@@ -15,17 +15,16 @@ import com.nicholasrutherford.chal.challengesredesign.challengedetails.STARTER_I
 import com.nicholasrutherford.chal.data.realdata.ActiveChallengesPosts
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
+import com.nicholasrutherford.chal.firebase.CATEGORY_NAME
 import com.nicholasrutherford.chal.firebase.TITLE_ACTIVE_CHALLENGES_POST
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.activechallengepost.WriteActiveChallengesPostsFirebase
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
-import com.nicholasrutherford.chal.room.entity.activechallenges.ActiveChallengesEntity
 import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
-import com.nicholasrutherford.chal.room.entity.user.UserEntity
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.UUID
 
 class ProgressUploadViewModel(private val progressUploadActivity: ProgressUploadActivity, private val appContext: Context, private val container: Int) : ViewModel() {
 
@@ -112,18 +111,7 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
 
                         writeUpdatedPostToFirebase()
 
-                        progressImageUrl?.let { progressUrl ->
-                            var activeChallengePost = ActiveChallengesPosts(
-                                id = 0,
-                                title = userPostTitle,
-                                description = userPostBody,
-                                category = 0,
-                                image = progressUrl,
-                                currentDay = 0
-                            )
-
-                            updateUserProgressDb(activeChallengePost)
-                        }
+                        navigation.hideAcProgress()
                     }
                 }
             })
@@ -141,75 +129,6 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
         }
 
         writeActiveChallengesPostFirebase.writeCurrentDay(savedUserLastIndexOfProgress, "0")
-    }
-
-    fun updateUserProgressDb(activeChallengePost: ActiveChallengesPosts) {
-        val challengesPost = arrayListOf<ChallengesPostsEntity>()
-
-        val chalRoom = ChalRoom(progressUploadActivity.application)
-
-        viewModelScope.launch {
-            val user = chalRoom.userRepository.getUser(currentUsername)
-
-            // user.activeChallengeEntities?.let {
-            //     it.forEach { challengeEntities ->
-            //         challengeEntities.activeChallengesPosts!!.forEach { challengePost ->
-            //             challengesPost.add(challengePost)
-            //         }
-            //     }
-            // }
-
-            // user.activeChallengeEntities?.get(0)?.activeChallengesPosts?.forEach { challengePost ->
-            //     challengesPost.add(challengePost)
-            // }
-
-            val challengesPostsEntity = ChallengesPostsEntity(
-                id = 0,
-                title = activeChallengePost.title,
-                description = activeChallengePost.description,
-                category = activeChallengePost.category,
-                imageUrl = activeChallengePost.image,
-                currentDay = activeChallengePost.currentDay,
-                comments = null
-            )
-
-            challengesPost.add(challengesPostsEntity)
-
-            user.activeChallengeEntities?.get(0)?.let { firstActiveChallenge ->
-                val activeChallengesEntityList = listOf(
-                    ActiveChallengesEntity(
-                        id = firstActiveChallenge.id,
-                        nameOfChallenge = firstActiveChallenge.nameOfChallenge,
-                        description = firstActiveChallenge.description,
-                        numberOfDaysOfChallenge = firstActiveChallenge.numberOfDaysOfChallenge,
-                        challengeExpireTime = firstActiveChallenge.challengeExpireTime,
-                        currentDayOfChallenge = firstActiveChallenge.currentDayOfChallenge,
-                        categoryName = firstActiveChallenge.categoryName,
-                        activeChallengesPosts = challengesPost
-                    )
-                )
-
-                chalRoom.userRepository.updateUser(
-                    UserEntity(
-                    id = 11,
-                    username = user.username,
-                    email = user.email,
-                    profileImageUrl = user.profileImageUrl,
-                    password = user.password,
-                    firstName = user.firstName,
-                    lastName = user.lastName,
-                    bio = user.bio,
-                    age = user.age,
-                    currentFriends = user.currentFriends,
-                    activeChallengeEntities = activeChallengesEntityList
-                )
-                )
-
-                navigation.hideAcProgress()
-
-                // println(user.activeChallengeEntities!!.get(0).activeChallengesPosts?.get(0)?.title)
-            }
-        }
     }
 
     inner class ProgressUploadViewStateImpl : ProgressViewState {

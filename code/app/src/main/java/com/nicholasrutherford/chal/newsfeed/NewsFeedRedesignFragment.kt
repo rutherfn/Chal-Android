@@ -25,8 +25,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
-        NewsFeedRedesignFragmentExtension {
+class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private val appContext: Context) :
+    Fragment(),
+    NewsFeedRedesignFragmentExtension {
 
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
     var mAuth: FirebaseAuth? = null
@@ -108,8 +109,7 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
 
         lifecycleScope.launch {
             viewModel?.let { newsFeedViewModel ->
-                newsFeedViewModel.allUsers.collect { usersLsit ->
-                    println(usersLsit.size)
+                newsFeedViewModel.allUsers.collect { userList ->
                 }
             }
         }

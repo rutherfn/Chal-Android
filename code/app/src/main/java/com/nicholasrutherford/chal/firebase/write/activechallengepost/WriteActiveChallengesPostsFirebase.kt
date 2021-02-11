@@ -7,6 +7,7 @@ import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
 import com.nicholasrutherford.chal.firebase.CATEGORY_ACTIVE_CHALLENGES_POST
 import com.nicholasrutherford.chal.firebase.CURRENT_DAY_ACTIVE_CHALLENGES_POST
 import com.nicholasrutherford.chal.firebase.DESCRIPTION_ACTIVE_CHALLENGES_POST
+import com.nicholasrutherford.chal.firebase.IMAGE_ACTIVE_CHALLENENGES_POST
 import com.nicholasrutherford.chal.firebase.TITLE_ACTIVE_CHALLENGES_POST
 import com.nicholasrutherford.chal.firebase.USERS
 
@@ -22,26 +23,26 @@ class WriteActiveChallengesPostsFirebase() : WriteActiveChallengePostsExtension 
 
     override fun writeTitle(index: Int, newValue: String) {
         ref.child(parentDirectoryChallengePost(index))
-        .child(TITLE_ACTIVE_CHALLENGES_POST).setValue(newValue)
+            .child(TITLE_ACTIVE_CHALLENGES_POST).setValue(newValue)
     }
 
     override fun writeDescription(index: Int, newValue: String) {
         ref.child(parentDirectoryChallengePost(index))
-        .child(DESCRIPTION_ACTIVE_CHALLENGES_POST).setValue(newValue)
+            .child(DESCRIPTION_ACTIVE_CHALLENGES_POST).setValue(newValue)
     }
 
     override fun writeCategory(index: Int, newValue: Int) {
         ref.child(parentDirectoryChallengePost(index))
-        .child(CATEGORY_ACTIVE_CHALLENGES_POST).setValue(newValue)
+            .child(CATEGORY_ACTIVE_CHALLENGES_POST).setValue(newValue)
     }
 
     override fun writeImage(index: Int, newValue: String) {
         ref.child(parentDirectoryChallengePost(index))
-        .child(CATEGORY_ACTIVE_CHALLENGES_POST).setValue(newValue)
+            .child(IMAGE_ACTIVE_CHALLENENGES_POST).setValue(newValue)
     }
 
     override fun writeCurrentDay(index: Int, newValue: String) {
         ref.child(parentDirectoryChallengePost(index))
-        .child(CURRENT_DAY_ACTIVE_CHALLENGES_POST).setValue(newValue)
+            .child(CURRENT_DAY_ACTIVE_CHALLENGES_POST).setValue(newValue)
     }
 }

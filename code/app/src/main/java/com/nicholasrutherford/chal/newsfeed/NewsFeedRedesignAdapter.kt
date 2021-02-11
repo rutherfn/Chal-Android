@@ -9,10 +9,10 @@ import com.nicholasrutherford.chal.helpers.Typeface
 
 class NewsFeedRedesignAdapter(private val context: Context, private val viewModel: NewsFeedRedesignViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-       val inflater = LayoutInflater.from(parent.context)
-       val binding = RedesignMyFeedLayoutBinding.inflate(inflater, parent, false)
-       return NewsFeedRedsignViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = RedesignMyFeedLayoutBinding.inflate(inflater, parent, false)
+        return NewsFeedRedsignViewHolder(binding)
     }
 
     override fun getItemCount(): Int {

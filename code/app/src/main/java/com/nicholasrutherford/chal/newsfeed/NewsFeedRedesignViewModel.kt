@@ -95,7 +95,7 @@ class NewsFeedRedesignViewModel(private val mainActivity: MainActivity, appConte
     fun fetchUsers(firebaseKeys: List<FirebaseKeys>) {
         viewModelScope.launch {
             firebaseKeys.forEach { firebaseKey ->
-                ref.child(firebaseKey.key).addValueEventListener(object: ValueEventListener {
+                ref.child(firebaseKey.key).addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
                             val username = snapshot.child(USERNAME).value.toString()
@@ -130,25 +130,25 @@ class NewsFeedRedesignViewModel(private val mainActivity: MainActivity, appConte
                                                 ),
                                                 activeChallenges = listOf(
                                                     ActiveChallenge(
-                                                        name = snapshot.child(CATEGORY_NAME)
+                                                        name = snapshot.child(CATEGORY_NAME).value
                                                             .toString(),
-                                                        description = snapshot.child(DESCRIPTION)
+                                                        description = snapshot.child(DESCRIPTION).value
                                                             .toString(),
                                                         numberOfDaysOfChallenge = 11,
                                                         challengeExipreTime = snapshot.child(
                                                             TIME_CHANGE_EXPIRE
-                                                        ).toString(),
+                                                        ).value.toString(),
                                                         currentDayOfChallange = 3,
                                                         categoryName = snapshot.child(CATEGORY_NAME)
-                                                            .toString(),
+                                                            .value.toString(),
                                                         activeChallengesPosts = emptyList()
                                                     )
                                                 )
                                             )
-                                            usersList.add(user)
 
-                                            _allUsers.value = usersList
+                                            usersList.add(user)
                                         }
+                                        _allUsers.value = usersList
                                     }
                                 }
 
@@ -165,7 +165,6 @@ class NewsFeedRedesignViewModel(private val mainActivity: MainActivity, appConte
                 })
             }
         }
-
     }
 
     inner class NewsFeedRedesignViewStateImpl : NewsFeedRedesignViewState {
