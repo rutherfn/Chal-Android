@@ -38,13 +38,13 @@ class ProgressUploadNavigationImpl : ProgressUploadNavigation {
             .themeColor(Color.WHITE)
             .fadeColor(Color.DKGRAY).build()
 
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.show()
         }
     }
 
     override fun hideAcProgress() {
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.dismiss()
         }
     }
@@ -58,10 +58,9 @@ class ProgressUploadNavigationImpl : ProgressUploadNavigation {
 
         alertDialogBuilder.setMessage(alertMessageText)
             .setCancelable(false)
-            .setPositiveButton(progressUploadActivity.getString(R.string.ok)) {dialog, _ ->
+            .setPositiveButton(progressUploadActivity.getString(R.string.ok)) { dialog, _ ->
                 dialog.cancel()
             }
-
 
         val alert = alertDialogBuilder.create()
 
@@ -81,11 +80,11 @@ class ProgressUploadNavigationImpl : ProgressUploadNavigation {
 
         alertDialogBuilder.setMessage(alertMessageText)
             .setCancelable(false)
-            .setPositiveButton(progressUploadActivity.getString(R.string.yes)) {dialog, _ ->
+            .setPositiveButton(progressUploadActivity.getString(R.string.yes)) { dialog, _ ->
                 dialog.cancel()
                 showMainActivity(progressUploadActivity, context)
             }
-            .setNegativeButton(progressUploadActivity.getString(R.string.no)) {dialog, _ ->
+            .setNegativeButton(progressUploadActivity.getString(R.string.no)) { dialog, _ ->
                 dialog.cancel()
             }
 
@@ -94,5 +93,4 @@ class ProgressUploadNavigationImpl : ProgressUploadNavigation {
         alert.setTitle(alertTitle)
         alert.show()
     }
-
 }

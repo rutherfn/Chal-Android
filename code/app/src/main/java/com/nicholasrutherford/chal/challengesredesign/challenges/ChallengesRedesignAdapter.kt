@@ -14,9 +14,13 @@ import com.nicholasrutherford.chal.helpers.Typeface
 
 // whole logic for this class isn't set just place holder stuff until i get local challenges saved in.
 
-class ChallengesRedesignAdapter (private val mainActivity: MainActivity, private val viewModel: ChallengesRedesignViewModel, private val context: Context,
-                                 private val fragmentManager: FragmentManager, private val container: Int,
-                                 private val bottomNavigationView: BottomNavigationView
+class ChallengesRedesignAdapter(
+    private val mainActivity: MainActivity,
+    private val viewModel: ChallengesRedesignViewModel,
+    private val context: Context,
+    private val fragmentManager: FragmentManager,
+    private val container: Int,
+    private val bottomNavigationView: BottomNavigationView
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -35,9 +39,11 @@ class ChallengesRedesignAdapter (private val mainActivity: MainActivity, private
         }
     }
 
-    inner class ChallengesRedesignViewHolder(private var binding: ChallengesListLayoutBinding,
-                                             private val viewModel: ChallengesRedesignViewModel,
-                                             private val context: Context) : RecyclerView.ViewHolder(binding.root) {
+    inner class ChallengesRedesignViewHolder(
+        private var binding: ChallengesListLayoutBinding,
+        private val viewModel: ChallengesRedesignViewModel,
+        private val context: Context
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         val typeface = Typeface()
 
@@ -74,9 +80,6 @@ class ChallengesRedesignAdapter (private val mainActivity: MainActivity, private
             binding.ivChallengeThree.setOnClickListener {
                 viewModel.challengesRedesignNavigationImpl.showChallengeDetails(mainActivity, context, true, fragmentManager, container, bottomNavigationView)
             }
-
         }
-
     }
-
 }

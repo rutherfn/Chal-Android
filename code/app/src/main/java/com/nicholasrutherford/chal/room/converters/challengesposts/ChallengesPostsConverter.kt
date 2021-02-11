@@ -12,9 +12,9 @@ class ChallengesPostsConverter {
     var gson = Gson()
 
     @TypeConverter
-    fun fromChallengesPosts(data: String) : List<ChallengesPostsEntity>? {
+    fun fromChallengesPosts(data: String): List<ChallengesPostsEntity>? {
 
-        if(data == null) {
+        if (data == null) {
             return Collections.emptyList()
         }
 

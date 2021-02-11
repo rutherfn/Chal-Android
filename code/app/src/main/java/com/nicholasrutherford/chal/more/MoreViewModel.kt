@@ -13,9 +13,13 @@ import com.nicholasrutherford.chal.navigationimpl.more.MoreNavigationImpl
 const val MILLIS_IN_FUTURE = 3000
 const val COUNT_DOWN_INTERVAL = 100
 
-class MoreViewModel(private val mainActivity: MainActivity, private val appContext: Context,
-                    private val fragmentManager: FragmentManager, private val container: Int,
-                    private val bottomNavigationView: BottomNavigationView) : ViewModel() {
+class MoreViewModel(
+    private val mainActivity: MainActivity,
+    private val appContext: Context,
+    private val fragmentManager: FragmentManager,
+    private val container: Int,
+    private val bottomNavigationView: BottomNavigationView
+) : ViewModel() {
 
     val viewState = MoreViewStateImpl()
     val navigation =
@@ -42,17 +46,17 @@ class MoreViewModel(private val mainActivity: MainActivity, private val appConte
                 navigation.hideAcProgress()
                 navigation.login(mainActivity, appContext)
             }
-
         }
         timer.start()
     }
 
     fun onUploadProgressClicked() { navigation.showProgress(mainActivity, appContext) }
 
+    fun onReportBugClicked() = navigation.reportBug(mainActivity, appContext, bottomNavigationView)
+
     fun onMyProfileClicked() = navigation.showMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView)
 
-    inner class MoreViewStateImpl: MoreViewState {
+    inner class MoreViewStateImpl : MoreViewState {
         override var profilePictureDirectory = ""
     }
-
 }

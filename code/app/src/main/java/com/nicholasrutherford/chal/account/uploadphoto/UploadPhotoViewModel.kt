@@ -18,7 +18,7 @@ import com.nicholasrutherford.chal.room.entity.user.UserEntity
 import kotlinx.coroutines.launch
 import java.util.*
 
-class UploadPhotoViewModel (private val uploadPhotoActivity: UploadPhotoActivity, private val appContext: Context) : ViewModel() {
+class UploadPhotoViewModel(private val uploadPhotoActivity: UploadPhotoActivity, private val appContext: Context) : ViewModel() {
 
     val viewState = UploadPhotoViewStateImpl()
     private val navigation = UploadPhotoNavigationImpl()
@@ -60,11 +60,10 @@ class UploadPhotoViewModel (private val uploadPhotoActivity: UploadPhotoActivity
         viewState.email?.let { usersEmail ->
             viewState.password?.let { usersPassword ->
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(usersEmail, usersPassword)
-                    .addOnCompleteListener(uploadPhotoActivity) {  task ->
+                    .addOnCompleteListener(uploadPhotoActivity) { task ->
                     if (task.isSuccessful) {
                         uploadUserPhoto(photoUri)
                     }
-
                     }.addOnFailureListener {
                         navigation.hideAcProgress()
                         navigation.createAccountAlert("Issue creating your account. Please try again", uploadPhotoActivity.getString(
@@ -147,7 +146,7 @@ class UploadPhotoViewModel (private val uploadPhotoActivity: UploadPhotoActivity
         }
     }
 
-    class UploadPhotoViewStateImpl: UploadPhotoViewState {
+    class UploadPhotoViewStateImpl : UploadPhotoViewState {
         override var email: String? = ""
         override var password: String? = ""
         override var username: String? = ""

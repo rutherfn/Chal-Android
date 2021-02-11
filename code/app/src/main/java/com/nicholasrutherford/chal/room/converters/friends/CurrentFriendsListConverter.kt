@@ -12,8 +12,8 @@ class CurrentFriendsListConverter {
     var gson = Gson()
 
     @TypeConverter
-    fun fromFriends(data: String) : List<FriendsEntity>? {
-        if(data == null) {
+    fun fromFriends(data: String): List<FriendsEntity>? {
+        if (data == null) {
             return Collections.emptyList()
         }
 

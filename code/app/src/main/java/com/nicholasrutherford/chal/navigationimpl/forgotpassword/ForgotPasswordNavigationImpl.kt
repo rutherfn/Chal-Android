@@ -21,7 +21,7 @@ class ForgotPasswordNavigationImpl : ForgotPasswordNavigation {
             .themeColor(Color.WHITE)
             .fadeColor(Color.DKGRAY).build()
 
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.show()
         }
     }
@@ -42,7 +42,7 @@ class ForgotPasswordNavigationImpl : ForgotPasswordNavigation {
     }
 
     override fun hideAcProgress() {
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.dismiss()
         }
     }
@@ -52,5 +52,4 @@ class ForgotPasswordNavigationImpl : ForgotPasswordNavigation {
         forgotPasswordActivity.startActivity(intent)
         forgotPasswordActivity.finish()
     }
-
 }

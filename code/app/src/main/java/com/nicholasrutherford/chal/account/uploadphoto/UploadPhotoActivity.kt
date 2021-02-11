@@ -57,7 +57,7 @@ class UploadPhotoActivity : AppCompatActivity(), UploadPhotoExtension {
 
         if (buildVersion > buildVersionM) {
             val cameraPermission = checkSelfPermission(applicationContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_DENIED
-            val writeExternalPermission = checkSelfPermission(applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_DENIED
+            val writeExternalPermission = checkSelfPermission(applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED
 
             if (!cameraPermission || !writeExternalPermission) {
                 val permission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -71,7 +71,7 @@ class UploadPhotoActivity : AppCompatActivity(), UploadPhotoExtension {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode) {
+        when (requestCode) {
             PERMISSION_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     viewModel?.openCamera()
@@ -118,5 +118,4 @@ class UploadPhotoActivity : AppCompatActivity(), UploadPhotoExtension {
             viewModel?.createUser(selectedPhotoUri)
         }
     }
-
 }

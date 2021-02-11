@@ -3,7 +3,12 @@ package com.nicholasrutherford.chal.firebase.write
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.nicholasrutherford.chal.firebase.*
+import com.nicholasrutherford.chal.firebase.AGE
+import com.nicholasrutherford.chal.firebase.BIO
+import com.nicholasrutherford.chal.firebase.FIRST_NAME
+import com.nicholasrutherford.chal.firebase.LAST_NAME
+import com.nicholasrutherford.chal.firebase.USERNAME
+import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.sharedpref.ReadFirebaseSharePref
 import com.nicholasrutherford.chal.firebase.sharedpref.WriteFirebaseSharedPref
 
@@ -46,7 +51,6 @@ class WriteAccountFirebase(appContext: Context) {
             }
         }
     }
-
 
     fun updateAge(age: Int) {
         ref.child("$uid/$AGE").setValue(age).addOnSuccessListener {

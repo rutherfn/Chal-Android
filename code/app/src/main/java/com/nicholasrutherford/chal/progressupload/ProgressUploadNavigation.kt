@@ -1,7 +1,6 @@
 package com.nicholasrutherford.chal.progressupload
 
 import android.content.Context
-import com.nicholasrutherford.chal.MainActivity
 
 interface ProgressUploadNavigation {
     fun openGallery(progressUploadActivity: ProgressUploadActivity)

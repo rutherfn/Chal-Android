@@ -32,5 +32,4 @@ class SignUpActivity : AppCompatActivity() {
         super.onBackPressed()
         navigation.login(this)
     }
-
 }

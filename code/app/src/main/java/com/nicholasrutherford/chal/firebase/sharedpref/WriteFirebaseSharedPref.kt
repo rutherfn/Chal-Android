@@ -3,7 +3,7 @@ package com.nicholasrutherford.chal.firebase.sharedpref
 import android.content.Context
 import android.content.SharedPreferences
 
-class WriteFirebaseSharedPref(private val appContext: Context)  {
+class WriteFirebaseSharedPref(private val appContext: Context) {
     private val sharedPrefs: SharedPreferences = appContext.getSharedPreferences(FIREBASE_SHARED_PREF, Context.MODE_PRIVATE)
 
     fun clearAllSharePrefs() = sharedPrefs.edit().clear().apply()
@@ -22,7 +22,7 @@ class WriteFirebaseSharedPref(private val appContext: Context)  {
 
     fun writeSharedPrefsPassword(password: String) = sharedPrefs.edit().putString(PASSWORD_PREF, password).apply()
 
-    fun writeSharedPrefsUserProfilePicture(profilePicture: String)  = sharedPrefs.edit().putString(
+    fun writeSharedPrefsUserProfilePicture(profilePicture: String) = sharedPrefs.edit().putString(
         PROFILE_PICTURE_PREF, profilePicture).apply()
 
     fun writeSharedPrefsUsername(username: String) = sharedPrefs.edit().putString(USERNAME_PREF, username).apply()

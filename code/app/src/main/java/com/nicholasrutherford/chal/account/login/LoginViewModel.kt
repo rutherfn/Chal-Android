@@ -27,9 +27,9 @@ class LoginViewModel(private val loginActivity: LoginActivity, private val appCo
     private var alertErrorMessage: String = ""
 
     fun updateEmailAfterTextChanged(email: String) {
-        if(email.contains("@") && email.contains(".com")) {
+        if (email.contains("@") && email.contains(".com")) {
             emailErrorNotVisible()
-        } else if(email == "") {
+        } else if (email == "") {
             emailErrorNotVisible()
         } else {
             emailErrorVisible()
@@ -39,7 +39,7 @@ class LoginViewModel(private val loginActivity: LoginActivity, private val appCo
     fun passwordEditAction(etEmail: EditText, etPassword: EditText, actionId: Int, email: String) {
         if (actionId == EditorInfo.IME_ACTION_DONE && email != "" && email.contains("@") && email.contains(".com")) {
             onLogInClicked(etEmail, etPassword)
-        } else if(actionId == EditorInfo.IME_ACTION_DONE) {
+        } else if (actionId == EditorInfo.IME_ACTION_DONE) {
             helper.hideSoftKeyBoard(loginActivity)
         }
     }
@@ -57,7 +57,7 @@ class LoginViewModel(private val loginActivity: LoginActivity, private val appCo
     fun onLogInClicked(etEmail: EditText, etPassword: EditText) {
         helper.hideSoftKeyBoard(loginActivity)
 
-        if(etEmail.text.toString().isEmpty() || etPassword.etPassword.toString().isEmpty()) {
+        if (etEmail.text.toString().isEmpty() || etPassword.etPassword.toString().isEmpty()) {
             alertErrorMessage = appContext.getString(R.string.error_fields_are_not_correct_log_in)
             showUserLoginErrorAlert()
         } else {
@@ -74,7 +74,7 @@ class LoginViewModel(private val loginActivity: LoginActivity, private val appCo
                         it.let { task ->
                             if (task.isSuccessful) {
 
-                                val timer = object: CountDownTimer(1000, 100) {
+                                val timer = object : CountDownTimer(1000, 100) {
 
                                     override fun onTick(millisUntilFinished: Long) {}
 
@@ -98,10 +98,10 @@ class LoginViewModel(private val loginActivity: LoginActivity, private val appCo
     }
 
     private fun isUserReadyToLogIn(): Boolean {
-        return if(viewState.emailErrorImageVisible || viewState.emailErrorImageVisible) {
+        return if (viewState.emailErrorImageVisible || viewState.emailErrorImageVisible) {
             alertErrorMessage = appContext.getString(R.string.error_fields_are_not_correct_log_in)
             false
-        } else if(!helper.isConnected()) {
+        } else if (!helper.isConnected()) {
             alertErrorMessage = appContext.getString(R.string.error_no_internet_log_in)
             false
         } else {
@@ -121,7 +121,7 @@ class LoginViewModel(private val loginActivity: LoginActivity, private val appCo
         navigation.forgotPassword(appContext, loginActivity)
     }
 
-    class LoginViewStateImpl: LoginViewState {
+    class LoginViewStateImpl : LoginViewState {
         override var emailErrorImageVisible: Boolean = false
         override var emailErrorTextVisible: Boolean = false
     }

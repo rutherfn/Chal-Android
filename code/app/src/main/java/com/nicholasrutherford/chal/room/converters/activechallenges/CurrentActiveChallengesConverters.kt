@@ -12,9 +12,9 @@ class CurrentActiveChallengesConverters {
     var gson = Gson()
 
     @TypeConverter
-    fun fromActiveChallenges(data: String) : List<ActiveChallengesEntity>? {
+    fun fromActiveChallenges(data: String): List<ActiveChallengesEntity>? {
 
-        if(data == null) {
+        if (data == null) {
             return Collections.emptyList()
         }
 

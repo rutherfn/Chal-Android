@@ -9,7 +9,6 @@ class ChalRoom(application: Application) {
     // default args of chal room
     var userAge = ""
 
-
     val firebaseKeyDao = ChalDatabase.getDatabase(application).firebaseKeyDao()
     val firebaseKeyRepository = FirebaseKeyRepository(firebaseKeyDao)
     val readAllFirebaseKeys = firebaseKeyRepository.readAllKeys

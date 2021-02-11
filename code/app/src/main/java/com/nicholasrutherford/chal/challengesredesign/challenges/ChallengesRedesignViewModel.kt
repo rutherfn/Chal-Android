@@ -8,9 +8,12 @@ import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeRedesignNavigationImpl
 
-class ChallengesRedesignViewModel(private val mainActivity: MainActivity, private val appContext: Context,
-                                  private val fragmentManager: FragmentManager, private val container: Int,
-                                  private val bottomNavigationView: BottomNavigationView
+class ChallengesRedesignViewModel(
+    private val mainActivity: MainActivity,
+    private val appContext: Context,
+    private val fragmentManager: FragmentManager,
+    private val container: Int,
+    private val bottomNavigationView: BottomNavigationView
 ) : ViewModel() {
 
     val viewState = ChallengesRedesignViewStateImpl()
@@ -30,7 +33,7 @@ class ChallengesRedesignViewModel(private val mainActivity: MainActivity, privat
         }
     }
 
-    inner class ChallengesRedesignViewStateImpl:
+    inner class ChallengesRedesignViewStateImpl :
         ChallengesRedesignViewState {
         override var toolbarName: String = ""
         override var toolbarImage: String = ""

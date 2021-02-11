@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.nicholasrutherford.chal.room.dao.UserDao
 import com.nicholasrutherford.chal.room.entity.user.UserEntity
 
-class UserRepository (private val userDao: UserDao) {
+class UserRepository(private val userDao: UserDao) {
 
     val readAllUsers: LiveData<List<UserEntity>> = userDao.readAllUsers()
 

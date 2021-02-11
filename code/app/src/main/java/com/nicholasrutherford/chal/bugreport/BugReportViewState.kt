@@ -1,10 +1,11 @@
 package com.nicholasrutherford.chal.bugreport
 
+import android.widget.ArrayAdapter
 import com.nicholasrutherford.chal.ViewState
 
 interface BugReportViewState : ViewState {
-    var reporterName: String
-    var bugTitle: String
-    var bugDescrption: String
-    var bugPriorityLevel: String
+    var profilePicture: String
+    var username: String
+    var reporterAdapter: ArrayAdapter<String>?
+    var priorityAdapter: ArrayAdapter<String>?
 }

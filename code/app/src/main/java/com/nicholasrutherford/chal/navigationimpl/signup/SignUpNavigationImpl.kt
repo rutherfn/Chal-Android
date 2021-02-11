@@ -27,5 +27,4 @@ class SignUpNavigationImpl : SignUpNavigation {
         intent.putExtra("isLinkedin", isLinkedin)
         signUpActivity.startActivity(intent)
     }
-
 }

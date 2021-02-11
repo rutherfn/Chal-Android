@@ -10,11 +10,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.nicholasrutherford.chal.ChalRoom
-import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
 import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragmentExtension
+import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,8 +25,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
+class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
         NewsFeedRedesignFragmentExtension {
+
+    private val ref = FirebaseDatabase.getInstance().getReference(USERS)
+    var mAuth: FirebaseAuth? = null
 
     private var newsFeedRedesignAdapter: NewsFeedRedesignAdapter? = null
     private val typeface = Typeface()
@@ -31,6 +37,10 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
 
     private val _allChallengesPosts = MutableStateFlow(listOf<ChallengesPostsEntity>())
     private val allChallengesPosts: StateFlow<List<ChallengesPostsEntity>> = _allChallengesPosts
+
+    init {
+        mAuth = FirebaseAuth.getInstance()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentRedesignMyFeedBinding.inflate(layoutInflater)
@@ -69,11 +79,10 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
     }
 
     fun newsListActiveChallengesPostsUpdate() {
-        val chalRoom  = ChalRoom(mainActivity.application)
+        val chalRoom = ChalRoom(mainActivity.application)
 
         lifecycleScope.launch {
             chalRoom.userRepository.readAllUsersRegular().forEach { users ->
-                println(users.username)
                 users.activeChallengeEntities?.forEach { challengesPosts ->
                     challengesPosts.activeChallengesPosts?.let { challengesPostsList ->
                         _allChallengesPosts.value = challengesPostsList
@@ -88,14 +97,28 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
 
     override fun initViewModel(activeChallengesPostsList: List<ChallengesPostsEntity>) {
         viewModel = NewsFeedRedesignViewModel(mainActivity, appContext, activeChallengesPostsList)
+
+        lifecycleScope.launch {
+            viewModel?.let { newsFeedViewModel ->
+                newsFeedViewModel.allFirebaseKeys.collect {
+                    newsFeedViewModel.fetchUsers(it)
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel?.let { newsFeedViewModel ->
+                newsFeedViewModel.allUsers.collect { usersLsit ->
+                    println(usersLsit.size)
+                }
+            }
+        }
     }
 
     override fun clickListeners(bind: FragmentRedesignMyFeedBinding) {
         bind.tbMyFeed.cvProfile.setOnClickListener {
-
         }
         bind.tbMyFeed.tvTitle.setOnClickListener {
-
         }
     }
 
@@ -111,5 +134,4 @@ class NewsFeedRedesignFragment (private val mainActivity: MainActivity, private 
                 .into(bind.tbMyFeed.cvProfile)
         }
     }
-
 }

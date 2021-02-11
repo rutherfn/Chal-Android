@@ -26,10 +26,10 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
 
     private fun checkEmail(email: String) {
 
-        if(email.contains("@") && email.contains(".com")) {
+        if (email.contains("@") && email.contains(".com")) {
             isEmailEmpty = false
             isEmailCorrectFormat = true
-        } else if(email == "") {
+        } else if (email == "") {
             isEmailEmpty = true
             isEmailCorrectFormat = false
         } else {
@@ -41,9 +41,9 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
     fun showOrDismissErrorEmail(email: String) {
         checkEmail(email)
 
-        if(!isEmailEmpty && isEmailCorrectFormat) {
+        if (!isEmailEmpty && isEmailCorrectFormat) {
             emailErrorNotVisible()
-        } else if(isEmailEmpty && !isEmailCorrectFormat) {
+        } else if (isEmailEmpty && !isEmailCorrectFormat) {
             emailErrorNotVisible()
         } else {
             emailErrorVisible()
@@ -62,10 +62,10 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
     private fun checkPassword(password: String) {
         val hasUpperCase = password != password.toLowerCase()
 
-        if(hasUpperCase && containsDigit(password)) {
+        if (hasUpperCase && containsDigit(password)) {
             isPasswordEmpty = false
             isPasswordCorrectFormat = true
-        } else if(password == "") {
+        } else if (password == "") {
             isPasswordEmpty = true
             isPasswordCorrectFormat = false
         } else {
@@ -77,9 +77,9 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
     fun showOrDismissErrorPassword(password: String) {
         checkPassword(password)
 
-        if(!isPasswordEmpty && isPasswordCorrectFormat) {
+        if (!isPasswordEmpty && isPasswordCorrectFormat) {
             passwordErrorNotVisible()
-        } else if(isPasswordEmpty && !isPasswordCorrectFormat) {
+        } else if (isPasswordEmpty && !isPasswordCorrectFormat) {
             passwordErrorNotVisible()
         } else {
             passwordErrorVisible()
@@ -95,15 +95,15 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
         navigation.errorCreate(errorMessageText = errorCreateMessage, createAccountActivity = createAccountActivity)
     }
 
-    private fun isAllFieldsEnteredCorrectly() : Boolean {
+    private fun isAllFieldsEnteredCorrectly(): Boolean {
         return !viewState.usernameErrorVisible && !viewState.emailErrorVisible && !viewState.passwordErrorVisible
     }
 
     fun onClickOnContinue(email: String, username: String, password: String) {
-        if(email == ""){
+        if (email == "") {
             showOrDismissErrorEmail(email)
         }
-        if(password ==  "") {
+        if (password == "") {
             showOrDismissErrorPassword(password)
         }
         // before this get release to beta users,
@@ -111,13 +111,13 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
         // are not stored in firebase realtime database.
         // if one of them are, tell them to use a different one(they should not be able to continue the workflow,
         // if that error occurs.
-        if(isAllFieldsEnteredCorrectly()) {
+        if (isAllFieldsEnteredCorrectly()) {
             navigation.showAcProgress(createAccountActivity)
 
             val timer = object : CountDownTimer(1000, 100) {
                 override fun onFinish() {
                     navigation.hideAcProgress()
-                    if(password == "" || username == "") {
+                    if (password == "" || username == "") {
                         showErrorUserCreateAccountAlert()
                     } else {
                         _createAccountSuccessState.value = true
@@ -126,10 +126,8 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
                 }
 
                 override fun onTick(millisUntilFinished: Long) {}
-
             }
             timer.start()
-
         } else {
             showErrorUserCreateAccountAlert()
         }
@@ -151,11 +149,9 @@ class CreateAccountViewModel(private val createAccountActivity: CreateAccountAct
         viewState.passwordErrorVisible = false
     }
 
-
-    inner class CreateAccountViewStateImpl: CreateAccountViewState {
+    inner class CreateAccountViewStateImpl : CreateAccountViewState {
         override var usernameErrorVisible = false
         override var emailErrorVisible = false
         override var passwordErrorVisible = false
 }
-
 }

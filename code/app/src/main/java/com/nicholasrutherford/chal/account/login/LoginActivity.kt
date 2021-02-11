@@ -22,5 +22,4 @@ class LoginActivity : AppCompatActivity() {
             loginFragment(this, applicationContext).javaClass.simpleName)
             .commit()
     }
-
 }

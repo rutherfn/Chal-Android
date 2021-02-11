@@ -126,7 +126,6 @@
         android:layout_width="@dimen/button_report_bug_width"
         android:layout_height="wrap_content"
         android:text="@string/report_bug"
-        android:gravity="center_horizontal"
         android:textSize="@dimen/sub_header_text_size"
         android:background="@drawable/corner_button"
         android:textColor="@color/colorSmokeWhite"

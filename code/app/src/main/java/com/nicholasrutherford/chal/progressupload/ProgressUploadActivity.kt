@@ -13,9 +13,6 @@ import com.nicholasrutherford.chal.databinding.ActivityProgressUploadBinding
 import com.nicholasrutherford.chal.ext.activitys.ProgressUploadExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 
-const val PERMISSION_CODE = 1000
-const val IMAGE_CAPTURE_CODE = 1001
-
 class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
 
     private var binding: ActivityProgressUploadBinding? = null
@@ -32,7 +29,7 @@ class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
 
         binding?.let { bind ->
             viewModel?.let { progressUploadViewModel ->
-                main(bind,progressUploadViewModel)
+                main(bind, progressUploadViewModel)
             }
         }
     }
@@ -107,5 +104,4 @@ class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
             viewModel.onPostProgressClicked(title, caption, category, selectedPhotoUri)
         }
     }
-
 }

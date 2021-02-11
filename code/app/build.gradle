@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "kotlin-kapt"
 
+apply from: "/Users/nicholasrutherford/Desktop/Dev/Mobile Apps/Chal/Chal-Android/code/klint.gradle"
+
 android {
     viewBinding {
         enabled = true
@@ -33,6 +35,8 @@ android {
 
 dependencies {
     def lifecycle_version = "2.2.0"
+
+    implementation 'com.android.support:multidex:1.0.3'
 
     // test fairy
     implementation 'testfairy:testfairy-android-sdk:1.+@aar'

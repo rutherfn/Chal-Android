@@ -17,12 +17,12 @@ class Typeface {
     }
 
     fun setTypefaceForSubHeaderBold(textView: TextView, context: Context) {
-        val typefaceSubHeaderBold =  Typeface.createFromAsset(context.assets, "font/Roboto-Bold.ttf")
+        val typefaceSubHeaderBold = Typeface.createFromAsset(context.assets, "font/Roboto-Bold.ttf")
         textView.typeface = typefaceSubHeaderBold
     }
 
     fun setTypefaceForSubHeaderRegular(textView: TextView, context: Context) {
-        val typefaceSubHeaderRegular =  Typeface.createFromAsset(context.assets, "font/Roboto-Regular.ttf")
+        val typefaceSubHeaderRegular = Typeface.createFromAsset(context.assets, "font/Roboto-Regular.ttf")
         textView.typeface = typefaceSubHeaderRegular
     }
 
@@ -47,8 +47,7 @@ class Typeface {
     }
 
     fun setTypefaceForBodyRegular(textView: TextView, context: Context) {
-        val typefaceBody =  Typeface.createFromAsset(context.assets, "font/OpenSans-Regular.ttf")
+        val typefaceBody = Typeface.createFromAsset(context.assets, "font/OpenSans-Regular.ttf")
         textView.typeface = typefaceBody
     }
-
 }

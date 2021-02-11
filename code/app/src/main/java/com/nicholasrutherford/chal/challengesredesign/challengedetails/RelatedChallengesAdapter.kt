@@ -8,9 +8,8 @@ import com.bumptech.glide.Glide
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ChallengesListLayoutBinding
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.helpers.visibleOrGone
 
-class RelatedChallengesAdapter (private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RelatedChallengesAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ChallengesListLayoutBinding.inflate(inflater, parent, false)
@@ -48,5 +47,4 @@ class RelatedChallengesAdapter (private val context: Context) : RecyclerView.Ada
             typeface.setTypefaceForBodyItalic(binding.tvChallengeThreeLength, context)
         }
     }
-
 }

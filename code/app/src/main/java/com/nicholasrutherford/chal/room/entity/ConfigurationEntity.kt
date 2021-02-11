@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "configuration")
 data class ConfigurationEntity(
     @PrimaryKey(autoGenerate = true)

@@ -27,5 +27,4 @@ class ForgotPasswordActivity : AppCompatActivity() {
         super.onBackPressed()
         forgotPasswordFragment(this, applicationContext).viewModel.navigateToLogin()
     }
-
 }

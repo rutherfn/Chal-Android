@@ -16,7 +16,7 @@ import com.nicholasrutherford.chal.ext.fragments.profile.ProfileFragmentExtensio
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.squareup.picasso.Picasso
 
-class ProfileFragment(private val mainActivity: MainActivity, private val appContext: Context): Fragment(),
+class ProfileFragment(private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
     ProfileFragmentExtension {
 
     private var btNavigation: BottomNavigationView? = null
@@ -57,8 +57,8 @@ class ProfileFragment(private val mainActivity: MainActivity, private val appCon
 
     override fun updateView(bind: FragmentProfilesBinding) {
         // placeholder for right now
-        Picasso.get().load("https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg").
-            into(bind.clProfile.ivProfile)
+        Picasso.get().load("https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg")
+            .into(bind.clProfile.ivProfile)
 
         val options = RequestOptions()
             .placeholder(R.drawable.placeholder)
@@ -78,5 +78,4 @@ class ProfileFragment(private val mainActivity: MainActivity, private val appCon
             viewModel?.onEditMyProfileClicked()
         }
     }
-
 }

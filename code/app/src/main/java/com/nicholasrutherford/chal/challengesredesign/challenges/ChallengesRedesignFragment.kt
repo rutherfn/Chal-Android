@@ -17,7 +17,7 @@ import com.nicholasrutherford.chal.ext.fragments.challengesredesign.ChallengesRe
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.squareup.picasso.Picasso
 
-class ChallengesRedesignFragment (private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
+class ChallengesRedesignFragment(private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
         ChallengesRedesignFragmentExtension {
 
     private var challengesRedesignAdapter: ChallengesRedesignAdapter? = null
@@ -99,5 +99,4 @@ class ChallengesRedesignFragment (private val mainActivity: MainActivity, privat
         Picasso.get().load("https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg")
             .into(bind.clChallengesHeader.ivChallengesHeader)
     }
-
 }

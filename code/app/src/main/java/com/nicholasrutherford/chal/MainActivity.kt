@@ -11,14 +11,14 @@ import com.testfairy.TestFairy
 
 class MainActivity : AppCompatActivity() {
 
-    var binding : ActivityMainBinding? = null
+    var binding: ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         main(binding!!)
-        TestFairy.begin(this, "SDK-aPjHEtM8");
+        TestFairy.begin(this, "SDK-aPjHEtM8")
     }
 
     private fun main(binding: ActivityMainBinding) {
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
                 when (item.itemId) {
-                    R.id.navigation_my_feed-> {
+                    R.id.navigation_my_feed -> {
                         supportFragmentManager.beginTransaction().replace(R.id.container,
                             newsFeedRedesignFragment(
                                 this@MainActivity,
@@ -101,7 +101,6 @@ class MainActivity : AppCompatActivity() {
                         binding?.tbMain?.visibleOrGone = false
                         return true
                     }
-
                 }
                 return false
             }
@@ -111,5 +110,4 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.top_navigation, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
 }

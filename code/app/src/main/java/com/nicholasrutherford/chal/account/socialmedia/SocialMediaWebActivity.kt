@@ -51,7 +51,7 @@ class SocialMediaWebActivity : AppCompatActivity() {
 
     private fun loadUrlToWebView() {
         val isFacebook = intent.getBooleanExtra("isFacebook", false)
-        val isGram = intent.getBooleanExtra("isGram",false)
+        val isGram = intent.getBooleanExtra("isGram", false)
         val isLinkedin = intent.getBooleanExtra("isLinkedin", false)
 
         when {
@@ -66,6 +66,4 @@ class SocialMediaWebActivity : AppCompatActivity() {
             }
         }
     }
-
 }
-

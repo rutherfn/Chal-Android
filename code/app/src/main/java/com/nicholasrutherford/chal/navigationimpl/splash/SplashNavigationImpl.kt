@@ -21,5 +21,4 @@ class SplashNavigationImpl : SplashNavigation {
         splashActivity.startActivity(intent)
         splashActivity.finish()
     }
-
 }

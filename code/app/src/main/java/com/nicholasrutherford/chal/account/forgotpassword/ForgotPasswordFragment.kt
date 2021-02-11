@@ -46,7 +46,7 @@ class ForgotPasswordFragment(private val activity: ForgotPasswordActivity, priva
             val email = bind.etTypeEmail.text.toString()
             if (actionId == EditorInfo.IME_ACTION_DONE && email != "" && email.contains("@") && email.contains(".com")) {
                 viewModel.attemptToSendResetPassword(email)
-            } else if(actionId == EditorInfo.IME_ACTION_DONE) {
+            } else if (actionId == EditorInfo.IME_ACTION_DONE) {
                 helper.hideSoftKeyBoard(activity)
             }
             false
@@ -54,7 +54,7 @@ class ForgotPasswordFragment(private val activity: ForgotPasswordActivity, priva
     }
 
     override fun textChangedListener(bind: FragmentForgotPasswordBinding) {
-        bind.etTypeEmail.addTextChangedListener (object: TextWatcher {
+        bind.etTypeEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val email = bind.etTypeEmail.text.toString()
                 viewModel.checkIfEmailIsEnteredCorrectly(email)
@@ -74,5 +74,4 @@ class ForgotPasswordFragment(private val activity: ForgotPasswordActivity, priva
             viewModel.attemptToSendResetPassword(resetEmail)
         }
     }
-
 }

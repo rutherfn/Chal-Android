@@ -53,7 +53,5 @@ class SignUpFragment(private val activity: SignUpActivity, private val appContex
         bind.btnSignUpRegular.setOnClickListener {
             navigation.createAccount(activity)
         }
-
     }
-
 }

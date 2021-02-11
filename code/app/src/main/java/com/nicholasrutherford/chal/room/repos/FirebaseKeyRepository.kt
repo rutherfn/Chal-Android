@@ -15,5 +15,4 @@ class FirebaseKeyRepository(private val firebaseKeyDao: FirebaseKeyDao) {
     }
 
     suspend fun deleteAllFirebaseKeys() = firebaseKeyDao.deleteAllFirebaseKeys()
-
 }

@@ -14,7 +14,7 @@ import com.nicholasrutherford.chal.databinding.FragmentEditProfileBinding
 import com.nicholasrutherford.chal.ext.fragments.editprofile.EditProfileExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class EditMyProfileFragment(private val mainActivity: MainActivity, private val appContext: Context): Fragment(), EditProfileExtension {
+class EditMyProfileFragment(private val mainActivity: MainActivity, private val appContext: Context) : Fragment(), EditProfileExtension {
 
     private var btNavigation: BottomNavigationView? = null
     private val typeface = Typeface()
@@ -81,5 +81,4 @@ class EditMyProfileFragment(private val mainActivity: MainActivity, private val 
     override fun containerId(): Int {
         return R.id.container
     }
-
 }

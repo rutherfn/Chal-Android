@@ -318,6 +318,100 @@
 
     </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvDebug"
+            android:layout_width="@dimen/card_view_more_width"
+            android:layout_height="@dimen/card_view_more_height"
+            android:layout_gravity="center"
+            app:cardBackgroundColor="@color/colorSmokeWhite"
+            app:cardCornerRadius="@dimen/card_view_more_corner_radius"
+            android:layout_marginTop="@dimen/margin_18dp"
+            app:layout_constraintEnd_toEndOf="@+id/cvMyFeed"
+            app:layout_constraintStart_toStartOf="@+id/cvMyFeed"
+            app:layout_constraintTop_toBottomOf="@+id/cvMyFeed">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ivDebug"
+                    android:layout_width="@dimen/more_images_width"
+                    android:layout_height="@dimen/more_images_height"
+                    android:background="@drawable/ic_debug"
+                    android:layout_marginTop="@dimen/margin_20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tvDebug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/padding_6dp"
+                    android:text="@string/debug"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/card_menu_text_size"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ivDebug"
+                    app:layout_constraintStart_toStartOf="@+id/ivDebug"
+                    app:layout_constraintTop_toBottomOf="@+id/ivDebug"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvReportBug"
+            android:layout_width="@dimen/card_view_more_width"
+            android:layout_height="@dimen/card_view_more_height"
+            android:layout_gravity="center"
+            app:cardBackgroundColor="@color/colorSmokeWhite"
+            app:cardCornerRadius="@dimen/card_view_more_corner_radius"
+            android:layout_marginTop="@dimen/margin_18dp"
+            app:layout_constraintEnd_toEndOf="@+id/cvChallenges"
+            app:layout_constraintStart_toStartOf="@+id/cvChallenges"
+            app:layout_constraintTop_toBottomOf="@+id/cvChallenges">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivReportBug"
+                android:layout_width="@dimen/more_images_width"
+                android:layout_height="@dimen/more_images_height"
+                android:background="@drawable/ic_bug"
+                android:layout_marginTop="@dimen/margin_20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tvReportBug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/padding_6dp"
+                android:text="@string/report_bug"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/card_menu_text_size"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ivReportBug"
+                app:layout_constraintStart_toStartOf="@+id/ivReportBug"
+                app:layout_constraintTop_toBottomOf="@+id/ivReportBug"
+                />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
     <Button
         android:id="@+id/btnSignOutAccount"
         android:layout_width="360dp"
@@ -329,8 +423,8 @@
         android:padding="@dimen/padding_20dp"
         android:text="Sign Out Of Account"
         app:layout_constraintEnd_toEndOf="@+id/cvChallenges"
-        app:layout_constraintStart_toStartOf="@+id/cvMyFeed"
-        app:layout_constraintTop_toBottomOf="@+id/cvMyFeed" />
+        app:layout_constraintStart_toStartOf="@+id/cvDebug"
+        app:layout_constraintTop_toBottomOf="@+id/cvDebug" />
 
     <TextView
         android:id="@+id/tvAllRightsReserved"

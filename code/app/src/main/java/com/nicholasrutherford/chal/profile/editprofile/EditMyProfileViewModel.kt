@@ -15,15 +15,18 @@ import com.nicholasrutherford.chal.navigationimpl.editmyprofile.EditMyProfileNav
 import com.nicholasrutherford.chal.room.entity.user.UserEntity
 import kotlinx.coroutines.launch
 
-class EditMyProfileViewModel(private val mainActivity: MainActivity, private val appContext: Context,
-                             private val fragmentManager: FragmentManager, private val container: Int,
-                             private val bottomNavigationView: BottomNavigationView
+class EditMyProfileViewModel(
+    private val mainActivity: MainActivity,
+    private val appContext: Context,
+    private val fragmentManager: FragmentManager,
+    private val container: Int,
+    private val bottomNavigationView: BottomNavigationView
 ) : ViewModel() {
 
     val viewState = EditMyProfileViewStateImpl()
     val navigation = EditMyProfileNavigationImpl()
 
-    var oldUserName : String? = ""
+    var oldUserName: String? = ""
 
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
     private val writeAccountFirebase = WriteAccountFirebase(appContext)
@@ -91,7 +94,6 @@ class EditMyProfileViewModel(private val mainActivity: MainActivity, private val
                 ))
             }
         }
-
     }
 
     inner class EditMyProfileViewStateImpl(

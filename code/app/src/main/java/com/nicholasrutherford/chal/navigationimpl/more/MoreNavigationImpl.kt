@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.bugReportFragment
 import com.nicholasrutherford.chal.profileFragment
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.progressupload.ProgressUploadActivity
@@ -25,12 +26,20 @@ class MoreNavigationImpl : MoreNavigation {
         mainActivity.startActivity(intent)
     }
 
+    override fun reportBug(mainActivity: MainActivity, context: Context, bottomNavigationView: BottomNavigationView) {
+        bottomNavigationView.visibleOrGone = true
+
+        mainActivity.supportFragmentManager.beginTransaction()
+            .replace(R.id.container, bugReportFragment(mainActivity, context), bugReportFragment(mainActivity, context)::javaClass.name)
+            .commit()
+    }
+
     override fun showAlert(title: String, message: String, mainActivity: MainActivity) {
         val alertDialogBuilder = AlertDialog.Builder(mainActivity)
 
         alertDialogBuilder.setMessage(message)
             .setCancelable(false)
-            .setPositiveButton(mainActivity.getString(R.string.ok)) {dialog, _ ->
+            .setPositiveButton(mainActivity.getString(R.string.ok)) { dialog, _ ->
                 dialog.cancel()
             }
 
@@ -46,7 +55,7 @@ class MoreNavigationImpl : MoreNavigation {
             .themeColor(Color.WHITE)
             .fadeColor(Color.DKGRAY).build()
 
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.show()
         }
     }
@@ -71,9 +80,8 @@ class MoreNavigationImpl : MoreNavigation {
     }
 
     override fun hideAcProgress() {
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.dismiss()
         }
     }
-
 }

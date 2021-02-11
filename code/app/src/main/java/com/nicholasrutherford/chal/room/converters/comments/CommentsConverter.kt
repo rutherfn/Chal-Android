@@ -12,8 +12,8 @@ class CommentsConverter {
     var gson = Gson()
 
     @TypeConverter
-    fun fromComments(data: String) : List<CommentsEntity>? {
-        if(data == null) {
+    fun fromComments(data: String): List<CommentsEntity>? {
+        if (data == null) {
             return Collections.emptyList()
         }
 

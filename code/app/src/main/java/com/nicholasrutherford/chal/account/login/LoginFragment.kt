@@ -38,7 +38,7 @@ class LoginFragment(activity: LoginActivity, private val appContext: Context) : 
     override fun main(bind: FragmentLoginBinding) {
         lifecycleScope.launch {
             viewModel.loginSuccessState.collect { successState ->
-                if(successState) {
+                if (successState) {
                     bind.etEmail.setText("")
                     bind.etPassword.setText("")
                 }
@@ -62,7 +62,7 @@ class LoginFragment(activity: LoginActivity, private val appContext: Context) : 
     }
 
     override fun textChangedListener(bind: FragmentLoginBinding) {
-        bind.etEmail.addTextChangedListener(object: TextWatcher{
+        bind.etEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -73,7 +73,6 @@ class LoginFragment(activity: LoginActivity, private val appContext: Context) : 
                 bind.tvErrorEmail.visibleOrGone = viewModel.viewState.emailErrorTextVisible
                 bind.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorImageVisible
             }
-
         })
 
         bind.etPassword.setOnEditorActionListener { _, actionId, _ ->
@@ -84,6 +83,7 @@ class LoginFragment(activity: LoginActivity, private val appContext: Context) : 
 
     override fun editActionListener(bind: FragmentLoginBinding) {
         bind.etEmail.setOnEditorActionListener { _, actionId, _ ->
+
           if (actionId == EditorInfo.IME_ACTION_DONE) {
               activity?.let { helper.hideSoftKeyBoard(it) }
           }
@@ -102,5 +102,4 @@ class LoginFragment(activity: LoginActivity, private val appContext: Context) : 
             viewModel.onForgotPasswordClicked()
         }
     }
-
 }

@@ -39,13 +39,13 @@ class CreateAccountNavigationImpl : CreateAccountNavigation {
             .themeColor(Color.WHITE)
             .fadeColor(Color.DKGRAY).build()
 
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.show()
         }
     }
 
     override fun hideAcProgress() {
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.dismiss()
         }
     }
@@ -67,5 +67,4 @@ class CreateAccountNavigationImpl : CreateAccountNavigation {
 
         errorAlert.show()
     }
-
 }

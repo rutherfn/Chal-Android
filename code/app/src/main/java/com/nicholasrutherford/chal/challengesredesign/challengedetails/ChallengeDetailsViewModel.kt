@@ -28,9 +28,12 @@ import java.util.*
 
 const val STARTER_INDEX = "0"
 
-class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private val appContext: Context,
-                                 private val fragmentManager: FragmentManager, private val container: Int,
-                                 private val bottomNavigationView: BottomNavigationView
+class ChallengeDetailsViewModel(
+    private val mainActivity: MainActivity,
+    private val appContext: Context,
+    private val fragmentManager: FragmentManager,
+    private val container: Int,
+    private val bottomNavigationView: BottomNavigationView
 ) : ViewModel() {
 
     val viewState = ChallengeDetailsViewStateImpl()
@@ -63,7 +66,7 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
     }
 
     fun onJoinChallengeClicked() {
-        ref.child("$uid$ACTIVE_CHALLENGES$STARTER_INDEX/$NUMBER_OF_DAYS_OF_CHALLENGE").addValueEventListener(object: ValueEventListener{
+        ref.child("$uid$ACTIVE_CHALLENGES$STARTER_INDEX/$NUMBER_OF_DAYS_OF_CHALLENGE").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 println("error")
             }
@@ -78,12 +81,10 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
                         Toast.makeText(appContext, "Your already in this challenge!",
                             Toast.LENGTH_LONG).show()
                     }
-
                 } else {
                     enrollUserIntoChallenge()
                 }
             }
-
         })
     }
 
@@ -103,7 +104,7 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
 
         writeActiveChallengesFirebase.writeCategoryName(STARTER_INDEX, "Health & Fitness")
         writeActiveChallengesFirebase.writeBio(STARTER_INDEX, "lorem ipsum dolor sit amet, consetetur spadiscing elitr, sed diam noumy elfrmod tempert invidunt vu volumpant. At vero eas et accusam eltistro duo doloroes et eu rebum")
-        writeActiveChallengesFirebase.writeName(STARTER_INDEX,"7 Days Of Meditation")
+        writeActiveChallengesFirebase.writeName(STARTER_INDEX, "7 Days Of Meditation")
         writeActiveChallengesFirebase.writeNumberOfDaysInChallenge(STARTER_INDEX, 7)
         writeActiveChallengesFirebase.writeTimeChallengeExpire(STARTER_INDEX, getDaysAgo(7))
         writeActiveChallengesFirebase.writeUserCurrentDay(STARTER_INDEX, 0)
@@ -149,9 +150,8 @@ class ChallengeDetailsViewModel (private val mainActivity: MainActivity, private
         }
     }
 
-    inner class ChallengeDetailsViewStateImpl: ChallengeDetailsViewState {
+    inner class ChallengeDetailsViewStateImpl : ChallengeDetailsViewState {
         override var toolbarName: String = ""
         override var toolbarImage: String = ""
     }
-
 }

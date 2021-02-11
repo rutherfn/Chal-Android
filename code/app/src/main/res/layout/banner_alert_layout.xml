@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clBannerMessage"
     android:background="@color/colorGreen"
-    android:visibility="gone"
     android:layout_width="match_parent"
     android:layout_height="50dp">
 

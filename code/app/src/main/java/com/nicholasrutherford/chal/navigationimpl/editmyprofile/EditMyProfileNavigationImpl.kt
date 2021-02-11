@@ -7,9 +7,9 @@ import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.MainActivity
-import com.nicholasrutherford.chal.profileFragment
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.profile.editprofile.EditMyProfileNavigation
+import com.nicholasrutherford.chal.profileFragment
 
 class EditMyProfileNavigationImpl : EditMyProfileNavigation {
 
@@ -38,16 +38,14 @@ class EditMyProfileNavigationImpl : EditMyProfileNavigation {
             .themeColor(Color.WHITE)
             .fadeColor(Color.DKGRAY).build()
 
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.show()
         }
     }
 
     override fun hideAcProgress() {
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.dismiss()
         }
     }
-
-
 }

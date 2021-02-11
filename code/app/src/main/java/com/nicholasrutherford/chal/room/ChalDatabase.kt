@@ -19,11 +19,11 @@ import com.nicholasrutherford.chal.room.entity.friends.FriendsEntity
 import com.nicholasrutherford.chal.room.entity.user.UserEntity
 
 @Database(
-    entities = [ActiveChallengesEntity::class, ChallengesPostsEntity::class,  ConfigurationEntity::class, CommentsEntity::class,  FirebaseKeyEntity::class, FriendsEntity::class,  UserEntity::class],
+    entities = [ActiveChallengesEntity::class, ChallengesPostsEntity::class, ConfigurationEntity::class, CommentsEntity::class, FirebaseKeyEntity::class, FriendsEntity::class, UserEntity::class],
     version = 6,
     exportSchema = false
 )
-@TypeConverters(ChallengesPostsConverter::class, CommentsConverter::class,  CurrentActiveChallengesConverters::class, CurrentFriendsListConverter::class)
+@TypeConverters(ChallengesPostsConverter::class, CommentsConverter::class, CurrentActiveChallengesConverters::class, CurrentFriendsListConverter::class)
 
 abstract class ChalDatabase : RoomDatabase() {
     // debug
@@ -62,5 +62,4 @@ abstract class ChalDatabase : RoomDatabase() {
             }
         }
     }
-
     }

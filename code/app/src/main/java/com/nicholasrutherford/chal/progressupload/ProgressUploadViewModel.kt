@@ -13,7 +13,11 @@ import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.ChalRoom
 import com.nicholasrutherford.chal.challengesredesign.challengedetails.STARTER_INDEX
 import com.nicholasrutherford.chal.data.realdata.ActiveChallengesPosts
-import com.nicholasrutherford.chal.firebase.*
+import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
+import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
+import com.nicholasrutherford.chal.firebase.TITLE_ACTIVE_CHALLENGES_POST
+import com.nicholasrutherford.chal.firebase.USERS
+import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.activechallengepost.WriteActiveChallengesPostsFirebase
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
@@ -23,7 +27,7 @@ import com.nicholasrutherford.chal.room.entity.user.UserEntity
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ProgressUploadViewModel(private val progressUploadActivity:  ProgressUploadActivity, private val appContext: Context, private val container: Int) : ViewModel() {
+class ProgressUploadViewModel(private val progressUploadActivity: ProgressUploadActivity, private val appContext: Context, private val container: Int) : ViewModel() {
 
     var userPostTitle = ""
     var userPostBody = ""
@@ -65,7 +69,6 @@ class ProgressUploadViewModel(private val progressUploadActivity:  ProgressUploa
         if (title == "" || body == "" || category == "" || photoUri == null) {
             navigation.hideAcProgress()
             navigation.progressUploadAlert("Looks like were missing data. Please enter info for all fields, in order to continue", "Missing Fields", progressUploadActivity)
-
         } else {
             userPostTitle = title
             userPostBody = body
@@ -92,13 +95,12 @@ class ProgressUploadViewModel(private val progressUploadActivity:  ProgressUploa
                     navigation.progressUploadAlert("Issue uploading image to server. Please Try Again", "Can not upload image to server", progressUploadActivity)
                 }
         }
-
     }
 
     fun updateFirebaseUser() {
-        listOf(0,1,2,3,4,5,6,7).forEach { index ->
+        listOf(0, 1, 2, 3, 4, 5, 6, 7).forEach { index ->
 
-            ref.child("$uid$ACTIVE_CHALLENGES$STARTER_INDEX$ACTIVE_CHALLENGES_POSTS$index/$TITLE_ACTIVE_CHALLENGES_POST").addValueEventListener(object : ValueEventListener{
+            ref.child("$uid$ACTIVE_CHALLENGES$STARTER_INDEX$ACTIVE_CHALLENGES_POSTS$index/$TITLE_ACTIVE_CHALLENGES_POST").addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                     println("error")
                 }
@@ -124,7 +126,6 @@ class ProgressUploadViewModel(private val progressUploadActivity:  ProgressUploa
                         }
                     }
                 }
-
             })
         }
         isSelectedIndex = false
@@ -150,9 +151,17 @@ class ProgressUploadViewModel(private val progressUploadActivity:  ProgressUploa
         viewModelScope.launch {
             val user = chalRoom.userRepository.getUser(currentUsername)
 
-            user.activeChallengeEntities?.get(0)?.activeChallengesPosts?.forEach {challengePost ->
-                challengesPost.add(challengePost)
-            }
+            // user.activeChallengeEntities?.let {
+            //     it.forEach { challengeEntities ->
+            //         challengeEntities.activeChallengesPosts!!.forEach { challengePost ->
+            //             challengesPost.add(challengePost)
+            //         }
+            //     }
+            // }
+
+            // user.activeChallengeEntities?.get(0)?.activeChallengesPosts?.forEach { challengePost ->
+            //     challengesPost.add(challengePost)
+            // }
 
             val challengesPostsEntity = ChallengesPostsEntity(
                 id = 0,
@@ -198,10 +207,8 @@ class ProgressUploadViewModel(private val progressUploadActivity:  ProgressUploa
 
                 navigation.hideAcProgress()
 
-                println(user.activeChallengeEntities!!.get(0).activeChallengesPosts?.get(0)?.title)
-
+                // println(user.activeChallengeEntities!!.get(0).activeChallengesPosts?.get(0)?.title)
             }
-
         }
     }
 
@@ -210,7 +217,5 @@ class ProgressUploadViewModel(private val progressUploadActivity:  ProgressUploa
         override var body = ""
         override var category = ""
         override var image = ""
-
     }
-
 }

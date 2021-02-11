@@ -52,11 +52,8 @@ class FirebaseKeysViewModelHelper(val viewModelScope: CoroutineScope) {
                 } else {
                     println("we have no users in our account error")
                 }
-
             }
-
         })
-
     }
 
     fun addFirebaseKey(firebaseKeyEntity: FirebaseKeyEntity, chalRoom: ChalRoom) {
@@ -70,5 +67,4 @@ class FirebaseKeysViewModelHelper(val viewModelScope: CoroutineScope) {
             chalRoom.firebaseKeyRepository.deleteAllFirebaseKeys()
         }
     }
-
 }

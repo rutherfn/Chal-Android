@@ -9,9 +9,12 @@ import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.myprofile.MyProfileNavigationImpl
 
-class MyProfileViewModel(private val mainActivity: MainActivity, private val appContext: Context,
-                         private val fragmentManager: FragmentManager, private val container: Int,
-                         private val bottomNavigationView: BottomNavigationView
+class MyProfileViewModel(
+    private val mainActivity: MainActivity,
+    private val appContext: Context,
+    private val fragmentManager: FragmentManager,
+    private val container: Int,
+    private val bottomNavigationView: BottomNavigationView
 ) : ViewModel() {
 
     val viewState = MyProfileViewStateImpl()
@@ -40,10 +43,9 @@ class MyProfileViewModel(private val mainActivity: MainActivity, private val app
         navigation.hideAcProgress()
     }
 
-    fun onEditMyProfileClicked() = navigation.showEditMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView )
+    fun onEditMyProfileClicked() = navigation.showEditMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView)
 
-
-    inner class MyProfileViewStateImpl: MyProfileViewState {
+    inner class MyProfileViewStateImpl : MyProfileViewState {
         override var age: Int? = 0
         override var description: String? = ""
         override var username: String? = ""

@@ -37,5 +37,4 @@ class CreateAccountActivity : AppCompatActivity() {
         super.onBackPressed()
         navigation.login(this)
     }
-
 }

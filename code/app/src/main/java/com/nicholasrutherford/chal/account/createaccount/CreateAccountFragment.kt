@@ -39,7 +39,7 @@ class CreateAccountFragment(private val activity: CreateAccountActivity, private
     override fun main(bind: FragmentCreateAccountBinding) {
         lifecycleScope.launch {
             viewModel.createAccountSuccessState.collect { successState ->
-                if(successState) {
+                if (successState) {
                     bind.etUsername.setText("")
                     bind.etEmail.setText("")
                     bind.etPassword.setText("")
@@ -63,7 +63,7 @@ class CreateAccountFragment(private val activity: CreateAccountActivity, private
     }
 
     override fun textChangedListener(bind: FragmentCreateAccountBinding) {
-        bind.etEmail.addTextChangedListener(object: TextWatcher{
+        bind.etEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val email = bind.etEmail.text.toString()
                 viewModel.showOrDismissErrorEmail(email)
@@ -74,10 +74,9 @@ class CreateAccountFragment(private val activity: CreateAccountActivity, private
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
         })
 
-        bind.etPassword.addTextChangedListener(object: TextWatcher{
+        bind.etPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val password = bind.etPassword.text.toString()
                 viewModel.showOrDismissErrorPassword(password)
@@ -88,10 +87,9 @@ class CreateAccountFragment(private val activity: CreateAccountActivity, private
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
         })
 
-        bind.etUsername.addTextChangedListener(object: TextWatcher{
+        bind.etUsername.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val username = bind.etUsername.text.toString()
                 viewModel.showOrDismissErrorUsername(username)
@@ -102,7 +100,6 @@ class CreateAccountFragment(private val activity: CreateAccountActivity, private
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
         })
     }
 
@@ -124,11 +121,10 @@ class CreateAccountFragment(private val activity: CreateAccountActivity, private
 
     fun etCloseKeyboardIfUserHitsDone(editText: EditText) {
         editText.setOnEditorActionListener { _, actionId, _ ->
-            if(actionId == EditorInfo.IME_ACTION_DONE) {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 helper.hideSoftKeyBoard(activity)
             }
             false
         }
     }
-
 }

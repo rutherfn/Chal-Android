@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.databinding.RedesignMyFeedLayoutBinding
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class NewsFeedRedesignAdapter (private val context: Context, private val viewModel: NewsFeedRedesignViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsFeedRedesignAdapter(private val context: Context, private val viewModel: NewsFeedRedesignViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
        val inflater = LayoutInflater.from(parent.context)
@@ -35,6 +35,5 @@ class NewsFeedRedesignAdapter (private val context: Context, private val viewMod
             typeface.setTypefaceForSubHeaderBold(binding.tvHomeChallengeTitle, context)
             typeface.setTypefaceForBodyItalic(binding.tvChallengepostDesc, context)
         }
-
     }
 }

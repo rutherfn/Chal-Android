@@ -8,10 +8,19 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.nicholasrutherford.chal.data.realdata.ActiveChallenges
 import com.nicholasrutherford.chal.data.realdata.CurrentFriends
-import com.nicholasrutherford.chal.firebase.*
+import com.nicholasrutherford.chal.firebase.AGE
+import com.nicholasrutherford.chal.firebase.BIO
+import com.nicholasrutherford.chal.firebase.DEFAULT_PROFILE_IMAGE
+import com.nicholasrutherford.chal.firebase.EMAIL
+import com.nicholasrutherford.chal.firebase.FIRST_NAME
+import com.nicholasrutherford.chal.firebase.ID
+import com.nicholasrutherford.chal.firebase.LAST_NAME
+import com.nicholasrutherford.chal.firebase.PASSWORD
+import com.nicholasrutherford.chal.firebase.PROFILE_IMAGE
+import com.nicholasrutherford.chal.firebase.USERNAME
+import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.sharedpref.ReadFirebaseSharePref
 import com.nicholasrutherford.chal.firebase.sharedpref.WriteFirebaseSharedPref
-
 
 class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
 
@@ -24,7 +33,7 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
     val ref = FirebaseDatabase.getInstance().getReference(USERS)
 
     override fun getAge(): Int? {
-        ref.child(uid).addValueEventListener(object: ValueEventListener {
+        ref.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 writeFirebaseSharePref.writeSharedPrefsAge(0)
             }
@@ -37,7 +46,6 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     writeFirebaseSharePref.writeSharedPrefsAge(0)
                 }
             }
-
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseAge()
     }
@@ -57,7 +65,6 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     writeFirebaseSharePref.writeSharePrefsBio("")
                 }
             }
-
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseBio()
     }
@@ -77,13 +84,12 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     writeFirebaseSharePref.writeSharedPrefsEmail("")
                 }
             }
-
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseEmail()
     }
 
     override fun getFirstName(): String? {
-        ref.child(uid).addValueEventListener(object: ValueEventListener{
+        ref.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 writeFirebaseSharePref.writeSharePrefsFirstName("")
             }
@@ -97,13 +103,12 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     writeFirebaseSharePref.writeSharePrefsFirstName("")
                 }
             }
-
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseFirstName()
     }
 
     override fun getId(): Int? {
-        ref.child(uid).addValueEventListener(object: ValueEventListener{
+        ref.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 writeFirebaseSharePref.writeSharedPrefsId(0)
             }
@@ -117,13 +122,12 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     writeFirebaseSharePref.writeSharedPrefsId(0)
                 }
             }
-
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseId()
     }
 
     override fun getLastName(): String? {
-        ref.child(uid).addValueEventListener(object: ValueEventListener{
+        ref.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 writeFirebaseSharePref.writeSharedPrefsLastName("")
             }
@@ -137,13 +141,12 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     writeFirebaseSharePref.writeSharedPrefsLastName("")
                 }
             }
-
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseLastName()
     }
 
     override fun getPassword(): String? {
-        ref.child(uid).addValueEventListener(object: ValueEventListener{
+        ref.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 writeFirebaseSharePref.writeSharedPrefsPassword("")
             }
@@ -157,13 +160,12 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     writeFirebaseSharePref.writeSharedPrefsPassword("")
                 }
             }
-
         })
         return readFirebaseSharedPref.getSharedPrefsFirebasePassword()
     }
 
     override fun getUserProfilePicture(): String? {
-        ref.child(uid).addValueEventListener(object: ValueEventListener{
+        ref.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 writeFirebaseSharePref.writeSharedPrefsUserProfilePicture(DEFAULT_PROFILE_IMAGE)
             }
@@ -177,13 +179,12 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     writeFirebaseSharePref.writeSharedPrefsUserProfilePicture(DEFAULT_PROFILE_IMAGE)
                 }
             }
-
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseUserProfilePicture()
     }
 
     override fun getUsername(): String? {
-        ref.child(uid).addValueEventListener(object: ValueEventListener{
+        ref.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 writeFirebaseSharePref.writeSharedPrefsUsername("")
             }
@@ -197,13 +198,12 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     writeFirebaseSharePref.writeSharedPrefsUsername("")
                 }
             }
-
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseUsername()
     }
 
     override fun getActiveUserChallenges() {
-        ref.child("$uid/activeChallenges").addValueEventListener(object: ValueEventListener{
+        ref.child("$uid/activeChallenges").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 println("error")
             }
@@ -220,12 +220,10 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
                     println("does not exist")
                 }
             }
-
         })
     }
 
     override fun getCurrentUserFriends(): List<CurrentFriends> {
         return currentFirendsList
     }
-
 }

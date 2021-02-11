@@ -1,18 +1,30 @@
 package com.nicholasrutherford.chal.splash
 
 import android.content.Context
-import androidx.lifecycle.ViewModel
-import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.navigationimpl.splash.SplashNavigationImpl
 import android.os.Handler
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.nicholasrutherford.chal.ChalRoom
+import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.challengesredesign.challengedetails.STARTER_INDEX
-import com.nicholasrutherford.chal.firebase.*
+import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
+import com.nicholasrutherford.chal.firebase.AGE
+import com.nicholasrutherford.chal.firebase.BIO
+import com.nicholasrutherford.chal.firebase.CATEGORY_NAME
+import com.nicholasrutherford.chal.firebase.DESCRIPTION
+import com.nicholasrutherford.chal.firebase.EMAIL
+import com.nicholasrutherford.chal.firebase.FIRST_NAME
+import com.nicholasrutherford.chal.firebase.ID
+import com.nicholasrutherford.chal.firebase.LAST_NAME
+import com.nicholasrutherford.chal.firebase.PASSWORD
+import com.nicholasrutherford.chal.firebase.PROFILE_IMAGE
+import com.nicholasrutherford.chal.firebase.USERNAME
+import com.nicholasrutherford.chal.firebase.USERS
+import com.nicholasrutherford.chal.navigationimpl.splash.SplashNavigationImpl
 import com.nicholasrutherford.chal.room.entity.activechallenges.ActiveChallengesEntity
 import com.nicholasrutherford.chal.room.entity.firebasekey.FirebaseKeyEntity
 import com.nicholasrutherford.chal.room.entity.user.UserEntity
@@ -22,7 +34,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class SplashViewModel(context: Context, private val activity: SplashActivity)  : ViewModel() {
+class SplashViewModel(context: Context, private val activity: SplashActivity) : ViewModel() {
 
     private val navigation = SplashNavigationImpl()
     var viewState = SplashViewModelImpl()
@@ -63,7 +75,7 @@ class SplashViewModel(context: Context, private val activity: SplashActivity)  :
 
     private fun fetchLatestUsers(allFirebaseKeys: List<FirebaseKeyEntity>) {
             allFirebaseKeys.forEach { firebaseKey ->
-                ref.child(firebaseKey.key).addValueEventListener(object: ValueEventListener{
+                ref.child(firebaseKey.key).addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(error: DatabaseError) {
                         println("error")
                     }
@@ -71,7 +83,7 @@ class SplashViewModel(context: Context, private val activity: SplashActivity)  :
                     override fun onDataChange(userSnapshot: DataSnapshot) {
                         if (userSnapshot.exists()) {
 
-                            ref.child("${firebaseKey.key}/${ACTIVE_CHALLENGES}$STARTER_INDEX").addValueEventListener(object: ValueEventListener{
+                            ref.child("${firebaseKey.key}/${ACTIVE_CHALLENGES}$STARTER_INDEX").addValueEventListener(object : ValueEventListener {
                                 override fun onCancelled(error: DatabaseError) {
                                     println("error")
                                 }
@@ -123,16 +135,12 @@ class SplashViewModel(context: Context, private val activity: SplashActivity)  :
                                 }
                             })
                         }
-
                     }
-
                 })
             }
-
     }
 
     inner class SplashViewModelImpl : SplashViewState {
         override var splashImageRes: Int = R.mipmap.chalappicon
     }
-
 }

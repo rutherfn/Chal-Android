@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.navigationimpl.forgotpassword.ForgotPasswordNavigationImpl
 
-class ForgotPasswordViewModel (private val forgotPasswordActivity: ForgotPasswordActivity, private val appContext: Context) : ViewModel() {
+class ForgotPasswordViewModel(private val forgotPasswordActivity: ForgotPasswordActivity, private val appContext: Context) : ViewModel() {
 
     private val navigation = ForgotPasswordNavigationImpl()
     val viewState = ForgotPasswordViewStateImpl()
@@ -33,7 +33,7 @@ class ForgotPasswordViewModel (private val forgotPasswordActivity: ForgotPasswor
             navigation.forgotPasswordAlert("Not a valid email", "Sorry but that is not a valid email. Please enter a valid email, and try again", forgotPasswordActivity)
         } else {
             navigation.showAcProgress(forgotPasswordActivity)
-            val timer = object: CountDownTimer(3000, 100) {
+            val timer = object : CountDownTimer(3000, 100) {
 
                 override fun onTick(millisUntilFinished: Long) {}
 
@@ -54,11 +54,10 @@ class ForgotPasswordViewModel (private val forgotPasswordActivity: ForgotPasswor
                 }
             }
             timer.start()
-
             }
         }
 
-    class ForgotPasswordViewStateImpl: ForgotPasswordViewState {
+    class ForgotPasswordViewStateImpl : ForgotPasswordViewState {
         override var errorForgotPasswordVisible = false
     }
 }

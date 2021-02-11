@@ -15,7 +15,7 @@ import com.nicholasrutherford.chal.databinding.FragmentMoreBinding
 import com.nicholasrutherford.chal.ext.fragments.more.MoreFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class MoreFragment(private val mainActivity: MainActivity, private val appContext: Context): Fragment(),
+class MoreFragment(private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
     MoreFragmentExtension {
 
     private var viewModel: MoreViewModel? = null
@@ -76,7 +76,7 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
             }
         }
         bind.clMore.cvSettings.setOnClickListener {
-            //load in the settings layout
+            // load in the settings layout
         }
         bind.clMore.cvChat.setOnClickListener {
             // we should should in the chat layout
@@ -86,6 +86,11 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
         }
         bind.clMore.cvChallenges.setOnClickListener {
             // we should load in the challenges ;ayout
+        }
+        bind.clMore.cvReportBug.setOnClickListener {
+            viewModel?.let { moreViewModel ->
+                moreViewModel.onReportBugClicked()
+            }
         }
         bind.clMore.btnSignOutAccount.setOnClickListener {
             viewModel?.let { moreViewModel ->
@@ -104,5 +109,4 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
                 .into(bind.clMore.cvMyProfilePic)
         }
     }
-
 }

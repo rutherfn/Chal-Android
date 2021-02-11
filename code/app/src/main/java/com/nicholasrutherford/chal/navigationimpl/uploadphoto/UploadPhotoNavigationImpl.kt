@@ -42,7 +42,7 @@ class UploadPhotoNavigationImpl : UploadPhotoNavigation {
             .themeColor(Color.WHITE)
             .fadeColor(Color.DKGRAY).build()
 
-        flowerLoadingDialog?.let {acProgressFlower ->
+        flowerLoadingDialog?.let { acProgressFlower ->
             acProgressFlower.show()
         }
     }
@@ -79,5 +79,4 @@ class UploadPhotoNavigationImpl : UploadPhotoNavigation {
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uploadPhotoActivity.selectedPhotoUri)
         uploadPhotoActivity.startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
     }
-
 }
