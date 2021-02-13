@@ -29,8 +29,8 @@
     <dimen name="button_text_size">20sp</dimen>
 
     <!-- Images Unique Sizes -->
-    <dimen name="challenge_icon_height">115dp</dimen>
-    <dimen name="challenge_icon_width">115dp</dimen>
+    <dimen name="challenge_icon_height">106dp</dimen>
+    <dimen name="challenge_icon_width">106dp</dimen>
     <dimen name="cv_challenge_icon_height">30dp</dimen>
     <dimen name="cv_challenge_icon_width">30dp</dimen>
     <dimen name="profile_my_fiends_image_height">20dp</dimen>

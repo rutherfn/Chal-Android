@@ -48,8 +48,9 @@
         android:id="@+id/ivChallengeOne"
         android:layout_width="@dimen/challenge_icon_height"
         android:layout_height="@dimen/challenge_icon_width"
+        android:layout_marginLeft="@dimen/margin_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
         android:layout_marginTop="@dimen/margin_20dp"
-        android:background="@drawable/challengesampleone"
         app:layout_constraintStart_toStartOf="@+id/cvChallengeIcon"
         app:layout_constraintTop_toBottomOf="@+id/tvChallengesCategories"
         />
@@ -59,7 +60,6 @@
             android:layout_width="@dimen/challenge_icon_height"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_6dp"
-            android:text="Challenge One"
             android:textSize="@dimen/body_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/ivChallengeOne"
@@ -72,7 +72,6 @@
             android:layout_width="@dimen/challenge_icon_height"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_6dp"
-            android:text="7 Days * 30m"
             android:textSize="@dimen/sub_body_challenge_text_size"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="@+id/tvChallengeOneName"
@@ -85,7 +84,6 @@
             android:layout_height="@dimen/challenge_icon_width"
             android:layout_marginStart="@dimen/margin_20dp"
             android:layout_marginLeft="@dimen/margin_20dp"
-            android:background="@drawable/challengesampletwo"
             app:layout_constraintBottom_toBottomOf="@+id/ivChallengeOne"
             app:layout_constraintStart_toEndOf="@+id/ivChallengeOne"
             app:layout_constraintTop_toTopOf="@+id/ivChallengeOne"
@@ -96,7 +94,6 @@
             android:layout_width="@dimen/challenge_icon_height"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_6dp"
-            android:text="Challenge Two"
             android:textSize="@dimen/body_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/ivChallengeTwo"
@@ -108,7 +105,6 @@
             android:layout_width="@dimen/challenge_icon_height"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_6dp"
-            android:text="7 Days * 30m"
             android:textSize="@dimen/sub_body_challenge_text_size"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@+id/tvChallengeTwoName"
@@ -119,9 +115,9 @@
             android:id="@+id/ivChallengeThree"
             android:layout_width="@dimen/challenge_icon_height"
             android:layout_height="@dimen/challenge_icon_width"
-            android:background="@drawable/challengesamplethree"
+            android:layout_marginStart="@dimen/margin_20dp"
+            android:layout_marginLeft="@dimen/margin_20dp"
             app:layout_constraintBottom_toBottomOf="@+id/ivChallengeTwo"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivChallengeTwo"
             app:layout_constraintTop_toTopOf="@+id/ivChallengeTwo" />
 
@@ -130,7 +126,6 @@
             android:layout_width="@dimen/challenge_icon_height"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_6dp"
-            android:text="Challenge Three"
             android:textSize="@dimen/body_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/ivChallengeThree"
@@ -143,7 +138,6 @@
             android:layout_width="@dimen/challenge_icon_height"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_6dp"
-            android:text="7 Days * 30m"
             android:textSize="@dimen/sub_body_challenge_text_size"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@+id/tvChallengeThreeName"
@@ -159,7 +153,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvChallengeTwoLength" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentRedesignChallengesBinding
 import com.nicholasrutherford.chal.ext.fragments.challengesredesign.ChallengesRedesignFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.squareup.picasso.Picasso
 
-class ChallengesRedesignFragment(private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
-        ChallengesRedesignFragmentExtension {
+class ChallengesRedesignFragment(private val mainActivity: MainActivity, private val appContext: Context) :
+    Fragment(),
+    ChallengesRedesignFragmentExtension {
 
     private var challengesRedesignAdapter: ChallengesRedesignAdapter? = null
     private var viewModel: ChallengesRedesignViewModel? = null
@@ -39,10 +40,11 @@ class ChallengesRedesignFragment(private val mainActivity: MainActivity, private
                 )
             }
         }
-        updateTypefaces(bind)
         bindAdapter(bind)
+        updateTypefaces(bind)
         clickListeners(bind)
         updateView(bind)
+
         return bind.root
     }
 
@@ -68,7 +70,8 @@ class ChallengesRedesignFragment(private val mainActivity: MainActivity, private
                             appContext,
                             fragmentManager,
                             containerId(),
-                            bottomNavigationView
+                            bottomNavigationView,
+                            challengesRedesignViewModel.liveChallengesList
                         )
                 }
             }

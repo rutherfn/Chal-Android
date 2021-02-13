@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.MainActivity
-import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedesignNavigation
 import com.nicholasrutherford.chal.challengeDetailsFragment
+import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedesignNavigation
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 
 class ChallengeRedesignNavigationImpl : ChallengesRedesignNavigation {
@@ -13,7 +13,8 @@ class ChallengeRedesignNavigationImpl : ChallengesRedesignNavigation {
         if (isClicked) {
             bottomNavigationView.visibleOrGone = true
             fragmentManager.beginTransaction()
-                .replace(id,
+                .replace(
+                    id,
                     challengeDetailsFragment(
                         activity,
                         context
@@ -21,7 +22,8 @@ class ChallengeRedesignNavigationImpl : ChallengesRedesignNavigation {
                     challengeDetailsFragment(
                         activity,
                         context
-                    )::javaClass.name)
+                    )::javaClass.name
+                )
                 .commit()
         }
     }

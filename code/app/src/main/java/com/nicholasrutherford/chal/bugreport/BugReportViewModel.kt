@@ -7,8 +7,8 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.bugreport.BugReportNavigationImpl
 
-class BugReportViewModel(private val bugReportFragment: BugReportFragment, private val appContext: Context)
-        : ViewModel() {
+class BugReportViewModel(private val bugReportFragment: BugReportFragment, private val appContext: Context) :
+    ViewModel() {
 
     private val navigation = BugReportNavigationImpl()
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
@@ -58,7 +58,7 @@ class BugReportViewModel(private val bugReportFragment: BugReportFragment, priva
             bugTitle.isEmpty() -> {
                 val missingBugTitle = appContext.getString(R.string.missing_title_message)
                 val missingBugDesc = appContext.getString(R.string.missing_title_desc_message)
-                navigation.showAlert(missingBugTitle, missingBugDesc, bugReportFragment,  appContext)
+                navigation.showAlert(missingBugTitle, missingBugDesc, bugReportFragment, appContext)
             }
             bugDesc.isEmpty() -> {
                 val missingBugDesc = appContext.getString(R.string.missing_desc_message)
@@ -71,11 +71,10 @@ class BugReportViewModel(private val bugReportFragment: BugReportFragment, priva
         }
     }
 
-    inner class BugReportViewStateImpl: BugReportViewState {
+    inner class BugReportViewStateImpl : BugReportViewState {
         override var profilePicture: String = ""
         override var username: String = ""
         override var reporterAdapter: ArrayAdapter<String>? = null
         override var priorityAdapter: ArrayAdapter<String>? = null
     }
-
-        }
+}

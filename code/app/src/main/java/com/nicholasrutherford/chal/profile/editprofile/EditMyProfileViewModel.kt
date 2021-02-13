@@ -66,8 +66,10 @@ class EditMyProfileViewModel(
                 navigation.hideAcProgress()
                 navigation.showMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView)
 
-                Toast.makeText(appContext, "Edited your account info",
-                Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    appContext, "Edited your account info",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
         timer.start()
@@ -79,19 +81,21 @@ class EditMyProfileViewModel(
             oldUserName?.let { username ->
                 val user = chalRoom.userRepository.getUser(username)
 
-                chalRoom.userRepository.updateUser(UserEntity(
-                    id = user.id,
-                    username = viewState.editUsername ?: "",
-                    email = user.email,
-                    profileImageUrl = user.profileImageUrl,
-                    password = user.password,
-                    firstName = viewState.editFirstName ?: "",
-                    lastName = viewState.editLastName ?: "",
-                    bio = viewState.editBio ?: "",
-                    age = user.age,
-                    currentFriends = user.currentFriends,
-                    activeChallengeEntities = user.activeChallengeEntities
-                ))
+                chalRoom.userRepository.updateUser(
+                    UserEntity(
+                        id = user.id,
+                        username = viewState.editUsername ?: "",
+                        email = user.email,
+                        profileImageUrl = user.profileImageUrl,
+                        password = user.password,
+                        firstName = viewState.editFirstName ?: "",
+                        lastName = viewState.editLastName ?: "",
+                        bio = viewState.editBio ?: "",
+                        age = user.age,
+                        currentFriends = user.currentFriends,
+                        activeChallengeEntities = user.activeChallengeEntities
+                    )
+                )
             }
         }
     }
