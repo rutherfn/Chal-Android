@@ -115,9 +115,8 @@
             android:id="@+id/ivChallengeThree"
             android:layout_width="@dimen/challenge_icon_height"
             android:layout_height="@dimen/challenge_icon_width"
-            android:layout_marginStart="@dimen/margin_20dp"
-            android:layout_marginLeft="@dimen/margin_20dp"
             app:layout_constraintBottom_toBottomOf="@+id/ivChallengeTwo"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivChallengeTwo"
             app:layout_constraintTop_toTopOf="@+id/ivChallengeTwo" />
 

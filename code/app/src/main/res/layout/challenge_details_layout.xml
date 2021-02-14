@@ -32,7 +32,6 @@
         android:id="@+id/ivChallengeCategory"
         android:layout_width="@dimen/challenges_details_image_height"
         android:layout_height="@dimen/challenges_details_image_width"
-        android:background="@drawable/ic_health_white"
         android:layout_marginTop="@dimen/padding_30dp"
         android:layout_marginStart="@dimen/margin_6dp"
         android:layout_marginLeft="@dimen/margin_6dp"
@@ -45,11 +44,11 @@
         android:id="@+id/tvChallengeCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Health And Fitness"
         android:textStyle="italic"
+        android:textSize="@dimen/body_text_size"
         android:textColor="@color/colorSmokeWhite"
-        android:layout_marginStart="@dimen/margin_10dp"
-        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_2dp"
+        android:layout_marginLeft="@dimen/margin_2dp"
         app:layout_constraintBottom_toBottomOf="@+id/ivChallengeCategory"
         app:layout_constraintStart_toEndOf="@+id/ivChallengeCategory"
         app:layout_constraintTop_toTopOf="@+id/ivChallengeCategory"
@@ -59,32 +58,35 @@
         android:id="@+id/tvChallengeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_10dp"
-        android:text="7 Days Of Meditation"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingBottom="@dimen/padding_4dp"
         android:textColor="@color/colorSmokeWhite"
         android:textSize="@dimen/header_text_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ivChallengeCategory"
-        app:layout_constraintTop_toBottomOf="@+id/ivChallengeCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/ivChallengeCategory"
+        />
 
     <TextView
         android:id="@+id/tvChallengeDescDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_4dp"
-        android:padding="@dimen/padding_10dp"
-        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy elrmod temport invidunt ut voluptua. At vero eos et accusam eltisto duo doloroes et ea rebum."
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingBottom="@dimen/padding_10dp"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/body_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvChallengeTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvChallengeTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvChallengeTitle"
+        />
 
     <Button
         android:id="@+id/btnJoinChallenge"
-        android:layout_width="390dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorSmokeWhite"
+        android:background="@color/colorLightGray"
         android:padding="@dimen/padding_10dp"
         android:text="Join Challenge"
         android:textAllCaps="false"
@@ -92,7 +94,6 @@
         android:textSize="@dimen/body_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/ivChallengesDetailsHeader"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvChallengeDescDetails" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

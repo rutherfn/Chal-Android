@@ -3,12 +3,10 @@ package com.nicholasrutherford.chal.challengesredesign.challenges
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.data.realdata.Challenges
 import com.nicholasrutherford.chal.data.realdata.LiveChallenges
 import com.nicholasrutherford.chal.databinding.ChallengesListLayoutBinding
 import com.nicholasrutherford.chal.helpers.Typeface
@@ -18,12 +16,8 @@ const val SECOND_POSITION = 1
 const val THIRD_POSITION = 2
 
 class ChallengesRedesignAdapter(
-    private val mainActivity: MainActivity,
     private val viewModel: ChallengesRedesignViewModel,
     private val context: Context,
-    private val fragmentManager: FragmentManager,
-    private val container: Int,
-    private val bottomNavigationView: BottomNavigationView,
     private val liveChallengesList: List<LiveChallenges>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -50,9 +44,9 @@ class ChallengesRedesignAdapter(
         private val liveChallengesList: List<LiveChallenges>
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        val typeface = Typeface()
+        private val typeface = Typeface()
 
-        fun categoryChallengeIcon(pos: Int): Int {
+        private fun categoryChallengeIcon(pos: Int): Int {
             return when (liveChallengesList[pos].categoryNumber) {
                 0 -> {
                     R.drawable.ic_health_wellness
@@ -64,6 +58,10 @@ class ChallengesRedesignAdapter(
                     R.drawable.ic_lifestyle
                 }
             }
+        }
+
+        private fun selectedChallenge(position: Int, index: Int): Challenges {
+            return liveChallengesList[position].challenges[index]
         }
 
         fun bind(position: Int) {
@@ -90,15 +88,9 @@ class ChallengesRedesignAdapter(
             typeface.setTypefaceForSubHeaderBold(binding.tvChallengeThreeName, context)
             typeface.setTypefaceForBodyItalic(binding.tvChallengeThreeLength, context)
 
-            binding.ivChallengeOne.setOnClickListener {
-                viewModel.challengesRedesignNavigationImpl.showChallengeDetails(mainActivity, context, true, fragmentManager, container, bottomNavigationView)
-            }
-            binding.ivChallengeTwo.setOnClickListener {
-                viewModel.challengesRedesignNavigationImpl.showChallengeDetails(mainActivity, context, true, fragmentManager, container, bottomNavigationView)
-            }
-            binding.ivChallengeThree.setOnClickListener {
-                viewModel.challengesRedesignNavigationImpl.showChallengeDetails(mainActivity, context, true, fragmentManager, container, bottomNavigationView)
-            }
+            binding.ivChallengeOne.setOnClickListener { viewModel.showChallengeDetails(selectedChallenge(position, FIRST_POSITION)) }
+            binding.ivChallengeTwo.setOnClickListener { viewModel.showChallengeDetails(selectedChallenge(position, SECOND_POSITION)) }
+            binding.ivChallengeThree.setOnClickListener { viewModel.showChallengeDetails(selectedChallenge(position, THIRD_POSITION)) }
         }
     }
 }

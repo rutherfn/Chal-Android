@@ -39,14 +39,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupHomeForFirstToLoad() {
-        supportFragmentManager.beginTransaction().replace(R.id.container,
+        supportFragmentManager.beginTransaction().replace(
+            R.id.container,
             newsFeedRedesignFragment(
                 this@MainActivity,
                 applicationContext
-            ), newsFeedRedesignFragment(
+            ),
+            newsFeedRedesignFragment(
                 this@MainActivity,
                 applicationContext
-            ).javaClass.simpleName)
+            ).javaClass.simpleName
+        )
             .commit()
     }
 
@@ -60,42 +63,44 @@ class MainActivity : AppCompatActivity() {
 
                 when (item.itemId) {
                     R.id.navigation_my_feed -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container,
+                        supportFragmentManager.beginTransaction().replace(
+                            R.id.container,
                             newsFeedRedesignFragment(
                                 this@MainActivity,
                                 applicationContext
-                            ), newsFeedRedesignFragment(
+                            ),
+                            newsFeedRedesignFragment(
                                 this@MainActivity,
                                 applicationContext
-                            ).javaClass.simpleName)
+                            ).javaClass.simpleName
+                        )
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
                         binding?.tbMain?.visibleOrGone = false
                         return true
                     }
                     R.id.navigation_challenges -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container,
-                            challengesRedesignFragment(
-                                this@MainActivity,
-                                applicationContext
-                            ), challengesRedesignFragment(
-                                this@MainActivity,
-                                applicationContext
-                            ).javaClass.simpleName)
+                        supportFragmentManager.beginTransaction().replace(
+                            R.id.container,
+                            challengesRedesignFragment(applicationContext), challengesRedesignFragment(applicationContext).javaClass.simpleName
+                        )
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
                         binding?.tbMain?.visibleOrGone = false
                         return true
                     }
                     R.id.navigation_more -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container,
+                        supportFragmentManager.beginTransaction().replace(
+                            R.id.container,
                             moreFragment(
                                 this@MainActivity,
                                 applicationContext
-                            ), moreFragment(
+                            ),
+                            moreFragment(
                                 this@MainActivity,
                                 applicationContext
-                            ).javaClass.simpleName)
+                            ).javaClass.simpleName
+                        )
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
                         binding?.tbMain?.visibleOrGone = false

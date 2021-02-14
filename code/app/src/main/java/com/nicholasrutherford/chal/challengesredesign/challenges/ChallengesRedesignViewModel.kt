@@ -3,10 +3,9 @@ package com.nicholasrutherford.chal.challengesredesign.challenges
 import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.data.realdata.Challenges
 import com.nicholasrutherford.chal.data.realdata.LiveChallenges
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeRedesignNavigationImpl
@@ -15,15 +14,12 @@ import java.io.IOException
 private const val CHALLENGES_JSON_FILE_NAME = "challenges.json"
 
 class ChallengesRedesignViewModel(
-    private val mainActivity: MainActivity,
-    private val appContext: Context,
     private val fragmentManager: FragmentManager,
-    private val container: Int,
-    private val bottomNavigationView: BottomNavigationView
+    private val appContext: Context
 ) : ViewModel() {
 
     val viewState = ChallengesRedesignViewStateImpl()
-    val challengesRedesignNavigationImpl = ChallengeRedesignNavigationImpl()
+    private val challengesRedesignNavigationImpl = ChallengeRedesignNavigationImpl()
 
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
     var liveChallengesList: List<LiveChallenges> = emptyList()
@@ -59,6 +55,8 @@ class ChallengesRedesignViewModel(
 
         return jsonString
     }
+
+    fun showChallengeDetails(challenge: Challenges) = challengesRedesignNavigationImpl.showChallengeDetails(fragmentManager, appContext, challenge)
 
     inner class ChallengesRedesignViewStateImpl :
         ChallengesRedesignViewState {

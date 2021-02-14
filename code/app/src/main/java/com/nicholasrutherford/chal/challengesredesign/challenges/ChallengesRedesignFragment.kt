@@ -9,37 +9,25 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentRedesignChallengesBinding
 import com.nicholasrutherford.chal.ext.fragments.challengesredesign.ChallengesRedesignFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.squareup.picasso.Picasso
 
-class ChallengesRedesignFragment(private val mainActivity: MainActivity, private val appContext: Context) :
+const val placeHolderImage = "https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg"
+
+class ChallengesRedesignFragment(private val appContext: Context) :
     Fragment(),
     ChallengesRedesignFragmentExtension {
 
     private var challengesRedesignAdapter: ChallengesRedesignAdapter? = null
     private var viewModel: ChallengesRedesignViewModel? = null
-    private var btNavigation: BottomNavigationView? = null
     private val typeface = Typeface()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentRedesignChallengesBinding.inflate(layoutInflater)
-        btNavigation = (activity as MainActivity).binding?.bvNavigation
-        btNavigation?.let { bottomNavigationView ->
-            viewModel = fragmentManager?.let { fragmentManager ->
-                ChallengesRedesignViewModel(
-                    mainActivity,
-                    appContext,
-                    fragmentManager,
-                    containerId(),
-                    bottomNavigationView
-                )
-            }
-        }
+        fragmentManager?.let { fragmentManager -> viewModel = ChallengesRedesignViewModel(fragmentManager, appContext) }
         bindAdapter(bind)
         updateTypefaces(bind)
         clickListeners(bind)
@@ -60,21 +48,8 @@ class ChallengesRedesignFragment(private val mainActivity: MainActivity, private
     override fun bindAdapter(bind: FragmentRedesignChallengesBinding) {
         bind.rvRedesignChallenges.isNestedScrollingEnabled = false
         bind.rvRedesignChallenges.layoutManager = LinearLayoutManager(activity)
-        btNavigation?.let { bottomNavigationView ->
-            fragmentManager?.let { fragmentManager ->
-                viewModel?.let { challengesRedesignViewModel ->
-                    challengesRedesignAdapter =
-                        ChallengesRedesignAdapter(
-                            mainActivity,
-                            challengesRedesignViewModel,
-                            appContext,
-                            fragmentManager,
-                            containerId(),
-                            bottomNavigationView,
-                            challengesRedesignViewModel.liveChallengesList
-                        )
-                }
-            }
+        viewModel?.let { challengesRedesignViewModel ->
+            challengesRedesignAdapter = ChallengesRedesignAdapter(challengesRedesignViewModel, appContext, challengesRedesignViewModel.liveChallengesList)
         }
         bind.rvRedesignChallenges.adapter = challengesRedesignAdapter
     }
@@ -98,8 +73,7 @@ class ChallengesRedesignFragment(private val mainActivity: MainActivity, private
                 .into(bind.tbRedesignChallenges.cvProfile)
         }
 
-        // temporary
-        Picasso.get().load("https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg")
-            .into(bind.clChallengesHeader.ivChallengesHeader)
+        Picasso.get().load(placeHolderImage).into(bind.clChallengesHeader.ivChallengesHeader)
+        Glide.with(appContext).load(R.drawable.ic_question).into(bind.tbRedesignChallenges.ivUploadChallenges)
     }
 }
