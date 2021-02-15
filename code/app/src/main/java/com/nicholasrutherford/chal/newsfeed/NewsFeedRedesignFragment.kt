@@ -110,6 +110,14 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
         lifecycleScope.launch {
             viewModel?.let { newsFeedViewModel ->
                 newsFeedViewModel.allUsers.collect { userList ->
+                    userList.forEach {
+                        it.activeChallenges.forEach {
+                            println(it.categoryName)
+                            it.activeChallengesPosts.forEach {
+                                println(it.title)
+                            }
+                        }
+                    }
                 }
             }
         }

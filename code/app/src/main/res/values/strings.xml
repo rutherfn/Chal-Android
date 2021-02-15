@@ -48,7 +48,7 @@
     <string name="done">Done</string>
     <string name="edit">Edit</string>
     <string name="edit_first_name">Edit First Name</string>
-    <string name="edit_my_profile">Edit My Profile</string>\
+    <string name="edit_my_profile">Edit My Profile</string>
     <string name="edit_my_profile_description">To <b>edit your profile, </b> edit the fields down below.</string>
     <string name="edit_username">Edit Username</string>
     <string name="email">Email</string>

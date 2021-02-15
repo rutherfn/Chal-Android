@@ -8,5 +8,4 @@ data class ActiveChallenge(
     var currentDayOfChallange: Int,
     var categoryName: String,
     var activeChallengesPosts: List<ChallengesPosts>
-
 )

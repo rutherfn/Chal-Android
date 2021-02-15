@@ -54,8 +54,8 @@ class ForgotPasswordViewModel(private val forgotPasswordActivity: ForgotPassword
                 }
             }
             timer.start()
-            }
         }
+    }
 
     class ForgotPasswordViewStateImpl : ForgotPasswordViewState {
         override var errorForgotPasswordVisible = false
