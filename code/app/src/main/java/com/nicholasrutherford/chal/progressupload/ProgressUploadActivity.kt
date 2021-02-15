@@ -8,10 +8,13 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityProgressUploadBinding
 import com.nicholasrutherford.chal.ext.activitys.ProgressUploadExtension
 import com.nicholasrutherford.chal.helpers.Typeface
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
 
@@ -36,8 +39,10 @@ class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
 
     override fun main(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel) {
         updateTypefaces(bind, viewModel)
-        updateSpinners(bind, viewModel)
+        collectChallengeAndCategoryResult(bind, viewModel)
         clickListeners(bind, viewModel)
+
+        bind.tbProgressUpload.tvTitle.text = getString(R.string.post_your_progress)
     }
 
     override fun updateTypefaces(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel) {
@@ -75,12 +80,27 @@ class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
         }
     }
 
-    override fun updateSpinners(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel) {
-        val listOfCategories = arrayOf("Lifestyle")
-        val listOfChallenges = arrayOf("7 Days Meditation")
+    private fun collectChallengeAndCategoryResult(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel) {
+        lifecycleScope.launch {
+            viewModel?.let { progressUploadViewModel ->
+                progressUploadViewModel.activeChallengeAndCategoryResponse.collect { activeChallengeAndCategoryList ->
+                    updateSpinners(bind, viewModel, activeChallengeAndCategoryList)
+                }
+            }
+        }
+    }
+
+    override fun updateSpinners(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel, challengeAndCategoryList: List<ProgressUploadViewModel.ActiveChallengeAndCategoryResponse>) {
+        val listOfChallenges = arrayListOf<String>()
+        val listOfCategories = arrayListOf<String>()
+
+        challengeAndCategoryList.forEach { challengeAndCategory  ->
+            listOfCategories.add(challengeAndCategory.category)
+            listOfChallenges.add(challengeAndCategory.challenge)
+        }
 
         val challengesAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, listOfChallenges)
-        val categoryAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, listOfCategories)
+        val categoryAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, listOfCategories.distinct())
 
         challengesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -95,6 +115,9 @@ class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
         }
         bind.clPostProgress.ivUploadImage.setOnClickListener {
             viewModel.onPhotoClicked()
+        }
+        bind.tbProgressUpload.ibMoreBack.setOnClickListener {
+            viewModel.onBackClicked()
         }
         bind.clPostProgress.btnPostProgressToMyFeed.setOnClickListener {
             val title = bind.clPostProgress.spSelectChallenge.selectedItem.toString()

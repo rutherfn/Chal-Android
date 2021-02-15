@@ -138,9 +138,12 @@
     <string name="missing_title_message">Bug Missing Title</string>
     <string name="missing_title_desc_message">Bug missing a title. Please add a title for the bug your reporting.</string>
     <string name="no">No</string>
+    <string name="not_enrolled_in_challenge">Not Enrolled In Challenge</string>
+    <string name="not_enrolled_in_challenge_message">Currently you are not enrolled into any challenges! In order to upload progress, you must be enrolled in a challenge!</string>
     <string name="ok">OK</string>
     <string name="password">Password</string>
     <string name="phone">Phone</string>
+    <string name="post_progress">Post Progress</string>
     <string name="post_progress_to_my_feed">Post Progress to My Feed</string>
     <string name="post_your_progress">Post Your Progress</string>
     <string name="post_your_progress_description">To <b>complete a challenge</b>, you must post an update to your page. It holds you accountable and counts towards your daily goal</string>

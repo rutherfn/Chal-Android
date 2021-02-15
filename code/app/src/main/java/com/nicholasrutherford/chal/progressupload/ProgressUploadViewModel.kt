@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.challengesredesign.challengedetails.STARTER_INDEX
+import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
 import com.nicholasrutherford.chal.firebase.TITLE_ACTIVE_CHALLENGES_POST
@@ -18,6 +19,8 @@ import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.activechallengepost.WriteActiveChallengesPostsFirebase
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.util.UUID
 
 class ProgressUploadViewModel(private val progressUploadActivity: ProgressUploadActivity, private val appContext: Context, private val container: Int) : ViewModel() {
@@ -42,10 +45,15 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
 
     var currentUsername = ""
 
+    private val _activeChallengeAndCategoryResponse = MutableStateFlow(listOf<ActiveChallengeAndCategoryResponse>())
+    val activeChallengeAndCategoryResponse: StateFlow<List<ActiveChallengeAndCategoryResponse>> = _activeChallengeAndCategoryResponse
+
     init {
         readProfileDetailsFirebase.getUsername()?.let { userName ->
             currentUsername = userName
         }
+
+        fetchActiveChallenges()
     }
 
     fun onPhotoClicked() {
@@ -113,6 +121,29 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
         isSelectedIndex = false
     }
 
+    internal fun fetchActiveChallenges() {
+        ref.child("$uid$ACTIVE_CHALLENGES")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {}
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val activeChallengeAndCategoryResponseList = arrayListOf<ActiveChallengeAndCategoryResponse>()
+                    for (activeChallenges in snapshot.children) {
+                        activeChallenges.getValue(CurrentActiveChallengesResponse::class.java).let {
+                            it?.let { activeChallenge ->
+                                activeChallengeAndCategoryResponseList.add(
+                                    ActiveChallengeAndCategoryResponse(activeChallenge.name, activeChallenge.categoryName)
+                                )
+                            }
+                        }
+                    }
+                    _activeChallengeAndCategoryResponse.value = activeChallengeAndCategoryResponseList
+                }
+            })
+    }
+
+    fun onBackClicked() = navigation.finish(progressUploadActivity)
+
     internal fun writeUpdatedPostToFirebase() {
         writeActiveChallengesPostFirebase.writeTitle(savedUserLastIndexOfProgress, userPostTitle)
         writeActiveChallengesPostFirebase.writeDescription(savedUserLastIndexOfProgress, userPostBody)
@@ -124,6 +155,11 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
 
         writeActiveChallengesPostFirebase.writeCurrentDay(savedUserLastIndexOfProgress, "0")
     }
+
+    data class ActiveChallengeAndCategoryResponse(
+        var challenge: String,
+        var category: String
+    )
 
     inner class ProgressUploadViewStateImpl : ProgressViewState {
         override var title = ""

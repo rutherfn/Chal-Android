@@ -20,7 +20,6 @@ import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragme
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -129,6 +128,7 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
         }
         bind.tbMyFeed.tvTitle.setOnClickListener {
         }
+        bind.tbMyFeed.ivUploadChallenges.setOnClickListener { viewModel?.let { newsFeedRedesignViewModel -> newsFeedRedesignViewModel.onUploadProgressClicked() } }
     }
 
     override fun updateView(bind: FragmentRedesignMyFeedBinding) {

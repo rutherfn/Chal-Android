@@ -8,14 +8,14 @@ import androidx.fragment.app.FragmentManager
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.bugReportFragment
-import com.nicholasrutherford.chal.profileFragment
 import com.nicholasrutherford.chal.helpers.visibleOrGone
-import com.nicholasrutherford.chal.progressupload.ProgressUploadActivity
 import com.nicholasrutherford.chal.more.MoreNavigation
+import com.nicholasrutherford.chal.profileFragment
+import com.nicholasrutherford.chal.progressupload.ProgressUploadActivity
 
 class MoreNavigationImpl : MoreNavigation {
 
@@ -69,12 +69,14 @@ class MoreNavigationImpl : MoreNavigation {
         if (isClicked) {
             bottomNavigationView.visibleOrGone = true
             fragmentManager.beginTransaction()
-                .replace(id,
+                .replace(
+                    id,
                     profileFragment(
                         activity,
                         context
                     ),
-                profileFragment(activity, context)::javaClass.name)
+                    profileFragment(activity, context)::javaClass.name
+                )
                 .commit()
         }
     }

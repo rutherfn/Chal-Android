@@ -3,6 +3,7 @@ package com.nicholasrutherford.chal.progressupload
 import android.content.Context
 
 interface ProgressUploadNavigation {
+    fun finish(progressUploadActivity: ProgressUploadActivity)
     fun openGallery(progressUploadActivity: ProgressUploadActivity)
     fun showMainActivity(progressUploadActivity: ProgressUploadActivity, appcontext: Context)
     fun showAcProgress(progressUploadActivity: ProgressUploadActivity)

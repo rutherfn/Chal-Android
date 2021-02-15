@@ -1,6 +1,7 @@
 package com.nicholasrutherford.chal.newsfeed
 
 import android.content.Context
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -8,7 +9,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.challengesredesign.challengedetails.STARTER_INDEX
 import com.nicholasrutherford.chal.data.firebase.ActiveChallenge
 import com.nicholasrutherford.chal.data.firebase.FirebaseKeys
@@ -28,20 +29,25 @@ import com.nicholasrutherford.chal.firebase.TIME_CHANGE_EXPIRE
 import com.nicholasrutherford.chal.firebase.USERNAME
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
+import com.nicholasrutherford.chal.navigationimpl.newsfeed.NewsFeedNavigationImpl
 import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class NewsFeedRedesignViewModel(private val mainActivity: MainActivity, appContext: Context, val activeChallengesPostsList: List<ChallengesPostsEntity>?) : ViewModel() {
+class NewsFeedRedesignViewModel(private val fragmentActivity: FragmentActivity, private val appContext: Context, val activeChallengesPostsList: List<ChallengesPostsEntity>?) : ViewModel() {
 
     private val keysList: MutableList<FirebaseKeys> = ArrayList()
     private val usersList: MutableList<User> = ArrayList()
 
+    private val uid = FirebaseAuth.getInstance().uid ?: ""
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
-    var mAuth: FirebaseAuth? = null
+    private var mAuth: FirebaseAuth? = null
 
     val viewState = NewsFeedRedesignViewStateImpl()
+    val newsFeedNavigationImpl = NewsFeedNavigationImpl()
+
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
 
     private val _allFirebaseKeys = MutableStateFlow(listOf<FirebaseKeys>())
@@ -53,11 +59,23 @@ class NewsFeedRedesignViewModel(private val mainActivity: MainActivity, appConte
     private val _allChallengesPosts = MutableStateFlow(listOf<ChallengesPostsEntity>())
     private val allChallengesPosts: StateFlow<List<ChallengesPostsEntity>> = _allChallengesPosts
 
+    private val _isUserEnrolledInChallenge = MutableStateFlow(false)
+    private val isUserEnrolledInChallenge: StateFlow<Boolean> = _isUserEnrolledInChallenge
+
+    private var userEnrolledInChallenge = false
+
     init {
         mAuth = FirebaseAuth.getInstance()
         initViewStateOnLoad()
 
         fetchKeys()
+        checkIfUserIsEnrolledInAChallenge()
+
+        viewModelScope.launch {
+            isUserEnrolledInChallenge.collect { isEnrolled ->
+                userEnrolledInChallenge = isEnrolled
+            }
+        }
     }
 
     private fun initViewStateOnLoad() {
@@ -89,6 +107,27 @@ class NewsFeedRedesignViewModel(private val mainActivity: MainActivity, appConte
                     }
                 }
             })
+        }
+    }
+
+    private fun checkIfUserIsEnrolledInAChallenge() {
+        ref.child("$uid$ACTIVE_CHALLENGES")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {}
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    _isUserEnrolledInChallenge.value = snapshot.exists()
+                }
+            })
+    }
+
+    fun onUploadProgressClicked() {
+        if (userEnrolledInChallenge) {
+            newsFeedNavigationImpl.showProgress(fragmentActivity, appContext)
+        } else {
+            val title = fragmentActivity.getString(R.string.not_enrolled_in_challenge)
+            val message = fragmentActivity.getString(R.string.not_enrolled_in_challenge_message)
+            newsFeedNavigationImpl.showAlert(title, message, fragmentActivity)
         }
     }
 

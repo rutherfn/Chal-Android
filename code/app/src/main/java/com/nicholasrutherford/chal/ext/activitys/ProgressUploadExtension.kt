@@ -7,6 +7,6 @@ interface ProgressUploadExtension {
     fun main(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel)
     fun updateTypefaces(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel)
     fun containerId(): Int
-    fun updateSpinners(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel)
+    fun updateSpinners(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel, challengeAndCategoryList: List<ProgressUploadViewModel.ActiveChallengeAndCategoryResponse>)
     fun clickListeners(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel)
 }

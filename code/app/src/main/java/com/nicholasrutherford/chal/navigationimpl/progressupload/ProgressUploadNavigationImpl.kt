@@ -17,6 +17,8 @@ class ProgressUploadNavigationImpl : ProgressUploadNavigation {
 
     private var flowerLoadingDialog: ACProgressFlower? = null
 
+    override fun finish(progressUploadActivity: ProgressUploadActivity) = progressUploadActivity.finish()
+
     override fun openGallery(progressUploadActivity: ProgressUploadActivity) {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = GALLERY_TYPE
