@@ -13,36 +13,35 @@ import com.nicholasrutherford.chal.firebase.USERS
 
 class WriteActiveChallengesPostsFirebase() : WriteActiveChallengePostsExtension {
 
-    private val starterIndex = "0"
     private val uid = FirebaseAuth.getInstance().uid ?: ""
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
 
-    override fun parentDirectoryChallengePost(index: Int): String {
-        return "$uid$ACTIVE_CHALLENGES$starterIndex$ACTIVE_CHALLENGES_POSTS$index"
+    override fun parentDirectoryChallengePost(selectedIndex: Int, index: Int): String {
+        return "$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS$index"
     }
 
-    override fun writeTitle(index: Int, newValue: String) {
-        ref.child(parentDirectoryChallengePost(index))
+    override fun writeTitle(selectedIndex: Int, index: Int, newValue: String) {
+        ref.child(parentDirectoryChallengePost(selectedIndex, index))
             .child(TITLE_ACTIVE_CHALLENGES_POST).setValue(newValue)
     }
 
-    override fun writeDescription(index: Int, newValue: String) {
-        ref.child(parentDirectoryChallengePost(index))
+    override fun writeDescription(selectedIndex: Int, index: Int, newValue: String) {
+        ref.child(parentDirectoryChallengePost(selectedIndex, index))
             .child(DESCRIPTION_ACTIVE_CHALLENGES_POST).setValue(newValue)
     }
 
-    override fun writeCategory(index: Int, newValue: Int) {
-        ref.child(parentDirectoryChallengePost(index))
+    override fun writeCategory(selectedIndex: Int, index: Int, newValue: Int) {
+        ref.child(parentDirectoryChallengePost(selectedIndex, index))
             .child(CATEGORY_ACTIVE_CHALLENGES_POST).setValue(newValue)
     }
 
-    override fun writeImage(index: Int, newValue: String) {
-        ref.child(parentDirectoryChallengePost(index))
+    override fun writeImage(selectedIndex: Int, index: Int, newValue: String) {
+        ref.child(parentDirectoryChallengePost(selectedIndex, index))
             .child(IMAGE_ACTIVE_CHALLENENGES_POST).setValue(newValue)
     }
 
-    override fun writeCurrentDay(index: Int, newValue: String) {
-        ref.child(parentDirectoryChallengePost(index))
+    override fun writeCurrentDay(selectedIndex: Int, index: Int, newValue: String) {
+        ref.child(parentDirectoryChallengePost(selectedIndex, index))
             .child(CURRENT_DAY_ACTIVE_CHALLENGES_POST).setValue(newValue)
     }
 }

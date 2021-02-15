@@ -23,6 +23,8 @@ class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
     private var viewModel: ProgressUploadViewModel? = null
     var selectedPhotoUri: Uri? = null
 
+    private val listOfChallenges = arrayListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProgressUploadBinding.inflate(layoutInflater)
@@ -91,10 +93,9 @@ class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
     }
 
     override fun updateSpinners(bind: ActivityProgressUploadBinding, viewModel: ProgressUploadViewModel, challengeAndCategoryList: List<ProgressUploadViewModel.ActiveChallengeAndCategoryResponse>) {
-        val listOfChallenges = arrayListOf<String>()
         val listOfCategories = arrayListOf<String>()
 
-        challengeAndCategoryList.forEach { challengeAndCategory  ->
+        challengeAndCategoryList.forEach { challengeAndCategory ->
             listOfCategories.add(challengeAndCategory.category)
             listOfChallenges.add(challengeAndCategory.challenge)
         }
@@ -113,6 +114,9 @@ class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
         bind.clPostProgress.btnCancelAndDiscardPost.setOnClickListener {
             viewModel.onDiscardPostClicked()
         }
+        bind.clPostProgress.btnCancelAndDiscardPost.setOnClickListener {
+            viewModel.onDiscardPostClicked()
+        }
         bind.clPostProgress.ivUploadImage.setOnClickListener {
             viewModel.onPhotoClicked()
         }
@@ -123,8 +127,15 @@ class ProgressUploadActivity : AppCompatActivity(), ProgressUploadExtension {
             val title = bind.clPostProgress.spSelectChallenge.selectedItem.toString()
             val category = bind.clPostProgress.spSelectCategory.selectedItem.toString()
             val caption = bind.clPostProgress.etAddCaption.text.toString()
+            var selectedIndex = 0
 
-            viewModel.onPostProgressClicked(title, caption, category, selectedPhotoUri)
+            listOfChallenges.forEachIndexed { index, challenges ->
+                if (title == challenges) {
+                    selectedIndex = index
+                }
+            }
+
+            viewModel.onPostProgressClicked(title, caption, category, selectedIndex, selectedPhotoUri)
         }
     }
 }

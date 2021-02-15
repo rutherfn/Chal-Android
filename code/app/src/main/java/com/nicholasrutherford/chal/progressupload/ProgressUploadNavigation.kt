@@ -10,4 +10,5 @@ interface ProgressUploadNavigation {
     fun hideAcProgress()
     fun progressUploadAlert(alertMessageText: String, alertTitle: String, progressUploadActivity: ProgressUploadActivity)
     fun showAlert(alertMessageText: String, alertTitle: String, progressUploadActivity: ProgressUploadActivity, context: Context, isClicked: Boolean, id: Int)
+    fun showCancelAndDiscardAlert(message: String, title: String, progressUploadActivity: ProgressUploadActivity)
 }

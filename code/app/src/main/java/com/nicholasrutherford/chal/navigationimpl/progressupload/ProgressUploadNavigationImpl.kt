@@ -95,4 +95,28 @@ class ProgressUploadNavigationImpl : ProgressUploadNavigation {
         alert.setTitle(alertTitle)
         alert.show()
     }
+
+    override fun showCancelAndDiscardAlert(
+        message: String,
+        title: String,
+        progressUploadActivity: ProgressUploadActivity
+    ) {
+
+        val alertDialogBuilder = AlertDialog.Builder(progressUploadActivity)
+
+        alertDialogBuilder.setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton(progressUploadActivity.getString(R.string.yes)) { dialog, _ ->
+                dialog.cancel()
+                finish(progressUploadActivity)
+            }
+            .setNegativeButton(progressUploadActivity.getString(R.string.no)) { dialog, _ ->
+                dialog.cancel()
+            }
+
+        val alert = alertDialogBuilder.create()
+
+        alert.setTitle(title)
+        alert.show()
+    }
 }

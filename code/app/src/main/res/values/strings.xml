@@ -45,6 +45,8 @@
     <string name="debug_change_configuration">•  Change App Configurations</string>
     <string name="debug_password_title">Please Enter Password In Order To Continue</string>
     <string name="dev_email">nicholasrutherford121@gmail.com</string>
+    <string name="cancel_and_discard_post_title">Discard Post</string>
+    <string name="cancel_and_discard_post_message">Are you sure you want to discard this post?</string>
     <string name="done">Done</string>
     <string name="edit">Edit</string>
     <string name="edit_first_name">Edit First Name</string>

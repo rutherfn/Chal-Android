@@ -9,7 +9,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import com.nicholasrutherford.chal.challengesredesign.challengedetails.STARTER_INDEX
+import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
@@ -64,7 +64,7 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
         navigation.showAlert("Are you sure you want to discard this post?", "Discard Post", progressUploadActivity, appContext, true, container)
     }
 
-    fun onPostProgressClicked(title: String, body: String, category: String, photoUri: Uri?) {
+    fun onPostProgressClicked(title: String, body: String, category: String, selectedIndex: Int, photoUri: Uri?) {
         navigation.showAcProgress(progressUploadActivity)
 
         if (title == "" || body == "" || category == "" || photoUri == null) {
@@ -75,11 +75,11 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
             userPostBody = body
             userPostCategory = category
 
-            uploadProgressPhoto(photoUri)
+            uploadProgressPhoto(selectedIndex, photoUri)
         }
     }
 
-    fun uploadProgressPhoto(photoUri: Uri?) {
+    fun uploadProgressPhoto(selectedIndex: Int, photoUri: Uri?) {
         photoUri?.let { progressPhotoUri ->
             val fileName = UUID.randomUUID().toString()
             val ref = FirebaseStorage.getInstance().getReference(bindUserImageFile(fileName))
@@ -88,7 +88,7 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener { progressImage ->
                         progressImageUrl = progressImage.toString()
-                        updateFirebaseUser()
+                        updateFirebaseUser(selectedIndex)
                     }
                 }
                 .addOnFailureListener {
@@ -98,10 +98,10 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
         }
     }
 
-    fun updateFirebaseUser() {
-        listOf(0, 1, 2, 3, 4, 5, 6, 7).forEach { index ->
+    fun updateFirebaseUser(selectedIndex: Int) {
+        listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20).forEach { index ->
 
-            ref.child("$uid$ACTIVE_CHALLENGES$STARTER_INDEX$ACTIVE_CHALLENGES_POSTS$index/$TITLE_ACTIVE_CHALLENGES_POST").addValueEventListener(object : ValueEventListener {
+            ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS$index/$TITLE_ACTIVE_CHALLENGES_POST").addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                     println("error")
                 }
@@ -111,9 +111,10 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
                         savedUserLastIndexOfProgress = index
                         isSelectedIndex = true
 
-                        writeUpdatedPostToFirebase()
+                        writeUpdatedPostToFirebase(selectedIndex)
 
                         navigation.hideAcProgress()
+                        navigation.finish(progressUploadActivity) // place holder for right now
                     }
                 }
             })
@@ -121,7 +122,7 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
         isSelectedIndex = false
     }
 
-    internal fun fetchActiveChallenges() {
+    private fun fetchActiveChallenges() {
         ref.child("$uid$ACTIVE_CHALLENGES")
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {}
@@ -131,9 +132,7 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
                     for (activeChallenges in snapshot.children) {
                         activeChallenges.getValue(CurrentActiveChallengesResponse::class.java).let {
                             it?.let { activeChallenge ->
-                                activeChallengeAndCategoryResponseList.add(
-                                    ActiveChallengeAndCategoryResponse(activeChallenge.name, activeChallenge.categoryName)
-                                )
+                                activeChallengeAndCategoryResponseList.add(ActiveChallengeAndCategoryResponse(activeChallenge.name, activeChallenge.categoryName))
                             }
                         }
                     }
@@ -144,16 +143,22 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
 
     fun onBackClicked() = navigation.finish(progressUploadActivity)
 
-    internal fun writeUpdatedPostToFirebase() {
-        writeActiveChallengesPostFirebase.writeTitle(savedUserLastIndexOfProgress, userPostTitle)
-        writeActiveChallengesPostFirebase.writeDescription(savedUserLastIndexOfProgress, userPostBody)
-        writeActiveChallengesPostFirebase.writeCategory(savedUserLastIndexOfProgress, 0)
+    fun onCancelAndDiscardPostClicked() {
+        val title = progressUploadActivity.getString(R.string.cancel_and_discard_post_title)
+        val message = progressUploadActivity.getString(R.string.cancel_and_discard_post_message)
+        navigation.showCancelAndDiscardAlert(message, title, progressUploadActivity)
+    }
+
+    internal fun writeUpdatedPostToFirebase(selectedIndex: Int) {
+        writeActiveChallengesPostFirebase.writeTitle(selectedIndex, savedUserLastIndexOfProgress, userPostTitle)
+        writeActiveChallengesPostFirebase.writeDescription(selectedIndex, savedUserLastIndexOfProgress, userPostBody)
+        writeActiveChallengesPostFirebase.writeCategory(selectedIndex, savedUserLastIndexOfProgress, 0)
 
         progressImageUrl?.let { imageUrl ->
-            writeActiveChallengesPostFirebase.writeImage(savedUserLastIndexOfProgress, imageUrl)
+            writeActiveChallengesPostFirebase.writeImage(selectedIndex, savedUserLastIndexOfProgress, imageUrl)
         }
 
-        writeActiveChallengesPostFirebase.writeCurrentDay(savedUserLastIndexOfProgress, "0")
+        writeActiveChallengesPostFirebase.writeCurrentDay(selectedIndex, savedUserLastIndexOfProgress, "0")
     }
 
     data class ActiveChallengeAndCategoryResponse(
