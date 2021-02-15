@@ -27,7 +27,7 @@ class ChallengesRedesignFragment(private val appContext: Context) :
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentRedesignChallengesBinding.inflate(layoutInflater)
-        fragmentManager?.let { fragmentManager -> viewModel = ChallengesRedesignViewModel(fragmentManager, appContext) }
+        fragmentManager?.let { fragmentManager -> viewModel = ChallengesRedesignViewModel(fragmentManager, appContext, requireActivity()) }
         bindAdapter(bind)
         updateTypefaces(bind)
         clickListeners(bind)
@@ -55,6 +55,9 @@ class ChallengesRedesignFragment(private val appContext: Context) :
     }
 
     override fun clickListeners(bind: FragmentRedesignChallengesBinding) {
+        viewModel?.let { challengesRedesignViewModel ->
+            bind.tbRedesignChallenges.ivUploadChallenges.setOnClickListener { challengesRedesignViewModel.onHelpClicked() }
+        }
     }
 
     override fun containerId(): Int {

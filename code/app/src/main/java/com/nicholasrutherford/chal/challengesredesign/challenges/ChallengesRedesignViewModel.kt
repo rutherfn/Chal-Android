@@ -1,10 +1,12 @@
 package com.nicholasrutherford.chal.challengesredesign.challenges
 
 import android.content.Context
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.realdata.Challenges
 import com.nicholasrutherford.chal.data.realdata.LiveChallenges
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
@@ -15,7 +17,8 @@ private const val CHALLENGES_JSON_FILE_NAME = "challenges.json"
 
 class ChallengesRedesignViewModel(
     private val fragmentManager: FragmentManager,
-    private val appContext: Context
+    private val appContext: Context,
+    private val fragmentActivity: FragmentActivity
 ) : ViewModel() {
 
     val viewState = ChallengesRedesignViewStateImpl()
@@ -54,6 +57,13 @@ class ChallengesRedesignViewModel(
         }
 
         return jsonString
+    }
+
+    fun onHelpClicked() {
+        val message = fragmentActivity.getString(R.string.join_a_challenge_message)
+        val title = fragmentActivity.getString(R.string.join_a_challenge)
+
+        challengesRedesignNavigationImpl.showAlert(message, title, fragmentActivity)
     }
 
     fun showChallengeDetails(challenge: Challenges) = challengesRedesignNavigationImpl.showChallengeDetails(fragmentManager, appContext, challenge)

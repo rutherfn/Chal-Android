@@ -33,7 +33,7 @@ class ChallengeDetailsFragment(private val appContext: Context, private val chal
         viewModel = ChallengeDetailsViewModel(appContext, challenge, requireActivity())
         updateTypefaces(bind)
         bindAdapter(bind)
-        collectAbilityToJoinChallengeResults()
+        collectChallenges()
         clickListeners(bind)
         updateView(bind)
 
@@ -43,7 +43,9 @@ class ChallengeDetailsFragment(private val appContext: Context, private val chal
     override fun bindAdapter(bind: FragmentChallengeDetailsBinding) {
         bind.rvRelatedChallenges.isNestedScrollingEnabled = false
         bind.rvRelatedChallenges.layoutManager = LinearLayoutManager(activity)
-        relatedChallengesAdapter = RelatedChallengesAdapter(appContext)
+        viewModel?.let { redesignChallengesViewModel ->
+            relatedChallengesAdapter = RelatedChallengesAdapter(appContext, redesignChallengesViewModel.liveChallengesFilterList, redesignChallengesViewModel)
+        }
         bind.rvRelatedChallenges.adapter = relatedChallengesAdapter
     }
 
@@ -73,7 +75,7 @@ class ChallengeDetailsFragment(private val appContext: Context, private val chal
         }
     }
 
-    private fun collectAbilityToJoinChallengeResults() {
+    private fun collectChallenges() {
         lifecycleScope.launch {
             viewModel?.let { challengeDetailsViewModel ->
                 challengeDetailsViewModel.activeChallengesResponse.collect { activeChallengesList ->

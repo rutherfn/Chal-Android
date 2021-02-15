@@ -87,6 +87,8 @@
     <string name="full_name">Full Name</string>
     <string name="in_order_to_reset_password">in order to reset password</string>
     <string name="join_challenge"><u> Join Challenge!</u></string>
+    <string name="join_a_challenge">Join A Challenge!</string>
+    <string name="join_a_challenge_message">Are you ready to join the challenge? Enroll in any time bound challenge for a period of time, by posting progress of the challenge for 7 days! </string>
     <string-array name="listOfFonts">
         <item>@string/font_1</item>
         <item>@string/font_2</item>
@@ -149,6 +151,7 @@
     <string name="qa_tester_1">Nick</string>
     <string name="qa_tester_2">Marina</string>
     <string name="qa_tester_3">Patrick</string>
+    <string name="related_challenges">Related Challenges</string>
     <string name="restart">Restart</string>
     <string name="reporter_name">Reporter Name</string>
     <string name="report_bug">Report Bug</string>

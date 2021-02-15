@@ -9,7 +9,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.nicholasrutherford.chal.data.realdata.Challenges
+import com.nicholasrutherford.chal.data.realdata.LiveChallenges
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.USERS
@@ -18,13 +21,15 @@ import com.nicholasrutherford.chal.firebase.write.activechallenge.WriteActiveCha
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeDetailsNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.io.IOException
 import java.util.Calendar
 import java.util.Date
 
 const val STARTER_INDEX = "0"
+private const val CHALLENGES_JSON_FILE_NAME = "challenges.json"
 
 class ChallengeDetailsViewModel(
-    appContext: Context,
+    private val appContext: Context,
     private val challenge: Challenges,
     private val fragmentActivity: FragmentActivity
 ) : ViewModel() {
@@ -43,8 +48,12 @@ class ChallengeDetailsViewModel(
     private val _activeChallengesResponse = MutableStateFlow(listOf<CurrentActiveChallengesResponse>())
     val activeChallengesResponse: StateFlow<List<CurrentActiveChallengesResponse>> = _activeChallengesResponse
 
+    var liveChallengesFilterList = arrayListOf<LiveChallenges>()
+
     init {
         initViewStateOnLoad()
+
+        fetchChallenges()
         fetchActiveChallenges()
     }
 
@@ -144,6 +153,33 @@ class ChallengeDetailsViewModel(
             else -> { 6 }
         }
     }
+
+    private fun fetchChallenges() {
+        var liveChallengesList: List<LiveChallenges> = emptyList()
+        val listOfLiveChallenges = object : TypeToken<List<LiveChallenges>>() {}.type
+        liveChallengesList = Gson().fromJson(readJsonChallenges(), listOfLiveChallenges)
+
+        liveChallengesList.forEach { challengesList ->
+            if (challengesList.categoryNumber == challenge.categoryNumber) {
+                liveChallengesFilterList.add(challengesList)
+            }
+        }
+    }
+
+    private fun readJsonChallenges(): String? {
+        val jsonString: String
+
+        try {
+            jsonString = appContext.assets.open(CHALLENGES_JSON_FILE_NAME).bufferedReader().use { it.readText() }
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+            return null
+        }
+
+        return jsonString
+    }
+
+    fun showChallengeDetails(challenge: Challenges) = navigation.showChallengeDetails(fragmentActivity.supportFragmentManager, appContext, challenge)
 
     inner class ChallengeDetailsViewStateImpl : ChallengeDetailsViewState {
         override var toolbarName: String = ""

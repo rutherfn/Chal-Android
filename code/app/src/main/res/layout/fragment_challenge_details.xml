@@ -43,19 +43,13 @@
                     android:layout_height="wrap_content"
                     />
 
-
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/rvRedesignChallenges"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"/>-->
-
-<!--                <include-->
-<!--                    android:id="@+id/clEndOfChallenges"-->
-<!--                    layout="@layout/end_of_challenges_layout"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:baselineAligned="false"-->
-<!--                    />-->
+                <include
+                    android:id="@+id/clEndOfChallenges"
+                    layout="@layout/end_of_challenges_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:baselineAligned="false"
+                    />
 
             </LinearLayout>
 
