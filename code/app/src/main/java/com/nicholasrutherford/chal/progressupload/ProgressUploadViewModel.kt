@@ -3,27 +3,21 @@ package com.nicholasrutherford.chal.progressupload
 import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import com.nicholasrutherford.chal.ChalRoom
 import com.nicholasrutherford.chal.challengesredesign.challengedetails.STARTER_INDEX
-import com.nicholasrutherford.chal.data.realdata.ActiveChallengesPosts
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
-import com.nicholasrutherford.chal.firebase.CATEGORY_NAME
 import com.nicholasrutherford.chal.firebase.TITLE_ACTIVE_CHALLENGES_POST
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.activechallengepost.WriteActiveChallengesPostsFirebase
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
-import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
-import kotlinx.coroutines.launch
 import java.util.UUID
 
 class ProgressUploadViewModel(private val progressUploadActivity: ProgressUploadActivity, private val appContext: Context, private val container: Int) : ViewModel() {

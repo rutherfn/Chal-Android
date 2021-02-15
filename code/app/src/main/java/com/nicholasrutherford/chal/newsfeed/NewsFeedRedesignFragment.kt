@@ -20,6 +20,7 @@ import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragme
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -141,5 +142,7 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
             Glide.with(this).load(newsFeedViewModel.viewState.toolbarImage).apply(options)
                 .into(bind.tbMyFeed.cvProfile)
         }
+
+        Glide.with(appContext).load(R.drawable.ic_add).into(bind.tbMyFeed.ivUploadChallenges)
     }
 }
