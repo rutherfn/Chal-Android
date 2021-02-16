@@ -15,13 +15,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.nicholasrutherford.chal.ChalRoom
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
 import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragmentExtension
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -36,21 +34,19 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
     private val typeface = Typeface()
     private var viewModel: NewsFeedRedesignViewModel? = null
 
-    private val _allChallengesPosts = MutableStateFlow(listOf<ChallengesPostsEntity>())
-    private val allChallengesPosts: StateFlow<List<ChallengesPostsEntity>> = _allChallengesPosts
-
     init {
         mAuth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentRedesignMyFeedBinding.inflate(layoutInflater)
-        newsListActiveChallengesPostsUpdate()
+        viewModel = NewsFeedRedesignViewModel(mainActivity, appContext)
 
         lifecycleScope.launch {
-            allChallengesPosts.collect { challengesPosts ->
-                initViewModel(challengesPosts)
-                bindAdapter(bind)
+            viewModel?.let { newsFeedRedesignViewModel ->
+                newsFeedRedesignViewModel.newsFeed.collect { newsFeedList ->
+                    bindAdapter(bind, newsFeedList)
+                }
             }
         }
 
@@ -60,12 +56,12 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
 
         return bind.root
     }
-    override fun bindAdapter(bind: FragmentRedesignMyFeedBinding) {
+    override fun bindAdapter(bind: FragmentRedesignMyFeedBinding, newsFeedList: List<NewsFeedResponse>) {
         bind.rvNewsFeedRedesign.isNestedScrollingEnabled = false
         bind.rvNewsFeedRedesign.layoutManager = LinearLayoutManager(activity)
 
         viewModel?.let { newsFeedRedesignViewModel ->
-            newsFeedRedesignAdapter = NewsFeedRedesignAdapter(appContext, newsFeedRedesignViewModel)
+            newsFeedRedesignAdapter = NewsFeedRedesignAdapter(appContext, newsFeedList, newsFeedRedesignViewModel)
             bind.rvNewsFeedRedesign.adapter = newsFeedRedesignAdapter
         }
     }
@@ -77,50 +73,6 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
 
     override fun containerId(): Int {
         return R.id.container
-    }
-
-    fun newsListActiveChallengesPostsUpdate() {
-        val chalRoom = ChalRoom(mainActivity.application)
-
-        lifecycleScope.launch {
-            chalRoom.userRepository.readAllUsersRegular().forEach { users ->
-                users.activeChallengeEntities?.forEach { challengesPosts ->
-                    challengesPosts.activeChallengesPosts?.let { challengesPostsList ->
-                        _allChallengesPosts.value = challengesPostsList
-                    }
-                }
-            }
-        }
-    }
-
-    override fun convertFirebaseKeysEntity() {
-    }
-
-    override fun initViewModel(activeChallengesPostsList: List<ChallengesPostsEntity>) {
-        viewModel = NewsFeedRedesignViewModel(mainActivity, appContext, activeChallengesPostsList)
-
-        lifecycleScope.launch {
-            viewModel?.let { newsFeedViewModel ->
-                newsFeedViewModel.allFirebaseKeys.collect {
-                    newsFeedViewModel.fetchUsers(it)
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel?.let { newsFeedViewModel ->
-                newsFeedViewModel.allUsers.collect { userList ->
-                    userList.forEach {
-                        it.activeChallenges.forEach {
-                            println(it.categoryName)
-                            it.activeChallengesPosts.forEach {
-                                println(it.title)
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     override fun clickListeners(bind: FragmentRedesignMyFeedBinding) {

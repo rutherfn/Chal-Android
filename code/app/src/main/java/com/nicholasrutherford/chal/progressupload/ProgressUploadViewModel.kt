@@ -13,7 +13,9 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
+import com.nicholasrutherford.chal.firebase.PROFILE_IMAGE
 import com.nicholasrutherford.chal.firebase.TITLE_ACTIVE_CHALLENGES_POST
+import com.nicholasrutherford.chal.firebase.USERNAME
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
@@ -113,6 +115,8 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
 
                         writeUpdatedPostToFirebase(selectedIndex)
 
+                        fetchUsernameAndUrl(savedUserLastIndexOfProgress, selectedIndex)
+
                         navigation.hideAcProgress()
                         navigation.finish(progressUploadActivity) // place holder for right now
                     }
@@ -141,6 +145,23 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
             })
     }
 
+    private fun fetchUsernameAndUrl(index: Int, selectedIndex: Int) {
+        ref.child(uid).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val username = snapshot.child(USERNAME).value.toString()
+                    val profileImageUrl = snapshot.child(PROFILE_IMAGE).value.toString()
+
+                    writeUpdatedUsernameAndUrlToFirebase(username, index, profileImageUrl, selectedIndex)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                println("error")
+            }
+        })
+    }
+
     fun onBackClicked() = navigation.finish(progressUploadActivity)
 
     fun onCancelAndDiscardPostClicked() {
@@ -159,6 +180,11 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
         }
 
         writeActiveChallengesPostFirebase.writeCurrentDay(selectedIndex, savedUserLastIndexOfProgress, "0")
+    }
+
+    internal fun writeUpdatedUsernameAndUrlToFirebase(username: String, index: Int, url: String, selectedIndex: Int) {
+        writeActiveChallengesPostFirebase.writeUsername(selectedIndex, index, username)
+        writeActiveChallengesPostFirebase.writeUsernameUrl(selectedIndex, index, url)
     }
 
     data class ActiveChallengeAndCategoryResponse(

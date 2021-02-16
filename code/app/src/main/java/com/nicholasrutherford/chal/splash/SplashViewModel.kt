@@ -62,82 +62,85 @@ class SplashViewModel(context: Context, private val activity: SplashActivity) : 
 
     private fun checkIfUserIsSignedIn(firebaseKeysViewModelHelper: FirebaseKeysViewModelHelper) {
         val handler = Handler()
-        handler.postDelayed({
-            val user = firebaseKeysViewModelHelper.mAuth?.currentUser ?: null
+        handler.postDelayed(
+            {
+                val user = firebaseKeysViewModelHelper.mAuth?.currentUser ?: null
 
-            if (user == null) {
-                navigation.login(activity)
-            } else {
-                navigation.home(activity)
-            }
-        }, 5000)
+                if (user == null) {
+                    navigation.login(activity)
+                } else {
+                    navigation.home(activity)
+                }
+            },
+            5000
+        )
     }
 
     private fun fetchLatestUsers(allFirebaseKeys: List<FirebaseKeyEntity>) {
-            allFirebaseKeys.forEach { firebaseKey ->
-                ref.child(firebaseKey.key).addValueEventListener(object : ValueEventListener {
-                    override fun onCancelled(error: DatabaseError) {
-                        println("error")
-                    }
+        allFirebaseKeys.forEach { firebaseKey ->
+            ref.child(firebaseKey.key).addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                    println("error")
+                }
 
-                    override fun onDataChange(userSnapshot: DataSnapshot) {
-                        if (userSnapshot.exists()) {
+                override fun onDataChange(userSnapshot: DataSnapshot) {
+                    if (userSnapshot.exists()) {
 
-                            ref.child("${firebaseKey.key}/${ACTIVE_CHALLENGES}$STARTER_INDEX").addValueEventListener(object : ValueEventListener {
-                                override fun onCancelled(error: DatabaseError) {
-                                    println("error")
-                                }
+                        ref.child("${firebaseKey.key}/${ACTIVE_CHALLENGES}$STARTER_INDEX").addValueEventListener(object : ValueEventListener {
+                            override fun onCancelled(error: DatabaseError) {
+                                println("error")
+                            }
 
-                                override fun onDataChange(activeChallengeSnapshot: DataSnapshot) {
-                                    if (activeChallengeSnapshot.exists()) {
+                            override fun onDataChange(activeChallengeSnapshot: DataSnapshot) {
+                                if (activeChallengeSnapshot.exists()) {
 
-                                        viewModelScope.launch {
-                                            val chalRoom = ChalRoom(activity.application)
-                                            chalRoom.userRepository.addAUser(
-                                                UserEntity(
-                                                    id = userSnapshot.child(ID).value.toString()
-                                                        .toInt(),
-                                                    username = userSnapshot.child(USERNAME).value.toString(),
-                                                    email = userSnapshot.child(EMAIL).value.toString(),
-                                                    profileImageUrl = userSnapshot.child(
-                                                        PROFILE_IMAGE
-                                                    ).value.toString(),
-                                                    password = userSnapshot.child(PASSWORD).value.toString(),
-                                                    firstName = userSnapshot.child(FIRST_NAME).value.toString(),
-                                                    lastName = userSnapshot.child(LAST_NAME).value.toString(),
-                                                    bio = userSnapshot.child(BIO).value.toString(),
-                                                    age = userSnapshot.child(AGE).value.toString()
-                                                        .toInt(),
-                                                    currentFriends = null,
-                                                    activeChallengeEntities = listOf(
-                                                        ActiveChallengesEntity(
-                                                            id = 0,
-                                                            nameOfChallenge = activeChallengeSnapshot.child(
-                                                                CATEGORY_NAME
-                                                            ).toString(),
-                                                            description = activeChallengeSnapshot.child(
-                                                                DESCRIPTION
-                                                            ).toString(),
-                                                            numberOfDaysOfChallenge = 0,
-                                                            challengeExpireTime = "dad",
-                                                            currentDayOfChallenge = 0,
-                                                            categoryName = activeChallengeSnapshot.child(
-                                                                CATEGORY_NAME
-                                                            ).toString(),
-                                                            activeChallengesPosts = emptyList()
+                                    viewModelScope.launch {
+                                        val chalRoom = ChalRoom(activity.application)
+                                        chalRoom.userRepository.addAUser(
+                                            UserEntity(
+                                                id = userSnapshot.child(ID).value.toString()
+                                                    .toInt(),
+                                                username = userSnapshot.child(USERNAME).value.toString(),
+                                                email = userSnapshot.child(EMAIL).value.toString(),
+                                                profileImageUrl = userSnapshot.child(
+                                                    PROFILE_IMAGE
+                                                ).value.toString(),
+                                                password = userSnapshot.child(PASSWORD).value.toString(),
+                                                firstName = userSnapshot.child(FIRST_NAME).value.toString(),
+                                                lastName = userSnapshot.child(LAST_NAME).value.toString(),
+                                                bio = userSnapshot.child(BIO).value.toString(),
+                                                age = userSnapshot.child(AGE).value.toString()
+                                                    .toInt(),
+                                                currentFriends = null,
+                                                activeChallengeEntities = listOf(
+                                                    ActiveChallengesEntity(
+                                                        id = 0,
+                                                        nameOfChallenge = activeChallengeSnapshot.child(
+                                                            CATEGORY_NAME
+                                                        ).toString(),
+                                                        description = activeChallengeSnapshot.child(
+                                                            DESCRIPTION
+                                                        ).toString(),
+                                                        numberOfDaysOfChallenge = 0,
+                                                        challengeExpireTime = "dad",
+                                                        currentDayOfChallenge = 0,
+                                                        categoryName = activeChallengeSnapshot.child(
+                                                            CATEGORY_NAME
+                                                        ).toString(),
+                                                        activeChallengesPosts = emptyList()
 
-                                                        )
                                                     )
                                                 )
                                             )
-                                        }
+                                        )
                                     }
                                 }
-                            })
-                        }
+                            }
+                        })
                     }
-                })
-            }
+                }
+            })
+        }
     }
 
     inner class SplashViewModelImpl : SplashViewState {

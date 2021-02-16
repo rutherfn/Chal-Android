@@ -28,18 +28,18 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <TextView
-        android:id="@+id/tvHomeUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_10dp"
-        android:layout_marginLeft="@dimen/margin_10dp"
-        android:textSize="@dimen/sub_header_text_size"
-        android:textStyle="bold"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/ivHomeProfilePicture"
-        app:layout_constraintTop_toTopOf="@+id/ivHomeProfilePicture"
-        />
+            <TextView
+                android:id="@+id/tvHomeUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:text="TextView"
+                android:textSize="@dimen/sub_header_text_size"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivHomeProfilePicture"
+                app:layout_constraintStart_toEndOf="@+id/ivHomeProfilePicture"
+                app:layout_constraintTop_toTopOf="@+id/ivHomeProfilePicture" />
 
     <ImageView
         android:id="@+id/ivShareHome"
@@ -80,31 +80,29 @@
         app:layout_constraintTop_toBottomOf="@+id/ivHomePostImage"
         />
 
-    <TextView
-        android:id="@+id/tvHomeChallengeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_6dp"
-        android:padding="@dimen/padding_6dp"
-        android:textStyle="bold"
-        android:textSize="@dimen/sub_header_text_size"
-        android:text="7 DAYS OF Meditation - HEALTH AND WELLNESS"
-        app:layout_constraintStart_toStartOf="@+id/btnDayOfChallenge"
-        app:layout_constraintTop_toBottomOf="@+id/btnDayOfChallenge"
-        />
+            <TextView
+                android:id="@+id/tvHomeChallengeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_6dp"
+                android:padding="@dimen/padding_6dp"
+                android:text="7 DAYS OF Meditation - HEALTH AND WELLNESS"
+                android:textSize="@dimen/sub_header_text_size"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/btnDayOfChallenge"
+                app:layout_constraintTop_toBottomOf="@+id/btnDayOfChallenge"
+                />
 
-    <TextView
-        android:id="@+id/tvChallengepostDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_6dp"
-        android:textSize="@dimen/body_text_size"
-        android:paddingBottom="@dimen/padding_10dp"
-        android:text="Lorem ipsumk dolor sir amet, consetutur sadisciping eltir, sed diam nonumy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvHomeChallengeTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvHomeChallengeTitle"
-        />
+            <TextView
+                android:id="@+id/tvChallengepostDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_6dp"
+                android:text="Lorem ipsumk dolor sir amet, consetutur sadisciping eltir, sed diam nonumy"
+                android:textSize="@dimen/body_text_size"
+                app:layout_constraintStart_toStartOf="@+id/tvHomeChallengeTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvHomeChallengeTitle"
+                />
 
             <View
                 android:layout_width="match_parent"

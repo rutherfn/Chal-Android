@@ -30,6 +30,7 @@ const val USER_CURRENT_DAY = "userCurrentDay"
 
 const val ACTIVE_CHALLENGES_POSTS = "/activeChallengesPosts/"
 const val ID_ACTIVE_CHALLENGES_POST = "id"
+const val USERNAME_URL = "usernameUrl"
 const val TITLE_ACTIVE_CHALLENGES_POST = "title"
 const val DESCRIPTION_ACTIVE_CHALLENGES_POST = "description"
 const val CATEGORY_ACTIVE_CHALLENGES_POST = "category"

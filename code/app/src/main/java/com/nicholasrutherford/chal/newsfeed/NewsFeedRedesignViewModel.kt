@@ -15,7 +15,10 @@ import com.nicholasrutherford.chal.data.firebase.ActiveChallenge
 import com.nicholasrutherford.chal.data.firebase.FirebaseKeys
 import com.nicholasrutherford.chal.data.firebase.Friends
 import com.nicholasrutherford.chal.data.firebase.User
+import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
+import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
+import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
 import com.nicholasrutherford.chal.firebase.AGE
 import com.nicholasrutherford.chal.firebase.BIO
 import com.nicholasrutherford.chal.firebase.CATEGORY_NAME
@@ -30,15 +33,15 @@ import com.nicholasrutherford.chal.firebase.USERNAME
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.newsfeed.NewsFeedNavigationImpl
-import com.nicholasrutherford.chal.room.entity.challengesposts.ChallengesPostsEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class NewsFeedRedesignViewModel(private val fragmentActivity: FragmentActivity, private val appContext: Context, val activeChallengesPostsList: List<ChallengesPostsEntity>?) : ViewModel() {
+class NewsFeedRedesignViewModel(private val fragmentActivity: FragmentActivity, private val appContext: Context) : ViewModel() {
 
     private val keysList: MutableList<FirebaseKeys> = ArrayList()
+
     private val usersList: MutableList<User> = ArrayList()
 
     private val uid = FirebaseAuth.getInstance().uid ?: ""
@@ -56,8 +59,8 @@ class NewsFeedRedesignViewModel(private val fragmentActivity: FragmentActivity, 
     private val _allUsers = MutableStateFlow(listOf<User>())
     val allUsers: StateFlow<List<User>> = _allUsers
 
-    private val _allChallengesPosts = MutableStateFlow(listOf<ChallengesPostsEntity>())
-    private val allChallengesPosts: StateFlow<List<ChallengesPostsEntity>> = _allChallengesPosts
+    private val _newsFeed = MutableStateFlow(listOf<NewsFeedResponse>())
+    val newsFeed: StateFlow<List<NewsFeedResponse>> = _newsFeed
 
     private val _isUserEnrolledInChallenge = MutableStateFlow(false)
     private val isUserEnrolledInChallenge: StateFlow<Boolean> = _isUserEnrolledInChallenge
@@ -74,6 +77,12 @@ class NewsFeedRedesignViewModel(private val fragmentActivity: FragmentActivity, 
         viewModelScope.launch {
             isUserEnrolledInChallenge.collect { isEnrolled ->
                 userEnrolledInChallenge = isEnrolled
+            }
+        }
+
+        viewModelScope.launch {
+            allFirebaseKeys.collect { firebaseKeys ->
+                fetchActiveChallengesPosts(firebaseKeys)
             }
         }
     }
@@ -128,6 +137,56 @@ class NewsFeedRedesignViewModel(private val fragmentActivity: FragmentActivity, 
             val title = fragmentActivity.getString(R.string.not_enrolled_in_challenge)
             val message = fragmentActivity.getString(R.string.not_enrolled_in_challenge_message)
             newsFeedNavigationImpl.showAlert(title, message, fragmentActivity)
+        }
+    }
+
+    fun fetchActiveChallengesPosts(firebaseKeys: List<FirebaseKeys>) {
+        val newsFeedList = arrayListOf<NewsFeedResponse>()
+        val activeChallengesResponseList = arrayListOf<CurrentActiveChallengesResponse>()
+        firebaseKeys.forEachIndexed { indexs, firebaseKeys ->
+            ref.child(firebaseKeys.key).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        ref.child("${firebaseKeys.key}$ACTIVE_CHALLENGES").addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                for (activeChallenges in snapshot.children) {
+                                    activeChallenges.getValue(CurrentActiveChallengesResponse::class.java).let {
+                                        it?.let { activeChallenge ->
+                                            activeChallengesResponseList.add(activeChallenge)
+                                        }
+                                    }
+                                }
+                                activeChallengesResponseList.forEachIndexed { index, currentActiveChallengesResponse ->
+                                    ref.child("${firebaseKeys.key}${ACTIVE_CHALLENGES}$index$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object : ValueEventListener {
+                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                            for (challengesPosts in snapshot.children) {
+                                                challengesPosts.getValue(NewsFeedResponse::class.java).let {
+                                                    it?.let { challengePost -> newsFeedList.add(challengePost) }
+                                                }
+                                            }
+
+                                            println(newsFeedList.size)
+                                            _newsFeed.value = newsFeedList
+                                        }
+
+                                        override fun onCancelled(error: DatabaseError) {
+                                            println("error")
+                                        }
+                                    })
+                                }
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                println("error")
+                            }
+                        })
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println("error")
+                }
+            })
         }
     }
 

@@ -7,4 +7,6 @@ interface WriteActiveChallengePostsExtension {
     fun writeCategory(selectedIndex: Int, index: Int, newValue: Int)
     fun writeImage(selectedIndex: Int, index: Int, newValue: String)
     fun writeCurrentDay(selectedIndex: Int, index: Int, newValue: String)
+    fun writeUsername(selectedIndex: Int, index: Int, newValue: String)
+    fun writeUsernameUrl(selectedIndex: Int, index: Int, newValue: String)
 }

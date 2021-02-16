@@ -23,9 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun main(binding: ActivityMainBinding) {
         setupView(binding)
-
         setupHomeForFirstToLoad()
-
         setupBottomNavigation(binding)
     }
 

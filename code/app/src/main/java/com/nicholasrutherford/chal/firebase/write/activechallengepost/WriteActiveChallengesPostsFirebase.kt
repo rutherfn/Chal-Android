@@ -9,6 +9,8 @@ import com.nicholasrutherford.chal.firebase.CURRENT_DAY_ACTIVE_CHALLENGES_POST
 import com.nicholasrutherford.chal.firebase.DESCRIPTION_ACTIVE_CHALLENGES_POST
 import com.nicholasrutherford.chal.firebase.IMAGE_ACTIVE_CHALLENENGES_POST
 import com.nicholasrutherford.chal.firebase.TITLE_ACTIVE_CHALLENGES_POST
+import com.nicholasrutherford.chal.firebase.USERNAME
+import com.nicholasrutherford.chal.firebase.USERNAME_URL
 import com.nicholasrutherford.chal.firebase.USERS
 
 class WriteActiveChallengesPostsFirebase() : WriteActiveChallengePostsExtension {
@@ -43,5 +45,15 @@ class WriteActiveChallengesPostsFirebase() : WriteActiveChallengePostsExtension 
     override fun writeCurrentDay(selectedIndex: Int, index: Int, newValue: String) {
         ref.child(parentDirectoryChallengePost(selectedIndex, index))
             .child(CURRENT_DAY_ACTIVE_CHALLENGES_POST).setValue(newValue)
+    }
+
+    override fun writeUsername(selectedIndex: Int, index: Int, newValue: String) {
+        ref.child(parentDirectoryChallengePost(selectedIndex, index))
+            .child(USERNAME).setValue(newValue)
+    }
+
+    override fun writeUsernameUrl(selectedIndex: Int, index: Int, newValue: String) {
+        ref.child(parentDirectoryChallengePost(selectedIndex, index))
+            .child(USERNAME_URL).setValue(newValue)
     }
 }
