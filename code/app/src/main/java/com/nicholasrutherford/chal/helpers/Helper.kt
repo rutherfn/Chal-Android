@@ -7,6 +7,8 @@ import java.io.IOException
 
 class Helper {
 
+    val categoryList = arrayListOf("Health And Wellness", "Intellectual", "Lifestyle")
+
     @Throws(InterruptedException::class, IOException::class) // responsible for checking internet connection, by hitting google.com. If it cant hit it, return back false
     fun isConnected(): Boolean {
         val command = "ping -c 1 google.com"

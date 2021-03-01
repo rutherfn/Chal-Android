@@ -55,7 +55,7 @@ class EditMyProfileViewModel(
         writeAccountFirebase.updateLastName(viewState.editLastName)
         writeAccountFirebase.updateBio(viewState.editBio)
 
-        editProfileDb()
+        //editProfileDb()
 
         navigation.showAcProgress(mainActivity)
         val timer = object : CountDownTimer(2500, 100) {

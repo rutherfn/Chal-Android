@@ -17,16 +17,18 @@ import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesRespons
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
-import com.nicholasrutherford.chal.firebase.write.activechallenge.WriteActiveChallengeFirebase
+import com.nicholasrutherford.chal.firebase.write.activechallenge.WriteActiveChallengeImpl
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeDetailsNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.io.IOException
-import java.util.Calendar
-import java.util.Date
+import java.text.SimpleDateFormat
+import java.util.*
 
 const val STARTER_INDEX = "0"
 private const val CHALLENGES_JSON_FILE_NAME = "challenges.json"
+
+const val DATE_FORMAT = "dd/M/yyyy hh:mm:ss"
 
 class ChallengeDetailsViewModel(
     private val appContext: Context,
@@ -36,7 +38,7 @@ class ChallengeDetailsViewModel(
 
     val viewState = ChallengeDetailsViewStateImpl()
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
-    private val writeActiveChallengesFirebase = WriteActiveChallengeFirebase()
+    private val writeActiveChallengesFirebase = WriteActiveChallengeImpl()
 
     private val uid = FirebaseAuth.getInstance().uid ?: ""
 
@@ -66,11 +68,11 @@ class ChallengeDetailsViewModel(
         }
     }
 
-    fun getDaysAgo(daysAgo: Int): Date {
+    fun dateChallengeExpires(daysAgo: Int): String {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, +daysAgo)
 
-        return calendar.time
+        return SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(calendar.time)
     }
 
     fun attemptToEnrollUserIntoChallenge(joinChallenge: JoinChallenge) {
@@ -130,8 +132,9 @@ class ChallengeDetailsViewModel(
         writeActiveChallengesFirebase.writeBio(starterIndex, challenge.desc)
         writeActiveChallengesFirebase.writeName(starterIndex, challenge.title)
         writeActiveChallengesFirebase.writeNumberOfDaysInChallenge(starterIndex, challenge.duration)
-        writeActiveChallengesFirebase.writeTimeChallengeExpire(starterIndex, getDaysAgo(challenge.duration))
+        writeActiveChallengesFirebase.writeDateChallengeExpire(starterIndex, dateChallengeExpires(challenge.duration))
         writeActiveChallengesFirebase.writeUserCurrentDay(starterIndex, dayJoiningChallenge())
+        writeActiveChallengesFirebase.writeUserDayOnChallenge(starterIndex, 0)
 
         navigation.showAlert(
             "You have just joined the ${challenge.duration} Day ${challenge.title}! Get started by posting progress.",
@@ -155,7 +158,7 @@ class ChallengeDetailsViewModel(
     }
 
     private fun fetchChallenges() {
-        var liveChallengesList: List<LiveChallenges> = emptyList()
+        var liveChallengesList: List<LiveChallenges>
         val listOfLiveChallenges = object : TypeToken<List<LiveChallenges>>() {}.type
         liveChallengesList = Gson().fromJson(readJsonChallenges(), listOfLiveChallenges)
 

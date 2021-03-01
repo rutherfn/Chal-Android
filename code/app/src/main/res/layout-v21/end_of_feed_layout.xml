@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/you_reached_the_end_of_the_feed"
         android:padding="@dimen/padding_10dp"
+        android:visibility="gone"
         android:textColor="@color/colorSmokeWhite"
         android:background="@color/colorBlack"
         android:textSize="@dimen/sub_header_text_size"

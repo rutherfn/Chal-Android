@@ -1,5 +1,6 @@
 <resources>
     <string name="active">Active(%s)</string>
+    <string name="all">All</string>
     <string name="all_rights_reserved">All Rights Reserved, Chal LLC 2020</string>
     <string name="app_name">chal</string>
     <string name="add_caption">Add Caption</string>
@@ -19,6 +20,7 @@
     <string name="category_education">Education</string>
     <string name="category_travel">Education</string>
     <string name="challenges">Challenges</string>
+    <string name="challenge_feed">Challenge Feed</string>
     <string name="challenge_details">Challenge Details</string>
     <string name="challenge_description">A <b>new you begins here!</b> Browse through the different categories below to find the <b>#chal </b>journey that youd like to embark on.</string>
     <string name="chal_menu">Chal Menu</string>
@@ -34,6 +36,7 @@
     <string name="challenges_bottom_nav">Challenges</string>
     <string name="choose_from_library">Choose From Library</string>
     <string name="create">Create</string>
+    <string name="days_completed">%d out of %d days completed \n- you are almost there!</string>
     <string name="do_not_have_account">Don\'t Have A Account?</string>
     <string name="debug">Debug</string>
     <string-array name="debugOptions">
@@ -84,6 +87,7 @@
     <string name="filler_hash_tag_one"><u>#MuscleGains</u></string>
     <string name="filler_hash_tag_two"><u>#PushMyself</u></string>
     <string name="filler_hash_tag_three"><u>#Motiviation</u></string>
+    <string name="friends">Friends</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="forgot_your_password">Forgot Your Password</string>
     <string name="full_name">Full Name</string>
@@ -131,8 +135,9 @@
     <string name="low">Low</string>
     <string name="name">Name</string>
     <string name="may_i_ask">May i ask for your phone number?</string>
-    <string name="my_challenges">My Challlenges</string>
+    <string name="my_challenges">My Challenges</string>
     <string name="my_feed">My Feed</string>
+    <string name="my_posts">My Posts</string>
     <string name="my_profile">My Profile</string>
     <string name="medium">Medium</string>
     <string name="missing_desc_message">Bug Missing Description</string>
@@ -183,6 +188,7 @@
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
     <string name="try_again">Try Again</string>
     <string name="username">Username</string>
+    <string name="update_progress">Update Progress</string>
     <string name="upload">Upload</string>
     <string name="upload_image">Upload Image</string>
     <string name="upload_post">Upload Post</string>

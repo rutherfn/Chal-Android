@@ -16,7 +16,7 @@ import com.nicholasrutherford.chal.data.realdata.Challenges
 import com.nicholasrutherford.chal.more.MoreFragment
 import com.nicholasrutherford.chal.newsfeed.NewsFeedRedesignFragment
 import com.nicholasrutherford.chal.profile.editprofile.EditMyProfileFragment
-import com.nicholasrutherford.chal.profile.profiles.ProfileFragment
+import com.nicholasrutherford.chal.profile.profiles.MyProfileFragment
 
 fun bugReportFragment(mainActivity: MainActivity, appContext: Context) = BugReportFragment(
     appContext
@@ -29,5 +29,5 @@ fun forgotPasswordFragment(activity: ForgotPasswordActivity, context: Context) =
 fun loginFragment(activity: LoginActivity, appContext: Context) = LoginFragment(activity, appContext)
 fun newsFeedRedesignFragment(mainActivity: MainActivity, appContext: Context) = NewsFeedRedesignFragment(mainActivity, appContext)
 fun moreFragment(mainActivity: MainActivity, context: Context) = MoreFragment(mainActivity, context)
-fun profileFragment(mainActivity: MainActivity, context: Context) = ProfileFragment(mainActivity, context)
+fun profileFragment(mainActivity: MainActivity, context: Context) = MyProfileFragment(mainActivity, context)
 fun signUpFragment(activity: SignUpActivity, appContext: Context) = SignUpFragment(activity, appContext)

@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.myprofile.MyProfileNavigationImpl
 
@@ -25,12 +25,23 @@ class MyProfileViewModel(
 
     init {
         setupProfilePage()
+        onMyChallengesTabClicked()
+    }
+
+    fun onMyChallengesTabClicked() {
+        viewState.myChallengesTabActive = true
+        viewState.myFriendsTabActive = false
+    }
+
+    fun onMyFriendsTabClicked() {
+        viewState.myFriendsTabActive = true
+        viewState.myChallengesTabActive = false
     }
 
     private fun setupProfilePage() {
         navigation.showAcProgress(mainActivity)
 
-       viewState.age = readProfiledDetailsFirebase.getAge()
+        viewState.age = readProfiledDetailsFirebase.getAge()
 
         viewState.description = readProfiledDetailsFirebase.getBio()
         if (viewState.description?.isEmpty()!!) {
@@ -50,5 +61,7 @@ class MyProfileViewModel(
         override var description: String? = ""
         override var username: String? = ""
         override var profileImage: String? = ""
+        override var myChallengesTabActive = false
+        override var myFriendsTabActive = false
     }
 }

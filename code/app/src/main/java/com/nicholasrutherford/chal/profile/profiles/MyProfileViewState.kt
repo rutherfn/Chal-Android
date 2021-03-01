@@ -5,4 +5,6 @@ interface MyProfileViewState {
     var description: String?
     var username: String?
     var profileImage: String?
+    var myChallengesTabActive: Boolean
+    var myFriendsTabActive: Boolean
 }
