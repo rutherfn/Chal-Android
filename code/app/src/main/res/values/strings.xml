@@ -36,7 +36,7 @@
     <string name="challenges_bottom_nav">Challenges</string>
     <string name="choose_from_library">Choose From Library</string>
     <string name="create">Create</string>
-    <string name="days_completed">%d out of %d days completed \n- you are almost there!</string>
+    <string name="days_completed">%d out of %d days completed</string>
     <string name="do_not_have_account">Don\'t Have A Account?</string>
     <string name="debug">Debug</string>
     <string-array name="debugOptions">

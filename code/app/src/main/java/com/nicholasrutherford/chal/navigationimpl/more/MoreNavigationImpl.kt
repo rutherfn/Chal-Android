@@ -23,7 +23,9 @@ class MoreNavigationImpl : MoreNavigation {
 
     override fun login(mainActivity: MainActivity, context: Context) {
         val intent = Intent(context, LoginActivity::class.java)
+
         mainActivity.startActivity(intent)
+        mainActivity.finish()
     }
 
     override fun reportBug(mainActivity: MainActivity, context: Context, bottomNavigationView: BottomNavigationView) {

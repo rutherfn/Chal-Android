@@ -130,23 +130,20 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
                 bind.rvNewsFeedRedesign.visibleOrGone = true
                 bind.clFriendsEmptyState.clAddFriend.visibleOrGone = false
                 updateButtonsAllClicked(bind)
-                //    newsFeedRedesignAdapter = null
                 bindAdapter(bind, allActiveNewsFeedList)
             }
         }
         bind.clChallengeFeed.btnFriends.setOnClickListener {
             bind.rvNewsFeedRedesign.visibleOrGone = false // place holder
             bind.clFriendsEmptyState.clAddFriend.visibleOrGone = true
-            // show new empty state for adding friends
+            bind.clEndOfFeed.tvEndOfFeed.visibleOrGone = false
             updateButtonsFriendsClicked(bind)
-            //  newsFeedRedesignAdapter = null
         }
         bind.clChallengeFeed.btnMyPosts.setOnClickListener {
             if (allActiveNewsFeedList.isNotEmpty()) {
                 bind.rvNewsFeedRedesign.visibleOrGone = true
                 bind.clFriendsEmptyState.clAddFriend.visibleOrGone = false
                 updateButtonsMyPostsClicked(bind)
-                //  newsFeedRedesignAdapter = null
                 bindAdapter(bind, currentUserNewsFeedList)
             }
         }
@@ -154,7 +151,7 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
         }
         bind.tbMyFeed.tvTitle.setOnClickListener {
         }
-        bind.tbMyFeed.ivUploadChallenges.setOnClickListener { viewModel?.let { newsFeedRedesignViewModel -> newsFeedRedesignViewModel.onUploadProgressClicked() } }
+        bind.tbMyFeed.ivUploadChallenges.setOnClickListener { viewModel?.onUploadProgressClicked() }
     }
 
     private fun updateButtonsAllClicked(bind: FragmentRedesignMyFeedBinding) {

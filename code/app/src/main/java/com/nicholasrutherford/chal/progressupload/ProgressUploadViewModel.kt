@@ -101,28 +101,40 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
     }
 
     fun updateFirebaseUser(selectedIndex: Int) {
-        listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20).forEach { index ->
-
-            ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS$index/$TITLE_ACTIVE_CHALLENGES_POST").addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    println("error")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (!snapshot.exists() && !isSelectedIndex) {
-                        savedUserLastIndexOfProgress = index
-                        isSelectedIndex = true
-
-                        writeUpdatedPostToFirebase(selectedIndex)
-
-                        fetchUsernameAndUrl(savedUserLastIndexOfProgress, selectedIndex)
-
-                        navigation.hideAcProgress()
-                        navigation.finish(progressUploadActivity) // place holder for right now
+        var activeChallengesPostsIndex = 0
+        ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (activeChallengesPosts in snapshot.children) {
+                        activeChallengesPostsIndex++
                     }
+                } else {
+                    activeChallengesPostsIndex = 0
                 }
-            })
-        }
+                ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS$activeChallengesPostsIndex/$TITLE_ACTIVE_CHALLENGES_POST").addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (!snapshot.exists() && !isSelectedIndex) {
+                            savedUserLastIndexOfProgress = activeChallengesPostsIndex
+                            isSelectedIndex = true
+
+                            writeUpdatedPostToFirebase(selectedIndex)
+
+                            fetchUsernameAndUrl(savedUserLastIndexOfProgress, selectedIndex)
+
+                            navigation.hideAcProgress()
+                            navigation.showMainActivity(progressUploadActivity, appContext)
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        println("error")
+                    }
+                })
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                println("error")
+            }
+        })
         isSelectedIndex = false
     }
 
