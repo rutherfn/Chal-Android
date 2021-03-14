@@ -15,11 +15,11 @@
             layout="@layout/post_toolbar_layout"
             />
 
-        <include
-            android:id="@+id/clSvProfile"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            layout="@layout/search_view_home"
+        <SearchView
+            android:id="@+id/svProfiles"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_height="50dp"
             />
 
         <include

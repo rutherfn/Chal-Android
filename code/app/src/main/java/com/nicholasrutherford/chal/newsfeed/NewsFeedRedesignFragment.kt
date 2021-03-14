@@ -15,14 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
 import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragmentExtension
-import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.helpers.PeekingLinearLayoutManager
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
@@ -33,8 +31,7 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
     Fragment(),
     NewsFeedRedesignFragmentExtension {
 
-    private val ref = FirebaseDatabase.getInstance().getReference(USERS)
-    var mAuth: FirebaseAuth? = null
+    private var mAuth: FirebaseAuth? = null
 
     private var myChallengesHeaderAdapter: MyChallengesHeaderAdapter? = null
     private var newsFeedRedesignAdapter: NewsFeedRedesignAdapter? = null

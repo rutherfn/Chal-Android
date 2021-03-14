@@ -61,7 +61,7 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
         bind.tbMore.ivBackgroundClose.setOnClickListener {
             // take user to the my feed menu
         }
-        bind.clSvMore.svHome.setOnClickListener {
+        bind.svMore.setOnClickListener {
             // ideally we should hide the menu here, and show the search view layout once its implemented
         }
         bind.clMore.cvMyProfile.setOnClickListener {
