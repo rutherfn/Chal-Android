@@ -42,7 +42,6 @@ class MyProfileFragment(private val mainActivity: MainActivity, private val appC
 
     override fun updateTypefaces(bind: FragmentProfilesBinding) {
         typeface.setTypefaceForHeaderBold(bind.tbProfilePost.tvTitle, appContext)
-        typeface.setTypefaceForHeaderRegular(bind.tbProfilePost.tvUpload, appContext)
 
         typeface.setTypefaceForHeaderRegular(bind.clProfile.tvProfileEdit, appContext)
         typeface.setTypefaceForSubHeaderBold(bind.clProfile.tvCurrentProfileName, appContext)

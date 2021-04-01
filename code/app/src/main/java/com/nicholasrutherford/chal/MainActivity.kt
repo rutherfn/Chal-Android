@@ -8,8 +8,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.testfairy.TestFairy
+import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     var binding: ActivityMainBinding? = null
 
