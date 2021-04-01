@@ -7,14 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.nicholasrutherford.chal.ChalRoom
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.realdata.Account
 import com.nicholasrutherford.chal.firebase.bindUserId
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.uploadphoto.UploadPhotoNavigationImpl
-import com.nicholasrutherford.chal.room.entity.user.UserEntity
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -115,7 +113,6 @@ class UploadPhotoViewModel(private val uploadPhotoActivity: UploadPhotoActivity,
             .addOnSuccessListener {
                 sendEmailVerification()
                 initStarterSavedPrefs()
-                saveCreatedUserToRoomDb(newUser)
 
                 navigation.hideAcProgress()
                 navigation.mainActivity(appContext, uploadPhotoActivity)
@@ -125,25 +122,6 @@ class UploadPhotoViewModel(private val uploadPhotoActivity: UploadPhotoActivity,
                 navigation.createAccountAlert("Issue creating your account. Please try again", uploadPhotoActivity.getString(
                     R.string.error_cant_create_account), uploadPhotoActivity)
             }
-    }
-
-    fun saveCreatedUserToRoomDb(user: Account) {
-        val chalRoom = ChalRoom(uploadPhotoActivity.application)
-        viewModelScope.launch {
-            chalRoom.userRepository.addAUser(UserEntity(
-                id = user.id,
-                username = user.username ?: "",
-                email = user.email ?: "",
-                profileImageUrl = user.profileImage ?: "",
-                password = user.password ?: "",
-                firstName = user.firstName ?: "",
-                lastName = user.lastName ?: "",
-                bio = user.bio ?: "",
-                age = user.age ?: 0,
-                currentFriends = null,
-                activeChallengeEntities = null
-            ))
-        }
     }
 
     class UploadPhotoViewStateImpl : UploadPhotoViewState {

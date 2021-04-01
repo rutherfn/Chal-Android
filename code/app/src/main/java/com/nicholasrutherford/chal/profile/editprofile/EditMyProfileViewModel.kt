@@ -5,15 +5,11 @@ import android.os.CountDownTimer
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nicholasrutherford.chal.ChalRoom
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.WriteAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.editmyprofile.EditMyProfileNavigationImpl
-import com.nicholasrutherford.chal.room.entity.user.UserEntity
-import kotlinx.coroutines.launch
 
 class EditMyProfileViewModel(
     private val mainActivity: MainActivity,
@@ -73,31 +69,6 @@ class EditMyProfileViewModel(
             }
         }
         timer.start()
-    }
-
-    fun editProfileDb() {
-        val chalRoom = ChalRoom(mainActivity.application)
-        viewModelScope.launch {
-            oldUserName?.let { username ->
-                val user = chalRoom.userRepository.getUser(username)
-
-                chalRoom.userRepository.updateUser(
-                    UserEntity(
-                        id = user.id,
-                        username = viewState.editUsername ?: "",
-                        email = user.email,
-                        profileImageUrl = user.profileImageUrl,
-                        password = user.password,
-                        firstName = viewState.editFirstName ?: "",
-                        lastName = viewState.editLastName ?: "",
-                        bio = viewState.editBio ?: "",
-                        age = user.age,
-                        currentFriends = user.currentFriends,
-                        activeChallengeEntities = user.activeChallengeEntities
-                    )
-                )
-            }
-        }
     }
 
     inner class EditMyProfileViewStateImpl(
