@@ -3,10 +3,10 @@ package com.nicholasrutherford.chal
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
 import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
 import com.testfairy.TestFairy
 import dagger.android.support.DaggerAppCompatActivity
 
@@ -40,14 +40,8 @@ class MainActivity : DaggerAppCompatActivity() {
     private fun setupHomeForFirstToLoad() {
         supportFragmentManager.beginTransaction().replace(
             R.id.container,
-            newsFeedFragment(
-                this@MainActivity,
-                applicationContext
-            ),
-            newsFeedFragment(
-                this@MainActivity,
-                applicationContext
-            ).javaClass.simpleName
+            NewsFeedFragment(application),
+            NewsFeedFragment(application).javaClass.simpleName
         )
             .commit()
     }
@@ -64,14 +58,8 @@ class MainActivity : DaggerAppCompatActivity() {
                     R.id.navigation_my_feed -> {
                         supportFragmentManager.beginTransaction().replace(
                             R.id.container,
-                            newsFeedFragment(
-                                this@MainActivity,
-                                applicationContext
-                            ),
-                            newsFeedFragment(
-                                this@MainActivity,
-                                applicationContext
-                            ).javaClass.simpleName
+                            NewsFeedFragment(application),
+                            NewsFeedFragment(application).javaClass.simpleName
                         )
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true

@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.newsfeed
 
+import android.app.Application
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
@@ -24,9 +25,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class NewsFeedViewModel(private val fragmentActivity: FragmentActivity, private val appContext: Context) : ViewModel() {
+class NewsFeedViewModel @Inject constructor(private val application: Application) : ViewModel() {
 
     private val keysList: MutableList<FirebaseKeys> = ArrayList()
 
@@ -37,9 +39,9 @@ class NewsFeedViewModel(private val fragmentActivity: FragmentActivity, private 
     val writeActiveChallengesFirebase = WriteActiveChallengeImpl()
 
     val viewState = NewsFeedRedesignViewStateImpl()
-    val newsFeedNavigationImpl = NewsFeedNavigationImpl()
+    //val newsFeedNavigationImpl = NewsFeedNavigationImpl(application)
 
-    private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
+    private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
 
     private val _allFirebaseKeys = MutableStateFlow(listOf<FirebaseKeys>())
     val allFirebaseKeys: StateFlow<List<FirebaseKeys>> = _allFirebaseKeys
@@ -132,15 +134,15 @@ class NewsFeedViewModel(private val fragmentActivity: FragmentActivity, private 
 
     fun onUploadProgressClicked() {
         if (userEnrolledInChallenge) {
-            newsFeedNavigationImpl.showProgress(fragmentActivity, appContext)
+         //   newsFeedNavigationImpl.showProgress()
         } else {
-            val title = fragmentActivity.getString(R.string.not_enrolled_in_challenge)
-            val message = fragmentActivity.getString(R.string.not_enrolled_in_challenge_message)
-            newsFeedNavigationImpl.showAlert(title, message, fragmentActivity)
+            val title = application.applicationContext.getString(R.string.not_enrolled_in_challenge)
+            val message = application.applicationContext.getString(R.string.not_enrolled_in_challenge_message)
+           // newsFeedNavigationImpl.showAlert(title, message)
         }
     }
 
-    fun onAddFriendsClicked() =newsFeedNavigationImpl.showPeopleList(fragmentActivity, fragmentActivity.supportFragmentManager, appContext)
+    //fun onAddFriendsClicked() = newsFeedNavigationImpl.showPeopleList()
 
     private fun updateDayOfAllActiveChallenges() {
         var index = 0

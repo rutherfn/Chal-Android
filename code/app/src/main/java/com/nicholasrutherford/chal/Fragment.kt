@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal
 
+import android.app.Application
 import android.content.Context
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountFragment
@@ -27,7 +28,6 @@ fun createAccountFragment(activity: CreateAccountActivity, context: Context) = C
 fun editMyProfileFragment(activity: MainActivity, context: Context) = EditMyProfileFragment(activity, context)
 fun forgotPasswordFragment(activity: ForgotPasswordActivity, context: Context) = ForgotPasswordFragment(activity, context)
 fun loginFragment(activity: LoginActivity, appContext: Context) = LoginFragment(activity, appContext)
-fun newsFeedFragment(mainActivity: MainActivity, appContext: Context) = NewsFeedFragment(mainActivity, appContext)
 fun moreFragment(mainActivity: MainActivity, context: Context) = MoreFragment(mainActivity, context)
 fun profileFragment(mainActivity: MainActivity, context: Context) = MyProfileFragment(mainActivity, context)
 fun signUpFragment(activity: SignUpActivity, appContext: Context) = SignUpFragment(activity, appContext)
