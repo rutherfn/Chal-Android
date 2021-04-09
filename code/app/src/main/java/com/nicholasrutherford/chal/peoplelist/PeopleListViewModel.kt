@@ -9,7 +9,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.nicholasrutherford.chal.data.firebase.FirebaseKeys
-import com.nicholasrutherford.chal.data.responses.ProfileListResponse
+import com.nicholasrutherford.chal.data.responses.PeopleListResponse
 import com.nicholasrutherford.chal.firebase.PROFILE_INFO
 import com.nicholasrutherford.chal.firebase.USERS
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,8 +31,8 @@ class PeopleListViewModel @Inject constructor(
     private val _allFirebaseKeys = MutableStateFlow(listOf<FirebaseKeys>())
     val allFirebaseKeys: StateFlow<List<FirebaseKeys>> = _allFirebaseKeys
 
-    private val _allPeopleList = MutableStateFlow(mutableListOf<ProfileListResponse>())
-    val peopleList: StateFlow<MutableList<ProfileListResponse>> = _allPeopleList
+    private val _allPeopleList = MutableStateFlow(mutableListOf<PeopleListResponse>())
+    val peopleList: StateFlow<MutableList<PeopleListResponse>> = _allPeopleList
 
     val viewState = PeopleListViewStateImpl()
 
@@ -72,17 +72,17 @@ class PeopleListViewModel @Inject constructor(
     }
 
     private fun fetchAllUsers(firebaseKeys: List<FirebaseKeys>) {
-        val profileListResponse = arrayListOf<ProfileListResponse>()
+        val profileListResponse = arrayListOf<PeopleListResponse>()
 
         firebaseKeys.forEachIndexed { index, firebase ->
             ref.child("${firebase.key}$PROFILE_INFO")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
 
-                        snapshot.getValue(ProfileListResponse::class.java).let { profileList ->
-                            profileList?.let { profile ->
+                        snapshot.getValue(PeopleListResponse::class.java).let { peopleList ->
+                            peopleList?.let { people ->
                                 if (firebaseKeys.size != index - 1) {
-                                    profileListResponse.add(profile)
+                                    profileListResponse.add(people)
                                 }
                             }
                         }

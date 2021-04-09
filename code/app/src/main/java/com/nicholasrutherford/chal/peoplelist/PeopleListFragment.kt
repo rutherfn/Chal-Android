@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.data.responses.ProfileListResponse
+import com.nicholasrutherford.chal.data.responses.PeopleListResponse
 import com.nicholasrutherford.chal.databinding.PeopleListFragmentBinding
 import com.nicholasrutherford.chal.ext.fragments.peoplelist.PeopleListFragmentExtension
 import com.nicholasrutherford.chal.navigationimpl.peoplelist.PeopleListNavigationImpl
@@ -29,8 +29,11 @@ class PeopleListFragment @Inject constructor(private val application: Applicatio
             .get(PeopleListViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View {
         val bind = PeopleListFragmentBinding.inflate(layoutInflater)
+
         clickListeners(bind, PeopleListNavigationImpl(this))
         updateView(bind)
         
@@ -43,27 +46,33 @@ class PeopleListFragment @Inject constructor(private val application: Applicatio
         return bind.root
     }
 
-    override fun bindAdapter(bind: PeopleListFragmentBinding, profileListResponse: MutableList<ProfileListResponse>) {
+    override fun bindAdapter(bind: PeopleListFragmentBinding,
+        peopleListResponse: MutableList<PeopleListResponse>) {
         bind.rvPeopleList.isNestedScrollingEnabled = false
         bind.rvPeopleList.layoutManager = LinearLayoutManager(application.applicationContext)
 
-        val peopleListAdapter = PeopleListAdapter(application, peopleListViewModel, profileListResponse)
+        val peopleListAdapter = PeopleListAdapter(
+            application,
+            peopleListViewModel,
+            peopleListResponse
+        )
 
         bind.rvPeopleList.adapter = peopleListAdapter
 
-        bind.svPeopleList.setOnQueryTextListener(object  : SearchView.OnQueryTextListener{
+        bind.svPeopleList.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                peopleListAdapter?.filter?.filter(newText)
+                peopleListAdapter.filter.filter(newText)
                 return true
             }
         })
     }
 
-    override fun clickListeners(bind: PeopleListFragmentBinding, peopleListNavigationImpl: PeopleListNavigationImpl) {
+    override fun clickListeners(bind: PeopleListFragmentBinding,
+        peopleListNavigationImpl: PeopleListNavigationImpl) {
         bind.tbPeopleList.ibMoreBack.setOnClickListener {
             peopleListNavigationImpl.pop()
         }

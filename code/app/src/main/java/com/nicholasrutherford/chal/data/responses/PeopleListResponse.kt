@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.data.responses
 
-data class ProfileListResponse (
+data class PeopleListResponse (
     var profileImage: String = "",
     var username: String = ""
 )

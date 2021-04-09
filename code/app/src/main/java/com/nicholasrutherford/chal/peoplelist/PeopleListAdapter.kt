@@ -1,26 +1,24 @@
 package com.nicholasrutherford.chal.peoplelist
 
 import android.app.Application
-import android.text.method.TextKeyListener.clear
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.nicholasrutherford.chal.data.responses.ProfileListResponse
+import com.nicholasrutherford.chal.data.responses.PeopleListResponse
 import com.nicholasrutherford.chal.databinding.PeopleListLayoutBinding
-import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class PeopleListAdapter @Inject constructor(private val application: Application, private val peopleListViewModel: PeopleListViewModel, private val profileListResponse: MutableList<ProfileListResponse>) :
+class PeopleListAdapter @Inject constructor(private val application: Application, private val peopleListViewModel: PeopleListViewModel, private val peopleListResponse: MutableList<PeopleListResponse>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
-    var profileFilterList = ArrayList<ProfileListResponse>()
+    var peopleFilterList = ArrayList<PeopleListResponse>()
 
     init {
-        profileFilterList = profileListResponse as ArrayList<ProfileListResponse>
+        peopleFilterList = peopleListResponse as ArrayList<PeopleListResponse>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -30,24 +28,24 @@ class PeopleListAdapter @Inject constructor(private val application: Application
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as PeopleListViewHolder).bind(profileFilterList[position])
+        (holder as PeopleListViewHolder).bind(peopleFilterList[position])
     }
 
     override fun getItemCount(): Int {
-        return profileFilterList.size
+        return peopleFilterList.size
     }
 
     inner class PeopleListViewHolder(private var binding: PeopleListLayoutBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(profileFilter: ProfileListResponse) {
-            updateUI(profileFilter)
+        fun bind(peopleFilter: PeopleListResponse) {
+            updateUI(peopleFilter)
             onClick()
         }
 
-        private fun updateUI(profileFilter: ProfileListResponse) {
-            Glide.with(application.applicationContext).load(profileFilter.profileImage)
+        private fun updateUI(peopleFilter: PeopleListResponse) {
+            Glide.with(application.applicationContext).load(peopleFilter.profileImage)
                 .into(binding.cvProfilePicture)
-            binding.tvUsername.text = profileFilter.username
+            binding.tvUsername.text = peopleFilter.username
         }
 
         private fun onClick() {
@@ -62,26 +60,25 @@ class PeopleListAdapter @Inject constructor(private val application: Application
                 val charSearch = constraint.toString()
 
                 if (charSearch.isEmpty()) {
-                    profileFilterList = profileListResponse as ArrayList<ProfileListResponse>
+                    peopleFilterList = peopleListResponse as ArrayList<PeopleListResponse>
                 } else {
-                    val resultList = ArrayList<ProfileListResponse>()
-                    for (row in profileListResponse) {
+                    val resultList = ArrayList<PeopleListResponse>()
+                    for (row in peopleListResponse) {
                         if (row.username.toLowerCase().contains(constraint.toString().toLowerCase())) {
                             resultList.add(row)
                         }
                     }
-                    profileFilterList = resultList
+                    peopleFilterList = resultList
                 }
                 val filterResults = FilterResults()
-                filterResults.values = profileFilterList
+                filterResults.values = peopleFilterList
 
                 return filterResults
             }
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                println(results?.values)
-                profileFilterList = results?.values as ArrayList<ProfileListResponse>
+                peopleFilterList = results?.values as ArrayList<PeopleListResponse>
                 notifyDataSetChanged()
             }
         }
