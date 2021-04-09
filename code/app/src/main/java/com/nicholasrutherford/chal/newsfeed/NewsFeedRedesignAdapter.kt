@@ -9,7 +9,7 @@ import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
 import com.nicholasrutherford.chal.databinding.RedesignMyFeedLayoutBinding
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class NewsFeedRedesignAdapter(private val context: Context, private val newsFeedList: List<NewsFeedResponse>, private val viewModel: NewsFeedRedesignViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsFeedRedesignAdapter(private val context: Context, private val newsFeedList: List<NewsFeedResponse>, private val viewModel: NewsFeedViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

@@ -40,11 +40,11 @@ class MainActivity : DaggerAppCompatActivity() {
     private fun setupHomeForFirstToLoad() {
         supportFragmentManager.beginTransaction().replace(
             R.id.container,
-            newsFeedRedesignFragment(
+            newsFeedFragment(
                 this@MainActivity,
                 applicationContext
             ),
-            newsFeedRedesignFragment(
+            newsFeedFragment(
                 this@MainActivity,
                 applicationContext
             ).javaClass.simpleName
@@ -64,11 +64,11 @@ class MainActivity : DaggerAppCompatActivity() {
                     R.id.navigation_my_feed -> {
                         supportFragmentManager.beginTransaction().replace(
                             R.id.container,
-                            newsFeedRedesignFragment(
+                            newsFeedFragment(
                                 this@MainActivity,
                                 applicationContext
                             ),
-                            newsFeedRedesignFragment(
+                            newsFeedFragment(
                                 this@MainActivity,
                                 applicationContext
                             ).javaClass.simpleName

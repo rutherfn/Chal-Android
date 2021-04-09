@@ -24,20 +24,21 @@ import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragme
 import com.nicholasrutherford.chal.helpers.PeekingLinearLayoutManager
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.nicholasrutherford.chal.newsfeed.adapter.ChallengesHeaderAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private val appContext: Context) :
+class NewsFeedFragment(private val mainActivity: MainActivity, private val appContext: Context) :
     Fragment(),
     NewsFeedRedesignFragmentExtension {
 
     private var mAuth: FirebaseAuth? = null
 
-    private var myChallengesHeaderAdapter: MyChallengesHeaderAdapter? = null
+    private var challengesHeaderAdapter: ChallengesHeaderAdapter? = null
     private var newsFeedRedesignAdapter: NewsFeedRedesignAdapter? = null
 
     private val typeface = Typeface()
-    private var viewModel: NewsFeedRedesignViewModel? = null
+    private var viewModel: NewsFeedViewModel? = null
 
     private var currentUserNewsFeedList: List<NewsFeedResponse> = ArrayList()
     private var allActiveNewsFeedList: List<NewsFeedResponse> = ArrayList()
@@ -49,7 +50,7 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentRedesignMyFeedBinding.inflate(layoutInflater)
 
-        viewModel = NewsFeedRedesignViewModel(mainActivity, appContext)
+        viewModel = NewsFeedViewModel(mainActivity, appContext)
 
         lifecycleScope.launch {
             viewModel?.let { newsFeedRedesignViewModel ->
@@ -92,8 +93,8 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
         bind.rvChallengeHeader.itemAnimator = DefaultItemAnimator()
 
         viewModel?.let { newsFeedRedesignViewModel ->
-            myChallengesHeaderAdapter = MyChallengesHeaderAdapter(appContext, newsFeedRedesignViewModel, listOfActiveChallenges)
-            bind.rvChallengeHeader.adapter = myChallengesHeaderAdapter
+            challengesHeaderAdapter = ChallengesHeaderAdapter(appContext, newsFeedRedesignViewModel, listOfActiveChallenges)
+            bind.rvChallengeHeader.adapter = challengesHeaderAdapter
         }
     }
     override fun bindAdapter(bind: FragmentRedesignMyFeedBinding, newsFeedList: List<NewsFeedResponse>) {

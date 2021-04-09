@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NewsFeedRedesignViewModel(private val fragmentActivity: FragmentActivity, private val appContext: Context) : ViewModel() {
+class NewsFeedViewModel(private val fragmentActivity: FragmentActivity, private val appContext: Context) : ViewModel() {
 
     private val keysList: MutableList<FirebaseKeys> = ArrayList()
 
@@ -79,6 +79,10 @@ class NewsFeedRedesignViewModel(private val fragmentActivity: FragmentActivity, 
                 fetchActiveChallengesPosts(firebaseKeys)
             }
         }
+
+        // make a call after were done with all this data
+        // that updates a challenge if its not in this current day
+        // in order to keep with the program of 7 days of challenges
     }
 
     private fun initViewStateOnLoad() {

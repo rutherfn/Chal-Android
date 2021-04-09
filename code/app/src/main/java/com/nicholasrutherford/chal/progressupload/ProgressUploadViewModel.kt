@@ -122,7 +122,7 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
                             fetchUsernameAndUrl(savedUserLastIndexOfProgress, selectedIndex)
 
                             navigation.hideAcProgress()
-                            navigation.showMainActivity(progressUploadActivity, appContext)
+                            navigation.finish(progressUploadActivity)
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {

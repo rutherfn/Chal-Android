@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.newsfeed
+package com.nicholasrutherford.chal.newsfeed.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,13 +11,14 @@ import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesRespons
 import com.nicholasrutherford.chal.databinding.MyChallengesHeaderLayoutBinding
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
+import com.nicholasrutherford.chal.newsfeed.NewsFeedViewModel
 import com.squareup.picasso.Picasso
 
 const val placeHolderImage = "https://www.topsecrets.com/wp-content/uploads/2020/03/goal-leap-4052923_1280-1024x512.jpg"
 
-class MyChallengesHeaderAdapter(
+class ChallengesHeaderAdapter(
     private val context: Context,
-    private val viewModel: NewsFeedRedesignViewModel,
+    private val viewModel: NewsFeedViewModel,
     private val listOfActiveChallenges: List<CurrentActiveChallengesResponse>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

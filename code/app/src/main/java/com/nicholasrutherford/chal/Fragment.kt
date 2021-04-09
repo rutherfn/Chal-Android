@@ -14,8 +14,7 @@ import com.nicholasrutherford.chal.challengesredesign.challengedetails.Challenge
 import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedesignFragment
 import com.nicholasrutherford.chal.data.realdata.Challenges
 import com.nicholasrutherford.chal.more.MoreFragment
-import com.nicholasrutherford.chal.newsfeed.NewsFeedRedesignFragment
-import com.nicholasrutherford.chal.peoplelist.PeopleListFragment
+import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
 import com.nicholasrutherford.chal.profile.editprofile.EditMyProfileFragment
 import com.nicholasrutherford.chal.profile.profiles.MyProfileFragment
 
@@ -28,7 +27,7 @@ fun createAccountFragment(activity: CreateAccountActivity, context: Context) = C
 fun editMyProfileFragment(activity: MainActivity, context: Context) = EditMyProfileFragment(activity, context)
 fun forgotPasswordFragment(activity: ForgotPasswordActivity, context: Context) = ForgotPasswordFragment(activity, context)
 fun loginFragment(activity: LoginActivity, appContext: Context) = LoginFragment(activity, appContext)
-fun newsFeedRedesignFragment(mainActivity: MainActivity, appContext: Context) = NewsFeedRedesignFragment(mainActivity, appContext)
+fun newsFeedFragment(mainActivity: MainActivity, appContext: Context) = NewsFeedFragment(mainActivity, appContext)
 fun moreFragment(mainActivity: MainActivity, context: Context) = MoreFragment(mainActivity, context)
 fun profileFragment(mainActivity: MainActivity, context: Context) = MyProfileFragment(mainActivity, context)
 fun signUpFragment(activity: SignUpActivity, appContext: Context) = SignUpFragment(activity, appContext)
