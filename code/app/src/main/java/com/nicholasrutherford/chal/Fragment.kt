@@ -15,6 +15,7 @@ import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedes
 import com.nicholasrutherford.chal.data.realdata.Challenges
 import com.nicholasrutherford.chal.more.MoreFragment
 import com.nicholasrutherford.chal.newsfeed.NewsFeedRedesignFragment
+import com.nicholasrutherford.chal.peoplelist.PeopleListFragment
 import com.nicholasrutherford.chal.profile.editprofile.EditMyProfileFragment
 import com.nicholasrutherford.chal.profile.profiles.MyProfileFragment
 

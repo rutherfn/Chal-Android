@@ -1,9 +1,9 @@
 package com.nicholasrutherford.chal.di
 
 import android.app.Application
-import com.nicholasrutherford.chal.ActivityBuildersModule
-import com.nicholasrutherford.chal.MyApplication
-import com.nicholasrutherford.chal.ViewModelFactoryModule
+import com.nicholasrutherford.chal.dagger.modules.ActivityBuildersModule
+import com.nicholasrutherford.chal.dagger.MyApplication
+import com.nicholasrutherford.chal.dagger.modules.ViewModelFactoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

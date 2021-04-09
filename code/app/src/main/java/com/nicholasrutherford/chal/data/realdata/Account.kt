@@ -2,6 +2,7 @@ package com.nicholasrutherford.chal.data.realdata
 
 data class Account(
     val id: Int = 0,
+    val profileInfo: ProfileInfo? = null,
     val username: String? = "",
     val email: String? = "",
     val profileImage: String? = "",

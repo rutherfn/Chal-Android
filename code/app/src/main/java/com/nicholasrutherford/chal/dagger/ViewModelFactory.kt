@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal
+package com.nicholasrutherford.chal.dagger
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

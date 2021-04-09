@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".dagger.MyApplication"
         android:importantForAutofill="no"
         android:allowBackup="true"
         android:icon="@mipmap/chalappicon"

@@ -19,6 +19,7 @@ const val PASSWORD = "password"
 const val PROFILE_IMAGE = "profileImage"
 const val USERNAME = "username"
 
+const val PROFILE_INFO = "/profileInfo/"
 const val ACTIVE_CHALLENGES = "/activeChallenges/"
 const val CATEGORY_NAME = "categoryName"
 const val DESCRIPTION = "description"

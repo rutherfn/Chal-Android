@@ -1,6 +1,7 @@
-package com.nicholasrutherford.chal
+package com.nicholasrutherford.chal.dagger.modules
 
 import androidx.lifecycle.ViewModelProvider
+import com.nicholasrutherford.chal.dagger.ViewModelFactory
 import dagger.Binds
 import dagger.Module
 

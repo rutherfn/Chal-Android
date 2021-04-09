@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal
+package com.nicholasrutherford.chal.dagger
 
 import com.nicholasrutherford.chal.di.DaggerAppComponent
 import dagger.android.AndroidInjector

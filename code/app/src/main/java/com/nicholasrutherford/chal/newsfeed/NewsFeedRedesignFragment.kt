@@ -144,6 +144,11 @@ class NewsFeedRedesignFragment(private val mainActivity: MainActivity, private v
                 bindAdapter(bind, currentUserNewsFeedList)
             }
         }
+        bind.clFriendsEmptyState.button2.setOnClickListener {
+            viewModel?.let { newsFeedRedesignViewModel ->
+                newsFeedRedesignViewModel.onAddFriendsClicked()
+            }
+        }
         bind.tbMyFeed.cvProfile.setOnClickListener {
         }
         bind.tbMyFeed.tvTitle.setOnClickListener {

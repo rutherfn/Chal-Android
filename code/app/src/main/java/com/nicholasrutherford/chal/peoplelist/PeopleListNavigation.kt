@@ -1,4 +1,7 @@
 package com.nicholasrutherford.chal.peoplelist
 
-class PeopleListNavigation {
+import com.nicholasrutherford.chal.Navigation
+
+interface PeopleListNavigation: Navigation {
+    fun pop()
 }

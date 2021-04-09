@@ -9,6 +9,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.realdata.Account
+import com.nicholasrutherford.chal.data.realdata.ProfileInfo
 import com.nicholasrutherford.chal.firebase.bindUserId
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
@@ -97,6 +98,7 @@ class UploadPhotoViewModel(private val uploadPhotoActivity: UploadPhotoActivity,
 
         val newUser = Account(
             id = 0,
+            profileInfo = profileImageUrl?.let { viewState.username?.let { it1 -> ProfileInfo(username = it1, profileImage = it) } },
             username = viewState.username,
             email = viewState.email,
             profileImage = profileImageUrl,

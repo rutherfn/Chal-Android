@@ -11,9 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.firebase.FirebaseKeys
-import com.nicholasrutherford.chal.data.firebase.User
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
-import com.nicholasrutherford.chal.data.responses.FriendsResponse
 import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
@@ -137,6 +135,8 @@ class NewsFeedRedesignViewModel(private val fragmentActivity: FragmentActivity, 
             newsFeedNavigationImpl.showAlert(title, message, fragmentActivity)
         }
     }
+
+    fun onAddFriendsClicked() =newsFeedNavigationImpl.showPeopleList(fragmentActivity, fragmentActivity.supportFragmentManager, appContext)
 
     private fun updateDayOfAllActiveChallenges() {
         var index = 0
