@@ -153,9 +153,7 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
             }
         }
         bind.clFriendsEmptyState.button2.setOnClickListener {
-           //  viewModel?.let { newsFeedRedesignViewModel ->
-           // //     newsFeedRedesignViewModel.onAddFriendsClicked()
-           //  }
+            newsFeedNavigationImpl.showSearchPeopleFragment()
         }
         bind.tbMyFeed.cvProfile.setOnClickListener {
         }
@@ -205,7 +203,6 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
 
         Glide.with(this).load(newsFeedViewModel.viewState.toolbarImage).apply(options)
                 .into(bind.tbMyFeed.cvProfile)
-
         Glide.with(application.applicationContext).load(R.drawable.ic_add).into(bind.tbMyFeed.ivUploadChallenges)
     }
 }

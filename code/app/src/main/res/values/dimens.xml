@@ -39,6 +39,8 @@
     <dimen name="challenge_icon_width">106dp</dimen>
     <dimen name="cv_challenge_icon_height">30dp</dimen>
     <dimen name="cv_challenge_icon_width">30dp</dimen>
+    <dimen name="cv_search_icon_height">90dp</dimen>
+    <dimen name="cv_search_icon_width">90dp</dimen>
     <dimen name="profile_my_fiends_image_height">20dp</dimen>
     <dimen name="profile_my_fiends_image_width">20dp</dimen>
     <dimen name="profile_challenge_image_height">20dp</dimen>
@@ -130,6 +132,7 @@
     <dimen name="challenges_details_image_width">46dp</dimen>
     <dimen name="spinner_post_progress_width">354dp</dimen>
     <dimen name="spinner_report_bug_width">354dp</dimen>
+    <dimen name="sv_height">50dp</dimen>
 
     <!-- Buttons Unique Sizes -->
     <dimen name="button_sign_up_size">300sp</dimen>
