@@ -24,7 +24,6 @@ import com.nicholasrutherford.chal.helpers.PeekingLinearLayoutManager
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.navigationimpl.newsfeed.NewsFeedNavigationImpl
-import com.nicholasrutherford.chal.newsfeed.adapter.ChallengesHeaderAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -81,7 +80,9 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
     override fun collectActiveChallengesResults(bind: FragmentRedesignMyFeedBinding) {
         lifecycleScope.launch {
                 newsFeedViewModel.currentUserActiveChallenges.collect { activeChallengesList ->
-                    bind.tvMyChallenges.visibleOrGone = activeChallengesList.isNotEmpty()
+                    newsFeedViewModel.updateMyChallengesVisible(activeChallengesList)
+
+                    updateView(bind)
                     bindHeaderAdapter(bind, activeChallengesList)
                 }
         }
@@ -153,7 +154,7 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
             }
         }
         bind.clFriendsEmptyState.button2.setOnClickListener {
-            newsFeedNavigationImpl.showSearchPeopleFragment()
+            newsFeedNavigationImpl.showPeopleList()
         }
         bind.tbMyFeed.cvProfile.setOnClickListener {
         }
@@ -193,6 +194,7 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
     }
 
     override fun updateView(bind: FragmentRedesignMyFeedBinding) {
+        bind.tvMyChallenges.visibleOrGone = newsFeedViewModel.viewState.myChallengesVisible
         bind.tbMyFeed.tvTitle.text = newsFeedViewModel.viewState.toolbarName
 
         val options = RequestOptions()

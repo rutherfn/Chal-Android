@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.dagger.modules
 
-import com.nicholasrutherford.chal.newsfeed.adapter.ChallengesHeaderAdapter
+import com.nicholasrutherford.chal.newsfeed.ChallengesHeaderAdapter
 import com.nicholasrutherford.chal.peoplelist.PeopleListAdapter
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

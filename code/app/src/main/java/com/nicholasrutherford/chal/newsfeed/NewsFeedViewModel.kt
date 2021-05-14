@@ -258,6 +258,10 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
         }
     }
 
+    fun updateMyChallengesVisible(currentActiveChallengesList: List<CurrentActiveChallengesResponse>) {
+        viewState.myChallengesVisible = currentActiveChallengesList.size > 1
+    }
+
     fun dayInChallenge(): Int {
         val calendar = Calendar.getInstance()
 
@@ -273,6 +277,7 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
     }
 
     inner class NewsFeedRedesignViewStateImpl : NewsFeedRedesignViewState {
+        override var myChallengesVisible: Boolean = false
         override var toolbarName: String = ""
         override var toolbarImage: String = ""
         override var isEndOfNewsFeedVisible: Boolean = false

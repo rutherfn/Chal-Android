@@ -1,7 +1,6 @@
 package com.nicholasrutherford.chal.dagger.modules
 
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
-import com.nicholasrutherford.chal.people.SearchPeopleFragment
 import com.nicholasrutherford.chal.peoplelist.PeopleListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -14,7 +13,4 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeNewsFeedFragment(): NewsFeedFragment
-
-    @ContributesAndroidInjector
-    abstract fun contributeSearchPeopleFragment(): SearchPeopleFragment
 }
