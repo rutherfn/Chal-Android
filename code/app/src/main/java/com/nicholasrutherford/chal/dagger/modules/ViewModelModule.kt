@@ -2,14 +2,32 @@ package com.nicholasrutherford.chal.dagger.modules
 
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.dagger.ViewModelKey
+import com.nicholasrutherford.chal.more.MoreViewModel
 import com.nicholasrutherford.chal.newsfeed.NewsFeedViewModel
 import com.nicholasrutherford.chal.peoplelist.PeopleListViewModel
+import com.nicholasrutherford.chal.profile.editprofile.EditProfileViewModel
+import com.nicholasrutherford.chal.profile.profiles.MyProfileViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
 abstract class ViewModelModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EditProfileViewModel::class)
+    internal abstract fun bindEditProfileViewModel(viewModel: EditProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MoreViewModel::class)
+    internal abstract fun bindMoreViewModel(viewModel: MoreViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MyProfileViewModel::class)
+    internal abstract fun bindMyProfileViewModel(viewModel: MyProfileViewModel): ViewModel
 
     @Binds
     @IntoMap

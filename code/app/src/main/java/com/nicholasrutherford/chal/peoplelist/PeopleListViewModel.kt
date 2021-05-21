@@ -18,9 +18,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class PeopleListViewModel @Inject constructor(
-    private val application: Application
-    )
+class PeopleListViewModel @Inject constructor(private val application: Application)
     : ViewModel() {
 
     private val uid = FirebaseAuth.getInstance().uid ?: ""

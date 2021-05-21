@@ -1,11 +1,9 @@
 package com.nicholasrutherford.chal.more
 
-import android.content.Context
+import android.app.Application
 import android.os.CountDownTimer
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,25 +20,22 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@Suppress("MagicNumber")
 const val MILLIS_IN_FUTURE = 3000
 const val COUNT_DOWN_INTERVAL = 100
 
-class MoreViewModel(
-    private val mainActivity: MainActivity,
-    private val appContext: Context,
-    private val fragmentManager: FragmentManager,
-    private val container: Int,
-    private val bottomNavigationView: BottomNavigationView
-) : ViewModel() {
+class MoreViewModel @Inject constructor(private val application: Application,
+    mainActivity: MainActivity) : ViewModel() {
 
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
     private val uid = FirebaseAuth.getInstance().uid ?: ""
 
     val viewState = MoreViewStateImpl()
-    val navigation = MoreNavigationImpl()
+    val navigation = MoreNavigationImpl(application, mainActivity)
 
-    private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
+    private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
 
     private val _isUserEnrolledInChallenge = MutableStateFlow(false)
     private val isUserEnrolledInChallenge: StateFlow<Boolean> = _isUserEnrolledInChallenge
@@ -48,7 +43,7 @@ class MoreViewModel(
     private var userEnrolledInChallenge = false
 
     init {
-        navigation.showAcProgress(mainActivity)
+        navigation.showAcProgress()
 
         checkIfUserIsEnrolledInAChallenge()
 
@@ -65,7 +60,7 @@ class MoreViewModel(
     }
 
     fun onSignOutAccountClicked() {
-        navigation.showAcProgress(mainActivity)
+        navigation.showAcProgress()
         val timer = object : CountDownTimer(MILLIS_IN_FUTURE.toLong(), COUNT_DOWN_INTERVAL.toLong()) {
             override fun onTick(millisUntilFinished: Long) {}
 
@@ -73,7 +68,7 @@ class MoreViewModel(
                 logUserOut()
 
                 navigation.hideAcProgress()
-                navigation.login(mainActivity, appContext)
+                navigation.login()
             }
         }
         timer.start()
@@ -92,19 +87,23 @@ class MoreViewModel(
 
     fun onUploadProgressClicked() {
         if (userEnrolledInChallenge) {
-            navigation.showProgress(mainActivity, appContext)
+            navigation.showProgress()
         } else {
-            val title = mainActivity.getString(R.string.not_enrolled_in_challenge)
-            val message = mainActivity.getString(R.string.not_enrolled_in_challenge_message)
-            navigation.showAlert(title, message, mainActivity)
+            application.applicationContext?.let { context ->
+            viewState.alertTitle = context.getString(R.string.not_enrolled_in_challenge)
+            viewState.alertMessage = context.getString(R.string.not_enrolled_in_challenge_message)
+            navigation.showAlert(viewState.alertTitle, viewState.alertMessage)
+            }
         }
     }
 
-    fun onReportBugClicked() = navigation.reportBug(mainActivity, appContext, bottomNavigationView)
+    fun onReportBugClicked() = navigation.reportBug()
 
-    fun onMyProfileClicked() = navigation.showMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView)
+    fun onMyProfileClicked() = navigation.showMyProfile()
 
     inner class MoreViewStateImpl : MoreViewState {
+        override var alertTitle: String = ""
+        override var alertMessage = ""
         override var profilePictureDirectory = ""
     }
 }

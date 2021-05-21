@@ -6,7 +6,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.MainActivity
 
 interface MyProfileNavigation {
-    fun showAcProgress(naubActivity: MainActivity)
+    fun showAcProgress()
     fun hideAcProgress()
-    fun showEditMyProfile(activity: MainActivity, context: Context, isClicked: Boolean, fragmentManager: FragmentManager, id: Int, bottomNavigationView: BottomNavigationView)
+    fun showEditMyProfile()
 }

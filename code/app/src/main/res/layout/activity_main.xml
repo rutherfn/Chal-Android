@@ -26,9 +26,10 @@
         android:id="@+id/bvNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:labelVisibilityMode="labeled"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
         android:background="@color/colorSmokeWhite"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation" />
 
     <FrameLayout

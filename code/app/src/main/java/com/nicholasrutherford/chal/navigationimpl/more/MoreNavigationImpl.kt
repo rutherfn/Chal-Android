@@ -1,42 +1,48 @@
 package com.nicholasrutherford.chal.navigationimpl.more
 
 import android.app.AlertDialog
-import android.content.Context
+import android.app.Application
 import android.content.Intent
 import android.graphics.Color
-import androidx.fragment.app.FragmentManager
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.login.LoginActivity
-import com.nicholasrutherford.chal.bugReportFragment
+import com.nicholasrutherford.chal.bugreport.BugReportFragment
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.more.MoreNavigation
-import com.nicholasrutherford.chal.profileFragment
+import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
+import com.nicholasrutherford.chal.profile.profiles.MyProfileFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadActivity
+import javax.inject.Inject
 
-class MoreNavigationImpl : MoreNavigation {
+class MoreNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : MoreNavigation {
 
     private var flowerLoadingDialog: ACProgressFlower? = null
 
-    override fun login(mainActivity: MainActivity, context: Context) {
-        val intent = Intent(context, LoginActivity::class.java)
-
-        mainActivity.startActivity(intent)
-        mainActivity.finish()
+    override fun login() {
+        application.applicationContext?.let { context ->
+            val intent = Intent(context, LoginActivity::class.java)
+            mainActivity.startActivity(intent)
+            mainActivity.finish()
+        }
     }
 
-    override fun reportBug(mainActivity: MainActivity, context: Context, bottomNavigationView: BottomNavigationView) {
-        bottomNavigationView.visibleOrGone = true
+    override fun reportBug() {
+        mainActivity.binding?.bvNavigation?.visibleOrGone = true
 
         mainActivity.supportFragmentManager.beginTransaction()
-            .replace(R.id.container, bugReportFragment(mainActivity, context), bugReportFragment(mainActivity, context)::javaClass.name)
+            .replace(
+                container,
+                BugReportFragment(application),
+                BugReportFragment(application)::javaClass.name
+            )
+            .addToBackStack("")
             .commit()
     }
 
-    override fun showAlert(title: String, message: String, mainActivity: MainActivity) {
+    override fun showAlert(title: String, message: String) {
         val alertDialogBuilder = AlertDialog.Builder(mainActivity)
 
         alertDialogBuilder.setMessage(message)
@@ -51,36 +57,33 @@ class MoreNavigationImpl : MoreNavigation {
         alert.show()
     }
 
-    override fun showAcProgress(mainActivity: MainActivity) {
+    override fun showAcProgress() {
         flowerLoadingDialog = ACProgressFlower.Builder(mainActivity)
-            .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-            .themeColor(Color.WHITE)
-            .fadeColor(Color.DKGRAY).build()
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .fadeColor(Color.DKGRAY).build()
 
-        flowerLoadingDialog?.let { acProgressFlower ->
-            acProgressFlower.show()
-        }
+            flowerLoadingDialog?.let { acProgressFlower ->
+                acProgressFlower.show()
+            }
     }
 
-    override fun showProgress(mainActivity: MainActivity, context: Context) {
-        val intent = Intent(context, ProgressUploadActivity::class.java)
+    override fun showProgress() {
+        val intent = Intent(application.applicationContext, ProgressUploadActivity::class.java)
         mainActivity.startActivity(intent)
     }
 
-    override fun showMyProfile(activity: MainActivity, context: Context, isClicked: Boolean, fragmentManager: FragmentManager, id: Int, bottomNavigationView: BottomNavigationView) {
-        if (isClicked) {
-            bottomNavigationView.visibleOrGone = true
-            fragmentManager.beginTransaction()
-                .replace(
-                    id,
-                    profileFragment(
-                        activity,
-                        context
-                    ),
-                    profileFragment(activity, context)::javaClass.name
-                )
-                .commit()
-        }
+    override fun showMyProfile() {
+        mainActivity.binding?.bvNavigation?.visibleOrGone = true
+
+        mainActivity.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                MyProfileFragment(application),
+                MyProfileFragment(application)::javaClass.name
+            )
+            .addToBackStack("")
+            .commit()
     }
 
     override fun hideAcProgress() {

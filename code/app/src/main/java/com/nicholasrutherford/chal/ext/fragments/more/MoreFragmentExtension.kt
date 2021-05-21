@@ -6,5 +6,4 @@ interface MoreFragmentExtension {
     fun updateTypefaces(bind: FragmentMoreBinding)
     fun updateView(bind: FragmentMoreBinding)
     fun clickListeners(bind: FragmentMoreBinding)
-    fun containerId(): Int
 }

@@ -1,31 +1,23 @@
 package com.nicholasrutherford.chal.profile.editprofile
 
-import android.content.Context
+import android.app.Application
 import android.os.CountDownTimer
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.WriteAccountFirebase
-import com.nicholasrutherford.chal.navigationimpl.editmyprofile.EditMyProfileNavigationImpl
+import com.nicholasrutherford.chal.navigationimpl.editmyprofile.EditProfileNavigationImpl
+import javax.inject.Inject
 
-class EditMyProfileViewModel(
-    private val mainActivity: MainActivity,
-    private val appContext: Context,
-    private val fragmentManager: FragmentManager,
-    private val container: Int,
-    private val bottomNavigationView: BottomNavigationView
-) : ViewModel() {
+class EditProfileViewModel @Inject constructor(application: Application, mainActivity: MainActivity): ViewModel() {
 
-    val viewState = EditMyProfileViewStateImpl()
-    val navigation = EditMyProfileNavigationImpl()
+    val viewState = EditProfileViewStateImpl()
+    val navigation = EditProfileNavigationImpl(application, mainActivity)
 
     var oldUserName: String? = ""
 
-    private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
-    private val writeAccountFirebase = WriteAccountFirebase(appContext)
+    private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
+    private val writeAccountFirebase = WriteAccountFirebase(application.applicationContext)
 
     init {
         setupEditProfile()
@@ -51,30 +43,23 @@ class EditMyProfileViewModel(
         writeAccountFirebase.updateLastName(viewState.editLastName)
         writeAccountFirebase.updateBio(viewState.editBio)
 
-        //editProfileDb()
-
-        navigation.showAcProgress(mainActivity)
+        navigation.showAcProgress()
         val timer = object : CountDownTimer(2500, 100) {
 
             override fun onTick(millisUntilFinished: Long) {}
 
             override fun onFinish() {
                 navigation.hideAcProgress()
-                navigation.showMyProfile(mainActivity, appContext, true, fragmentManager, container, bottomNavigationView)
-
-                Toast.makeText(
-                    appContext, "Edited your account info",
-                    Toast.LENGTH_LONG
-                ).show()
+                navigation.showMyProfile()
             }
         }
         timer.start()
     }
 
-    inner class EditMyProfileViewStateImpl(
+    inner class EditProfileViewStateImpl(
         override var editUsername: String? = "",
         override var editFirstName: String? = "",
         override var editLastName: String? = "",
         override var editBio: String? = ""
-    ) : EditMyProfileViewState
+    ) : EditProfileViewState
 }

@@ -1,11 +1,11 @@
 package com.nicholasrutherford.chal.more
 
-import android.content.Context
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,22 +14,25 @@ import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentMoreBinding
 import com.nicholasrutherford.chal.ext.fragments.more.MoreFragmentExtension
 import com.nicholasrutherford.chal.helpers.Typeface
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class MoreFragment(private val mainActivity: MainActivity, private val appContext: Context) : Fragment(),
-    MoreFragmentExtension {
+class MoreFragment @Inject constructor(private val application: Application) : DaggerFragment(), MoreFragmentExtension {
 
-    private var viewModel: MoreViewModel? = null
-    private var btNavigation: BottomNavigationView? = null
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    val moreViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)
+            .get(MoreViewModel::class.java)
+    }
+
+    var btNavigation: BottomNavigationView? = null
     private val typeface = Typeface()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentMoreBinding.inflate(layoutInflater)
         btNavigation = (activity as MainActivity).binding?.bvNavigation
-        btNavigation?.let { bottomNavigationView ->
-            viewModel = fragmentManager?.let { fragmentManager ->
-                MoreViewModel(mainActivity, appContext, fragmentManager, containerId(), bottomNavigationView)
-            }
-        }
         updateTypefaces(bind)
         clickListeners(bind)
         updateView(bind)
@@ -37,21 +40,19 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
     }
 
     override fun updateTypefaces(bind: FragmentMoreBinding) {
-        typeface.setTypefaceForHeaderBold(bind.clMore.tvChalMenu, appContext)
+        application.applicationContext?.let { appContext ->
+            typeface.setTypefaceForHeaderBold(bind.clMore.tvChalMenu, appContext)
 
-        typeface.setTypefaceForBodyBold(bind.clMore.tvMyProfile, appContext)
-        typeface.setTypefaceForBodyBold(bind.clMore.tvUploadPost, appContext)
-        typeface.setTypefaceForBodyBold(bind.clMore.tvSettings, appContext)
-        typeface.setTypefaceForBodyBold(bind.clMore.tvChat, appContext)
-        typeface.setTypefaceForBodyBold(bind.clMore.tvMyFeed, appContext)
-        typeface.setTypefaceForBodyBold(bind.clMore.tvChallenges, appContext)
+            typeface.setTypefaceForBodyBold(bind.clMore.tvMyProfile, appContext)
+            typeface.setTypefaceForBodyBold(bind.clMore.tvUploadPost, appContext)
+            typeface.setTypefaceForBodyBold(bind.clMore.tvSettings, appContext)
+            typeface.setTypefaceForBodyBold(bind.clMore.tvChat, appContext)
+            typeface.setTypefaceForBodyBold(bind.clMore.tvMyFeed, appContext)
+            typeface.setTypefaceForBodyBold(bind.clMore.tvChallenges, appContext)
 
-        typeface.setTypefaceForSubHeaderBold(bind.clMore.btnSignOutAccount, appContext)
-        typeface.setTypefaceForSubHeaderRegular(bind.clMore.tvAllRightsReserved, appContext)
-    }
-
-    override fun containerId(): Int {
-        return R.id.container
+            typeface.setTypefaceForSubHeaderBold(bind.clMore.btnSignOutAccount, appContext)
+            typeface.setTypefaceForSubHeaderRegular(bind.clMore.tvAllRightsReserved, appContext)
+        }
     }
 
     override fun clickListeners(bind: FragmentMoreBinding) {
@@ -59,15 +60,10 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
             // take the user to the my feed menu
         }
         bind.clMore.cvMyProfile.setOnClickListener {
-            viewModel?.let { moreViewModel ->
-                moreViewModel.onMyProfileClicked()
-            }
-            // we should load in the users profile fragment
+            moreViewModel.onMyProfileClicked()
         }
         bind.clMore.cvUploadPost.setOnClickListener {
-            viewModel?.let { moreViewModel ->
-                moreViewModel.onUploadProgressClicked()
-            }
+            moreViewModel.onUploadProgressClicked()
         }
         bind.clMore.cvSettings.setOnClickListener {
             // load in the settings layout
@@ -82,14 +78,10 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
             // we should load in the challenges ;ayout
         }
         bind.clMore.cvReportBug.setOnClickListener {
-            viewModel?.let { moreViewModel ->
-                moreViewModel.onReportBugClicked()
-            }
+            moreViewModel.onReportBugClicked()
         }
         bind.clMore.btnSignOutAccount.setOnClickListener {
-            viewModel?.let { moreViewModel ->
-                moreViewModel.onSignOutAccountClicked()
-            }
+            moreViewModel.onSignOutAccountClicked()
         }
     }
 
@@ -98,9 +90,7 @@ class MoreFragment(private val mainActivity: MainActivity, private val appContex
             .placeholder(R.drawable.placeholder)
             .error(R.drawable.placeholder)
 
-        viewModel?.let { moreViewModel ->
-            Glide.with(this).load(moreViewModel.viewState.profilePictureDirectory).apply(options)
+        Glide.with(this).load(moreViewModel.viewState.profilePictureDirectory).apply(options)
                 .into(bind.clMore.cvMyProfilePic)
-        }
     }
 }

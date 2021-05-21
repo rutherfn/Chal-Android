@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.profile.editprofile
 
-interface EditMyProfileViewState {
+interface EditProfileViewState {
     var editUsername: String?
     var editFirstName: String?
     var editLastName: String?

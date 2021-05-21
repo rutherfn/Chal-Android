@@ -6,6 +6,7 @@ import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
 import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.nicholasrutherford.chal.more.MoreFragment
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
 import com.testfairy.TestFairy
 import dagger.android.support.DaggerAppCompatActivity
@@ -79,14 +80,8 @@ class MainActivity : DaggerAppCompatActivity() {
                     R.id.navigation_more -> {
                         supportFragmentManager.beginTransaction().replace(
                             R.id.container,
-                            moreFragment(
-                                this@MainActivity,
-                                applicationContext
-                            ),
-                            moreFragment(
-                                this@MainActivity,
-                                applicationContext
-                            ).javaClass.simpleName
+                            MoreFragment(application),
+                            MoreFragment(application).javaClass.simpleName
                         )
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
