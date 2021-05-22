@@ -15,6 +15,8 @@ class EditProfileNavigationImpl @Inject constructor(private val application: App
 
     private var flowerLoadingDialog: ACProgressFlower? = null
 
+    override fun pop() = mainActivity.supportFragmentManager.popBackStack()
+
     override fun showMyProfile() {
         mainActivity.binding?.bvNavigation?.visibleOrGone = true
 

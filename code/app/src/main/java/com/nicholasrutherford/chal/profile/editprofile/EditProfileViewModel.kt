@@ -56,6 +56,8 @@ class EditProfileViewModel @Inject constructor(application: Application, mainAct
         timer.start()
     }
 
+    fun onBackButtonClicked() = navigation.pop()
+
     inner class EditProfileViewStateImpl(
         override var editUsername: String? = "",
         override var editFirstName: String? = "",

@@ -12,6 +12,10 @@ import com.nicholasrutherford.chal.profile.editprofile.EditProfileFragment
 import com.nicholasrutherford.chal.profile.profiles.MyProfileNavigation
 import javax.inject.Inject
 
+@Suppress("MagicNumber")
+const val COUNT_DOWN_IN_FUTURE: Long = 2000
+const val COUNT_DOWN_INTERVAL: Long = 100
+
 class MyProfileNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : MyProfileNavigation {
 
     private var flowerLoadingDialog: ACProgressFlower? = null
@@ -24,7 +28,7 @@ class MyProfileNavigationImpl @Inject constructor(private val application: Appli
 
         flowerLoadingDialog?.show()
 
-        val timer = object : CountDownTimer(2000, 100) {
+        val timer = object : CountDownTimer(COUNT_DOWN_IN_FUTURE, COUNT_DOWN_INTERVAL) {
 
             override fun onTick(millisUntilFinished: Long) = Unit
 

@@ -14,13 +14,6 @@
             layout="@layout/more_toolbar_layout"
             />
 
-        <SearchView
-            android:id="@+id/svEditProfile"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:layout_height="50dp"
-            />
-
         <include
             android:id="@+id/clEditProfile"
             android:layout_width="match_parent"

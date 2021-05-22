@@ -89,6 +89,9 @@ class EditProfileFragment(private val application: Application) : DaggerFragment
 
             editProfileViewModel.onEditProfileClicked(username, firstName, lastName, bio)
         }
+        bind.tbEditMyProfile.ibMoreBack.setOnClickListener {
+            editProfileViewModel.onBackButtonClicked()
+        }
     }
 
     override fun containerId(): Int {
