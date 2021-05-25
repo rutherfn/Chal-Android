@@ -8,11 +8,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tbMyFeed"
+            android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            layout="@layout/toolbar_my_feed"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="@color/colorSmokeWhite"
+            app:title="@string/news_feed"
+            android:gravity="center_horizontal"
+            app:popupTheme="@style/AppTheme"
             />
 
         <SearchView
@@ -33,15 +37,15 @@
 
                 <TextView
                     android:id="@+id/tvMyChallenges"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="@string/my_challenges"
                     android:textSize="@dimen/sub_header_text_size"
                     android:padding="@dimen/padding_4dp"
                     android:layout_marginTop="@dimen/margin_6dp"
                     android:layout_marginStart="@dimen/margin_6dp"
                     android:layout_marginLeft="@dimen/margin_6dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </TextView>
+                    />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvChallengeHeader"

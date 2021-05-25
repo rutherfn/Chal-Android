@@ -1,11 +1,12 @@
 <resources>
+    <string name="add_progress">Add Progress</string>
     <string name="active">Active(%s)</string>
     <string name="all">All</string>
     <string name="all_rights_reserved">All Rights Reserved, Chal LLC 2020</string>
     <string name="app_name">chal</string>
     <string name="add_caption">Add Caption</string>
     <string name="add_photo_later">Add Photo Later</string>
-    <string name="active_challenges">ACTIVE</string>
+    <string name="active_challenges">Active</string>
     <string name="account">Account</string>
     <string name="already_have_a_account_text">Already have a account?</string>
     <string name="app_menu">App Menu</string>
@@ -26,6 +27,7 @@
     <string name="chal_menu">Chal Menu</string>
     <string name="chat">Chat</string>
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
+    <string name="click_to_refresh">Click to refresh</string>
     <string name="close">CLOSE</string>
     <string name="completed">Completed</string>
     <string name="completed_challenges">COMPLETED</string>
@@ -145,6 +147,7 @@
     <string name="missing_desc_alert_message">Bug missing a description. Please add a description for the bug your reporting.</string>
     <string name="missing_title_message">Bug Missing Title</string>
     <string name="missing_title_desc_message">Bug missing a title. Please add a title for the bug your reporting.</string>
+    <string name="news_feed">News Feed</string>
     <string name="no">No</string>
     <string name="not_enrolled_in_challenge">Not Enrolled In Challenge</string>
     <string name="not_enrolled_in_challenge_message">Currently you are not enrolled into any challenges! In order to upload progress, you must be enrolled in a challenge!</string>
@@ -164,10 +167,11 @@
     <string name="qa_tester_3">Patrick</string>
     <string name="related_challenges">Related Challenges</string>
     <string name="restart">Restart</string>
+    <string name="refresh">Refresh</string>
     <string name="reporter_name">Reporter Name</string>
     <string name="report_bug">Report Bug</string>
     <string name="select_category">Select Category</string>
-    <string name="search_challenges">SEARCH</string>
+    <string name="search_challenges">Search</string>
     <string name="select_challenge">Select Challenge</string>
     <string name="sending_email">Sending Email...</string>
     <string name="search_for_friends">Search For Friends</string>

@@ -94,7 +94,7 @@ class MainActivity : DaggerAppCompatActivity() {
         }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.top_navigation, menu)
+        menuInflater.inflate(R.menu.navigation_news_feed, menu)
         return super.onCreateOptionsMenu(menu)
     }
 }

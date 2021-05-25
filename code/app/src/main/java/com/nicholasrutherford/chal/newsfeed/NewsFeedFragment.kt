@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
@@ -55,6 +54,11 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         mAuth = FirebaseAuth.getInstance()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentRedesignMyFeedBinding.inflate(layoutInflater)
 
@@ -65,6 +69,8 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         updateTypefaces(bind)
         clickListeners(bind, NewsFeedNavigationImpl(application, this))
         updateView(bind)
+
+        bind.tbMyFeed.inflateMenu(R.menu.navigation_news_feed)
 
         return bind.root
     }
@@ -116,9 +122,8 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
     }
 
     override fun updateTypefaces(bind: FragmentRedesignMyFeedBinding) {
-        typeface.setTypefaceForHeaderBold(bind.tbMyFeed.tvTitle, application.applicationContext)
+      //  typeface.setTypefaceForHeaderBold(bind.tbMyFeed.tvTitle, application.applicationContext)
         typeface.setTypefaceForSubHeaderBold(bind.clEndOfFeed.tvEndOfFeed, application.applicationContext)
-        typeface.setTypefaceForSubHeaderBold(bind.clChallengeFeed.tvChallengeFeed, application.applicationContext)
         typeface.setTypefaceForSubHeaderBold(bind.tvMyChallenges, application.applicationContext)
 
         typeface.setTypefaceForBodyBold(bind.clChallengeFeed.btnAll, application.applicationContext)
@@ -156,10 +161,6 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         bind.clFriendsEmptyState.button2.setOnClickListener {
             newsFeedNavigationImpl.showPeopleList()
         }
-        bind.tbMyFeed.cvProfile.setOnClickListener {
-        }
-        bind.tbMyFeed.tvTitle.setOnClickListener {
-        }
         // bind.tbMyFeed.ivUploadChallenges.setOnClickListener { viewModel?.onUploadProgressClicked() }
     }
 
@@ -195,7 +196,7 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
 
     override fun updateView(bind: FragmentRedesignMyFeedBinding) {
         bind.tvMyChallenges.visibleOrGone = newsFeedViewModel.viewState.myChallengesVisible
-        bind.tbMyFeed.tvTitle.text = newsFeedViewModel.viewState.toolbarName
+       // bind.tbMyFeed.tvTitle.text = newsFeedViewModel.viewState.toolbarName
 
         val options = RequestOptions()
             .placeholder(R.drawable.placeholder)
@@ -203,8 +204,8 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
 
         bind.clEndOfFeed.tvEndOfFeed.visibleOrGone = newsFeedViewModel.viewState.isEndOfNewsFeedVisible
 
-        Glide.with(this).load(newsFeedViewModel.viewState.toolbarImage).apply(options)
-                .into(bind.tbMyFeed.cvProfile)
-        Glide.with(application.applicationContext).load(R.drawable.ic_add).into(bind.tbMyFeed.ivUploadChallenges)
+        // Glide.with(this).load(newsFeedViewModel.viewState.toolbarImage).apply(options)
+        //         .into(bind.tbMyFeed.cvProfile)
+        // Glide.with(application.applicationContext).load(R.drawable.ic_add).into(bind.tbMyFeed.ivUploadChallenges)
     }
 }

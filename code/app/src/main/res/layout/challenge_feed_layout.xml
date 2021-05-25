@@ -6,32 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tvChallengeFeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/challenge_feed"
-        android:textSize="@dimen/sub_header_text_size"
-        android:padding="@dimen/padding_4dp"
-        android:layout_marginTop="@dimen/margin_6dp"
-        android:layout_marginStart="@dimen/margin_6dp"
-        android:layout_marginLeft="@dimen/margin_6dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
     <Button
         android:id="@+id/btnAll"
         android:layout_width="@dimen/button_challenge_feed_width"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8dp"
-        android:textSize="@dimen/body_text_size"
-        android:text="@string/all"
         android:background="@drawable/corner_button_white"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/all"
         android:textAllCaps="false"
         android:textColor="@color/colorBlack"
-        app:layout_constraintStart_toStartOf="@+id/tvChallengeFeed"
-        app:layout_constraintTop_toBottomOf="@+id/tvChallengeFeed"
+        android:textSize="@dimen/body_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <Button
