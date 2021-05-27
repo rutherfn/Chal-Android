@@ -35,7 +35,7 @@
         />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnAddFriendEmptyState"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:text="Add Friends"

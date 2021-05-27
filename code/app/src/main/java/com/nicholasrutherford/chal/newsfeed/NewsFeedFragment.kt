@@ -4,6 +4,7 @@ import android.app.Application
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -12,17 +13,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
-import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragmentExt
 import com.nicholasrutherford.chal.helpers.PeekingLinearLayoutManager
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
-import com.nicholasrutherford.chal.navigationimpl.newsfeed.NewsFeedNavigationImpl
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -30,17 +28,15 @@ import javax.inject.Inject
 
 class NewsFeedFragment @Inject constructor(private val application: Application) :
     DaggerFragment(),
-    NewsFeedRedesignFragmentExtension {
+    NewsFeedRedesignFragmentExt {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    val newsFeedViewModel by lazy {
+    private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)
             .get(NewsFeedViewModel::class.java)
     }
-
-    private var mAuth: FirebaseAuth? = null
 
     private var challengesHeaderAdapter: ChallengesHeaderAdapter? = null
     private var newsFeedRedesignAdapter: NewsFeedRedesignAdapter? = null
@@ -50,10 +46,6 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
     private var currentUserNewsFeedList: List<NewsFeedResponse> = ArrayList()
     private var allActiveNewsFeedList: List<NewsFeedResponse> = ArrayList()
 
-    init {
-        mAuth = FirebaseAuth.getInstance()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -62,67 +54,52 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentRedesignMyFeedBinding.inflate(layoutInflater)
 
-        collectUserNewsFeedListResults()
-        collectActiveChallengesResults(bind)
-        collectNewsFeedResults(bind)
+        collectResults(bind)
 
         updateTypefaces(bind)
-        clickListeners(bind, NewsFeedNavigationImpl(application, this))
-        updateView(bind)
+        clickListeners(bind)
 
         bind.tbMyFeed.inflateMenu(R.menu.navigation_news_feed)
 
         return bind.root
     }
 
-    override fun collectUserNewsFeedListResults() {
+    // override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    //
+    // }
+
+    override fun collectResults(bind: FragmentRedesignMyFeedBinding) {
         lifecycleScope.launch {
-            newsFeedViewModel.userNewsFeed.collect { newsFeedList ->
+            viewModel.userNewsFeed.collect { newsFeedList ->
                 currentUserNewsFeedList = newsFeedList
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.currentUserActiveChallenges.collect { activeChallengesList ->
+                viewModel.updateMyChallengesVisible(activeChallengesList)
+
+                updateView(bind)
+                bindHeaderAdapter(bind, activeChallengesList)
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.newsFeed.collect { newsFeedList ->
+                allActiveNewsFeedList = newsFeedList
+                bind.clEndOfFeed.tvEndOfFeed.visibleOrGone = viewModel.viewState.isEndOfNewsFeedVisible
+                bindAdapter(bind, newsFeedList)
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.isViewStateUpdated.collect { isUpdated ->
+                if (isUpdated) {
+                    updateView(bind)
+                    viewModel._isViewStateUpdated.value = false // we call this because once the view state is done updating, it needs to go back to its original value.
+                }
             }
         }
     }
 
-    override fun collectActiveChallengesResults(bind: FragmentRedesignMyFeedBinding) {
-        lifecycleScope.launch {
-                newsFeedViewModel.currentUserActiveChallenges.collect { activeChallengesList ->
-                    newsFeedViewModel.updateMyChallengesVisible(activeChallengesList)
-
-                    updateView(bind)
-                    bindHeaderAdapter(bind, activeChallengesList)
-                }
-        }
-    }
-
-    override fun collectNewsFeedResults(bind: FragmentRedesignMyFeedBinding) {
-             lifecycleScope.launch {
-                 newsFeedViewModel.newsFeed.collect { newsFeedList ->
-                     allActiveNewsFeedList = newsFeedList
-                     bind.clEndOfFeed.tvEndOfFeed.visibleOrGone = newsFeedViewModel.viewState.isEndOfNewsFeedVisible
-                     bindAdapter(bind, newsFeedList)
-                 }
-        }
-    }
-
-    override fun bindHeaderAdapter(bind: FragmentRedesignMyFeedBinding, listOfActiveChallenges: List<CurrentActiveChallengesResponse>) {
-        bind.rvChallengeHeader.isNestedScrollingEnabled = false
-
-        bind.rvChallengeHeader.layoutManager = PeekingLinearLayoutManager(application.applicationContext, RecyclerView.HORIZONTAL)
-        bind.rvChallengeHeader.itemAnimator = DefaultItemAnimator()
-
-        challengesHeaderAdapter = ChallengesHeaderAdapter(application.applicationContext, newsFeedViewModel, listOfActiveChallenges)
-        bind.rvChallengeHeader.adapter = challengesHeaderAdapter
-    }
-    override fun bindAdapter(bind: FragmentRedesignMyFeedBinding, newsFeedList: List<NewsFeedResponse>) {
-        bind.rvNewsFeedRedesign.isNestedScrollingEnabled = false
-        bind.rvNewsFeedRedesign.layoutManager = LinearLayoutManager(activity)
-
-        newsFeedRedesignAdapter = NewsFeedRedesignAdapter(application.applicationContext, newsFeedList,  newsFeedViewModel)
-        bind.rvNewsFeedRedesign.adapter = newsFeedRedesignAdapter
-    }
-
     override fun updateTypefaces(bind: FragmentRedesignMyFeedBinding) {
-      //  typeface.setTypefaceForHeaderBold(bind.tbMyFeed.tvTitle, application.applicationContext)
         typeface.setTypefaceForSubHeaderBold(bind.clEndOfFeed.tvEndOfFeed, application.applicationContext)
         typeface.setTypefaceForSubHeaderBold(bind.tvMyChallenges, application.applicationContext)
 
@@ -131,81 +108,57 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         typeface.setTypefaceForBodyBold(bind.clChallengeFeed.btnMyPosts, application.applicationContext)
     }
 
-    override fun containerId(): Int {
-        return R.id.container
+    override fun bindHeaderAdapter(bind: FragmentRedesignMyFeedBinding, listOfActiveChallenges: List<CurrentActiveChallengesResponse>) {
+        bind.rvChallengeHeader.isNestedScrollingEnabled = viewModel.viewState.isNestedScrollEnabled
+
+        bind.rvChallengeHeader.layoutManager = PeekingLinearLayoutManager(application.applicationContext, RecyclerView.HORIZONTAL)
+        bind.rvChallengeHeader.itemAnimator = DefaultItemAnimator()
+
+        challengesHeaderAdapter = ChallengesHeaderAdapter(application.applicationContext, viewModel, listOfActiveChallenges)
+        bind.rvChallengeHeader.adapter = challengesHeaderAdapter
+    }
+    override fun bindAdapter(bind: FragmentRedesignMyFeedBinding, newsFeedList: List<NewsFeedResponse>) {
+        bind.rvNewsFeedRedesign.isNestedScrollingEnabled = viewModel.viewState.isNestedScrollEnabled
+        bind.rvNewsFeedRedesign.layoutManager = LinearLayoutManager(activity)
+
+        newsFeedRedesignAdapter = NewsFeedRedesignAdapter(application.applicationContext, newsFeedList, viewModel)
+        bind.rvNewsFeedRedesign.adapter = newsFeedRedesignAdapter
     }
 
-    override fun clickListeners(bind: FragmentRedesignMyFeedBinding, newsFeedNavigationImpl: NewsFeedNavigationImpl) {
+    override fun clickListeners(bind: FragmentRedesignMyFeedBinding) {
         bind.clChallengeFeed.btnAll.setOnClickListener {
             if (allActiveNewsFeedList.isNotEmpty()) {
-                bind.rvNewsFeedRedesign.visibleOrGone = true
-                bind.clFriendsEmptyState.clAddFriend.visibleOrGone = false
-                updateButtonsAllClicked(bind)
+                viewModel.allClicked()
                 bindAdapter(bind, allActiveNewsFeedList)
             }
         }
         bind.clChallengeFeed.btnFriends.setOnClickListener {
-            bind.rvNewsFeedRedesign.visibleOrGone = false // place holder
-            bind.clFriendsEmptyState.clAddFriend.visibleOrGone = true
-            bind.clEndOfFeed.tvEndOfFeed.visibleOrGone = false
-            updateButtonsFriendsClicked(bind)
+            viewModel.friendsClicked()
         }
         bind.clChallengeFeed.btnMyPosts.setOnClickListener {
             if (allActiveNewsFeedList.isNotEmpty()) {
-                bind.rvNewsFeedRedesign.visibleOrGone = true
-                bind.clFriendsEmptyState.clAddFriend.visibleOrGone = false
-                updateButtonsMyPostsClicked(bind)
+                viewModel.myPostsClicked()
                 bindAdapter(bind, currentUserNewsFeedList)
             }
         }
-        bind.clFriendsEmptyState.button2.setOnClickListener {
-            newsFeedNavigationImpl.showPeopleList()
+        bind.clFriendsEmptyState.btnAddFriendEmptyState.setOnClickListener {
+            viewModel.onAddFriendsEmptyStateClicked()
         }
-        // bind.tbMyFeed.ivUploadChallenges.setOnClickListener { viewModel?.onUploadProgressClicked() }
-    }
-
-    private fun updateButtonsAllClicked(bind: FragmentRedesignMyFeedBinding) {
-        bind.clChallengeFeed.btnAll.setTextColor(Color.parseColor("#000000"))
-        bind.clChallengeFeed.btnFriends.setTextColor(Color.parseColor("#FFFFFF"))
-        bind.clChallengeFeed.btnMyPosts.setTextColor(Color.parseColor("#FFFFFF"))
-
-        bind.clChallengeFeed.btnAll.background = ContextCompat.getDrawable(application.applicationContext, R.drawable.corner_button_white)
-        bind.clChallengeFeed.btnFriends.background = ContextCompat.getDrawable(application.applicationContext, R.drawable.corner_button)
-        bind.clChallengeFeed.btnMyPosts.background = ContextCompat.getDrawable(application.applicationContext, R.drawable.corner_button)
-    }
-
-    private fun updateButtonsFriendsClicked(bind: FragmentRedesignMyFeedBinding) {
-        bind.clChallengeFeed.btnAll.setTextColor(Color.parseColor("#FFFFFF"))
-        bind.clChallengeFeed.btnFriends.setTextColor(Color.parseColor("#000000"))
-        bind.clChallengeFeed.btnMyPosts.setTextColor(Color.parseColor("#FFFFFF"))
-
-        bind.clChallengeFeed.btnAll.background = ContextCompat.getDrawable(application.applicationContext, R.drawable.corner_button)
-        bind.clChallengeFeed.btnFriends.background = ContextCompat.getDrawable(application.applicationContext, R.drawable.corner_button_white)
-        bind.clChallengeFeed.btnMyPosts.background = ContextCompat.getDrawable(application.applicationContext, R.drawable.corner_button)
-    }
-
-    private fun updateButtonsMyPostsClicked(bind: FragmentRedesignMyFeedBinding) {
-        bind.clChallengeFeed.btnAll.setTextColor(Color.parseColor("#FFFFFF"))
-        bind.clChallengeFeed.btnFriends.setTextColor(Color.parseColor("#FFFFFF"))
-        bind.clChallengeFeed.btnMyPosts.setTextColor(Color.parseColor("#000000"))
-
-        bind.clChallengeFeed.btnAll.background = ContextCompat.getDrawable(application.applicationContext, R.drawable.corner_button)
-        bind.clChallengeFeed.btnFriends.background = ContextCompat.getDrawable(application.applicationContext, R.drawable.corner_button)
-        bind.clChallengeFeed.btnMyPosts.background = ContextCompat.getDrawable(application.applicationContext, R.drawable.corner_button_white)
     }
 
     override fun updateView(bind: FragmentRedesignMyFeedBinding) {
-        bind.tvMyChallenges.visibleOrGone = newsFeedViewModel.viewState.myChallengesVisible
-       // bind.tbMyFeed.tvTitle.text = newsFeedViewModel.viewState.toolbarName
+        bind.tvMyChallenges.visibleOrGone = viewModel.viewState.myChallengesVisible
+        bind.clEndOfFeed.tvEndOfFeed.visibleOrGone = viewModel.viewState.isEndOfNewsFeedVisible
 
-        val options = RequestOptions()
-            .placeholder(R.drawable.placeholder)
-            .error(R.drawable.placeholder)
+        bind.rvNewsFeedRedesign.visibleOrGone = viewModel.viewState.recyclerNewsFeedVisible
+        bind.clFriendsEmptyState.clAddFriend.visibleOrGone = viewModel.viewState.addFriendsEmptyStateVisible
 
-        bind.clEndOfFeed.tvEndOfFeed.visibleOrGone = newsFeedViewModel.viewState.isEndOfNewsFeedVisible
+        bind.clChallengeFeed.btnAll.setTextColor(Color.parseColor(viewModel.viewState.btnAllTextColor))
+        bind.clChallengeFeed.btnFriends.setTextColor(Color.parseColor(viewModel.viewState.btnFriendsTextColor))
+        bind.clChallengeFeed.btnMyPosts.setTextColor(Color.parseColor(viewModel.viewState.btnMyPostsTextColor))
 
-        // Glide.with(this).load(newsFeedViewModel.viewState.toolbarImage).apply(options)
-        //         .into(bind.tbMyFeed.cvProfile)
-        // Glide.with(application.applicationContext).load(R.drawable.ic_add).into(bind.tbMyFeed.ivUploadChallenges)
+        bind.clChallengeFeed.btnAll.background = ContextCompat.getDrawable(application.applicationContext, viewModel.viewState.btnAllBackgroundResId)
+        bind.clChallengeFeed.btnFriends.background = ContextCompat.getDrawable(application.applicationContext, viewModel.viewState.btnFriendsBackgroundResId)
+        bind.clChallengeFeed.btnMyPosts.background = ContextCompat.getDrawable(application.applicationContext, viewModel.viewState.btnMyPostsBackgroundResId)
     }
 }

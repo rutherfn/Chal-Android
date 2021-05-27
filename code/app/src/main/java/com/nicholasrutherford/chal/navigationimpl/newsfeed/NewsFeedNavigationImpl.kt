@@ -3,25 +3,53 @@ package com.nicholasrutherford.chal.navigationimpl.newsfeed
 import android.app.AlertDialog
 import android.app.Application
 import android.content.Intent
+import android.graphics.Color
+import android.os.CountDownTimer
+import cc.cloudist.acplibrary.ACProgressConstant
+import cc.cloudist.acplibrary.ACProgressFlower
+import com.nicholasrutherford.chal.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
-import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
 import com.nicholasrutherford.chal.newsfeed.NewsFeedNavigation
 import com.nicholasrutherford.chal.peoplelist.PeopleListFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadActivity
 import javax.inject.Inject
 
-class NewsFeedNavigationImpl @Inject constructor(private val application: Application, private val newsFeedFragment: NewsFeedFragment) : NewsFeedNavigation {
+class NewsFeedNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : NewsFeedNavigation {
+
+    private var flowerLoadingDialog: ACProgressFlower? = null
+
+    override fun hideAcProgress() {
+        val timer = object  : CountDownTimer(1500, 100) {
+            override fun onTick(millisUntilFinished: Long) = Unit
+
+            override fun onFinish() {
+                flowerLoadingDialog?.dismiss()
+            }
+        }
+        timer.start()
+    }
+
+    override fun pop()  = mainActivity.supportFragmentManager.popBackStack()
+
+    override fun showAcProgress() {
+        flowerLoadingDialog = ACProgressFlower.Builder(mainActivity)
+            .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+            .themeColor(Color.WHITE)
+            .fadeColor(Color.DKGRAY).build()
+
+        flowerLoadingDialog?.show()
+    }
 
     override fun showPeopleList() {
-        newsFeedFragment.fragmentManager?.beginTransaction()
-            ?.replace(
+        mainActivity.supportFragmentManager.beginTransaction()
+            .replace(
                 container,
                 PeopleListFragment(application),
                 PeopleListFragment(application)::javaClass.name
             )
-            ?.addToBackStack("")
-            ?.commit()
+            .addToBackStack("")
+            .commit()
     }
 
     override fun showAlert(title: String, message: String) {
@@ -29,7 +57,7 @@ class NewsFeedNavigationImpl @Inject constructor(private val application: Applic
 
         alertDialogBuilder.setMessage(message)
             .setCancelable(false)
-            .setPositiveButton(newsFeedFragment.getString(R.string.ok)) { dialog, _ ->
+            .setPositiveButton(mainActivity.getString(R.string.ok)) { dialog, _ ->
                 dialog.cancel()
             }
 
@@ -41,6 +69,6 @@ class NewsFeedNavigationImpl @Inject constructor(private val application: Applic
 
     override fun showProgress() {
         val intent = Intent(application.applicationContext, ProgressUploadActivity::class.java)
-        newsFeedFragment.startActivity(intent)
+        mainActivity.startActivity(intent)
     }
 }

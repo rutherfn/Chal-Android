@@ -80,6 +80,8 @@
     <string name="error_password">One capital letter and one number.</string>
     <string name="first_name">First Name</string>
     <string name="header_font_bold_text_title">Header Bold Font</string>
+    <string name="hex_black">#000000</string>
+    <string name="hex_white">#FFFFFF</string>
     <string name="high">High</string>
     <string name="last_updated">Last Updated</string>
     <string name="more_navigation">More</string>
