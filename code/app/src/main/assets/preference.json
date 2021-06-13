@@ -1,0 +1,15 @@
+[
+  {
+    "type": "progressUpload",
+    "sharedPrefTypes": [
+      {
+        "name": "title",
+        "value": "progressTitle"
+      },
+      {
+        "name": "caption",
+        "value": "progressCaption"
+      }
+    ]
+  }
+]

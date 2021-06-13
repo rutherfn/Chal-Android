@@ -8,7 +8,15 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuildersModule {
 
     @ContributesAndroidInjector(
-        modules = [AdapterModule::class, FragmentBuildersModule::class, NavigationImplModule::class, TestFairyModule::class,  ViewModelModule::class]
+        modules = [
+            AdapterModule::class,
+            FragmentBuildersModule::class,
+            JsonAssetReaderImplModule::class,
+            NavigationImplModule::class,
+            SharedPreferenceModule::class,
+            TestFairyModule::class,
+            ViewModelModule::class
+        ]
     )
     abstract fun contributeMainActivity(): MainActivity
 }

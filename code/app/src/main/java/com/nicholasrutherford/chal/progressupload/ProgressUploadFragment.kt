@@ -1,8 +1,6 @@
 package com.nicholasrutherford.chal.progressupload
 
 import android.app.Application
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,20 +8,18 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.Screens
+import com.nicholasrutherford.chal.data.responses.ActiveChallengeAndCategoryResponse
 import com.nicholasrutherford.chal.databinding.FragmentProgressUploadBinding
 import com.nicholasrutherford.chal.ext.activitys.ProgressUploadExt
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.main.MainActivity
 import dagger.android.support.DaggerFragment
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProgressUploadFragment @Inject constructor(private val application: Application) :
+class ProgressUploadFragment @Inject constructor(private val application: Application, private val progressUploadParams: ProgressUploadParams) :
     DaggerFragment(),
     ProgressUploadExt {
 
@@ -36,75 +32,24 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         }
 
     private val typeface = Typeface()
-    var selectedPhotoUri: Uri? = null
 
     private val listOfChallenges = arrayListOf<String>()
-
-    private var bind: FragmentProgressUploadBinding? = null
-
-    val _test = MutableStateFlow("")
-    val test: StateFlow<String> = _test
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val mainActivity: MainActivity = (activity as MainActivity)
         mainActivity.viewModel.updateCurrentScreen(Screens.UPLOAD_PROGRESS)
 
-        println(mainActivity.viewModel.viewState.currentScreen)
+        val bind = FragmentProgressUploadBinding.inflate(layoutInflater)
 
-        bind = FragmentProgressUploadBinding.inflate(layoutInflater)
+        updateTypefaces(bind)
+        collectChallengesAndCategoryResult(bind)
+        updateView(bind)
+        clickListeners(bind)
 
-        bind?.let {
-            main(it, viewModel)
-        }
-
-        lifecycleScope.launch {
-            test.collect {
-                bind?.let {
-                    println("get here if bind is not null")
-                }
-                println(it)
-            }
-        }
-
-
-        return bind?.root
+        return bind.root
     }
 
-    override fun main(bind: FragmentProgressUploadBinding, viewModel: ProgressUploadViewModel) {
-        updateTypefaces(bind, viewModel)
-        collectChallengesAndCategoryResult(bind, viewModel)
-        clickListeners(bind, viewModel)
-
-        bind.tbProgressUpload.tvTitle.text = getString(R.string.post_your_progress)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        // if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
-        //     selectedPhotoUri = data.data
-        //
-        //     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
-        //
-        //     val bitmapDrawable = BitmapDrawable(bitmap)
-        //     bind?.clPostProgress?.ivUploadImage?.setBackgroundDrawable(bitmapDrawable)
-        // } else if (resultCode == Activity.RESULT_OK) {
-        //     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
-        //
-        //     val bitmapDrawable = BitmapDrawable(bitmap)
-        //     binding?.clPostProgress?.ivUploadImage?.setBackgroundDrawable(bitmapDrawable)
-        // }
-    }
-
-    private fun collectChallengesAndCategoryResult(bind: FragmentProgressUploadBinding, viewModel: ProgressUploadViewModel) {
-        lifecycleScope.launch {
-            viewModel.activeChallengeAndCategoryResponse.collect { activeChallengeAndCategoryList ->
-                updateSpinners(bind, viewModel, activeChallengeAndCategoryList)
-            }
-        }
-    }
-
-    override fun updateTypefaces(bind: FragmentProgressUploadBinding, viewModel: ProgressUploadViewModel) {
+    override fun updateTypefaces(bind: FragmentProgressUploadBinding) {
         typeface.setTypefaceForHeaderBold(bind.clPostProgress.tvPostProgress, application.applicationContext)
         typeface.setTypefaceForBodyRegular(bind.clPostProgress.tvPostProgress, application.applicationContext)
 
@@ -117,7 +62,15 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.btnCancelAndDiscardPost, application.applicationContext)
     }
 
-    override fun updateSpinners(bind: FragmentProgressUploadBinding, viewModel: ProgressUploadViewModel, challengeAndCategoryList: List<ProgressUploadViewModel.ActiveChallengeAndCategoryResponse>) {
+    private fun collectChallengesAndCategoryResult(bind: FragmentProgressUploadBinding) {
+        lifecycleScope.launch {
+            viewModel.activeChallengeAndCategoryResponse.collect { activeChallengeAndCategoryList ->
+                updateSpinners(bind, activeChallengeAndCategoryList)
+            }
+        }
+    }
+
+    override fun updateSpinners(bind: FragmentProgressUploadBinding, challengeAndCategoryList: List<ActiveChallengeAndCategoryResponse>) {
         val listOfCategories = arrayListOf<String>()
 
         challengeAndCategoryList.forEach { challengeAndCategory ->
@@ -135,7 +88,11 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         bind.clPostProgress.spSelectCategory.adapter = categoryAdapter
     }
 
-    override fun clickListeners(bind: FragmentProgressUploadBinding, viewModel: ProgressUploadViewModel) {
+    override fun updateView(bind: FragmentProgressUploadBinding) {
+        bind.tbProgressUpload.tvTitle.text = viewModel.viewState.toolbarTitle
+    }
+
+    override fun clickListeners(bind: FragmentProgressUploadBinding) {
         bind.clPostProgress.btnCancelAndDiscardPost.setOnClickListener {
             viewModel.onDiscardPostClicked()
         }
@@ -152,15 +109,9 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
             val title = bind.clPostProgress.spSelectChallenge.selectedItem.toString()
             val category = bind.clPostProgress.spSelectCategory.selectedItem.toString()
             val caption = bind.clPostProgress.etAddCaption.text.toString()
-            var selectedIndex = 0
 
-            listOfChallenges.forEachIndexed { index, challenges ->
-                if (title == challenges) {
-                    selectedIndex = index
-                }
-            }
-
-            viewModel.onPostProgressClicked(title, caption, category, selectedIndex, selectedPhotoUri)
+            viewModel.onPostProgressClicked(title, caption, category, listOfChallenges)
         }
     }
+
     }

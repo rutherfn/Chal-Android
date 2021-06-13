@@ -15,6 +15,7 @@ import com.nicholasrutherford.chal.more.MoreNavigation
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.profile.profiles.MyProfileFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadFragment
+import com.nicholasrutherford.chal.progressupload.ProgressUploadParams
 import javax.inject.Inject
 
 class MoreNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : MoreNavigation {
@@ -72,8 +73,8 @@ class MoreNavigationImpl @Inject constructor(private val application: Applicatio
         mainActivity.supportFragmentManager.beginTransaction()
             .replace(
                 container,
-                ProgressUploadFragment(application),
-                ProgressUploadFragment(application)::javaClass.name
+                ProgressUploadFragment(application, ProgressUploadParams(isUpdate = false, title = null, caption = null, photoUri = null)),
+                ProgressUploadFragment(application, ProgressUploadParams(isUpdate = false, title = null, caption = null, photoUri = null))::javaClass.name
             )
             .addToBackStack("")
             .commit()

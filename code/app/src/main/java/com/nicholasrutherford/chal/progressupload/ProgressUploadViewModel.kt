@@ -11,6 +11,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.data.responses.ActiveChallengeAndCategoryResponse
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
@@ -52,7 +53,13 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     private val _activeChallengeAndCategoryResponse = MutableStateFlow(listOf<ActiveChallengeAndCategoryResponse>())
     val activeChallengeAndCategoryResponse: StateFlow<List<ActiveChallengeAndCategoryResponse>> = _activeChallengeAndCategoryResponse
 
+    val _isViewStateUpdated = MutableStateFlow(false)
+    val isViewStateUpdated: StateFlow<Boolean> = _isViewStateUpdated
+
+    private var selectedPhotoUri: Uri? = null
+
     init {
+        viewState.toolbarTitle = application.getString(R.string.post_your_progress)
         readProfileDetailsFirebase.getUsername()?.let { userName ->
             currentUsername = userName
         }
@@ -60,7 +67,10 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         fetchActiveChallenges()
     }
 
-    fun onPhotoClicked() = navigation.openGallery()
+    fun onPhotoClicked() {
+        // save data in shared preferences 
+        navigation.openGallery()
+    }
 
     fun onDiscardPostClicked() {
         val title = application.applicationContext.getString(R.string.discard_post)
@@ -69,10 +79,17 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         navigation.showAlert(title, desc)
     }
 
-    fun onPostProgressClicked(title: String, body: String, category: String, selectedIndex: Int, photoUri: Uri?) {
+    fun onPostProgressClicked(title: String, body: String, category: String, listOfChallenges: List<String>) { // check if the image is empty or not\
+        var selectedIndex = 0
+
+        listOfChallenges.forEachIndexed { index, challenges ->
+            if (title == challenges) {
+                selectedIndex = index
+            }
+        }
         navigation.showAcProgress()
 
-        if (title == "" || body == "" || category == "" || photoUri == null) {
+        if (title == "" || body == "" || category == "") {
             navigation.hideAcProgress()
 
             val alertTitle = application.applicationContext.getString(R.string.missing_fields)
@@ -84,7 +101,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
             userPostBody = body
             userPostCategory = category
 
-            uploadProgressPhoto(selectedIndex, photoUri)
+            uploadProgressPhoto(selectedIndex, selectedPhotoUri)
         }
     }
 
@@ -164,6 +181,8 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                         }
                     }
                     _activeChallengeAndCategoryResponse.value = activeChallengeAndCategoryResponseList
+
+
                 }
             })
     }
@@ -187,12 +206,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     fun onBackClicked() = println("test") //navigation.finish(progressUploadActivity)
 
-    fun onCancelAndDiscardPostClicked() {
-        val title = application.applicationContext.getString(R.string.cancel_and_discard_post_title)
-        val message = application.applicationContext.getString(R.string.cancel_and_discard_post_message)
-        navigation.showCancelAndDiscardAlert(message, title)
-    }
-
     internal fun writeUpdatedPostToFirebase(selectedIndex: Int) {
         writeActiveChallengesPostFirebase.writeTitle(selectedIndex, savedUserLastIndexOfProgress, userPostTitle)
         writeActiveChallengesPostFirebase.writeDescription(selectedIndex, savedUserLastIndexOfProgress, userPostBody)
@@ -210,12 +223,8 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         writeActiveChallengesPostFirebase.writeUsernameUrl(selectedIndex, index, url)
     }
 
-    data class ActiveChallengeAndCategoryResponse(
-        var challenge: String,
-        var category: String
-    )
-
     inner class ProgressUploadViewStateImpl : ProgressViewState {
+        override var toolbarTitle = ""
         override var title = ""
         override var body = ""
         override var category = ""

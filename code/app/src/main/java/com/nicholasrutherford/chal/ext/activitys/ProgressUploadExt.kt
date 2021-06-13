@@ -1,11 +1,11 @@
 package com.nicholasrutherford.chal.ext.activitys
 
+import com.nicholasrutherford.chal.data.responses.ActiveChallengeAndCategoryResponse
 import com.nicholasrutherford.chal.databinding.FragmentProgressUploadBinding
-import com.nicholasrutherford.chal.progressupload.ProgressUploadViewModel
 
 interface ProgressUploadExt {
-    fun main(bind: FragmentProgressUploadBinding, viewModel: ProgressUploadViewModel)
-    fun updateTypefaces(bind: FragmentProgressUploadBinding, viewModel: ProgressUploadViewModel)
-    fun updateSpinners(bind: FragmentProgressUploadBinding, viewModel: ProgressUploadViewModel, challengeAndCategoryList: List<ProgressUploadViewModel.ActiveChallengeAndCategoryResponse>)
-    fun clickListeners(bind: FragmentProgressUploadBinding, viewModel: ProgressUploadViewModel)
+    fun updateTypefaces(bind: FragmentProgressUploadBinding)
+    fun updateSpinners(bind: FragmentProgressUploadBinding, challengeAndCategoryList: List<ActiveChallengeAndCategoryResponse>)
+    fun clickListeners(bind: FragmentProgressUploadBinding)
+    fun updateView(bind: FragmentProgressUploadBinding)
 }

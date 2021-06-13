@@ -12,6 +12,7 @@ import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.newsfeed.NewsFeedNavigation
 import com.nicholasrutherford.chal.peoplelist.PeopleListFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadFragment
+import com.nicholasrutherford.chal.progressupload.ProgressUploadParams
 import javax.inject.Inject
 
 class NewsFeedNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : NewsFeedNavigation {
@@ -70,8 +71,8 @@ class NewsFeedNavigationImpl @Inject constructor(private val application: Applic
         mainActivity.supportFragmentManager.beginTransaction()
             .replace(
                 container,
-                ProgressUploadFragment(application),
-                ProgressUploadFragment(application)::javaClass.name
+                ProgressUploadFragment(application, ProgressUploadParams(isUpdate = false, title = null, caption = null, photoUri = null)),
+                ProgressUploadFragment(application, ProgressUploadParams(isUpdate = false, title = null, caption = null, photoUri = null))::javaClass.name
             )
             .addToBackStack("")
             .commit()
