@@ -6,7 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.bugreport.BugReportFragment
@@ -14,7 +14,7 @@ import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.more.MoreNavigation
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.profile.profiles.MyProfileFragment
-import com.nicholasrutherford.chal.progressupload.ProgressUploadActivity
+import com.nicholasrutherford.chal.progressupload.ProgressUploadFragment
 import javax.inject.Inject
 
 class MoreNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : MoreNavigation {
@@ -69,8 +69,14 @@ class MoreNavigationImpl @Inject constructor(private val application: Applicatio
     }
 
     override fun showProgress() {
-        val intent = Intent(application.applicationContext, ProgressUploadActivity::class.java)
-        mainActivity.startActivity(intent)
+        mainActivity.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                ProgressUploadFragment(application),
+                ProgressUploadFragment(application)::javaClass.name
+            )
+            .addToBackStack("")
+            .commit()
     }
 
     override fun showMyProfile() {

@@ -8,7 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.firebase.FirebaseKeys
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
@@ -130,16 +130,6 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
                     _isUserEnrolledInChallenge.value = snapshot.exists()
                 }
             })
-    }
-
-    fun onUploadProgressClicked() {
-        if (userEnrolledInChallenge) {
-         //   newsFeedNavigationImpl.showProgress()
-        } else {
-            val title = application.applicationContext.getString(R.string.not_enrolled_in_challenge)
-            val message = application.applicationContext.getString(R.string.not_enrolled_in_challenge_message)
-           // newsFeedNavigationImpl.showAlert(title, message)
-        }
     }
 
     //fun onAddFriendsClicked() = newsFeedNavigationImpl.showPeopleList()
@@ -318,6 +308,16 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
 
     fun onRefreshTabClicked() {
         fetchNewsFeedList()
+    }
+
+    fun onAddProgressTabClicked() {
+        if (userEnrolledInChallenge) {
+            navigation.showProgress()
+        } else {
+            val title = application.applicationContext.getString(R.string.not_enrolled_in_challenge)
+            val message = application.applicationContext.getString(R.string.not_enrolled_in_challenge_message)
+            navigation.showAlert(title, message)
+        }
     }
 
     fun dayInChallenge(): Int {

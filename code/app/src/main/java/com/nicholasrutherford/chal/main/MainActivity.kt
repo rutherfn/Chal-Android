@@ -1,17 +1,29 @@
-package com.nicholasrutherford.chal
+package com.nicholasrutherford.chal.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.challengesRedesignFragment
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.more.MoreFragment
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
-import com.testfairy.TestFairy
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)
+            .get(MainViewModel::class.java)
+    }
 
     var binding: ActivityMainBinding? = null
 
@@ -19,23 +31,13 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        main(binding!!)
-        TestFairy.begin(this, "SDK-aPjHEtM8")
+        binding?.let { main(it) }
+        viewModel.testFairy.init()
     }
 
     private fun main(binding: ActivityMainBinding) {
-        setupView(binding)
         setupHomeForFirstToLoad()
         setupBottomNavigation(binding)
-    }
-
-    private fun setupView(binding: ActivityMainBinding) {
-        setupToolbar(binding)
-    }
-
-    private fun setupToolbar(binding: ActivityMainBinding) {
-        setSupportActionBar(binding.tbMain)
-        binding.tbMain.title = ""
     }
 
     private fun setupHomeForFirstToLoad() {
@@ -64,7 +66,6 @@ class MainActivity : DaggerAppCompatActivity() {
                         )
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
-                        binding?.tbMain?.visibleOrGone = false
                         return true
                     }
                     R.id.navigation_challenges -> {
@@ -74,7 +75,6 @@ class MainActivity : DaggerAppCompatActivity() {
                         )
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
-                        binding?.tbMain?.visibleOrGone = false
                         return true
                     }
                     R.id.navigation_more -> {
@@ -85,7 +85,6 @@ class MainActivity : DaggerAppCompatActivity() {
                         )
                             .commit()
                         binding?.bvNavigation?.visibleOrGone = true
-                        binding?.tbMain?.visibleOrGone = false
                         return true
                     }
                 }
@@ -96,5 +95,10 @@ class MainActivity : DaggerAppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.navigation_news_feed, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        viewModel.onCameraResult(resultCode, requestCode, data)
     }
 }

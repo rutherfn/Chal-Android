@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.databinding.FragmentEditProfileBinding
 import com.nicholasrutherford.chal.ext.fragments.editprofile.EditProfileExtension
 import com.nicholasrutherford.chal.helpers.Typeface

@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.dagger.modules
 
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -8,7 +8,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuildersModule {
 
     @ContributesAndroidInjector(
-        modules = [AdapterModule::class, FragmentBuildersModule::class, NavigationImplModule::class,  ViewModelModule::class]
+        modules = [AdapterModule::class, FragmentBuildersModule::class, NavigationImplModule::class, TestFairyModule::class,  ViewModelModule::class]
     )
     abstract fun contributeMainActivity(): MainActivity
 }

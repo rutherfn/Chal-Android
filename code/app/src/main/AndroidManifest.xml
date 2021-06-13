@@ -47,12 +47,8 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".main.MainActivity"
             android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
-
-        <activity android:name=".progressupload.ProgressUploadActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
 

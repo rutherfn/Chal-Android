@@ -3,7 +3,7 @@ package com.nicholasrutherford.chal.profile.editprofile
 import android.app.Application
 import android.os.CountDownTimer
 import androidx.lifecycle.ViewModel
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.WriteAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.editmyprofile.EditProfileNavigationImpl

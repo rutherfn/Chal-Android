@@ -2,17 +2,16 @@ package com.nicholasrutherford.chal.navigationimpl.newsfeed
 
 import android.app.AlertDialog
 import android.app.Application
-import android.content.Intent
 import android.graphics.Color
 import android.os.CountDownTimer
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.newsfeed.NewsFeedNavigation
 import com.nicholasrutherford.chal.peoplelist.PeopleListFragment
-import com.nicholasrutherford.chal.progressupload.ProgressUploadActivity
+import com.nicholasrutherford.chal.progressupload.ProgressUploadFragment
 import javax.inject.Inject
 
 class NewsFeedNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : NewsFeedNavigation {
@@ -53,7 +52,7 @@ class NewsFeedNavigationImpl @Inject constructor(private val application: Applic
     }
 
     override fun showAlert(title: String, message: String) {
-        val alertDialogBuilder = AlertDialog.Builder(application.applicationContext)
+        val alertDialogBuilder = AlertDialog.Builder(mainActivity)
 
         alertDialogBuilder.setMessage(message)
             .setCancelable(false)
@@ -68,7 +67,14 @@ class NewsFeedNavigationImpl @Inject constructor(private val application: Applic
     }
 
     override fun showProgress() {
-        val intent = Intent(application.applicationContext, ProgressUploadActivity::class.java)
-        mainActivity.startActivity(intent)
+        mainActivity.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                ProgressUploadFragment(application),
+                ProgressUploadFragment(application)::javaClass.name
+            )
+            .addToBackStack("")
+            .commit()
     }
+
 }

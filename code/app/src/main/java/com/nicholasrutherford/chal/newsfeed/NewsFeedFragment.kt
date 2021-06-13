@@ -64,9 +64,15 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         return bind.root
     }
 
-    // override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    //
-    // }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.navigation_refresh) {
+            viewModel.onRefreshTabClicked()
+            return true
+        } else if (item.itemId == R.id.navigation_add_progress) {
+            return true
+        }
+        return true
+    }
 
     override fun collectResults(bind: FragmentRedesignMyFeedBinding) {
         lifecycleScope.launch {
@@ -143,6 +149,17 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         }
         bind.clFriendsEmptyState.btnAddFriendEmptyState.setOnClickListener {
             viewModel.onAddFriendsEmptyStateClicked()
+        }
+
+        bind.tbMyFeed.setOnMenuItemClickListener {
+            it?.let { item ->
+                if (item.itemId == R.id.navigation_refresh) {
+                    viewModel.onRefreshTabClicked()
+                } else if (item.itemId == R.id.navigation_add_progress) {
+                    viewModel.onAddProgressTabClicked()
+                }
+                true
+            } == true
         }
     }
 

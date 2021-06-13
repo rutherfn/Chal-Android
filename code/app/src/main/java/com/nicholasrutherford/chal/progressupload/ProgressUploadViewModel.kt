@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.progressupload
 
-import android.content.Context
+import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
@@ -24,17 +25,18 @@ import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadN
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.UUID
+import javax.inject.Inject
 
-class ProgressUploadViewModel(private val progressUploadActivity: ProgressUploadActivity, private val appContext: Context, private val container: Int) : ViewModel() {
+class ProgressUploadViewModel @Inject constructor(private val application: Application, mainActivity: MainActivity) : ViewModel() {
 
     var userPostTitle = ""
     var userPostBody = ""
     var userPostCategory = ""
 
-    private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
+    private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
 
     val viewState = ProgressUploadViewStateImpl()
-    val navigation = ProgressUploadNavigationImpl()
+    val navigation = ProgressUploadNavigationImpl(application, mainActivity)
 
     private var progressImageUrl: String? = ""
 
@@ -58,20 +60,25 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
         fetchActiveChallenges()
     }
 
-    fun onPhotoClicked() {
-        navigation.openGallery(progressUploadActivity)
-    }
+    fun onPhotoClicked() = navigation.openGallery()
 
     fun onDiscardPostClicked() {
-        navigation.showAlert("Are you sure you want to discard this post?", "Discard Post", progressUploadActivity, appContext, true, container)
+        val title = application.applicationContext.getString(R.string.discard_post)
+        val desc = application.applicationContext.getString(R.string.are_you_sure_you_you_want_to_discard_the_post)
+
+        navigation.showAlert(title, desc)
     }
 
     fun onPostProgressClicked(title: String, body: String, category: String, selectedIndex: Int, photoUri: Uri?) {
-        navigation.showAcProgress(progressUploadActivity)
+        navigation.showAcProgress()
 
         if (title == "" || body == "" || category == "" || photoUri == null) {
             navigation.hideAcProgress()
-            navigation.progressUploadAlert("Looks like were missing data. Please enter info for all fields, in order to continue", "Missing Fields", progressUploadActivity)
+
+            val alertTitle = application.applicationContext.getString(R.string.missing_fields)
+            val alertDesc = application.applicationContext.getString(R.string.looks_like_were_missing_data)
+
+            navigation.progressUploadAlert(alertDesc, alertTitle)
         } else {
             userPostTitle = title
             userPostBody = body
@@ -95,7 +102,11 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
                 }
                 .addOnFailureListener {
                     navigation.hideAcProgress()
-                    navigation.progressUploadAlert("Issue uploading image to server. Please Try Again", "Can not upload image to server", progressUploadActivity)
+
+                    val title = application.applicationContext.getString(R.string.can_not_upload_image_to_server)
+                    val message = application.applicationContext.getString(R.string.issue_uploading_image_to_server)
+
+                    navigation.progressUploadAlert(message, title)
                 }
         }
     }
@@ -122,7 +133,7 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
                             fetchUsernameAndUrl(savedUserLastIndexOfProgress, selectedIndex)
 
                             navigation.hideAcProgress()
-                            navigation.finish(progressUploadActivity)
+                            navigation.finish()
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
@@ -174,12 +185,12 @@ class ProgressUploadViewModel(private val progressUploadActivity: ProgressUpload
         })
     }
 
-    fun onBackClicked() = navigation.finish(progressUploadActivity)
+    fun onBackClicked() = println("test") //navigation.finish(progressUploadActivity)
 
     fun onCancelAndDiscardPostClicked() {
-        val title = progressUploadActivity.getString(R.string.cancel_and_discard_post_title)
-        val message = progressUploadActivity.getString(R.string.cancel_and_discard_post_message)
-        navigation.showCancelAndDiscardAlert(message, title, progressUploadActivity)
+        val title = application.applicationContext.getString(R.string.cancel_and_discard_post_title)
+        val message = application.applicationContext.getString(R.string.cancel_and_discard_post_message)
+        navigation.showCancelAndDiscardAlert(message, title)
     }
 
     internal fun writeUpdatedPostToFirebase(selectedIndex: Int) {

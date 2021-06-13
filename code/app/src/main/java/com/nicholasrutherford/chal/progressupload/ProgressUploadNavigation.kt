@@ -1,14 +1,12 @@
 package com.nicholasrutherford.chal.progressupload
 
-import android.content.Context
-
 interface ProgressUploadNavigation {
-    fun finish(progressUploadActivity: ProgressUploadActivity)
-    fun openGallery(progressUploadActivity: ProgressUploadActivity)
-    fun showMainActivity(progressUploadActivity: ProgressUploadActivity, appcontext: Context)
-    fun showAcProgress(progressUploadActivity: ProgressUploadActivity)
+    fun finish()
+    fun openGallery()
+    fun showMainActivity()
+    fun showAcProgress()
     fun hideAcProgress()
-    fun progressUploadAlert(alertMessageText: String, alertTitle: String, progressUploadActivity: ProgressUploadActivity)
-    fun showAlert(alertMessageText: String, alertTitle: String, progressUploadActivity: ProgressUploadActivity, context: Context, isClicked: Boolean, id: Int)
-    fun showCancelAndDiscardAlert(message: String, title: String, progressUploadActivity: ProgressUploadActivity)
+    fun progressUploadAlert(alertMessageText: String, alertTitle: String)
+    fun showAlert(alertMessageText: String, alertTitle: String)
+    fun showCancelAndDiscardAlert(message: String, title: String)
 }

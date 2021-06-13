@@ -2,11 +2,13 @@ package com.nicholasrutherford.chal.dagger.modules
 
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.dagger.ViewModelKey
+import com.nicholasrutherford.chal.main.MainViewModel
 import com.nicholasrutherford.chal.more.MoreViewModel
 import com.nicholasrutherford.chal.newsfeed.NewsFeedViewModel
 import com.nicholasrutherford.chal.peoplelist.PeopleListViewModel
 import com.nicholasrutherford.chal.profile.editprofile.EditProfileViewModel
 import com.nicholasrutherford.chal.profile.profiles.MyProfileViewModel
+import com.nicholasrutherford.chal.progressupload.ProgressUploadViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -21,6 +23,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    internal abstract fun bindMainViewModel(vieModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(MoreViewModel::class)
     internal abstract fun bindMoreViewModel(viewModel: MoreViewModel): ViewModel
 
@@ -31,11 +38,16 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(NewsFeedViewModel::class)
+    internal abstract fun bindNewsFeedViewModel(viewModel: NewsFeedViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(PeopleListViewModel::class)
     internal abstract fun bindPeopleListViewModel(viewModel: PeopleListViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(NewsFeedViewModel::class)
-    internal abstract fun bindNewsFeedViewModel(viewModel: NewsFeedViewModel): ViewModel
+    @ViewModelKey(ProgressUploadViewModel::class)
+    internal abstract fun bindProgressUploadViewModel(viewModel: ProgressUploadViewModel): ViewModel
 }

@@ -2,7 +2,7 @@ package com.nicholasrutherford.chal.profile.profiles
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.myprofile.MyProfileNavigationImpl

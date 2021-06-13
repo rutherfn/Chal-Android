@@ -8,7 +8,7 @@ import android.graphics.Color
 import android.provider.MediaStore
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.uploadphoto.IMAGE_CAPTURE_CODE
 import com.nicholasrutherford.chal.account.uploadphoto.UploadPhotoActivity

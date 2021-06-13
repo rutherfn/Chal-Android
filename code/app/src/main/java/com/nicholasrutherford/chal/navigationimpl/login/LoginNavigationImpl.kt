@@ -10,7 +10,7 @@ import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.login.LoginNavigation
 import com.nicholasrutherford.chal.account.signup.SignUpActivity
-import com.nicholasrutherford.chal.MainActivity
+import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.account.forgotpassword.ForgotPasswordActivity
 
 class LoginNavigationImpl : LoginNavigation {

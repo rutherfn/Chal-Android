@@ -9,6 +9,7 @@
     <string name="active_challenges">Active</string>
     <string name="account">Account</string>
     <string name="already_have_a_account_text">Already have a account?</string>
+    <string name="are_you_sure_you_you_want_to_discard_the_post">Are you sure you want to discard this post?</string>
     <string name="app_menu">App Menu</string>
     <string name="bio">Bio</string>
     <string name="bug_descrption">Bug Description</string>
@@ -16,6 +17,7 @@
     <string name="bug_priority_level">Bug Priority Level</string>
     <string name="bug_title">Bug Title</string>
     <string name="sample_challenge_title">Sample Challenge</string>
+    <string name="can_not_upload_image_to_server">Can Not Upload Image To Server</string>
     <string name="cancel_and_discard_post">Cancel and Discard Post</string>
     <string name="category_fitness">Fitness</string>
     <string name="category_education">Education</string>
@@ -49,6 +51,7 @@
     <string name="debug_incorrect_password">Incorrect Password!</string>
     <string name="debug_change_configuration">•  Change App Configurations</string>
     <string name="debug_password_title">Please Enter Password In Order To Continue</string>
+    <string name="discard_post">Discard Post</string>
     <string name="dev_email">nicholasrutherford121@gmail.com</string>
     <string name="cancel_and_discard_post_title">Discard Post</string>
     <string name="cancel_and_discard_post_message">Are you sure you want to discard this post?</string>
@@ -83,6 +86,7 @@
     <string name="hex_black">#000000</string>
     <string name="hex_white">#FFFFFF</string>
     <string name="high">High</string>
+    <string name="issue_uploading_image_to_server">Issue uploading image to server. Please Try Again</string>
     <string name="last_updated">Last Updated</string>
     <string name="more_navigation">More</string>
     <string name="my_feed_bottom_nav">My Feed</string>
@@ -134,6 +138,7 @@
     </string-array>
     <string name="last_name">Last Name</string>
     <string name="log_out">Log out</string>
+    <string name="looks_like_were_missing_data">Looks like were missing data. Please enter info for all fields, in order to continue.</string>
     <string name="loading">Loading</string>
     <string name="loading_account">Loading Your Account… </string>
     <string name="login_text">Log In</string>
@@ -147,6 +152,7 @@
     <string name="medium">Medium</string>
     <string name="missing_desc_message">Bug Missing Description</string>
     <string name="missing_desc_alert_message">Bug missing a description. Please add a description for the bug your reporting.</string>
+    <string name="missing_fields">Missing Fields</string>
     <string name="missing_title_message">Bug Missing Title</string>
     <string name="missing_title_desc_message">Bug missing a title. Please add a title for the bug your reporting.</string>
     <string name="news_feed">News Feed</string>
