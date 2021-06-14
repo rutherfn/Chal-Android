@@ -22,7 +22,6 @@ import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.activechallengepost.WriteActiveChallengesPostsFirebase
-import com.nicholasrutherford.chal.helpers.sharedpreference.updatesharedpreference.UpdateSharedPreference
 import com.nicholasrutherford.chal.helpers.sharedpreference.updatesharedpreference.UpdateSharedPreferenceImpl
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,7 +33,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     var userPostTitle = ""
     var userPostBody = ""
-    var userPostCategory = ""
 
     private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
 
@@ -82,7 +80,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         navigation.showAlert(title, desc)
     }
 
-    fun onPostProgressClicked(title: String, body: String, category: String, listOfChallenges: List<String>) { // check if the image is empty or not\
+    fun onPostProgressClicked(title: String, body: String, listOfChallenges: List<String>) { // check if the image is empty or not\
         var selectedIndex = 0
 
         listOfChallenges.forEachIndexed { index, challenges ->
@@ -92,7 +90,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         }
         navigation.showAcProgress()
 
-        if (title == "" || body == "" || category == "") {
+        if (title == "" || body == "") {
             navigation.hideAcProgress()
 
             val alertTitle = application.applicationContext.getString(R.string.missing_fields)
@@ -102,7 +100,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         } else {
             userPostTitle = title
             userPostBody = body
-            userPostCategory = category
 
             uploadProgressPhoto(selectedIndex, selectedPhotoUri)
         }

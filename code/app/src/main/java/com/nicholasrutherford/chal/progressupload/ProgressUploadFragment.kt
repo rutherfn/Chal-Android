@@ -64,7 +64,6 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         typeface.setTypefaceForBodyRegular(bind.clPostProgress.tvPostProgress, application.applicationContext)
 
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvSelectChallenge, application.applicationContext)
-        typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvSelectCategory, application.applicationContext)
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvAddCaption, application.applicationContext)
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvUploadImage, application.applicationContext)
 
@@ -81,21 +80,15 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
     }
 
     override fun updateSpinners(bind: FragmentProgressUploadBinding, challengeAndCategoryList: List<ActiveChallengeAndCategoryResponse>) {
-        val listOfCategories = arrayListOf<String>()
-
         challengeAndCategoryList.forEach { challengeAndCategory ->
-            listOfCategories.add(challengeAndCategory.category)
             listOfChallenges.add(challengeAndCategory.challenge)
         }
 
         val challengesAdapter = ArrayAdapter(application.applicationContext, android.R.layout.simple_spinner_item, listOfChallenges)
-        val categoryAdapter = ArrayAdapter(application.applicationContext, android.R.layout.simple_spinner_item, listOfCategories.distinct())
 
         challengesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         bind.clPostProgress.spSelectChallenge.adapter = challengesAdapter
-        bind.clPostProgress.spSelectCategory.adapter = categoryAdapter
 
         if (params.isUpdate) {
             listOfChallenges.forEachIndexed { index, challenges ->
@@ -135,10 +128,10 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         }
         bind.clPostProgress.btnPostProgressToMyFeed.setOnClickListener {
             val title = bind.clPostProgress.spSelectChallenge.selectedItem.toString()
-            val category = bind.clPostProgress.spSelectCategory.selectedItem.toString()
+
             val caption = bind.clPostProgress.etAddCaption.text.toString()
 
-            viewModel.onPostProgressClicked(title, caption, category, listOfChallenges)
+            viewModel.onPostProgressClicked(title, caption, listOfChallenges)
         }
     }
 
