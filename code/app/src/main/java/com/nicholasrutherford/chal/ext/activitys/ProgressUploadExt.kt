@@ -4,6 +4,7 @@ import com.nicholasrutherford.chal.data.responses.ActiveChallengeAndCategoryResp
 import com.nicholasrutherford.chal.databinding.FragmentProgressUploadBinding
 
 interface ProgressUploadExt {
+    fun updateSelectedPhotoUri()
     fun updateTypefaces(bind: FragmentProgressUploadBinding)
     fun updateSpinners(bind: FragmentProgressUploadBinding, challengeAndCategoryList: List<ActiveChallengeAndCategoryResponse>)
     fun clickListeners(bind: FragmentProgressUploadBinding)

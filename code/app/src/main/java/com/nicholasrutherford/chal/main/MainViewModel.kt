@@ -10,6 +10,8 @@ import android.view.MenuItem
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.Screens
+import com.nicholasrutherford.chal.helpers.sharedpreference.clearsharedpreference.ClearSharedPreferenceImpl
+import com.nicholasrutherford.chal.helpers.sharedpreference.readsharedpreference.ReadSharedPreferenceImpl
 import com.nicholasrutherford.chal.helpers.testfairy.ChalTestFairyImpl
 import com.nicholasrutherford.chal.navigationimpl.main.MainNavigationImpl
 import javax.inject.Inject
@@ -22,20 +24,11 @@ class MainViewModel @Inject constructor(private val application: Application, ma
     val testFairy = ChalTestFairyImpl(application)
 
     var selectedPhotoUri: Uri? = null
-    private var isNewFeed: Boolean = false
 
-    init {
-        isNewFeed = true
-        launchNewsFeed()
-    }
+    private val clearSharedPreference = ClearSharedPreferenceImpl(application)
+    private val readSharedPreference = ReadSharedPreferenceImpl(application)
 
-    private fun launchNewsFeed() {
-        if (isNewFeed) {
-            navigation.showMewsFeed(backStack = null)
-        } else {
-            navigation.showMewsFeed(backStack = "")
-        }
-    }
+    fun launchNewsFeed() = navigation.showMewsFeed()
 
     private fun launchChallenges() = navigation.showChallenges()
 
@@ -59,7 +52,7 @@ class MainViewModel @Inject constructor(private val application: Application, ma
         return false
     }
 
-        fun onCameraResult(resultCode: Int, requestCode: Int, data: Intent?) {
+    fun onCameraResult(resultCode: Int, requestCode: Int, data: Intent?) {
             if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
                 selectedPhotoUri = data.data
 
@@ -68,28 +61,47 @@ class MainViewModel @Inject constructor(private val application: Application, ma
                 val bitmapDrawable = BitmapDrawable(bitmap)
 
                 if (viewState.currentScreen == Screens.UPLOAD_PROGRESS) {
-                    // do this functionality for only the upload progress, once you have the bit map drawable
+                    navigateToProgressUpload(bitmapDrawable)
                 }
-
-                // test(application)._test.value = bitmapDrawable.toString()
-
-                // test(application).setSomething(bitmapDrawable)
             } else if (resultCode == Activity.RESULT_OK) {
                 val bitmap = MediaStore.Images.Media.getBitmap(application.applicationContext.contentResolver, selectedPhotoUri)
 
                 val bitmapDrawable = BitmapDrawable(bitmap)
 
                 if (viewState.currentScreen == Screens.UPLOAD_PROGRESS) {
-                    // do this functionality for only the upload progress, once you have the bit map drawable
+                    navigateToProgressUpload(bitmapDrawable)
+                  // bind?.clPostProgress?.ivUploadImage?.setBackgroundDrawable(bitmapDrawable)
                 }
-
-                //test(application)._test.value = bitmapDrawable.toString()
             }
         }
 
-        private fun captureTestFairyScreenshot() = testFairy.takeScreenshot()
+    private fun navigateToProgressUpload(bitmapDrawable: BitmapDrawable) {
+        val title = readSharedPreference.readProgressTitle()
+        val caption = readSharedPreference.readProgressCaption()
 
-        fun updateCurrentScreen(newScreen: Screens) {
+        navigation.pop()
+
+        navigation.showProgressUpload(
+            isUpdate = true,
+            title = title,
+            caption = caption,
+            photoUri = selectedPhotoUri,
+            bitmapDrawable = bitmapDrawable
+        )
+
+        clearSharedPreference.clearProgressTitle()
+        clearSharedPreference.clearProgressCaption()
+    }
+
+    private fun captureTestFairyScreenshot() = testFairy.takeScreenshot()
+
+    fun onBackPressed(entryCount: Int) {
+        if (entryCount == 0) {
+            navigation.finish()
+        }
+    }
+
+    fun updateCurrentScreen(newScreen: Screens) {
             viewState.currentScreen = newScreen
         }
 

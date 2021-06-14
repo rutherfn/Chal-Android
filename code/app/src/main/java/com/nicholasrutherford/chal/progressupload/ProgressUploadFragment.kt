@@ -1,6 +1,7 @@
 package com.nicholasrutherford.chal.progressupload
 
 import android.app.Application
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProgressUploadFragment @Inject constructor(private val application: Application, private val progressUploadParams: ProgressUploadParams) :
+class ProgressUploadFragment @Inject constructor(private val application: Application, private val params: ProgressUploadParams) :
     DaggerFragment(),
     ProgressUploadExt {
 
@@ -35,18 +36,27 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
 
     private val listOfChallenges = arrayListOf<String>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private var selectedPhotoUri: Uri? = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val mainActivity: MainActivity = (activity as MainActivity)
         mainActivity.viewModel.updateCurrentScreen(Screens.UPLOAD_PROGRESS)
 
         val bind = FragmentProgressUploadBinding.inflate(layoutInflater)
 
+        updateSelectedPhotoUri()
         updateTypefaces(bind)
         collectChallengesAndCategoryResult(bind)
         updateView(bind)
         clickListeners(bind)
 
         return bind.root
+    }
+
+    override fun updateSelectedPhotoUri() {
+        params.photoUri?.let { uri ->
+            selectedPhotoUri = uri
+        }
     }
 
     override fun updateTypefaces(bind: FragmentProgressUploadBinding) {
@@ -86,10 +96,26 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
 
         bind.clPostProgress.spSelectChallenge.adapter = challengesAdapter
         bind.clPostProgress.spSelectCategory.adapter = categoryAdapter
+
+        if (params.isUpdate) {
+            listOfChallenges.forEachIndexed { index, challenges ->
+                if (params.title == challenges) {
+                    bind.clPostProgress.spSelectChallenge.setSelection(index)
+                }
+            }
+        }
     }
 
     override fun updateView(bind: FragmentProgressUploadBinding) {
         bind.tbProgressUpload.tvTitle.text = viewModel.viewState.toolbarTitle
+
+        params.caption?.let {
+            bind.clPostProgress.etAddCaption.setText(it)
+        }
+
+        params.bitmapDrawable?.let { bitmapDrawable ->
+              bind.clPostProgress.ivUploadImage.setBackgroundDrawable(bitmapDrawable)
+        }
     }
 
     override fun clickListeners(bind: FragmentProgressUploadBinding) {
@@ -100,7 +126,9 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
             viewModel.onDiscardPostClicked()
         }
         bind.clPostProgress.ivUploadImage.setOnClickListener {
-            viewModel.onPhotoClicked()
+            val title = bind.clPostProgress.spSelectChallenge.selectedItem.toString()
+            val caption = bind.clPostProgress.etAddCaption.text.toString()
+            viewModel.onPhotoClicked(title, caption)
         }
         bind.tbProgressUpload.ibMoreBack.setOnClickListener {
             viewModel.onBackClicked()

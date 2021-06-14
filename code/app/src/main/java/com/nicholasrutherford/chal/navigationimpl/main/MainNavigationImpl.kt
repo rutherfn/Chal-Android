@@ -1,15 +1,23 @@
 package com.nicholasrutherford.chal.navigationimpl.main
 
 import android.app.Application
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedesignFragment
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.main.MainNavigation
 import com.nicholasrutherford.chal.more.MoreFragment
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
+import com.nicholasrutherford.chal.progressupload.ProgressUploadFragment
+import com.nicholasrutherford.chal.progressupload.ProgressUploadParams
 import javax.inject.Inject
 
 class MainNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : MainNavigation {
+
+    override fun finish() = mainActivity.finish()
+
+    override fun pop()  = mainActivity.supportFragmentManager.popBackStack()
 
     override fun showChallenges() {
         mainActivity.supportFragmentManager.beginTransaction()
@@ -22,14 +30,14 @@ class MainNavigationImpl @Inject constructor(private val application: Applicatio
             .commit()
     }
 
-    override fun showMewsFeed(backStack: String?) {
+    override fun showMewsFeed() {
         mainActivity.supportFragmentManager.beginTransaction()
             .replace(
                 container,
                 NewsFeedFragment(application),
                 NewsFeedFragment(application)::javaClass.name
             )
-            .addToBackStack(backStack)
+            .addToBackStack(null)
             .commit()
     }
 
@@ -39,6 +47,30 @@ class MainNavigationImpl @Inject constructor(private val application: Applicatio
                 container,
                 MoreFragment(application),
                 MoreFragment(application)::javaClass.name
+            )
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun showProgressUpload(
+        isUpdate: Boolean,
+        title: String?,
+        caption: String?,
+        photoUri: Uri?,
+        bitmapDrawable: BitmapDrawable?) {
+
+        val params = ProgressUploadParams(
+            isUpdate = isUpdate,
+            title = title,
+            caption = caption,
+            photoUri = photoUri,
+            bitmapDrawable = bitmapDrawable
+        )
+        mainActivity.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                ProgressUploadFragment(application, params),
+                ProgressUploadFragment(application, params)::javaClass.name
             )
             .addToBackStack(null)
             .commit()

@@ -70,11 +70,18 @@ class MoreNavigationImpl @Inject constructor(private val application: Applicatio
     }
 
     override fun showProgress() {
+        val params = ProgressUploadParams(
+            isUpdate = false,
+            title = null,
+            caption = null,
+            photoUri = null,
+            bitmapDrawable = null
+        )
         mainActivity.supportFragmentManager.beginTransaction()
             .replace(
                 container,
-                ProgressUploadFragment(application, ProgressUploadParams(isUpdate = false, title = null, caption = null, photoUri = null)),
-                ProgressUploadFragment(application, ProgressUploadParams(isUpdate = false, title = null, caption = null, photoUri = null))::javaClass.name
+                ProgressUploadFragment(application, params),
+                ProgressUploadFragment(application, params)::javaClass.name
             )
             .addToBackStack("")
             .commit()

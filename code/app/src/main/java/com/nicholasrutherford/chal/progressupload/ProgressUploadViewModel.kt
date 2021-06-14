@@ -22,6 +22,8 @@ import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.activechallengepost.WriteActiveChallengesPostsFirebase
+import com.nicholasrutherford.chal.helpers.sharedpreference.updatesharedpreference.UpdateSharedPreference
+import com.nicholasrutherford.chal.helpers.sharedpreference.updatesharedpreference.UpdateSharedPreferenceImpl
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -39,6 +41,8 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     val viewState = ProgressUploadViewStateImpl()
     val navigation = ProgressUploadNavigationImpl(application, mainActivity)
 
+    private val updateSharedPreference = UpdateSharedPreferenceImpl(application)
+
     private var progressImageUrl: String? = ""
 
     private val writeActiveChallengesPostFirebase = WriteActiveChallengesPostsFirebase()
@@ -53,9 +57,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     private val _activeChallengeAndCategoryResponse = MutableStateFlow(listOf<ActiveChallengeAndCategoryResponse>())
     val activeChallengeAndCategoryResponse: StateFlow<List<ActiveChallengeAndCategoryResponse>> = _activeChallengeAndCategoryResponse
 
-    val _isViewStateUpdated = MutableStateFlow(false)
-    val isViewStateUpdated: StateFlow<Boolean> = _isViewStateUpdated
-
     private var selectedPhotoUri: Uri? = null
 
     init {
@@ -67,8 +68,10 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         fetchActiveChallenges()
     }
 
-    fun onPhotoClicked() {
-        // save data in shared preferences 
+    fun onPhotoClicked(title: String, caption: String) {
+        updateSharedPreference.updateProgressTitle(title)
+        updateSharedPreference.updateProgressCaption(caption)
+        // save data in shared preferences
         navigation.openGallery()
     }
 

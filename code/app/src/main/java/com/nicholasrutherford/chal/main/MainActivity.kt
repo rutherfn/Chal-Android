@@ -28,6 +28,7 @@ class MainActivity : DaggerAppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+        viewModel.launchNewsFeed()
         binding?.let { binding ->
             setupBottomNavigation(binding = binding)
         }
@@ -51,5 +52,10 @@ class MainActivity : DaggerAppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         viewModel.onCameraResult(resultCode, requestCode, data)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        viewModel.onBackPressed(supportFragmentManager.backStackEntryCount)
     }
 }

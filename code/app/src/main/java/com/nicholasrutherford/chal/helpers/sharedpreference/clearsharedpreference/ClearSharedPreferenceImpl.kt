@@ -4,11 +4,13 @@ import android.app.Application
 import com.nicholasrutherford.chal.helpers.sharedpreference.ReadSharedPreferenceJson
 import javax.inject.Inject
 
-class ClearSharedPreferenceImpl @Inject constructor(private val application: Application) : ClearSharedPreference {
+class ClearSharedPreferenceImpl @Inject constructor(application: Application) : ClearSharedPreference {
 
     private val readSharedPreferenceJson = ReadSharedPreferenceJson(application)
 
-    override fun clearAll() = readSharedPreferenceJson.editor.clear()
+    override fun clearAll() {
+        readSharedPreferenceJson.editor.clear()
+    }
 
     override fun clearProgressTitle() {
         readSharedPreferenceJson.sharedPreference.getString(readSharedPreferenceJson.progressTitle, "")?.let {
