@@ -105,7 +105,7 @@
             android:id="@+id/etAddCaption"
             android:layout_width="354dp"
             android:layout_height="wrap_content"
-            android:ems="17"
+            android:ems="22"
             android:layout_marginTop="@dimen/margin_6dp"
             android:gravity="start|top"
             android:inputType="textMultiLine"

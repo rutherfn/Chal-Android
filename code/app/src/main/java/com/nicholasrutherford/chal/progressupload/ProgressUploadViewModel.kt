@@ -30,11 +30,8 @@ import javax.inject.Inject
 
 class ProgressUploadViewModel @Inject constructor(private val application: Application, mainActivity: MainActivity) : ViewModel() {
 
-    var userPostTitle = ""
-    var userPostBody = ""
-
     val viewState = ProgressUploadViewStateImpl()
-    val navigation = ProgressUploadNavigationImpl(application, mainActivity)
+    val navigation = ProgressUploadNavigationImpl(mainActivity)
 
     private val updateSharedPreference = UpdateSharedPreferenceImpl(application)
 
@@ -50,8 +47,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     private val _activeChallengeList = MutableStateFlow(listOf<ActiveChallengeResponse>())
     val activeChallengeList: StateFlow<List<ActiveChallengeResponse>> = _activeChallengeList
 
-    private var selectedPhotoUri: Uri? = null
-
     init {
         viewState.toolbarTitle = application.getString(R.string.post_your_progress)
         fetchActiveChallenges()
@@ -64,13 +59,13 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     }
 
     fun onDiscardPostClicked() {
-        val title = application.applicationContext.getString(R.string.discard_post)
+        val title = application.applicationContext.getString(R.string.discard_post_details)
         val desc = application.applicationContext.getString(R.string.are_you_sure_you_you_want_to_discard_the_post)
 
         navigation.showAlert(title, desc)
     }
 
-    fun onPostProgressClicked(title: String, body: String, listOfChallenges: List<String>) { // check if the image is empty or not\
+    fun onPostProgressClicked(title: String, body: String, listOfChallenges: List<String>, selectedPhotoUri: Uri?) { // check if the image is empty or not\
         var selectedIndex = 0
 
         listOfChallenges.forEachIndexed { index, challenges ->
@@ -80,45 +75,53 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         }
         navigation.showAcProgress()
 
-        if (title == "" || body == "") {
-            navigation.hideAcProgress()
-
-            val alertTitle = application.applicationContext.getString(R.string.missing_fields)
-            val alertDesc = application.applicationContext.getString(R.string.looks_like_were_missing_data)
-
-            navigation.progressUploadAlert(alertDesc, alertTitle)
-        } else {
-            userPostTitle = title
-            userPostBody = body
-
-            uploadProgressPhoto(selectedIndex, selectedPhotoUri)
+        when (body) {
+            "" -> {
+                showErrorAlert(
+                    title = application.applicationContext.getString(R.string.missing_fields),
+                    message = application.applicationContext.getString(R.string.looks_like_were_missing_caption)
+                )
+            }
+            else -> {
+                selectedPhotoUri?.let { photoUri ->
+                    uploadProgressPhoto(title, body, selectedIndex, photoUri)
+                } ?: run {
+                    showErrorAlert(
+                        title = application.applicationContext.getString(R.string.missing_fields),
+                        message = application.applicationContext.getString(R.string.looks_like_were_missing_image)
+                    )
+                }
+            }
         }
     }
 
-    fun uploadProgressPhoto(selectedIndex: Int, photoUri: Uri?) {
-        photoUri?.let { progressPhotoUri ->
+    private fun showErrorAlert(title: String, message: String) {
+        navigation.hideAcProgress()
+        navigation.progressUploadAlert(message, title)
+    }
+
+    private fun uploadProgressPhoto(title: String, body: String, selectedIndex: Int, photoUri: Uri) {
             val fileName = UUID.randomUUID().toString()
             val ref = FirebaseStorage.getInstance().getReference(bindUserImageFile(fileName))
 
-            ref.putFile(progressPhotoUri)
+            ref.putFile(photoUri)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener { progressImage ->
                         progressImageUrl = progressImage.toString()
-                        updateFirebaseUser(selectedIndex)
+                        updateFirebaseUser(title, body, selectedIndex)
                     }
                 }
                 .addOnFailureListener {
                     navigation.hideAcProgress()
 
-                    val title = application.applicationContext.getString(R.string.can_not_upload_image_to_server)
-                    val message = application.applicationContext.getString(R.string.issue_uploading_image_to_server)
+                    val titleAlert= application.applicationContext.getString(R.string.can_not_upload_image_to_server)
+                    val messageAlert = application.applicationContext.getString(R.string.issue_uploading_image_to_server)
 
-                    navigation.progressUploadAlert(message, title)
+                    navigation.progressUploadAlert(messageAlert, titleAlert)
                 }
-        }
     }
 
-    fun updateFirebaseUser(selectedIndex: Int) {
+    private fun updateFirebaseUser(title: String, body: String, selectedIndex: Int) {
         var activeChallengesPostsIndex = 0
         ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -135,7 +138,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                             savedUserLastIndexOfProgress = activeChallengesPostsIndex
                             isSelectedIndex = true
 
-                            writeUpdatedPostToFirebase(selectedIndex)
+                            writeUpdatedPostToFirebase(title, body, selectedIndex)
 
                             fetchUsernameAndUrl(savedUserLastIndexOfProgress, selectedIndex)
 
@@ -144,13 +147,19 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
-                        println("error")
+                        showErrorAlert(
+                            title = application.applicationContext.getString(R.string.error_updating_data_title),
+                            message = application.applicationContext.getString(R.string.error_updating_data_desc)
+                        )
                     }
                 })
             }
 
             override fun onCancelled(error: DatabaseError) {
-                println("error")
+                showErrorAlert(
+                    title = application.applicationContext.getString(R.string.error_updating_data_title),
+                    message = application.applicationContext.getString(R.string.error_updating_data_desc)
+                )
             }
         })
         isSelectedIndex = false
@@ -172,7 +181,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                     }
                     _activeChallengeList.value = activeChallengeList
 
-
                 }
             })
     }
@@ -189,16 +197,19 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
             }
 
             override fun onCancelled(error: DatabaseError) {
-                println("error")
+                showErrorAlert(
+                    title = application.applicationContext.getString(R.string.error_updating_data_title),
+                    message = application.applicationContext.getString(R.string.error_updating_data_desc)
+                )
             }
         })
     }
 
-    fun onBackClicked() = println("test") //navigation.finish(progressUploadActivity)
+    fun onBackClicked() = navigation.pop()
 
-    internal fun writeUpdatedPostToFirebase(selectedIndex: Int) {
-        writeActiveChallengesPostFirebase.writeTitle(selectedIndex, savedUserLastIndexOfProgress, userPostTitle)
-        writeActiveChallengesPostFirebase.writeDescription(selectedIndex, savedUserLastIndexOfProgress, userPostBody)
+    internal fun writeUpdatedPostToFirebase(title: String, body: String, selectedIndex: Int) {
+        writeActiveChallengesPostFirebase.writeTitle(selectedIndex, savedUserLastIndexOfProgress, title)
+        writeActiveChallengesPostFirebase.writeDescription(selectedIndex, savedUserLastIndexOfProgress, body)
         writeActiveChallengesPostFirebase.writeCategory(selectedIndex, savedUserLastIndexOfProgress, 0)
 
         progressImageUrl?.let { imageUrl ->

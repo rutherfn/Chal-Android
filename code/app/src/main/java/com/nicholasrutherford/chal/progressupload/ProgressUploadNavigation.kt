@@ -1,9 +1,9 @@
 package com.nicholasrutherford.chal.progressupload
 
 interface ProgressUploadNavigation {
+    fun pop()
     fun finish()
     fun openGallery()
-    fun showMainActivity()
     fun showAcProgress()
     fun hideAcProgress()
     fun progressUploadAlert(alertMessageText: String, alertTitle: String)

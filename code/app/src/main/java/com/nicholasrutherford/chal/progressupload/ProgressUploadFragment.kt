@@ -127,10 +127,9 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         }
         bind.clPostProgress.btnPostProgressToMyFeed.setOnClickListener {
             val title = bind.clPostProgress.spSelectChallenge.selectedItem.toString()
-
             val caption = bind.clPostProgress.etAddCaption.text.toString()
 
-            viewModel.onPostProgressClicked(title, caption, listOfChallenges)
+            viewModel.onPostProgressClicked(title, caption, listOfChallenges, selectedPhotoUri)
         }
     }
 

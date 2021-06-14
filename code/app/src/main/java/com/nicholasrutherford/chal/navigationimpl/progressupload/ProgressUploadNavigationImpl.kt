@@ -1,7 +1,6 @@
 package com.nicholasrutherford.chal.navigationimpl.progressupload
 
 import android.app.AlertDialog
-import android.app.Application
 import android.content.Intent
 import android.graphics.Color
 import cc.cloudist.acplibrary.ACProgressConstant
@@ -14,27 +13,20 @@ import com.nicholasrutherford.chal.progressupload.ProgressUploadNavigation
 import javax.inject.Inject
 
 class ProgressUploadNavigationImpl @Inject constructor(
-    private val application: Application,
     private val activity: MainActivity)
     : ProgressUploadNavigation {
 
     private var flowerLoadingDialog: ACProgressFlower? = null
 
-    override fun finish() {
-        activity.finish()
-    }
+    override fun pop() = activity.supportFragmentManager.popBackStack()
+
+    override fun finish() = activity.finish()
 
     override fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = GALLERY_TYPE
 
         activity.startActivityForResult(intent, GALLERY_REQUEST_CODE)
-    }
-
-    override fun showMainActivity() {
-        val intent = Intent(application.applicationContext, MainActivity::class.java)
-        activity.startActivity(intent)
-        activity.finish()
     }
 
     override fun showAcProgress() {
@@ -76,7 +68,7 @@ class ProgressUploadNavigationImpl @Inject constructor(
             .setCancelable(false)
             .setPositiveButton(activity.getString(R.string.yes)) { dialog, _ ->
                 dialog.cancel()
-                showMainActivity()
+                pop()
             }
             .setNegativeButton(activity.getString(R.string.no)) { dialog, _ ->
                 dialog.cancel()
@@ -96,7 +88,7 @@ class ProgressUploadNavigationImpl @Inject constructor(
             .setCancelable(false)
             .setPositiveButton(activity.getString(R.string.yes)) { dialog, _ ->
                 dialog.cancel()
-                finish()
+                pop()
             }
             .setNegativeButton(activity.getString(R.string.no)) { dialog, _ ->
                 dialog.cancel()
