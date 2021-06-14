@@ -1,18 +1,22 @@
 package com.nicholasrutherford.chal.navigationimpl.progressupload
 
 import android.app.AlertDialog
+import android.app.Application
 import android.content.Intent
 import android.graphics.Color
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.navigationimpl.uploadphoto.GALLERY_REQUEST_CODE
 import com.nicholasrutherford.chal.navigationimpl.uploadphoto.GALLERY_TYPE
+import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadNavigation
 import javax.inject.Inject
 
 class ProgressUploadNavigationImpl @Inject constructor(
+    private val application: Application,
     private val activity: MainActivity)
     : ProgressUploadNavigation {
 
@@ -80,6 +84,17 @@ class ProgressUploadNavigationImpl @Inject constructor(
         alert.show()
     }
 
+    override fun showNewsFeed() {
+       activity.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                NewsFeedFragment(application),
+                NewsFeedFragment(application)::javaClass.name
+            )
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun showCancelAndDiscardAlert(message: String, title: String) {
 
         val alertDialogBuilder = AlertDialog.Builder(activity)
@@ -99,4 +114,5 @@ class ProgressUploadNavigationImpl @Inject constructor(
         alert.setTitle(title)
         alert.show()
     }
+
 }

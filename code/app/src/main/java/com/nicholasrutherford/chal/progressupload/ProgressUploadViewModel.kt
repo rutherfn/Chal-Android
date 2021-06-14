@@ -31,7 +31,7 @@ import javax.inject.Inject
 class ProgressUploadViewModel @Inject constructor(private val application: Application, mainActivity: MainActivity) : ViewModel() {
 
     val viewState = ProgressUploadViewStateImpl()
-    val navigation = ProgressUploadNavigationImpl(mainActivity)
+    val navigation = ProgressUploadNavigationImpl(application, mainActivity)
 
     private val updateSharedPreference = UpdateSharedPreferenceImpl(application)
 
@@ -46,6 +46,10 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     private val _activeChallengeList = MutableStateFlow(listOf<ActiveChallengeResponse>())
     val activeChallengeList: StateFlow<List<ActiveChallengeResponse>> = _activeChallengeList
+
+    private val _isCompleted = MutableStateFlow(false)
+    val isUpdated: StateFlow<Boolean> = _isCompleted
+
 
     init {
         viewState.toolbarTitle = application.getString(R.string.post_your_progress)
@@ -141,9 +145,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                             writeUpdatedPostToFirebase(title, body, selectedIndex)
 
                             fetchUsernameAndUrl(savedUserLastIndexOfProgress, selectedIndex)
-
-                            navigation.hideAcProgress()
-                            navigation.finish()
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
@@ -162,6 +163,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                 )
             }
         })
+
         isSelectedIndex = false
     }
 
@@ -193,6 +195,8 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                     val profileImageUrl = snapshot.child(PROFILE_IMAGE).value.toString()
 
                     writeUpdatedUsernameAndUrlToFirebase(username, index, profileImageUrl, selectedIndex)
+
+                    _isCompleted.value = true
                 }
             }
 
@@ -222,6 +226,11 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     internal fun writeUpdatedUsernameAndUrlToFirebase(username: String, index: Int, url: String, selectedIndex: Int) {
         writeActiveChallengesPostFirebase.writeUsername(selectedIndex, index, username)
         writeActiveChallengesPostFirebase.writeUsernameUrl(selectedIndex, index, url)
+    }
+
+    fun test() {
+        navigation.hideAcProgress()
+        navigation.showNewsFeed()
     }
 
     inner class ProgressUploadViewStateImpl : ProgressViewState {

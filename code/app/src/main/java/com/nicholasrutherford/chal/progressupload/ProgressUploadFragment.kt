@@ -50,6 +50,14 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         updateView(bind)
         clickListeners(bind)
 
+        lifecycleScope.launch {
+            viewModel.isUpdated.collect {
+                if (it == true) {
+                    viewModel.test()
+                }
+            }
+        }
+
         return bind.root
     }
 
