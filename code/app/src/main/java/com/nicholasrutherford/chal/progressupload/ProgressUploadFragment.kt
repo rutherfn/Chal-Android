@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.Screens
-import com.nicholasrutherford.chal.data.responses.ActiveChallengeAndCategoryResponse
+import com.nicholasrutherford.chal.data.responses.ActiveChallengeResponse
 import com.nicholasrutherford.chal.databinding.FragmentProgressUploadBinding
 import com.nicholasrutherford.chal.ext.activitys.ProgressUploadExt
 import com.nicholasrutherford.chal.helpers.Typeface
@@ -46,7 +46,7 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
 
         updateSelectedPhotoUri()
         updateTypefaces(bind)
-        collectChallengesAndCategoryResult(bind)
+        collectChallengesListResult(bind)
         updateView(bind)
         clickListeners(bind)
 
@@ -71,21 +71,20 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.btnCancelAndDiscardPost, application.applicationContext)
     }
 
-    private fun collectChallengesAndCategoryResult(bind: FragmentProgressUploadBinding) {
+    private fun collectChallengesListResult(bind: FragmentProgressUploadBinding) {
         lifecycleScope.launch {
-            viewModel.activeChallengeAndCategoryResponse.collect { activeChallengeAndCategoryList ->
-                updateSpinners(bind, activeChallengeAndCategoryList)
+            viewModel.activeChallengeList.collect { activeChallengeList ->
+                updateSpinners(bind, activeChallengeList)
             }
         }
     }
 
-    override fun updateSpinners(bind: FragmentProgressUploadBinding, challengeAndCategoryList: List<ActiveChallengeAndCategoryResponse>) {
-        challengeAndCategoryList.forEach { challengeAndCategory ->
-            listOfChallenges.add(challengeAndCategory.challenge)
+    override fun updateSpinners(bind: FragmentProgressUploadBinding, challengeList: List<ActiveChallengeResponse>) {
+        challengeList.forEach { data ->
+            listOfChallenges.add(data.challenge)
         }
 
         val challengesAdapter = ArrayAdapter(application.applicationContext, android.R.layout.simple_spinner_item, listOfChallenges)
-
         challengesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         bind.clPostProgress.spSelectChallenge.adapter = challengesAdapter

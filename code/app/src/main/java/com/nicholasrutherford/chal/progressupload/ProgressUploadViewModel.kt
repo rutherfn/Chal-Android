@@ -11,7 +11,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.data.responses.ActiveChallengeAndCategoryResponse
+import com.nicholasrutherford.chal.data.responses.ActiveChallengeResponse
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
@@ -20,7 +20,6 @@ import com.nicholasrutherford.chal.firebase.TITLE_ACTIVE_CHALLENGES_POST
 import com.nicholasrutherford.chal.firebase.USERNAME
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
-import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.write.activechallengepost.WriteActiveChallengesPostsFirebase
 import com.nicholasrutherford.chal.helpers.sharedpreference.updatesharedpreference.UpdateSharedPreferenceImpl
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
@@ -33,8 +32,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     var userPostTitle = ""
     var userPostBody = ""
-
-    private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
 
     val viewState = ProgressUploadViewStateImpl()
     val navigation = ProgressUploadNavigationImpl(application, mainActivity)
@@ -50,26 +47,19 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     private var savedUserLastIndexOfProgress = 0
     private var isSelectedIndex = false
 
-    var currentUsername = ""
-
-    private val _activeChallengeAndCategoryResponse = MutableStateFlow(listOf<ActiveChallengeAndCategoryResponse>())
-    val activeChallengeAndCategoryResponse: StateFlow<List<ActiveChallengeAndCategoryResponse>> = _activeChallengeAndCategoryResponse
+    private val _activeChallengeList = MutableStateFlow(listOf<ActiveChallengeResponse>())
+    val activeChallengeList: StateFlow<List<ActiveChallengeResponse>> = _activeChallengeList
 
     private var selectedPhotoUri: Uri? = null
 
     init {
         viewState.toolbarTitle = application.getString(R.string.post_your_progress)
-        readProfileDetailsFirebase.getUsername()?.let { userName ->
-            currentUsername = userName
-        }
-
         fetchActiveChallenges()
     }
 
     fun onPhotoClicked(title: String, caption: String) {
         updateSharedPreference.updateProgressTitle(title)
         updateSharedPreference.updateProgressCaption(caption)
-        // save data in shared preferences
         navigation.openGallery()
     }
 
@@ -172,15 +162,15 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                 override fun onCancelled(error: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val activeChallengeAndCategoryResponseList = arrayListOf<ActiveChallengeAndCategoryResponse>()
+                    val activeChallengeList = arrayListOf<ActiveChallengeResponse>()
                     for (activeChallenges in snapshot.children) {
                         activeChallenges.getValue(CurrentActiveChallengesResponse::class.java).let {
                             it?.let { activeChallenge ->
-                                activeChallengeAndCategoryResponseList.add(ActiveChallengeAndCategoryResponse(activeChallenge.name, activeChallenge.categoryName))
+                                activeChallengeList.add(ActiveChallengeResponse(activeChallenge.name))
                             }
                         }
                     }
-                    _activeChallengeAndCategoryResponse.value = activeChallengeAndCategoryResponseList
+                    _activeChallengeList.value = activeChallengeList
 
 
                 }
