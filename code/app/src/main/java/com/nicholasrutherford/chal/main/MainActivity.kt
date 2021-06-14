@@ -54,7 +54,7 @@ class MainActivity : DaggerAppCompatActivity() {
         viewModel.onCameraResult(resultCode, requestCode, data)
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed() { // test
         super.onBackPressed()
         viewModel.onBackPressed(supportFragmentManager.backStackEntryCount)
     }
