@@ -52,7 +52,7 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
 
         lifecycleScope.launch {
             viewModel.isUpdated.collect {
-                if (it == true) {
+                if (it) {
                     viewModel.test()
                 }
             }
