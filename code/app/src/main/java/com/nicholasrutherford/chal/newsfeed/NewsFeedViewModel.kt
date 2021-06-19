@@ -17,7 +17,6 @@ import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
-import com.nicholasrutherford.chal.firebase.write.activechallenge.WriteActiveChallengeImpl
 import com.nicholasrutherford.chal.navigationimpl.newsfeed.NewsFeedNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,8 +33,6 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
     private val uid = FirebaseAuth.getInstance().uid ?: ""
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
     private var mAuth: FirebaseAuth? = null
-
-    val writeActiveChallengesFirebase = WriteActiveChallengeImpl()
 
     val viewState = NewsFeedRedesignViewStateImpl()
     //val newsFeedNavigationImpl = NewsFeedNavigationImpl(application)
