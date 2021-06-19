@@ -51,7 +51,7 @@
     <string name="debug_incorrect_password">Incorrect Password!</string>
     <string name="debug_change_configuration">•  Change App Configurations</string>
     <string name="debug_password_title">Please Enter Password In Order To Continue</string>
-    <string name="discard_post">Discard Post</string>
+    <string name="discard_post_details">Clicking YES will discard your current post towards your challenge.</string>
     <string name="dev_email">nicholasrutherford121@gmail.com</string>
     <string name="cancel_and_discard_post_title">Discard Post</string>
     <string name="cancel_and_discard_post_message">Are you sure you want to discard this post?</string>
@@ -81,6 +81,8 @@
     <string name="error_phone">Phone must not be more then 10 digits long.</string>
     <string name="error_phone_not_valid">Phone number not valid.</string>
     <string name="error_password">One capital letter and one number.</string>
+    <string name="error_updating_data_title">Error Updating Data</string>
+    <string name="error_updating_data_desc">Error updating your progress! Please press OK and try again!</string>
     <string name="first_name">First Name</string>
     <string name="header_font_bold_text_title">Header Bold Font</string>
     <string name="hex_black">#000000</string>
@@ -138,6 +140,8 @@
     </string-array>
     <string name="last_name">Last Name</string>
     <string name="log_out">Log out</string>
+    <string name="looks_like_were_missing_caption">Looks like you are missing a caption. Please enter info for all fields, in order to post progress,</string>
+    <string name="looks_like_were_missing_image">Looks like you are missing a image. Please enter info for all fields, in order to post progress,</string>
     <string name="looks_like_were_missing_data">Looks like were missing data. Please enter info for all fields, in order to continue.</string>
     <string name="loading">Loading</string>
     <string name="loading_account">Loading Your Account… </string>
@@ -178,7 +182,6 @@
     <string name="refresh">Refresh</string>
     <string name="reporter_name">Reporter Name</string>
     <string name="report_bug">Report Bug</string>
-    <string name="select_category">Select Category</string>
     <string name="search_challenges">Search</string>
     <string name="select_challenge">Select Challenge</string>
     <string name="sending_email">Sending Email...</string>

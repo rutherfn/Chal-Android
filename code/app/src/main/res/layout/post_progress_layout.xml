@@ -88,29 +88,6 @@
             />
 
         <TextView
-            android:id="@+id/tvSelectCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20dp"
-            android:text="@string/select_category"
-            android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:padding="@dimen/padding_6dp"
-            android:textSize="@dimen/sub_header_text_size"
-            app:layout_constraintStart_toStartOf="@+id/spSelectChallenge"
-            app:layout_constraintTop_toBottomOf="@+id/spSelectChallenge"
-            />
-
-        <Spinner
-            android:id="@+id/spSelectCategory"
-            android:layout_width="@dimen/spinner_post_progress_width"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_6dp"
-            app:layout_constraintStart_toStartOf="@+id/tvSelectCategory"
-            app:layout_constraintTop_toBottomOf="@+id/tvSelectCategory"
-            />
-
-        <TextView
             android:id="@+id/tvAddCaption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -120,15 +97,15 @@
             android:textColor="@color/colorBlack"
             android:padding="@dimen/padding_6dp"
             android:textSize="@dimen/sub_header_text_size"
-            app:layout_constraintStart_toStartOf="@+id/spSelectCategory"
-            app:layout_constraintTop_toBottomOf="@+id/spSelectCategory"
+            app:layout_constraintStart_toStartOf="@+id/spSelectChallenge"
+            app:layout_constraintTop_toBottomOf="@+id/spSelectChallenge"
             />
 
         <EditText
             android:id="@+id/etAddCaption"
             android:layout_width="354dp"
             android:layout_height="wrap_content"
-            android:ems="17"
+            android:ems="22"
             android:layout_marginTop="@dimen/margin_6dp"
             android:gravity="start|top"
             android:inputType="textMultiLine"

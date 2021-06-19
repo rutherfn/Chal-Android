@@ -180,7 +180,7 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 for (challengesPosts in snapshot.children) {
                                     challengesPosts.getValue(NewsFeedResponse::class.java).let {
-                                        it?.let { challengePost -> userNewsFeedList.add(challengePost) }
+                                        it?.let {  challengePost -> userNewsFeedList.add(challengePost) }
                                     }
                                 }
 

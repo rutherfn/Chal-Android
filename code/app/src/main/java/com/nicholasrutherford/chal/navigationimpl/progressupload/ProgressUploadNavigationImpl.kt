@@ -8,8 +8,10 @@ import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.navigationimpl.uploadphoto.GALLERY_REQUEST_CODE
 import com.nicholasrutherford.chal.navigationimpl.uploadphoto.GALLERY_TYPE
+import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadNavigation
 import javax.inject.Inject
 
@@ -20,21 +22,15 @@ class ProgressUploadNavigationImpl @Inject constructor(
 
     private var flowerLoadingDialog: ACProgressFlower? = null
 
-    override fun finish() {
-        activity.finish()
-    }
+    override fun pop() = activity.supportFragmentManager.popBackStack()
+
+    override fun finish() = activity.finish()
 
     override fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = GALLERY_TYPE
 
         activity.startActivityForResult(intent, GALLERY_REQUEST_CODE)
-    }
-
-    override fun showMainActivity() {
-        val intent = Intent(application.applicationContext, MainActivity::class.java)
-        activity.startActivity(intent)
-        activity.finish()
     }
 
     override fun showAcProgress() {
@@ -76,7 +72,7 @@ class ProgressUploadNavigationImpl @Inject constructor(
             .setCancelable(false)
             .setPositiveButton(activity.getString(R.string.yes)) { dialog, _ ->
                 dialog.cancel()
-                showMainActivity()
+                pop()
             }
             .setNegativeButton(activity.getString(R.string.no)) { dialog, _ ->
                 dialog.cancel()
@@ -88,6 +84,17 @@ class ProgressUploadNavigationImpl @Inject constructor(
         alert.show()
     }
 
+    override fun showNewsFeed() {
+       activity.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                NewsFeedFragment(application),
+                NewsFeedFragment(application)::javaClass.name
+            )
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun showCancelAndDiscardAlert(message: String, title: String) {
 
         val alertDialogBuilder = AlertDialog.Builder(activity)
@@ -96,7 +103,7 @@ class ProgressUploadNavigationImpl @Inject constructor(
             .setCancelable(false)
             .setPositiveButton(activity.getString(R.string.yes)) { dialog, _ ->
                 dialog.cancel()
-                finish()
+                pop()
             }
             .setNegativeButton(activity.getString(R.string.no)) { dialog, _ ->
                 dialog.cancel()
@@ -107,4 +114,5 @@ class ProgressUploadNavigationImpl @Inject constructor(
         alert.setTitle(title)
         alert.show()
     }
+
 }

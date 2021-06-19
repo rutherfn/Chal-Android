@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.Screens
-import com.nicholasrutherford.chal.data.responses.ActiveChallengeAndCategoryResponse
+import com.nicholasrutherford.chal.data.responses.ActiveChallengeResponse
 import com.nicholasrutherford.chal.databinding.FragmentProgressUploadBinding
 import com.nicholasrutherford.chal.ext.activitys.ProgressUploadExt
 import com.nicholasrutherford.chal.helpers.Typeface
@@ -46,9 +46,17 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
 
         updateSelectedPhotoUri()
         updateTypefaces(bind)
-        collectChallengesAndCategoryResult(bind)
+        collectChallengesListResult(bind)
         updateView(bind)
         clickListeners(bind)
+
+        lifecycleScope.launch {
+            viewModel.isUpdated.collect {
+                if (it) {
+                    viewModel.test()
+                }
+            }
+        }
 
         return bind.root
     }
@@ -64,7 +72,6 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         typeface.setTypefaceForBodyRegular(bind.clPostProgress.tvPostProgress, application.applicationContext)
 
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvSelectChallenge, application.applicationContext)
-        typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvSelectCategory, application.applicationContext)
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvAddCaption, application.applicationContext)
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvUploadImage, application.applicationContext)
 
@@ -72,30 +79,23 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.btnCancelAndDiscardPost, application.applicationContext)
     }
 
-    private fun collectChallengesAndCategoryResult(bind: FragmentProgressUploadBinding) {
+    private fun collectChallengesListResult(bind: FragmentProgressUploadBinding) {
         lifecycleScope.launch {
-            viewModel.activeChallengeAndCategoryResponse.collect { activeChallengeAndCategoryList ->
-                updateSpinners(bind, activeChallengeAndCategoryList)
+            viewModel.activeChallengeList.collect { activeChallengeList ->
+                updateSpinners(bind, activeChallengeList)
             }
         }
     }
 
-    override fun updateSpinners(bind: FragmentProgressUploadBinding, challengeAndCategoryList: List<ActiveChallengeAndCategoryResponse>) {
-        val listOfCategories = arrayListOf<String>()
-
-        challengeAndCategoryList.forEach { challengeAndCategory ->
-            listOfCategories.add(challengeAndCategory.category)
-            listOfChallenges.add(challengeAndCategory.challenge)
+    override fun updateSpinners(bind: FragmentProgressUploadBinding, challengeList: List<ActiveChallengeResponse>) {
+        challengeList.forEach { data ->
+            listOfChallenges.add(data.challenge)
         }
 
         val challengesAdapter = ArrayAdapter(application.applicationContext, android.R.layout.simple_spinner_item, listOfChallenges)
-        val categoryAdapter = ArrayAdapter(application.applicationContext, android.R.layout.simple_spinner_item, listOfCategories.distinct())
-
         challengesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         bind.clPostProgress.spSelectChallenge.adapter = challengesAdapter
-        bind.clPostProgress.spSelectCategory.adapter = categoryAdapter
 
         if (params.isUpdate) {
             listOfChallenges.forEachIndexed { index, challenges ->
@@ -135,10 +135,9 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         }
         bind.clPostProgress.btnPostProgressToMyFeed.setOnClickListener {
             val title = bind.clPostProgress.spSelectChallenge.selectedItem.toString()
-            val category = bind.clPostProgress.spSelectCategory.selectedItem.toString()
             val caption = bind.clPostProgress.etAddCaption.text.toString()
 
-            viewModel.onPostProgressClicked(title, caption, category, listOfChallenges)
+            viewModel.onPostProgressClicked(title, caption, listOfChallenges, selectedPhotoUri)
         }
     }
 
