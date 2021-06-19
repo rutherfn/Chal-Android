@@ -3,9 +3,10 @@ package com.nicholasrutherford.chal.profile.editprofile
 import android.app.Application
 import android.os.CountDownTimer
 import androidx.lifecycle.ViewModel
+import com.nicholasrutherford.chal.data.firebase.AccountInfo
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
-import com.nicholasrutherford.chal.firebase.write.WriteAccountFirebase
+import com.nicholasrutherford.chal.firebase.write.accountinfo.WriteAccountInfoImpl
 import com.nicholasrutherford.chal.navigationimpl.editmyprofile.EditProfileNavigationImpl
 import javax.inject.Inject
 
@@ -14,10 +15,10 @@ class EditProfileViewModel @Inject constructor(application: Application, mainAct
     val viewState = EditProfileViewStateImpl()
     val navigation = EditProfileNavigationImpl(application, mainActivity)
 
-    var oldUserName: String? = ""
+    private var oldUserName: String? = ""
 
     private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
-    private val writeAccountFirebase = WriteAccountFirebase(application.applicationContext)
+    private val writeAccountInfo = WriteAccountInfoImpl()
 
     init {
         setupEditProfile()
@@ -38,10 +39,13 @@ class EditProfileViewModel @Inject constructor(application: Application, mainAct
         viewState.editLastName = lastName
         viewState.editBio = bio
 
-        writeAccountFirebase.updateUsername(viewState.editUsername)
-        writeAccountFirebase.updateFirstName(viewState.editFirstName)
-        writeAccountFirebase.updateLastName(viewState.editLastName)
-        writeAccountFirebase.updateBio(viewState.editBio)
+        writeAccountInfo.updateAccountInfo(accountInfo = AccountInfo(
+            username = username,
+            firstName = firstName,
+            lastName = lastName,
+            bio = bio,
+            age = 0
+        ))
 
         navigation.showAcProgress()
         val timer = object : CountDownTimer(2500, 100) {
