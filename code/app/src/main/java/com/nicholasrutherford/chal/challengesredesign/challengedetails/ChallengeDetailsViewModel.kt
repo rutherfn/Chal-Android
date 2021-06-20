@@ -39,7 +39,7 @@ class ChallengeDetailsViewModel(
 
     val viewState = ChallengeDetailsViewStateImpl()
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
-    private val writeActiveChallengesFirebase = WriteNewActiveChallengeImpl()
+    private val writeNewActiveChallenge = WriteNewActiveChallengeImpl()
 
     private val uid = FirebaseAuth.getInstance().uid ?: ""
 
@@ -129,7 +129,7 @@ class ChallengeDetailsViewModel(
     }
 
     private fun enrollUserIntoNewChallenge(starterIndex: String) {
-        writeActiveChallengesFirebase.writeNewActiveChallenge(starterIndex, ActiveChallenge(
+        writeNewActiveChallenge.writeNewActiveChallenge(starterIndex, ActiveChallenge(
             name = challenge.title,
             bio = challenge.desc,
             categoryName = challenge.category,

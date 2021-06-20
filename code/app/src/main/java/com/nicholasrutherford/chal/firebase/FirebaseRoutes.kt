@@ -7,6 +7,7 @@ fun bindUserId(uid: String?): String { return "/users/$uid" }
 fun bindUserImageFile(fileName: String): String { return "/images/$fileName" }
 
 const val USERS = "/users/"
+const val POSTS = "/posts/"
 
 // route for general info
 const val AGE = "age"
@@ -22,7 +23,6 @@ const val USERNAME = "username"
 const val PROFILE_INFO = "/profileInfo/"
 const val ACTIVE_CHALLENGES = "/activeChallenges/"
 const val CATEGORY_NAME = "categoryName"
-const val DESCRIPTION = "description"
 const val ID_ACTIVE_CHALLENGES = "id"
 const val NAME = "name"
 const val NUMBER_OF_DAYS_OF_CHALLENGE = "numberOfDaysOfChallenge"
@@ -34,11 +34,11 @@ const val USER_DAY_ON_CHALLENGE = "dayOnChallenge"
 const val ACTIVE_CHALLENGES_POSTS = "/activeChallengesPosts/"
 const val ID_ACTIVE_CHALLENGES_POST = "id"
 const val USERNAME_URL = "usernameUrl"
-const val TITLE_ACTIVE_CHALLENGES_POST = "title"
-const val DESCRIPTION_ACTIVE_CHALLENGES_POST = "description"
-const val CATEGORY_ACTIVE_CHALLENGES_POST = "category"
-const val IMAGE_ACTIVE_CHALLENENGES_POST = "image"
-const val CURRENT_DAY_ACTIVE_CHALLENGES_POST = "currentDay"
+const val TITLE = "title"
+const val DESCRIPTION = "description"
+const val CATEGORY = "category"
+const val IMAGE = "image"
+const val CURRENT_DAY = "currentDay"
 
 // comments here
 
