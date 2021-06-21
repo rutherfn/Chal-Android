@@ -1,22 +1,21 @@
 package com.nicholasrutherford.chal.firebase.write.activenewchallenge
 
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.nicholasrutherford.chal.data.firebase.ActiveChallenge
-import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
-import com.nicholasrutherford.chal.firebase.CATEGORY_NAME
-import com.nicholasrutherford.chal.firebase.DATE_CHALLENGE_EXPIRED
-import com.nicholasrutherford.chal.firebase.DESCRIPTION
-import com.nicholasrutherford.chal.firebase.NAME
-import com.nicholasrutherford.chal.firebase.NUMBER_OF_DAYS_OF_CHALLENGE
 import com.nicholasrutherford.chal.firebase.USERS
-import com.nicholasrutherford.chal.firebase.USER_CURRENT_DAY
-import com.nicholasrutherford.chal.firebase.USER_DAY_ON_CHALLENGE
+import com.nicholasrutherford.chal.firebase.bioActiveChallengePath
+import com.nicholasrutherford.chal.firebase.categoryNameActiveChallengePath
+import com.nicholasrutherford.chal.firebase.currentDayActiveChallengePath
+import com.nicholasrutherford.chal.firebase.dateChallengeExpireActiveChallengePath
+import com.nicholasrutherford.chal.firebase.dayOnChallengeActiveChallengePath
+import com.nicholasrutherford.chal.firebase.daysInChallengeActiveChallengePath
+import com.nicholasrutherford.chal.firebase.nameActiveChallengePath
+import com.nicholasrutherford.chal.firebase.timberlog.TimberFirebaseLogImpl
 
-class WriteNewActiveChallengeImpl() : WriteNewActiveChallenge {
+class WriteNewActiveChallengeImpl : WriteNewActiveChallenge {
 
-    val uid = FirebaseAuth.getInstance().uid ?: ""
-    val ref = FirebaseDatabase.getInstance().getReference(USERS)
+    private val ref = FirebaseDatabase.getInstance().getReference(USERS)
+    private val timberFirebaseLog = TimberFirebaseLogImpl()
 
     override fun writeNewActiveChallenge(index: String, activeChallenge: ActiveChallenge) {
         writeName(index = index, newValue = activeChallenge.name)
@@ -30,30 +29,38 @@ class WriteNewActiveChallengeImpl() : WriteNewActiveChallenge {
     }
 
     override fun writeName(index: String, newValue: String) {
-        ref.child("$uid$ACTIVE_CHALLENGES$index").child(NAME).setValue(newValue)
+        ref.child(nameActiveChallengePath(index)).setValue(newValue)
+            .addOnFailureListener { timberFirebaseLog.logActiveChallengeNameError(index, newValue) }
     }
 
     override fun writeBio(index: String, newValue: String) {
-        ref.child("$uid$ACTIVE_CHALLENGES$index").child(DESCRIPTION).setValue(newValue)
+        ref.child(bioActiveChallengePath(index)).setValue(newValue)
+            .addOnFailureListener { timberFirebaseLog.logActiveChallengeBioError(index, newValue) }
     }
 
     override fun writeCategoryName(index: String, newValue: String) {
-        ref.child("$uid$ACTIVE_CHALLENGES$index").child(CATEGORY_NAME).setValue(newValue)
+        ref.child(categoryNameActiveChallengePath(index)).setValue(newValue)
+            .addOnFailureListener { timberFirebaseLog.logActiveChallengeCategoryNameError(index, newValue) }
     }
 
     override fun writeNumberOfDaysInChallenge(index: String, newValue: Int) {
-        ref.child("$uid$ACTIVE_CHALLENGES$index").child(NUMBER_OF_DAYS_OF_CHALLENGE).setValue(newValue)
+        ref.child(daysInChallengeActiveChallengePath(index)).setValue(newValue)
+            .addOnFailureListener { timberFirebaseLog.logActiveChallengeDaysInChallengeError(index, newValue) }
     }
 
     override fun writeDateChallengeExpire(index: String, newValue: String) {
-        ref.child("$uid$ACTIVE_CHALLENGES$index").child(DATE_CHALLENGE_EXPIRED).setValue(newValue)
+        ref.child(dateChallengeExpireActiveChallengePath(index))
+            .setValue(newValue)
+            .addOnFailureListener { timberFirebaseLog.logActiveChallengeExpireError(index, newValue) }
     }
 
     override fun writeCurrentDay(index: String, newValue: Int) {
-        ref.child("$uid$ACTIVE_CHALLENGES$index").child(USER_CURRENT_DAY).setValue(newValue)
+        ref.child(currentDayActiveChallengePath(index)).setValue(newValue)
+            .addOnFailureListener { timberFirebaseLog.logActiveChallengeCurrentDayError(index, newValue) }
     }
 
     override fun writeDayOnChallenge(index: String, newValue: Int) {
-        ref.child("$uid$ACTIVE_CHALLENGES$index").child(USER_DAY_ON_CHALLENGE).setValue(newValue)
+        ref.child(dayOnChallengeActiveChallengePath(index)).setValue(newValue)
+            .addOnFailureListener { timberFirebaseLog.logDayOnChallengeError(index, newValue) }
     }
 }

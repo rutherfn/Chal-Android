@@ -1,44 +1,39 @@
 package com.nicholasrutherford.chal.firebase.write.activepost
 
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.nicholasrutherford.chal.data.firebase.ActivePost
-import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
-import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
-import com.nicholasrutherford.chal.firebase.CATEGORY
-import com.nicholasrutherford.chal.firebase.CURRENT_DAY
-import com.nicholasrutherford.chal.firebase.DESCRIPTION
-import com.nicholasrutherford.chal.firebase.IMAGE
 import com.nicholasrutherford.chal.firebase.POSTS
-import com.nicholasrutherford.chal.firebase.TITLE
-import com.nicholasrutherford.chal.firebase.USERNAME
-import com.nicholasrutherford.chal.firebase.USERNAME_URL
 import com.nicholasrutherford.chal.firebase.USERS
+import com.nicholasrutherford.chal.firebase.categoryActiveChallengeUserPostPath
+import com.nicholasrutherford.chal.firebase.categoryPostPath
+import com.nicholasrutherford.chal.firebase.currentDayActiveChallengeUserPostPath
+import com.nicholasrutherford.chal.firebase.currentDayPath
+import com.nicholasrutherford.chal.firebase.descriptionActiveChallengeUserPostPath
+import com.nicholasrutherford.chal.firebase.descriptionPostPath
+import com.nicholasrutherford.chal.firebase.imageActiveChallengeUserPostPath
+import com.nicholasrutherford.chal.firebase.imagePostPath
+import com.nicholasrutherford.chal.firebase.titleActiveChallengeUserPostPath
+import com.nicholasrutherford.chal.firebase.titlePostPath
+import com.nicholasrutherford.chal.firebase.usernameActiveChallengeUserPostPath
+import com.nicholasrutherford.chal.firebase.usernamePath
+import com.nicholasrutherford.chal.firebase.usernameUrlActiveChallengeUserPostPath
+import com.nicholasrutherford.chal.firebase.usernameUrlPath
 
 class WriteActivePostImpl : WriteActivePost {
 
-    private val uid = FirebaseAuth.getInstance().uid ?: ""
     private val refPosts = FirebaseDatabase.getInstance().getReference(POSTS)
     private val refUsers = FirebaseDatabase.getInstance().getReference(USERS)
-
-    private fun parentDirectoryChallengePost(userActiveChallengeIndex: Int, userActiveChallengePostIndex: Int): String {
-        return "$uid$ACTIVE_CHALLENGES$userActiveChallengeIndex$ACTIVE_CHALLENGES_POSTS$userActiveChallengePostIndex"
-    }
-
-    private fun parentDirectoryPost(postIndex: Int): String {
-        return "$postIndex/"
-    }
 
     override fun writeTitle(userActiveChallengeIndex: Int,
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(parentDirectoryChallengePost(userActiveChallengeIndex, userActiveChallengePostIndex))
-            .child(TITLE).setValue(newValue)
+        refUsers.child(titleActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
 
-        refPosts.child(parentDirectoryPost(postIndex))
-            .child(TITLE).setValue(newValue)
+        refPosts.child(titlePostPath(postIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
     }
 
@@ -46,12 +41,12 @@ class WriteActivePostImpl : WriteActivePost {
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(parentDirectoryChallengePost(userActiveChallengeIndex, userActiveChallengePostIndex))
-            .child(DESCRIPTION).setValue(newValue)
+        refUsers.child(descriptionActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
 
-        refPosts.child(parentDirectoryPost(postIndex))
-            .child(DESCRIPTION).setValue(newValue)
+        refPosts.child(descriptionPostPath(postIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
     }
 
@@ -59,12 +54,12 @@ class WriteActivePostImpl : WriteActivePost {
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: Int) {
-        refUsers.child(parentDirectoryChallengePost(userActiveChallengeIndex, userActiveChallengePostIndex))
-            .child(CATEGORY).setValue(newValue)
+        refUsers.child(categoryActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
 
-        refPosts.child(parentDirectoryPost(postIndex))
-            .child(CATEGORY).setValue(newValue)
+        refPosts.child(categoryPostPath(postIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
     }
 
@@ -72,14 +67,12 @@ class WriteActivePostImpl : WriteActivePost {
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(parentDirectoryChallengePost(userActiveChallengeIndex, userActiveChallengePostIndex))
-            .child(IMAGE).setValue(newValue)
-            .addOnSuccessListener {  }
+        refUsers.child(imageActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
 
-        refPosts.child(parentDirectoryPost(postIndex))
-            .child(IMAGE).setValue(newValue)
-            .addOnSuccessListener {  }
+        refPosts.child(imagePostPath(postIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
     }
 
@@ -87,14 +80,12 @@ class WriteActivePostImpl : WriteActivePost {
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(parentDirectoryChallengePost(userActiveChallengeIndex, userActiveChallengeIndex))
-            .child(CURRENT_DAY).setValue(newValue)
-            .addOnSuccessListener {  }
+        refUsers.child(currentDayActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengeIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
 
-        refPosts.child(parentDirectoryPost(postIndex))
-            .child(CURRENT_DAY).setValue(newValue)
-            .addOnSuccessListener {  }
+        refPosts.child(currentDayPath(postIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
     }
 
@@ -102,14 +93,12 @@ class WriteActivePostImpl : WriteActivePost {
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(parentDirectoryChallengePost(userActiveChallengeIndex, userActiveChallengePostIndex))
-            .child(USERNAME).setValue(newValue)
-            .addOnFailureListener {  }
+        refUsers.child(usernameActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
 
-        refPosts.child(parentDirectoryPost(postIndex))
-            .child(USERNAME).setValue(newValue)
-            .addOnSuccessListener {  }
+        refPosts.child(usernamePath(postIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
     }
 
@@ -117,14 +106,12 @@ class WriteActivePostImpl : WriteActivePost {
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(parentDirectoryChallengePost(userActiveChallengeIndex, userActiveChallengePostIndex))
-            .child(USERNAME_URL).setValue(newValue)
-            .addOnFailureListener {  }
+        refUsers.child(usernameUrlActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
 
-        refPosts.child(parentDirectoryPost(postIndex))
-            .child(USERNAME_URL).setValue(newValue)
-            .addOnSuccessListener {  }
+        refPosts.child(usernameUrlPath(postIndex))
+            .setValue(newValue)
             .addOnFailureListener {  }
     }
 
@@ -175,4 +162,5 @@ class WriteActivePostImpl : WriteActivePost {
             newValue = activePost.usernameUrl
         )
     }
+
 }
