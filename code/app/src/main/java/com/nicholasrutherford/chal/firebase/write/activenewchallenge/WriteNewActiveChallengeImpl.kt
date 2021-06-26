@@ -10,12 +10,11 @@ import com.nicholasrutherford.chal.firebase.dateChallengeExpireActiveChallengePa
 import com.nicholasrutherford.chal.firebase.dayOnChallengeActiveChallengePath
 import com.nicholasrutherford.chal.firebase.daysInChallengeActiveChallengePath
 import com.nicholasrutherford.chal.firebase.nameActiveChallengePath
-import com.nicholasrutherford.chal.firebase.timberlog.TimberFirebaseLogImpl
+import timber.log.Timber
 
 class WriteNewActiveChallengeImpl : WriteNewActiveChallenge {
 
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
-    private val timberFirebaseLog = TimberFirebaseLogImpl()
 
     override fun writeNewActiveChallenge(index: String, activeChallenge: ActiveChallenge) {
         writeName(index = index, newValue = activeChallenge.name)
@@ -30,37 +29,52 @@ class WriteNewActiveChallengeImpl : WriteNewActiveChallenge {
 
     override fun writeName(index: String, newValue: String) {
         ref.child(nameActiveChallengePath(index)).setValue(newValue)
-            .addOnFailureListener { timberFirebaseLog.logActiveChallengeNameError(index, newValue) }
+            .addOnFailureListener {
+                Timber.d("Error writing Firebase field $newValue to ${nameActiveChallengePath(index)}"
+                )
+            }
     }
 
     override fun writeBio(index: String, newValue: String) {
         ref.child(bioActiveChallengePath(index)).setValue(newValue)
-            .addOnFailureListener { timberFirebaseLog.logActiveChallengeBioError(index, newValue) }
+            .addOnFailureListener {
+                Timber.d("Error writing Firebase field $newValue to ${bioActiveChallengePath(index)}")
+            }
     }
 
     override fun writeCategoryName(index: String, newValue: String) {
         ref.child(categoryNameActiveChallengePath(index)).setValue(newValue)
-            .addOnFailureListener { timberFirebaseLog.logActiveChallengeCategoryNameError(index, newValue) }
+            .addOnFailureListener {
+                Timber.d("Error writing Firebase field $newValue to ${categoryNameActiveChallengePath(index)}")
+            }
     }
 
     override fun writeNumberOfDaysInChallenge(index: String, newValue: Int) {
         ref.child(daysInChallengeActiveChallengePath(index)).setValue(newValue)
-            .addOnFailureListener { timberFirebaseLog.logActiveChallengeDaysInChallengeError(index, newValue) }
+            .addOnFailureListener {
+                Timber.d("Error writing Firebase field $newValue to ${daysInChallengeActiveChallengePath(index)}")
+            }
     }
 
     override fun writeDateChallengeExpire(index: String, newValue: String) {
         ref.child(dateChallengeExpireActiveChallengePath(index))
             .setValue(newValue)
-            .addOnFailureListener { timberFirebaseLog.logActiveChallengeExpireError(index, newValue) }
+            .addOnFailureListener {
+                Timber.d("Error writing Firebase field $newValue to ${dateChallengeExpireActiveChallengePath(index)}")
+            }
     }
 
     override fun writeCurrentDay(index: String, newValue: Int) {
         ref.child(currentDayActiveChallengePath(index)).setValue(newValue)
-            .addOnFailureListener { timberFirebaseLog.logActiveChallengeCurrentDayError(index, newValue) }
+            .addOnFailureListener {
+                Timber.d("Error writing Firebase field $newValue to ${currentDayActiveChallengePath(index)}")
+            }
     }
 
     override fun writeDayOnChallenge(index: String, newValue: Int) {
         ref.child(dayOnChallengeActiveChallengePath(index)).setValue(newValue)
-            .addOnFailureListener { timberFirebaseLog.logDayOnChallengeError(index, newValue) }
+            .addOnFailureListener {
+                Timber.d("Error writing Firebase field $newValue to ${dayOnChallengeActiveChallengePath(index)}")
+            }
     }
 }
