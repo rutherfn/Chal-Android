@@ -8,13 +8,13 @@ android {
     viewBinding {
         enabled = true
     }
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.nicholasrutherford.chal"
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 30
         multiDexEnabled true
         versionCode 1
         versionName "1.2"
@@ -35,6 +35,9 @@ dependencies {
     def lifecycle_version = "2.2.0"
 
     implementation 'com.android.support:multidex:1.0.3'
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // test fairy
     implementation 'testfairy:testfairy-android-sdk:1.+@aar'

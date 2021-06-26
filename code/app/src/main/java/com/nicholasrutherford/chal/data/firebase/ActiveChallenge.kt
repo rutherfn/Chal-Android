@@ -2,10 +2,10 @@ package com.nicholasrutherford.chal.data.firebase
 
 data class ActiveChallenge(
     var name: String,
-    var description: String,
-    var numberOfDaysOfChallenge: Int,
-    var challengeExipreTime: String,
-    var currentDayOfChallange: Int,
+    var bio: String,
     var categoryName: String,
-    var activeChallengesPosts: List<ChallengesPosts>
+    var numberOfDaysInChallenge: Int,
+    var challengeExpire: String,
+    var currentDay: Int,
+    var dayOnChallenge: Int
 )

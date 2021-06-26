@@ -11,13 +11,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.nicholasrutherford.chal.data.firebase.ActiveChallenge
 import com.nicholasrutherford.chal.data.realdata.Challenges
 import com.nicholasrutherford.chal.data.realdata.LiveChallenges
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
-import com.nicholasrutherford.chal.firebase.write.activechallenge.WriteActiveChallengeImpl
+import com.nicholasrutherford.chal.firebase.write.activenewchallenge.WriteNewActiveChallengeImpl
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeDetailsNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -38,7 +39,7 @@ class ChallengeDetailsViewModel(
 
     val viewState = ChallengeDetailsViewStateImpl()
     private val readProfileDetailsFirebase = ReadAccountFirebase(appContext)
-    private val writeActiveChallengesFirebase = WriteActiveChallengeImpl()
+    private val writeNewActiveChallenge = WriteNewActiveChallengeImpl()
 
     private val uid = FirebaseAuth.getInstance().uid ?: ""
 
@@ -127,14 +128,16 @@ class ChallengeDetailsViewModel(
             })
     }
 
-    fun enrollUserIntoNewChallenge(starterIndex: String) {
-        writeActiveChallengesFirebase.writeCategoryName(starterIndex, challenge.category)
-        writeActiveChallengesFirebase.writeBio(starterIndex, challenge.desc)
-        writeActiveChallengesFirebase.writeName(starterIndex, challenge.title)
-        writeActiveChallengesFirebase.writeNumberOfDaysInChallenge(starterIndex, challenge.duration)
-        writeActiveChallengesFirebase.writeDateChallengeExpire(starterIndex, dateChallengeExpires(challenge.duration))
-        writeActiveChallengesFirebase.writeUserCurrentDay(starterIndex, dayJoiningChallenge())
-        writeActiveChallengesFirebase.writeUserDayOnChallenge(starterIndex, 0)
+    private fun enrollUserIntoNewChallenge(starterIndex: String) {
+        writeNewActiveChallenge.writeNewActiveChallenge(starterIndex, ActiveChallenge(
+            name = challenge.title,
+            bio = challenge.desc,
+            categoryName = challenge.category,
+            numberOfDaysInChallenge = challenge.duration,
+            challengeExpire = dateChallengeExpires(challenge.duration),
+            currentDay = dayJoiningChallenge(),
+            dayOnChallenge = 0
+        ))
 
         navigation.showAlert(
             "You have just joined the ${challenge.duration} Day ${challenge.title}! Get started by posting progress.",

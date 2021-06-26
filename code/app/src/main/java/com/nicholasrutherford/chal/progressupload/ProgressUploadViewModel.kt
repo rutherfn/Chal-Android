@@ -3,6 +3,7 @@ package com.nicholasrutherford.chal.progressupload
 import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -11,20 +12,26 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.data.firebase.ActivePost
 import com.nicholasrutherford.chal.data.responses.ActiveChallengeResponse
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
+import com.nicholasrutherford.chal.data.responses.post.PostListResponse
+import com.nicholasrutherford.chal.data.responses.post.PostResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
+import com.nicholasrutherford.chal.firebase.POSTS
 import com.nicholasrutherford.chal.firebase.PROFILE_IMAGE
-import com.nicholasrutherford.chal.firebase.TITLE_ACTIVE_CHALLENGES_POST
+import com.nicholasrutherford.chal.firebase.TITLE
 import com.nicholasrutherford.chal.firebase.USERNAME
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
-import com.nicholasrutherford.chal.firebase.write.activechallengepost.WriteActiveChallengesPostsFirebase
+import com.nicholasrutherford.chal.firebase.write.activepost.WriteActivePostImpl
 import com.nicholasrutherford.chal.helpers.sharedpreference.updatesharedpreference.UpdateSharedPreferenceImpl
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.UUID
 import javax.inject.Inject
 
@@ -37,9 +44,11 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     private var progressImageUrl: String? = ""
 
-    private val writeActiveChallengesPostFirebase = WriteActiveChallengesPostsFirebase()
+    private val writeActivePost = WriteActivePostImpl()
+
     private val uid = FirebaseAuth.getInstance().uid ?: ""
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
+    private val refPosts = FirebaseDatabase.getInstance().getReference(POSTS)
 
     private var savedUserLastIndexOfProgress = 0
     private var isSelectedIndex = false
@@ -50,10 +59,38 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     private val _isCompleted = MutableStateFlow(false)
     val isUpdated: StateFlow<Boolean> = _isCompleted
 
+    private val _userInfoList = MutableStateFlow(listOf<String>())
+    private val userInfoList: StateFlow<List<String>> = _userInfoList
+
+    private var username: String? = null
+    private var usernameUrl: String? = null
+
+    private val _postList = MutableStateFlow(listOf<PostListResponse>())
+    private val postList: StateFlow<List<PostListResponse>> = _postList
+
+    private var currentPostsSize: Int = 0
+
 
     init {
         viewState.toolbarTitle = application.getString(R.string.post_your_progress)
         fetchActiveChallenges()
+        fetchAllPosts()
+        fetchUsernameAndUrl()
+
+        viewModelScope.launch {
+            postList.collect { data ->
+                currentPostsSize = data.size
+            }
+        }
+
+        viewModelScope.launch {
+            userInfoList.collect { data ->
+                if (data.size == 2) {
+                    username = data[0]
+                    usernameUrl = data[1]
+                }
+            }
+        }
     }
 
     fun onPhotoClicked(title: String, caption: String) {
@@ -136,15 +173,13 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                 } else {
                     activeChallengesPostsIndex = 0
                 }
-                ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS$activeChallengesPostsIndex/$TITLE_ACTIVE_CHALLENGES_POST").addValueEventListener(object : ValueEventListener {
+                ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS$activeChallengesPostsIndex/$TITLE").addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (!snapshot.exists() && !isSelectedIndex) {
                             savedUserLastIndexOfProgress = activeChallengesPostsIndex
                             isSelectedIndex = true
 
-                            writeUpdatedPostToFirebase(title, body, selectedIndex)
-
-                            fetchUsernameAndUrl(savedUserLastIndexOfProgress, selectedIndex)
+                            writeNewPost(title, body, selectedIndex)
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
@@ -187,16 +222,38 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
             })
     }
 
-    private fun fetchUsernameAndUrl(index: Int, selectedIndex: Int) {
+    private fun fetchAllPosts() {
+        refPosts.addValueEventListener(object: ValueEventListener {
+
+                override fun onCancelled(error: DatabaseError) = Unit
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val postList = arrayListOf<PostListResponse>()
+                    for (posts in snapshot.children) {
+                        posts.getValue(PostResponse::class.java).let { postResponse ->
+                        postResponse?.let { data ->
+                            postList.add(PostListResponse(data))
+                        }
+                        }
+                    }
+                    _postList.value = postList
+                }
+
+            })
+    }
+
+    private fun fetchUsernameAndUrl() {
         ref.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+                    val userInfoList = arrayListOf<String>()
                     val username = snapshot.child(USERNAME).value.toString()
                     val profileImageUrl = snapshot.child(PROFILE_IMAGE).value.toString()
 
-                    writeUpdatedUsernameAndUrlToFirebase(username, index, profileImageUrl, selectedIndex)
+                    userInfoList.add(username)
+                    userInfoList.add(profileImageUrl)
 
-                    _isCompleted.value = true
+                    _userInfoList.value = userInfoList
                 }
             }
 
@@ -211,26 +268,21 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     fun onBackClicked() = navigation.pop()
 
-    internal fun writeUpdatedPostToFirebase(title: String, body: String, selectedIndex: Int) {
-        writeActiveChallengesPostFirebase.writeTitle(selectedIndex, savedUserLastIndexOfProgress, title)
-        writeActiveChallengesPostFirebase.writeDescription(selectedIndex, savedUserLastIndexOfProgress, body)
-        writeActiveChallengesPostFirebase.writeCategory(selectedIndex, savedUserLastIndexOfProgress, 0)
-
-        progressImageUrl?.let { imageUrl ->
-            writeActiveChallengesPostFirebase.writeImage(selectedIndex, savedUserLastIndexOfProgress, imageUrl)
-        }
-
-        writeActiveChallengesPostFirebase.writeCurrentDay(selectedIndex, savedUserLastIndexOfProgress, "0")
-    }
-
-    internal fun writeUpdatedUsernameAndUrlToFirebase(username: String, index: Int, url: String, selectedIndex: Int) {
-        writeActiveChallengesPostFirebase.writeUsername(selectedIndex, index, username)
-        writeActiveChallengesPostFirebase.writeUsernameUrl(selectedIndex, index, url)
+    internal fun writeNewPost(title: String, body: String, selectedIndex: Int) {
+        writeActivePost.writePost(selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
+            title = title,
+            description = body,
+            category = 0,
+            image = progressImageUrl ?: "",
+            currentDay = "0",
+            username = username ?: "",
+            usernameUrl = usernameUrl ?: ""
+        ))
     }
 
     fun test() {
         navigation.hideAcProgress()
-        navigation.showNewsFeed()
+      //  navigation.showNewsFeed()
     }
 
     inner class ProgressUploadViewStateImpl : ProgressViewState {
