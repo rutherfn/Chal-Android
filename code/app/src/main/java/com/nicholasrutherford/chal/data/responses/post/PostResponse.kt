@@ -5,6 +5,7 @@ data class PostResponse (
     var currentDay: String = "",
     var description: String = "",
     var image: String = "",
+    var title: String = "",
     var username: String = "",
     var usernameUrl: String = ""
     )
