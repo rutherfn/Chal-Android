@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
+import com.nicholasrutherford.chal.data.responses.post.PostListResponse
 import com.nicholasrutherford.chal.databinding.RedesignMyFeedLayoutBinding
 import com.nicholasrutherford.chal.helpers.Typeface
 
-class NewsFeedRedesignAdapter(private val context: Context, private val newsFeedList: List<NewsFeedResponse>, private val viewModel: NewsFeedViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsFeedRedesignAdapter(private val context: Context, private val newsFeedList: List<PostListResponse>, private val viewModel: NewsFeedViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -31,12 +32,12 @@ class NewsFeedRedesignAdapter(private val context: Context, private val newsFeed
         private val typeface = Typeface()
 
         fun bind(position: Int) {
-            binding.tvHomeUsername.text = newsFeedList[position].username
-            Glide.with(context).load(newsFeedList[position].usernameUrl).into(binding.ivHomeProfilePicture)
+            binding.tvHomeUsername.text = newsFeedList[position].posts?.username
+            Glide.with(context).load(newsFeedList[position].posts?.usernameUrl).into(binding.ivHomeProfilePicture)
 
-            Glide.with(context).load(newsFeedList[position].image).into(binding.ivHomePostImage)
-            binding.tvHomeChallengeTitle.text = newsFeedList[position].title
-            binding.tvChallengepostDesc.text = newsFeedList[position].description
+            Glide.with(context).load(newsFeedList[position].posts?.image).into(binding.ivHomePostImage)
+            binding.tvHomeChallengeTitle.text = newsFeedList[position].posts?.title
+            binding.tvChallengepostDesc.text = newsFeedList[position].posts?.description
 
             updateTypeface()
         }

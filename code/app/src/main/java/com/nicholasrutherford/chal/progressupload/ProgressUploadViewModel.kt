@@ -16,15 +16,14 @@ import com.nicholasrutherford.chal.data.firebase.ActivePost
 import com.nicholasrutherford.chal.data.responses.ActiveChallengeResponse
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.data.responses.post.PostListResponse
-import com.nicholasrutherford.chal.data.responses.post.PostResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
-import com.nicholasrutherford.chal.firebase.POSTS
 import com.nicholasrutherford.chal.firebase.PROFILE_IMAGE
 import com.nicholasrutherford.chal.firebase.TITLE
 import com.nicholasrutherford.chal.firebase.USERNAME
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
+import com.nicholasrutherford.chal.firebase.read.accountinfo.ReadFirebaseFieldsImpl
 import com.nicholasrutherford.chal.firebase.write.activepost.WriteActivePostImpl
 import com.nicholasrutherford.chal.helpers.sharedpreference.updatesharedpreference.UpdateSharedPreferenceImpl
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
@@ -48,16 +47,12 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     private val uid = FirebaseAuth.getInstance().uid ?: ""
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
-    private val refPosts = FirebaseDatabase.getInstance().getReference(POSTS)
 
     private var savedUserLastIndexOfProgress = 0
     private var isSelectedIndex = false
 
     private val _activeChallengeList = MutableStateFlow(listOf<ActiveChallengeResponse>())
     val activeChallengeList: StateFlow<List<ActiveChallengeResponse>> = _activeChallengeList
-
-    private val _isCompleted = MutableStateFlow(false)
-    val isUpdated: StateFlow<Boolean> = _isCompleted
 
     private val _userInfoList = MutableStateFlow(listOf<String>())
     private val userInfoList: StateFlow<List<String>> = _userInfoList
@@ -69,6 +64,8 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     private val postList: StateFlow<List<PostListResponse>> = _postList
 
     private var currentPostsSize: Int = 0
+
+    private val readFirebaseFields = ReadFirebaseFieldsImpl()
 
 
     init {
@@ -222,25 +219,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
             })
     }
 
-    private fun fetchAllPosts() {
-        refPosts.addValueEventListener(object: ValueEventListener {
-
-                override fun onCancelled(error: DatabaseError) = Unit
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val postList = arrayListOf<PostListResponse>()
-                    for (posts in snapshot.children) {
-                        posts.getValue(PostResponse::class.java).let { postResponse ->
-                        postResponse?.let { data ->
-                            postList.add(PostListResponse(data))
-                        }
-                        }
-                    }
-                    _postList.value = postList
-                }
-
-            })
-    }
+    private fun fetchAllPosts() = readFirebaseFields.getAllPosts(_postList)
 
     private fun fetchUsernameAndUrl() {
         ref.child(uid).addValueEventListener(object : ValueEventListener {
@@ -282,7 +261,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     fun test() {
         navigation.hideAcProgress()
-      //  navigation.showNewsFeed()
+        navigation.showNewsFeed()
     }
 
     inner class ProgressUploadViewStateImpl : ProgressViewState {

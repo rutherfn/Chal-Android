@@ -10,13 +10,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.data.firebase.FirebaseKeys
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
+import com.nicholasrutherford.chal.data.responses.post.PostListResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
-import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
+import com.nicholasrutherford.chal.firebase.read.accountinfo.ReadFirebaseFieldsImpl
 import com.nicholasrutherford.chal.navigationimpl.newsfeed.NewsFeedNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,29 +24,22 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class NewsFeedViewModel @Inject constructor(private val application: Application, mainActivity: MainActivity) : ViewModel() {
-
-    private val keysList: MutableList<FirebaseKeys> = ArrayList()
 
     private val uid = FirebaseAuth.getInstance().uid ?: ""
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
     private var mAuth: FirebaseAuth? = null
 
     val viewState = NewsFeedRedesignViewStateImpl()
-    //val newsFeedNavigationImpl = NewsFeedNavigationImpl(application)
 
     private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
-
-    private val _allFirebaseKeys = MutableStateFlow(listOf<FirebaseKeys>())
-    val allFirebaseKeys: StateFlow<List<FirebaseKeys>> = _allFirebaseKeys
 
     private val _newsFeed = MutableStateFlow(listOf<NewsFeedResponse>())
     val newsFeed: StateFlow<List<NewsFeedResponse>> = _newsFeed
 
-    private val _userNewsFeed = MutableStateFlow(listOf<NewsFeedResponse>())
-    val userNewsFeed: StateFlow<List<NewsFeedResponse>> = _userNewsFeed
+    private val _postList = MutableStateFlow(listOf<PostListResponse>())
+    val postList: StateFlow<List<PostListResponse>> = _postList
 
     private val _isUserEnrolledInChallenge = MutableStateFlow(false)
     private val isUserEnrolledInChallenge: StateFlow<Boolean> = _isUserEnrolledInChallenge
@@ -59,9 +52,12 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
 
     private var userEnrolledInChallenge = false
 
+    private val readFirebaseFields = ReadFirebaseFieldsImpl()
+
     val navigation = NewsFeedNavigationImpl(application, mainActivity)
 
     init {
+       // startProgress()
         mAuth = FirebaseAuth.getInstance()
 
         fetchNewsFeedList()
@@ -72,49 +68,13 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
     }
 
     fun fetchNewsFeedList() {
-        navigation.showAcProgress()
-
-        updateDayOfAllActiveChallenges()
-
-        fetchKeys()
         checkEnrolledInAChallenge()
-        fetchUserActiveChallenges()
+        fetchAllPosts()
 
         viewModelScope.launch {
             isUserEnrolledInChallenge.collect { isEnrolled ->
                 userEnrolledInChallenge = isEnrolled
             }
-        }
-
-        viewModelScope.launch {
-            allFirebaseKeys.collect { firebaseKeys ->
-                fetchActiveChallengesPosts(firebaseKeys)
-            }
-        }
-    }
-
-    private fun fetchKeys() {
-        viewModelScope.launch {
-            ref.addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    println("error")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        for (keys in snapshot.children) {
-                            keys?.key?.let { firebaseUserKey ->
-                                // if (firebaseUserKey != uid) { // fetch all firebase keys that are not the current user
-                                keysList.add(FirebaseKeys(firebaseUserKey))
-                                //  }
-                            }
-                        }
-                        _allFirebaseKeys.value = keysList
-                    } else {
-                        println("we have no users in our account error")
-                    }
-                }
-            })
         }
     }
 
@@ -128,8 +88,6 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
                 }
             })
     }
-
-    //fun onAddFriendsClicked() = newsFeedNavigationImpl.showPeopleList()
 
     private fun updateDayOfAllActiveChallenges() {
         var index = 0
@@ -155,101 +113,15 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
             })
     }
 
-    private fun fetchUserActiveChallenges() {
-        val userNewsFeedList = arrayListOf<NewsFeedResponse>()
-        val activeChallengesResponseList = arrayListOf<CurrentActiveChallengesResponse>()
-        ref.child("$uid$ACTIVE_CHALLENGES")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {}
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (activeChallenges in snapshot.children) {
-                        activeChallenges.getValue(CurrentActiveChallengesResponse::class.java).let {
-                            it?.let { activeChallenge ->
-                                activeChallengesResponseList.add(activeChallenge)
-                            }
-                        }
-                    }
-                    _currentUserActiveChallenges.value = activeChallengesResponseList
-
-                    activeChallengesResponseList.forEachIndexed { index, _ ->
-                        ref.child("$uid$ACTIVE_CHALLENGES$index$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object : ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                for (challengesPosts in snapshot.children) {
-                                    challengesPosts.getValue(NewsFeedResponse::class.java).let {
-                                        it?.let {  challengePost -> userNewsFeedList.add(challengePost) }
-                                    }
-                                }
-
-                                _userNewsFeed.value = userNewsFeedList
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                println("Error")
-                            }
-                        })
-                    }
-                }
-            })
-    }
-
-    private fun fetchActiveChallengesPosts(firebaseKeys: List<FirebaseKeys>) {
-        val newsFeedList = arrayListOf<NewsFeedResponse>()
-        val activeChallengesResponseList = arrayListOf<CurrentActiveChallengesResponse>()
-        firebaseKeys.forEachIndexed { _, firebase ->
-            ref.child(firebase.key).addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        ref.child("${firebase.key}$ACTIVE_CHALLENGES").addValueEventListener(object : ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                for (activeChallenges in snapshot.children) {
-                                    activeChallenges.getValue(CurrentActiveChallengesResponse::class.java).let {
-                                        it?.let { activeChallenge ->
-                                            activeChallengesResponseList.add(activeChallenge)
-                                        }
-                                    }
-                                }
-                                activeChallengesResponseList.forEachIndexed { index, _ ->
-                                    ref.child("${firebase.key}${ACTIVE_CHALLENGES}$index$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object : ValueEventListener {
-                                        override fun onDataChange(snapshot: DataSnapshot) {
-                                            for (challengesPosts in snapshot.children) {
-                                                challengesPosts.getValue(NewsFeedResponse::class.java).let {
-                                                    it?.let { challengePost -> newsFeedList.add(challengePost) }
-                                                }
-                                            }
-
-                                            viewState.isEndOfNewsFeedVisible = true
-                                            _newsFeed.value = newsFeedList
-
-                                            navigation.hideAcProgress()
-                                        }
-
-                                        override fun onCancelled(error: DatabaseError) {
-                                            println("error")
-                                        }
-                                    })
-                                }
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                println("error")
-                            }
-                        })
-                    } else {
-                        viewState.isEndOfNewsFeedVisible = false
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    println("error")
-                }
-            })
-        }
+    private fun fetchAllPosts() {
+        readFirebaseFields.getAllPosts(_postList)
     }
 
     fun updateMyChallengesVisible(currentActiveChallengesList: List<CurrentActiveChallengesResponse>) {
         viewState.myChallengesVisible = currentActiveChallengesList.size > 1
     }
+
+    fun hideAcProgress() = navigation.hideAcProgress()
 
     fun allClicked() {
         viewState.recyclerNewsFeedVisible = true
@@ -330,6 +202,10 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
             else -> { 6 }
         }
     }
+
+    fun startProgress() = navigation.showAcProgress()
+
+    fun hideProgress() = navigation.hideAcProgress()
 
     inner class NewsFeedRedesignViewStateImpl : NewsFeedRedesignViewState {
         override var addFriendsEmptyStateVisible: Boolean = false
