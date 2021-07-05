@@ -12,7 +12,6 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/challenges_details_background_height"
         android:alpha="0.3"
-        android:background="@drawable/challengesamplethree"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

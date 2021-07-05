@@ -11,15 +11,14 @@
         android:id="@+id/ivSearchChallenge"
         android:layout_width="110dp"
         android:layout_height="match_parent"
-        android:background="@drawable/challengesampleone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <ImageView
         android:id="@+id/ivFire"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:background="@drawable/ic_fire"
         android:paddingTop="@dimen/padding_4dp"
         android:paddingBottom="@dimen/padding_4dp"
         android:layout_marginTop="@dimen/margin_10dp"

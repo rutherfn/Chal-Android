@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/workingout" />
+        />
 
     <ImageButton
         android:id="@+id/ibBack"
@@ -27,7 +27,8 @@
         android:layout_marginTop="@dimen/margin_10dp"
         android:layout_marginStart="@dimen/margin_10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivHeader" />
+        app:layout_constraintTop_toTopOf="@+id/ivHeader"
+        android:layout_marginLeft="@dimen/margin_10dp" />
 
     <TextView
         android:id="@+id/tvTitle"
