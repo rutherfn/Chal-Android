@@ -9,7 +9,6 @@
         android:id="@+id/ivChallengesHeader"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/challenges_background_height"
-        android:background="@drawable/challengesamplethree"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
