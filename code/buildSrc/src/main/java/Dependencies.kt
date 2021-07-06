@@ -1,30 +1,32 @@
 
 object Dependencies {
     object Plugin {
-        const val android = "android"
-        const val application = "com.android.application"
-        const val androidExtensions = "android.extensions"
-        const val kapt = "kapt"
+        const val Android = "android"
+        const val Application = "com.android.application"
+        const val AndroidExtensions = "android.extensions"
+        const val GoogleServices = "com.google.gms.google-services"
+        const val Kapt = "kapt"
     }
     object Android {
-        const val applicationId = "com.nicholasrutherford.chal"
-        const val buildToolsVersion = "29.0.3"
-        const val compileSdkVersion = 30
-        const val minSdkVersion = 16
-        const val targetSdkVersion = 30
-        const val testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-        const val versionCode = 1
-        const val versionName = "1.0"
+        const val ApplicationId = "com.nicholasrutherford.chal"
+        const val BuildToolsVersion = "29.0.3"
+        const val CompileSdkVersion = 30
+        const val MinSdkVersion = 16
+        const val TargetSdkVersion = 30
+        const val TestInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        const val VersionCode = 1
+        const val VersionName = "1.0"
 
         object BuildTypes  {
-            const val debug = "debug"
-            const val staging = "staging"
-            const val release = "release"
+            const val Debug = "debug"
+            const val Staging = "staging"
+            const val Release = "release"
         }
     }
     object Version {
         const val acProgressVersion = "1.2.1"
         const val appCompatVersion = "1.1.0"
+        const val buildGradleVersion = "4.2.0"
         const val circleImageViewVersion = "3.1.0"
         const val constraintLayoutVersion = "1.1.3"
         const val daggerVersion = "2.27"
@@ -35,6 +37,7 @@ object Dependencies {
         const val firebaseStorageVersion = "19.1.1"
         const val glideVersion = "4.11.0"
         const val glideCompilerVersion = "4.11.0"
+        const val googleServicesVersion = "4.3.8"
         const val gsonVersion = "2.8.6"
         const val junitVersion = "1.1.1"
         const val junitTestImplementationVersion = "4.13"
@@ -54,6 +57,9 @@ object Dependencies {
         object Android {
             const val AppCompat = "androidx.appcompat:appcompat:${Version.appCompatVersion}"
             const val Ktx = "androidx.core:core-ktx:${Version.ktxVersion}"
+            const val Gradle = "com.android.tools.build:gradle:${Version.buildGradleVersion}"
+            const val GradleKotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlinVersion}"
+            const val GoogleServices = "com.google.gms:google-services:${Version.googleServicesVersion}"
         }
 
         object Debug {
@@ -94,7 +100,7 @@ object Dependencies {
 
         object Kotlin {
             const val Coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.kotlinCoroutinesVersion}"
-            const val Jdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk7${Version.kotlinVersion}"
+            const val Jdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlinVersion}"
         }
 
         object Room {

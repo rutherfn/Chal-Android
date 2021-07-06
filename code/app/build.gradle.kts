@@ -1,30 +1,31 @@
-// apply plugin: "com.google.gms.google-services" // need to come back to this and find out how we are going to import this
+apply(plugin = Dependencies.Plugin.GoogleServices)
 
 plugins {
-    id(Dependencies.Plugin.application)
-    kotlin(Dependencies.Plugin.android)
-    kotlin(Dependencies.Plugin.androidExtensions)
-    kotlin(Dependencies.Plugin.kapt)
+    id(Dependencies.Plugin.Application)
+    kotlin(Dependencies.Plugin.Android)
+    kotlin(Dependencies.Plugin.AndroidExtensions)
+    kotlin(Dependencies.Plugin.Kapt)
 }
 
 android {
-    buildToolsVersion(Dependencies.Android.buildToolsVersion)
-    compileSdkVersion(Dependencies.Android.compileSdkVersion)
+    buildToolsVersion(Dependencies.Android.BuildToolsVersion)
+    compileSdkVersion(Dependencies.Android.CompileSdkVersion)
 
     buildFeatures.viewBinding = true
 
 
     defaultConfig {
-        applicationId = Dependencies.Android.applicationId
-        minSdkVersion(Dependencies.Android.minSdkVersion)
-        targetSdkVersion(Dependencies.Android.targetSdkVersion)
-        versionCode = Dependencies.Android.versionCode
-        versionName = Dependencies.Android.versionName
-        testInstrumentationRunner = Dependencies.Android.testInstrumentationRunner
+        applicationId = Dependencies.Android.ApplicationId
+        minSdkVersion(Dependencies.Android.MinSdkVersion)
+        targetSdkVersion(Dependencies.Android.TargetSdkVersion)
+        multiDexEnabled =  true
+        versionCode = Dependencies.Android.VersionCode
+        versionName = Dependencies.Android.VersionName
+        testInstrumentationRunner = Dependencies.Android.TestInstrumentationRunner
     }
 
     buildTypes  {
-        getByName(Dependencies.Android.BuildTypes.release) {
+        getByName(Dependencies.Android.BuildTypes.Release) {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -80,6 +81,8 @@ dependencies {
 
     kapt(Dependencies.Libs.Dagger.Compiler)
     kapt(Dependencies.Libs.Dagger.Processor)
+
+    implementation ("com.android.support:multidex:1.0.3")
 }
 
 // dependencies {
