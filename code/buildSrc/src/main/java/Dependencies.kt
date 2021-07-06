@@ -6,6 +6,7 @@ object Dependencies {
         const val AndroidExtensions = "android.extensions"
         const val GoogleServices = "com.google.gms.google-services"
         const val Kapt = "kapt"
+        const val Library = "com.android.library"
     }
     object Android {
         const val ApplicationId = "com.nicholasrutherford.chal"

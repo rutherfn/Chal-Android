@@ -1,7 +1,7 @@
 plugins {
-    id ("com.android.library")
+    id (Dependencies.Plugin.Library)
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(Dependencies.Android.CompileSdkVersion)
 }
