@@ -10,7 +10,7 @@ object Dependencies {
     }
     object Android {
         const val ApplicationId = "com.nicholasrutherford.chal"
-        const val BuildToolsVersion = "29.0.3"
+        const val BuildToolsVersion = "30.0.2"
         const val CompileSdkVersion = 30
         const val MinSdkVersion = 16
         const val TargetSdkVersion = 30
@@ -43,7 +43,7 @@ object Dependencies {
         const val junitVersion = "1.1.1"
         const val junitTestImplementationVersion = "4.13"
         const val kotlinCoroutinesVersion = "1.4.0"
-        const val kotlinVersion = "1.4.20"
+        const val kotlinVersion = "1.5.20"
         const val ktxVersion = "1.3.1"
         const val lifecycleVersion = "2.2.0"
         const val materialVersion = "1.1.0"
