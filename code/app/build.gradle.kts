@@ -34,6 +34,7 @@ android {
 
 dependencies {
     api(project(path = ":main:resources"))
+    api(project(path = ":main:splash"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
@@ -81,14 +82,4 @@ dependencies {
 
     kapt(Dependencies.Libs.Dagger.Compiler)
     kapt(Dependencies.Libs.Dagger.Processor)
-
-    implementation ("com.android.support:multidex:1.0.3")
 }
-
-// dependencies {
-//     implementation 'com.android.support:multidex:1.0.3' // keep just in case
-//     // color picker keep this here just in case
-//     implementation 'com.github.yukuku:ambilwarna:2.0.1' '
-//
-//     //Login Buttons keep this here just in case
-//     implementation 'com.shaishavgandhi:login-buttons:1.0.0'

@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/main/resources" />
+            <option value="$PROJECT_DIR$/main/splash" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

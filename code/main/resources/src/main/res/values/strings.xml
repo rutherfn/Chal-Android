@@ -63,6 +63,7 @@
     <string name="edit_username">Edit Username</string>
     <string name="email">Email</string>
     <string name="email_sent">Email Sent!</string>
+    <string name="empty_string" />
     <string name="iv_error_content_description_debug_password">Image View for not the correct password debug mode error</string>
     <string name="error_cant_log_in">Unable To Log In </string>
     <string name="error_cant_create_account">Unable To Create Account</string>
