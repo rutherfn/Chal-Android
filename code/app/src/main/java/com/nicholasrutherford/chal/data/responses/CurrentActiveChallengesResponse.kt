@@ -7,6 +7,6 @@ data class CurrentActiveChallengesResponse(
     var dayOnChallenge: Int = 0,
     var dateChallengeExpired: String = "",
     var name: String = "",
-    var description: String = "",
+    var bio: String = "",
     var numberOfDaysOfChallenge: Int = 0
 )
