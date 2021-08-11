@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Handler
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.nicholasrutherford.chal.ChallengeCalenderDay
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.navigationimpl.splash.SplashNavigationImpl
 
@@ -11,6 +12,8 @@ class SplashViewModel(context: Context, private val activity: SplashActivity) : 
 
     private val navigation = SplashNavigationImpl()
     var viewState = SplashViewModelImpl()
+
+    private val test = ChallengeCalenderDay()
 
     init {
         checkIfUserIsSignedIn()

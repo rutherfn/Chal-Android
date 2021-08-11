@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.nicholasrutherford.chal.ChallengeCalenderDay
 import com.nicholasrutherford.chal.data.firebase.ActiveChallenge
 import com.nicholasrutherford.chal.data.realdata.Challenges
 import com.nicholasrutherford.chal.data.realdata.LiveChallenges
@@ -135,29 +136,14 @@ class ChallengeDetailsViewModel(
             categoryName = challenge.category,
             numberOfDaysInChallenge = challenge.duration,
             challengeExpire = dateChallengeExpires(challenge.duration),
-            currentDay = dayJoiningChallenge(),
-            dayOnChallenge = 0
+            currentDay = 1,
+            dayOnChallenge = 1
         ))
 
         navigation.showAlert(
             "You have just joined the ${challenge.duration} Day ${challenge.title}! Get started by posting progress.",
             challenge.title, fragmentActivity
         )
-    }
-
-    private fun dayJoiningChallenge(): Int {
-        val calendar = Calendar.getInstance()
-        val day = calendar[Calendar.DAY_OF_WEEK]
-
-        return when (day) {
-            Calendar.MONDAY -> { 0 }
-            Calendar.TUESDAY -> { 1 }
-            Calendar.WEDNESDAY -> { 2 }
-            Calendar.THURSDAY -> { 3 }
-            Calendar.FRIDAY -> { 4 }
-            Calendar.SATURDAY -> { 5 }
-            else -> { 6 }
-        }
     }
 
     private fun fetchChallenges() {

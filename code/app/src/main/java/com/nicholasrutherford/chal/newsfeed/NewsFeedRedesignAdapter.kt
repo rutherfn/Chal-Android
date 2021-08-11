@@ -38,6 +38,7 @@ class NewsFeedRedesignAdapter(private val context: Context, private val newsFeed
             Glide.with(context).load(newsFeedList[position].posts?.image).into(binding.ivHomePostImage)
             binding.tvHomeChallengeTitle.text = newsFeedList[position].posts?.title
             binding.tvChallengepostDesc.text = newsFeedList[position].posts?.description
+            binding.btnDayOfChallenge.text = "Day ".plus( newsFeedList[position].posts?.currentDay)
 
             updateTypeface()
         }

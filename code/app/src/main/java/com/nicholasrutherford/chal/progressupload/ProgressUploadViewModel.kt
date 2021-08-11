@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.nicholasrutherford.chal.ChallengeCalenderDay
 import com.nicholasrutherford.chal.InternetConnectivity
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
@@ -19,6 +20,7 @@ import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesRespons
 import com.nicholasrutherford.chal.data.responses.post.PostListResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
+import com.nicholasrutherford.chal.firebase.CURRENT_DAY
 import com.nicholasrutherford.chal.firebase.PROFILE_IMAGE
 import com.nicholasrutherford.chal.firebase.TITLE
 import com.nicholasrutherford.chal.firebase.USERNAME
@@ -70,6 +72,8 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     private val internetConnectivity = InternetConnectivity()
 
+    private val challengeCurrentDay = ChallengeCalenderDay()
+
     init {
         viewState.toolbarTitle = application.getString(R.string.post_your_progress)
         fetchActiveChallenges()
@@ -111,7 +115,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
             listOfChallenges.forEachIndexed { index, challenge ->
                 if (title == challenge) {
-                    println(selectedIndex)
                     selectedIndex = index
                 }
             }
@@ -172,6 +175,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     private fun updateFirebaseUser(title: String, body: String, selectedIndex: Int) {
         var activeChallengesPostsIndex = 0
+        var currentChallengeDay = "0"
         ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -181,14 +185,31 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                 } else {
                     activeChallengesPostsIndex = 0
                 }
-                println(activeChallengesPostsIndex)
+
+                ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex/$CURRENT_DAY").addValueEventListener(object : ValueEventListener {
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            currentChallengeDay = snapshot.value.toString()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        showErrorAlert(
+                            title = application.applicationContext.getString(R.string.error_updating_data_title),
+                            message = application.applicationContext.getString(R.string.error_updating_data_desc)
+                        )
+                    }
+                })
+
                 ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS$activeChallengesPostsIndex/$TITLE").addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (!snapshot.exists() && !isSelectedIndex) {
+                            println(currentChallengeDay)
                             savedUserLastIndexOfProgress = activeChallengesPostsIndex
                             isSelectedIndex = true
 
-                            writeNewPost(title, body, selectedIndex)
+                            writeNewPost(title, body, selectedIndex, currentChallengeDay)
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
@@ -259,13 +280,13 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     fun onBackClicked() = navigation.pop()
 
-    internal fun writeNewPost(title: String, body: String, selectedIndex: Int) {
-        writeActivePost.writePost(selectedIndex, savedUserLastIndexOfProgress,   currentPostsSize, ActivePost(
+    internal fun writeNewPost(title: String, body: String, selectedIndex: Int, currentChallengeDay: String) {
+        writeActivePost.writePost(selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
             title = title,
             description = body,
             category = 0,
             image = progressImageUrl ?: "",
-            currentDay = "0",
+            currentDay = currentChallengeDay,
             username = username ?: "",
             usernameUrl = usernameUrl ?: ""
         ))

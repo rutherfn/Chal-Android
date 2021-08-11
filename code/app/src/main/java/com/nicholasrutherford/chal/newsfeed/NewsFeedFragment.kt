@@ -47,7 +47,7 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
 
     private val typeface = Typeface()
 
-    private var currentUserNewsFeedList: List<NewsFeedResponse> = ArrayList()
+    private var currentUserNewsFeedList: List<PostListResponse> = emptyList()
     private var allActiveNewsFeedList: List<PostListResponse> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,11 +82,6 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
     }
 
     override fun collectResults(bind: FragmentRedesignMyFeedBinding) {
-        // lifecycleScope.launch {
-        //     viewModel.userNewsFeed.collect { newsFeedList ->
-        //         currentUserNewsFeedList = newsFeedList
-        //     }
-        // }
         lifecycleScope.launch {
             viewModel.currentUserActiveChallenges.collect { activeChallengesList ->
                 if (activeChallengesList.isNotEmpty()) {
@@ -100,6 +95,8 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
             viewModel.postList.collect { newsFeedList ->
                 if (newsFeedList.isNotEmpty()) {
                     allActiveNewsFeedList = newsFeedList
+                    currentUserNewsFeedList = viewModel.generateUserPostList(allActiveNewsFeedList)
+
                     bind.clEndOfFeed.tvEndOfFeed.visibleOrGone =
                         viewModel.viewState.isEndOfNewsFeedVisible
                     bindAdapter(bind, newsFeedList)
@@ -155,7 +152,7 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         bind.clChallengeFeed.btnMyPosts.setOnClickListener {
             if (allActiveNewsFeedList.isNotEmpty()) {
                 viewModel.myPostsClicked()
-              //  bindAdapter(bind, currentUserNewsFeedList)
+                bindAdapter(bind, currentUserNewsFeedList)
             }
         }
         bind.clFriendsEmptyState.btnAddFriendEmptyState.setOnClickListener {

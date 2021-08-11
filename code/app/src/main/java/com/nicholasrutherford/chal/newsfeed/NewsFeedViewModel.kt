@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.nicholasrutherford.chal.ChallengeCalenderDay
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
@@ -17,6 +18,7 @@ import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.read.accountinfo.ReadFirebaseFieldsImpl
+import com.nicholasrutherford.chal.firebase.write.activenewchallenge.WriteNewActiveChallengeImpl
 import com.nicholasrutherford.chal.navigationimpl.newsfeed.NewsFeedNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -53,6 +55,9 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
     private var userEnrolledInChallenge = false
 
     private val readFirebaseFields = ReadFirebaseFieldsImpl()
+    private val writeNewActiveChallengeImpl = WriteNewActiveChallengeImpl()
+
+    private val challengeCurrentDay = ChallengeCalenderDay()
 
     val navigation = NewsFeedNavigationImpl(application, mainActivity)
 
@@ -61,6 +66,8 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
         mAuth = FirebaseAuth.getInstance()
 
         fetchNewsFeedList()
+        println("get here212121")
+        updateDayOfAllActiveChallenges()
 
         // make a call after were done with all this data
         // that updates a challenge if its not in this current day
@@ -104,11 +111,11 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
                             }
                         }
                     }
-                    // activeChallengesResponseList.forEachIndexed { index, currentActiveChallengesResponse ->
-                    //     if (currentActiveChallengesResponse.currentDay == dayInChallenge()) {
-                    //         writeActiveChallengesFirebase.writeUserDayOnChallenge(index.toString(), currentActiveChallengesResponse.dayOnChallenge + 1)
-                    //     }
-                    // }
+                    activeChallengesResponseList.forEachIndexed { index, currentActiveChallengesResponse ->
+                        if (currentActiveChallengesResponse.currentDay != challengeCurrentDay.dayInChallenge()) {
+                            writeNewActiveChallengeImpl.writeCurrentDay(index.toString(), currentActiveChallengesResponse.dayOnChallenge + 1)
+                        }
+                    }
                 }
             })
     }
@@ -189,18 +196,19 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
         }
     }
 
-    fun dayInChallenge(): Int {
-        val calendar = Calendar.getInstance()
+    fun generateUserPostList(allPostsList: List<PostListResponse>): List<PostListResponse> {
+        val userPostList = arrayListOf(PostListResponse())
+        val username = readProfileDetailsFirebase.getUsername() ?: ""
 
-        return when (calendar[Calendar.DAY_OF_WEEK]) {
-            Calendar.MONDAY -> { 0 }
-            Calendar.TUESDAY -> { 1 }
-            Calendar.WEDNESDAY -> { 2 }
-            Calendar.THURSDAY -> { 3 }
-            Calendar.FRIDAY -> { 4 }
-            Calendar.SATURDAY -> { 5 }
-            else -> { 6 }
+        userPostList.clear()
+
+        allPostsList.forEach { allPosts ->
+            if (allPosts.posts?.username == username) {
+                userPostList.add(allPosts)
+            }
         }
+
+        return userPostList
     }
 
     fun startProgress() = navigation.showAcProgress()
