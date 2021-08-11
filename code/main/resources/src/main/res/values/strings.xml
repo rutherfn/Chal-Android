@@ -1,5 +1,7 @@
 <resources>
     <string name="add_progress">Add Progress</string>
+    <string name="added_progress">Added Progress</string>
+    <string name="add_more_progress">Add More Progress</string>
     <string name="active">Active(%s)</string>
     <string name="all">All</string>
     <string name="all_rights_reserved">All Rights Reserved, Chal LLC 2020</string>
@@ -90,6 +92,7 @@
     <string name="hex_white">#FFFFFF</string>
     <string name="high">High</string>
     <string name="issue_uploading_image_to_server">Issue uploading image to server. Please Try Again</string>
+    <string name="internet_not_available">internet Not Available</string>
     <string name="last_updated">Last Updated</string>
     <string name="more_navigation">More</string>
     <string name="my_feed_bottom_nav">My Feed</string>
@@ -141,6 +144,7 @@
     </string-array>
     <string name="last_name">Last Name</string>
     <string name="log_out">Log out</string>
+    <string name="looks_like_the_system_cant_detect_internet">Looks like the system can not detect internet. Please try connecting to a tnetwork</string>
     <string name="looks_like_were_missing_caption">Looks like you are missing a caption. Please enter info for all fields, in order to post progress,</string>
     <string name="looks_like_were_missing_image">Looks like you are missing a image. Please enter info for all fields, in order to post progress,</string>
     <string name="looks_like_were_missing_data">Looks like were missing data. Please enter info for all fields, in order to continue.</string>
@@ -175,6 +179,8 @@
     <string name="please_enter_your_email">Please Enter Your Email</string>
     <string name="primary_logo_content_desc">Primary Logo For Chal.</string>
     <string name="priority_level"> - Priority Level -</string>
+    <string name="progress_added_title">Progress Added</string>
+    <string name="progress_added_desc">Progress has been added to your challenge. Click Add More Progress to Add More Progress towards your goals, or Continue to view your progress!</string>
     <string name="qa_tester_1">Nick</string>
     <string name="qa_tester_2">Marina</string>
     <string name="qa_tester_3">Patrick</string>

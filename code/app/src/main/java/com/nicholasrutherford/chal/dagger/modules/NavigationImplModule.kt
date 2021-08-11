@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.dagger.modules
 
+import com.nicholasrutherford.chal.navigationimpl.addedprogress.AddedProgressNavigationImpl
 import com.nicholasrutherford.chal.navigationimpl.editmyprofile.EditProfileNavigationImpl
 import com.nicholasrutherford.chal.navigationimpl.main.MainNavigationImpl
 import com.nicholasrutherford.chal.navigationimpl.more.MoreNavigationImpl
@@ -11,6 +12,9 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class NavigationImplModule {
+
+    @ContributesAndroidInjector
+    abstract fun contributesAddedProgressNavigationImpl(): AddedProgressNavigationImpl
 
     @ContributesAndroidInjector
     abstract fun contributeEditProfileNavigationImpl(): EditProfileNavigationImpl

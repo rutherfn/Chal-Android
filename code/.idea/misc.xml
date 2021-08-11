@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_upload_profile_picture.xml" value="0.24139492753623187" />
+        <entry key="app/src/main/res/layout/added_progress_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_added_progress.xml" value="0.24139492753623187" />
+        <entry key="app/src/main/res/layout/fragment_forgot_password.xml" value="0.41354166666666664" />
+        <entry key="app/src/main/res/layout/fragment_progress_upload.xml" value="0.24139492753623187" />
+        <entry key="app/src/main/res/layout/post_progress_layout.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/single_challenge_layout.xml" value="0.24139492753623187" />
+        <entry key="app/src/main/res/layout/toolbar_title_with_back_stack.xml" value="0.41354166666666664" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

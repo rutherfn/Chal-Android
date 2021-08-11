@@ -1,6 +1,7 @@
 package com.nicholasrutherford.chal.dagger.modules
 
 import androidx.lifecycle.ViewModel
+import com.nicholasrutherford.chal.addedProgress.AddedProgressViewModel
 import com.nicholasrutherford.chal.dagger.ViewModelKey
 import com.nicholasrutherford.chal.main.MainViewModel
 import com.nicholasrutherford.chal.more.MoreViewModel
@@ -16,6 +17,11 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class ViewModelModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddedProgressViewModel::class)
+    internal abstract fun bindAddedProgressViewModel(viewModel: AddedProgressViewModel): ViewModel
 
     @Binds
     @IntoMap

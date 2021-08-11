@@ -8,6 +8,7 @@ import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.addedProgress.AddedProgressFragment
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.navigationimpl.uploadphoto.GALLERY_REQUEST_CODE
 import com.nicholasrutherford.chal.navigationimpl.uploadphoto.GALLERY_TYPE
@@ -63,6 +64,17 @@ class ProgressUploadNavigationImpl @Inject constructor(
 
         alert.setTitle(alertTitle)
         alert.show()
+    }
+
+    override fun showAddedProgress() {
+        activity.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                AddedProgressFragment(application),
+                AddedProgressFragment(application)::javaClass.name
+            )
+            .addToBackStack("")
+            .commit()
     }
 
     override fun showAlert(alertMessageText: String, alertTitle: String) {
