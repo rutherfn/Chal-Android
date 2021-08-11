@@ -14,8 +14,10 @@ import com.nicholasrutherford.chal.data.responses.ActiveChallengeResponse
 import com.nicholasrutherford.chal.databinding.FragmentProgressUploadBinding
 import com.nicholasrutherford.chal.ext.activitys.ProgressUploadExt
 import com.nicholasrutherford.chal.helpers.Typeface
+import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.main.MainActivity
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -41,6 +43,7 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val mainActivity: MainActivity = (activity as MainActivity)
         mainActivity.viewModel.updateCurrentScreen(Screens.UPLOAD_PROGRESS)
+        mainActivity.bvNavigation.visibleOrGone = false
 
         val bind = FragmentProgressUploadBinding.inflate(layoutInflater)
 

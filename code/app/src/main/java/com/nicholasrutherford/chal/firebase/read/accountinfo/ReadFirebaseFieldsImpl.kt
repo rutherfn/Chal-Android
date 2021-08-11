@@ -10,7 +10,6 @@ import com.nicholasrutherford.chal.data.responses.post.PostResponse
 import com.nicholasrutherford.chal.firebase.POSTS
 import com.nicholasrutherford.chal.firebase.USERS
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 class ReadFirebaseFieldsImpl : ReadFirebaseFields {
 
@@ -33,18 +32,12 @@ class ReadFirebaseFieldsImpl : ReadFirebaseFields {
         })
     }
 
-    suspend fun something() {
-
-    }
-
     override fun getAllPosts(_postList: MutableStateFlow<List<PostListResponse>>) {
-        println("start get something")
         refPosts.addValueEventListener(object: ValueEventListener {
 
             override fun onCancelled(error: DatabaseError) = Unit
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                println("start get something 1")
                 val postList = arrayListOf<PostListResponse>()
                 for (posts in snapshot.children) {
                     posts.getValue(PostResponse::class.java).let { postResponse ->
@@ -53,7 +46,6 @@ class ReadFirebaseFieldsImpl : ReadFirebaseFields {
                         }
                     }
                 }
-                println("start get something 2")
                 _postList.value = postList
             }
 

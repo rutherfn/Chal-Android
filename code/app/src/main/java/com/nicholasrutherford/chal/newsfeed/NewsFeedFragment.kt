@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.Screens
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
 import com.nicholasrutherford.chal.data.responses.post.PostListResponse
@@ -22,7 +23,9 @@ import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragme
 import com.nicholasrutherford.chal.helpers.PeekingLinearLayoutManager
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.nicholasrutherford.chal.main.MainActivity
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -53,6 +56,9 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val mainActivity: MainActivity = (activity as MainActivity)
+        mainActivity.bvNavigation.visibleOrGone = true
+
         val bind = FragmentRedesignMyFeedBinding.inflate(layoutInflater)
 
         collectResults(bind)

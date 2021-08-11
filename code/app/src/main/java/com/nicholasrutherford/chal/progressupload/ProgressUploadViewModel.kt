@@ -111,6 +111,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
             listOfChallenges.forEachIndexed { index, challenge ->
                 if (title == challenge) {
+                    println(selectedIndex)
                     selectedIndex = index
                 }
             }
@@ -180,6 +181,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                 } else {
                     activeChallengesPostsIndex = 0
                 }
+                println(activeChallengesPostsIndex)
                 ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS$activeChallengesPostsIndex/$TITLE").addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (!snapshot.exists() && !isSelectedIndex) {
@@ -258,7 +260,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     fun onBackClicked() = navigation.pop()
 
     internal fun writeNewPost(title: String, body: String, selectedIndex: Int) {
-        writeActivePost.writePost(selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
+        writeActivePost.writePost(selectedIndex, savedUserLastIndexOfProgress,   currentPostsSize, ActivePost(
             title = title,
             description = body,
             category = 0,
