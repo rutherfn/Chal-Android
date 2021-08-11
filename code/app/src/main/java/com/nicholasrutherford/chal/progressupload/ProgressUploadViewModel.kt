@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.nicholasrutherford.chal.InternetConnectivity
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.firebase.ActivePost
@@ -67,6 +68,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     private val readFirebaseFields = ReadFirebaseFieldsImpl()
 
+    private val internetConnectivity = InternetConnectivity()
 
     init {
         viewState.toolbarTitle = application.getString(R.string.post_your_progress)
@@ -103,33 +105,41 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         navigation.showAlert(title, desc)
     }
 
-    fun onPostProgressClicked(title: String, body: String, listOfChallenges: List<String>, selectedPhotoUri: Uri?) { // check if the image is empty or not\
-        var selectedIndex = 0
+    fun onPostProgressClicked(title: String, body: String, listOfChallenges: List<String>, selectedPhotoUri: Uri?) {
+        if (internetConnectivity.isInternetAvailable(application)) {
+            var selectedIndex = 0
 
-        listOfChallenges.forEachIndexed { index, challenges ->
-            if (title == challenges) {
-                selectedIndex = index
-            }
-        }
-        navigation.showAcProgress()
-
-        when (body) {
-            "" -> {
-                showErrorAlert(
-                    title = application.applicationContext.getString(R.string.missing_fields),
-                    message = application.applicationContext.getString(R.string.looks_like_were_missing_caption)
-                )
-            }
-            else -> {
-                selectedPhotoUri?.let { photoUri ->
-                    uploadProgressPhoto(title, body, selectedIndex, photoUri)
-                } ?: run {
-                    showErrorAlert(
-                        title = application.applicationContext.getString(R.string.missing_fields),
-                        message = application.applicationContext.getString(R.string.looks_like_were_missing_image)
-                    )
+            listOfChallenges.forEachIndexed { index, challenge ->
+                if (title == challenge) {
+                    selectedIndex = index
                 }
             }
+            navigation.showAcProgress()
+
+            when (body) {
+                "" -> {
+                    showErrorAlert(
+                        title = application.applicationContext.getString(R.string.missing_fields),
+                        message = application.applicationContext.getString(R.string.looks_like_were_missing_caption)
+                    )
+                }
+                else -> {
+                    selectedPhotoUri?.let { photoUri ->
+                        uploadProgressPhoto(title, body, selectedIndex, photoUri)
+                    } ?: run {
+                        showErrorAlert(
+                            title = application.applicationContext.getString(R.string.missing_fields),
+                            message = application.applicationContext.getString(R.string.looks_like_were_missing_image)
+                        )
+                    }
+                }
+            }
+        } else {
+            showErrorAlert(
+                title = application.applicationContext.getString(R.string.internet_not_available),
+                message = application.applicationContext.getString(R.string.looks_like_the_system_cant_detect_internet)
+            )
+            // no internet we are on airplane mode
         }
     }
 
@@ -257,12 +267,15 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
             username = username ?: "",
             usernameUrl = usernameUrl ?: ""
         ))
+
+        navigateToAddedProgress()
     }
 
-    fun test() {
+    fun navigateToAddedProgress() {
         navigation.hideAcProgress()
-        navigation.showNewsFeed()
+        navigation.showAddedProgress()
     }
+
 
     inner class ProgressUploadViewStateImpl : ProgressViewState {
         override var toolbarTitle = ""

@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.dagger.modules
 
+import com.nicholasrutherford.chal.addedProgress.AddedProgressFragment
 import com.nicholasrutherford.chal.more.MoreFragment
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
 import com.nicholasrutherford.chal.peoplelist.PeopleListFragment
@@ -11,6 +12,9 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class FragmentBuildersModule {
+
+    @ContributesAndroidInjector
+    abstract fun contributeAddedProgressFragment(): AddedProgressFragment
 
     @ContributesAndroidInjector
     abstract fun contributeEditProfileFragment(): EditProfileFragment

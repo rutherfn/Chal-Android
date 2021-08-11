@@ -11,7 +11,7 @@
             android:id="@+id/tbProgressUpload"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            layout="@layout/more_toolbar_layout"
+            layout="@layout/toolbar_title_with_back_stack"
             />
 
         <androidx.core.widget.NestedScrollView
@@ -25,7 +25,7 @@
 
                 <include
                     android:id="@+id/clPostProgress"
-                    layout="@layout/post_progress_layout"
+                    layout="@layout/added_progress_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:baselineAligned="false"
