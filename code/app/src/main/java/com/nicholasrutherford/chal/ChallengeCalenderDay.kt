@@ -54,5 +54,4 @@ class ChallengeCalenderDay {
 
     fun lastDayInChallenge(): Int = 7
 
-
 }
