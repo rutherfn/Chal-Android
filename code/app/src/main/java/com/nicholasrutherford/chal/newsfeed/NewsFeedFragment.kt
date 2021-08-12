@@ -142,19 +142,15 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
 
     override fun clickListeners(bind: FragmentRedesignMyFeedBinding) {
         bind.clChallengeFeed.btnAll.setOnClickListener {
-            if (allActiveNewsFeedList.isNotEmpty()) {
-                viewModel.allClicked()
-                bindAdapter(bind, allActiveNewsFeedList)
-            }
+            viewModel.allClicked()
+            bindAdapter(bind, allActiveNewsFeedList)
         }
         bind.clChallengeFeed.btnFriends.setOnClickListener {
             viewModel.friendsClicked()
         }
         bind.clChallengeFeed.btnMyPosts.setOnClickListener {
-            if (allActiveNewsFeedList.isNotEmpty()) {
-                viewModel.myPostsClicked()
-                bindAdapter(bind, currentUserNewsFeedList)
-            }
+            viewModel.myPostsClicked()
+            bindAdapter(bind, currentUserNewsFeedList)
         }
         bind.clFriendsEmptyState.btnAddFriendEmptyState.setOnClickListener {
             viewModel.onAddFriendsEmptyStateClicked()
