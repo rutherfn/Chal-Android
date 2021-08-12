@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.CountDownTimer
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,10 +20,13 @@ import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesRespons
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
+import com.nicholasrutherford.chal.firebase.read.accountinfo.ReadFirebaseFieldsImpl
 import com.nicholasrutherford.chal.firebase.write.activenewchallenge.WriteNewActiveChallengeImpl
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeDetailsNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,13 +56,28 @@ class ChallengeDetailsViewModel(
     private val _activeChallengesResponse = MutableStateFlow(listOf<CurrentActiveChallengesResponse>())
     val activeChallengesResponse: StateFlow<List<CurrentActiveChallengesResponse>> = _activeChallengesResponse
 
+    private val _allActiveChallengesListSize = MutableStateFlow(0)
+    private val allActiveChallengesListSize: StateFlow<Int> = _allActiveChallengesListSize
+
+    private var currentActiveChallengesSize = 0
+
+    private val challengeCalenderDay = ChallengeCalenderDay()
     var liveChallengesFilterList = arrayListOf<LiveChallenges>()
+
+    private val readFirebaseFieldsImpl = ReadFirebaseFieldsImpl()
 
     init {
         initViewStateOnLoad()
 
         fetchChallenges()
         fetchActiveChallenges()
+        fetchAllChallengesListSize()
+
+        viewModelScope.launch {
+            allActiveChallengesListSize.collect {
+                currentActiveChallengesSize = it
+            }
+        }
     }
 
     fun initViewStateOnLoad() {
@@ -129,15 +148,19 @@ class ChallengeDetailsViewModel(
             })
     }
 
+    fun fetchAllChallengesListSize() = readFirebaseFieldsImpl.getAllChallengesSizeFlow(_allActiveChallengesListSize)
+
     private fun enrollUserIntoNewChallenge(starterIndex: String) {
-        writeNewActiveChallenge.writeNewActiveChallenge(starterIndex, ActiveChallenge(
+        val challengeExpire = challengeCalenderDay.dayInChallenge() + 7
+
+        writeNewActiveChallenge.writeNewActiveChallenge(currentActiveChallengesSize, uid, starterIndex, ActiveChallenge(
             name = challenge.title,
             bio = challenge.desc,
             categoryName = challenge.category,
             numberOfDaysInChallenge = challenge.duration,
-            challengeExpire = dateChallengeExpires(challenge.duration),
-            currentDay = 1,
-            dayOnChallenge = 1
+            challengeExpire = challengeExpire.toString(),
+            currentDay = challengeCalenderDay.dayInChallenge(),
+            username = readProfileDetailsFirebase.getUsername() ?: ""
         ))
 
         navigation.showAlert(

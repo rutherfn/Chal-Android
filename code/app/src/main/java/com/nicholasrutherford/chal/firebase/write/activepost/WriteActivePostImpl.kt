@@ -24,11 +24,13 @@ class WriteActivePostImpl : WriteActivePost {
     private val refPosts = FirebaseDatabase.getInstance().getReference(POSTS)
     private val refUsers = FirebaseDatabase.getInstance().getReference(USERS)
 
-    override fun writeTitle(userActiveChallengeIndex: Int,
+    override fun writeTitle(
+        uid: String,
+        userActiveChallengeIndex: Int,
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(titleActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+        refUsers.child(titleActiveChallengeUserPostPath(uid, userActiveChallengeIndex, userActiveChallengePostIndex))
             .setValue(newValue)
             .addOnFailureListener {  }
 
@@ -37,11 +39,13 @@ class WriteActivePostImpl : WriteActivePost {
             .addOnFailureListener {  }
     }
 
-    override fun writeDescription(userActiveChallengeIndex: Int,
+    override fun writeDescription(
+        uid: String,
+        userActiveChallengeIndex: Int,
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(descriptionActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+        refUsers.child(descriptionActiveChallengeUserPostPath(uid, userActiveChallengeIndex, userActiveChallengePostIndex))
             .setValue(newValue)
             .addOnFailureListener {  }
 
@@ -50,11 +54,13 @@ class WriteActivePostImpl : WriteActivePost {
             .addOnFailureListener {  }
     }
 
-    override fun writeCategory(userActiveChallengeIndex: Int,
+    override fun writeCategory(
+        uid: String,
+        userActiveChallengeIndex: Int,
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: Int) {
-        refUsers.child(categoryActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+        refUsers.child(categoryActiveChallengeUserPostPath(uid, userActiveChallengeIndex, userActiveChallengePostIndex))
             .setValue(newValue)
             .addOnFailureListener {  }
 
@@ -63,11 +69,13 @@ class WriteActivePostImpl : WriteActivePost {
             .addOnFailureListener {  }
     }
 
-    override fun writeImage(userActiveChallengeIndex: Int,
+    override fun writeImage(
+        uid: String,
+        userActiveChallengeIndex: Int,
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(imageActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+        refUsers.child(imageActiveChallengeUserPostPath(uid, userActiveChallengeIndex, userActiveChallengePostIndex))
             .setValue(newValue)
             .addOnFailureListener {  }
 
@@ -76,11 +84,13 @@ class WriteActivePostImpl : WriteActivePost {
             .addOnFailureListener {  }
     }
 
-    override fun writeCurrentDay(userActiveChallengeIndex: Int,
+    override fun writeCurrentDay(
+        uid: String,
+        userActiveChallengeIndex: Int,
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(currentDayActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengeIndex))
+        refUsers.child(currentDayActiveChallengeUserPostPath(uid, userActiveChallengeIndex, userActiveChallengeIndex))
             .setValue(newValue)
             .addOnFailureListener {  }
 
@@ -89,11 +99,13 @@ class WriteActivePostImpl : WriteActivePost {
             .addOnFailureListener {  }
     }
 
-    override fun writeUsername(userActiveChallengeIndex: Int,
+    override fun writeUsername(
+        uid: String,
+        userActiveChallengeIndex: Int,
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(usernameActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+        refUsers.child(usernameActiveChallengeUserPostPath(uid, userActiveChallengeIndex, userActiveChallengePostIndex))
             .setValue(newValue)
             .addOnFailureListener {  }
 
@@ -102,11 +114,13 @@ class WriteActivePostImpl : WriteActivePost {
             .addOnFailureListener {  }
     }
 
-    override fun writeUsernameUrl(userActiveChallengeIndex: Int,
+    override fun writeUsernameUrl(
+        uid: String,
+        userActiveChallengeIndex: Int,
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         newValue: String) {
-        refUsers.child(usernameUrlActiveChallengeUserPostPath(userActiveChallengeIndex, userActiveChallengePostIndex))
+        refUsers.child(usernameUrlActiveChallengeUserPostPath(uid, userActiveChallengeIndex, userActiveChallengePostIndex))
             .setValue(newValue)
             .addOnFailureListener {  }
 
@@ -115,47 +129,56 @@ class WriteActivePostImpl : WriteActivePost {
             .addOnFailureListener {  }
     }
 
-    override fun writePost(userActiveChallengeIndex: Int,
+    override fun writePost(
+        uid: String,
+        userActiveChallengeIndex: Int,
         userActiveChallengePostIndex: Int,
         postIndex: Int,
         activePost: ActivePost) {
         writeTitle(
+            uid = uid,
             userActiveChallengeIndex = userActiveChallengeIndex,
             userActiveChallengePostIndex = userActiveChallengePostIndex,
             postIndex = postIndex,
             newValue = activePost.title
         )
         writeDescription(
+            uid = uid,
             userActiveChallengeIndex = userActiveChallengeIndex,
             userActiveChallengePostIndex = userActiveChallengePostIndex,
             postIndex = postIndex,
             newValue = activePost.description
         )
         writeCategory(
+            uid = uid,
             userActiveChallengeIndex = userActiveChallengeIndex,
             userActiveChallengePostIndex = userActiveChallengePostIndex,
             postIndex = postIndex,
             newValue = activePost.category
         )
         writeImage(
+            uid = uid,
             userActiveChallengeIndex = userActiveChallengeIndex,
             userActiveChallengePostIndex = userActiveChallengePostIndex,
             postIndex = postIndex,
             newValue = activePost.image
         )
         writeCurrentDay(
+            uid = uid,
             userActiveChallengeIndex = userActiveChallengeIndex,
             userActiveChallengePostIndex = userActiveChallengePostIndex,
             postIndex = postIndex,
             newValue = activePost.currentDay
         )
         writeUsername(
+            uid = uid,
             userActiveChallengeIndex = userActiveChallengeIndex,
             userActiveChallengePostIndex = userActiveChallengePostIndex,
             postIndex = postIndex,
             newValue = activePost.username
         )
         writeUsernameUrl(
+            uid = uid,
             userActiveChallengeIndex = userActiveChallengeIndex,
             userActiveChallengePostIndex = userActiveChallengePostIndex,
             postIndex = postIndex,

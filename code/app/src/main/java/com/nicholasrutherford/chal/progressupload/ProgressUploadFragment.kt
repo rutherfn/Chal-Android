@@ -117,9 +117,6 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         bind.clPostProgress.btnCancelAndDiscardPost.setOnClickListener {
             viewModel.onDiscardPostClicked()
         }
-        bind.clPostProgress.btnCancelAndDiscardPost.setOnClickListener {
-            viewModel.onDiscardPostClicked()
-        }
         bind.clPostProgress.ivUploadImage.setOnClickListener {
             val title = bind.clPostProgress.spSelectChallenge.selectedItem.toString()
             val caption = bind.clPostProgress.etAddCaption.text.toString()
@@ -127,6 +124,8 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
         }
         bind.tbProgressUpload.ibMoreBack.setOnClickListener {
             viewModel.onBackClicked()
+            val mainActivity: MainActivity = (activity as MainActivity)
+            mainActivity.bvNavigation.visibleOrGone = true
         }
         bind.clPostProgress.btnPostProgressToMyFeed.setOnClickListener {
             val title = bind.clPostProgress.spSelectChallenge.selectedItem.toString()

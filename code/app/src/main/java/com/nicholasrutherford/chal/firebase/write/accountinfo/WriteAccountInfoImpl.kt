@@ -14,46 +14,46 @@ class WriteAccountInfoImpl : WriteAccountInfo {
 
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
 
-    override fun updateAccountInfo(accountInfo: AccountInfo) {
-        updateUsername(username = accountInfo.username)
-        updateFirstName(firstName = accountInfo.firstName)
-        updateLastName(lastName = accountInfo.lastName)
-        updateBio(bio = accountInfo.bio)
-        updateAge(age = accountInfo.age)
+    override fun updateAccountInfo(uid: String, accountInfo: AccountInfo) {
+        updateUsername(uid = uid, username = accountInfo.username)
+        updateFirstName(uid = uid,firstName = accountInfo.firstName)
+        updateLastName(uid = uid, lastName = accountInfo.lastName)
+        updateBio(uid = uid, bio = accountInfo.bio)
+        updateAge(uid = uid, age = accountInfo.age)
     }
 
-    override fun updateUsername(username: String) {
-        ref.child(usernameAccountPath()).setValue(username)
+    override fun updateUsername(uid: String, username: String) {
+        ref.child(usernameAccountPath(uid)).setValue(username)
             .addOnFailureListener {
-                Timber.d("Error writing Firebase field $username to ${usernameAccountPath()}")
+                Timber.d("Error writing Firebase field $username to ${usernameAccountPath(uid)}")
             }
     }
 
-    override fun updateFirstName(firstName: String) {
-        ref.child(firstNameAccountPath()).setValue(firstName)
+    override fun updateFirstName(uid: String, firstName: String) {
+        ref.child(firstNameAccountPath(uid)).setValue(firstName)
             .addOnFailureListener {
-                Timber.d("Error writing Firebase field $firstName to ${firstNameAccountPath()}")
+                Timber.d("Error writing Firebase field $firstName to ${firstNameAccountPath(uid)}")
             }
     }
 
-    override fun updateLastName(lastName: String) {
-        ref.child(lastNameAccountPath()).setValue(lastName)
+    override fun updateLastName(uid: String, lastName: String) {
+        ref.child(lastNameAccountPath(uid)).setValue(lastName)
             .addOnFailureListener {
-                Timber.d("Error writing Firebase field $lastName to ${lastNameAccountPath()}")
+                Timber.d("Error writing Firebase field $lastName to ${lastNameAccountPath(uid)}")
             }
     }
 
-    override fun updateBio(bio: String) {
-        ref.child(bioAccountPath()).setValue(bio)
+    override fun updateBio(uid: String, bio: String) {
+        ref.child(bioAccountPath(uid)).setValue(bio)
             .addOnFailureListener {
-                Timber.d("Error writing Firebase field $bio to ${bioAccountPath()}")
+                Timber.d("Error writing Firebase field $bio to ${bioAccountPath(uid)}")
             }
     }
 
-    override fun updateAge(age: Int) {
-        ref.child(ageAccountPath()).setValue(age)
+    override fun updateAge(uid: String, age: Int) {
+        ref.child(ageAccountPath(uid)).setValue(age)
             .addOnFailureListener {
-                Timber.d("Error writing Firebase field $age to ${ageAccountPath()}")
+                Timber.d("Error writing Firebase field $age to ${ageAccountPath(uid)}")
             }
     }
 

@@ -281,7 +281,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     fun onBackClicked() = navigation.pop()
 
     internal fun writeNewPost(title: String, body: String, selectedIndex: Int, currentChallengeDay: String) {
-        writeActivePost.writePost(selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
+        writeActivePost.writePost(uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
             title = title,
             description = body,
             category = 0,

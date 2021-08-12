@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.Screens
-import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
-import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
+import com.nicholasrutherford.chal.data.responses.activechallenges.ActiveChallengesListResponse
 import com.nicholasrutherford.chal.data.responses.post.PostListResponse
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
 import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragmentExt
@@ -83,15 +81,6 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
 
     override fun collectResults(bind: FragmentRedesignMyFeedBinding) {
         lifecycleScope.launch {
-            viewModel.currentUserActiveChallenges.collect { activeChallengesList ->
-                if (activeChallengesList.isNotEmpty()) {
-                    viewModel.updateMyChallengesVisible(activeChallengesList)
-                    updateView(bind)
-                    bindHeaderAdapter(bind, activeChallengesList)
-                }
-            }
-        }
-        lifecycleScope.launch {
             viewModel.postList.collect { newsFeedList ->
                 if (newsFeedList.isNotEmpty()) {
                     allActiveNewsFeedList = newsFeedList
@@ -100,6 +89,18 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
                     bind.clEndOfFeed.tvEndOfFeed.visibleOrGone =
                         viewModel.viewState.isEndOfNewsFeedVisible
                     bindAdapter(bind, newsFeedList)
+                }
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.allActiveChallengesList.collect { allChallengesList ->
+                if (allChallengesList.isNotEmpty()) {
+                    val allChallengesSize = allChallengesList.size
+
+                    viewModel.updateMyChallengesVisible(allChallengesList)
+                    viewModel.updateDayOfAllActiveChallenges(allChallengesList)
+                    updateView(bind)
+                    bindHeaderAdapter(bind, allChallengesList)
                 }
             }
         }
@@ -122,7 +123,7 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         typeface.setTypefaceForBodyBold(bind.clChallengeFeed.btnMyPosts, application.applicationContext)
     }
 
-    override fun bindHeaderAdapter(bind: FragmentRedesignMyFeedBinding, listOfActiveChallenges: List<CurrentActiveChallengesResponse>) {
+    override fun bindHeaderAdapter(bind: FragmentRedesignMyFeedBinding, listOfActiveChallenges: List<ActiveChallengesListResponse>) {
         bind.rvChallengeHeader.isNestedScrollingEnabled = viewModel.viewState.isNestedScrollEnabled
 
         bind.rvChallengeHeader.layoutManager = PeekingLinearLayoutManager(application.applicationContext, RecyclerView.HORIZONTAL)

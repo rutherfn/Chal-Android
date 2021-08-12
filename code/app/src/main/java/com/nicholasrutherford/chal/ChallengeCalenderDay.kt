@@ -1,6 +1,5 @@
 package com.nicholasrutherford.chal
 
-import java.time.LocalTime
 import java.util.*
 
 class ChallengeCalenderDay {

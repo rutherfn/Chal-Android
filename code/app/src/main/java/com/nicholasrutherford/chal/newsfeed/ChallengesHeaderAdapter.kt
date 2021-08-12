@@ -4,10 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
+import com.nicholasrutherford.chal.data.responses.activechallenges.ActiveChallengesListResponse
 import com.nicholasrutherford.chal.databinding.MyChallengesHeaderLayoutBinding
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
@@ -18,7 +17,7 @@ const val placeHolderImage = "https://www.topsecrets.com/wp-content/uploads/2020
 class ChallengesHeaderAdapter(
     private val context: Context,
     private val viewModel: NewsFeedViewModel,
-    private val listOfActiveChallenges: List<CurrentActiveChallengesResponse>
+    private val listOfActiveChallenges: List<ActiveChallengesListResponse>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -48,18 +47,18 @@ class ChallengesHeaderAdapter(
         fun bind(position: Int) {
             updateTypefaces()
 
-            val currentChallengeDay = listOfActiveChallenges[position].dayOnChallenge
-            val challengeExpireDay = listOfActiveChallenges[position].numberOfDaysOfChallenge
+            val currentChallengeDay = listOfActiveChallenges[position].activeChallenges?.currentDay ?: 0
+            val challengeExpireDay = 7
 
-            binding.tvChallengeHeaderTitle.text = listOfActiveChallenges[position].name
+            binding.tvChallengeHeaderTitle.text = listOfActiveChallenges[position].activeChallenges?.name
             binding.tvChallengeHeaderDesc.text = context.getString(R.string.days_completed, currentChallengeDay, challengeExpireDay)
             Picasso.get().load(placeHolderImage).into(binding.ivChallengeHeader)
 
             val options = RequestOptions()
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
-            Glide.with(context).load(challengeTypeImage(position)).apply(options)
-                .into(binding.ivChallengeType)
+            // Glide.with(context).load(challengeTypeImage(position)).apply(options)
+            //     .into(binding.ivChallengeType)
         }
 
         private fun updateTypefaces() {
@@ -68,19 +67,19 @@ class ChallengesHeaderAdapter(
             typeface.setTypefaceForBodyRegular(binding.btnUpdateProgress, context)
         }
 
-        private fun challengeTypeImage(position: Int): Int {
-            return when (listOfActiveChallenges[position].categoryName) {
-                helper.categoryList[0] -> {
-                    R.drawable.ic_health_wellness_white
-                }
-                helper.categoryList[1] -> {
-                    R.drawable.ic_intellectual_white
-                }
-                else -> {
-                    R.drawable.ic_lifestyle_white
-                }
-            }
-        }
+        // private fun challengeTypeImage(position: Int): Int {
+        //     return when (listOfActiveChallenges[position].posts.ca) {
+        //         helper.categoryList[0] -> {
+        //             R.drawable.ic_health_wellness_white
+        //         }
+        //         helper.categoryList[1] -> {
+        //             R.drawable.ic_intellectual_white
+        //         }
+        //         else -> {
+        //             R.drawable.ic_lifestyle_white
+        //         }
+        //     }
+        // }
 
     }
 }

@@ -3,6 +3,7 @@ package com.nicholasrutherford.chal.profile.editprofile
 import android.app.Application
 import android.os.CountDownTimer
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.data.firebase.AccountInfo
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
@@ -19,6 +20,8 @@ class EditProfileViewModel @Inject constructor(application: Application, mainAct
 
     private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
     private val writeAccountInfo = WriteAccountInfoImpl()
+
+    val uid = FirebaseAuth.getInstance().uid ?: ""
 
     init {
         setupEditProfile()
@@ -39,7 +42,7 @@ class EditProfileViewModel @Inject constructor(application: Application, mainAct
         viewState.editLastName = lastName
         viewState.editBio = bio
 
-        writeAccountInfo.updateAccountInfo(accountInfo = AccountInfo(
+        writeAccountInfo.updateAccountInfo(uid = uid, accountInfo = AccountInfo(
             username = username,
             firstName = firstName,
             lastName = lastName,

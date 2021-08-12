@@ -11,8 +11,8 @@ import com.google.firebase.database.ValueEventListener
 import com.nicholasrutherford.chal.ChallengeCalenderDay
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
 import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
+import com.nicholasrutherford.chal.data.responses.activechallenges.ActiveChallengesListResponse
 import com.nicholasrutherford.chal.data.responses.post.PostListResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.USERS
@@ -24,18 +24,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 class NewsFeedViewModel @Inject constructor(private val application: Application, mainActivity: MainActivity) : ViewModel() {
 
+    private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
+
     private val uid = FirebaseAuth.getInstance().uid ?: ""
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
     private var mAuth: FirebaseAuth? = null
+    private val username = readProfileDetailsFirebase.getUsername() ?: ""
 
     val viewState = NewsFeedRedesignViewStateImpl()
-
-    private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
 
     private val _newsFeed = MutableStateFlow(listOf<NewsFeedResponse>())
     val newsFeed: StateFlow<List<NewsFeedResponse>> = _newsFeed
@@ -43,11 +43,11 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
     private val _postList = MutableStateFlow(listOf<PostListResponse>())
     val postList: StateFlow<List<PostListResponse>> = _postList
 
+    private val _allActiveChallengesList = MutableStateFlow(listOf<ActiveChallengesListResponse>())
+    val allActiveChallengesList: StateFlow<List<ActiveChallengesListResponse>> = _allActiveChallengesList
+
     private val _isUserEnrolledInChallenge = MutableStateFlow(false)
     private val isUserEnrolledInChallenge: StateFlow<Boolean> = _isUserEnrolledInChallenge
-
-    private val _currentUserActiveChallenges = MutableStateFlow(listOf<CurrentActiveChallengesResponse>())
-    val currentUserActiveChallenges: StateFlow<List<CurrentActiveChallengesResponse>> = _currentUserActiveChallenges
 
     val _isViewStateUpdated = MutableStateFlow(false)
     val isViewStateUpdated: StateFlow<Boolean> = _isViewStateUpdated
@@ -62,21 +62,15 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
     val navigation = NewsFeedNavigationImpl(application, mainActivity)
 
     init {
-       // startProgress()
         mAuth = FirebaseAuth.getInstance()
 
         fetchNewsFeedList()
-        println("get here212121")
-        updateDayOfAllActiveChallenges()
-
-        // make a call after were done with all this data
-        // that updates a challenge if its not in this current day
-        // in order to keep with the program of 7 days of challenges
     }
 
     fun fetchNewsFeedList() {
         checkEnrolledInAChallenge()
         fetchAllPosts()
+        fetchAllActiveChallenges()
 
         viewModelScope.launch {
             isUserEnrolledInChallenge.collect { isEnrolled ->
@@ -96,35 +90,51 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
             })
     }
 
-    private fun updateDayOfAllActiveChallenges() {
+    fun updateDayOfAllActiveChallenges(activeChallenges: List<ActiveChallengesListResponse>) {
         var index = 0
-        val activeChallengesResponseList = arrayListOf<CurrentActiveChallengesResponse>()
-        ref.child("$uid$ACTIVE_CHALLENGES")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {}
+        val maxChallengesList = arrayListOf<Int>()
 
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (activeChallenges in snapshot.children) {
-                        activeChallenges.getValue(CurrentActiveChallengesResponse::class.java).let {
-                            it?.let { activeChallenge ->
-                                activeChallengesResponseList.add(activeChallenge)
-                            }
-                        }
-                    }
-                    activeChallengesResponseList.forEachIndexed { index, currentActiveChallengesResponse ->
-                        if (currentActiveChallengesResponse.currentDay != challengeCurrentDay.dayInChallenge()) {
-                            writeNewActiveChallengeImpl.writeCurrentDay(index.toString(), currentActiveChallengesResponse.dayOnChallenge + 1)
-                        }
-                    }
-                }
-            })
+        activeChallenges.forEach {
+            maxChallengesList.add(index)
+            index++
+        }
+        maxChallengesList.forEach { index ->
+            if (activeChallenges.size >= index) {
+                checkToUpdateCurrentDayOfChallenge(activeChallenges, index)
+            }
+        }
+    }
+
+    private fun checkToUpdateCurrentDayOfChallenge(activeChallenges: List<ActiveChallengesListResponse>, index: Int) {
+        val currentDay = activeChallenges.get(index).activeChallenges?.currentDay ?: 0
+        val newDay = currentDay + 1
+
+        if (currentDay >= 14) {
+            writeNewActiveChallengeImpl.writeCurrentDay(
+                uid,
+                index.toString(),
+                0
+            )
+        }
+
+        else if (currentDay != challengeCurrentDay.dayInChallenge()) {
+            writeNewActiveChallengeImpl.writeCurrentDay(
+                uid,
+                index.toString(),
+                newDay
+            )
+        }
     }
 
     private fun fetchAllPosts() {
         readFirebaseFields.getAllPosts(_postList)
     }
 
-    fun updateMyChallengesVisible(currentActiveChallengesList: List<CurrentActiveChallengesResponse>) {
+    private fun fetchAllActiveChallenges() {
+        readFirebaseFields.getAllActiveChallengesFlow(_allActiveChallengesList)
+    }
+
+    fun updateMyChallengesVisible(currentActiveChallengesList: List<ActiveChallengesListResponse>) {
         viewState.myChallengesVisible = currentActiveChallengesList.size > 1
     }
 
@@ -198,7 +208,6 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
 
     fun generateUserPostList(allPostsList: List<PostListResponse>): List<PostListResponse> {
         val userPostList = arrayListOf(PostListResponse())
-        val username = readProfileDetailsFirebase.getUsername() ?: ""
 
         userPostList.clear()
 
@@ -210,10 +219,6 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
 
         return userPostList
     }
-
-    fun startProgress() = navigation.showAcProgress()
-
-    fun hideProgress() = navigation.hideAcProgress()
 
     inner class NewsFeedRedesignViewStateImpl : NewsFeedRedesignViewState {
         override var addFriendsEmptyStateVisible: Boolean = false

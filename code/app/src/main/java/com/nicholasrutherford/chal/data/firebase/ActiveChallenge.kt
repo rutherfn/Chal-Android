@@ -7,5 +7,5 @@ data class ActiveChallenge(
     var numberOfDaysInChallenge: Int,
     var challengeExpire: String,
     var currentDay: Int,
-    var dayOnChallenge: Int
+    var username: String
 )
