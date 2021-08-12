@@ -7,5 +7,6 @@ data class PostResponse (
     var image: String = "",
     var title: String = "",
     var username: String = "",
-    var usernameUrl: String = ""
+    var usernameUrl: String = "",
+    var dateChallengeExpired: String = ""
     )

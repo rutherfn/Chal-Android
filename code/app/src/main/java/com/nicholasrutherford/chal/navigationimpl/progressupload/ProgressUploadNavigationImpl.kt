@@ -66,12 +66,12 @@ class ProgressUploadNavigationImpl @Inject constructor(
         alert.show()
     }
 
-    override fun showAddedProgress() {
+    override fun showAddedProgress(isChallengeComplete: Boolean) {
         activity.supportFragmentManager.beginTransaction()
             .replace(
                 container,
-                AddedProgressFragment(application),
-                AddedProgressFragment(application)::javaClass.name
+                AddedProgressFragment(application, isChallengeComplete),
+                AddedProgressFragment(application, isChallengeComplete)::javaClass.name
             )
             .addToBackStack("")
             .commit()

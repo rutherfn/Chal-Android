@@ -11,5 +11,6 @@ interface WriteActivePost : ChalFirebase {
     fun writeCurrentDay(uid: String, userActiveChallengeIndex: Int, userActiveChallengePostIndex: Int, postIndex: Int, newValue: String)
     fun writeUsername(uid: String, userActiveChallengeIndex: Int, userActiveChallengePostIndex: Int, postIndex: Int, newValue: String)
     fun writeUsernameUrl(uid: String, userActiveChallengeIndex: Int, userActiveChallengePostIndex: Int, postIndex: Int, newValue: String)
+    fun writeCurrentChallengeExpireDay(uid: String, postIndex: Int, newValue: String)
     fun writePost(uid: String, userActiveChallengeIndex: Int, userActiveChallengePostIndex: Int, postIndex: Int, activePost: ActivePost)
 }

@@ -15,7 +15,7 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class AddedProgressFragment @Inject constructor(private val application: Application) :
+class AddedProgressFragment @Inject constructor(private val application: Application, private val isChallengeCompleted: Boolean) :
 DaggerFragment(), AddedProgressExt {
 
     @Inject
@@ -30,6 +30,8 @@ DaggerFragment(), AddedProgressExt {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val bind = FragmentAddedProgressBinding.inflate(layoutInflater)
+
+        viewModel.isChallengeCompleted = isChallengeCompleted
 
         val mainActivity: MainActivity = (activity as MainActivity)
         mainActivity.bvNavigation.visibleOrGone = false

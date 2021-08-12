@@ -7,5 +7,6 @@ data class ActivePost (
     var image: String,
     var currentDay: String,
     var username: String,
-    var usernameUrl: String
+    var usernameUrl: String,
+    var dateChallengeExpired: String
     )

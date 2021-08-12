@@ -9,6 +9,8 @@ import javax.inject.Inject
 
 class AddedProgressViewModel @Inject constructor(private val application: Application, mainActivity: MainActivity) : ViewModel() {
 
+    var isChallengeCompleted = false
+
     val viewState = AddedProgressViewStateImpl()
     val navigation = AddedProgressNavigationImpl(application = application, activity = mainActivity)
 

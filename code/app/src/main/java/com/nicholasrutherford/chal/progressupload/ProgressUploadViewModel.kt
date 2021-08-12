@@ -22,6 +22,7 @@ import com.nicholasrutherford.chal.data.responses.post.PostListResponse
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES_POSTS
 import com.nicholasrutherford.chal.firebase.CURRENT_DAY
+import com.nicholasrutherford.chal.firebase.DATE_CHALLENGE_EXPIRED
 import com.nicholasrutherford.chal.firebase.PROFILE_IMAGE
 import com.nicholasrutherford.chal.firebase.TITLE
 import com.nicholasrutherford.chal.firebase.USERNAME
@@ -186,6 +187,7 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     private fun updateFirebaseUser(title: String, body: String, selectedIndex: Int) {
         var activeChallengesPostsIndex = 0
         var currentChallengeDay = "0"
+        var currentChallengeExpireDay = "0"
         ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -212,14 +214,29 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
                     }
                 })
 
+                ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex/$DATE_CHALLENGE_EXPIRED").addValueEventListener(object : ValueEventListener {
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            currentChallengeExpireDay = snapshot.value.toString()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        showErrorAlert(
+                            title = application.applicationContext.getString(R.string.error_updating_data_title),
+                            message = application.applicationContext.getString(R.string.error_updating_data_desc)
+                        )
+                    }
+                })
+
                 ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS$activeChallengesPostsIndex/$TITLE").addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (!snapshot.exists() && !isSelectedIndex) {
-                            println(currentChallengeDay)
                             savedUserLastIndexOfProgress = activeChallengesPostsIndex
                             isSelectedIndex = true
 
-                            writeNewPost(title, body, selectedIndex, currentChallengeDay)
+                            writeNewPost(title, body, selectedIndex, currentChallengeDay, currentChallengeExpireDay)
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
@@ -290,10 +307,11 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
 
     fun onBackClicked() = navigation.pop()
 
-    internal fun writeNewPost(title: String, body: String, selectedIndex: Int, currentChallengeDay: String) {
+    internal fun writeNewPost(title: String, body: String, selectedIndex: Int, currentChallengeDay: String, currentChallengeExpireDay: String) {
         val writeNewActiveChallengeImpl = WriteNewActiveChallengeImpl()
-
         val newCurrentDay = currentChallengeDay.toInt() + 1
+
+        val isChallengeCompleted = newCurrentDay == currentChallengeExpireDay.toInt()
 
         writeActivePost.writePost(uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
             title = title,
@@ -302,7 +320,8 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
             image = progressImageUrl ?: "",
             currentDay = newCurrentDay.toString(),
             username = username ?: "",
-            usernameUrl = usernameUrl ?: ""
+            usernameUrl = usernameUrl ?: "",
+            dateChallengeExpired = currentChallengeExpireDay
         ))
 
         writeNewActiveChallengeImpl.writeCurrentDay(
@@ -317,7 +336,8 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
             isVisible = true,
             isCloseable = true
         )
-        navigateToAddedProgress()
+
+        navigateToAddedProgress(isChallengeCompleted)
     }
 
     private fun updateNewsFeedBanner(title: String, desc: String, isVisible: Boolean, isCloseable: Boolean) {
@@ -331,9 +351,10 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
         writeAccountInfoImpl.updateChallengeBannerType(uid = uid, bannerType = ChallengeBannerType.JUST_POSTED.value)
     }
 
-    fun navigateToAddedProgress() {
+    fun navigateToAddedProgress(isChallengeCompleted: Boolean) {
+        println(isChallengeCompleted)
         navigation.hideAcProgress()
-        navigation.showAddedProgress()
+        navigation.showAddedProgress(isChallengeComplete = isChallengeCompleted)
     }
 
 

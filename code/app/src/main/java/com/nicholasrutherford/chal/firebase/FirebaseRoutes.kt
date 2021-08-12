@@ -101,4 +101,5 @@ fun imagePostPath(postIndex: Int): String { return "$postIndex/$IMAGE"}
 fun currentDayPath(postIndex: Int): String { return "$postIndex/$CURRENT_DAY"}
 fun usernamePath(postIndex: Int): String { return "$postIndex/$USERNAME"}
 fun usernameUrlPath(postIndex: Int): String { return "$postIndex/$USERNAME_URL"}
+fun currentChallengeExpireDayPath(postIndex: Int): String { return "$postIndex/$DATE_CHALLENGE_EXPIRED"}
 

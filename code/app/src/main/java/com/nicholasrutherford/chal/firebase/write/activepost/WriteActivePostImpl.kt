@@ -6,6 +6,7 @@ import com.nicholasrutherford.chal.firebase.POSTS
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.categoryActiveChallengeUserPostPath
 import com.nicholasrutherford.chal.firebase.categoryPostPath
+import com.nicholasrutherford.chal.firebase.currentChallengeExpireDayPath
 import com.nicholasrutherford.chal.firebase.currentDayActiveChallengeUserPostPath
 import com.nicholasrutherford.chal.firebase.currentDayPath
 import com.nicholasrutherford.chal.firebase.descriptionActiveChallengeUserPostPath
@@ -129,6 +130,12 @@ class WriteActivePostImpl : WriteActivePost {
             .addOnFailureListener {  }
     }
 
+    override fun writeCurrentChallengeExpireDay(uid: String, postIndex: Int, newValue: String) {
+        refPosts.child(currentChallengeExpireDayPath(postIndex))
+            .setValue(newValue)
+            .addOnFailureListener {  }
+    }
+
     override fun writePost(
         uid: String,
         userActiveChallengeIndex: Int,
@@ -183,6 +190,11 @@ class WriteActivePostImpl : WriteActivePost {
             userActiveChallengePostIndex = userActiveChallengePostIndex,
             postIndex = postIndex,
             newValue = activePost.usernameUrl
+        )
+        writeCurrentChallengeExpireDay(
+            uid = uid,
+            postIndex = postIndex,
+            newValue = activePost.dateChallengeExpired
         )
     }
 
