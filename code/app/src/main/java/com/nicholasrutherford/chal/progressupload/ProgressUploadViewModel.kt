@@ -14,6 +14,7 @@ import com.nicholasrutherford.chal.ChallengeCalenderDay
 import com.nicholasrutherford.chal.InternetConnectivity
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.challengebanner.ChallengeBannerType
 import com.nicholasrutherford.chal.data.firebase.ActivePost
 import com.nicholasrutherford.chal.data.responses.ActiveChallengeResponse
 import com.nicholasrutherford.chal.data.responses.CurrentActiveChallengesResponse
@@ -27,6 +28,9 @@ import com.nicholasrutherford.chal.firebase.USERNAME
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.accountinfo.ReadFirebaseFieldsImpl
+import com.nicholasrutherford.chal.firebase.sharedpref.clear.ClearFirebaseSharedPref
+import com.nicholasrutherford.chal.firebase.sharedpref.write.WriteFirebaseSharedPref
+import com.nicholasrutherford.chal.firebase.write.accountinfo.WriteAccountInfoImpl
 import com.nicholasrutherford.chal.firebase.write.activenewchallenge.WriteNewActiveChallengeImpl
 import com.nicholasrutherford.chal.firebase.write.activepost.WriteActivePostImpl
 import com.nicholasrutherford.chal.helpers.sharedpreference.updatesharedpreference.UpdateSharedPreferenceImpl
@@ -72,6 +76,11 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     private val readFirebaseFields = ReadFirebaseFieldsImpl()
 
     private val internetConnectivity = InternetConnectivity()
+
+    private val clearFirebaseSharedPref = ClearFirebaseSharedPref(application)
+    private val writeFirebaseSharedPref = WriteFirebaseSharedPref(application)
+
+    private val writeAccountInfoImpl = WriteAccountInfoImpl()
 
     private val challengeCurrentDay = ChallengeCalenderDay()
 
@@ -302,7 +311,24 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
             newCurrentDay
         )
 
+        updateNewsFeedBanner(
+            title = "A new post has been updated for the",
+            desc = title,
+            isVisible = true,
+            isCloseable = true
+        )
         navigateToAddedProgress()
+    }
+
+    private fun updateNewsFeedBanner(title: String, desc: String, isVisible: Boolean, isCloseable: Boolean) {
+        clearFirebaseSharedPref.clearBannerTypeDetails()
+
+        writeFirebaseSharedPref.writeSharedPrefBannerTypeTitle(title = title)
+        writeFirebaseSharedPref.writeSharedPrefBannerTypeDesc(description = desc)
+        writeFirebaseSharedPref.writeSharedPrefBannerTypeIsVisible(isVisible = isVisible)
+        writeFirebaseSharedPref.writeBannerTypeIsCloseable(isCloseable = isCloseable)
+
+        writeAccountInfoImpl.updateChallengeBannerType(uid = uid, bannerType = ChallengeBannerType.JUST_POSTED.value)
     }
 
     fun navigateToAddedProgress() {

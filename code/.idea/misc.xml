@@ -6,9 +6,14 @@
         <entry key="app/src/main/res/layout/activity_upload_profile_picture.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/added_progress_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_added_progress.xml" value="0.24139492753623187" />
+        <entry key="app/src/main/res/layout/fragment_challenge_details.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/layout/fragment_forgot_password.xml" value="0.41354166666666664" />
         <entry key="app/src/main/res/layout/fragment_progress_upload.xml" value="0.24139492753623187" />
+        <entry key="app/src/main/res/layout/fragment_redesign_challenges.xml" value="0.20520833333333333" />
+        <entry key="app/src/main/res/layout/fragment_redesign_my_feed.xml" value="0.2752808988764045" />
+        <entry key="app/src/main/res/layout/news_feed_banner_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/news_feed_notification_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/other_users_profile_layout.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/post_progress_layout.xml" value="0.18" />
         <entry key="app/src/main/res/layout/redesign_my_feed_layout.xml" value="0.18518518518518517" />
         <entry key="app/src/main/res/layout/single_challenge_layout.xml" value="0.24139492753623187" />

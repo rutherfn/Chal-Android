@@ -121,6 +121,9 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         typeface.setTypefaceForBodyBold(bind.clChallengeFeed.btnAll, application.applicationContext)
         typeface.setTypefaceForBodyBold(bind.clChallengeFeed.btnFriends, application.applicationContext)
         typeface.setTypefaceForBodyBold(bind.clChallengeFeed.btnMyPosts, application.applicationContext)
+
+        typeface.setTypefaceForHeaderBold(bind.clNewsFeedBanner.tvTitle, application.applicationContext)
+        typeface.setTypefaceForBodyItalic(bind.clNewsFeedBanner.tvDesc, application.applicationContext)
     }
 
     override fun bindHeaderAdapter(bind: FragmentRedesignMyFeedBinding, listOfActiveChallenges: List<ActiveChallengesListResponse>) {
@@ -166,6 +169,11 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
                 true
             } == true
         }
+        bind.clNewsFeedBanner.clBannerType.setOnClickListener {
+            if (viewModel.viewState.bannerIsCloseable) {
+                viewModel.onBannerDismissedClicked()
+            }
+        }
     }
 
     override fun updateView(bind: FragmentRedesignMyFeedBinding) {
@@ -182,5 +190,9 @@ class NewsFeedFragment @Inject constructor(private val application: Application)
         bind.clChallengeFeed.btnAll.background = ContextCompat.getDrawable(application.applicationContext, viewModel.viewState.btnAllBackgroundResId)
         bind.clChallengeFeed.btnFriends.background = ContextCompat.getDrawable(application.applicationContext, viewModel.viewState.btnFriendsBackgroundResId)
         bind.clChallengeFeed.btnMyPosts.background = ContextCompat.getDrawable(application.applicationContext, viewModel.viewState.btnMyPostsBackgroundResId)
+
+        bind.clNewsFeedBanner.clBannerType.visibleOrGone = viewModel.viewState.bannerVisible
+        bind.clNewsFeedBanner.tvTitle.text = viewModel.viewState.bannerTitle
+        bind.clNewsFeedBanner.tvDesc.text = viewModel.viewState.bannerDescription
     }
 }

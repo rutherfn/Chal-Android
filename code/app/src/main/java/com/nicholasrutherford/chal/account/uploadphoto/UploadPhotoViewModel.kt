@@ -3,10 +3,10 @@ package com.nicholasrutherford.chal.account.uploadphoto
 import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.nicholasrutherford.chal.challengebanner.ChallengeBannerType
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.realdata.Account
 import com.nicholasrutherford.chal.data.realdata.ProfileInfo
@@ -14,7 +14,6 @@ import com.nicholasrutherford.chal.firebase.bindUserId
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.navigationimpl.uploadphoto.UploadPhotoNavigationImpl
-import kotlinx.coroutines.launch
 import java.util.*
 
 class UploadPhotoViewModel(private val uploadPhotoActivity: UploadPhotoActivity, private val appContext: Context) : ViewModel() {
@@ -107,6 +106,7 @@ class UploadPhotoViewModel(private val uploadPhotoActivity: UploadPhotoActivity,
             lastName = "",
             bio = "",
             age = 0,
+            challengeBannerType = ChallengeBannerType.NONE.value,
             friends = null,
             activeChallenges = null
         )

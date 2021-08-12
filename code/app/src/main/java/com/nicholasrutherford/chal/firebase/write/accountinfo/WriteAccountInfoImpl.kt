@@ -5,6 +5,7 @@ import com.nicholasrutherford.chal.data.firebase.AccountInfo
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.ageAccountPath
 import com.nicholasrutherford.chal.firebase.bioAccountPath
+import com.nicholasrutherford.chal.firebase.challengeBannerTypePath
 import com.nicholasrutherford.chal.firebase.firstNameAccountPath
 import com.nicholasrutherford.chal.firebase.lastNameAccountPath
 import com.nicholasrutherford.chal.firebase.usernameAccountPath
@@ -57,4 +58,11 @@ class WriteAccountInfoImpl : WriteAccountInfo {
             }
     }
 
+    override fun updateChallengeBannerType(uid: String, bannerType: Int) {
+        println(bannerType)
+        ref.child(challengeBannerTypePath(uid)).setValue(bannerType)
+            .addOnFailureListener {
+                Timber.d("Error writing Firebase field $bannerType to ${challengeBannerTypePath(uid)}")
+            }
+    }
 }

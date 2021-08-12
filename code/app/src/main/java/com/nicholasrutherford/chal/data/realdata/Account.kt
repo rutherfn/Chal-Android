@@ -11,6 +11,7 @@ data class Account(
     val lastName: String? = "",
     val bio: String? = "",
     val age: Int? = 0,
+    val challengeBannerType: Int? = 0,
     val friends: List<CurrentFriends>? = null,
     val activeChallenges: List<ActiveChallenges>? = null
 )

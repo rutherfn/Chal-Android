@@ -13,6 +13,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.nicholasrutherford.chal.ChallengeCalenderDay
+import com.nicholasrutherford.chal.challengebanner.ChallengeBannerType
 import com.nicholasrutherford.chal.data.firebase.ActiveChallenge
 import com.nicholasrutherford.chal.data.realdata.Challenges
 import com.nicholasrutherford.chal.data.realdata.LiveChallenges
@@ -21,6 +22,9 @@ import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.read.accountinfo.ReadFirebaseFieldsImpl
+import com.nicholasrutherford.chal.firebase.sharedpref.clear.ClearFirebaseSharedPref
+import com.nicholasrutherford.chal.firebase.sharedpref.write.WriteFirebaseSharedPref
+import com.nicholasrutherford.chal.firebase.write.accountinfo.WriteAccountInfoImpl
 import com.nicholasrutherford.chal.firebase.write.activenewchallenge.WriteNewActiveChallengeImpl
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.ChallengeDetailsNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -63,6 +67,11 @@ class ChallengeDetailsViewModel(
 
     private val challengeCalenderDay = ChallengeCalenderDay()
     var liveChallengesFilterList = arrayListOf<LiveChallenges>()
+
+    private val clearFirebaseSharedPref = ClearFirebaseSharedPref(appContext)
+    private val writeFirebaseSharedPref = WriteFirebaseSharedPref(appContext)
+
+    private val writeAccountInfoImpl = WriteAccountInfoImpl()
 
     private val readFirebaseFieldsImpl = ReadFirebaseFieldsImpl()
 
@@ -163,10 +172,28 @@ class ChallengeDetailsViewModel(
             username = readProfileDetailsFirebase.getUsername() ?: ""
         ))
 
+        updateNewsFeedBanner(
+            title = "Success! You've joined the",
+            desc = challenge.title,
+            isVisible = true,
+            isCloseable = true
+        )
+
         navigation.showAlert(
             "You have just joined the ${challenge.duration} Day ${challenge.title}! Get started by posting progress.",
             challenge.title, fragmentActivity
         )
+    }
+
+    private fun updateNewsFeedBanner(title: String, desc: String, isVisible: Boolean, isCloseable: Boolean) {
+        clearFirebaseSharedPref.clearBannerTypeDetails()
+
+        writeFirebaseSharedPref.writeSharedPrefBannerTypeTitle(title = title)
+        writeFirebaseSharedPref.writeSharedPrefBannerTypeDesc(description = desc)
+        writeFirebaseSharedPref.writeSharedPrefBannerTypeIsVisible(isVisible = isVisible)
+        writeFirebaseSharedPref.writeBannerTypeIsCloseable(isCloseable = isCloseable)
+
+        writeAccountInfoImpl.updateChallengeBannerType(uid = uid, bannerType = ChallengeBannerType.JOINED_CHALLENGE.value)
     }
 
     private fun fetchChallenges() {

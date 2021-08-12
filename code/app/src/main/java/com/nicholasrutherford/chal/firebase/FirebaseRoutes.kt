@@ -20,6 +20,7 @@ const val LAST_NAME = "lastName"
 const val PASSWORD = "password"
 const val PROFILE_IMAGE = "profileImage"
 const val USERNAME = "username"
+const val CHALLENGE_BANNER_TYPE = "challengeBannerType"
 
 const val PROFILE_INFO = "/profileInfo/"
 const val ACTIVE_CHALLENGES = "/activeChallenges/"
@@ -49,6 +50,7 @@ fun firstNameAccountPath(uid: String): String { return "$uid/$FIRST_NAME" }
 fun lastNameAccountPath(uid: String): String { return "$uid/$LAST_NAME" }
 fun bioAccountPath(uid: String): String { return "$uid/$BIO" }
 fun ageAccountPath(uid: String): String { return "$uid/$AGE" }
+fun challengeBannerTypePath(uid: String): String { return "$uid/$CHALLENGE_BANNER_TYPE"}
 
 // active challenges paths
 fun nameActiveChallengePath(uid: String, index: String): String { return "$uid$ACTIVE_CHALLENGES$index/$NAME"}

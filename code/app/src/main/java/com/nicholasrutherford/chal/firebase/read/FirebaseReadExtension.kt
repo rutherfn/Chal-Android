@@ -12,6 +12,7 @@ interface FirebaseReadExtension {
     fun getPassword(): String?
     fun getUserProfilePicture(): String?
     fun getUsername(): String?
+    fun getChallengeBannerType(): Int?
 
     fun getCurrentUserFriends(): List<CurrentFriends>
     fun getActiveUserChallenges()

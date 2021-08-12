@@ -10,6 +10,7 @@ import com.nicholasrutherford.chal.data.realdata.ActiveChallenges
 import com.nicholasrutherford.chal.data.realdata.CurrentFriends
 import com.nicholasrutherford.chal.firebase.AGE
 import com.nicholasrutherford.chal.firebase.BIO
+import com.nicholasrutherford.chal.firebase.CHALLENGE_BANNER_TYPE
 import com.nicholasrutherford.chal.firebase.DEFAULT_PROFILE_IMAGE
 import com.nicholasrutherford.chal.firebase.EMAIL
 import com.nicholasrutherford.chal.firebase.FIRST_NAME
@@ -19,8 +20,8 @@ import com.nicholasrutherford.chal.firebase.PASSWORD
 import com.nicholasrutherford.chal.firebase.PROFILE_IMAGE
 import com.nicholasrutherford.chal.firebase.USERNAME
 import com.nicholasrutherford.chal.firebase.USERS
-import com.nicholasrutherford.chal.firebase.sharedpref.ReadFirebaseSharePref
-import com.nicholasrutherford.chal.firebase.sharedpref.WriteFirebaseSharedPref
+import com.nicholasrutherford.chal.firebase.sharedpref.read.ReadFirebaseSharePref
+import com.nicholasrutherford.chal.firebase.sharedpref.write.WriteFirebaseSharedPref
 
 class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
 
@@ -200,6 +201,24 @@ class ReadAccountFirebase(appContext: Context) : FirebaseReadExtension {
             }
         })
         return readFirebaseSharedPref.getSharedPrefsFirebaseUsername()
+    }
+
+    override fun getChallengeBannerType(): Int? {
+        ref.child(uid).addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+                writeFirebaseSharePref.writeSharedPrefBannerType(0)
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val bannerTypeSnapshot = snapshot.child(CHALLENGE_BANNER_TYPE).value.toString()
+                    writeFirebaseSharePref.writeSharedPrefBannerType(bannerTypeSnapshot.toInt())
+                } else {
+                    writeFirebaseSharePref.writeSharedPrefBannerType(0)
+                }
+            }
+        })
+        return readFirebaseSharedPref.getSharedPrefsBannerType()
     }
 
     override fun getActiveUserChallenges() {

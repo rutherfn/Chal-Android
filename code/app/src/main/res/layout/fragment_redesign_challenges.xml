@@ -18,6 +18,7 @@
             android:id="@+id/cvRedesignChallenges"
             android:layout_width="fill_parent"
             android:layout_marginTop="@dimen/margin_10dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             />
 

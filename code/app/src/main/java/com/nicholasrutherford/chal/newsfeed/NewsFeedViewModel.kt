@@ -8,9 +8,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.nicholasrutherford.chal.challengebanner.ChallengeBannerType
 import com.nicholasrutherford.chal.ChallengeCalenderDay
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.challengebanner.ChallengeBanner
 import com.nicholasrutherford.chal.data.responses.NewsFeedResponse
 import com.nicholasrutherford.chal.data.responses.activechallenges.ActiveChallengesListResponse
 import com.nicholasrutherford.chal.data.responses.post.PostListResponse
@@ -18,6 +20,9 @@ import com.nicholasrutherford.chal.firebase.ACTIVE_CHALLENGES
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.read.ReadAccountFirebase
 import com.nicholasrutherford.chal.firebase.read.accountinfo.ReadFirebaseFieldsImpl
+import com.nicholasrutherford.chal.firebase.sharedpref.clear.ClearFirebaseSharedPref
+import com.nicholasrutherford.chal.firebase.sharedpref.read.ReadFirebaseSharePref
+import com.nicholasrutherford.chal.firebase.write.accountinfo.WriteAccountInfoImpl
 import com.nicholasrutherford.chal.firebase.write.activenewchallenge.WriteNewActiveChallengeImpl
 import com.nicholasrutherford.chal.navigationimpl.newsfeed.NewsFeedNavigationImpl
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,12 +57,19 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
     val _isViewStateUpdated = MutableStateFlow(false)
     val isViewStateUpdated: StateFlow<Boolean> = _isViewStateUpdated
 
+    private var currentBannerType = ChallengeBannerType.NONE
+
     private var userEnrolledInChallenge = false
 
     private val readFirebaseFields = ReadFirebaseFieldsImpl()
     private val writeNewActiveChallengeImpl = WriteNewActiveChallengeImpl()
+    private val readAccountFirebase = ReadAccountFirebase(application)
+    private val readFirebaseSharedPref = ReadFirebaseSharePref(application)
 
     private val challengeCurrentDay = ChallengeCalenderDay()
+
+    private val clearFirebaseSharedPref = ClearFirebaseSharedPref(application)
+    private val writeAccountInfoImpl = WriteAccountInfoImpl()
 
     val navigation = NewsFeedNavigationImpl(application, mainActivity)
 
@@ -65,6 +77,9 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
         mAuth = FirebaseAuth.getInstance()
 
         fetchNewsFeedList()
+
+        readCurrentBannerType()
+        updateBannerType()
     }
 
     fun fetchNewsFeedList() {
@@ -77,6 +92,63 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
                 userEnrolledInChallenge = isEnrolled
             }
         }
+    }
+
+    fun readCurrentBannerType() {
+        val bannerTypeValue = readAccountFirebase.getChallengeBannerType()
+
+        currentBannerType = when (bannerTypeValue) {
+            ChallengeBannerType.JOINED_CHALLENGE.value -> {
+                ChallengeBannerType.JOINED_CHALLENGE
+            }
+            ChallengeBannerType.JUST_POSTED.value -> {
+                ChallengeBannerType.JUST_POSTED
+            }
+            ChallengeBannerType.LAST_DAY.value -> {
+                ChallengeBannerType.LAST_DAY
+            }
+            else -> {
+                ChallengeBannerType.NONE
+            }
+        }
+    }
+
+    fun updateBannerType() {
+        val bannerTitle = readFirebaseSharedPref.getSharedPrefsBannerTypeTitle()
+        val bannerDesc = readFirebaseSharedPref.getSharedPrefsBannerTypeDescription()
+
+        val challengeBanner = if (currentBannerType == ChallengeBannerType.NONE) {
+            ChallengeBanner(
+                title = null,
+                description = null,
+                isVisible = false,
+                isCloseable = false
+            )
+            } else {
+                ChallengeBanner(
+                    title = bannerTitle,
+                    description = bannerDesc,
+                    isVisible = !bannerTitle.isNullOrEmpty() && !bannerDesc.isNullOrEmpty(),
+                    isCloseable = true
+                )
+        }
+
+        viewState.bannerTitle = challengeBanner.title
+        viewState.bannerDescription = challengeBanner.description
+        viewState.bannerVisible = challengeBanner.isVisible
+        viewState.bannerIsCloseable = challengeBanner.isCloseable
+    }
+
+    fun onBannerDismissedClicked() {
+        clearFirebaseSharedPref.clearBannerTypeDetails()
+        writeAccountInfoImpl.updateChallengeBannerType(uid = uid, bannerType = ChallengeBannerType.NONE.value)
+
+        viewState.bannerTitle = null
+        viewState.bannerDescription = null
+        viewState.bannerVisible = false
+        viewState.bannerIsCloseable = true
+
+        _isViewStateUpdated.value = true
     }
 
     private fun checkEnrolledInAChallenge() {
@@ -232,5 +304,10 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
         override var myChallengesVisible: Boolean = false
         override var recyclerNewsFeedVisible: Boolean = true
         override var isEndOfNewsFeedVisible: Boolean = false
+
+        override var bannerVisible: Boolean = false
+        override var bannerTitle: String? = null
+        override var bannerDescription: String? = null
+        override var bannerIsCloseable: Boolean = false
     }
 }

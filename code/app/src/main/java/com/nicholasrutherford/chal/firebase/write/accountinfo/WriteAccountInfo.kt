@@ -10,4 +10,5 @@ interface WriteAccountInfo : ChalFirebase {
     fun updateLastName(uid: String, lastName: String)
     fun updateBio(uid: String, bio: String)
     fun updateAge(uid: String, age: Int)
+    fun updateChallengeBannerType(uid: String, bannerType: Int)
 }

@@ -14,4 +14,9 @@ interface NewsFeedRedesignViewState : ViewState {
     var myChallengesVisible: Boolean
     var recyclerNewsFeedVisible: Boolean
     var isEndOfNewsFeedVisible: Boolean
+
+    var bannerVisible: Boolean
+    var bannerTitle: String?
+    var bannerDescription: String?
+    var bannerIsCloseable: Boolean
 }

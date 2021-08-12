@@ -47,9 +47,9 @@ class NewsFeedRedesignAdapter(private val context: Context, private val newsFeed
         fun bind(position: Int) {
 
             val currentDay = newsFeedList[position].posts?.currentDay?.toInt() ?: 0
-            val challengeExpired = newsFeedList[position].posts?.currentDay?.toInt()?.plus(7) ?: 0
+            val challengeExpired = newsFeedList[position].posts?.currentDay?.toInt()?.plus(7)?.minus(position + 1) ?: 0
 
-            val currentChallengeDay = challengeCalenderDay.getRealCurrentDayOnChallenge(currentDay = currentDay, challengeExpired = challengeExpired) + 1
+            val currentChallengeDay = challengeCalenderDay.getRealCurrentDayOnChallenge(currentDay = currentDay, challengeExpired = challengeExpired)
 
             binding.tvHomeUsername.text = newsFeedList[position].posts?.username
             Glide.with(context).load(newsFeedList[position].posts?.usernameUrl).apply(requestOption).into(binding.ivHomeProfilePicture)
