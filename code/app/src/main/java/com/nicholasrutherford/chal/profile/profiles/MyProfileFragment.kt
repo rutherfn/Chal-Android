@@ -118,8 +118,8 @@ class MyProfileFragment @Inject constructor(private val application: Application
             .into(bind.clProfile.ivProfile)
 
         val options = RequestOptions()
-            .placeholder(R.drawable.placeholder)
-            .error(R.drawable.placeholder)
+            .placeholder(R.drawable.circle)
+            .error(R.drawable.circle)
 
         Glide.with(this).load(myProfileViewModel.viewState.profileImage).apply(options)
             .into(bind.clProfile.cvCurrentProfilePic)

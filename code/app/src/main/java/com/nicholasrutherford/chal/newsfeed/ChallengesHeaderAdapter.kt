@@ -62,8 +62,8 @@ class ChallengesHeaderAdapter(
             Picasso.get().load(placeHolderImage).into(binding.ivChallengeHeader)
 
             val options = RequestOptions()
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.circle)
+                .error(R.drawable.circle)
 
             Glide.with(context).load(challengeTypeImage(position)).apply(options)
                 .into(binding.ivChallengeType)

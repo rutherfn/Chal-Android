@@ -68,8 +68,8 @@ class ChallengesRedesignFragment(private val appContext: Context) :
         bind.tbRedesignChallenges.tvTitle.text = viewModel?.viewState?.toolbarName
 
         val options = RequestOptions()
-            .placeholder(R.drawable.placeholder)
-            .error(R.drawable.placeholder)
+            .placeholder(R.drawable.circle)
+            .error(R.drawable.circle)
 
         viewModel?.let { challengesViewModel ->
             Glide.with(this).load(challengesViewModel.viewState.toolbarImage).apply(options)
