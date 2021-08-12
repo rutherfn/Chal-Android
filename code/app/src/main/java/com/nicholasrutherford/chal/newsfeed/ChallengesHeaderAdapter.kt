@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.nicholasrutherford.chal.ChallengeCalenderDay
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.activechallenges.ActiveChallengesListResponse
 import com.nicholasrutherford.chal.databinding.MyChallengesHeaderLayoutBinding
@@ -44,11 +46,16 @@ class ChallengesHeaderAdapter(
         private val typeface = Typeface()
         private val helper = Helper()
 
+        private val challengeCalenderDay = ChallengeCalenderDay()
+
         fun bind(position: Int) {
             updateTypefaces()
 
-            val currentChallengeDay = listOfActiveChallenges[position].activeChallenges?.currentDay ?: 0
-            val challengeExpireDay = 7
+            val currentDay = listOfActiveChallenges[position].activeChallenges?.currentDay ?: 0
+            val challengeExpired = listOfActiveChallenges[position].activeChallenges?.dateChallengeExpired?.toInt() ?: 0
+
+            val currentChallengeDay = challengeCalenderDay.getRealCurrentDayOnChallenge(currentDay = currentDay, challengeExpired = challengeExpired)
+            val challengeExpireDay = challengeCalenderDay.lastDayInChallenge()
 
             binding.tvChallengeHeaderTitle.text = listOfActiveChallenges[position].activeChallenges?.name
             binding.tvChallengeHeaderDesc.text = context.getString(R.string.days_completed, currentChallengeDay, challengeExpireDay)
@@ -57,8 +64,17 @@ class ChallengesHeaderAdapter(
             val options = RequestOptions()
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
-            // Glide.with(context).load(challengeTypeImage(position)).apply(options)
-            //     .into(binding.ivChallengeType)
+
+            Glide.with(context).load(challengeTypeImage(position)).apply(options)
+                .into(binding.ivChallengeType)
+
+            clickListeners()
+        }
+
+        fun clickListeners() {
+            binding.btnUpdateProgress.setOnClickListener {
+                viewModel.onAddProgressTabClicked()
+            }
         }
 
         private fun updateTypefaces() {
@@ -67,19 +83,19 @@ class ChallengesHeaderAdapter(
             typeface.setTypefaceForBodyRegular(binding.btnUpdateProgress, context)
         }
 
-        // private fun challengeTypeImage(position: Int): Int {
-        //     return when (listOfActiveChallenges[position].posts.ca) {
-        //         helper.categoryList[0] -> {
-        //             R.drawable.ic_health_wellness_white
-        //         }
-        //         helper.categoryList[1] -> {
-        //             R.drawable.ic_intellectual_white
-        //         }
-        //         else -> {
-        //             R.drawable.ic_lifestyle_white
-        //         }
-        //     }
-        // }
+        private fun challengeTypeImage(position: Int): Int {
+            return when (listOfActiveChallenges[position].activeChallenges?.categoryName) {
+                helper.categoryList[0] -> {
+                    R.drawable.ic_health_wellness_white
+                }
+                helper.categoryList[1] -> {
+                    R.drawable.ic_intellectual_white
+                }
+                else -> {
+                    R.drawable.ic_lifestyle_white
+                }
+            }
+        }
 
     }
 }
