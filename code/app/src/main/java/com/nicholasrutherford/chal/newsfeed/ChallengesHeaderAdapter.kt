@@ -67,6 +67,14 @@ class ChallengesHeaderAdapter(
 
             Glide.with(context).load(challengeTypeImage(position)).apply(options)
                 .into(binding.ivChallengeType)
+
+            clickListeners()
+        }
+
+        fun clickListeners() {
+            binding.btnUpdateProgress.setOnClickListener {
+                viewModel.onAddProgressTabClicked()
+            }
         }
 
         private fun updateTypefaces() {
