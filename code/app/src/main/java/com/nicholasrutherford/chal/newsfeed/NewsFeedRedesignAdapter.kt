@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.nicholasrutherford.chal.ChallengeCalenderDay
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.data.responses.post.PostListResponse
 import com.nicholasrutherford.chal.databinding.RedesignMyFeedLayoutBinding
@@ -33,6 +34,7 @@ class NewsFeedRedesignAdapter(private val context: Context, private val newsFeed
 
     inner class NewsFeedRedsignViewHolder(private var binding: RedesignMyFeedLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         private val typeface = Typeface()
+        private val challengeCalenderDay = ChallengeCalenderDay()
 
         val requestOption : RequestOptions = RequestOptions()
             .placeholder(R.drawable.circle)
@@ -43,13 +45,19 @@ class NewsFeedRedesignAdapter(private val context: Context, private val newsFeed
             .dontTransform()
 
         fun bind(position: Int) {
+
+            val currentDay = newsFeedList[position].posts?.currentDay?.toInt() ?: 0
+            val challengeExpired = newsFeedList[position].posts?.currentDay?.toInt()?.plus(7) ?: 0
+
+            val currentChallengeDay = challengeCalenderDay.getRealCurrentDayOnChallenge(currentDay = currentDay, challengeExpired = challengeExpired) + 1
+
             binding.tvHomeUsername.text = newsFeedList[position].posts?.username
             Glide.with(context).load(newsFeedList[position].posts?.usernameUrl).apply(requestOption).into(binding.ivHomeProfilePicture)
 
             Glide.with(context).load(newsFeedList[position].posts?.image).apply(requestOption).into(binding.ivHomePostImage)
             binding.tvHomeChallengeTitle.text = newsFeedList[position].posts?.title
             binding.tvChallengepostDesc.text = newsFeedList[position].posts?.description
-            binding.btnDayOfChallenge.text = "Day ".plus( newsFeedList[position].posts?.currentDay)
+            binding.btnDayOfChallenge.text = "Day ".plus(currentChallengeDay)
 
             updateTypeface()
         }
