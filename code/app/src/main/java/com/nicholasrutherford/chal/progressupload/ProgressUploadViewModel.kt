@@ -27,6 +27,7 @@ import com.nicholasrutherford.chal.firebase.USERNAME
 import com.nicholasrutherford.chal.firebase.USERS
 import com.nicholasrutherford.chal.firebase.bindUserImageFile
 import com.nicholasrutherford.chal.firebase.read.accountinfo.ReadFirebaseFieldsImpl
+import com.nicholasrutherford.chal.firebase.write.activenewchallenge.WriteNewActiveChallengeImpl
 import com.nicholasrutherford.chal.firebase.write.activepost.WriteActivePostImpl
 import com.nicholasrutherford.chal.helpers.sharedpreference.updatesharedpreference.UpdateSharedPreferenceImpl
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
@@ -281,15 +282,25 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     fun onBackClicked() = navigation.pop()
 
     internal fun writeNewPost(title: String, body: String, selectedIndex: Int, currentChallengeDay: String) {
+        val writeNewActiveChallengeImpl = WriteNewActiveChallengeImpl()
+
+        val newCurrentDay = currentChallengeDay.toInt() + 1
+
         writeActivePost.writePost(uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
             title = title,
             description = body,
             category = 0,
             image = progressImageUrl ?: "",
-            currentDay = currentChallengeDay,
+            currentDay = newCurrentDay.toString(),
             username = username ?: "",
             usernameUrl = usernameUrl ?: ""
         ))
+
+        writeNewActiveChallengeImpl.writeCurrentDay(
+            uid,
+            selectedIndex.toString(),
+            newCurrentDay
+        )
 
         navigateToAddedProgress()
     }

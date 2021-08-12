@@ -117,7 +117,7 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
             )
         }
 
-        else if (currentDay != challengeCurrentDay.dayInChallenge()) {
+        else if (currentDay < challengeCurrentDay.dayInChallenge() && currentDay != challengeCurrentDay.dayInChallenge()) {
             writeNewActiveChallengeImpl.writeCurrentDay(
                 uid,
                 index.toString(),
