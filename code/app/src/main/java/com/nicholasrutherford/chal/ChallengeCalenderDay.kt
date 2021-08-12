@@ -21,8 +21,33 @@ class ChallengeCalenderDay {
         }
     }
 
-    fun checkIfWeShouldIncrementDayOfChallenge() {
-
+    fun getRealCurrentDayOnChallenge(currentDay: Int, challengeExpired: Int): Int {
+        when (challengeExpired - currentDay) {
+            7 -> {
+                return 0
+            }
+            6 -> {
+                return 1
+            }
+            5 -> {
+                return 2
+            }
+            4 -> {
+                return 3
+            }
+            3 -> {
+                return 4
+            }
+            2 -> {
+                return 5
+            }
+            1 -> {
+                return 6
+            }
+            else -> {
+                return 7
+            }
+        }
     }
 
     fun firstDayInChallenge(): Int = 0
