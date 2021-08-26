@@ -11,6 +11,7 @@ abstract class ActivityBuildersModule {
         modules = [
             AdapterModule::class,
             FragmentBuildersModule::class,
+            FirebaseHelperModule::class,
             JsonAssetReaderImplModule::class,
             NavigationImplModule::class,
             SharedPreferenceModule::class,
