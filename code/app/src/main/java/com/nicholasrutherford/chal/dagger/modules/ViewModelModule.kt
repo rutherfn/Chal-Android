@@ -11,6 +11,7 @@ import com.nicholasrutherford.chal.profile.editprofile.EditProfileViewModel
 import com.nicholasrutherford.chal.profile.profiles.MyProfileViewModel
 import com.nicholasrutherford.chal.progressupload.ProgressUploadViewModel
 import com.nicholasrutherford.chal.main.splash.SplashViewModel
+import com.nicholasrutherford.chal.splashredesign.SplashRedesignViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -57,6 +58,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProgressUploadViewModel::class)
     internal abstract fun bindProgressUploadViewModel(viewModel: ProgressUploadViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashRedesignViewModel::class)
+    internal abstract fun bindSplashViewModel(viewModel: SplashRedesignViewModel): ViewModel
 
     // @Binds
     // @IntoMap
