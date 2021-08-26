@@ -11,6 +11,7 @@ import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadParams
+import com.nicholasrutherford.chal.splashredesign.SplashRedesignFragment
 import javax.inject.Inject
 
 class MainNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : MainNavigation {
@@ -71,6 +72,17 @@ class MainNavigationImpl @Inject constructor(private val application: Applicatio
                 container,
                 ProgressUploadFragment(application, params),
                 ProgressUploadFragment(application, params)::javaClass.name
+            )
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun showSplash() {
+        mainActivity.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                SplashRedesignFragment(),
+                SplashRedesignFragment()::javaClass.name
             )
             .addToBackStack(null)
             .commit()

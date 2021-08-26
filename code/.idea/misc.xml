@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_upload_profile_picture.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/added_progress_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_added_progress.xml" value="0.24139492753623187" />
@@ -11,6 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_progress_upload.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/fragment_redesign_challenges.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/layout/fragment_redesign_my_feed.xml" value="0.2752808988764045" />
+        <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.2259963768115942" />
         <entry key="app/src/main/res/layout/news_feed_banner_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/news_feed_notification_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/other_users_profile_layout.xml" value="0.23641304347826086" />

@@ -28,6 +28,8 @@ class MainViewModel @Inject constructor(private val application: Application, ma
     private val clearSharedPreference = ClearSharedPreferenceImpl(application)
     private val readSharedPreference = ReadSharedPreferenceImpl(application)
 
+    fun launchSplash() = navigation.showSplash()
+
     fun launchNewsFeed() = navigation.showMewsFeed()
 
     private fun launchChallenges() = navigation.showChallenges()

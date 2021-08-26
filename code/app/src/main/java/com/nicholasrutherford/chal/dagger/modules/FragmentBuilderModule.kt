@@ -7,6 +7,7 @@ import com.nicholasrutherford.chal.peoplelist.PeopleListFragment
 import com.nicholasrutherford.chal.profile.editprofile.EditProfileFragment
 import com.nicholasrutherford.chal.profile.profiles.MyProfileFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadFragment
+import com.nicholasrutherford.chal.splashredesign.SplashRedesignFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -33,4 +34,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeProgressUploadFragment(): ProgressUploadFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSplashFragment(): SplashRedesignFragment
 }
