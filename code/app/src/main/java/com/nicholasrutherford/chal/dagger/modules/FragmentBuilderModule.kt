@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.dagger.modules
 
+import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginFragment
 import com.nicholasrutherford.chal.addedProgress.AddedProgressFragment
 import com.nicholasrutherford.chal.more.MoreFragment
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
@@ -19,6 +20,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeEditProfileFragment(): EditProfileFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeLoginFragment(): RedesignLoginFragment
 
     @ContributesAndroidInjector
     abstract fun contributeMoreFragment(): MoreFragment
