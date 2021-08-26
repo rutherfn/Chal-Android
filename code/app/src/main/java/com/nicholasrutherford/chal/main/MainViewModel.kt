@@ -16,11 +16,13 @@ import com.nicholasrutherford.chal.helpers.testfairy.ChalTestFairyImpl
 import com.nicholasrutherford.chal.navigationimpl.main.MainNavigationImpl
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val application: Application, mainActivity: MainActivity) : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val application: Application,
+    private val navigation: MainNavigationImpl
+) : ViewModel() {
 
     val viewState = MainViewStateImpl()
 
-    private val navigation = MainNavigationImpl(application, mainActivity)
     val testFairy = ChalTestFairyImpl(application)
 
     var selectedPhotoUri: Uri? = null

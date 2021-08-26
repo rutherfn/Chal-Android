@@ -26,14 +26,16 @@ import javax.inject.Inject
 const val MILLIS_IN_FUTURE = 3000
 const val COUNT_DOWN_INTERVAL = 100
 
-class MoreViewModel @Inject constructor(private val application: Application,
-    mainActivity: MainActivity) : ViewModel() {
+class MoreViewModel @Inject constructor(
+    private val application: Application,
+    private val navigation: MoreNavigationImpl,
+    mainActivity: MainActivity
+) : ViewModel() {
 
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
     private val uid = FirebaseAuth.getInstance().uid ?: ""
 
     val viewState = MoreViewStateImpl()
-    val navigation = MoreNavigationImpl(application, mainActivity)
 
     private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
 

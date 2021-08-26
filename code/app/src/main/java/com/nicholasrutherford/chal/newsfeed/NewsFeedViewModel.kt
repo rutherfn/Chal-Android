@@ -31,7 +31,11 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsFeedViewModel @Inject constructor(private val application: Application, mainActivity: MainActivity) : ViewModel() {
+class NewsFeedViewModel @Inject constructor(
+    private val application: Application,
+    private val navigation: NewsFeedNavigationImpl,
+    mainActivity: MainActivity
+) : ViewModel() {
 
     private val readProfileDetailsFirebase = ReadAccountFirebase(application.applicationContext)
 
@@ -70,8 +74,6 @@ class NewsFeedViewModel @Inject constructor(private val application: Application
 
     private val clearFirebaseSharedPref = ClearFirebaseSharedPref(application)
     private val writeAccountInfoImpl = WriteAccountInfoImpl()
-
-    val navigation = NewsFeedNavigationImpl(application, mainActivity)
 
     init {
         mAuth = FirebaseAuth.getInstance()

@@ -8,6 +8,7 @@ import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.main.helper.MainActivityHelperImpl
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.newsfeed.NewsFeedNavigation
 import com.nicholasrutherford.chal.peoplelist.PeopleListFragment
@@ -15,7 +16,11 @@ import com.nicholasrutherford.chal.progressupload.ProgressUploadFragment
 import com.nicholasrutherford.chal.progressupload.ProgressUploadParams
 import javax.inject.Inject
 
-class NewsFeedNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : NewsFeedNavigation {
+class NewsFeedNavigationImpl @Inject constructor(
+    private val application: Application,
+    private val mainActivityHelper: MainActivityHelperImpl,
+    private val mainActivity: MainActivity
+    ) : NewsFeedNavigation {
 
     private var flowerLoadingDialog: ACProgressFlower? = null
 
@@ -78,8 +83,8 @@ class NewsFeedNavigationImpl @Inject constructor(private val application: Applic
         mainActivity.supportFragmentManager.beginTransaction()
             .replace(
                 container,
-                ProgressUploadFragment(application, params),
-                ProgressUploadFragment(application, params)::javaClass.name
+                ProgressUploadFragment(application, mainActivityHelper, params),
+                ProgressUploadFragment(application, mainActivityHelper, params)::javaClass.name
             )
             .addToBackStack("")
             .commit()

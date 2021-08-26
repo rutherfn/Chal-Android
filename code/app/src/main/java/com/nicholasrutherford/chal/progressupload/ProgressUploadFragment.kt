@@ -16,15 +16,18 @@ import com.nicholasrutherford.chal.ext.activitys.ProgressUploadExt
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.main.MainActivity
+import com.nicholasrutherford.chal.main.helper.MainActivityHelperImpl
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProgressUploadFragment @Inject constructor(private val application: Application, private val params: ProgressUploadParams) :
-    DaggerFragment(),
-    ProgressUploadExt {
+class ProgressUploadFragment @Inject constructor(
+    private val application: Application,
+    private val mainActivityHelper: MainActivityHelperImpl,
+    private val params: ProgressUploadParams
+    ) : DaggerFragment(), ProgressUploadExt {
 
         @Inject
         lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -41,9 +44,8 @@ class ProgressUploadFragment @Inject constructor(private val application: Applic
     private var selectedPhotoUri: Uri? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val mainActivity: MainActivity = (activity as MainActivity)
-        mainActivity.viewModel.updateCurrentScreen(Screens.UPLOAD_PROGRESS)
-        mainActivity.bvNavigation.visibleOrGone = false
+        mainActivityHelper.updateCurrentScreen(currentScreen = Screens.UPLOAD_PROGRESS)
+        mainActivityHelper.updateBottomNavigationVisibility(isVisible = false)
 
         val bind = FragmentProgressUploadBinding.inflate(layoutInflater)
 
