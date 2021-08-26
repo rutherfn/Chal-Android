@@ -6,6 +6,7 @@ import android.net.Uri
 import com.nicholasrutherford.chal.challengesredesign.challenges.ChallengesRedesignFragment
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.main.MainNavigation
+import com.nicholasrutherford.chal.main.helper.MainActivityHelperImpl
 import com.nicholasrutherford.chal.more.MoreFragment
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
@@ -14,7 +15,11 @@ import com.nicholasrutherford.chal.progressupload.ProgressUploadParams
 import com.nicholasrutherford.chal.splashredesign.SplashRedesignFragment
 import javax.inject.Inject
 
-class MainNavigationImpl @Inject constructor(private val application: Application, private val mainActivity: MainActivity) : MainNavigation {
+class MainNavigationImpl @Inject constructor(
+    private val application: Application,
+    private val mainActivityHelper: MainActivityHelperImpl,
+    private val mainActivity: MainActivity
+    ) : MainNavigation {
 
     override fun finish() = mainActivity.finish()
 
@@ -70,8 +75,8 @@ class MainNavigationImpl @Inject constructor(private val application: Applicatio
         mainActivity.supportFragmentManager.beginTransaction()
             .replace(
                 container,
-                ProgressUploadFragment(application, params),
-                ProgressUploadFragment(application, params)::javaClass.name
+                ProgressUploadFragment(application, mainActivityHelper, params),
+                ProgressUploadFragment(application, mainActivityHelper, params)::javaClass.name
             )
             .addToBackStack(null)
             .commit()
