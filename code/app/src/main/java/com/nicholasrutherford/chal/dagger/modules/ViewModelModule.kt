@@ -1,6 +1,7 @@
 package com.nicholasrutherford.chal.dagger.modules
 
 import androidx.lifecycle.ViewModel
+import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginViewModel
 import com.nicholasrutherford.chal.addedProgress.AddedProgressViewModel
 import com.nicholasrutherford.chal.dagger.ViewModelKey
 import com.nicholasrutherford.chal.main.MainViewModel
@@ -10,7 +11,6 @@ import com.nicholasrutherford.chal.peoplelist.PeopleListViewModel
 import com.nicholasrutherford.chal.profile.editprofile.EditProfileViewModel
 import com.nicholasrutherford.chal.profile.profiles.MyProfileViewModel
 import com.nicholasrutherford.chal.progressupload.ProgressUploadViewModel
-import com.nicholasrutherford.chal.main.splash.SplashViewModel
 import com.nicholasrutherford.chal.splashredesign.SplashRedesignViewModel
 import dagger.Binds
 import dagger.Module
@@ -28,6 +28,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(EditProfileViewModel::class)
     internal abstract fun bindEditProfileViewModel(viewModel: EditProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedesignLoginViewModel::class)
+    internal abstract fun bindLoginViewModel(viewModel: RedesignLoginViewModel): ViewModel
 
     @Binds
     @IntoMap
