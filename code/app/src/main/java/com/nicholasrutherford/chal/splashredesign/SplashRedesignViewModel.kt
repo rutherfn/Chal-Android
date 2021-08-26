@@ -1,17 +1,16 @@
 package com.nicholasrutherford.chal.splashredesign
 
-import android.app.Application
 import android.os.Handler
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.firebasehelper.ChalFirebaseAuthImpl
 import com.nicholasrutherford.chal.navigationimpl.splash.SplashRedesignNavigationImpl
 import javax.inject.Inject
 
 class SplashRedesignViewModel @Inject constructor(
-    private val application: Application,
+    private val firebaseAuth: ChalFirebaseAuthImpl,
     private val navigation: SplashRedesignNavigationImpl
-    ) : ViewModel() {
+) : ViewModel() {
 
     var viewState = SplashRedesignViewStateImpl()
 
@@ -19,7 +18,7 @@ class SplashRedesignViewModel @Inject constructor(
         val handler = Handler()
         handler.postDelayed(
             {
-                if (FirebaseAuth.getInstance().currentUser == null) {
+                if (!firebaseAuth.isLoggedIn) {
                     navigation.showlogin()
                 } else {
                     navigation.showHome()
