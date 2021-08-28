@@ -16,6 +16,8 @@
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/main/resources" />
             <option value="$PROJECT_DIR$/main/splash" />
+            <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/ui/typefaces" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
