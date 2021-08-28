@@ -28,9 +28,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsFeedFragment @Inject constructor(private val application: Application) :
-    DaggerFragment(),
-    NewsFeedRedesignFragmentExt {
+class NewsFeedFragment @Inject constructor(
+    private val application: Application
+    ) : DaggerFragment(), NewsFeedRedesignFragmentExt {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
