@@ -24,7 +24,7 @@ class SplashViewModel(context: Context, private val activity: SplashActivity) : 
         handler.postDelayed(
             {
                 if (FirebaseAuth.getInstance().currentUser == null) {
-                    navigation.login(activity) // change this later for real functionality
+                    navigation.home(activity) // change this later for real functionality
                 } else {
                     navigation.home(activity)
                 }
