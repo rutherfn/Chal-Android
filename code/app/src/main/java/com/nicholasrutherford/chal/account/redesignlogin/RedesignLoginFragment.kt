@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
 import com.nicholasrutherford.chal.ext.fragments.login.LoginFragmentExt
-import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.ui.typefaces.TypefacesImpl
 import dagger.android.support.DaggerFragment
@@ -21,6 +21,7 @@ import javax.inject.Inject
 
 class RedesignLoginFragment @Inject constructor(
     private val typeface: TypefacesImpl,
+    private val keyboard: KeyboardImpl
     ) : DaggerFragment(), LoginFragmentExt {
 
         @Inject
@@ -31,9 +32,7 @@ class RedesignLoginFragment @Inject constructor(
                 .get(RedesignLoginViewModel::class.java)
         }
 
-    private val helper = Helper()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val bind = FragmentLoginBinding.inflate(layoutInflater)
         main(bind)
         updateTypefaces(bind)
@@ -91,7 +90,7 @@ class RedesignLoginFragment @Inject constructor(
         bind.etEmail.setOnEditorActionListener { _, actionId, _ ->
 
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                activity?.let { helper.hideSoftKeyBoard(it) }
+                keyboard.hideKeyBoard()
             }
             false
         }
