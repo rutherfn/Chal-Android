@@ -1,19 +1,19 @@
 package com.nicholasrutherford.chal.account.redesignlogin
 
 import android.app.Application
-import android.os.CountDownTimer
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.viewModelScope
 import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.Networkimpl
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.helpers.Helper
+import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuthImpl
+import com.nicholasrutherford.chal.firebase.auth.LoginStatus
 import com.nicholasrutherford.chal.navigationimpl.login.RedesignLoginNavigationImpl
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @Suppress("MagicNumber")
@@ -23,17 +23,25 @@ class RedesignLoginViewModel @Inject constructor(
     private val application: Application,
     private val navigation: RedesignLoginNavigationImpl,
     private val keyboard: KeyboardImpl,
-    private val network: Networkimpl
+    private val network: Networkimpl,
+    private val firebaseAuth: ChalFirebaseAuthImpl
     ) : ViewModel() {
 
-    private val _loginSuccessState = MutableStateFlow(false)
-    val loginSuccessState: StateFlow<Boolean> = _loginSuccessState
-
-    val viewState = RedesignLoginViewStateImpl()
-
-    private val helper = Helper()
+    init {
+        viewModelScope.launch {
+            firebaseAuth.loginStatusState.collect { status ->
+                if (status == LoginStatus.ERROR) {
+                    showLoginStatusError()
+                } else if (status == LoginStatus.LOGGED_IN) {
+                    showloginStatusSuccess()
+                }
+            }
+        }
+    }
 
     private var alertErrorMessage: String = ""
+
+    val viewState = RedesignLoginViewStateImpl()
 
     private fun isEmailEmpty(email: String): Boolean {
         val empty = application.getString(R.string.empty_string)
@@ -72,12 +80,12 @@ class RedesignLoginViewModel @Inject constructor(
         }
     }
 
-    fun emailErrorVisible() {
+    private fun emailErrorVisible() {
         viewState.emailErrorImageVisible = true
         viewState.emailErrorTextVisible = true
     }
 
-    fun emailErrorNotVisible() {
+    private fun emailErrorNotVisible() {
         viewState.emailErrorImageVisible = false
         viewState.emailErrorTextVisible = false
     }
@@ -109,32 +117,20 @@ class RedesignLoginViewModel @Inject constructor(
                 val email = etEmail.text.toString()
                 val password = etPassword.text.toString()
 
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener {
-                        it.let { task ->
-                            if (task.isSuccessful) {
-
-                                val timer = object : CountDownTimer(1000, 100) {
-
-                                    override fun onTick(millisUntilFinished: Long) {}
-
-                                    override fun onFinish() {
-                                        _loginSuccessState.value = true
-                                        navigation.hideAcProgress()
-                                        navigation.loginToApp()
-                                    }
-                                }
-                                timer.start()
-                            }
-                        }
-                    }.addOnFailureListener {
-                        navigation.hideAcProgress()
-                        alertErrorMessage = application.applicationContext.getString(R.string.error_login_no_account_associated_with_email)
-                        showUserLoginErrorAlert()
-                        // show a alert stating that current user account doesn't exist
-                    }
+                firebaseAuth.signInWithEmailAndPassword(email = email, password = password)
             }
         }
+    }
+
+    fun showloginStatusSuccess() {
+        navigation.hideAcProgress()
+        navigation.loginToApp()
+    }
+
+    fun showLoginStatusError() {
+        navigation.hideAcProgress()
+        alertErrorMessage = application.applicationContext.getString(R.string.error_login_no_account_associated_with_email)
+        showUserLoginErrorAlert()
     }
 
     fun showUserLoginErrorAlert() {

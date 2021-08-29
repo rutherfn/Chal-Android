@@ -3,7 +3,7 @@ package com.nicholasrutherford.chal.splashredesign
 import android.os.Handler
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.firebasehelper.ChalFirebaseAuthImpl
+import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuthImpl
 import com.nicholasrutherford.chal.navigationimpl.splash.SplashRedesignNavigationImpl
 import javax.inject.Inject
 
