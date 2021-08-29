@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.account.redesignlogin
 
+import android.app.Application
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.KeyboardImpl
+import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
 import com.nicholasrutherford.chal.ext.fragments.login.LoginFragmentExt
 import com.nicholasrutherford.chal.helpers.visibleOrGone
@@ -20,6 +22,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RedesignLoginFragment @Inject constructor(
+    private val application: Application,
     private val typeface: TypefacesImpl,
     private val keyboard: KeyboardImpl
     ) : DaggerFragment(), LoginFragmentExt {
@@ -34,7 +37,6 @@ class RedesignLoginFragment @Inject constructor(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val bind = FragmentLoginBinding.inflate(layoutInflater)
-        main(bind)
         updateTypefaces(bind)
         textChangedListener(bind)
         editActionListener(bind)
@@ -42,16 +44,7 @@ class RedesignLoginFragment @Inject constructor(
         return bind.root
     }
 
-    override fun main(bind: FragmentLoginBinding) {
-        lifecycleScope.launch {
-            viewModel.loginSuccessState.collect { successState ->
-                if (successState) {
-                    bind.etEmail.setText("")
-                    bind.etPassword.setText("")
-                }
-            }
-        }
-    }
+    override fun main(bind: FragmentLoginBinding) = Unit
 
     override fun updateTypefaces(bind: FragmentLoginBinding) {
         typeface.setTextViewHeaderBoldTypeface(bind.tvTitle)
@@ -79,11 +72,6 @@ class RedesignLoginFragment @Inject constructor(
                 bind.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorImageVisible
             }
         })
-
-        bind.etPassword.setOnEditorActionListener { _, actionId, _ ->
-            viewModel.passwordEditAction(bind.etEmail, bind.etPassword, actionId, bind.etEmail.text.toString())
-            false
-        }
     }
 
     override fun editActionListener(bind: FragmentLoginBinding) {
@@ -94,11 +82,20 @@ class RedesignLoginFragment @Inject constructor(
             }
             false
         }
+
+        bind.etPassword.setOnEditorActionListener { _, actionId, _ ->
+            viewModel.passwordEditAction(bind.etEmail, bind.etPassword, actionId, bind.etEmail.text.toString())
+            false
+        }
     }
 
     override fun clickListeners(bind: FragmentLoginBinding) {
         bind.btLogIn.setOnClickListener {
             viewModel.onLogInClicked(bind.etEmail, bind.etPassword)
+
+            val emptyString = application.getString(R.string.empty_string)
+            bind.etEmail.setText(emptyString)
+            bind.etPassword.setText(emptyString)
         }
         bind.tvSignUp.setOnClickListener {
             viewModel.onSignUpClicked()

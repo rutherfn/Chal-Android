@@ -55,6 +55,7 @@
     <string name="debug_password_title">Please Enter Password In Order To Continue</string>
     <string name="discard_post_details">Clicking YES will discard your current post towards your challenge.</string>
     <string name="dev_email">nicholasrutherford121@gmail.com</string>
+    <string name="dot_com">.com</string>
     <string name="cancel_and_discard_post_title">Discard Post</string>
     <string name="cancel_and_discard_post_message">Are you sure you want to discard this post?</string>
     <string name="done">Done</string>
