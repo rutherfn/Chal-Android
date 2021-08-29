@@ -1,6 +1,5 @@
 package com.nicholasrutherford.chal.account.redesignlogin
 
-import android.app.Application
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,18 +10,18 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
-import com.nicholasrutherford.chal.ext.fragments.login.LoginFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.login.LoginFragmentExt
 import com.nicholasrutherford.chal.helpers.Helper
-import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.nicholasrutherford.chal.ui.typefaces.TypefacesImpl
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RedesignLoginFragment @Inject constructor(
-    private val application: Application
-    ) : DaggerFragment(), LoginFragmentExtension {
+    private val typeface: TypefacesImpl,
+    ) : DaggerFragment(), LoginFragmentExt {
 
         @Inject
         lateinit var viewmodelFactory: ViewModelProvider.Factory
@@ -32,7 +31,6 @@ class RedesignLoginFragment @Inject constructor(
                 .get(RedesignLoginViewModel::class.java)
         }
 
-    private val typeface = Typeface()
     private val helper = Helper()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,19 +55,16 @@ class RedesignLoginFragment @Inject constructor(
     }
 
     override fun updateTypefaces(bind: FragmentLoginBinding) {
-        val appContext = application.applicationContext
-        typeface.setTypefaceForHeaderBold(bind.tvTitle, appContext)
-        typeface.setTypefaceForHeaderBold(bind.tvTitle, appContext)
-        typeface.setTypefaceForHeaderBold(bind.btLogIn, appContext)
+        typeface.setTextViewHeaderBoldTypeface(bind.tvTitle)
+        typeface.setTextViewSubHeaderItalicTypeface(bind.tvSubTitle)
 
-        typeface.setTypefaceForSubHeaderBold(bind.tvErrorEmail, appContext)
+        typeface.setTextViewSubHeaderBoldTypeface(bind.tvEmail)
+        typeface.setTextViewSubHeaderBoldTypeface(bind.tvPassword)
 
-        typeface.setTypefaceForBodyBold(bind.tvEmail, appContext)
-        typeface.setTypefaceForBodyBold(bind.tvPassword, appContext)
-        typeface.setTypefaceForBodyBold(bind.tvSignUp, appContext)
+        typeface.setTextViewSubHeaderRegularTypeface(bind.btLogIn)
 
-        typeface.setTypefaceForBodyItalic(bind.tvForgotPassword, appContext)
-        typeface.setTypefaceForLightBody(bind.tvDoNotHaveAccount, appContext)
+        typeface.setTextViewBodyBoldTypeface(bind.tvForgotPassword)
+        typeface.setTextViewBodyBoldTypeface(bind.tvSignUp)
     }
 
     override fun textChangedListener(bind: FragmentLoginBinding) {
