@@ -22,7 +22,6 @@ class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
                 it.let { taskResult ->
                     if (taskResult.isSuccessful) {
                         _loginStatusState.value = LoginStatus.LOGGED_IN
-                        // set tje flow here
                     }
                 }
             }.addOnFailureListener {
