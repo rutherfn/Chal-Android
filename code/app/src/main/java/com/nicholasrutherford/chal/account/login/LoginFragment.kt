@@ -11,7 +11,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
-import com.nicholasrutherford.chal.ext.fragments.login.LoginFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.login.LoginFragmentExt
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.helpers.visibleOrGone
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class LoginFragment(activity: LoginActivity, private val appContext: Context) : Fragment(),
-    LoginFragmentExtension {
+    LoginFragmentExt {
 
     private val viewModel = LoginViewModel(activity, appContext)
     private val typeface = Typeface()
@@ -58,7 +58,6 @@ class LoginFragment(activity: LoginActivity, private val appContext: Context) : 
         typeface.setTypefaceForBodyBold(bind.tvSignUp, appContext)
 
         typeface.setTypefaceForBodyItalic(bind.tvForgotPassword, appContext)
-        typeface.setTypefaceForLightBody(bind.tvDoNotHaveAccount, appContext)
     }
 
     override fun textChangedListener(bind: FragmentLoginBinding) {

@@ -28,7 +28,7 @@ class MainActivity : DaggerAppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        viewModel.launchNewsFeed()
+        viewModel.launchSplash()
         binding?.let { binding ->
             setupBottomNavigation(binding = binding)
         }

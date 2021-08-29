@@ -2,7 +2,7 @@ package com.nicholasrutherford.chal.ext.fragments.login
 
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
 
-interface LoginFragmentExtension {
+interface LoginFragmentExt {
     fun main(bind: FragmentLoginBinding)
     fun updateTypefaces(bind: FragmentLoginBinding)
     fun textChangedListener(bind: FragmentLoginBinding)
