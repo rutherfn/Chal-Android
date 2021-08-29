@@ -1,6 +1,7 @@
 package com.nicholasrutherford.chal.navigationimpl.splash
 
 import android.content.Intent
+import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginFragment
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
@@ -10,7 +11,8 @@ import javax.inject.Inject
 
 class SplashRedesignNavigationImpl @Inject constructor(
     private val main: MainActivity,
-    private val typeface: TypefacesImpl
+    private val typeface: TypefacesImpl,
+    private val keyboard: KeyboardImpl
     ): SplashRedesignNavigation {
 
     override fun showHome() {
@@ -21,12 +23,17 @@ class SplashRedesignNavigationImpl @Inject constructor(
     }
 
     override fun showlogin() {
-        println("i see fire")
         main.supportFragmentManager.beginTransaction()
             .replace(
                 container,
-                RedesignLoginFragment(typeface = typeface),
-                RedesignLoginFragment(typeface = typeface)::javaClass.name
+                RedesignLoginFragment(
+                    typeface = typeface,
+                    keyboard = keyboard
+                ),
+                RedesignLoginFragment(
+                    typeface = typeface,
+                    keyboard = keyboard
+                )::javaClass.name
             )
             .addToBackStack(null)
             .commit()
