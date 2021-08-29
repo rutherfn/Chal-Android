@@ -35,6 +35,7 @@ android {
 dependencies {
     api(project(path = ":main:resources"))
     api(project(path = ":main:splash"))
+    api(project(path = ":network"))
     api(project(path = ":ui:typefaces"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))

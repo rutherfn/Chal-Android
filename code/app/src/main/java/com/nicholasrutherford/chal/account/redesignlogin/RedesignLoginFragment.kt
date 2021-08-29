@@ -79,11 +79,6 @@ class RedesignLoginFragment @Inject constructor(
                 bind.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorImageVisible
             }
         })
-
-        bind.etPassword.setOnEditorActionListener { _, actionId, _ ->
-            viewModel.passwordEditAction(bind.etEmail, bind.etPassword, actionId, bind.etEmail.text.toString())
-            false
-        }
     }
 
     override fun editActionListener(bind: FragmentLoginBinding) {
@@ -92,6 +87,11 @@ class RedesignLoginFragment @Inject constructor(
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 keyboard.hideKeyBoard()
             }
+            false
+        }
+
+        bind.etPassword.setOnEditorActionListener { _, actionId, _ ->
+            viewModel.passwordEditAction(bind.etEmail, bind.etPassword, actionId, bind.etEmail.text.toString())
             false
         }
     }

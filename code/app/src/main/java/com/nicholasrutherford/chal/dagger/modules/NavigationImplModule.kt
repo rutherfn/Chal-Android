@@ -23,9 +23,6 @@ abstract class NavigationImplModule {
     abstract fun contributeEditProfileNavigationImpl(): EditProfileNavigationImpl
 
     @ContributesAndroidInjector
-    abstract fun contributeLoginNavigationImpl(): RedesignLoginNavigationImpl
-
-    @ContributesAndroidInjector
     abstract fun contributeMainNavigationImpl(): MainNavigationImpl
 
     @ContributesAndroidInjector
