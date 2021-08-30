@@ -10,6 +10,9 @@ class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
     private val _loginStatusState = MutableStateFlow(LoginStatus.NONE)
     val loginStatusState: StateFlow<LoginStatus> = _loginStatusState
 
+    private val _sendPasswordResetEmailState = MutableStateFlow(SendPasswordResetEmailStatus.NONE)
+    val sendPasswordResetEmailState: StateFlow<SendPasswordResetEmailStatus> = _sendPasswordResetEmailState
+
     val firebaseAuth = FirebaseAuth.getInstance()
 
     override var isLoggedIn: Boolean = firebaseAuth.currentUser != null
@@ -19,13 +22,22 @@ class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
     override fun signInWithEmailAndPassword(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
-                it.let { taskResult ->
-                    if (taskResult.isSuccessful) {
+                    if (it.isSuccessful) {
                         _loginStatusState.value = LoginStatus.LOGGED_IN
-                    }
                 }
             }.addOnFailureListener {
                 _loginStatusState.value = LoginStatus.ERROR
+            }
+    }
+
+    override fun sendPasswordResetEmail(resetEmail: String) {
+        firebaseAuth.sendPasswordResetEmail(resetEmail)
+            .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.SUCCESSFUL
+                }
+            }.addOnFailureListener {
+                _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.ERROR
             }
     }
 }
