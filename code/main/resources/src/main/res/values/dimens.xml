@@ -1,6 +1,7 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
 
+    <dimen name="forgot_password_btn_done_width">100dp</dimen>
     <dimen name="cl_toolbar_more_height">45dp</dimen>
     <dimen name="cl_toolbar_post_height">60dp</dimen>
 
