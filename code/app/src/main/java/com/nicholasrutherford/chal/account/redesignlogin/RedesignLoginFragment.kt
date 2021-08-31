@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
@@ -17,8 +16,6 @@ import com.nicholasrutherford.chal.ext.fragments.login.LoginFragmentExt
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.ui.typefaces.TypefacesImpl
 import dagger.android.support.DaggerFragment
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RedesignLoginFragment @Inject constructor(
@@ -84,14 +81,14 @@ class RedesignLoginFragment @Inject constructor(
         }
 
         bind.etPassword.setOnEditorActionListener { _, actionId, _ ->
-            viewModel.passwordEditAction(bind.etEmail, bind.etPassword, actionId, bind.etEmail.text.toString())
+            viewModel.passwordEditAction(bind.etEmail.text.toString(), bind.etPassword.text.toString(), actionId)
             false
         }
     }
 
     override fun clickListeners(bind: FragmentLoginBinding) {
         bind.btLogIn.setOnClickListener {
-            viewModel.onLogInClicked(bind.etEmail, bind.etPassword)
+            viewModel.onLogInClicked(bind.etEmail.text.toString(), bind.etPassword.text.toString())
 
             val emptyString = application.getString(R.string.empty_string)
             bind.etEmail.setText(emptyString)

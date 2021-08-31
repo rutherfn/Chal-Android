@@ -27,8 +27,12 @@ class ForgotPasswordFragment(private val activity: ForgotPasswordActivity, priva
         updateTypefaces(bind)
         editorActionListener(bind)
         textChangedListener(bind)
-        clickListener(bind)
+        clickListeners(bind)
         return bind.root
+    }
+
+    override fun collectViewStateUpdated(bind: FragmentForgotPasswordBinding) {
+
     }
 
     override fun updateTypefaces(bind: FragmentForgotPasswordBinding) {
@@ -68,10 +72,14 @@ class ForgotPasswordFragment(private val activity: ForgotPasswordActivity, priva
         })
     }
 
-    override fun clickListener(bind: FragmentForgotPasswordBinding) {
+    override fun clickListeners(bind: FragmentForgotPasswordBinding) {
         bind.btnDone.setOnClickListener {
             val resetEmail = bind.etTypeEmail.text.toString()
             viewModel.attemptToSendResetPassword(resetEmail)
         }
+    }
+
+    override fun updateView(bind: FragmentForgotPasswordBinding) {
+
     }
 }

@@ -42,6 +42,7 @@
     <string name="challenges_bottom_nav">Challenges</string>
     <string name="choose_from_library">Choose From Library</string>
     <string name="create">Create</string>
+    <string name="current_email_does_not_exist_please_try_again_with_a_valid_email_register_to_chal">Current email does mpt exist. Please try again with a valid email registered under Chal accounts.</string>
     <string name="days_completed">%d out of %d days completed</string>
     <string name="do_not_have_account">Don\'t Have A Account?</string>
     <string name="debug">Debug</string>
@@ -65,6 +66,8 @@
     <string name="edit_my_profile_description">To <b>edit your profile, </b> edit the fields down below.</string>
     <string name="edit_username">Edit Username</string>
     <string name="email">Email</string>
+    <string name="email_does_not_exist">Email Does Not Exist!</string>
+    <string name="email_to_reset_password_sent_please_check_your_email_for_directions_on_how_to_reset_password">Email to reset password sent! Please check your email, for directions on how to reset your password.</string>
     <string name="email_sent">Email Sent!</string>
     <string name="empty_string" />
     <string name="iv_error_content_description_debug_password">Image View for not the correct password debug mode error</string>
@@ -167,6 +170,7 @@
     <string name="missing_title_desc_message">Bug missing a title. Please add a title for the bug your reporting.</string>
     <string name="news_feed">News Feed</string>
     <string name="no">No</string>
+    <string name="not_a_valid_email">Not a valid email</string>
     <string name="not_enrolled_in_challenge">Not Enrolled In Challenge</string>
     <string name="not_enrolled_in_challenge_message">Currently you are not enrolled into any challenges! In order to upload progress, you must be enrolled in a challenge!</string>
     <string name="ok">OK</string>
@@ -207,6 +211,7 @@
     <string name="social_media_instagram_content_desc">Social Media Icon Instagram</string>
     <string name="social_media_facebook_content_desc">Social Media Icon Facebook</string>
     <string name="social_media_linkedin_content_desc">Social Media Icon Linkedin</string>
+    <string name="sorry_but_this_is_not_a_valid_email_please_enter_a_valid_email_and_try_again">Sorry but that is not a valid email. Please enter a valid email, and try again"</string>
     <string name="successful">Successful</string>
     <string name="teaser_challenge">Teaser Challenge</string>
     <string name="to_reset_password">To Reset Password.</string>

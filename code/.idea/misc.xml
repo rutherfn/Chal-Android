@@ -10,7 +10,7 @@
         <entry key="app/src/main/res/layout/added_progress_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_added_progress.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/fragment_challenge_details.xml" value="0.20520833333333333" />
-        <entry key="app/src/main/res/layout/fragment_forgot_password.xml" value="0.41354166666666664" />
+        <entry key="app/src/main/res/layout/fragment_forgot_password.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2210144927536232" />
         <entry key="app/src/main/res/layout/fragment_progress_upload.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/fragment_redesign_challenges.xml" value="0.20520833333333333" />

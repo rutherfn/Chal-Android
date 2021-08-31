@@ -2,29 +2,26 @@ package com.nicholasrutherford.chal.account.redesignlogin
 
 import android.app.Application
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.Networkimpl
 import com.nicholasrutherford.chal.R
+import com.nicholasrutherford.chal.account.validation.AccountValidationImpl
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuthImpl
 import com.nicholasrutherford.chal.firebase.auth.LoginStatus
 import com.nicholasrutherford.chal.navigationimpl.login.RedesignLoginNavigationImpl
-import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-@Suppress("MagicNumber")
-const val AT_SYMBOL = "@"
 
 class RedesignLoginViewModel @Inject constructor(
     private val application: Application,
     private val navigation: RedesignLoginNavigationImpl,
     private val keyboard: KeyboardImpl,
     private val network: Networkimpl,
-    private val firebaseAuth: ChalFirebaseAuthImpl
+    private val firebaseAuth: ChalFirebaseAuthImpl,
+    private val accountValidation: AccountValidationImpl
     ) : ViewModel() {
 
     init {
@@ -43,27 +40,12 @@ class RedesignLoginViewModel @Inject constructor(
 
     val viewState = RedesignLoginViewStateImpl()
 
-    private fun isEmailEmpty(email: String): Boolean {
-        val empty = application.getString(R.string.empty_string)
-        return email == empty
-    }
-
-    private fun isEmailMeetRequirements(email: String): Boolean {
-        val dotCom = application.getString(R.string.dot_com)
-        return email.contains(AT_SYMBOL) && email.contains(dotCom)
-    }
-
-    private fun isPasswordEmpty(password: String): Boolean {
-        val empty = application.getString(R.string.empty_string)
-        return password == empty
-    }
-
     fun updateEmailAfterTextChanged(email: String) {
         when {
-            isEmailMeetRequirements(email) -> {
+            accountValidation.isEmailMeetRequirements(email) -> {
                 emailErrorNotVisible()
             }
-            isEmailEmpty(email) -> {
+            accountValidation.isEmailEmpty(email) -> {
                 emailErrorNotVisible()
             }
             else -> {
@@ -72,9 +54,9 @@ class RedesignLoginViewModel @Inject constructor(
         }
     }
 
-    fun passwordEditAction(etEmail: EditText, etPassword: EditText, actionId: Int, email: String) {
-        if (actionId == EditorInfo.IME_ACTION_DONE && !isEmailEmpty(email) && isEmailMeetRequirements(email)) {
-            onLogInClicked(etEmail, etPassword)
+    fun passwordEditAction(email: String, password: String, actionId: Int) {
+        if (actionId == EditorInfo.IME_ACTION_DONE && accountValidation.isEmailValid(email)) {
+            onLogInClicked(email, password)
         } else if (actionId == EditorInfo.IME_ACTION_DONE) {
             keyboard.hideKeyBoard()
         }
@@ -102,10 +84,10 @@ class RedesignLoginViewModel @Inject constructor(
         }
     }
 
-    fun onLogInClicked(etEmail: EditText, etPassword: EditText) {
+    fun onLogInClicked(email: String, password: String) {
         keyboard.hideKeyBoard()
 
-        if (isEmailEmpty(etEmail.text.toString()) || isPasswordEmpty(etPassword.etPassword.toString())) {
+        if (accountValidation.isPasswordOrEmailEmpty(email, password)) {
             alertErrorMessage = application.applicationContext.getString(R.string.error_fields_are_not_correct_log_in)
             showUserLoginErrorAlert()
         } else {
@@ -113,9 +95,6 @@ class RedesignLoginViewModel @Inject constructor(
                 showUserLoginErrorAlert()
             } else {
                 navigation.showAcProgress()
-
-                val email = etEmail.text.toString()
-                val password = etPassword.text.toString()
 
                 firebaseAuth.signInWithEmailAndPassword(email = email, password = password)
             }
@@ -142,7 +121,7 @@ class RedesignLoginViewModel @Inject constructor(
     }
 
     fun onForgotPasswordClicked() {
-        navigation.forgotPassword()
+        navigation.showForgotPassword()
     }
 
     class RedesignLoginViewStateImpl : RedesignLoginViewState {
