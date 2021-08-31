@@ -4,7 +4,7 @@ import com.nicholasrutherford.chal.Navigation
 
 interface RedesignLoginViewNavigation: Navigation {
     fun signUp()
-    fun forgotPassword()
+    fun showForgotPassword()
     fun errorLogin(errorMessageText: String)
     fun showAcProgress()
     fun hideAcProgress()

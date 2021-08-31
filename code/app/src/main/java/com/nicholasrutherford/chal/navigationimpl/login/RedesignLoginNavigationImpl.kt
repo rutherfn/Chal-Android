@@ -7,17 +7,19 @@ import android.graphics.Color
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.account.forgotpassword.ForgotPasswordActivity
+import com.nicholasrutherford.chal.account.forgotpasswordredesign.ForgotPasswordRedesignFragment
 import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginViewNavigation
 import com.nicholasrutherford.chal.account.signup.SignUpActivity
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
+import com.nicholasrutherford.chal.ui.typefaces.TypefacesImpl
 import javax.inject.Inject
 
 class RedesignLoginNavigationImpl @Inject constructor(
     private val application: Application,
-    private val main: MainActivity
+    private val main: MainActivity,
+    private val typeface: TypefacesImpl
     ) : RedesignLoginViewNavigation {
 
     private var flowerLoadingDialog: ACProgressFlower? = null
@@ -29,11 +31,15 @@ class RedesignLoginNavigationImpl @Inject constructor(
         main.finish()
     }
 
-    override fun forgotPassword() {
-        val intent = Intent(main.applicationContext, ForgotPasswordActivity::class.java)
-
-        main.startActivity(intent)
-        main.finish()
+    override fun showForgotPassword() {
+        main.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                ForgotPasswordRedesignFragment(typeface = typeface),
+                ForgotPasswordRedesignFragment(typeface = typeface)::javaClass.name
+            )
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun errorLogin(errorMessageText: String) {

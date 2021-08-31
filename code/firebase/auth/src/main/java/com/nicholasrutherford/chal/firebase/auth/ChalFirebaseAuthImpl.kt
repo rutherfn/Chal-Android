@@ -33,11 +33,17 @@ class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
     override fun sendPasswordResetEmail(resetEmail: String) {
         firebaseAuth.sendPasswordResetEmail(resetEmail)
             .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.SUCCESSFUL
+                if (it.isSuccessful) {
+                    _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.SUCCESSFUL
+                } else {
+                    _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.ERROR
                 }
             }.addOnFailureListener {
                 _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.ERROR
             }
+    }
+
+    override fun setPasswordResetEmailStateAsNotUpdated() {
+        _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.NONE
     }
 }
