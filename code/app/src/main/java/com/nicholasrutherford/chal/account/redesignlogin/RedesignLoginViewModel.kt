@@ -2,8 +2,6 @@ package com.nicholasrutherford.chal.account.redesignlogin
 
 import android.app.Application
 import android.view.inputmethod.EditorInfo
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.Networkimpl
 import com.nicholasrutherford.chal.R
@@ -11,8 +9,7 @@ import com.nicholasrutherford.chal.account.validation.AccountValidationImpl
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuthImpl
 import com.nicholasrutherford.chal.firebase.auth.LoginStatus
 import com.nicholasrutherford.chal.navigationimpl.login.RedesignLoginNavigationImpl
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import javax.inject.Inject
 
 class RedesignLoginViewModel @Inject constructor(
@@ -20,25 +17,22 @@ class RedesignLoginViewModel @Inject constructor(
     private val navigation: RedesignLoginNavigationImpl,
     private val keyboard: KeyboardImpl,
     private val network: Networkimpl,
-    private val firebaseAuth: ChalFirebaseAuthImpl,
+    val firebaseAuth: ChalFirebaseAuthImpl,
     private val accountValidation: AccountValidationImpl
-    ) : ViewModel() {
-
-    init {
-        viewModelScope.launch {
-            firebaseAuth.loginStatusState.collect { status ->
-                if (status == LoginStatus.ERROR) {
-                    showLoginStatusError()
-                } else if (status == LoginStatus.LOGGED_IN) {
-                    showloginStatusSuccess()
-                }
-            }
-        }
-    }
+    ) : BaseViewModel() {
 
     private var alertErrorMessage: String = ""
 
     val viewState = RedesignLoginViewStateImpl()
+
+    fun onLoginStatesResult(status: LoginStatus) {
+        if (status == LoginStatus.ERROR) {
+            showLoginStatusError()
+        } else if (status == LoginStatus.LOGGED_IN) {
+            showloginStatusSuccess()
+        }
+        firebaseAuth.setLoginStatusStateAsNotUpdated()
+    }
 
     fun updateEmailAfterTextChanged(email: String) {
         when {
@@ -65,11 +59,13 @@ class RedesignLoginViewModel @Inject constructor(
     private fun emailErrorVisible() {
         viewState.emailErrorImageVisible = true
         viewState.emailErrorTextVisible = true
+        setViewStateAsUpdated()
     }
 
     private fun emailErrorNotVisible() {
         viewState.emailErrorImageVisible = false
         viewState.emailErrorTextVisible = false
+        setViewStateAsUpdated()
     }
 
     private fun isUserReadyToLogIn(): Boolean {
@@ -95,13 +91,12 @@ class RedesignLoginViewModel @Inject constructor(
                 showUserLoginErrorAlert()
             } else {
                 navigation.showAcProgress()
-
                 firebaseAuth.signInWithEmailAndPassword(email = email, password = password)
             }
         }
     }
 
-    fun showloginStatusSuccess() {
+    private fun showloginStatusSuccess() {
         navigation.hideAcProgress()
         navigation.loginToApp()
     }
@@ -112,7 +107,7 @@ class RedesignLoginViewModel @Inject constructor(
         showUserLoginErrorAlert()
     }
 
-    fun showUserLoginErrorAlert() {
+    private fun showUserLoginErrorAlert() {
         navigation.errorLogin(errorMessageText = alertErrorMessage)
     }
 

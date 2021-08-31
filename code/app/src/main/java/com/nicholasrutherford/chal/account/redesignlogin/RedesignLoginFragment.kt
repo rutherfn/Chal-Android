@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
@@ -16,6 +17,8 @@ import com.nicholasrutherford.chal.ext.fragments.login.LoginFragmentExt
 import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.ui.typefaces.TypefacesImpl
 import dagger.android.support.DaggerFragment
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RedesignLoginFragment @Inject constructor(
@@ -43,6 +46,21 @@ class RedesignLoginFragment @Inject constructor(
 
     override fun main(bind: FragmentLoginBinding) = Unit
 
+    override fun collectViewStateUpdated(bind: FragmentLoginBinding) {
+        lifecycleScope.launch {
+            viewModel.viewStateUpdated.collect { isUpdated ->
+                if (isUpdated) {
+                    updateView(bind)
+                }
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.firebaseAuth.loginStatusState.collect { status ->
+                viewModel.onLoginStatesResult(status)
+            }
+        }
+    }
+
     override fun updateTypefaces(bind: FragmentLoginBinding) {
         typeface.setTextViewHeaderBoldTypeface(bind.tvTitle)
         typeface.setTextViewSubHeaderItalicTypeface(bind.tvSubTitle)
@@ -64,9 +82,6 @@ class RedesignLoginFragment @Inject constructor(
 
             override fun afterTextChanged(s: Editable?) {
                 viewModel.updateEmailAfterTextChanged(bind.etEmail.text.toString())
-
-                bind.tvErrorEmail.visibleOrGone = viewModel.viewState.emailErrorTextVisible
-                bind.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorImageVisible
             }
         })
     }
@@ -100,5 +115,10 @@ class RedesignLoginFragment @Inject constructor(
         bind.tvForgotPassword.setOnClickListener {
             viewModel.onForgotPasswordClicked()
         }
+    }
+
+    override fun updateView(bind: FragmentLoginBinding) {
+        bind.tvErrorEmail.visibleOrGone = viewModel.viewState.emailErrorTextVisible
+        bind.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorImageVisible
     }
 }

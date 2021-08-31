@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/news_feed_notification_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/other_users_profile_layout.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/post_progress_layout.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/redesign_my_feed_layout.xml" value="0.18518518518518517" />
+        <entry key="app/src/main/res/layout/redesign_my_feed_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_challenge_layout.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/toolbar_title_with_back_stack.xml" value="0.41354166666666664" />
         <entry key="main/activity/src/main/res/layout/main_activity.xml" value="0.16" />

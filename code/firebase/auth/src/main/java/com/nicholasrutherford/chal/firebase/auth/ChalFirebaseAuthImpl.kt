@@ -30,6 +30,10 @@ class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
             }
     }
 
+    override fun setLoginStatusStateAsNotUpdated() {
+        _loginStatusState.value = LoginStatus.NONE
+    }
+
     override fun sendPasswordResetEmail(resetEmail: String) {
         firebaseAuth.sendPasswordResetEmail(resetEmail)
             .addOnCompleteListener {

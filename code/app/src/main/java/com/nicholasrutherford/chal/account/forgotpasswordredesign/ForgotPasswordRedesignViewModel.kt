@@ -41,8 +41,6 @@ class ForgotPasswordRedesignViewModel @Inject constructor(
         firebaseAuth.setPasswordResetEmailStateAsNotUpdated()
     }
 
-    fun navigationToLogin() = navigation.showLogin()
-
     fun showErrorEmail() {
         viewState.errorForgotPasswordVisible = true
         setViewStateAsUpdated()
