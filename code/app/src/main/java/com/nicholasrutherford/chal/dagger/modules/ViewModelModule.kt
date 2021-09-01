@@ -3,6 +3,7 @@ package com.nicholasrutherford.chal.dagger.modules
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.account.forgotpasswordredesign.ForgotPasswordRedesignViewModel
 import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginViewModel
+import com.nicholasrutherford.chal.account.redesignsignup.RedesignSignUpViewModel
 import com.nicholasrutherford.chal.addedProgress.AddedProgressViewModel
 import com.nicholasrutherford.chal.dagger.ViewModelKey
 import com.nicholasrutherford.chal.main.MainViewModel
@@ -74,6 +75,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SplashRedesignViewModel::class)
     internal abstract fun bindSplashViewModel(viewModel: SplashRedesignViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedesignSignUpViewModel::class)
+    internal abstract fun bindSignUpViewModel(viewModel: RedesignSignUpViewModel): ViewModel
 
     // @Binds
     // @IntoMap
