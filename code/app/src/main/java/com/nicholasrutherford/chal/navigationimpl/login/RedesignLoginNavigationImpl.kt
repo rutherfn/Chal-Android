@@ -2,14 +2,13 @@ package com.nicholasrutherford.chal.navigationimpl.login
 
 import android.app.AlertDialog
 import android.app.Application
-import android.content.Intent
 import android.graphics.Color
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.forgotpasswordredesign.ForgotPasswordRedesignFragment
 import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginViewNavigation
-import com.nicholasrutherford.chal.account.signup.SignUpActivity
+import com.nicholasrutherford.chal.account.redesignsignup.RedesignSignUpFragment
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.newsfeed.NewsFeedFragment
@@ -25,10 +24,14 @@ class RedesignLoginNavigationImpl @Inject constructor(
     private var flowerLoadingDialog: ACProgressFlower? = null
 
     override fun signUp() {
-        val intent = Intent(main.applicationContext, SignUpActivity::class.java)
-
-        main.startActivity(intent)
-        main.finish()
+        main.supportFragmentManager.beginTransaction()
+            .replace(
+                container,
+                RedesignSignUpFragment(typeface),
+                RedesignSignUpFragment(typeface)::javaClass.name
+            )
+            .addToBackStack("")
+            .commit()
     }
 
     override fun showForgotPassword() {

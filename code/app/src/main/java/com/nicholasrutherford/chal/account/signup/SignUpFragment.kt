@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nicholasrutherford.chal.databinding.FragmentSignUpBinding
-import com.nicholasrutherford.chal.ext.fragments.signup.SignUpFragmentExtension
+import com.nicholasrutherford.chal.ext.fragments.signup.SignUpFragmentExt
 import com.nicholasrutherford.chal.helpers.Typeface
 import com.nicholasrutherford.chal.navigationimpl.signup.SignUpNavigationImpl
 
 class SignUpFragment(private val activity: SignUpActivity, private val appContext: Context) : Fragment(),
-    SignUpFragmentExtension {
+    SignUpFragmentExt {
 
     private val typeface = Typeface()
     private val navigation =
