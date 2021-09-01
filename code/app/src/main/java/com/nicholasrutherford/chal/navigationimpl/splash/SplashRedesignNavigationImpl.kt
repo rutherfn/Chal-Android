@@ -1,7 +1,6 @@
 package com.nicholasrutherford.chal.navigationimpl.splash
 
 import android.app.Application
-import android.content.Intent
 import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginFragment
 import com.nicholasrutherford.chal.main.MainActivity
@@ -18,10 +17,7 @@ class SplashRedesignNavigationImpl @Inject constructor(
     ): SplashRedesignNavigation {
 
     override fun showHome() {
-        val intent = Intent(main.applicationContext, MainActivity::class.java)
-
-        main.startActivity(intent)
-        main.finish()
+        // show home
     }
 
     override fun showlogin() {
