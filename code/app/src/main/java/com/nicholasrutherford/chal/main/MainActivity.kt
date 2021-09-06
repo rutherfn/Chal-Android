@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
-import com.nicholasrutherford.chal.navigator.Navigator
+import com.nicholasrutherford.chal.main.navigation.Navigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

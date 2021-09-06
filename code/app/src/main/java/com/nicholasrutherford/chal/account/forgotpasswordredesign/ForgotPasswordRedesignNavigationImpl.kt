@@ -7,9 +7,7 @@ import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginFragment
 import com.nicholasrutherford.chal.main.MainActivity
-import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
 import com.nicholasrutherford.chal.ui.typefaces.TypefacesImpl
 import javax.inject.Inject
 

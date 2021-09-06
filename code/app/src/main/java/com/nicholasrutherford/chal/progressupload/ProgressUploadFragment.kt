@@ -13,8 +13,8 @@ import com.nicholasrutherford.chal.Screens
 import com.nicholasrutherford.chal.data.responses.ActiveChallengeResponse
 import com.nicholasrutherford.chal.databinding.FragmentProgressUploadBinding
 import com.nicholasrutherford.chal.ext.activitys.ProgressUploadExt
+import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.main.helper.MainActivityHelperImpl
 import dagger.android.support.DaggerFragment

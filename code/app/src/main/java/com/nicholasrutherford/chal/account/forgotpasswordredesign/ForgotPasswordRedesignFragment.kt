@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.databinding.FragmentForgotPasswordBinding
 import com.nicholasrutherford.chal.ext.fragments.forgotpassword.ForgotPasswordFragmentExtension
-import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.flow.collect

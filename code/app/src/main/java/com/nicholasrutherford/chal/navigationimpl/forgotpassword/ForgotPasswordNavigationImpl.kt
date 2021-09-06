@@ -9,7 +9,6 @@ import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.forgotpassword.ForgotPasswordActivity
 import com.nicholasrutherford.chal.account.forgotpassword.ForgotPasswordNavigation
-import com.nicholasrutherford.chal.account.login.LoginActivity
 
 class ForgotPasswordNavigationImpl : ForgotPasswordNavigation {
 
@@ -48,8 +47,8 @@ class ForgotPasswordNavigationImpl : ForgotPasswordNavigation {
     }
 
     override fun login(appContext: Context, forgotPasswordActivity: ForgotPasswordActivity) {
-        val intent = Intent(appContext, LoginActivity::class.java)
-        forgotPasswordActivity.startActivity(intent)
-        forgotPasswordActivity.finish()
+        // val intent = Intent(appContext, LoginActivity::class.java)
+        // forgotPasswordActivity.startActivity(intent)
+        // forgotPasswordActivity.finish()
     }
 }

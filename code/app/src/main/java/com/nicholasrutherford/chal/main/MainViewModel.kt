@@ -14,11 +14,9 @@ import com.nicholasrutherford.chal.Screens
 import com.nicholasrutherford.chal.helpers.sharedpreference.clearsharedpreference.ClearSharedPreferenceImpl
 import com.nicholasrutherford.chal.helpers.sharedpreference.readsharedpreference.ReadSharedPreferenceImpl
 import com.nicholasrutherford.chal.helpers.testfairy.ChalTestFairyImpl
-import com.nicholasrutherford.chal.navigationimpl.main.MainNavigationImpl
 
 class MainViewModel @ViewModelInject constructor(
-    private val application: Application,
-    private val navigation: MainNavigationImpl
+    private val application: Application
 ) : ViewModel() {
 
     val viewState = MainViewStateImpl()
@@ -30,24 +28,24 @@ class MainViewModel @ViewModelInject constructor(
     private val clearSharedPreference = ClearSharedPreferenceImpl(application)
     private val readSharedPreference = ReadSharedPreferenceImpl(application)
 
-    fun launchNewsFeed() = navigation.showMewsFeed()
-
-    private fun launchChallenges() = navigation.showChallenges()
-
-    private fun launchMore() = navigation.showMore()
+    // fun launchNewsFeed() = navigation.showMewsFeed()
+    //
+    // private fun launchChallenges() = navigation.showChallenges()
+    //
+    // private fun launchMore() = navigation.showMore()
 
     fun navigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navigation_my_feed -> {
-                launchNewsFeed()
+             //   launchNewsFeed()
                 return true
             }
             R.id.navigation_challenges -> {
-                launchChallenges()
+             //   launchChallenges()
                 return true
             }
             R.id.navigation_more -> {
-                launchMore()
+              //  launchMore()
                 return true
             }
         }
@@ -81,15 +79,15 @@ class MainViewModel @ViewModelInject constructor(
         val title = readSharedPreference.readProgressTitle()
         val caption = readSharedPreference.readProgressCaption()
 
-        navigation.pop()
+     //   navigation.pop()
 
-        navigation.showProgressUpload(
-            isUpdate = true,
-            title = title,
-            caption = caption,
-            photoUri = selectedPhotoUri,
-            bitmapDrawable = bitmapDrawable
-        )
+        // navigation.showProgressUpload(
+        //     isUpdate = true,
+        //     title = title,
+        //     caption = caption,
+        //     photoUri = selectedPhotoUri,
+        //     bitmapDrawable = bitmapDrawable
+        // )
 
         clearSharedPreference.clearProgressTitle()
         clearSharedPreference.clearProgressCaption()
@@ -99,7 +97,7 @@ class MainViewModel @ViewModelInject constructor(
 
     fun onBackPressed(entryCount: Int) {
         if (entryCount == 0) {
-            navigation.finish()
+           // navigation.finish()
         }
     }
 

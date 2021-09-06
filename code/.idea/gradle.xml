@@ -12,12 +12,16 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/account" />
+            <option value="$PROJECT_DIR$/account/login" />
             <option value="$PROJECT_DIR$/account/validation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/firebase" />
             <option value="$PROJECT_DIR$/firebase/auth" />
+            <option value="$PROJECT_DIR$/helper" />
+            <option value="$PROJECT_DIR$/helper/fragment" />
             <option value="$PROJECT_DIR$/main" />
+            <option value="$PROJECT_DIR$/main/navigation" />
             <option value="$PROJECT_DIR$/main/resources" />
             <option value="$PROJECT_DIR$/main/splash" />
             <option value="$PROJECT_DIR$/network" />

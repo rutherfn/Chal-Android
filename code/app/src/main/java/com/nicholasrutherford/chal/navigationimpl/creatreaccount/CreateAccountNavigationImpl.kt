@@ -8,7 +8,6 @@ import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountNavigation
 import com.nicholasrutherford.chal.account.createaccount.CreateAccountActivity
-import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.account.uploadphoto.UploadPhotoActivity
 
 class CreateAccountNavigationImpl : CreateAccountNavigation {
@@ -16,10 +15,10 @@ class CreateAccountNavigationImpl : CreateAccountNavigation {
     private var flowerLoadingDialog: ACProgressFlower? = null
 
     override fun login(createAccountActivity: CreateAccountActivity) {
-        val intent = Intent(createAccountActivity.applicationContext, LoginActivity::class.java)
-
-        createAccountActivity.startActivity(intent)
-        createAccountActivity.finish()
+        // val intent = Intent(createAccountActivity.applicationContext, LoginActivity::class.java)
+        //
+        // createAccountActivity.startActivity(intent)
+        // createAccountActivity.finish()
     }
 
     override fun uploadPhoto(userName: String, email: String, password: String, createAccountActivity: CreateAccountActivity) {

@@ -7,6 +7,7 @@ import com.nicholasrutherford.chal.Navigation
 interface MainNavigation : Navigation {
     fun finish()
     fun pop()
+    fun showLogin()
     fun showChallenges()
     fun showMewsFeed()
     fun showMore()

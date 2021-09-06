@@ -2,14 +2,11 @@ package com.nicholasrutherford.chal.dagger.modules
 
 import com.nicholasrutherford.chal.navigationimpl.addedprogress.AddedProgressNavigationImpl
 import com.nicholasrutherford.chal.navigationimpl.editmyprofile.EditProfileNavigationImpl
-import com.nicholasrutherford.chal.navigationimpl.login.RedesignLoginNavigationImpl
 import com.nicholasrutherford.chal.navigationimpl.main.MainNavigationImpl
 import com.nicholasrutherford.chal.navigationimpl.more.MoreNavigationImpl
 import com.nicholasrutherford.chal.navigationimpl.newsfeed.NewsFeedNavigationImpl
 import com.nicholasrutherford.chal.navigationimpl.peoplelist.PeopleListNavigationImpl
 import com.nicholasrutherford.chal.navigationimpl.progressupload.ProgressUploadNavigationImpl
-import com.nicholasrutherford.chal.navigationimpl.splash.SplashNavigationImpl
-import com.nicholasrutherford.chal.navigationimpl.splash.SplashRedesignNavigationImpl
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.hilt.InstallIn
@@ -39,7 +36,4 @@ abstract class NavigationImplModule {
 
     @ContributesAndroidInjector
     abstract fun contributeProgressUploadNavigationImpl(): ProgressUploadNavigationImpl
-
-    @ContributesAndroidInjector
-    abstract fun contributeSplashNavigationImpl(): SplashRedesignNavigationImpl
 }

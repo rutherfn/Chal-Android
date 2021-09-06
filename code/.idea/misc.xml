@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="account/login/src/main/res/layout/fragment_login.xml" value="0.2210144927536232" />
+        <entry key="account/login/src/main/res/layout/frament_splash.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_upload_profile_picture.xml" value="0.24139492753623187" />
@@ -27,6 +28,8 @@
         <entry key="main/resources/src/main/res/drawable/ic_close.xml" value="0.13333333333333333" />
         <entry key="main/resources/src/main/res/drawable/ic_close_white.xml" value="0.13333333333333333" />
         <entry key="main/resources/src/main/res/drawable/ic_green_check_mark.xml" value="0.13333333333333333" />
+        <entry key="main/resources/src/main/res/menu/bottom_navigation.xml" value="0.382051282051282" />
+        <entry key="main/splash/src/main/res/layout/fragment_splash.xml" value="0.18439716312056736" />
       </map>
     </option>
   </component>

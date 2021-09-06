@@ -1,7 +1,7 @@
 package com.nicholasrutherford.chal.main.helper
 
 import com.nicholasrutherford.chal.Screens
-import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
