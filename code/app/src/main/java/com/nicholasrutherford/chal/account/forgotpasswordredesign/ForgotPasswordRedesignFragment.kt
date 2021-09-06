@@ -11,14 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.databinding.FragmentForgotPasswordBinding
 import com.nicholasrutherford.chal.ext.fragments.forgotpassword.ForgotPasswordFragmentExtension
 import com.nicholasrutherford.chal.helpers.visibleOrGone
-import com.nicholasrutherford.chal.ui.typefaces.TypefacesImpl
+import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ForgotPasswordRedesignFragment @Inject constructor(
-    private val typeface: TypefacesImpl
+    private val typeface: Typefaces
 ): DaggerFragment(), ForgotPasswordFragmentExtension {
 
     @Inject

@@ -2,6 +2,7 @@ plugins {
     id (Dependencies.Plugin.Library)
     kotlin(Dependencies.Plugin.Android)
     kotlin(Dependencies.Plugin.Kapt)
+    id(Dependencies.Plugin.DaggerHilt)
 }
 
 android {
@@ -14,4 +15,8 @@ android {
 
 dependencies {
     implementation(Dependencies.Libs.Dagger.Android)
+
+    implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
+    kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
+    kapt(Dependencies.Libs.Hilt.hiltCompiler)
 }
