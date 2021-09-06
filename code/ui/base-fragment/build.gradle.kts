@@ -13,8 +13,6 @@ android {
 }
 
 dependencies {
-    api(project(path = ":main:resources"))
-
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
     kapt(Dependencies.Libs.Hilt.hiltCompiler)

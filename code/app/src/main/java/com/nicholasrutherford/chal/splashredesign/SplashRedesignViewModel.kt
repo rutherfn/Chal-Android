@@ -1,6 +1,7 @@
 package com.nicholasrutherford.chal.splashredesign
 
 import android.os.Handler
+import android.os.Looper
 import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
@@ -18,17 +19,13 @@ class SplashRedesignViewModel @ViewModelInject constructor(
     var viewState = SplashRedesignViewStateImpl()
 
     fun checkIfUserIsSignedIn() {
-        val handler = Handler()
-        handler.postDelayed(
-            {
-                if (!firebaseAuth.isLoggedIn) {
-                    navigation.showlogin()
-                } else {
-                    navigation.showlogin()
-                }
-            },
-            SPLASH_DELAYED.toLong()
-        )
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (!firebaseAuth.isLoggedIn) {
+                navigation.showlogin()
+            } else {
+                navigation.showlogin()
+            }
+        }, SPLASH_DELAYED.toLong())
     }
 
     inner class SplashRedesignViewStateImpl : SplashRedesignViewState {
