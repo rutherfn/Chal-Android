@@ -21,7 +21,9 @@ class SplashFragment @Inject constructor() : BaseFragment<FragmentSplashBinding>
 
     override fun updateTypefaces() = Unit // not used
 
-    override fun clickListeners() = Unit // not used
+    override fun collectViewStateAsUpdated() = Unit // not used
+
+    override fun onListener() = Unit // not used
 
     override fun updateView() {
         binding.ivSplashLogo.setImageResource(viewModel.viewState.splashImageRes)

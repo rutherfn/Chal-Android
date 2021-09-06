@@ -18,14 +18,17 @@ abstract class BaseFragment<VB: ViewBinding>(
 
     abstract fun updateTypefaces()
 
-    abstract fun clickListeners()
+    abstract fun collectViewStateAsUpdated()
+
+    abstract fun onListener()
 
     abstract fun updateView()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = inflate.invoke(inflater, container, false)
         updateTypefaces()
-        clickListeners()
+        collectViewStateAsUpdated()
+        onListener()
         updateView()
         return binding.root
     }

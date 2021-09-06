@@ -1,18 +1,17 @@
 package com.nicholasrutherford.chal.account.login
 
 import android.app.Application
-import android.os.Bundle
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.fragment.app.Fragment
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.account.login.databinding.FragmentLoginBinding
 import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
+import com.nicholasrutherford.chal.ui.base_fragment.BaseFragment
 import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -20,36 +19,40 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment @Inject constructor() : Fragment() {
+class LoginFragment @Inject constructor() : BaseFragment<FragmentLoginBinding>(
+    FragmentLoginBinding::inflate) {
 
     @Inject
     lateinit var typeface: Typefaces
-    //
-    // @Inject
-    // lateinit var keyboard: KeyboardImpl
 
     @Inject
     lateinit var application: Application
 
     private val viewModel: LoginViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val bind = FragmentLoginBinding.inflate(layoutInflater)
-        updateTypefaces(bind)
-        textChangedListener(bind)
-        editActionListener(bind)
-        collectViewStateUpdated(bind)
-        clickListeners(bind)
-        return bind.root
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    fun main(bind: FragmentLoginBinding) = Unit
+    override fun updateTypefaces() {
+        typeface.setTextViewHeaderBoldTypeface(binding.tvTitle)
+        typeface.setTextViewSubHeaderItalicTypeface(binding.tvSubTitle)
 
-    fun collectViewStateUpdated(bind: FragmentLoginBinding) {
+        typeface.setTextViewSubHeaderBoldTypeface(binding.tvEmail)
+        typeface.setTextViewSubHeaderBoldTypeface(binding.tvPassword)
+
+        typeface.setTextViewSubHeaderRegularTypeface(binding.btLogIn)
+
+        typeface.setTextViewBodyBoldTypeface(binding.tvForgotPassword)
+        typeface.setTextViewBodyBoldTypeface(binding.tvSignUp)
+    }
+
+    override fun collectViewStateAsUpdated() {
         lifecycleScope.launch {
             viewModel.viewStateUpdated.collect { isUpdated ->
                 if (isUpdated) {
-                    updateView(bind)
+                    updateView()
                 }
                 viewModel.setViewStateAsNotUpdated()
             }
@@ -61,64 +64,53 @@ class LoginFragment @Inject constructor() : Fragment() {
         }
     }
 
-    fun updateTypefaces(bind: FragmentLoginBinding) {
-        // typeface.setTextViewHeaderBoldTypeface(bind.tvTitle)
-        // typeface.setTextViewSubHeaderItalicTypeface(bind.tvSubTitle)
-        //
-        // typeface.setTextViewSubHeaderBoldTypeface(bind.tvEmail)
-        // typeface.setTextViewSubHeaderBoldTypeface(bind.tvPassword)
-        //
-        // typeface.setTextViewSubHeaderRegularTypeface(bind.btLogIn)
-        //
-        // typeface.setTextViewBodyBoldTypeface(bind.tvForgotPassword)
-        // typeface.setTextViewBodyBoldTypeface(bind.tvSignUp)
-    }
+    override fun onListener() {
+        binding.etEmail.setOnEditorActionListener { _, actionId, _ ->
 
-    fun textChangedListener(bind: FragmentLoginBinding) {
-        bind.etEmail.addTextChangedListener(object : TextWatcher {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                view?.hideKeyboard()
+            }
+            false
+        }
+
+        binding.etEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-                viewModel.updateEmailAfterTextChanged(bind.etEmail.text.toString())
+                viewModel.updateEmailAfterTextChanged(binding.etEmail.text.toString())
             }
         })
-    }
 
-    fun editActionListener(bind: FragmentLoginBinding) {
-        bind.etEmail.setOnEditorActionListener { _, actionId, _ ->
-
+        binding.etPassword.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-               // keyboard.hideKeyBoard()
+                view?.hideKeyboard()
             }
+            viewModel.passwordEditAction(binding.etEmail.text.toString(), binding.etPassword.text.toString(), actionId)
             false
         }
 
-        bind.etPassword.setOnEditorActionListener { _, actionId, _ ->
-            viewModel.passwordEditAction(bind.etEmail.text.toString(), bind.etPassword.text.toString(), actionId)
-            false
-        }
-    }
-
-    fun clickListeners(bind: FragmentLoginBinding) {
-        bind.btLogIn.setOnClickListener {
-            viewModel.onLogInClicked(bind.etEmail.text.toString(), bind.etPassword.text.toString())
+        binding.btLogIn.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            viewModel.onLogInClicked(email = email, password = password)
 
             val emptyString = application.getString(R.string.empty_string)
-            bind.etEmail.setText(emptyString)
-            bind.etPassword.setText(emptyString)
+            binding.etEmail.setText(emptyString)
+            binding.etPassword.setText(emptyString)
         }
-        bind.tvSignUp.setOnClickListener {
+        binding.tvSignUp.setOnClickListener {
             viewModel.onSignUpClicked()
         }
-        bind.tvForgotPassword.setOnClickListener {
+        binding.tvForgotPassword.setOnClickListener {
             viewModel.onForgotPasswordClicked()
         }
     }
 
-    fun updateView(bind: FragmentLoginBinding) {
-        bind.tvErrorEmail.visibleOrGone = viewModel.viewState.emailErrorTextVisible
-        bind.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorImageVisible
+    override fun updateView() {
+        binding.tvErrorEmail.visibleOrGone = viewModel.viewState.emailErrorTextVisible
+        binding.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorImageVisible
     }
+
 }

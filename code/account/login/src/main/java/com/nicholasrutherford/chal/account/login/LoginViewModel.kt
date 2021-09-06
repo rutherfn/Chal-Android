@@ -5,7 +5,6 @@ import android.view.inputmethod.EditorInfo
 import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.Network
 import com.nicholasrutherford.chal.account.validation.AccountValidation
-import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuthImpl
 import com.nicholasrutherford.chal.firebase.auth.LoginStatus
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
@@ -47,8 +46,6 @@ class LoginViewModel @ViewModelInject constructor(
     fun passwordEditAction(email: String, password: String, actionId: Int) {
         if (actionId == EditorInfo.IME_ACTION_DONE && accountValidation.isEmailValid(email)) {
             onLogInClicked(email, password)
-        } else if (actionId == EditorInfo.IME_ACTION_DONE) {
-            //  keyboard.hideKeyBoard()
         }
     }
 
