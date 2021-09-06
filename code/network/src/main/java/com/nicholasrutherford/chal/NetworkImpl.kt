@@ -6,7 +6,7 @@ import javax.inject.Inject
 const val COMMAND_PING_GOOGLE = "ping -c 1 google.com"
 const val WAIT_FOR_VALUE = 0
 
-class Networkimpl @Inject constructor() : Network {
+class NetworkImpl @Inject constructor() : Network {
 
     override fun isConnected(): Boolean {
         val command = COMMAND_PING_GOOGLE

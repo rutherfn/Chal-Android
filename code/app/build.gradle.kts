@@ -5,7 +5,7 @@ plugins {
     kotlin(Dependencies.Plugin.Android)
     kotlin(Dependencies.Plugin.AndroidExtensions)
     kotlin(Dependencies.Plugin.Kapt)
-    id("dagger.hilt.android.plugin")
+    id(Dependencies.Plugin.DaggerHilt)
 }
 
 android {

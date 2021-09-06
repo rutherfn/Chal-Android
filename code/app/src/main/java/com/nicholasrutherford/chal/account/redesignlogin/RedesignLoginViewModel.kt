@@ -4,21 +4,19 @@ import android.app.Application
 import android.view.inputmethod.EditorInfo
 import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.KeyboardImpl
-import com.nicholasrutherford.chal.Networkimpl
+import com.nicholasrutherford.chal.Network
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.account.validation.AccountValidationImpl
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuthImpl
 import com.nicholasrutherford.chal.firebase.auth.LoginStatus
 import com.nicholasrutherford.chal.navigationimpl.login.RedesignLoginNavigationImpl
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
-import com.nicholasrutherford.chal.ui.typefaces.Typefaces
-import javax.inject.Inject
 
 class RedesignLoginViewModel @ViewModelInject constructor(
     private val application: Application,
     private val navigation: RedesignLoginNavigationImpl,
     private val keyboard: KeyboardImpl,
-    private val network: Networkimpl,
+    private val network: Network,
     val firebaseAuth: ChalFirebaseAuthImpl,
     private val accountValidation: AccountValidationImpl
     ) : BaseViewModel() {
@@ -59,7 +57,6 @@ class RedesignLoginViewModel @ViewModelInject constructor(
     }
 
     private fun emailErrorVisible() {
-        println("get here")
         viewState.emailErrorImageVisible = true
         viewState.emailErrorTextVisible = true
 

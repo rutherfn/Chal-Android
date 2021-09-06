@@ -4,6 +4,7 @@ object Dependencies {
         const val Android = "android"
         const val Application = "com.android.application"
         const val AndroidExtensions = "android.extensions"
+        const val DaggerHilt = "dagger.hilt.android.plugin"
         const val GoogleServices = "com.google.gms.google-services"
         const val Kapt = "kapt"
         const val Library = "com.android.library"
