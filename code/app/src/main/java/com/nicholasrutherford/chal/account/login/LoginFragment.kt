@@ -46,6 +46,9 @@ class LoginFragment(activity: LoginActivity, private val appContext: Context) : 
         }
     }
 
+    override fun collectViewStateUpdated(bind: FragmentLoginBinding) {
+    }
+
     override fun updateTypefaces(bind: FragmentLoginBinding) {
         typeface.setTypefaceForHeaderBold(bind.tvTitle, appContext)
         typeface.setTypefaceForHeaderBold(bind.tvTitle, appContext)
@@ -100,5 +103,8 @@ class LoginFragment(activity: LoginActivity, private val appContext: Context) : 
         bind.tvForgotPassword.setOnClickListener {
             viewModel.onForgotPasswordClicked()
         }
+    }
+
+    override fun updateView(bind: FragmentLoginBinding) {
     }
 }
