@@ -50,6 +50,7 @@ dependencies {
     api(project(path = ":main:resources"))
     api(project(path = ":main:splash"))
     api(project(path = ":network"))
+    api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:typefaces"))
 

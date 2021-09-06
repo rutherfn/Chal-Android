@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/main/splash" />
             <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/ui/base-fragment" />
             <option value="$PROJECT_DIR$/ui/base-vm" />
             <option value="$PROJECT_DIR$/ui/typefaces" />
           </set>
