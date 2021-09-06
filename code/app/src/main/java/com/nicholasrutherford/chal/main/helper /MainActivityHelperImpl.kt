@@ -9,7 +9,7 @@ import javax.inject.Inject
 class MainActivityHelperImpl @Inject constructor(private val mainActivity: MainActivity) : MainActivityHelper {
 
     override fun updateCurrentScreen(currentScreen: Screens) {
-        mainActivity.viewModel.updateCurrentScreen(currentScreen)
+      //  mainActivity.viewModel.updateCurrentScreen(currentScreen)
     }
 
     override fun updateBottomNavigationVisibility(isVisible: Boolean) {

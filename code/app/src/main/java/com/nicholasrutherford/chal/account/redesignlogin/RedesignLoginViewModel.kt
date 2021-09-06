@@ -2,6 +2,7 @@ package com.nicholasrutherford.chal.account.redesignlogin
 
 import android.app.Application
 import android.view.inputmethod.EditorInfo
+import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.Networkimpl
 import com.nicholasrutherford.chal.R
@@ -10,9 +11,10 @@ import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuthImpl
 import com.nicholasrutherford.chal.firebase.auth.LoginStatus
 import com.nicholasrutherford.chal.navigationimpl.login.RedesignLoginNavigationImpl
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
+import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import javax.inject.Inject
 
-class RedesignLoginViewModel @Inject constructor(
+class RedesignLoginViewModel @ViewModelInject constructor(
     private val application: Application,
     private val navigation: RedesignLoginNavigationImpl,
     private val keyboard: KeyboardImpl,
@@ -57,8 +59,10 @@ class RedesignLoginViewModel @Inject constructor(
     }
 
     private fun emailErrorVisible() {
+        println("get here")
         viewState.emailErrorImageVisible = true
         viewState.emailErrorTextVisible = true
+
         setViewStateAsUpdated()
     }
 

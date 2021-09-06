@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/navSplash">
+
+    <fragment
+        android:id="@+id/navSplash"
+        android:name="com.nicholasrutherford.chal.splashredesign.SplashRedesignFragment">
+
+        <action
+            android:id="@id/navLogin"
+            app:destination="@id/navLogin" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navLogin"
+        android:name="com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginFragment">
+    </fragment>
+
+</navigation>

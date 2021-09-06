@@ -51,21 +51,15 @@ class ForgotPasswordRedesignNavigationImpl @Inject constructor(
     }
 
     override fun showLogin() {
-        mainActivity.supportFragmentManager.beginTransaction()
-            .replace(
-                container,
-                RedesignLoginFragment(
-                    application = application,
-                    typeface = typeface,
-                    keyboard = keyboard
-                ),
-                RedesignLoginFragment(
-                    application = application,
-                    typeface = typeface,
-                    keyboard = keyboard
-                )::javaClass.name
-            )
-            .addToBackStack(null)
-            .commit()
+        // mainActivity.supportFragmentManager.beginTransaction()
+        //     .replace(
+        //         container,
+        //         RedesignLoginFragment(
+        //         ),
+        //         RedesignLoginFragment(
+        //         )::javaClass.name
+        //     )
+        //     .addToBackStack(null)
+        //     .commit()
     }
 }

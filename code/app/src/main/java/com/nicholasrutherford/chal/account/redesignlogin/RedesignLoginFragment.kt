@@ -8,38 +8,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.KeyboardImpl
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.FragmentLoginBinding
 import com.nicholasrutherford.chal.ext.fragments.login.LoginFragmentExt
 import com.nicholasrutherford.chal.helpers.visibleOrGone
-import com.nicholasrutherford.chal.ui.typefaces.TypefacesImpl
-import dagger.android.support.DaggerFragment
+import com.nicholasrutherford.chal.ui.typefaces.Typefaces
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class RedesignLoginFragment @Inject constructor(
-    private val application: Application,
-    private val typeface: TypefacesImpl,
-    private val keyboard: KeyboardImpl
-    ) : DaggerFragment(), LoginFragmentExt {
+@AndroidEntryPoint
+class RedesignLoginFragment @Inject constructor() : Fragment(), LoginFragmentExt {
 
-        @Inject
-        lateinit var viewmodelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var typeface: Typefaces
 
-        private val viewModel by lazy {
-            ViewModelProvider(this, viewmodelFactory)
-                .get(RedesignLoginViewModel::class.java)
-        }
+    @Inject
+    lateinit var keyboard: KeyboardImpl
+
+    @Inject
+    lateinit var application: Application
+
+    private val viewModel: RedesignLoginViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val bind = FragmentLoginBinding.inflate(layoutInflater)
         updateTypefaces(bind)
         textChangedListener(bind)
         editActionListener(bind)
+        collectViewStateUpdated(bind)
         clickListeners(bind)
         return bind.root
     }
@@ -52,6 +54,7 @@ class RedesignLoginFragment @Inject constructor(
                 if (isUpdated) {
                     updateView(bind)
                 }
+                viewModel.setViewStateAsNotUpdated()
             }
         }
         lifecycleScope.launch {
@@ -105,9 +108,9 @@ class RedesignLoginFragment @Inject constructor(
         bind.btLogIn.setOnClickListener {
             viewModel.onLogInClicked(bind.etEmail.text.toString(), bind.etPassword.text.toString())
 
-            val emptyString = application.getString(R.string.empty_string)
-            bind.etEmail.setText(emptyString)
-            bind.etPassword.setText(emptyString)
+           val emptyString = application.getString(R.string.empty_string)
+           bind.etEmail.setText(emptyString)
+           bind.etPassword.setText(emptyString)
         }
         bind.tvSignUp.setOnClickListener {
             viewModel.onSignUpClicked()

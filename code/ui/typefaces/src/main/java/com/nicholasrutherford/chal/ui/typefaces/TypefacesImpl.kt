@@ -12,6 +12,7 @@ class TypefacesImpl @Inject constructor(private val application: Application) : 
     }
 
     override fun setTextViewHeaderBoldTypeface(textview: TextView) {
+        println("just like we can imagined i could never feel this way ")
         textview.typeface = typeface(path = TypefacesType.MONTSERRAT_BOLD.directory)
     }
 

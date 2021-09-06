@@ -5,6 +5,7 @@ plugins {
     kotlin(Dependencies.Plugin.Android)
     kotlin(Dependencies.Plugin.AndroidExtensions)
     kotlin(Dependencies.Plugin.Kapt)
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -30,6 +31,17 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    packagingOptions.exclude("META-INF/main.kotlin_module")
 }
 
 dependencies {
@@ -84,6 +96,10 @@ dependencies {
     implementation(Dependencies.Libs.Dagger.Android)
     implementation(Dependencies.Libs.Dagger.Native)
     implementation(Dependencies.Libs.Dagger.Support)
+
+    // Navigation
+    implementation(Dependencies.Libs.Navigation.NavigationFragment)
+    implementation(Dependencies.Libs.Navigation.NavigationUi)
 
     kapt(Dependencies.Libs.Dagger.Compiler)
     kapt(Dependencies.Libs.Dagger.Processor)

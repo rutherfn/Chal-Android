@@ -49,6 +49,7 @@ object Dependencies {
         const val ktxVersion = "1.3.1"
         const val lifecycleVersion = "2.2.0"
         const val materialVersion = "1.1.0"
+        const val navigationVersion = "2.2.0"
         const val picassoVersion = "2.71828"
         const val roomVersion = "2.2.5"
         const val swipeRefreshVersion = "1.1.0"
@@ -111,6 +112,11 @@ object Dependencies {
         object Kotlin {
             const val Coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.kotlinCoroutinesVersion}"
             const val Jdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlinVersion}"
+        }
+
+        object Navigation {
+            const val NavigationFragment = "androidx.navigation:navigation-fragment-ktx:${Version.navigationVersion}"
+            const val NavigationUi = "androidx.navigation:navigation-ui-ktx:${Version.navigationVersion}"
         }
 
         object Room {

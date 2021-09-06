@@ -11,5 +11,4 @@ interface MainNavigation : Navigation {
     fun showMewsFeed()
     fun showMore()
     fun showProgressUpload(isUpdate: Boolean, title: String?, caption: String?, photoUri: Uri?, bitmapDrawable: BitmapDrawable?)
-    fun showSplash()
 }

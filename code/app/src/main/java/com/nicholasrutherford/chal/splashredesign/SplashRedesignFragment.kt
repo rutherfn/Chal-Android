@@ -4,20 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.nicholasrutherford.chal.databinding.FragmentSplashBinding
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class SplashRedesignFragment @Inject constructor() : DaggerFragment() {
+@AndroidEntryPoint
+class SplashRedesignFragment @Inject constructor() : Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)
-            .get(SplashRedesignViewModel::class.java)
-    }
+    private val viewModel: SplashRedesignViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bind = FragmentSplashBinding.inflate(layoutInflater)

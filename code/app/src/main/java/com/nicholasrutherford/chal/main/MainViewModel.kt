@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.provider.MediaStore
 import android.view.MenuItem
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.Screens
@@ -14,9 +15,8 @@ import com.nicholasrutherford.chal.helpers.sharedpreference.clearsharedpreferenc
 import com.nicholasrutherford.chal.helpers.sharedpreference.readsharedpreference.ReadSharedPreferenceImpl
 import com.nicholasrutherford.chal.helpers.testfairy.ChalTestFairyImpl
 import com.nicholasrutherford.chal.navigationimpl.main.MainNavigationImpl
-import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+class MainViewModel @ViewModelInject constructor(
     private val application: Application,
     private val navigation: MainNavigationImpl
 ) : ViewModel() {
@@ -29,8 +29,6 @@ class MainViewModel @Inject constructor(
 
     private val clearSharedPreference = ClearSharedPreferenceImpl(application)
     private val readSharedPreference = ReadSharedPreferenceImpl(application)
-
-    fun launchSplash() = navigation.showSplash()
 
     fun launchNewsFeed() = navigation.showMewsFeed()
 

@@ -81,15 +81,4 @@ class MainNavigationImpl @Inject constructor(
             .addToBackStack(null)
             .commit()
     }
-
-    override fun showSplash() {
-        mainActivity.supportFragmentManager.beginTransaction()
-            .replace(
-                container,
-                SplashRedesignFragment(),
-                SplashRedesignFragment()::javaClass.name
-            )
-            .addToBackStack(null)
-            .commit()
-    }
 }

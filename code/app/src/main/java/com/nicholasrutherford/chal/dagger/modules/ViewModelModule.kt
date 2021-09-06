@@ -2,11 +2,9 @@ package com.nicholasrutherford.chal.dagger.modules
 
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.account.forgotpasswordredesign.ForgotPasswordRedesignViewModel
-import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginViewModel
 import com.nicholasrutherford.chal.account.redesignsignup.RedesignSignUpViewModel
 import com.nicholasrutherford.chal.addedProgress.AddedProgressViewModel
 import com.nicholasrutherford.chal.dagger.ViewModelKey
-import com.nicholasrutherford.chal.main.MainViewModel
 import com.nicholasrutherford.chal.more.MoreViewModel
 import com.nicholasrutherford.chal.newsfeed.NewsFeedViewModel
 import com.nicholasrutherford.chal.peoplelist.PeopleListViewModel
@@ -38,16 +36,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ForgotPasswordRedesignViewModel::class)
     internal abstract fun bindForgotPasswordViewModel(viewModel: ForgotPasswordRedesignViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(RedesignLoginViewModel::class)
-    internal abstract fun bindLoginViewModel(viewModel: RedesignLoginViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    internal abstract fun bindMainViewModel(vieModel: MainViewModel): ViewModel
 
     @Binds
     @IntoMap

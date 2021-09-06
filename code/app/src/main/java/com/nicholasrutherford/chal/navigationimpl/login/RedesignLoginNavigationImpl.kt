@@ -17,59 +17,58 @@ import javax.inject.Inject
 
 class RedesignLoginNavigationImpl @Inject constructor(
     private val application: Application,
-    private val main: MainActivity,
     private val typeface: TypefacesImpl
     ) : RedesignLoginViewNavigation {
 
     private var flowerLoadingDialog: ACProgressFlower? = null
 
     override fun signUp() {
-        main.supportFragmentManager.beginTransaction()
-            .replace(
-                container,
-                RedesignSignUpFragment(typeface),
-                RedesignSignUpFragment(typeface)::javaClass.name
-            )
-            .addToBackStack("")
-            .commit()
+        // main.supportFragmentManager.beginTransaction()
+        //     .replace(
+        //         container,
+        //         RedesignSignUpFragment(typeface),
+        //         RedesignSignUpFragment(typeface)::javaClass.name
+        //     )
+        //     .addToBackStack("")
+        //     .commit()
     }
 
     override fun showForgotPassword() {
-        main.supportFragmentManager.beginTransaction()
-            .replace(
-                container,
-                ForgotPasswordRedesignFragment(typeface = typeface),
-                ForgotPasswordRedesignFragment(typeface = typeface)::javaClass.name
-            )
-            .addToBackStack(null)
-            .commit()
+        // main.supportFragmentManager.beginTransaction()
+        //     .replace(
+        //         container,
+        //         ForgotPasswordRedesignFragment(typeface = typeface),
+        //         ForgotPasswordRedesignFragment(typeface = typeface)::javaClass.name
+        //     )
+        //     .addToBackStack(null)
+        //     .commit()
     }
 
     override fun errorLogin(errorMessageText: String) {
-        val errorDialogBuilder = AlertDialog.Builder(main)
-
-        errorDialogBuilder.setMessage(errorMessageText)
-
-            .setCancelable(false)
-
-            .setPositiveButton(main.getString(R.string.ok)) { dialog, _ ->
-                dialog.cancel()
-            }
-
-        val errorAlert = errorDialogBuilder.create()
-
-        errorAlert.setTitle(main.getString(R.string.error_cant_log_in))
-
-        errorAlert.show()
+        // val errorDialogBuilder = AlertDialog.Builder(main)
+        //
+        // errorDialogBuilder.setMessage(errorMessageText)
+        //
+        //     .setCancelable(false)
+        //
+        //     .setPositiveButton(main.getString(R.string.ok)) { dialog, _ ->
+        //         dialog.cancel()
+        //     }
+        //
+        // val errorAlert = errorDialogBuilder.create()
+        //
+        // errorAlert.setTitle(main.getString(R.string.error_cant_log_in))
+        //
+        // errorAlert.show()
     }
 
     override fun showAcProgress() {
-        flowerLoadingDialog = ACProgressFlower.Builder(main)
-            .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-            .themeColor(Color.WHITE)
-            .fadeColor(Color.DKGRAY).build()
-
-        flowerLoadingDialog?.show()
+        // flowerLoadingDialog = ACProgressFlower.Builder(main)
+        //     .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+        //     .themeColor(Color.WHITE)
+        //     .fadeColor(Color.DKGRAY).build()
+        //
+        // flowerLoadingDialog?.show()
     }
 
     override fun hideAcProgress() {
@@ -77,13 +76,13 @@ class RedesignLoginNavigationImpl @Inject constructor(
     }
 
     override fun loginToApp() {
-        main.supportFragmentManager.beginTransaction()
-            .replace(
-                container,
-                NewsFeedFragment(application),
-                NewsFeedFragment(application)::javaClass.name
-            )
-            .addToBackStack(null)
-            .commit()
+        // main.supportFragmentManager.beginTransaction()
+        //     .replace(
+        //         container,
+        //         NewsFeedFragment(application),
+        //         NewsFeedFragment(application)::javaClass.name
+        //     )
+        //     .addToBackStack(null)
+        //     .commit()
     }
 }

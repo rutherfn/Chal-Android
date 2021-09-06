@@ -1,16 +1,12 @@
 package com.nicholasrutherford.chal.dagger
 
+import android.app.Application
 import com.nicholasrutherford.chal.BuildConfig
-import com.nicholasrutherford.chal.di.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
-class MyApplication : DaggerApplication() {
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.factory().create(this)
-    }
-
+@HiltAndroidApp
+class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
