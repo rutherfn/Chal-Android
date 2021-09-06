@@ -45,12 +45,11 @@ android {
 }
 
 dependencies {
-    api(project(path = ":account:login"))
     api(project(path = ":account:validation"))
     api(project(path = ":firebase:auth"))
     api(project(path = ":helper:fragment"))
+    api(project(path = ":main:activity"))
     api(project(path = ":main:resources"))
-    api(project(path = ":main:splash"))
     api(project(path = ":network"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))

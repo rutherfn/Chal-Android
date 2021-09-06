@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.account.login.databinding.FragmentLoginBinding
 import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
+import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,8 +22,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginFragment @Inject constructor() : Fragment() {
 
-    // @Inject
-    // lateinit var typeface: Typefaces
+    @Inject
+    lateinit var typeface: Typefaces
     //
     // @Inject
     // lateinit var keyboard: KeyboardImpl

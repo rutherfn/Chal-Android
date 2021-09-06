@@ -36,6 +36,7 @@ dependencies {
     api(project(path = ":network"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
+    api(project(path = ":ui:typefaces"))
 
     implementation(Dependencies.Libs.Android.AppCompat)
     implementation(Dependencies.Libs.Android.Ktx)

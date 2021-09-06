@@ -16,6 +16,7 @@ class SplashViewModel @ViewModelInject constructor(
 
     var viewState = SplashRedesignViewStateImpl()
 
+
     fun checkIfUserIsSignedIn() {
         Handler(Looper.getMainLooper()).postDelayed({
             if (!firebaseAuth.isLoggedIn) {
