@@ -87,4 +87,9 @@ dependencies {
 
     kapt(Dependencies.Libs.Dagger.Compiler)
     kapt(Dependencies.Libs.Dagger.Processor)
+
+    implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
+    kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
+    implementation(Dependencies.Libs.Hilt.HiltLifecycleViewModel)
+    kapt(Dependencies.Libs.Hilt.hiltCompiler)
 }
