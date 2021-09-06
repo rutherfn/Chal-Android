@@ -2,16 +2,18 @@ package com.nicholasrutherford.chal.splashredesign
 
 import android.os.Handler
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuthImpl
+import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.navigationimpl.splash.SplashRedesignNavigationImpl
-import javax.inject.Inject
+import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
+
+@Suppress("MagicNumber")
+const val SPLASH_DELAYED = 5000
 
 class SplashRedesignViewModel @ViewModelInject constructor(
-    private val firebaseAuth: ChalFirebaseAuthImpl,
+    private val firebaseAuth: ChalFirebaseAuth,
     private val navigation: SplashRedesignNavigationImpl
-) : ViewModel() {
+) : BaseViewModel() {
 
     var viewState = SplashRedesignViewStateImpl()
 
@@ -25,7 +27,7 @@ class SplashRedesignViewModel @ViewModelInject constructor(
                     navigation.showlogin()
                 }
             },
-            5000
+            SPLASH_DELAYED.toLong()
         )
     }
 
