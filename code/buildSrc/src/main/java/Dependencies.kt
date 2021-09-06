@@ -40,6 +40,8 @@ object Dependencies {
         const val glideCompilerVersion = "4.11.0"
         const val googleServicesVersion = "4.3.8"
         const val gsonVersion = "2.8.6"
+        const val hiltVersion = "2.28-alpha"
+        const val hiltLifecycleVersion = "1.0.0-alpha01"
         const val junitVersion = "1.1.1"
         const val junitTestImplementationVersion = "4.13"
         const val kotlinCoroutinesVersion = "1.4.0"
@@ -74,6 +76,13 @@ object Dependencies {
             const val Native = "com.google.dagger:dagger:${Version.daggerVersion}"
             const val Processor = "com.google.dagger:dagger-android-processor:${Version.daggerVersion}"
             const val Support = "com.google.dagger:dagger-android-support:${Version.daggerVersion}"
+        }
+
+        object Hilt {
+            const val DaggerHiltAndroid = "com.google.dagger:hilt-android:${Version.hiltVersion}"
+            const val DaggerHiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:${Version.hiltVersion}"
+            const val HiltLifecycleViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Version.hiltLifecycleVersion}"
+            const val hiltCompiler = "androidx.hilt:hilt-compiler:${Version.hiltLifecycleVersion}"
         }
 
         object Firebase {

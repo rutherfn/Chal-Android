@@ -13,8 +13,11 @@ import com.nicholasrutherford.chal.progressupload.ProgressUploadFragment
 import com.nicholasrutherford.chal.splashredesign.SplashRedesignFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 
 @Module
+@InstallIn(ApplicationComponent::class)
 abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
