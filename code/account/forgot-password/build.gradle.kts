@@ -28,7 +28,6 @@ android {
 }
 
 dependencies {
-    api(project(path = ":account:forgot-password"))
     api(project(path = ":account:validation"))
     api(project(path = ":firebase:auth"))
     api(project(path = ":helper:fragment"))
@@ -39,11 +38,11 @@ dependencies {
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:typefaces"))
 
+    implementation(Dependencies.Libs.UI.AcProgress)
+
     implementation(Dependencies.Libs.Android.AppCompat)
     implementation(Dependencies.Libs.Android.Ktx)
     implementation(Dependencies.Libs.UI.ConstraintLayout)
-
-    implementation(Dependencies.Libs.Firebase.Auth)
 
     implementation(Dependencies.Libs.Navigation.NavigationFragment)
     implementation(Dependencies.Libs.Navigation.NavigationUi)

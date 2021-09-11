@@ -58,7 +58,7 @@ class LoginFragment @Inject constructor() : BaseFragment<FragmentLoginBinding>(
             }
         }
         lifecycleScope.launch {
-            viewModel.firebaseAuth.loginStatusState.collect { status ->
+            viewModel.loginStatusState.collect { status ->
                 viewModel.onLoginStatesResult(status)
             }
         }

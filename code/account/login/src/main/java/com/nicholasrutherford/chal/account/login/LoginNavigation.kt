@@ -1,4 +1,5 @@
 package com.nicholasrutherford.chal.account.login
 
-class LoginNavigation {
+interface LoginNavigation {
+    fun showForgotPassword()
 }

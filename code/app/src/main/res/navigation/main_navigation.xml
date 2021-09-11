@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/navSplash"
-        android:name="com.nicholasrutherford.chal.main.splash.SplashFragment">
+        android:name="com.nicholasrutherford.chal.main.splash.SplashDialogFragment">
 
         <action
             android:id="@+id/action_homeFragment_to_nav_graph_a"

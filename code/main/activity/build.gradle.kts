@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    api(project(path = ":account:forgot-password"))
     api(project(path = ":account:login"))
     api(project(path = ":firebase:auth"))
     api(project(path = ":main:navigation"))

@@ -74,12 +74,23 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
         viewModel.onCameraResult(resultCode, requestCode, data)
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     override fun onBackPressed() {
-        super.onBackPressed()
-        viewModel.onBackPressed(supportFragmentManager.backStackEntryCount)
+        val navController = navHostFragment.findNavController()
+
+        navController.currentDestination?.let { navDestination ->
+            when (navDestination.id) {
+                R.id.fragmentLogin -> {
+                    finish()
+                }
+                R.id.fragmentForgotPassword -> {
+                    navigator.navigateBack()
+                }
+                else -> {
+                    finish()
+                }
+            }
+        }?: run {
+            finish()
+        }
     }
 }

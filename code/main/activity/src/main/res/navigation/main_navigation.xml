@@ -9,17 +9,13 @@
 
     <fragment
         android:id="@+id/navSplash"
-        android:name="com.nicholasrutherford.chal.main.splash.SplashFragment">
+        android:name="com.nicholasrutherford.chal.main.splash.SplashDialogFragment">
 
         <action
             android:id="@+id/action_homeFragment_to_nav_graph_b"
-            app:destination="@id/nav_graph_login" />
+            app:destination="@id/nav_graph_login"
+            app:popUpTo="@+id/nav_graph_login"
+            />
 
     </fragment>
-
-    <fragment
-        android:id="@+id/navLogin"
-        android:name="com.nicholasrutherford.chal.account.login.LoginFragment">
-    </fragment>
-
 </navigation>

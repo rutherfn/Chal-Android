@@ -7,35 +7,34 @@ import javax.inject.Inject
 
 class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
 
-    private val _loginStatusState = MutableStateFlow(LoginStatus.NONE)
-    val loginStatusState: StateFlow<LoginStatus> = _loginStatusState
-
     private val _sendPasswordResetEmailState = MutableStateFlow(SendPasswordResetEmailStatus.NONE)
     val sendPasswordResetEmailState: StateFlow<SendPasswordResetEmailStatus> = _sendPasswordResetEmailState
 
-    val firebaseAuth = FirebaseAuth.getInstance()
+    override val auth = FirebaseAuth.getInstance()
 
-    override var isLoggedIn: Boolean = firebaseAuth.currentUser != null
+    override val isLoggedIn: Boolean = auth.currentUser != null
 
-    override var uid: String? = firebaseAuth.uid
+    override val uid: String? = auth.uid
 
-    override fun signInWithEmailAndPassword(email: String, password: String) {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+    override fun getSignInWithEmailAndPasswordLoginStatus(email: String, password: String): LoginStatus {
+        val _loginStatusState = MutableStateFlow(LoginStatus.UNSUCCESSFUL)
+
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        _loginStatusState.value = LoginStatus.LOGGED_IN
+                if (it.isSuccessful) {
+                        _loginStatusState.value = LoginStatus.SUCCESSFUL
+                } else if (it.isCanceled) {
+                    _loginStatusState.value = LoginStatus.UNSUCCESSFUL
                 }
             }.addOnFailureListener {
                 _loginStatusState.value = LoginStatus.ERROR
             }
-    }
 
-    override fun setLoginStatusStateAsNotUpdated() {
-        _loginStatusState.value = LoginStatus.NONE
+        return _loginStatusState.value
     }
 
     override fun sendPasswordResetEmail(resetEmail: String) {
-        firebaseAuth.sendPasswordResetEmail(resetEmail)
+        auth.sendPasswordResetEmail(resetEmail)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.SUCCESSFUL

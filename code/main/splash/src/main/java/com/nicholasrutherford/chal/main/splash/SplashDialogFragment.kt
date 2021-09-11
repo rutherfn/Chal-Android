@@ -2,15 +2,15 @@ package com.nicholasrutherford.chal.main.splash
 
 import android.os.Bundle
 import android.view.View
-import com.nicholasrutherford.chal.main.splash.databinding.FragmentSplashBinding
-import com.nicholasrutherford.chal.ui.base_fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.fragment.app.viewModels
+import com.nicholasrutherford.chal.main.splash.databinding.DialogFragmentSplashBinding
+import com.nicholasrutherford.chal.ui.base_fragment.BaseDialogFragment
 
 @AndroidEntryPoint
-class SplashFragment @Inject constructor() : BaseFragment<FragmentSplashBinding>(
-    FragmentSplashBinding::inflate) {
+class SplashDialogFragment @Inject constructor() : BaseDialogFragment<DialogFragmentSplashBinding>(
+    DialogFragmentSplashBinding::inflate) {
 
     private val viewModel: SplashViewModel by viewModels()
 
@@ -20,8 +20,6 @@ class SplashFragment @Inject constructor() : BaseFragment<FragmentSplashBinding>
     }
 
     override fun updateTypefaces() = Unit // not used
-
-    override fun collectViewStateAsUpdated() = Unit // not used
 
     override fun onListener() = Unit // not used
 

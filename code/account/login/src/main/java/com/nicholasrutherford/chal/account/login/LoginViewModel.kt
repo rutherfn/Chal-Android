@@ -5,28 +5,40 @@ import android.view.inputmethod.EditorInfo
 import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.Network
 import com.nicholasrutherford.chal.account.validation.AccountValidation
-import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuthImpl
+import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.firebase.auth.LoginStatus
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class LoginViewModel @ViewModelInject constructor(
     private val application: Application,
     private val network: Network,
-    val firebaseAuth: ChalFirebaseAuthImpl,
+    private val navigation: LoginNavigation,
+    private val firebaseAuth: ChalFirebaseAuth,
     private val accountValidation: AccountValidation
     ) : BaseViewModel() {
+
+    private val _loginStatusState = MutableStateFlow(LoginStatus.UNSUCCESSFUL)
+    val loginStatusState: StateFlow<LoginStatus> = _loginStatusState
 
     private var alertErrorMessage: String = ""
 
     val viewState = LoginViewStateImpl()
 
     fun onLoginStatesResult(status: LoginStatus) {
-        if (status == LoginStatus.ERROR) {
-            showLoginStatusError()
-        } else if (status == LoginStatus.LOGGED_IN) {
-            showloginStatusSuccess()
+        when (status) {
+            LoginStatus.ERROR -> {
+                showLoginStatusError()
+            }
+            LoginStatus.UNSUCCESSFUL -> {
+                showLoginStatusError()
+            }
+            LoginStatus.SUCCESSFUL -> {
+                showloginStatusSuccess()
+            }
         }
-        firebaseAuth.setLoginStatusStateAsNotUpdated()
+        setLoginStatusStateAsNotUpdated()
     }
 
     fun updateEmailAfterTextChanged(email: String) {
@@ -87,10 +99,26 @@ class LoginViewModel @ViewModelInject constructor(
             if (!isUserReadyToLogIn()) {
                 showUserLoginErrorAlert()
             } else {
-                //     navigation.showAcProgress()
-                firebaseAuth.signInWithEmailAndPassword(email = email, password = password)
+                setLoginStatusState(email, password)
             }
         }
+    }
+
+    fun setLoginStatusStateAsNotUpdated() {
+        _loginStatusState.value = LoginStatus.UNSUCCESSFUL
+    }
+
+    fun setLoginStatusState(email: String, password: String) {
+        firebaseAuth.auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    _loginStatusState.value = LoginStatus.SUCCESSFUL
+                } else if (it.isCanceled) {
+                    _loginStatusState.value = LoginStatus.UNSUCCESSFUL
+                }
+            }.addOnFailureListener {
+                _loginStatusState.value = LoginStatus.ERROR
+            }
     }
 
     private fun showloginStatusSuccess() {
@@ -114,10 +142,10 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     fun onForgotPasswordClicked() {
-        // navigation.showForgotPassword()
+        navigation.showForgotPassword()
     }
 
-    class LoginViewStateImpl : LoginViewState {
+    inner class LoginViewStateImpl : LoginViewState {
         override var emailErrorImageVisible: Boolean = false
         override var emailErrorTextVisible: Boolean = false
     }

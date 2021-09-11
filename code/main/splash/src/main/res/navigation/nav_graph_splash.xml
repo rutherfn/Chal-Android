@@ -7,10 +7,9 @@
 
     <fragment
         android:id="@+id/fragmentSplash"
-        android:name="com.nicholasrutherford.chal.main.splash.SplashFragment"
+        android:name="com.nicholasrutherford.chal.main.splash.SplashDialogFragment"
         android:label="splash_1"
-        tools:layout="@layout/fragment_splash">
-
+        tools:layout="@layout/dialog_fragment_splash">
     </fragment>
 
 </navigation>
