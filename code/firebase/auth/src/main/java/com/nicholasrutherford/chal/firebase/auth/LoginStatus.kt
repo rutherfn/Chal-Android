@@ -1,7 +1,7 @@
 package com.nicholasrutherford.chal.firebase.auth
 
 enum class LoginStatus {
-    UNSUCCESSFUL,
+    NONE,
     SUCCESSFUL,
     ERROR
 }

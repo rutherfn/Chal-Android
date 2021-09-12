@@ -21,6 +21,8 @@ class SplashDialogFragment @Inject constructor() : BaseDialogFragment<DialogFrag
 
     override fun updateTypefaces() = Unit // not used
 
+    override fun collectAlertAsUpdated() = Unit  // not used
+
     override fun onListener() = Unit // not used
 
     override fun updateView() {

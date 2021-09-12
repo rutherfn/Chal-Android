@@ -12,6 +12,9 @@ import javax.inject.Inject
 class ForgotPasswordDialogFragment @Inject constructor(): BaseDialogFragment<DialogFragmentForgotPasswordBinding>(
     DialogFragmentForgotPasswordBinding::inflate) {
 
+    @Inject
+    lateinit var navigation: ForgotPasswordNavigation
+
     private val viewModel: ForgotPasswordViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -19,11 +22,18 @@ class ForgotPasswordDialogFragment @Inject constructor(): BaseDialogFragment<Dia
     }
 
     override fun updateTypefaces() {
+        TODO("Not yet implemented")
+    }
+
+    override fun collectAlertAsUpdated() {
+        TODO("Not yet implemented")
     }
 
     override fun onListener() {
+        TODO("Not yet implemented")
     }
 
     override fun updateView() {
+        TODO("Not yet implemented")
     }
 }

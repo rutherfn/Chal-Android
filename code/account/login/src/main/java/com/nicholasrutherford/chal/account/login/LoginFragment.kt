@@ -2,6 +2,7 @@ package com.nicholasrutherford.chal.account.login
 
 import android.app.Application
 import android.content.Context
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -30,6 +31,32 @@ class LoginFragment @Inject constructor() : BaseFragment<FragmentLoginBinding>(
 
     private val viewModel: LoginViewModel by viewModels()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launch {
+            collectViewStateResult(viewModel.viewStateUpdated, viewModel._viewStateUpdated)
+        }
+        lifecycleScope.launch {
+            collectShouldShowProgressResult(
+                viewModel.shouldShowProgress,
+                viewModel._shouldShowProgress
+            )
+        }
+        lifecycleScope.launch {
+            collectShouldDismissProgressResult(
+                viewModel.shouldDismissProgress,
+                viewModel._shouldDismissProgress
+            )
+        }
+        lifecycleScope.launch {
+            viewModel.loginStatusState.collect { status ->
+                viewModel.onLoginStatesResult(status)
+            }
+        }
+        collectAlertAsUpdated()
+    }
+
+
     private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
@@ -48,18 +75,13 @@ class LoginFragment @Inject constructor() : BaseFragment<FragmentLoginBinding>(
         typeface.setTextViewBodyBoldTypeface(binding.tvSignUp)
     }
 
-    override fun collectViewStateAsUpdated() {
+    override fun collectAlertAsUpdated() {
         lifecycleScope.launch {
-            viewModel.viewStateUpdated.collect { isUpdated ->
-                if (isUpdated) {
-                    updateView()
+            viewModel.shouldShowAlert.collect { isShouldShowAlert ->
+                if (isShouldShowAlert) {
+                    showAlert(title = viewModel.alertErrorTitle, message = viewModel.alertErrorMessage)
                 }
-                viewModel.setViewStateAsNotUpdated()
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.loginStatusState.collect { status ->
-                viewModel.onLoginStatesResult(status)
+                viewModel._shouldShowAlert.value = false
             }
         }
     }
@@ -92,6 +114,7 @@ class LoginFragment @Inject constructor() : BaseFragment<FragmentLoginBinding>(
         }
 
         binding.btLogIn.setOnClickListener {
+            view?.hideKeyboard()
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
             viewModel.onLogInClicked(email = email, password = password)

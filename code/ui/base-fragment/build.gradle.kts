@@ -13,6 +13,12 @@ android {
 }
 
 dependencies {
+    api(project(path = ":main:resources"))
+
+    implementation(Dependencies.Libs.UI.AcProgress)
+
+    implementation(Dependencies.Libs.Kotlin.Coroutines)
+
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
     kapt(Dependencies.Libs.Hilt.hiltCompiler)

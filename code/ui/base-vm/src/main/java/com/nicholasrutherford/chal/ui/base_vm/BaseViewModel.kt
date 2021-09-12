@@ -6,18 +6,54 @@ import kotlinx.coroutines.flow.StateFlow
 
 open class BaseViewModel : ViewModel() {
 
-    private val _viewStateUpdated = MutableStateFlow(false)
+    val _viewStateUpdated = MutableStateFlow(false)
     val viewStateUpdated: StateFlow<Boolean> = _viewStateUpdated
+
+    val _shouldShowProgress = MutableStateFlow(false)
+    val shouldShowProgress: StateFlow<Boolean> = _shouldShowProgress
+
+    val _shouldDismissProgress = MutableStateFlow(false)
+    val shouldDismissProgress: StateFlow<Boolean> = _shouldDismissProgress
+
+    val _shouldShowAlert = MutableStateFlow(false)
+    val shouldShowAlert: StateFlow<Boolean> = _shouldShowAlert
 
     init {
         setViewStateAsNotUpdated()
+        setShouldShowProgressAsNotUpdated()
+        setShouldDismissProgressAsNotUpdated()
+        setShouldShowAlertAsNotUpdated()
+    }
+
+    fun setViewStateAsNotUpdated() {
+        _viewStateUpdated.value = false
+    }
+
+    fun setShouldShowProgressAsNotUpdated() {
+        _shouldShowProgress.value = false
+    }
+
+    fun setShouldDismissProgressAsNotUpdated() {
+        _shouldDismissProgress.value = false
+    }
+
+    fun setShouldShowAlertAsNotUpdated() {
+        _shouldShowAlert.value = false
     }
 
     fun setViewStateAsUpdated() {
         _viewStateUpdated.value = true
     }
 
-    fun setViewStateAsNotUpdated() {
-        _viewStateUpdated.value = false
+    fun setShouldShowProgressAsUpdated() {
+        _shouldShowProgress.value = true
+    }
+
+    fun setShouldShowDismissProgressAsUpdated() {
+        _shouldDismissProgress.value = true
+    }
+
+    fun setShouldShowAlertAsUpdated() {
+        _shouldShowAlert.value = true
     }
 }

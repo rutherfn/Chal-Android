@@ -14,6 +14,10 @@ import com.nicholasrutherford.chal.main.navigation.Navigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@Suppress("MagicNumber")
+const val FIREBASE_SHARED_PREF = "shared_prefs_firebase"
+const val CURRENT_DESTINATION_ID = "current_destination_id"
+
 @AndroidEntryPoint
 class MainActivity @Inject constructor() : AppCompatActivity() {
 
@@ -41,10 +45,13 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.navSplash -> {
-                    binding!!.bvNavigation.visibleOrGone = false
+                    hideBottomNavigation()
                 }
                 R.id.fragmentLogin -> {
-                    binding!!.bvNavigation.visibleOrGone = false
+                    hideBottomNavigation()
+                }
+                R.id.fragmentForgotPassword -> {
+                    hideBottomNavigation()
                 }
             }
         }
@@ -52,8 +59,6 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
         binding?.let { binding ->
             setupBottomNavigation(binding = binding)
         }
-
-       // viewModel.testFairy.init()
     }
 
     private fun setupBottomNavigation(binding: ActivityMainBinding) {
@@ -63,6 +68,17 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item -> viewModel.navigationItemSelected(item) }
 
+    private fun hideBottomNavigation() {
+        binding?.let { bind ->
+            bind.bvNavigation.visibleOrGone = false
+        }
+    }
+
+    private fun showBottomNavigation() {
+        binding?.let { bind ->
+            bind.bvNavigation.visibleOrGone = true
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.navigation_news_feed, menu)

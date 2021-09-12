@@ -16,23 +16,6 @@ class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
 
     override val uid: String? = auth.uid
 
-    override fun getSignInWithEmailAndPasswordLoginStatus(email: String, password: String): LoginStatus {
-        val _loginStatusState = MutableStateFlow(LoginStatus.UNSUCCESSFUL)
-
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                        _loginStatusState.value = LoginStatus.SUCCESSFUL
-                } else if (it.isCanceled) {
-                    _loginStatusState.value = LoginStatus.UNSUCCESSFUL
-                }
-            }.addOnFailureListener {
-                _loginStatusState.value = LoginStatus.ERROR
-            }
-
-        return _loginStatusState.value
-    }
-
     override fun sendPasswordResetEmail(resetEmail: String) {
         auth.sendPasswordResetEmail(resetEmail)
             .addOnCompleteListener {

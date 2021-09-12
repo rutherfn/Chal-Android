@@ -1,31 +1,17 @@
 package com.nicholasrutherford.chal.account.forgot.password
 
 import android.app.Application
-import android.graphics.Color
-import cc.cloudist.acplibrary.ACProgressConstant
-import cc.cloudist.acplibrary.ACProgressFlower
+import com.nicholasrutherford.chal.main.navigation.Navigator
 import javax.inject.Inject
 
 class ForgotPasswordNavigationImpl @Inject constructor(
     private val application: Application
     ): ForgotPasswordNavigation {
 
-    private var flowerLoadingDialog: ACProgressFlower? = null
-
-    override fun showAcProgress() {
-        flowerLoadingDialog = ACProgressFlower.Builder(application)
-            .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-            .themeColor(Color.WHITE)
-            .fadeColor(Color.DKGRAY).build()
-
-        flowerLoadingDialog?.show()
-    }
-
-    override fun hideAcProgress() {
-        flowerLoadingDialog?.dismiss()
-    }
+    @Inject
+    lateinit var navigator: Navigator
 
     override fun showForgotPasswordAlert(title: String, message: String) {
-        TODO("Not yet implemented")
+        println(":whole pie paid and wiating to go ")
     }
 }

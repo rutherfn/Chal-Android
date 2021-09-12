@@ -7,14 +7,8 @@ import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 
 class ForgotPasswordViewModel @ViewModelInject constructor(
     private val application: Application,
-    private val firebaseAuth: ChalFirebaseAuth,
-    private val navigation: ForgotPasswordNavigation
+    private val firebaseAuth: ChalFirebaseAuth
 ) : BaseViewModel() {
-
-    init {
-        println("get here")
-        navigation.showAcProgress()
-    }
 
     val viewState = ForgotPasswordViewStateImpl()
 

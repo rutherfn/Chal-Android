@@ -38,8 +38,6 @@ dependencies {
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:typefaces"))
 
-    implementation(Dependencies.Libs.UI.AcProgress)
-
     implementation(Dependencies.Libs.Android.AppCompat)
     implementation(Dependencies.Libs.Android.Ktx)
     implementation(Dependencies.Libs.UI.ConstraintLayout)

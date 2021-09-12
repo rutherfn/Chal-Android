@@ -19,26 +19,26 @@ class LoginViewModel @ViewModelInject constructor(
     private val accountValidation: AccountValidation
     ) : BaseViewModel() {
 
-    private val _loginStatusState = MutableStateFlow(LoginStatus.UNSUCCESSFUL)
+    private val _loginStatusState = MutableStateFlow(LoginStatus.NONE)
     val loginStatusState: StateFlow<LoginStatus> = _loginStatusState
 
-    private var alertErrorMessage: String = ""
+    var alertErrorTitle: String = application.applicationContext.getString(R.string.error_cant_log_in)
+    var alertErrorMessage: String = ""
 
     val viewState = LoginViewStateImpl()
 
     fun onLoginStatesResult(status: LoginStatus) {
         when (status) {
-            LoginStatus.ERROR -> {
-                showLoginStatusError()
+            LoginStatus.NONE -> {
+                // showLoginStatusError()
             }
-            LoginStatus.UNSUCCESSFUL -> {
+            LoginStatus.ERROR -> {
                 showLoginStatusError()
             }
             LoginStatus.SUCCESSFUL -> {
                 showloginStatusSuccess()
             }
         }
-        setLoginStatusStateAsNotUpdated()
     }
 
     fun updateEmailAfterTextChanged(email: String) {
@@ -89,15 +89,13 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     fun onLogInClicked(email: String, password: String) {
-        //     keyboard.hideKeyBoard()
-
         if (accountValidation.isPasswordOrEmailEmpty(email, password)) {
             alertErrorMessage =
                 application.applicationContext.getString(R.string.error_fields_are_not_correct_log_in)
-            showUserLoginErrorAlert()
+            setShouldShowAlertAsUpdated()
         } else {
             if (!isUserReadyToLogIn()) {
-                showUserLoginErrorAlert()
+                setShouldShowAlertAsUpdated()
             } else {
                 setLoginStatusState(email, password)
             }
@@ -105,16 +103,17 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     fun setLoginStatusStateAsNotUpdated() {
-        _loginStatusState.value = LoginStatus.UNSUCCESSFUL
+        _loginStatusState.value = LoginStatus.NONE
     }
 
     fun setLoginStatusState(email: String, password: String) {
+        setShouldShowProgressAsUpdated()
         firebaseAuth.auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     _loginStatusState.value = LoginStatus.SUCCESSFUL
                 } else if (it.isCanceled) {
-                    _loginStatusState.value = LoginStatus.UNSUCCESSFUL
+                    _loginStatusState.value = LoginStatus.ERROR
                 }
             }.addOnFailureListener {
                 _loginStatusState.value = LoginStatus.ERROR
@@ -122,19 +121,15 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     private fun showloginStatusSuccess() {
-        // navigation.hideAcProgress()
+        setShouldShowDismissProgressAsUpdated()
         // navigation.loginToApp()
     }
 
     fun showLoginStatusError() {
-        //  navigation.hideAcProgress()
+        setShouldShowDismissProgressAsUpdated()
         alertErrorMessage =
             application.applicationContext.getString(R.string.error_login_no_account_associated_with_email)
-        showUserLoginErrorAlert()
-    }
-
-    private fun showUserLoginErrorAlert() {
-        //  navigation.errorLogin(errorMessageText = alertErrorMessage)
+        setShouldShowAlertAsUpdated()
     }
 
     fun onSignUpClicked() {
