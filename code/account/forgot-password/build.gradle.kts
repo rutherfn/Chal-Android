@@ -36,11 +36,14 @@ dependencies {
     api(project(path = ":network"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
+    api(project(path = ":ui:shared-layout"))
     api(project(path = ":ui:typefaces"))
 
     implementation(Dependencies.Libs.Android.AppCompat)
     implementation(Dependencies.Libs.Android.Ktx)
     implementation(Dependencies.Libs.UI.ConstraintLayout)
+
+    implementation(Dependencies.Libs.Firebase.Auth)
 
     implementation(Dependencies.Libs.Navigation.NavigationFragment)
     implementation(Dependencies.Libs.Navigation.NavigationUi)

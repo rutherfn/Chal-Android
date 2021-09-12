@@ -14,10 +14,6 @@ import com.nicholasrutherford.chal.main.navigation.Navigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@Suppress("MagicNumber")
-const val FIREBASE_SHARED_PREF = "shared_prefs_firebase"
-const val CURRENT_DESTINATION_ID = "current_destination_id"
-
 @AndroidEntryPoint
 class MainActivity @Inject constructor() : AppCompatActivity() {
 
@@ -59,6 +55,10 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
         binding?.let { binding ->
             setupBottomNavigation(binding = binding)
         }
+
+        // binding?.tbBack?.ibBack?.setOnClickListener {
+        //     navigator.navigateBack()
+        // }
     }
 
     private fun setupBottomNavigation(binding: ActivityMainBinding) {

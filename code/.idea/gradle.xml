@@ -30,6 +30,7 @@
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui/base-fragment" />
             <option value="$PROJECT_DIR$/ui/base-vm" />
+            <option value="$PROJECT_DIR$/ui/shared-layout" />
             <option value="$PROJECT_DIR$/ui/typefaces" />
           </set>
         </option>
