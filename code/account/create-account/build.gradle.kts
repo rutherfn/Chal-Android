@@ -29,6 +29,7 @@ android {
 
 dependencies {
     api(project(path = ":account:validation"))
+    api(project(path = ":firebase:auth"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":main:navigation"))
     api(project(path = ":main:resources"))

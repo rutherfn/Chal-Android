@@ -1,14 +1,20 @@
 package com.nicholasrutherford.chal.create.account
 
 import android.app.Application
-import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.account.validation.AccountValidation
+import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
+
+@Suppress("MagicNumber")
+const val LOADING_DELAY = 1000
 
 class CreateAccountViewModel @ViewModelInject constructor(
     private val accountValidation: AccountValidation,
     private val application: Application,
+    private val chalFirebaseAuth: ChalFirebaseAuth,
     private val navigation: CreateAccountNavigation
 ) : BaseViewModel() {
 
@@ -82,10 +88,14 @@ class CreateAccountViewModel @ViewModelInject constructor(
         setViewStateAsUpdated()
     }
 
-    fun showErrorCreateAccountAlert() {
+    private fun setAlertCopy(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+    }
+
+    private fun showErrorCreateAccountAlert(title: String, message: String) {
         setShouldShowDismissProgressAsUpdated()
-        alertTitle = application.getString(R.string.error_cant_create_account)
-        alertMessage = application.getString(R.string.error_fields_are_not_correct_create_account)
+        setAlertCopy(title, message)
         setShouldShowAlertAsUpdated()
     }
 
@@ -106,28 +116,33 @@ class CreateAccountViewModel @ViewModelInject constructor(
             viewState.usernameErrorVisible = accountValidation.isUsernameEmpty(username)
             setViewStateAsUpdated()
         }
-        // before this get release to beta users,
-        // were going to need to check to make sure the username and email,
-        // are not stored in firebase realtime database.
-        // if one of them are, tell them to use a different one(they should not be able to continue the workflow,
-        // if that error occurs.
         if (isAllFieldsEnteredCorrectly()) {
             setShouldShowProgressAsUpdated()
 
-            val timer = object : CountDownTimer(1000, 100) {
-                override fun onFinish() {
-                    setShouldShowDismissProgressAsUpdated()
-                    // ask the user if they want to upload a profile picture
-                    // if they dont, we continue to create a profile
-                    // if they do, we take them to upload picture
-                    println("it works ")
-                }
+            chalFirebaseAuth.auth.fetchSignInMethodsForEmail(email)
+                .addOnCompleteListener {
+                    val isNewUser = it.result?.signInMethods?.isEmpty() ?:  true
 
-                override fun onTick(millisUntilFinished: Long) {}
-            }
-            timer.start()
+                    if (isNewUser) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            setShouldShowDismissProgressAsUpdated()
+                            // ask the user if they want to upload a profile picture
+                            // if they dont, we continue to create a profile
+                            // if they do, we take them to upload picture
+                            println("it works ")
+                        }, LOADING_DELAY.toLong())
+                    } else {
+                        showErrorCreateAccountAlert(
+                            title = application.getString(R.string.error_cant_create_account),
+                            message = application.getString(R.string.error_email_already_exists)
+                        )
+                    }
+                }
         } else {
-            showErrorCreateAccountAlert()
+            showErrorCreateAccountAlert(
+                title = application.getString(R.string.error_cant_create_account),
+                message = application.getString(R.string.error_fields_are_not_correct_create_account)
+            )
         }
     }
 
