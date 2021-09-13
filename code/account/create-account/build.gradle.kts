@@ -28,11 +28,10 @@ android {
 }
 
 dependencies {
-    api(project(path = ":account:create-account"))
+    api(project(path = ":account:validation"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":main:navigation"))
     api(project(path = ":main:resources"))
-    api(project(path = ":network"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:shared-layout"))
@@ -41,6 +40,7 @@ dependencies {
     implementation(Dependencies.Libs.Android.AppCompat)
     implementation(Dependencies.Libs.Android.Ktx)
     implementation(Dependencies.Libs.UI.ConstraintLayout)
+    implementation(Dependencies.Libs.UI.CircleImageView)
 
     implementation(Dependencies.Libs.Firebase.Auth)
 

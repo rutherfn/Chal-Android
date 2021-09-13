@@ -49,6 +49,9 @@ class SignUpFragment @Inject constructor(): BaseFragment<SignUpFragmentBinding>(
         binding.tbSignUpBackButton.ibBack.setOnClickListener {
             viewModel.onBackClicked()
         }
+        binding.btnSignUpRegular.setOnClickListener {
+            viewModel.onContinueWithEmailClicked()
+        }
         binding.tvLogin.setOnClickListener {
             viewModel.onLoginClicked()
         }

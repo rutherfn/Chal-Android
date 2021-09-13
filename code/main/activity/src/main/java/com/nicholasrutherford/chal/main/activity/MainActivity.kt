@@ -52,6 +52,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentSignUp -> {
                     hideBottomNavigation()
                 }
+                R.id.fragmentCreateAccount -> {
+                    hideBottomNavigation()
+                }
             }
         }
 
@@ -105,6 +108,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                     navigator.navigateBack()
                 }
                 R.id.fragmentSignUp -> {
+                    navigator.navigateBack()
+                }
+                R.id.fragmentCreateAccount -> {
                     navigator.navigateBack()
                 }
                 else -> {

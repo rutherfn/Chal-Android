@@ -11,4 +11,8 @@ class SignUpNavigationImpl @Inject constructor() : SignUpNavigation {
     override fun pop() {
         navigator.navController.popBackStack()
     }
+
+    override fun showCreateAccount() {
+        navigator.navigate(R.id.nav_graph_create_account)
+    }
 }

@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    api(project(path = ":account:create-account"))
     api(project(path = ":account:forgot-password"))
     api(project(path = ":account:login"))
     api(project(path = ":account:sign-up"))

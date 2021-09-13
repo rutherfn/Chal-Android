@@ -5,11 +5,18 @@
     android:id="@+id/nav_graph_sign_up"
     app:startDestination="@id/fragmentSignUp">
 
+    <include app:graph="@navigation/nav_graph_create_account"/>
+
     <fragment
         android:id="@+id/fragmentSignUp"
         android:name="com.nicholasrutherford.chal.account.sign.up.SignUpFragment"
         android:label="sign_up_fragment"
         tools:layout="@layout/sign_up_fragment">
+
+        <action
+            android:id="@+id/action_CreateAccountpFragment_to_nav_graph"
+            app:destination="@+id/nav_graph_create_account"
+            />
 
     </fragment>
 
