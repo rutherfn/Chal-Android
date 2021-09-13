@@ -7,10 +7,10 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Dependencies.Android.CompileSdkVersion)
+    compileSdk = Dependencies.Android.CompileSdkVersion
 
     defaultConfig {
-        minSdkVersion(Dependencies.Android.MinSdkVersion)
+        minSdk = Dependencies.Android.MinSdkVersion
     }
 
     buildFeatures.viewBinding = true

@@ -11,4 +11,8 @@ class LoginNavigationImpl @Inject constructor(): LoginNavigation {
     override fun showForgotPassword() {
         navigator.navigate(R.id.nav_graph_forgot_password)
     }
+
+    override fun showSignIn() {
+        navigator.navigate(R.id.nav_graph_sign_up)
+    }
 }

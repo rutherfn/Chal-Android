@@ -49,6 +49,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentForgotPassword -> {
                     hideBottomNavigation()
                 }
+                R.id.fragmentSignUp -> {
+                    hideBottomNavigation()
+                }
             }
         }
 
@@ -99,6 +102,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                     finish()
                 }
                 R.id.fragmentForgotPassword -> {
+                    navigator.navigateBack()
+                }
+                R.id.fragmentSignUp -> {
                     navigator.navigateBack()
                 }
                 else -> {

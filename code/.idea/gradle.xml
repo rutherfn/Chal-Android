@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/account" />
             <option value="$PROJECT_DIR$/account/forgot-password" />
             <option value="$PROJECT_DIR$/account/login" />
+            <option value="$PROJECT_DIR$/account/sign-up" />
             <option value="$PROJECT_DIR$/account/validation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />

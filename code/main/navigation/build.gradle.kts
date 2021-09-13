@@ -6,14 +6,16 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Dependencies.Android.CompileSdkVersion)
+    compileSdk = Dependencies.Android.CompileSdkVersion
 
     defaultConfig {
-        minSdkVersion(Dependencies.Android.MinSdkVersion)
+        minSdk = Dependencies.Android.MinSdkVersion
     }
 }
 
 dependencies {
+    api(project(path = ":main:resources"))
+
     implementation(Dependencies.Libs.Dagger.Android)
 
     implementation(Dependencies.Libs.Navigation.NavigationFragment)

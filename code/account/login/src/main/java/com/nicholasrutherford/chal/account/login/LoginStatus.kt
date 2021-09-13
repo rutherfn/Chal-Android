@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.firebase.auth
+package com.nicholasrutherford.chal.account.login
 
 enum class LoginStatus {
     NONE,

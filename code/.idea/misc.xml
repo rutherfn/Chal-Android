@@ -8,7 +8,10 @@
         <entry key="account/forgot-password/src/main/res/layout/fragment_forgot_password.xml" value="0.19630192502532928" />
         <entry key="account/login/src/main/res/layout/fragment_login.xml" value="0.12" />
         <entry key="account/login/src/main/res/layout/frament_splash.xml" value="0.19630192502532928" />
+        <entry key="account/sign-up/src/main/res/layout/fragment_sign_up.xml" value="0.19630192502532928" />
+        <entry key="account/sign-up/src/main/res/layout/sign_up_fragment.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.41354166666666664" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_upload_profile_picture.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/added_progress_layout.xml" value="0.33" />

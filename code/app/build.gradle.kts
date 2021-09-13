@@ -9,16 +9,19 @@ plugins {
 }
 
 android {
-    buildToolsVersion(Dependencies.Android.BuildToolsVersion)
-    compileSdkVersion(Dependencies.Android.CompileSdkVersion)
+    compileSdk = Dependencies.Android.CompileSdkVersion
+
+    defaultConfig {
+        minSdk = Dependencies.Android.MinSdkVersion
+    }
 
     buildFeatures.viewBinding = true
 
 
     defaultConfig {
         applicationId = Dependencies.Android.ApplicationId
-        minSdkVersion(Dependencies.Android.MinSdkVersion)
-        targetSdkVersion(Dependencies.Android.TargetSdkVersion)
+        targetSdk = Dependencies.Android.TargetSdkVersion
+        minSdk = Dependencies.Android.MinSdkVersion
         multiDexEnabled =  true
         versionCode = Dependencies.Android.VersionCode
         versionName = Dependencies.Android.VersionName

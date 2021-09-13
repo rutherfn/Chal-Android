@@ -7,10 +7,10 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Dependencies.Android.CompileSdkVersion)
+    compileSdk = Dependencies.Android.CompileSdkVersion
 
     defaultConfig {
-        minSdkVersion(Dependencies.Android.MinSdkVersion)
+        minSdk = Dependencies.Android.MinSdkVersion
     }
 
     buildFeatures.viewBinding = true
@@ -29,6 +29,7 @@ android {
 
 dependencies {
     api(project(path = ":account:forgot-password"))
+    api(project(path = ":account:sign-up"))
     api(project(path = ":account:validation"))
     api(project(path = ":firebase:auth"))
     api(project(path = ":helper:fragment"))

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Dependencies.Android.CompileSdkVersion)
+    compileSdk = Dependencies.Android.CompileSdkVersion
 
     buildFeatures.viewBinding = true
 }
@@ -20,6 +20,7 @@ dependencies {
     implementation(Dependencies.Libs.Kotlin.Coroutines)
 
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
+    implementation(project(mapOf("path" to ":main:navigation")))
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
     kapt(Dependencies.Libs.Hilt.hiltCompiler)
 }

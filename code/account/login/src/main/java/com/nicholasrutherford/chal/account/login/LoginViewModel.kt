@@ -6,7 +6,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.Network
 import com.nicholasrutherford.chal.account.validation.AccountValidation
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
-import com.nicholasrutherford.chal.firebase.auth.LoginStatus
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,7 +29,7 @@ class LoginViewModel @ViewModelInject constructor(
     fun onLoginStatesResult(status: LoginStatus) {
         when (status) {
             LoginStatus.NONE -> {
-                // showLoginStatusError()
+                // nothing to do here
             }
             LoginStatus.ERROR -> {
                 showLoginStatusError()
@@ -39,6 +38,7 @@ class LoginViewModel @ViewModelInject constructor(
                 showloginStatusSuccess()
             }
         }
+        setLoginStatusStateAsNotUpdated()
     }
 
     fun updateEmailAfterTextChanged(email: String) {
@@ -133,7 +133,7 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     fun onSignUpClicked() {
-        //    navigation.signUp()
+        navigation.showSignIn()
     }
 
     fun onForgotPasswordClicked() {

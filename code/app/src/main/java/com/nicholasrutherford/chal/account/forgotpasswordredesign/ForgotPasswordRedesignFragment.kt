@@ -48,11 +48,11 @@ class ForgotPasswordRedesignFragment @Inject constructor(
                 viewModel.setViewStateAsNotUpdated()
             }
         }
-        lifecycleScope.launch {
-            viewModel.firebaseAuth.sendPasswordResetEmailState.collect { status ->
-                viewModel.updateViewFromPasswordResetEmailStatus(status)
-            }
-        }
+        // lifecycleScope.launch {
+        //     viewModel.firebaseAuth.sendPasswordResetEmailState.collect { status ->
+        //         viewModel.updateViewFromPasswordResetEmailStatus(status)
+        //     }
+        // }
     }
 
     override fun updateTypefaces(bind: FragmentForgotPasswordBinding) {
