@@ -4,6 +4,7 @@ plugins {
     kotlin(Dependencies.Plugin.AndroidExtensions)
     kotlin(Dependencies.Plugin.Kapt)
     id(Dependencies.Plugin.DaggerHilt)
+    id("androidx.navigation.safeargs")
 }
 
 android {

@@ -13,14 +13,17 @@ android {
 }
 
 dependencies {
+    api(project(path = ":main:navigation"))
     api(project(path = ":main:resources"))
 
     implementation(Dependencies.Libs.UI.AcProgress)
 
     implementation(Dependencies.Libs.Kotlin.Coroutines)
 
+    implementation(Dependencies.Libs.Navigation.NavigationFragment)
+    implementation(Dependencies.Libs.Navigation.NavigationUi)
+
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
-    implementation(project(mapOf("path" to ":main:navigation")))
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
     kapt(Dependencies.Libs.Hilt.hiltCompiler)
 }

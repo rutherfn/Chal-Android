@@ -9,7 +9,7 @@ class LoginNavigationImpl @Inject constructor(): LoginNavigation {
     lateinit var navigator: Navigator
 
     override fun showForgotPassword() {
-        navigator.navigate(R.id.nav_graph_forgot_password)
+        navigator.navigate(R.id.nav_graph_forgot_password,)
     }
 
     override fun showSignIn() {

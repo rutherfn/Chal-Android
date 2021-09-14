@@ -52,6 +52,10 @@ abstract class BaseFragment<VB: ViewBinding>(
         fragmentNavigation?.showOkAlert(title, message)
     }
 
+    fun showClosingOutAppProgressAlert(resId: Int, title: String, message: String) {
+        fragmentNavigation?.showClosingOutAppProgressAlert(resId, title, message)
+    }
+
     suspend fun collectViewStateResult(viewStateUpdated: StateFlow<Boolean>, _viewStateAsUpdated: MutableStateFlow<Boolean>) {
         viewStateUpdated.collect { isViewStateUpdated ->
             if (isViewStateUpdated) {
