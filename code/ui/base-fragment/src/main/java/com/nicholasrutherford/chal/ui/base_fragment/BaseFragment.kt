@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.ui.base_fragment
 
+import android.Manifest
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,6 +17,7 @@ import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
+import android.os.Build
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
@@ -23,7 +25,8 @@ typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 const val GALLERY_TYPE = "image/*"
 
 const val GALLERY_REQUEST_CODE = 0
-const val IMAGE_CAPTURE_CODE = 1001
+const val CAMERA_CAPTURE_REQUEST = 1888
+const val CAMERA_PERMISSION_CODE = 100
 
 abstract class BaseFragment<VB: ViewBinding>(
     private val inflate: Inflate<VB>
@@ -47,7 +50,8 @@ abstract class BaseFragment<VB: ViewBinding>(
 
     private fun setColors(fragmentActivity: FragmentActivity) {
         colorBlack = ContextCompat.getColor(fragmentActivity.applicationContext, R.color.colorBlack)
-        colorSmokeWhite = ContextCompat.getColor(fragmentActivity.applicationContext, R.color.colorSmokeWhite)
+        colorSmokeWhite =
+            ContextCompat.getColor(fragmentActivity.applicationContext, R.color.colorSmokeWhite)
     }
 
     fun openGallery() {
@@ -58,39 +62,39 @@ abstract class BaseFragment<VB: ViewBinding>(
     }
 
     fun openCamera(title: String, description: String) {
-        val values = ContentValues()
-
-        values.put(MediaStore.Images.Media.TITLE, title)
-        values.put(MediaStore.Images.Media.DESCRIPTION, description)
-
-        val selectedPhotoUri = activity?.contentResolver?.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, selectedPhotoUri)
-
         if (!hasCameraPermission()) {
-            requestPermissions(String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}
-                PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+            requestCameraPermission()
         } else {
-            activity?.startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
+            activity?.startActivityForResult(cameraIntent, CAMERA_CAPTURE_REQUEST)
         }
     }
 
     private fun hasCameraPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            activity.applicationContext, android.Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
+        return activity?.applicationContext?.let {
+            ContextCompat.checkSelfPermission(
+                it, Manifest.permission.CAMERA
+            )
+        } == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestCameraPermission() {
-        requestPermissions(String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}
-            PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+        requestPermissions(
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA),
+            CAMERA_PERMISSION_CODE
+        )
     }
 
     fun navigateToUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = ((Uri.parse(url)))
         activity?.startActivity(intent)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray) { // do some work here in the future
     }
 
     fun showAlert(title: String, message: String) {

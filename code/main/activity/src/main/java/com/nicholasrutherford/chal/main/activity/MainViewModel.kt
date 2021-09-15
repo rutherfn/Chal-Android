@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.provider.MediaStore
@@ -12,6 +13,7 @@ import android.view.MenuItem
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.shared.preference.create.CreateSharedPreference
+import java.io.ByteArrayOutputStream
 
 class MainViewModel @ViewModelInject constructor(
     private val application: Application,
@@ -23,9 +25,6 @@ class MainViewModel @ViewModelInject constructor(
    // val testFairy = ChalTestFairyImpl(application)
 
     var selectedPhotoUri: Uri? = null
-
-    // private val clearSharedPreference = ClearSharedPreferenceImpl(application)
-    // private val readSharedPreference = ReadSharedPreferenceImpl(application)
 
     fun navigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -47,16 +46,35 @@ class MainViewModel @ViewModelInject constructor(
 
     fun onCameraResult(resultCode: Int, requestCode: Int, data: Intent?) {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
+            println("get here test")
 
             data.data?.let { uriData ->
                 createSharedPreference.createProfilePictureDirectorySharedPreference("profile-picture", uriData.toString())
             }
             // }
-        } else if (resultCode == Activity.RESULT_OK && data != null && requestCode == 1001) {
-            data.data?.let { uriData ->
-                createSharedPreference.createProfilePictureDirectorySharedPreference("profile-picture", uriData.toString())
+        } else if (requestCode == 1888 && resultCode == Activity.RESULT_OK && data != null) { // hack needs to be updated down the road
+            data.extras?.get("data").let {
+                val uri = getImageUri(application.applicationContext, it as Bitmap)
+                uri.let { uriData ->
+                    createSharedPreference.createProfilePictureDirectorySharedPreference(
+                        "profile-picture",
+                        uriData.toString()
+                    )
+                }
             }
         }
+    }
+
+    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(
+            inContext.getContentResolver(),
+            inImage,
+            "Title",
+            null
+        )
+        return Uri.parse(path)
     }
 
     private fun navigateToProgressUpload(bitmapDrawable: BitmapDrawable) {
