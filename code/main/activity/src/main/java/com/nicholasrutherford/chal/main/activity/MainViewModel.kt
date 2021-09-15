@@ -2,16 +2,20 @@ package com.nicholasrutherford.chal.main.activity
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.provider.MediaStore
 import android.view.MenuItem
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import com.nicholasrutherford.chal.shared.preference.create.CreateSharedPreference
 
 class MainViewModel @ViewModelInject constructor(
-private val application: Application
+    private val application: Application,
+    private val createSharedPreference: CreateSharedPreference
 ) : ViewModel() {
 
     val viewState = MainViewStateImpl()
@@ -43,24 +47,15 @@ private val application: Application
 
     fun onCameraResult(resultCode: Int, requestCode: Int, data: Intent?) {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
-            selectedPhotoUri = data.data
 
-            val bitmap = MediaStore.Images.Media.getBitmap(application.applicationContext.contentResolver, selectedPhotoUri)
-
-            val bitmapDrawable = BitmapDrawable(bitmap)
-
-            // if (viewState.currentScreen == Screens.UPLOAD_PROGRESS) {
-            //     navigateToProgressUpload(bitmapDrawable)
+            data.data?.let { uriData ->
+                createSharedPreference.createProfilePictureDirectorySharedPreference("profile-picture", uriData.toString())
+            }
             // }
-        } else if (resultCode == Activity.RESULT_OK) {
-            val bitmap = MediaStore.Images.Media.getBitmap(application.applicationContext.contentResolver, selectedPhotoUri)
-
-            val bitmapDrawable = BitmapDrawable(bitmap)
-
-            // if (viewState.currentScreen == Screens.UPLOAD_PROGRESS) {
-            //     navigateToProgressUpload(bitmapDrawable)
-            //     // bind?.clPostProgress?.ivUploadImage?.setBackgroundDrawable(bitmapDrawable)
-            // }
+        } else if (resultCode == Activity.RESULT_OK && data != null && requestCode == 1001) {
+            data.data?.let { uriData ->
+                createSharedPreference.createProfilePictureDirectorySharedPreference("profile-picture", uriData.toString())
+            }
         }
     }
 

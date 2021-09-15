@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.create.account
+package com.nicholasrutherford.chal.create.account.createaccount
 
 interface CreateAccountViewState  {
     var usernameErrorVisible: Boolean

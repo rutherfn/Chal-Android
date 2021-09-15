@@ -172,6 +172,7 @@
     <dimen name="margin_26dp">26dp</dimen>
     <dimen name="margin_28dp">28dp</dimen>
     <dimen name="margin_30dp">30dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
     <dimen name="margin_40dp">40dp</dimen>
     <dimen name="margin_60dp">60dp</dimen>
 

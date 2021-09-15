@@ -36,6 +36,7 @@ dependencies {
     api(project(path = ":main:navigation"))
     api(project(path = ":main:resources"))
     api(project(path = ":main:splash"))
+    api(project(path = ":shared-preference:create"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
 

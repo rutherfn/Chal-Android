@@ -1,4 +1,7 @@
 package com.nicholasrutherford.chal.create.account.uploadphoto
 
-class UploadPhotoViewState {
+import android.graphics.Bitmap
+
+interface UploadPhotoViewState {
+    var imageTakeAPhotoBitmap: Bitmap?
 }

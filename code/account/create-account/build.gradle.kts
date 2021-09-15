@@ -4,7 +4,7 @@ plugins {
     kotlin(Dependencies.Plugin.AndroidExtensions)
     kotlin(Dependencies.Plugin.Kapt)
     id(Dependencies.Plugin.DaggerHilt)
-    id("androidx.navigation.safeargs")
+    id(Dependencies.Plugin.NavigationSageArgs)
 }
 
 android {
@@ -34,6 +34,8 @@ dependencies {
     api(project(path = ":helper:fragment"))
     api(project(path = ":main:navigation"))
     api(project(path = ":main:resources"))
+    api(project(path = ":shared-preference:fetch"))
+    api(project(path = ":shared-preference:remove"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:shared-layout"))

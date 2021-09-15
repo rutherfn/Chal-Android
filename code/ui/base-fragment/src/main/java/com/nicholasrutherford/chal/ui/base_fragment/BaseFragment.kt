@@ -1,8 +1,11 @@
 package com.nicholasrutherford.chal.ui.base_fragment
 
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +18,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
+
+@Suppress("MagicNumber")
+const val GALLERY_TYPE = "image/*"
+
+const val GALLERY_REQUEST_CODE = 0
+const val IMAGE_CAPTURE_CODE = 1001
 
 abstract class BaseFragment<VB: ViewBinding>(
     private val inflate: Inflate<VB>
@@ -39,6 +48,43 @@ abstract class BaseFragment<VB: ViewBinding>(
     private fun setColors(fragmentActivity: FragmentActivity) {
         colorBlack = ContextCompat.getColor(fragmentActivity.applicationContext, R.color.colorBlack)
         colorSmokeWhite = ContextCompat.getColor(fragmentActivity.applicationContext, R.color.colorSmokeWhite)
+    }
+
+    fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = GALLERY_TYPE
+
+        activity?.startActivityForResult(intent, GALLERY_REQUEST_CODE)
+    }
+
+    fun openCamera(title: String, description: String) {
+        val values = ContentValues()
+
+        values.put(MediaStore.Images.Media.TITLE, title)
+        values.put(MediaStore.Images.Media.DESCRIPTION, description)
+
+        val selectedPhotoUri = activity?.contentResolver?.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, selectedPhotoUri)
+
+        if (!hasCameraPermission()) {
+            requestPermissions(String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}
+                PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+        } else {
+            activity?.startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
+        }
+    }
+
+    private fun hasCameraPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            activity.applicationContext, android.Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestCameraPermission() {
+        requestPermissions(String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}
+            PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
     }
 
     fun navigateToUrl(url: String) {
@@ -67,7 +113,6 @@ abstract class BaseFragment<VB: ViewBinding>(
 
     suspend fun collectShouldShowProgressResult(shouldShowProgress: StateFlow<Boolean>, _shouldShowProgress: MutableStateFlow<Boolean>) {
         shouldShowProgress.collect { isProgressUpdated ->
-            println(isProgressUpdated)
             if (isProgressUpdated) {
                 fragmentNavigation?.showFlowerProgess()
             }

@@ -111,6 +111,7 @@ class ProgressUploadFragment @Inject constructor(
         }
 
         params.bitmapDrawable?.let { bitmapDrawable ->
+
               bind.clPostProgress.ivUploadImage.setBackgroundDrawable(bitmapDrawable)
         }
     }

@@ -8,7 +8,7 @@ object Dependencies {
         const val GoogleServices = "com.google.gms.google-services"
         const val Kapt = "kapt"
         const val Library = "com.android.library"
-        const val NavigationSageArgs = "androidx.navigation.safeargs.kotlin"
+        const val NavigationSageArgs = "androidx.navigation.safeargs"
     }
     object Android {
         const val ApplicationId = "com.nicholasrutherford.chal"
@@ -119,7 +119,6 @@ object Dependencies {
 
         object Navigation {
             const val NavigationFragment = "androidx.navigation:navigation-fragment-ktx:${Version.navigationVersion}"
-            const val NavigationSafeArg = "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0-alpha09"
             const val NavigationUi = "androidx.navigation:navigation-ui-ktx:${Version.navigationVersion}"
         }
 

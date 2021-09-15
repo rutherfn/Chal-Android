@@ -1,10 +1,11 @@
-package com.nicholasrutherford.chal.create.account
+package com.nicholasrutherford.chal.create.account.createaccount
 
 import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.account.validation.AccountValidation
+import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 
@@ -126,10 +127,7 @@ class CreateAccountViewModel @ViewModelInject constructor(
                     if (isNewUser) {
                         Handler(Looper.getMainLooper()).postDelayed({
                             setShouldShowDismissProgressAsUpdated()
-                            // ask the user if they want to upload a profile picture
-                            // if they dont, we continue to create a profile
-                            // if they do, we take them to upload picture
-                            println("it works ")
+                            navigation.showUploadPhoto(username, email, password)
                         }, LOADING_DELAY.toLong())
                     } else {
                         showErrorCreateAccountAlert(

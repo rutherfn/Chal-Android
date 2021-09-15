@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.create.account
+package com.nicholasrutherford.chal.create.account.createaccount
 
 import android.app.Application
 import android.content.Context
@@ -144,7 +144,6 @@ class CreateAccountFragment @Inject constructor() : BaseFragment<CreateAccountFr
     }
 
     override fun updateView() {
-        println(viewModel.viewState.passwordErrorVisible)
         binding.ivErrorUsername.visibleOrGone = viewModel.viewState.usernameErrorVisible
         binding.tvErrorUsername.visibleOrGone = viewModel.viewState.usernameErrorVisible
 
