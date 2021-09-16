@@ -59,6 +59,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentUploadPhoto -> {
                     hideBottomNavigation()
                 }
+                R.id.fragmentNewsFeed -> {
+                    showBottomNavigation()
+                }
             }
         }
 
@@ -121,6 +124,12 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                     showClosingOutAppProgressAlert(
                         title = this.getString(R.string.creating_your_account),
                         message = this.getString(R.string.creating_your_account_desc)
+                    )
+                }
+                R.id.fragmentNewsFeed -> {
+                    showClosingOutAppProgressAlert(
+                        title = this.getString(R.string.closing_out_app),
+                        message = this.getString(R.string.are_you_sure_you_you_want_to_discard_the_post)
                     )
                 }
                 else -> {

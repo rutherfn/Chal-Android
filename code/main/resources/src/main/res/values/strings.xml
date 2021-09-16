@@ -12,6 +12,7 @@
     <string name="active_challenges">Active</string>
     <string name="account">Account</string>
     <string name="already_have_a_account_text">Already have a account?</string>
+    <string name="are_you_sure_you_want_to_close_out_of_app_desc">Are you sure you want to close out of the app?</string>
     <string name="are_you_sure_you_you_want_to_discard_the_post">Are you sure you want to discard this post?</string>
     <string name="app_menu">App Menu</string>
     <string name="back">Back</string>
@@ -42,6 +43,7 @@
     <string name="clear_photo">Clear Photo</string>
     <string name="click_here_to_add_a_description"><u>Click Here</u> To Add A Description</string>
     <string name="click_me_to_take_a_picture">Click Me To Take A Picture</string>
+    <string name="closing_out_app">Closing Out App</string>
     <string name="continue_creating">Continue</string>
     <string name="challenges_bottom_nav">Challenges</string>
     <string name="choose_from_library">Choose From Library</string>

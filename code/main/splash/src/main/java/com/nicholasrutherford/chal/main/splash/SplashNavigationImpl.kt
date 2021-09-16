@@ -9,8 +9,8 @@ class SplashNavigationImpl @Inject constructor(
     @Inject
     lateinit var navigator: Navigator
 
-    override fun showHome() {
-        // show home
+    override fun showNewsFeed() {
+        navigator.navigate(R.id.nav_graph_news_feed)
     }
 
     override fun showlogin() {

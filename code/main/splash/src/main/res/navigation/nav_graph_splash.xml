@@ -5,11 +5,18 @@
     android:id="@+id/nav_graph_splash"
     app:startDestination="@id/fragmentSplash">
 
+    <include app:graph="@navigation/nav_graph_login"/>
+
     <fragment
         android:id="@+id/fragmentSplash"
         android:name="com.nicholasrutherford.chal.main.splash.SplashDialogFragment"
         android:label="splash_1"
         tools:layout="@layout/dialog_fragment_splash">
-    </fragment>
 
+        <action
+            android:id="@+id/action_LoginFragment_to_nav_graph_b"
+            app:destination="@+id/nav_graph_login"
+            />
+
+    </fragment>
 </navigation>

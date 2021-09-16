@@ -1,6 +1,6 @@
 package com.nicholasrutherford.chal.main.splash
 
 interface SplashNavigation {
-    fun showHome()
+    fun showNewsFeed()
     fun showlogin()
 }

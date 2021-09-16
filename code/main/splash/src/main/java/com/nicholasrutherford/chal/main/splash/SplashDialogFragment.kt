@@ -6,10 +6,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.fragment.app.viewModels
 import com.nicholasrutherford.chal.main.splash.databinding.DialogFragmentSplashBinding
-import com.nicholasrutherford.chal.ui.base_fragment.BaseDialogFragment
+import com.nicholasrutherford.chal.ui.base_fragment.BaseFragment
 
 @AndroidEntryPoint
-class SplashDialogFragment @Inject constructor() : BaseDialogFragment<DialogFragmentSplashBinding>(
+class SplashDialogFragment @Inject constructor() : BaseFragment<DialogFragmentSplashBinding>(
     DialogFragmentSplashBinding::inflate) {
 
     private val viewModel: SplashViewModel by viewModels()

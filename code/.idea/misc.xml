@@ -55,6 +55,7 @@
         <entry key="main/resources/src/main/res/drawable/ic_close_white.xml" value="0.13333333333333333" />
         <entry key="main/resources/src/main/res/drawable/ic_green_check_mark.xml" value="0.13333333333333333" />
         <entry key="main/resources/src/main/res/menu/bottom_navigation.xml" value="0.382051282051282" />
+        <entry key="main/splash/src/main/res/layout/dialog_fragment_splash.xml" value="0.10207700101317123" />
         <entry key="main/splash/src/main/res/layout/fragment_splash.xml" value="0.18439716312056736" />
         <entry key="ui/base-vm/src/main/res/layout/toolbar_back_button_with_title.xml" value="0.19630192502532928" />
         <entry key="ui/shared-layout/src/main/res/layout/toolbar_back_button_with_text.xml" value="0.1" />

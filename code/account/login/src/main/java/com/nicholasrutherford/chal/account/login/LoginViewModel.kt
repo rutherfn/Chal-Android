@@ -122,7 +122,7 @@ class LoginViewModel @ViewModelInject constructor(
 
     private fun showloginStatusSuccess() {
         setShouldShowDismissProgressAsUpdated()
-        // navigation.loginToApp()
+        navigation.showNewsFeed()
     }
 
     fun showLoginStatusError() {

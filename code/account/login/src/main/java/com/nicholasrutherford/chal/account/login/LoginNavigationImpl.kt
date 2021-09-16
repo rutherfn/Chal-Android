@@ -15,4 +15,8 @@ class LoginNavigationImpl @Inject constructor(): LoginNavigation {
     override fun showSignIn() {
         navigator.navigate(R.id.nav_graph_sign_up)
     }
+
+    override fun showNewsFeed() {
+        navigator.navigate(R.id.nav_graph_news_feed)
+    }
 }

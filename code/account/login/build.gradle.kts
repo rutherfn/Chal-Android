@@ -34,6 +34,7 @@ dependencies {
     api(project(path = ":firebase:auth"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":main:navigation"))
+    api(project(path = ":main:news-feed"))
     api(project(path = ":main:resources"))
     api(project(path = ":network"))
     api(project(path = ":ui:base-fragment"))
