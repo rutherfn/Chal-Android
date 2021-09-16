@@ -27,6 +27,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     private val fetchSharedPreference: FetchSharedPreference,
     private val network: Network,
     private val removeSharedPreference: RemoveSharedPreference,
+    private val navigation: UploadPhotoNavigation,
     private val firebaseAuth: ChalFirebaseAuth,
     private val firebaseStorage: ChalFirebaseStorage,
     private val firebaseDatabase: ChalFirebaseDatabase,
@@ -178,8 +179,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
             .addOnCompleteListener {
                 firebaseAuth.sendEmailVerification()
                 setShouldShowDismissProgressAsUpdated()
-
-                // navigate user directly to the news feed page
+                navigation.showNewsFeed()
             }
             .addOnFailureListener {
                 showStockErrorState()

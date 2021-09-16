@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/fragmentNewsFeed"
         android:name="com.nicholasrutherford.chal.main.news.feed.NewsFeedFragment"
-        android:label="sign_up_fragment"
+        android:label="news_feed_fragment"
         tools:layout="@layout/fragment_news_feed">
 
     </fragment>

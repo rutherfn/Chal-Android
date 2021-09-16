@@ -1,4 +1,5 @@
 package com.nicholasrutherford.chal.create.account.uploadphoto
 
-class UploadPhotoNavigation {
+interface UploadPhotoNavigation {
+    fun showNewsFeed()
 }
