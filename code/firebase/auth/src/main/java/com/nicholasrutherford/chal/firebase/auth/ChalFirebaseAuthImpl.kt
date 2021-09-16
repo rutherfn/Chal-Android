@@ -10,4 +10,8 @@ class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
     override val isLoggedIn: Boolean = auth.currentUser != null
 
     override val uid: String? = auth.uid
+
+    override fun sendEmailVerification() {
+        auth.currentUser?.sendEmailVerification()
+    }
 }

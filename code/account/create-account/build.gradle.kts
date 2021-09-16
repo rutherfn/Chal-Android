@@ -30,6 +30,7 @@ android {
 
 dependencies {
     api(project(path = ":account:validation"))
+    api(project(path = ":data:account-info"))
     api(project(path = ":firebase:auth"))
     api(project(path = ":firebase:database"))
     api(project(path = ":firebase:storage"))

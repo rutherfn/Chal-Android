@@ -6,4 +6,5 @@ interface ChalFirebaseAuth  {
     val auth: FirebaseAuth
     val isLoggedIn: Boolean
     val uid: String?
+    fun sendEmailVerification()
 }

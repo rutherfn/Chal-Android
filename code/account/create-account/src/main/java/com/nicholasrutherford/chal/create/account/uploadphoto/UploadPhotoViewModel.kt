@@ -10,7 +10,10 @@ import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.Network
 import com.nicholasrutherford.chal.create.account.R
+import com.nicholasrutherford.chal.data.account.info.AccountInfo
+import com.nicholasrutherford.chal.data.account.info.ProfileInfo
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
+import com.nicholasrutherford.chal.firebase.database.ChalFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.storage.ChalFirebaseStorage
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
@@ -26,6 +29,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     private val removeSharedPreference: RemoveSharedPreference,
     private val firebaseAuth: ChalFirebaseAuth,
     private val firebaseStorage: ChalFirebaseStorage,
+    private val firebaseDatabase: ChalFirebaseDatabase,
     private val application: Application
 ) : BaseViewModel() {
 
@@ -144,15 +148,42 @@ class UploadPhotoViewModel @ViewModelInject constructor(
                 .addOnSuccessListener {
                     firebaseStorage.profilePictureImageReference(fileName)
                         .downloadUrl.addOnSuccessListener { profileImage ->
-                            val profileImageUrl = profileImage.toString()
-                            println(profileImageUrl)
-                            setShouldShowDismissProgressAsUpdated()
+                            createDbUser(profileImage.toString())
                         }
                 }
                 .addOnFailureListener {
                     showStockErrorState()
                 }
         }
+    }
+
+    private fun createDbUser(profileImageUrl: String) {
+        val newUser = AccountInfo(
+            id = 0,
+            profileInfo = username?.let { name -> ProfileInfo(username = name, profileImage = profileImageUrl) },
+            username = username,
+            email = email,
+            profileImage = profileImageUrl,
+            firstName = "",
+            lastName = "",
+            bio = "",
+            age = 0,
+            challengeBannerType = 0,
+            friends = null,
+            activeChallenges = null
+        )
+
+        firebaseDatabase.userDatabaseReference(firebaseAuth.uid ?: "")
+            .setValue(newUser)
+            .addOnCompleteListener {
+                firebaseAuth.sendEmailVerification()
+                setShouldShowDismissProgressAsUpdated()
+
+                // navigate user directly to the news feed page
+            }
+            .addOnFailureListener {
+                showStockErrorState()
+            }
     }
     
     inner class UploadPhotoViewStateImpl : UploadPhotoViewState {
