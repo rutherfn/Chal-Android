@@ -31,6 +31,7 @@ android {
 dependencies {
     api(project(path = ":account:validation"))
     api(project(path = ":firebase:auth"))
+    api(project(path = ":firebase:database"))
     api(project(path = ":firebase:storage"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":main:navigation"))
@@ -49,6 +50,7 @@ dependencies {
     implementation(Dependencies.Libs.UI.CircleImageView)
 
     implementation(Dependencies.Libs.Firebase.Auth)
+    implementation(Dependencies.Libs.Firebase.Database)
     implementation(Dependencies.Libs.Firebase.Storage)
 
     implementation(Dependencies.Libs.Navigation.NavigationFragment)
