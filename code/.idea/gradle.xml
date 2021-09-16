@@ -30,6 +30,7 @@
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/main/activity" />
             <option value="$PROJECT_DIR$/main/navigation" />
+            <option value="$PROJECT_DIR$/main/news-feed" />
             <option value="$PROJECT_DIR$/main/resources" />
             <option value="$PROJECT_DIR$/main/splash" />
             <option value="$PROJECT_DIR$/network" />

@@ -1,4 +1,5 @@
 <resources>
+    <string name="add_friends">Add Friends</string>
     <string name="add_progress">Add Progress</string>
     <string name="added_progress">Added Progress</string>
     <string name="add_more_progress">Add More Progress</string>
@@ -154,6 +155,7 @@
     </string-array>
     <string name="last_name">Last Name</string>
     <string name="log_out">Log out</string>
+    <string name="looks_like_you_dont_have_any_friends">Looks like you havent had any friends yet!</string>
     <string name="looks_like_the_system_cant_detect_internet">Looks like the system can not detect internet. Please try connecting to a tnetwork</string>
     <string name="looks_like_were_missing_caption">Looks like you are missing a caption. Please enter info for all fields, in order to post progress,</string>
     <string name="looks_like_were_missing_image">Looks like you are missing a image. Please enter info for all fields, in order to post progress,</string>
@@ -219,6 +221,7 @@
     <string name="social_media_linkedin_content_desc">Social Media Icon Linkedin</string>
     <string name="sorry_but_this_is_not_a_valid_email_please_enter_a_valid_email_and_try_again">Sorry but that is not a valid email. Please enter a valid email, and try again"</string>
     <string name="successful">Successful</string>
+    <string name="success_you_joined_the">Success! You joined the</string>
     <string name="teaser_challenge">Teaser Challenge</string>
     <string name="to_reset_password">To Reset Password.</string>
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
