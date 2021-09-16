@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.create.account.R
+import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
@@ -19,6 +20,7 @@ const val PROFILE_PICTURE_SHARED_PREF = "profile-picture"
 class UploadPhotoViewModel @ViewModelInject constructor(
     private val fetchSharedPreference: FetchSharedPreference,
     private val removeSharedPreference: RemoveSharedPreference,
+    private val firebaseAuth: ChalFirebaseAuth,
     private val application: Application
 ) : BaseViewModel() {
 
@@ -81,14 +83,28 @@ class UploadPhotoViewModel @ViewModelInject constructor(
         }
     }
 
-    fun onCloseClicked() {
-        alertTitle = application.getString(R.string.creating_your_account)
-        alertMessage = application.getString(R.string.creating_your_account_desc)
+    fun showErrorCreatingAccountState() {
+        alertTitle = application.getString(R.string.error_cant_create_account)
+        alertMessage = application.getString(R.string.issue_creating_your_account)
+        setShouldShowDismissProgressAsUpdated()
         setShouldShowAlertAsUpdated()
     }
 
     fun onContinueClicked() {
+        setShouldShowProgressAsUpdated()
 
+        email?.let { validEmail ->
+            password?.let { validPassword ->
+                firebaseAuth.auth.createUserWithEmailAndPassword(validEmail, validPassword)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            setShouldShowDismissProgressAsUpdated()
+                        }
+                    }.addOnCompleteListener {
+                        showErrorCreatingAccountState()
+                    }
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.P)

@@ -99,6 +99,7 @@
     <string name="hex_black">#000000</string>
     <string name="hex_white">#FFFFFF</string>
     <string name="high">High</string>
+    <string name="issue_creating_your_account">Issue creating your account. Please try again</string>
     <string name="issue_uploading_image_to_server">Issue uploading image to server. Please Try Again</string>
     <string name="internet_not_available">internet Not Available</string>
     <string name="last_updated">Last Updated</string>

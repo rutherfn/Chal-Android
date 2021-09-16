@@ -86,7 +86,6 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
             openCamera()
         }
         binding.btnContinueUpload.setOnClickListener {
-            findNavController().navigateUp()
             viewModel.onContinueClicked()
         }
     }
