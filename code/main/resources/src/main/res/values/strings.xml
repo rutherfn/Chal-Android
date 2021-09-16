@@ -34,6 +34,8 @@
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
     <string name="click_to_refresh">Click to refresh</string>
     <string name="close">CLOSE</string>
+    <string name="creating_your_account">Creating Your Account</string>
+    <string name="creating_your_account_desc">You are currently in the process of creating your account. Closing the app will not save your changes, are you sure you want to continue?</string>
     <string name="completed">Completed</string>
     <string name="completed_challenges">COMPLETED</string>
     <string name="clear_photo">Clear Photo</string>

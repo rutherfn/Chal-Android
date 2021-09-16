@@ -77,7 +77,7 @@ class CreateAccountFragment @Inject constructor() : BaseFragment<CreateAccountFr
         lifecycleScope.launch {
             viewModel.shouldShowAlert.collect { isShouldShowAlert ->
                 if (isShouldShowAlert) {
-                    showAlert(title = viewModel.alertTitle, message = viewModel.alertMessage)
+                    showOkAlert(title = viewModel.alertTitle, message = viewModel.alertMessage)
                 }
                 viewModel._shouldShowAlert.value = false
             }

@@ -79,7 +79,7 @@ class LoginFragment @Inject constructor() : BaseFragment<FragmentLoginBinding>(
         lifecycleScope.launch {
             viewModel.shouldShowAlert.collect { isShouldShowAlert ->
                 if (isShouldShowAlert) {
-                    showAlert(title = viewModel.alertErrorTitle, message = viewModel.alertErrorMessage)
+                    showOkAlert(title = viewModel.alertErrorTitle, message = viewModel.alertErrorMessage)
                 }
                 viewModel._shouldShowAlert.value = false
             }

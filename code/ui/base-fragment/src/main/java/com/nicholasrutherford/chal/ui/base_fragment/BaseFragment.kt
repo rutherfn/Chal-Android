@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import android.os.Build
+import androidx.navigation.fragment.findNavController
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
@@ -61,7 +62,7 @@ abstract class BaseFragment<VB: ViewBinding>(
         activity?.startActivityForResult(intent, GALLERY_REQUEST_CODE)
     }
 
-    fun openCamera(title: String, description: String) {
+    fun openCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
         if (!hasCameraPermission()) {
@@ -97,7 +98,7 @@ abstract class BaseFragment<VB: ViewBinding>(
         grantResults: IntArray) { // do some work here in the future
     }
 
-    fun showAlert(title: String, message: String) {
+    fun showOkAlert(title: String, message: String) {
         // exapnd on this down the line
         fragmentNavigation?.showOkAlert(title, message)
     }

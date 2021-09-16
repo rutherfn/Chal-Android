@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.main.activity
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -53,6 +54,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                     hideBottomNavigation()
                 }
                 R.id.fragmentCreateAccount -> {
+                    hideBottomNavigation()
+                }
+                R.id.fragmentUploadPhoto -> {
                     hideBottomNavigation()
                 }
             }
@@ -113,6 +117,12 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentCreateAccount -> {
                     navigator.navigateBack()
                 }
+                R.id.fragmentUploadPhoto -> {
+                    showClosingOutAppProgressAlert(
+                        title = this.getString(R.string.creating_your_account),
+                        message = this.getString(R.string.creating_your_account_desc)
+                    )
+                }
                 else -> {
                     finish()
                 }
@@ -120,5 +130,23 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
         }?: run {
             finish()
         }
+    }
+
+    fun showClosingOutAppProgressAlert(title: String, message: String) {
+        val closingOutAppProgressAlertDialogBuilder = AlertDialog.Builder(this)
+
+        closingOutAppProgressAlertDialogBuilder.setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton(this.getString(R.string.yes)) { dialog, _ ->
+                finish()
+            }
+            .setNegativeButton(this.getString(R.string.no)) { dialog, _ ->
+                dialog.cancel()
+            }
+
+        val appProgressAlert = closingOutAppProgressAlertDialogBuilder.create()
+        appProgressAlert.setTitle(title)
+
+        appProgressAlert.show()
     }
 }

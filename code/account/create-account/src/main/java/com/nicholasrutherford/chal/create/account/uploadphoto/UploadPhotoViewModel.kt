@@ -8,6 +8,7 @@ import android.os.Build
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
+import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
@@ -24,7 +25,22 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     private var isPhotoReadyToBeUpdated = false
     private val buildSdkVersion = Build.VERSION.SDK_INT
 
+    private var email: String? = null
+    private var password: String? = null
+    private var username: String? = null
+
+    var alertTitle = application.getString(R.string.empty_string)
+    var alertMessage = application.getString(R.string.empty_string)
+
     val viewState = UploadPhotoViewStateImpl()
+
+    fun setParams(email: String?, password: String?, username: String?) {
+        this.email = email
+        this.password = password
+        this.username = username
+
+        println(this.email)
+    }
 
     fun updateIsPhotoReadyToBeUpdated(isPhotoReadyToBeUpdated: Boolean) {
         this.isPhotoReadyToBeUpdated = isPhotoReadyToBeUpdated
@@ -63,6 +79,16 @@ class UploadPhotoViewModel @ViewModelInject constructor(
                 return null
             }
         }
+    }
+
+    fun onCloseClicked() {
+        alertTitle = application.getString(R.string.creating_your_account)
+        alertMessage = application.getString(R.string.creating_your_account_desc)
+        setShouldShowAlertAsUpdated()
+    }
+
+    fun onContinueClicked() {
+
     }
 
     @RequiresApi(Build.VERSION_CODES.P)

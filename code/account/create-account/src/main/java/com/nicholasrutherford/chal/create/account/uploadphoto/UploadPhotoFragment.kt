@@ -10,6 +10,11 @@ import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.nicholasrutherford.chal.create.account.EMAIL
+import com.nicholasrutherford.chal.create.account.PASSWORD
+import com.nicholasrutherford.chal.create.account.USERNAME
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -26,8 +31,36 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.setParams(
+            email = arguments?.getString(EMAIL),
+            password = arguments?.getString(PASSWORD),
+            username = arguments?.getString(USERNAME)
+        )
         lifecycleScope.launch {
             collectViewStateResult(viewModel.viewStateUpdated, viewModel._viewStateUpdated)
+        }
+        lifecycleScope.launch {
+            collectShouldShowProgressResult(
+                viewModel.shouldShowProgress,
+                viewModel._shouldShowProgress
+            )
+        }
+        lifecycleScope.launch {
+            collectShouldDismissProgressResult(
+                viewModel.shouldDismissProgress,
+                viewModel._shouldDismissProgress
+            )
+        }
+    }
+
+    override fun collectAlertAsUpdated() {
+        lifecycleScope.launch {
+            viewModel.shouldShowAlert.collect { isShouldShowAlert ->
+                if (isShouldShowAlert) {
+                    showOkAlert(title = viewModel.alertTitle, message = viewModel.alertMessage)
+                }
+                viewModel._shouldShowAlert.value = false
+            }
         }
     }
 
@@ -37,9 +70,10 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
     }
 
     override fun updateTypefaces() {
-    }
+        typeface.setTextViewHeaderBoldTypeface(binding.tvTakeAPictureOrChooseFromLibrary)
 
-    override fun collectAlertAsUpdated() {
+        typeface.setTextViewBodyBoldTypeface(binding.btnChooseFormLibrary)
+        typeface.setTextViewBodyBoldTypeface(binding.btnContinueUpload)
     }
 
     override fun onListener() {
@@ -49,7 +83,11 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
         }
         binding.cvTakeAPhoto.setOnClickListener {
             viewModel.updateIsPhotoReadyToBeUpdated(true)
-            openCamera("Test", "Test two")
+            openCamera()
+        }
+        binding.btnContinueUpload.setOnClickListener {
+            findNavController().navigateUp()
+            viewModel.onContinueClicked()
         }
     }
 
