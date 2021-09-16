@@ -1,2 +1,0 @@
-com/nicholasrutherford/chal/ui/permissions/BuildConfig.java
- com.nicholasrutherford.chal.ui.permissions.BuildConfig

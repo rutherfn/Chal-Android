@@ -1,2 +1,0 @@
-com/nicholasrutherford/chal/data/account/BuildConfig.java
- com.nicholasrutherford.chal.data.account.BuildConfig

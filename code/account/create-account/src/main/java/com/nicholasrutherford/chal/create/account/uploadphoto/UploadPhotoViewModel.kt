@@ -8,6 +8,7 @@ import android.os.Build
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
+import com.nicholasrutherford.chal.Network
 import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
@@ -19,6 +20,7 @@ const val PROFILE_PICTURE_SHARED_PREF = "profile-picture"
 
 class UploadPhotoViewModel @ViewModelInject constructor(
     private val fetchSharedPreference: FetchSharedPreference,
+    private val network: Network,
     private val removeSharedPreference: RemoveSharedPreference,
     private val firebaseAuth: ChalFirebaseAuth,
     private val application: Application
@@ -90,20 +92,32 @@ class UploadPhotoViewModel @ViewModelInject constructor(
         setShouldShowAlertAsUpdated()
     }
 
+    fun showNoNetworkState() {
+        alertTitle = application.getString(R.string.error_cant_create_account)
+        alertMessage = application.applicationContext.getString(R.string.error_no_internet_log_in)
+        setShouldShowDismissProgressAsUpdated()
+        setShouldShowAlertAsUpdated()
+    }
+
     fun onContinueClicked() {
         setShouldShowProgressAsUpdated()
 
-        email?.let { validEmail ->
-            password?.let { validPassword ->
-                firebaseAuth.auth.createUserWithEmailAndPassword(validEmail, validPassword)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            setShouldShowDismissProgressAsUpdated()
+        if (network.isConnected()) {
+
+            email?.let { validEmail ->
+                password?.let { validPassword ->
+                    firebaseAuth.auth.createUserWithEmailAndPassword(validEmail, validPassword)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                setShouldShowDismissProgressAsUpdated()
+                            }
+                        }.addOnCompleteListener {
+                            showErrorCreatingAccountState()
                         }
-                    }.addOnCompleteListener {
-                        showErrorCreatingAccountState()
-                    }
+                }
             }
+        } else {
+            showNoNetworkState()
         }
     }
 

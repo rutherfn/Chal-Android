@@ -33,6 +33,7 @@ dependencies {
     api(project(path = ":firebase:auth"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":main:navigation"))
+    api(project(path = ":network"))
     api(project(path = ":main:resources"))
     api(project(path = ":shared-preference:fetch"))
     api(project(path = ":shared-preference:remove"))
