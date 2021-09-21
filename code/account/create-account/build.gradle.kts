@@ -34,6 +34,7 @@ dependencies {
     api(project(path = ":firebase:auth"))
     api(project(path = ":firebase:database"))
     api(project(path = ":firebase:storage"))
+    api(project(path = ":helper:constants"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":main:navigation"))
     api(project(path = ":network"))

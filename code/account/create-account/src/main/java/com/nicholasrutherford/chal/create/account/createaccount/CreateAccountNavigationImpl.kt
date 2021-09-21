@@ -1,10 +1,10 @@
 package com.nicholasrutherford.chal.create.account.createaccount
 
 import androidx.core.os.bundleOf
-import com.nicholasrutherford.chal.create.account.EMAIL
-import com.nicholasrutherford.chal.create.account.PASSWORD
 import com.nicholasrutherford.chal.create.account.R
-import com.nicholasrutherford.chal.create.account.USERNAME
+import com.nicholasrutherford.chal.helper.constants.EMAIL
+import com.nicholasrutherford.chal.helper.constants.PASSWORD
+import com.nicholasrutherford.chal.helper.constants.USERNAME
 import com.nicholasrutherford.chal.main.navigation.Navigator
 import javax.inject.Inject
 

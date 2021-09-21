@@ -15,7 +15,7 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.Libs.UI.AcProgress)
+    api(project(path = ":helper:constants"))
 
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)

@@ -15,13 +15,11 @@ import com.nicholasrutherford.chal.data.account.info.ProfileInfo
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.firebase.database.ChalFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.storage.ChalFirebaseStorage
+import com.nicholasrutherford.chal.helper.constants.PROFILE_PICTURE_DIRECTORY_PREFERENCE
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import java.util.*
-
-@Suppress("MagicNumber")
-const val PROFILE_PICTURE_SHARED_PREF = "profile-picture"
 
 class UploadPhotoViewModel @ViewModelInject constructor(
     private val fetchSharedPreference: FetchSharedPreference,
@@ -62,7 +60,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
         if (isPhotoReadyToBeUpdated) {
             val profilePictureDirectory =
                 fetchSharedPreference.fetchProfilePictureDirectorySharedPreference(
-                    PROFILE_PICTURE_SHARED_PREF)
+                    PROFILE_PICTURE_DIRECTORY_PREFERENCE)
 
             if (profilePictureDirectory.isNullOrEmpty()) {
                 viewState.imageTakeAPhotoBitmap = null
@@ -71,7 +69,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
                 viewState.imageTakeAPhotoBitmap = getCapturedImage(profileUri as Uri)
 
                 removeSharedPreference.removeProfilePictureDirectorySharedPreference(
-                    PROFILE_PICTURE_SHARED_PREF)
+                    PROFILE_PICTURE_DIRECTORY_PREFERENCE)
                 setViewStateAsUpdated()
             }
             updateIsPhotoReadyToBeUpdated(false)
@@ -159,22 +157,23 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     }
 
     private fun createDbUser(profileImageUrl: String) {
+        val emptyString = application.getString(R.string.empty_string)
         val newUser = AccountInfo(
-            id = 0,
+            id = 0, // TODO update later
             profileInfo = username?.let { name -> ProfileInfo(username = name, profileImage = profileImageUrl) },
             username = username,
             email = email,
             profileImage = profileImageUrl,
-            firstName = "",
-            lastName = "",
-            bio = "",
-            age = 0,
-            challengeBannerType = 0,
+            firstName = emptyString,
+            lastName = emptyString,
+            bio = emptyString,
+            age = 0, // TODO update later
+            challengeBannerType = 0, // TODO update later
             friends = null,
             activeChallenges = null
         )
 
-        firebaseDatabase.userDatabaseReference(firebaseAuth.uid ?: "")
+        firebaseDatabase.userDatabaseReference(firebaseAuth.uid ?: emptyString)
             .setValue(newUser)
             .addOnCompleteListener {
                 firebaseAuth.sendEmailVerification()

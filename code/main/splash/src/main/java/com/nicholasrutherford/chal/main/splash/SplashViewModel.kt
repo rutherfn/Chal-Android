@@ -22,7 +22,7 @@ class SplashViewModel @ViewModelInject constructor(
             if (!firebaseAuth.isLoggedIn) {
                 navigation.showlogin()
             } else {
-                navigation.showNewsFeed()
+                navigation.showlogin()
             }
         }, SPLASH_DELAYED.toLong())
     }

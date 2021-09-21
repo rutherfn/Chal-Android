@@ -14,7 +14,10 @@ android {
 }
 
 dependencies {
+    api(project(path = ":helper:constants"))
     api(project(path = ":main:resources"))
+
+    implementation(Dependencies.Libs.Kotlin.Jdk)
 
     implementation(Dependencies.Libs.Dagger.Android)
 

@@ -10,10 +10,9 @@ import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.nicholasrutherford.chal.create.account.EMAIL
-import com.nicholasrutherford.chal.create.account.PASSWORD
-import com.nicholasrutherford.chal.create.account.USERNAME
+import com.nicholasrutherford.chal.helper.constants.EMAIL
+import com.nicholasrutherford.chal.helper.constants.PASSWORD
+import com.nicholasrutherford.chal.helper.constants.USERNAME
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -59,7 +58,7 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
                 if (isShouldShowAlert) {
                     showOkAlert(title = viewModel.alertTitle, message = viewModel.alertMessage)
                 }
-                viewModel._shouldShowAlert.value = false
+                viewModel.setShouldShowAlertAsNotUpdated()
             }
         }
     }

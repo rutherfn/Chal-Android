@@ -21,10 +21,6 @@ class MainViewModel @ViewModelInject constructor(
 
     val viewState = MainViewStateImpl()
 
-   // val testFairy = ChalTestFairyImpl(application)
-
-    var selectedPhotoUri: Uri? = null
-
     fun navigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navigation_my_feed -> {
@@ -45,20 +41,16 @@ class MainViewModel @ViewModelInject constructor(
 
     fun onCameraResult(resultCode: Int, requestCode: Int, data: Intent?) {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
-            println("get here test")
 
             data.data?.let { uriData ->
-                createSharedPreference.createProfilePictureDirectorySharedPreference("profile-picture", uriData.toString())
+                createSharedPreference.createProfilePictureDirectorySharedPreference( uriData.toString())
             }
             // }
         } else if (requestCode == 1888 && resultCode == Activity.RESULT_OK && data != null) { // hack needs to be updated down the road
             data.extras?.get("data").let {
                 val uri = getImageUri(application.applicationContext, it as Bitmap)
                 uri.let { uriData ->
-                    createSharedPreference.createProfilePictureDirectorySharedPreference(
-                        "profile-picture",
-                        uriData.toString()
-                    )
+                    createSharedPreference.createProfilePictureDirectorySharedPreference(uriData.toString())
                 }
             }
         }

@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/firebase/database" />
             <option value="$PROJECT_DIR$/firebase/storage" />
             <option value="$PROJECT_DIR$/helper" />
+            <option value="$PROJECT_DIR$/helper/constants" />
             <option value="$PROJECT_DIR$/helper/fragment" />
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/main/activity" />

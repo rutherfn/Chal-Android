@@ -30,7 +30,6 @@ class ForgotPasswordDialogFragment @Inject constructor(): BaseDialogFragment<Dia
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println(arguments?.getString("myAge"))
         lifecycleScope.launch {
             collectViewStateResult(viewModel.viewStateUpdated, viewModel._viewStateUpdated)
         }

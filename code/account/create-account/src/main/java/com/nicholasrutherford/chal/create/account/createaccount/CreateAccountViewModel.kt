@@ -7,10 +7,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.account.validation.AccountValidation
 import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
+import com.nicholasrutherford.chal.helper.constants.LOADING_DELAY
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
-
-@Suppress("MagicNumber")
-const val LOADING_DELAY = 1000
 
 class CreateAccountViewModel @ViewModelInject constructor(
     private val accountValidation: AccountValidation,
@@ -31,15 +29,19 @@ class CreateAccountViewModel @ViewModelInject constructor(
     val viewState = CreateAccountViewStateImpl()
 
     private fun checkEmail(email: String) {
-        if (accountValidation.isEmailValid(email)) {
-            isEmailEmpty = false
-            isEmailCorrectFormat = true
-        } else if (accountValidation.isEmailEmpty(email)) {
-            isEmailEmpty = true
-            isEmailCorrectFormat = false
-        } else {
-            isEmailEmpty = false
-            isEmailCorrectFormat = false
+        when {
+            accountValidation.isEmailValid(email) -> {
+                isEmailEmpty = false
+                isEmailCorrectFormat = true
+            }
+            accountValidation.isEmailEmpty(email) -> {
+                isEmailEmpty = true
+                isEmailCorrectFormat = false
+            }
+            else -> {
+                isEmailEmpty = false
+                isEmailCorrectFormat = false
+            }
         }
     }
 
@@ -144,19 +146,19 @@ class CreateAccountViewModel @ViewModelInject constructor(
         }
     }
 
-    fun emailErrorVisible() {
+    private fun emailErrorVisible() {
         viewState.emailErrorVisible = true
     }
 
-    fun emailErrorNotVisible() {
+    private fun emailErrorNotVisible() {
         viewState.emailErrorVisible = false
     }
 
-    fun passwordErrorVisible() {
+    private fun passwordErrorVisible() {
         viewState.passwordErrorVisible = true
     }
 
-    fun passwordErrorNotVisible() {
+    private fun passwordErrorNotVisible() {
         viewState.passwordErrorVisible = false
     }
 

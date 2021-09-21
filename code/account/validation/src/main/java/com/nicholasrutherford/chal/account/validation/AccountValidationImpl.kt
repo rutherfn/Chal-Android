@@ -1,13 +1,11 @@
 package com.nicholasrutherford.chal.account.validation
 
 import android.app.Application
+import com.nicholasrutherford.chal.helper.constants.AT_SYMBOL
 import java.util.*
 import javax.inject.Inject
 
-@Suppress("MagicNumber")
-const val AT_SYMBOL = "@"
-
-class AccountValidationImpl @Inject constructor(private val application: Application) : AccountValidation {
+class AccountValidationImpl @Inject constructor(application: Application) : AccountValidation {
 
     private val empty  = application.getString(R.string.empty_string)
     private val dotCom = application.getString(R.string.dot_com)

@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.create.account.databinding.CreateAccountFragmentBinding
+import com.nicholasrutherford.chal.helper.constants.KEYBOARD_FLAGS
 import com.nicholasrutherford.chal.ui.base_fragment.BaseFragment
 import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,7 +55,7 @@ class CreateAccountFragment @Inject constructor() : BaseFragment<CreateAccountFr
 
     private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(windowToken, 0)
+        imm.hideSoftInputFromWindow(windowToken, KEYBOARD_FLAGS)
     }
 
     override fun updateTypefaces() {
@@ -79,7 +80,7 @@ class CreateAccountFragment @Inject constructor() : BaseFragment<CreateAccountFr
                 if (isShouldShowAlert) {
                     showOkAlert(title = viewModel.alertTitle, message = viewModel.alertMessage)
                 }
-                viewModel._shouldShowAlert.value = false
+                viewModel.setShouldShowAlertAsNotUpdated()
             }
         }
     }
