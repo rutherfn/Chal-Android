@@ -18,9 +18,9 @@ import com.nicholasrutherford.chal.data.responses.activechallenges.ActiveChallen
 import com.nicholasrutherford.chal.data.responses.post.PostListResponse
 import com.nicholasrutherford.chal.databinding.FragmentRedesignMyFeedBinding
 import com.nicholasrutherford.chal.ext.fragments.newsfeed.NewsFeedRedesignFragmentExt
+import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.helpers.PeekingLinearLayoutManager
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.main.MainActivity
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.*

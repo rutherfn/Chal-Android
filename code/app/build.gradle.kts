@@ -5,19 +5,23 @@ plugins {
     kotlin(Dependencies.Plugin.Android)
     kotlin(Dependencies.Plugin.AndroidExtensions)
     kotlin(Dependencies.Plugin.Kapt)
+    id(Dependencies.Plugin.DaggerHilt)
 }
 
 android {
-    buildToolsVersion(Dependencies.Android.BuildToolsVersion)
-    compileSdkVersion(Dependencies.Android.CompileSdkVersion)
+    compileSdk = Dependencies.Android.CompileSdkVersion
+
+    defaultConfig {
+        minSdk = Dependencies.Android.MinSdkVersion
+    }
 
     buildFeatures.viewBinding = true
 
 
     defaultConfig {
         applicationId = Dependencies.Android.ApplicationId
-        minSdkVersion(Dependencies.Android.MinSdkVersion)
-        targetSdkVersion(Dependencies.Android.TargetSdkVersion)
+        targetSdk = Dependencies.Android.TargetSdkVersion
+        minSdk = Dependencies.Android.MinSdkVersion
         multiDexEnabled =  true
         versionCode = Dependencies.Android.VersionCode
         versionName = Dependencies.Android.VersionName
@@ -30,14 +34,27 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    packagingOptions.exclude("META-INF/main.kotlin_module")
 }
 
 dependencies {
     api(project(path = ":account:validation"))
     api(project(path = ":firebase:auth"))
+    api(project(path = ":helper:fragment"))
+    api(project(path = ":main:activity"))
     api(project(path = ":main:resources"))
-    api(project(path = ":main:splash"))
     api(project(path = ":network"))
+    api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:typefaces"))
 
@@ -84,6 +101,10 @@ dependencies {
     implementation(Dependencies.Libs.Dagger.Android)
     implementation(Dependencies.Libs.Dagger.Native)
     implementation(Dependencies.Libs.Dagger.Support)
+
+    // Navigation
+    implementation(Dependencies.Libs.Navigation.NavigationFragment)
+    implementation(Dependencies.Libs.Navigation.NavigationUi)
 
     kapt(Dependencies.Libs.Dagger.Compiler)
     kapt(Dependencies.Libs.Dagger.Processor)

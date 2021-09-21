@@ -1,15 +1,20 @@
 package com.nicholasrutherford.chal.main.splash
 
-import android.app.Application
-import android.content.Intent
+import com.nicholasrutherford.chal.main.navigation.Navigator
 import javax.inject.Inject
 
-class SplashNavigationImpl @Inject constructor(private val application: Application, private val splashActivity: SplashActivity): SplashNavigation {
+class SplashNavigationImpl @Inject constructor(
+): SplashNavigation {
 
-    override fun login() {
-        println("login here")
+    @Inject
+    lateinit var navigator: Navigator
+
+    override fun showNewsFeed() {
+        navigator.navigate(R.id.nav_graph_news_feed)
     }
 
-    override fun newsFeed() {
+    override fun showlogin() {
+        println("show login")
+       navigator.navigate(R.id.nav_graph_login)
     }
 }

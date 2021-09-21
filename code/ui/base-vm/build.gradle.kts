@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Dependencies.Android.CompileSdkVersion)
+    compileSdk = Dependencies.Android.CompileSdkVersion
 }
 
 dependencies {

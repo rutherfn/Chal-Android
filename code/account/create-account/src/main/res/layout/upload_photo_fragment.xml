@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/colorSmokeWhite"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cvTakeAPhoto"
+            android:layout_width="@dimen/iv_take_a_picture_width"
+            android:layout_height="@dimen/iv_take_a_picture_height"
+            android:background="@drawable/ic_photo"
+            android:layout_marginTop="@dimen/margin_30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvTakeAPictureOrChooseFromLibrary"
+            android:layout_width="@dimen/tv_take_picture_or_choose_from_library_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/take_a_picture_or_choose_from_library"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/header_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="@+id/cvTakeAPhoto"
+            app:layout_constraintHorizontal_bias="0.662"
+            app:layout_constraintStart_toStartOf="@+id/cvTakeAPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/cvTakeAPhoto"
+            />
+
+        <Button
+            android:id="@+id/btnChooseFormLibrary"
+            android:layout_width="@dimen/btn_choose_from_library_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:background="@drawable/corner_button"
+            android:padding="@dimen/padding_10dp"
+            android:textStyle="bold"
+            android:textSize="@dimen/sub_header_text_size"
+            android:text="@string/choose_from_library"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorSmokeWhite"
+            app:layout_constraintEnd_toEndOf="@+id/tvTakeAPictureOrChooseFromLibrary"
+            app:layout_constraintStart_toStartOf="@+id/tvTakeAPictureOrChooseFromLibrary"
+            app:layout_constraintTop_toBottomOf="@+id/tvTakeAPictureOrChooseFromLibrary"
+            />
+
+        <Button
+            android:id="@+id/btnContinueUpload"
+            android:layout_width="@dimen/btn_continue_creating_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corner_button"
+            android:text="@string/continue_creating"
+            android:textColor="@color/colorSmokeWhite"
+            android:textSize="@dimen/sub_header_text_size"
+            android:textStyle="bold"
+            android:padding="@dimen/padding_10dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            app:layout_constraintEnd_toEndOf="@+id/btnChooseFormLibrary"
+            app:layout_constraintStart_toStartOf="@+id/btnChooseFormLibrary"
+            app:layout_constraintTop_toBottomOf="@+id/btnChooseFormLibrary"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

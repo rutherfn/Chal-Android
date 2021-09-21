@@ -3,24 +3,28 @@ package com.nicholasrutherford.chal.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nicholasrutherford.chal.R
 import com.nicholasrutherford.chal.databinding.ActivityMainBinding
-import dagger.android.support.DaggerAppCompatActivity
+import com.nicholasrutherford.chal.main.navigation.Navigator
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity @Inject constructor() : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var navigator: Navigator
 
     var binding: ActivityMainBinding? = null
 
-    val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)
-            .get(MainViewModel::class.java)
-    }
+    private lateinit var navHostFragment: Fragment
+
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +32,12 @@ class MainActivity : DaggerAppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        viewModel.launchNewsFeed()
+        navHostFragment =
+            requireNotNull(supportFragmentManager.findFragmentById(R.id.container))
+
+        val navController = navHostFragment.findNavController()
+        navigator.navController = navController
+
         binding?.let { binding ->
             setupBottomNavigation(binding = binding)
         }

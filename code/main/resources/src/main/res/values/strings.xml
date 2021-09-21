@@ -1,4 +1,5 @@
 <resources>
+    <string name="add_friends">Add Friends</string>
     <string name="add_progress">Add Progress</string>
     <string name="added_progress">Added Progress</string>
     <string name="add_more_progress">Add More Progress</string>
@@ -11,8 +12,10 @@
     <string name="active_challenges">Active</string>
     <string name="account">Account</string>
     <string name="already_have_a_account_text">Already have a account?</string>
+    <string name="are_you_sure_you_want_to_close_out_of_app_desc">Are you sure you want to close out of the app?</string>
     <string name="are_you_sure_you_you_want_to_discard_the_post">Are you sure you want to discard this post?</string>
     <string name="app_menu">App Menu</string>
+    <string name="back">Back</string>
     <string name="bio">Bio</string>
     <string name="bug_descrption">Bug Description</string>
     <string name="bug_report_title">Report A Bug</string>
@@ -33,11 +36,14 @@
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
     <string name="click_to_refresh">Click to refresh</string>
     <string name="close">CLOSE</string>
+    <string name="creating_your_account">Creating Your Account</string>
+    <string name="creating_your_account_desc">You are currently in the process of creating your account. Closing the app will not save your changes, are you sure you want to continue?</string>
     <string name="completed">Completed</string>
     <string name="completed_challenges">COMPLETED</string>
     <string name="clear_photo">Clear Photo</string>
     <string name="click_here_to_add_a_description"><u>Click Here</u> To Add A Description</string>
     <string name="click_me_to_take_a_picture">Click Me To Take A Picture</string>
+    <string name="closing_out_app">Closing Out App</string>
     <string name="continue_creating">Continue</string>
     <string name="challenges_bottom_nav">Challenges</string>
     <string name="choose_from_library">Choose From Library</string>
@@ -76,10 +82,12 @@
     <string name="error_content_desc_creating_account">Error Creating Account</string>
     <string name="error_creating_create_account_fields">One of the require fields are incorrect. Press OK to try again.</string>
     <string name="error_creating_account_firebase">Error Creating Account. Please Check Your Internet Connection</string>
+    <string name="error_email_already_exists">Error Create Account. This email already exists. Please try a new email, or login with current email and password.</string>
     <string name="error_login_no_account_associated_with_email">No account associated with this email. Please create an account for this email.</string>
     <string name="error_fields_are_not_correct_create_account">One of the fields are empty or do not meet our requirements. Please try again.</string>
     <string name="error_fields_are_not_correct_log_in">One of the fields if not both are empty, please check your email and password and try again.</string>
     <string name="error_fields_not_entered_login">Email and or password are not entered. Please check your email and password and try again.</string>
+    <string name="error_no_image">Plase upload a profile image in order to continue.</string>
     <string name="error_no_internet_log_in">Please connect to internet in order to log into your account.</string>
     <string name="error_name">No name entered</string>
     <string name="error_username">No username entered</string>
@@ -95,6 +103,7 @@
     <string name="hex_black">#000000</string>
     <string name="hex_white">#FFFFFF</string>
     <string name="high">High</string>
+    <string name="issue_creating_your_account">Issue creating your account. Please try again</string>
     <string name="issue_uploading_image_to_server">Issue uploading image to server. Please Try Again</string>
     <string name="internet_not_available">internet Not Available</string>
     <string name="last_updated">Last Updated</string>
@@ -148,6 +157,7 @@
     </string-array>
     <string name="last_name">Last Name</string>
     <string name="log_out">Log out</string>
+    <string name="looks_like_you_dont_have_any_friends">Looks like you havent had any friends yet!</string>
     <string name="looks_like_the_system_cant_detect_internet">Looks like the system can not detect internet. Please try connecting to a tnetwork</string>
     <string name="looks_like_were_missing_caption">Looks like you are missing a caption. Please enter info for all fields, in order to post progress,</string>
     <string name="looks_like_were_missing_image">Looks like you are missing a image. Please enter info for all fields, in order to post progress,</string>
@@ -213,6 +223,7 @@
     <string name="social_media_linkedin_content_desc">Social Media Icon Linkedin</string>
     <string name="sorry_but_this_is_not_a_valid_email_please_enter_a_valid_email_and_try_again">Sorry but that is not a valid email. Please enter a valid email, and try again"</string>
     <string name="successful">Successful</string>
+    <string name="success_you_joined_the">Success! You joined the</string>
     <string name="teaser_challenge">Teaser Challenge</string>
     <string name="to_reset_password">To Reset Password.</string>
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>

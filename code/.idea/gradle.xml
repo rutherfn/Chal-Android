@@ -12,17 +12,37 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/account" />
+            <option value="$PROJECT_DIR$/account/create-account" />
+            <option value="$PROJECT_DIR$/account/forgot-password" />
+            <option value="$PROJECT_DIR$/account/login" />
+            <option value="$PROJECT_DIR$/account/sign-up" />
             <option value="$PROJECT_DIR$/account/validation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/account-info" />
             <option value="$PROJECT_DIR$/firebase" />
             <option value="$PROJECT_DIR$/firebase/auth" />
+            <option value="$PROJECT_DIR$/firebase/database" />
+            <option value="$PROJECT_DIR$/firebase/storage" />
+            <option value="$PROJECT_DIR$/helper" />
+            <option value="$PROJECT_DIR$/helper/constants" />
+            <option value="$PROJECT_DIR$/helper/fragment" />
             <option value="$PROJECT_DIR$/main" />
+            <option value="$PROJECT_DIR$/main/activity" />
+            <option value="$PROJECT_DIR$/main/navigation" />
+            <option value="$PROJECT_DIR$/main/news-feed" />
             <option value="$PROJECT_DIR$/main/resources" />
             <option value="$PROJECT_DIR$/main/splash" />
             <option value="$PROJECT_DIR$/network" />
+            <option value="$PROJECT_DIR$/shared-preference" />
+            <option value="$PROJECT_DIR$/shared-preference/create" />
+            <option value="$PROJECT_DIR$/shared-preference/fetch" />
+            <option value="$PROJECT_DIR$/shared-preference/remove" />
             <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/ui/base-fragment" />
             <option value="$PROJECT_DIR$/ui/base-vm" />
+            <option value="$PROJECT_DIR$/ui/shared-layout" />
             <option value="$PROJECT_DIR$/ui/typefaces" />
           </set>
         </option>

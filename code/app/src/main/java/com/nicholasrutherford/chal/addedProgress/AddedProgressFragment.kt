@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.nicholasrutherford.chal.databinding.FragmentAddedProgressBinding
 import com.nicholasrutherford.chal.ext.fragments.addedprogress.AddedProgressExt
+import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.helpers.visibleOrGone
 import com.nicholasrutherford.chal.main.MainActivity
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.*

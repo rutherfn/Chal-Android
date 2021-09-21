@@ -1,32 +1,33 @@
 package com.nicholasrutherford.chal.main.splash
 
-import android.app.Application
-import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
 import android.os.Handler
 import android.os.Looper
-import javax.inject.Inject
+import androidx.hilt.lifecycle.ViewModelInject
+import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
+import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 
 @Suppress("MagicNumber")
-const val SPLASH_DURATION = 5000
+const val SPLASH_DELAYED = 5000
 
-class SplashViewModel @Inject constructor(private val application: Application, splashActivity: SplashActivity) : ViewModel() {
+class SplashViewModel @ViewModelInject constructor(
+    private val firebaseAuth: ChalFirebaseAuth,
+    private val navigation: SplashNavigation
+) : BaseViewModel() {
 
-    private val auth = FirebaseAuth.getInstance()
+    var viewState = SplashRedesignViewStateImpl()
 
-    init {
 
+    fun checkIfUserIsSignedIn() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (!firebaseAuth.isLoggedIn) {
+                navigation.showlogin()
+            } else {
+                navigation.showlogin()
+            }
+        }, SPLASH_DELAYED.toLong())
     }
 
-    private fun test() {
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                if (auth.currentUser == null) {
-                    /// navigation.login
-                } else {
-                    // navigation home
-                }
-            // Your Code
-        }, SPLASH_DURATION.toLong())
+    inner class SplashRedesignViewStateImpl : SplashRedesignViewState {
+        override var splashImageRes: Int = R.mipmap.chalappicon
     }
 }

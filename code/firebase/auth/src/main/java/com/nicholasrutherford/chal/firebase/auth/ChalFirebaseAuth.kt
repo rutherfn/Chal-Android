@@ -1,10 +1,10 @@
 package com.nicholasrutherford.chal.firebase.auth
 
+import com.google.firebase.auth.FirebaseAuth
+
 interface ChalFirebaseAuth  {
-    var isLoggedIn: Boolean
-    var uid: String?
-    fun signInWithEmailAndPassword(email: String, password: String)
-    fun setLoginStatusStateAsNotUpdated()
-    fun sendPasswordResetEmail(resetEmail: String)
-    fun setPasswordResetEmailStateAsNotUpdated()
+    val auth: FirebaseAuth
+    val isLoggedIn: Boolean
+    val uid: String?
+    fun sendEmailVerification()
 }

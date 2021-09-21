@@ -11,9 +11,9 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import com.nicholasrutherford.chal.databinding.FragmentForgotPasswordBinding
 import com.nicholasrutherford.chal.ext.fragments.forgotpassword.ForgotPasswordFragmentExtension
+import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.helpers.Helper
 import com.nicholasrutherford.chal.helpers.Typeface
-import com.nicholasrutherford.chal.helpers.visibleOrGone
 
 class ForgotPasswordFragment(private val activity: ForgotPasswordActivity, private val appContext: Context) : Fragment(),
         ForgotPasswordFragmentExtension {

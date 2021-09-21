@@ -4,9 +4,11 @@ object Dependencies {
         const val Android = "android"
         const val Application = "com.android.application"
         const val AndroidExtensions = "android.extensions"
+        const val DaggerHilt = "dagger.hilt.android.plugin"
         const val GoogleServices = "com.google.gms.google-services"
         const val Kapt = "kapt"
         const val Library = "com.android.library"
+        const val NavigationSageArgs = "androidx.navigation.safeargs"
     }
     object Android {
         const val ApplicationId = "com.nicholasrutherford.chal"
@@ -49,6 +51,8 @@ object Dependencies {
         const val ktxVersion = "1.3.1"
         const val lifecycleVersion = "2.2.0"
         const val materialVersion = "1.1.0"
+        const val navigationArgVersion = "2.3.5"
+        const val navigationVersion = "2.2.0"
         const val picassoVersion = "2.71828"
         const val roomVersion = "2.2.5"
         const val swipeRefreshVersion = "1.1.0"
@@ -111,6 +115,11 @@ object Dependencies {
         object Kotlin {
             const val Coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.kotlinCoroutinesVersion}"
             const val Jdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlinVersion}"
+        }
+
+        object Navigation {
+            const val NavigationFragment = "androidx.navigation:navigation-fragment-ktx:${Version.navigationVersion}"
+            const val NavigationUi = "androidx.navigation:navigation-ui-ktx:${Version.navigationVersion}"
         }
 
         object Room {

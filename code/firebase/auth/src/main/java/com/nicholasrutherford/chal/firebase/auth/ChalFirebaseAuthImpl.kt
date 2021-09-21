@@ -1,53 +1,17 @@
 package com.nicholasrutherford.chal.firebase.auth
 
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
 
-    private val _loginStatusState = MutableStateFlow(LoginStatus.NONE)
-    val loginStatusState: StateFlow<LoginStatus> = _loginStatusState
+    override val auth = FirebaseAuth.getInstance()
 
-    private val _sendPasswordResetEmailState = MutableStateFlow(SendPasswordResetEmailStatus.NONE)
-    val sendPasswordResetEmailState: StateFlow<SendPasswordResetEmailStatus> = _sendPasswordResetEmailState
+    override val isLoggedIn: Boolean = auth.currentUser != null
 
-    val firebaseAuth = FirebaseAuth.getInstance()
+    override val uid: String? = auth.uid
 
-    override var isLoggedIn: Boolean = firebaseAuth.currentUser != null
-
-    override var uid: String? = firebaseAuth.uid
-
-    override fun signInWithEmailAndPassword(email: String, password: String) {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        _loginStatusState.value = LoginStatus.LOGGED_IN
-                }
-            }.addOnFailureListener {
-                _loginStatusState.value = LoginStatus.ERROR
-            }
-    }
-
-    override fun setLoginStatusStateAsNotUpdated() {
-        _loginStatusState.value = LoginStatus.NONE
-    }
-
-    override fun sendPasswordResetEmail(resetEmail: String) {
-        firebaseAuth.sendPasswordResetEmail(resetEmail)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.SUCCESSFUL
-                } else {
-                    _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.ERROR
-                }
-            }.addOnFailureListener {
-                _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.ERROR
-            }
-    }
-
-    override fun setPasswordResetEmailStateAsNotUpdated() {
-        _sendPasswordResetEmailState.value = SendPasswordResetEmailStatus.NONE
+    override fun sendEmailVerification() {
+        auth.currentUser?.sendEmailVerification()
     }
 }

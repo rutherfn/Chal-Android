@@ -2,18 +2,15 @@ package com.nicholasrutherford.chal.dagger.modules
 
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.account.forgotpasswordredesign.ForgotPasswordRedesignViewModel
-import com.nicholasrutherford.chal.account.redesignlogin.RedesignLoginViewModel
 import com.nicholasrutherford.chal.account.redesignsignup.RedesignSignUpViewModel
 import com.nicholasrutherford.chal.addedProgress.AddedProgressViewModel
 import com.nicholasrutherford.chal.dagger.ViewModelKey
-import com.nicholasrutherford.chal.main.MainViewModel
 import com.nicholasrutherford.chal.more.MoreViewModel
 import com.nicholasrutherford.chal.newsfeed.NewsFeedViewModel
 import com.nicholasrutherford.chal.peoplelist.PeopleListViewModel
 import com.nicholasrutherford.chal.profile.editprofile.EditProfileViewModel
 import com.nicholasrutherford.chal.profile.profiles.MyProfileViewModel
 import com.nicholasrutherford.chal.progressupload.ProgressUploadViewModel
-import com.nicholasrutherford.chal.splashredesign.SplashRedesignViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -41,16 +38,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(RedesignLoginViewModel::class)
-    internal abstract fun bindLoginViewModel(viewModel: RedesignLoginViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    internal abstract fun bindMainViewModel(vieModel: MainViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(MoreViewModel::class)
     internal abstract fun bindMoreViewModel(viewModel: MoreViewModel): ViewModel
 
@@ -73,11 +60,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProgressUploadViewModel::class)
     internal abstract fun bindProgressUploadViewModel(viewModel: ProgressUploadViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(SplashRedesignViewModel::class)
-    internal abstract fun bindSplashViewModel(viewModel: SplashRedesignViewModel): ViewModel
 
     @Binds
     @IntoMap

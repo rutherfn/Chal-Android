@@ -2,15 +2,13 @@ package com.nicholasrutherford.chal.navigationimpl.more
 
 import android.app.AlertDialog
 import android.app.Application
-import android.content.Intent
 import android.graphics.Color
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.account.login.LoginActivity
 import com.nicholasrutherford.chal.bugreport.BugReportFragment
-import com.nicholasrutherford.chal.helpers.visibleOrGone
+import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.main.helper.MainActivityHelperImpl
 import com.nicholasrutherford.chal.more.MoreNavigation
 import com.nicholasrutherford.chal.navigationimpl.challengeredesign.container
@@ -28,11 +26,11 @@ class MoreNavigationImpl @Inject constructor(
     private var flowerLoadingDialog: ACProgressFlower? = null
 
     override fun login() {
-        application.applicationContext?.let { context ->
-            val intent = Intent(context, LoginActivity::class.java)
-            mainActivity.startActivity(intent)
-            mainActivity.finish()
-        }
+        // application.applicationContext?.let { context ->
+        //     val intent = Intent(context, LoginActivity::class.java)
+        //     mainActivity.startActivity(intent)
+        //     mainActivity.finish()
+        // }
     }
 
     override fun reportBug() {

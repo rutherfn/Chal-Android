@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clBack"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/ibBack"
+        android:layout_width="@dimen/back_button_width"
+        android:layout_height="@dimen/back_button_height"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="?attr/homeAsUpIndicator"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:layout_marginStart="@dimen/margin_12dp"
+        android:tint="@color/colorSmokeWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:layout_marginBottom="@dimen/margin_4dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/sub_header_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ibBack"
+        app:layout_constraintTop_toTopOf="@+id/ibBack"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
