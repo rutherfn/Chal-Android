@@ -51,9 +51,13 @@
         <entry key="main/news-feed/src/main/res/layout/fragment_news_feed.xml" value="0.17258883248730963" />
         <entry key="main/news-feed/src/main/res/layout/friends_empty_state_layout.xml" value="0.1824074074074074" />
         <entry key="main/news-feed/src/main/res/layout/news_feed_banner_layout.xml" value="0.1824074074074074" />
+        <entry key="main/resources/src/main/res/drawable/ic_arrow.xml" value="0.1" />
+        <entry key="main/resources/src/main/res/drawable/ic_bug.xml" value="0.22037037037037038" />
         <entry key="main/resources/src/main/res/drawable/ic_close.xml" value="0.13333333333333333" />
         <entry key="main/resources/src/main/res/drawable/ic_close_white.xml" value="0.13333333333333333" />
         <entry key="main/resources/src/main/res/drawable/ic_green_check_mark.xml" value="0.13333333333333333" />
+        <entry key="main/resources/src/main/res/drawable/ic_home.xml" value="0.22037037037037038" />
+        <entry key="main/resources/src/main/res/drawable/ic_toolbar_arrow.xml" value="0.1" />
         <entry key="main/resources/src/main/res/menu/bottom_navigation.xml" value="0.382051282051282" />
         <entry key="main/splash/src/main/res/layout/dialog_fragment_splash.xml" value="0.10207700101317123" />
         <entry key="main/splash/src/main/res/layout/fragment_splash.xml" value="0.18439716312056736" />

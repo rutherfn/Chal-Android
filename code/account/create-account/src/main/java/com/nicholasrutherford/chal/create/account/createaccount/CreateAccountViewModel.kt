@@ -165,6 +165,7 @@ class CreateAccountViewModel @ViewModelInject constructor(
     fun onBackClicked() = navigation.pop()
 
     inner class CreateAccountViewStateImpl : CreateAccountViewState {
+        override var toolbarText: String = application.getString(R.string.back)
         override var emailErrorVisible: Boolean = false
         override var passwordErrorVisible: Boolean = false
         override var usernameErrorVisible: Boolean = false
