@@ -44,6 +44,7 @@ class SignUpViewModel @ViewModelInject constructor(
     fun onContinueWithEmailClicked() = navigation.showCreateAccount()
 
     inner class SignUpViewStateImpl: SignUpViewState {
+        override var toolbarText: String = application.getString(R.string.back)
         override var socialMediaUrl: String = application.getString(R.string.empty_string)
     }
 }

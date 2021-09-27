@@ -11,7 +11,7 @@
         <entry key="account/login/src/main/res/layout/fragment_login.xml" value="0.12" />
         <entry key="account/login/src/main/res/layout/frament_splash.xml" value="0.19630192502532928" />
         <entry key="account/sign-up/src/main/res/layout/fragment_sign_up.xml" value="0.19630192502532928" />
-        <entry key="account/sign-up/src/main/res/layout/sign_up_fragment.xml" value="0.16" />
+        <entry key="account/sign-up/src/main/res/layout/sign_up_fragment.xml" value="0.14450867052023122" />
         <entry key="app/src/main/res/layout-v21/end_of_feed_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.41354166666666664" />
@@ -58,6 +58,8 @@
         <entry key="main/resources/src/main/res/drawable/ic_green_check_mark.xml" value="0.13333333333333333" />
         <entry key="main/resources/src/main/res/drawable/ic_home.xml" value="0.22037037037037038" />
         <entry key="main/resources/src/main/res/drawable/ic_toolbar_arrow.xml" value="0.1" />
+        <entry key="main/resources/src/main/res/drawable/ic_upload_bkacj.xml" value="0.1" />
+        <entry key="main/resources/src/main/res/drawable/ic_upload_white.xml" value="0.1" />
         <entry key="main/resources/src/main/res/menu/bottom_navigation.xml" value="0.382051282051282" />
         <entry key="main/splash/src/main/res/layout/dialog_fragment_splash.xml" value="0.10207700101317123" />
         <entry key="main/splash/src/main/res/layout/fragment_splash.xml" value="0.18439716312056736" />

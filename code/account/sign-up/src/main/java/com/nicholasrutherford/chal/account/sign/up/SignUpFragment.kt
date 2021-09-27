@@ -1,9 +1,11 @@
 package com.nicholasrutherford.chal.account.sign.up
 
+import android.app.Application
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.nicholasrutherford.chal.account.sign.up.databinding.SignUpFragmentBinding
+import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.ui.base_fragment.BaseFragment
 import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +18,9 @@ class SignUpFragment @Inject constructor(): BaseFragment<SignUpFragmentBinding>(
     @Inject
     lateinit var typeface: Typefaces
 
+    @Inject
+    lateinit var application: Application
+
     private val viewModel: SignUpViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,11 +30,10 @@ class SignUpFragment @Inject constructor(): BaseFragment<SignUpFragmentBinding>(
 
     private fun updateToobarUI() {
         colorSmokeWhite?.let { whiteColor ->
-            binding.tbSignUpBackButton.clBack.setBackgroundColor(whiteColor)
+            binding.tbSignUp.tbStock.setBackgroundColor(whiteColor)
         }
         colorBlack?.let { blackColor ->
-            binding.tbSignUpBackButton.tvTitle.setTextColor(blackColor)
-            binding.tbSignUpBackButton.ibBack.setColorFilter(blackColor)
+            binding.tbSignUp.tbStock.setTitleTextColor(blackColor)
         }
     }
 
@@ -37,7 +41,7 @@ class SignUpFragment @Inject constructor(): BaseFragment<SignUpFragmentBinding>(
         typeface.setTextViewHeaderBoldTypeface(binding.tvSignUp)
         typeface.setTextViewHeaderRegularTypeface(binding.tvSubHeader)
 
-        typeface.setTextViewSubHeaderBoldTypeface(binding.tbSignUpBackButton.tvTitle)
+        binding.tbSignUp.tbStock.setTitleTextAppearance(application, R.style.ToolbarTextAppearance)
 
         typeface.setTextViewBodyBoldTypeface(binding.tvAlreadyHaveAccount)
         typeface.setTextViewBodyBoldTypeface(binding.tvLogin)
@@ -46,7 +50,7 @@ class SignUpFragment @Inject constructor(): BaseFragment<SignUpFragmentBinding>(
     override fun collectAlertAsUpdated() = Unit
 
     override fun onListener() {
-        binding.tbSignUpBackButton.ibBack.setOnClickListener {
+        binding.tbSignUp.tbStock.setOnClickListener {
             viewModel.onBackClicked()
         }
         binding.btnSignUpRegular.setOnClickListener {
@@ -69,5 +73,8 @@ class SignUpFragment @Inject constructor(): BaseFragment<SignUpFragmentBinding>(
         }
     }
 
-    override fun updateView() = Unit
+    override fun updateView() {
+        binding.tbSignUp.tbStock.setNavigationIcon(viewModel.toolbarBlackBackImage)
+        binding.tbSignUp.tbStock.title = viewModel.viewState.toolbarText
+    }
 }
