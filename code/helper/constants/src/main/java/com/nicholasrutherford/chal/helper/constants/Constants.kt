@@ -13,6 +13,9 @@ const val LOADING_DELAY = 1000
 // hide keyboard flag 0
 const val KEYBOARD_FLAGS = 0
 
+// we can't set shared int shared preferences to null, so set it to 11 as a default value
+const val STOCK_INT_PREFERENCE = 11
+
 // constants for shared preference
 const val CHAL_PREFERENCES = "CHAL_PREFERENCES"
 const val PROFILE_PICTURE_DIRECTORY_PREFERENCE = "PROFILE_PICTURE_DIRECTORY_PREFERENCE"

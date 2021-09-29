@@ -69,8 +69,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
                 profileUri = Uri.parse(profilePictureDirectory)
                 viewState.imageTakeAPhotoBitmap = getCapturedImage(profileUri as Uri)
 
-                removeSharedPreference.removeProfilePictureDirectorySharedPreference(
-                    PROFILE_PICTURE_DIRECTORY_PREFERENCE)
+                removeSharedPreference.removeProfilePictureDirectorySharedPreference()
                 setViewStateAsUpdated()
             }
             updateIsPhotoReadyToBeUpdated(false)
