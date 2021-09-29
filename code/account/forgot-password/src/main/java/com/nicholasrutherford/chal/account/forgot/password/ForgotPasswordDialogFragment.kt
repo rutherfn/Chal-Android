@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.account.forgot.password
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -25,6 +26,9 @@ class ForgotPasswordDialogFragment @Inject constructor(): BaseDialogFragment<Dia
 
     @Inject
     lateinit var typeface: Typefaces
+
+    @Inject
+    lateinit var application: Application
 
     private val viewModel: ForgotPasswordViewModel by viewModels()
 
@@ -61,7 +65,7 @@ class ForgotPasswordDialogFragment @Inject constructor(): BaseDialogFragment<Dia
     override fun updateTypefaces() {
         typeface.setTextViewHeaderBoldTypeface(binding.tvForgotYourPassword)
 
-        typeface.setTextViewSubHeaderBoldTypeface(binding.tbBackButton.tvTitle)
+        binding.tbForgotPassword.tbStock.setTitleTextAppearance(application, R.style.ToolbarTextAppearance)
 
         typeface.setTextViewSubHeaderRegularTypeface(binding.tvPleaseEnterYour)
         typeface.setTextViewSubHeaderRegularTypeface(binding.tvToResetPassword)
@@ -109,12 +113,15 @@ class ForgotPasswordDialogFragment @Inject constructor(): BaseDialogFragment<Dia
             val resetEmail = binding.etTypeEmail.text.toString()
             viewModel.onDoneClicked(resetEmail)
         }
-        binding.tbBackButton.ibBack.setOnClickListener {
-            findNavController().popBackStack()
+        binding.tbForgotPassword.tbStock.setOnClickListener {
+            viewModel.onBackClicked()
         }
     }
 
     override fun updateView() {
+        binding.tbForgotPassword.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
+        binding.tbForgotPassword.tbStock.title = viewModel.viewState.toolbarText
+
         binding.tvErrorEmailForgotPassword.visibleOrGone = viewModel.viewState.errorForgotPasswordVisible
     }
 }

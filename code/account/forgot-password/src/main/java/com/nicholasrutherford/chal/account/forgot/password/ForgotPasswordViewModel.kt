@@ -4,14 +4,17 @@ import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import com.nicholasrutherford.chal.account.validation.AccountValidation
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
+import com.nicholasrutherford.chal.main.navigation.Navigator
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
 class ForgotPasswordViewModel @ViewModelInject constructor(
     private val application: Application,
     private val firebaseAuth: ChalFirebaseAuth,
-    private val accountValidation: AccountValidation
+    private val accountValidation: AccountValidation,
+    private val navigator: Navigator
 ) : BaseViewModel() {
 
     var alertTitle = application.getString(R.string.empty_string)
@@ -96,7 +99,10 @@ class ForgotPasswordViewModel @ViewModelInject constructor(
             }
     }
 
+    fun onBackClicked() = navigator.navigateBack()
+
     inner class ForgotPasswordViewStateImpl: ForgotPasswordViewState {
+        override var toolbarText: String = application.getString(R.string.forgot_your_password)
         override var errorForgotPasswordVisible = false
     }
 }

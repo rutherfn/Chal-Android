@@ -13,9 +13,7 @@ class CreateAccountNavigationImpl @Inject constructor(): CreateAccountNavigation
     @Inject
     lateinit var navigator: Navigator
 
-    override fun pop() {
-        navigator.navController.popBackStack()
-    }
+    override fun pop() = navigator.navigateBack()
 
     override fun showUploadPhoto(username: String, email: String, password: String) {
         val uploadPhotoBundle = bundleOf(USERNAME to username, EMAIL to email, PASSWORD to password)
