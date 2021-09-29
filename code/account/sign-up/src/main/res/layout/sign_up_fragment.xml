@@ -15,12 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/tbSignUpBackButton"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/back_toolbar_height"
-        layout="@layout/toolbar_back_button_with_text"
-        />
+        <include
+            android:id="@+id/tbSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            layout="@layout/stock_toolbar_with_text"
+            />
 
     <ImageView
         android:id="@+id/ivSignInLogo"
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbSignUpBackButton"
+        app:layout_constraintTop_toBottomOf="@+id/tbSignUp"
         />
 
     <TextView

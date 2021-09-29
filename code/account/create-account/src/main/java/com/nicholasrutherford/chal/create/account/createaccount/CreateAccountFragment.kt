@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.create.account.databinding.CreateAccountFragmentBinding
 import com.nicholasrutherford.chal.helper.constants.KEYBOARD_FLAGS
@@ -62,7 +63,7 @@ class CreateAccountFragment @Inject constructor() : BaseFragment<CreateAccountFr
         typeface.setTextViewHeaderBoldTypeface(binding.tvCreate)
         typeface.setTextViewHeaderBoldTypeface(binding.tvAccount)
 
-        typeface.setTextViewSubHeaderBoldTypeface(binding.tbCreateAccount.tvTitle)
+        binding.tbCreateAccount.tbStock.setTitleTextAppearance(application, R.style.ToolbarTextAppearance)
 
         typeface.setTextViewSubHeaderBoldTypeface(binding.tvUsername)
         typeface.setTextViewBodyBoldTypeface(binding.tvErrorUsername)
@@ -139,12 +140,14 @@ class CreateAccountFragment @Inject constructor() : BaseFragment<CreateAccountFr
             val password = binding.etPassword.text.toString()
             viewModel.onClickOnContinue(email, username, password)
         }
-        binding.tbCreateAccount.ibBack.setOnClickListener {
+        binding.tbCreateAccount.tbStock.setOnClickListener {
             viewModel.onBackClicked()
         }
     }
 
     override fun updateView() {
+        binding.tbCreateAccount.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
+        binding.tbCreateAccount.tbStock.title = viewModel.viewState.toolbarText
         binding.ivErrorUsername.visibleOrGone = viewModel.viewState.usernameErrorVisible
         binding.tvErrorUsername.visibleOrGone = viewModel.viewState.usernameErrorVisible
 

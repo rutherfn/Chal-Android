@@ -9,7 +9,5 @@ class UploadPhotoNavigationImpl @Inject constructor(): UploadPhotoNavigation {
     @Inject
     lateinit var navigator: Navigator
 
-    override fun showNewsFeed() {
-        navigator.navigate(R.id.nav_graph_news_feed)
-    }
+    override fun showNewsFeed() = navigator.navigate(R.id.nav_graph_news_feed)
 }

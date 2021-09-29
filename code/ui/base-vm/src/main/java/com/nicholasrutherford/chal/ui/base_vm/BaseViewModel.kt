@@ -6,6 +6,9 @@ import kotlinx.coroutines.flow.StateFlow
 
 open class BaseViewModel : ViewModel() {
 
+    val toolbarBackImage = R.drawable.ic_toolbar_arrow
+    val toolbarBlackBackImage = R.drawable.ic_toolbar_arrow_black
+
     val _viewStateUpdated = MutableStateFlow(false)
     val viewStateUpdated: StateFlow<Boolean> = _viewStateUpdated
 

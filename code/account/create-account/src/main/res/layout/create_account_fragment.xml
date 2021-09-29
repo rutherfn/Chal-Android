@@ -20,8 +20,8 @@
             <include
                 android:id="@+id/tbCreateAccount"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/back_toolbar_height"
-                layout="@layout/toolbar_back_button_with_text"
+                android:layout_height="@dimen/toolbar_height"
+                layout="@layout/stock_toolbar_with_text"
                 />
 
         <TextView
@@ -178,60 +178,60 @@
             app:layout_constraintTop_toTopOf="@+id/ivErrorEmail"
             />
 
-        <TextView
-            android:id="@+id/tvPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20dp"
-            android:text="@string/password"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/sub_header_text_size"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/ivErrorEmail"
-            app:layout_constraintTop_toBottomOf="@+id/ivErrorEmail"
-            />
+    <TextView
+        android:id="@+id/tvPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:text="@string/password"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/sub_header_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ivErrorEmail"
+        app:layout_constraintTop_toBottomOf="@+id/ivErrorEmail"
+        />
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:ems="17"
-            android:hint="@string/password"
-            android:autofillHints="@string/password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:windowSoftInputMode="adjustPan"
-            app:layout_constraintStart_toStartOf="@+id/tvPassword"
-            app:layout_constraintTop_toBottomOf="@+id/tvPassword"
-            />
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:ems="17"
+                android:hint="@string/password"
+                android:autofillHints="@string/password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintStart_toStartOf="@+id/tvPassword"
+                app:layout_constraintTop_toBottomOf="@+id/tvPassword"
+                />
 
-        <ImageView
-            android:id="@+id/ivErrorPassword"
-            android:layout_width="@dimen/iv_email_error_height"
-            android:layout_height="@dimen/iv_email_error_width"
-            android:layout_marginTop="@dimen/margin_6dp"
-            android:background="@drawable/ic_error"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@+id/etPassword"
-            app:layout_constraintTop_toBottomOf="@+id/etPassword"
-            />
+            <ImageView
+                android:id="@+id/ivErrorPassword"
+                android:layout_width="@dimen/iv_email_error_height"
+                android:layout_height="@dimen/iv_email_error_width"
+                android:layout_marginTop="@dimen/margin_6dp"
+                android:background="@drawable/ic_error"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/etPassword"
+                app:layout_constraintTop_toBottomOf="@+id/etPassword"
+                />
 
-        <TextView
-            android:id="@+id/tvErrorPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_10dp"
-            android:layout_marginStart="@dimen/margin_10dp"
-            android:textColor="@color/colorBlack"
-            android:visibility="gone"
-            android:text="@string/error_password"
-            app:layout_constraintBottom_toBottomOf="@+id/ivErrorPassword"
-            app:layout_constraintStart_toEndOf="@+id/ivErrorPassword"
-            app:layout_constraintTop_toTopOf="@+id/ivErrorPassword"
-            />
+            <TextView
+                android:id="@+id/tvErrorPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:textColor="@color/colorBlack"
+                android:visibility="gone"
+                android:text="@string/error_password"
+                app:layout_constraintBottom_toBottomOf="@+id/ivErrorPassword"
+                app:layout_constraintStart_toEndOf="@+id/ivErrorPassword"
+                app:layout_constraintTop_toTopOf="@+id/ivErrorPassword"
+                />
 
             <Button
                 android:id="@+id/btnContinueCreating"
@@ -250,7 +250,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvErrorPassword"
                 />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
 </androidx.core.widget.NestedScrollView>

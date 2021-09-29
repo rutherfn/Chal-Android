@@ -10,6 +10,7 @@ import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.lifecycle.lifecycleScope
+import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.helper.constants.EMAIL
 import com.nicholasrutherford.chal.helper.constants.PASSWORD
 import com.nicholasrutherford.chal.helper.constants.USERNAME
@@ -70,6 +71,7 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
 
     override fun updateTypefaces() {
         typeface.setTextViewHeaderBoldTypeface(binding.tvTakeAPictureOrChooseFromLibrary)
+        binding.tbUploadPhoto.tbStock.setTitleTextAppearance(application, R.style.ToolbarTextAppearance)
 
         typeface.setTextViewBodyBoldTypeface(binding.btnChooseFormLibrary)
         typeface.setTextViewBodyBoldTypeface(binding.btnContinueUpload)
@@ -90,6 +92,7 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
     }
 
     override fun updateView() {
+        binding.tbUploadPhoto.tbStock.title = viewModel.viewState.toolbarText
         viewModel.viewState.imageTakeAPhotoBitmap?.let { bitmap ->
             binding.cvTakeAPhoto.setImageBitmap(bitmap)
         }

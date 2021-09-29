@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ToolbarTextAppearance">
+        <item name="android:fontFamily">@assets/Montserrat-Bold.otf</item>
+    </style>
+
 </resources>

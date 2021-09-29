@@ -46,6 +46,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
 
     val viewState = UploadPhotoViewStateImpl()
 
+
     fun setParams(email: String?, password: String?, username: String?) {
         this.email = email
         this.password = password
@@ -186,6 +187,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     }
     
     inner class UploadPhotoViewStateImpl : UploadPhotoViewState {
+        override var toolbarText: String = application.getString(R.string.upload_image)
         override var imageTakeAPhotoBitmap: Bitmap? = null
     }
 }

@@ -12,6 +12,7 @@
     <dimen name="banner_x_image_width">18dp</dimen>
     <dimen name="banner_x_image_height">18dp</dimen>
 
+    <dimen name="toolbar_height">62dp</dimen>
     <dimen name="back_toolbar_height">62dp</dimen>
     <dimen name="back_button_width">48dp</dimen>
     <dimen name="back_button_height">48dp</dimen>
