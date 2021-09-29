@@ -23,13 +23,11 @@ class FetchSharedPreferenceImpl @Inject constructor(
         return sharedPreference.getBoolean(preferenceName, false)
     }
 
-    override fun fetchProfilePictureDirectorySharedPreference(preferenceName: String): String? {
-        val profilePictureDirectory = sharedPreference.getString(preferenceName, null)
-
-        if (profilePictureDirectory.isNullOrEmpty()) {
-            return  null
+    override fun fetchProfilePictureDirectorySharedPreference(): String? {
+        if (getPreferenceString(PROFILE_PICTURE_DIRECTORY_PREFERENCE).isNullOrEmpty()) {
+            return null
         } else {
-            return profilePictureDirectory
+            return getPreferenceString(PROFILE_PICTURE_DIRECTORY_PREFERENCE)
         }
     }
 

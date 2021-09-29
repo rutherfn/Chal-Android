@@ -2,7 +2,7 @@ package com.nicholasrutherford.chal.shared.preference.fetch
 
 interface FetchSharedPreference {
     // firebase
-    fun fetchProfilePictureDirectorySharedPreference(preferenceName: String): String?
+    fun fetchProfilePictureDirectorySharedPreference(): String?
 
     // account shared preferences
     fun fetchAgeSharedPreference(): Int?

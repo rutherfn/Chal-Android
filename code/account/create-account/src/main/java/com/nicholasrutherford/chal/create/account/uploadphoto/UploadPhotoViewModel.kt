@@ -60,8 +60,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     fun onImageUpdate() {
         if (isPhotoReadyToBeUpdated) {
             val profilePictureDirectory =
-                fetchSharedPreference.fetchProfilePictureDirectorySharedPreference(
-                    PROFILE_PICTURE_DIRECTORY_PREFERENCE)
+                fetchSharedPreference.fetchProfilePictureDirectorySharedPreference()
 
             if (profilePictureDirectory.isNullOrEmpty()) {
                 viewState.imageTakeAPhotoBitmap = null
