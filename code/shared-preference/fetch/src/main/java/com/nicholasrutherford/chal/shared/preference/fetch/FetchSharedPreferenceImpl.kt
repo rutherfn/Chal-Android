@@ -15,7 +15,7 @@ class FetchSharedPreferenceImpl @Inject constructor(
         val profilePictureDirectory = sharedPreference.getString(preferenceName, null)
 
         if (profilePictureDirectory.isNullOrEmpty()) {
-            return  null
+            return null
         } else {
             return profilePictureDirectory
         }
