@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -24,6 +26,9 @@ typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
 @Suppress("MagicNumber")
 const val GALLERY_TYPE = "image/*"
+
+// used to rotate a image 360 degrees
+const val ROTATE_IMAGE_360 = 360f
 
 const val GALLERY_REQUEST_CODE = 0
 const val CAMERA_CAPTURE_REQUEST = 1888
@@ -101,6 +106,11 @@ abstract class BaseFragment<VB: ViewBinding>(
     fun showOkAlert(title: String, message: String) {
         // exapnd on this down the line
         fragmentNavigation?.showOkAlert(title, message)
+    }
+
+    fun Bitmap.rotate(degrees: Float): Bitmap {
+        val matrix = Matrix().apply { postRotate(degrees) }
+        return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
     }
 
     fun showClosingOutAppProgressAlert(resId: Int, title: String, message: String) {

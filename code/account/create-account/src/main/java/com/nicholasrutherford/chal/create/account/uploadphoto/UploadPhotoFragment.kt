@@ -14,6 +14,7 @@ import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.helper.constants.EMAIL
 import com.nicholasrutherford.chal.helper.constants.PASSWORD
 import com.nicholasrutherford.chal.helper.constants.USERNAME
+import com.nicholasrutherford.chal.ui.base_fragment.ROTATE_IMAGE_360
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -94,7 +95,7 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
     override fun updateView() {
         binding.tbUploadPhoto.tbStock.title = viewModel.viewState.toolbarText
         viewModel.viewState.imageTakeAPhotoBitmap?.let { bitmap ->
-            binding.cvTakeAPhoto.setImageBitmap(bitmap)
+            binding.cvTakeAPhoto.setImageBitmap(bitmap.rotate(ROTATE_IMAGE_360))
         }
     }
 }
