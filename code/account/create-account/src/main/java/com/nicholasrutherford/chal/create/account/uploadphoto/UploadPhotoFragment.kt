@@ -52,6 +52,7 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
                 viewModel._shouldDismissProgress
             )
         }
+        collectAlertAsUpdated()
     }
 
     override fun collectAlertAsUpdated() {
