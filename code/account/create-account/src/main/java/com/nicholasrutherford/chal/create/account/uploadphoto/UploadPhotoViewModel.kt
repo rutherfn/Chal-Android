@@ -110,9 +110,16 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     }
 
     fun onContinueClicked() {
-        setShouldShowProgressAsUpdated()
-
-        if (network.isConnected() && profileUri != null) {
+        if (!network.isConnected()) {
+            showErrorState(
+                application.getString(R.string.error_no_internet_log_in)
+            )
+        } else if (profileUri == null) {
+            showErrorState(
+                application.getString(R.string.error_no_image)
+            )
+        } else {
+            setShouldShowProgressAsUpdated()
 
             email?.let { validEmail ->
                 password?.let { validPassword ->
@@ -120,20 +127,12 @@ class UploadPhotoViewModel @ViewModelInject constructor(
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 storeProfilePictureToFirebaseStorage()
+                            } else {
+                                showStockErrorState()
                             }
-                        }.addOnCompleteListener {
-                            showStockErrorState()
                         }
                 }
             }
-        } else if (!network.isConnected()) {
-            showErrorState(
-                application.getString(R.string.error_no_internet_log_in)
-            )
-        } else {
-            showErrorState(
-                application.getString(R.string.error_no_image)
-            )
         }
     }
 

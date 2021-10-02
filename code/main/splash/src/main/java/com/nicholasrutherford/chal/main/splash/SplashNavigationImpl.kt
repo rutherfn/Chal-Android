@@ -14,7 +14,6 @@ class SplashNavigationImpl @Inject constructor(
     }
 
     override fun showlogin() {
-        println("show login")
        navigator.navigate(R.id.nav_graph_login)
     }
 }
