@@ -23,7 +23,8 @@
             <option value="$PROJECT_DIR$/data/account-info" />
             <option value="$PROJECT_DIR$/firebase" />
             <option value="$PROJECT_DIR$/firebase/auth" />
-            <option value="$PROJECT_DIR$/firebase/database" />
+            <option value="$PROJECT_DIR$/firebase/realtime-database" />
+            <option value="$PROJECT_DIR$/firebase/realtime-database/fetch" />
             <option value="$PROJECT_DIR$/firebase/storage" />
             <option value="$PROJECT_DIR$/helper" />
             <option value="$PROJECT_DIR$/helper/constants" />

@@ -32,7 +32,7 @@ dependencies {
     api(project(path = ":account:validation"))
     api(project(path = ":data:account-info"))
     api(project(path = ":firebase:auth"))
-    api(project(path = ":firebase:database"))
+    api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":firebase:storage"))
     api(project(path = ":helper:constants"))
     api(project(path = ":helper:fragment"))

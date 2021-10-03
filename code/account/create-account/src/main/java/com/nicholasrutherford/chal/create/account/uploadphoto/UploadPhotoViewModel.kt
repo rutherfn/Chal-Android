@@ -13,7 +13,7 @@ import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.data.account.info.AccountInfo
 import com.nicholasrutherford.chal.data.account.info.ProfileInfo
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
-import com.nicholasrutherford.chal.firebase.database.ChalFirebaseDatabase
+import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.storage.ChalFirebaseStorage
 import com.nicholasrutherford.chal.helper.constants.PROFILE_PICTURE_DIRECTORY_PREFERENCE
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
@@ -28,7 +28,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     private val navigation: UploadPhotoNavigation,
     private val firebaseAuth: ChalFirebaseAuth,
     private val firebaseStorage: ChalFirebaseStorage,
-    private val firebaseDatabase: ChalFirebaseDatabase,
+    private val fetchFirebaseDatabase: FetchFirebaseDatabase,
     private val application: Application
 ) : BaseViewModel() {
 
@@ -171,7 +171,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
             activeChallenges = null
         )
 
-        firebaseDatabase.userDatabaseReference(firebaseAuth.uid ?: emptyString)
+        fetchFirebaseDatabase.fetchAllUsersDatabaseReference(firebaseAuth.uid ?: emptyString)
             .setValue(newUser)
             .addOnCompleteListener {
                 firebaseAuth.sendEmailVerification()

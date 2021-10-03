@@ -13,6 +13,10 @@ const val LOADING_DELAY = 1000
 // hide keyboard flag 0
 const val KEYBOARD_FLAGS = 0
 
+// Firebase Database Routes here
+const val ROUTE_USERS = "/users/"
+fun userDatabaseReference(uid: String) = ROUTE_USERS.plus(uid)
+
 // we can't set shared int shared preferences to null, so set it to 11 as a default value
 const val STOCK_INT_PREFERENCE = 11
 
