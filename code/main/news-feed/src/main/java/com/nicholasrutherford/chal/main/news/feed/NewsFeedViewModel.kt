@@ -7,6 +7,7 @@ import com.nicholasrutherford.chal.data.post.PostListResponse
 import com.nicholasrutherford.chal.firebase.realtime.database.create.CreateFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
+import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
 import con.nicholasrutherford.chal.data.challenges.ChallengeBanner
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 class NewsFeedViewModel @ViewModelInject constructor(
     private val createFirebaseDatabase: CreateFirebaseDatabase,
     private val fetchFirebaseDatabase: FetchFirebaseDatabase,
+    private val removeSharedPreference: RemoveSharedPreference,
     private val fetchSharedPreference: FetchSharedPreference,
     private val application: Application
 ) : BaseViewModel() {
@@ -45,6 +47,7 @@ class NewsFeedViewModel @ViewModelInject constructor(
     var alertMessage = application.getString(R.string.empty_string)
 
     private var bannerType = ChallengeBannerType.NONE
+    private val userPostList = arrayListOf(PostListResponse())
 
     val viewState = NewsFeedViewStateImpl()
 
@@ -128,6 +131,151 @@ class NewsFeedViewModel @ViewModelInject constructor(
         viewState.bannerDescription = challengeBanner.description
         viewState.bannerVisible = challengeBanner.isVisible
         viewState.bannerIsCloseable = challengeBanner.isCloseable
+
+        setViewStateAsUpdated()
+    }
+
+    fun onBannerDismissedClicked() {
+        removeSharedPreference.removeChallengeBannerPreferences()
+        createFirebaseDatabase.createChallengeBannerType(bannerType = ChallengeBannerType.NONE.value)
+    }
+
+    private fun resetBannerState() {
+        viewState.bannerTitle = null
+        viewState.bannerDescription = null
+        viewState.bannerVisible = false
+        viewState.bannerIsCloseable = true
+
+        setViewStateAsUpdated()
+    }
+
+    fun updateMyChallengesVisible(currentActiveChallengesList: List<ActiveChallengesListResponse>) {
+        viewState.myChallengesVisible = currentActiveChallengesList.size > 1
+        setViewStateAsUpdated()
+    }
+
+//    fun updateDayOfAllActiveChallenges(activeChallenges: List<ActiveChallengesListResponse>) {
+//        var index = 0
+//        val maxChallengesList = arrayListOf<Int>()
+//
+//        activeChallenges.forEach {
+//            maxChallengesList.add(index)
+//            index++
+//        }
+//        maxChallengesList.forEach { index ->
+//            if (activeChallenges.size >= index) {
+//                checkToUpdateCurrentDayOfChallenge(activeChallenges, index)
+//            }
+//        }
+//    }
+//
+//    private fun checkToUpdateCurrentDayOfChallenge(activeChallenges: List<ActiveChallengesListResponse>, index: Int) {
+//        val currentDay = activeChallenges.get(index).activeChallenges?.currentDay ?: 0
+//        val newDay = currentDay + 1
+//
+//        if (currentDay >= 14) {
+//            writeNewActiveChallengeImpl.writeCurrentDay(
+//                uid,
+//                index.toString(),
+//                0
+//            )
+//        }
+//
+//        else if (currentDay < challengeCurrentDay.dayInChallenge() && currentDay != challengeCurrentDay.dayInChallenge()) {
+//            writeNewActiveChallengeImpl.writeCurrentDay(
+//                uid,
+//                index.toString(),
+//                newDay
+//            )
+//        }
+//    }
+
+    fun hideProgress() {
+        // hide some progress
+    }
+
+    fun onAllClicked() {
+        viewState.recyclerNewsFeedVisible = true
+        viewState.addFriendsEmptyStateVisible = false
+        viewState.isEndOfNewsFeedVisible = true
+
+        viewState.btnAllTextColor = application.getString(R.string.hex_black)
+        viewState.btnFriendsTextColor = application.getString(R.string.hex_white)
+        viewState.btnMyPostsTextColor = application.getString(R.string.hex_white)
+
+        viewState.btnAllBackgroundResId = R.drawable.corner_button_white
+        viewState.btnFriendsBackgroundResId = R.drawable.corner_button
+        viewState.btnMyPostsBackgroundResId = R.drawable.corner_button
+
+        setViewStateAsUpdated()
+    }
+
+    fun onFriendsClicked() {
+        viewState.recyclerNewsFeedVisible = false
+        viewState.addFriendsEmptyStateVisible = true
+        viewState.isEndOfNewsFeedVisible = false
+
+        viewState.btnAllTextColor = application.getString(R.string.hex_white)
+        viewState.btnFriendsTextColor = application.getString(R.string.hex_black)
+        viewState.btnMyPostsTextColor = application.getString(R.string.hex_white)
+
+        viewState.btnAllBackgroundResId = R.drawable.corner_button
+        viewState.btnFriendsBackgroundResId = R.drawable.corner_button_white
+        viewState.btnMyPostsBackgroundResId = R.drawable.corner_button
+
+        setViewStateAsUpdated()
+    }
+
+    fun onMyPostsClicked() {
+        viewState.recyclerNewsFeedVisible = true
+        viewState.addFriendsEmptyStateVisible = false
+        viewState.isEndOfNewsFeedVisible = true
+
+        viewState.btnAllTextColor = application.getString(R.string.hex_white)
+        viewState.btnFriendsTextColor = application.getString(R.string.hex_white)
+        viewState.btnMyPostsTextColor = application.getString(R.string.hex_black)
+
+        viewState.btnAllBackgroundResId = R.drawable.corner_button
+        viewState.btnFriendsBackgroundResId = R.drawable.corner_button
+        viewState.btnMyPostsBackgroundResId = R.drawable.corner_button_white
+
+        setViewStateAsUpdated()
+    }
+
+    fun onAddFriendsEmptyStateClicked() {
+        // showPeoplkesList
+    }
+
+    fun onRefreshTabClicked() {
+        fetchUserEnrolledInAChallenge()
+        fetchAllPosts()
+        fetchAllActiveChallenges()
+    }
+
+    fun onAddProgressTabClicked() {
+        if (isUserEnrolledInAChallenge) {
+            // show progress fragment
+        } else {
+            alertTitle = application.applicationContext.getString(R.string.not_enrolled_in_challenge)
+            alertMessage = application.applicationContext.getString(R.string.not_enrolled_in_challenge_message)
+            setShouldShowAlertAsUpdated()
+        }
+    }
+
+    fun generateUserAdapterPostList(allPostsList: List<PostListResponse>): List<PostListResponse> {
+        if (userPostList.isNotEmpty()) {
+            userPostList.clear()
+        }
+
+        allPostsList.forEach { allPosts ->
+            if (username.isNotEmpty()) {
+                if (allPosts.posts?.username == username) {
+                    userPostList.add(allPosts)
+                }
+            }
+        }
+
+        return userPostList
     }
 
     inner class NewsFeedViewStateImpl : NewsFeedViewState {
