@@ -11,4 +11,5 @@ interface CreateFirebaseDatabase {
 
     // call this function to add a active challenge via firebase
     fun createNewActiveChallenge(allActiveChallengeIndex: Int, userChallengeIndex: String, activeChallenge: ActiveChallenge)
+    fun createChallengeBannerType(bannerType: Int)
 }

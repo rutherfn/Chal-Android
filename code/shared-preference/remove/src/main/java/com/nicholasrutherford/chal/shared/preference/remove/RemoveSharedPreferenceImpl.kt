@@ -60,24 +60,32 @@ class RemoveSharedPreferenceImpl @Inject constructor(
         checkAndRemoveSharedPreferenceString(USERNAME_PREFERENCE)
     }
 
-    override fun removeBannerTypeSharedPreference() {
+    private fun removeBannerTypeSharedPreference() {
         checkAndRemovePreferenceInt(BANNER_TYPE_PREFERENCE)
     }
 
-    override fun removeChallengeBannerTypeTitleSharedPreference() {
+    private fun removeChallengeBannerTypeTitleSharedPreference() {
         checkAndRemoveSharedPreferenceString(BANNER_TYPE_TITLE)
     }
 
-    override fun removeChallengeBannerTypeDescSharedPreference() {
+    private fun removeChallengeBannerTypeDescSharedPreference() {
         checkAndRemoveSharedPreferenceString(BANNER_TYPE_PREFERENCE)
     }
 
-    override fun removeChallengeBannerTypeIsVisible() {
+    private fun removeChallengeBannerTypeIsVisible() {
         editor.remove(BANNER_TYPE_IS_VISIBLE).apply()
     }
 
-    override fun removeChallengeBannerTypeIsCloseable() {
+    private fun removeChallengeBannerTypeIsCloseable() {
         editor.remove(BANNER_TYPE_IS_CLOSEABLE).apply()
+    }
+
+    override fun removeChallengeBannerPreferences() {
+        removeBannerTypeSharedPreference()
+        removeChallengeBannerTypeTitleSharedPreference()
+        removeChallengeBannerTypeDescSharedPreference()
+        removeChallengeBannerTypeIsVisible()
+        removeChallengeBannerTypeIsCloseable()
     }
 
     override fun removeAllSharedPreferences() {

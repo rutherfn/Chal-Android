@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/account-info" />
             <option value="$PROJECT_DIR$/data/challenges" />
+            <option value="$PROJECT_DIR$/data/post" />
             <option value="$PROJECT_DIR$/firebase" />
             <option value="$PROJECT_DIR$/firebase/auth" />
             <option value="$PROJECT_DIR$/firebase/realtime-database" />

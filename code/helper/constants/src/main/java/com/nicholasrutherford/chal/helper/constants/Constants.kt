@@ -7,6 +7,8 @@ const val USERNAME = "username"
 const val EMAIL = "email"
 const val PASSWORD = "password"
 
+val CURRENT_CATEGORY_LIST = arrayListOf("Health And Wellness", "Intellectual", "Lifestyle")
+
 // splash loading
 const val LOADING_DELAY = 1000
 
@@ -18,6 +20,8 @@ const val ROUTE_USERS = "/users/"
 fun userDatabaseReference(uid: String) = ROUTE_USERS.plus(uid)
 
 const val ROUTE_ALL_ACTIVE_CHALLENGES = "/all-active-challenges/"
+
+const val PLACEHOLDER_CHALLENGE_HEADER_IMAGE = "https://www.topsecrets.com/wp-content/uploads/2020/03/goal-leap-4052923_1280-1024x512.jpg"
 
 // will do for now, stock image if user does not have a profile picture
 const val DEFAULT_PROFILE_IMAGE = "https://www.dovercourt.org/wp-content/uploads/2019/11/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg"

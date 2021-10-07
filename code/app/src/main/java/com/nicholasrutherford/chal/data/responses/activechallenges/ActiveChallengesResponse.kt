@@ -8,4 +8,4 @@ data class ActiveChallengesResponse (
     val name: String = "",
     val numberOfDaysOfChallenge: Int = 0,
     val username: String = ""
-    )
+)

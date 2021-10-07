@@ -15,10 +15,8 @@ interface RemoveSharedPreference {
     fun removeUsernameSharedPreference()
 
     // challenge banner shared preferences
-    fun removeBannerTypeSharedPreference()
-    fun removeChallengeBannerTypeTitleSharedPreference()
-    fun removeChallengeBannerTypeDescSharedPreference()
-    fun removeChallengeBannerTypeIsVisible()
-    fun removeChallengeBannerTypeIsCloseable()
+    fun removeChallengeBannerPreferences()
+
+    // remove all shared preferences
     fun removeAllSharedPreferences()
 }
