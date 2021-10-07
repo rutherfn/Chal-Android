@@ -55,9 +55,9 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
             collectViewStateResult(viewModel.viewStateUpdated, viewModel._viewStateUpdated)
         }
         lifecycleScope.launch {
-            collectShouldDismissProgressResult(
-                viewModel.shouldDismissProgress,
-                viewModel._shouldDismissProgress
+            collectShouldShowProgressResult(
+                viewModel.shouldShowProgress,
+                viewModel._shouldShowProgress
             )
         }
         lifecycleScope.launch {
@@ -75,6 +75,7 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
                     currentUserNewsFeedList = viewModel.generateUserAdapterPostList(allActiveNewsFeedList)
 
                     bindListAdapter(newsFeedList)
+                    viewModel.waitBeforeWeDismissProgress()
                 }
             }
         }

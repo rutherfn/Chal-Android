@@ -127,10 +127,7 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                     )
                 }
                 R.id.fragmentNewsFeed -> {
-                    showClosingOutAppProgressAlert(
-                        title = this.getString(R.string.closing_out_app),
-                        message = this.getString(R.string.are_you_sure_you_you_want_to_discard_the_post)
-                    )
+                    finish()
                 }
                 else -> {
                     finish()

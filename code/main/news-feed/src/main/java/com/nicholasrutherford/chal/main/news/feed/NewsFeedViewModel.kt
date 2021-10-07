@@ -1,6 +1,8 @@
 package com.nicholasrutherford.chal.main.news.feed
 
 import android.app.Application
+import android.os.Handler
+import android.os.Looper
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.nicholasrutherford.chal.data.post.PostListResponse
@@ -52,6 +54,7 @@ class NewsFeedViewModel @ViewModelInject constructor(
     val viewState = NewsFeedViewStateImpl()
 
     init {
+        setShouldShowProgressAsUpdated()
         viewModelScope.launch {
             loggedInUsername.collect { loggedInUsername ->
                 username = loggedInUsername
@@ -152,6 +155,12 @@ class NewsFeedViewModel @ViewModelInject constructor(
     fun updateMyChallengesVisible(currentActiveChallengesList: List<ActiveChallengesListResponse>) {
         viewState.myChallengesVisible = currentActiveChallengesList.size > 1
         setViewStateAsUpdated()
+    }
+
+    fun waitBeforeWeDismissProgress() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            setShouldShowDismissProgressAsUpdated()
+        }, 1500.toLong())
     }
 
 //    fun updateDayOfAllActiveChallenges(activeChallenges: List<ActiveChallengesListResponse>) {
