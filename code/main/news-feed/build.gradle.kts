@@ -29,7 +29,10 @@ android {
 }
 
 dependencies {
+    api(project(path = ":firebase:realtime-database:create"))
+    api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":main:resources"))
+    api(project(path = ":shared-preference:fetch"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:shared-layout"))
@@ -44,5 +47,6 @@ dependencies {
 
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
+    implementation(Dependencies.Libs.Hilt.HiltLifecycleViewModel)
     kapt(Dependencies.Libs.Hilt.hiltCompiler)
 }

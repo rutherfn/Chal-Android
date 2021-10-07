@@ -14,7 +14,11 @@ android {
 }
 
 dependencies {
+    api(project(path = ":data:challenges"))
+    api(project(path = ":data:post"))
+    api(project(path = ":firebase:auth"))
     api(project(path = ":helper:constants"))
+    api(project(path = ":main:resources"))
 
     implementation(Dependencies.Libs.Dagger.Android)
 

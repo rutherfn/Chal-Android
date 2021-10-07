@@ -16,6 +16,7 @@ android {
 dependencies {
     api(project(path = ":data:challenges"))
     api(project(path = ":firebase:auth"))
+    api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":helper:constants"))
 
     implementation(Dependencies.Libs.Dagger.Android)

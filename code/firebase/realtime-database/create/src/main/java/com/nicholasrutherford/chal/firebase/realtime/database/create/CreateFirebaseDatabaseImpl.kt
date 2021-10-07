@@ -3,12 +3,14 @@ package com.nicholasrutherford.chal.firebase.realtime.database.create
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
+import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.helper.constants.*
 import con.nicholasrutherford.chal.data.challenges.ActiveChallenge
 import javax.inject.Inject
 
 // TODO we need to add on failure timber logs as we ass sucess timber logs in the future!
 class CreateFirebaseDatabaseImpl @Inject constructor(
+    private val fetchFirebaseDatabase: FetchFirebaseDatabase,
     private val firebaseAuth: ChalFirebaseAuth
 ): CreateFirebaseDatabase {
 
@@ -196,5 +198,19 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
         creatDateChallengeExpireOfChallenge(allActiveChallengeIndex, userChallengeIndex, activeChallenge.challengeExpire)
         createCurrentDayOfChallenge(allActiveChallengeIndex, userChallengeIndex, activeChallenge.currentDay)
         createUsernameEnrolledOfChallenge(allActiveChallengeIndex, userChallengeIndex, activeChallenge.username)
+    }
+
+    override fun createChallengeBannerType(bannerType: Int) {
+        uid?.let { firebaseUid ->
+            fetchFirebaseDatabase.databaseUserReference
+                .child(challengeBannerTypePath(firebaseUid))
+                .setValue(bannerType)
+                .addOnSuccessListener {
+                // timber log here }
+                }
+                .addOnFailureListener {
+                    // timber log here
+                }
+        }
     }
 }

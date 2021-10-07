@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.data.responses.activechallenges
+package con.nicholasrutherford.chal.data.challenges
 
 data class ActiveChallengesListResponse (
     var activeChallenges: ActiveChallengesResponse? = null

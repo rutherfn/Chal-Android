@@ -20,5 +20,7 @@ interface RemoveSharedPreference {
     fun removeChallengeBannerTypeDescSharedPreference()
     fun removeChallengeBannerTypeIsVisible()
     fun removeChallengeBannerTypeIsCloseable()
+
+    // remove all shared preferences
     fun removeAllSharedPreferences()
 }
