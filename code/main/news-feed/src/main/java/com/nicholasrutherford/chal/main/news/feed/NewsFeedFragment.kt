@@ -81,13 +81,13 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
         }
 
         lifecycleScope.launch {
-            viewModel.allActiveChallengesList.collect { allChallengesList ->
-                if (allChallengesList.isNotEmpty()) {
-                    viewModel.updateMyChallengesVisible(allChallengesList)
+            viewModel.allUserActiveChallengesList.collect { challengesList ->
+                if (challengesList.isNotEmpty()) {
+                    viewModel.updateMyChallengesVisible(challengesList)
 
                     viewModel.setViewStateAsUpdated()
 
-                    bindHeaderAdapter(allChallengesList)
+                    bindHeaderAdapter(challengesList)
                 }
             }
         }

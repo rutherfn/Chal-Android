@@ -39,8 +39,8 @@ class NewsFeedViewModel @ViewModelInject constructor(
     private val _postList = MutableStateFlow(listOf<PostListResponse>())
     val postList: StateFlow<List<PostListResponse>> = _postList
 
-    private val _allActiveChallengesList = MutableStateFlow(listOf<ActiveChallengesListResponse>())
-    val allActiveChallengesList: StateFlow<List<ActiveChallengesListResponse>> = _allActiveChallengesList
+    private val _allUserActiveChallengesList = MutableStateFlow(listOf<ActiveChallengesListResponse>())
+    val allUserActiveChallengesList: StateFlow<List<ActiveChallengesListResponse>> = _allUserActiveChallengesList
 
     private val _challengeBannerType = MutableStateFlow(0)
     private val challengeBannerType: StateFlow<Int> = _challengeBannerType
@@ -78,7 +78,7 @@ class NewsFeedViewModel @ViewModelInject constructor(
 
         fetchUserEnrolledInAChallenge()
         fetchAllPosts()
-        fetchAllActiveChallenges()
+        fetchAllUserActiveChallenges()
     }
 
     private fun fetchLoggedInUsername() = fetchFirebaseDatabase.fetchLoggedInUsername(_loggedInUsername)
@@ -87,7 +87,7 @@ class NewsFeedViewModel @ViewModelInject constructor(
 
     private fun fetchAllPosts() = fetchFirebaseDatabase.fetchAllPosts(_postList)
 
-    private fun fetchAllActiveChallenges() = fetchFirebaseDatabase.fetchAllUserActiveChallenges(_allActiveChallengesList)
+    private fun fetchAllUserActiveChallenges() = fetchFirebaseDatabase.fetchAllUserActiveChallenges(_allUserActiveChallengesList)
 
     private fun fetchChallengeBannerType() = fetchFirebaseDatabase.fetchChallengeBannerType(_challengeBannerType)
 
@@ -258,7 +258,7 @@ class NewsFeedViewModel @ViewModelInject constructor(
     fun onRefreshTabClicked() {
         fetchUserEnrolledInAChallenge()
         fetchAllPosts()
-        fetchAllActiveChallenges()
+        fetchAllUserActiveChallenges()
     }
 
     fun onAddProgressTabClicked() {
