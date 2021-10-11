@@ -6,6 +6,7 @@
     app:startDestination="@id/fragmentNewsFeed">
 
     <include app:graph="@navigation/nav_graph_challenges_list"/>
+    <include app:graph="@navigation/nav_graph_more" />
 
     <fragment
         android:id="@+id/fragmentNewsFeed"
@@ -15,7 +16,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/fragmentChallengeList"
+        android:id="@+id/fragmentChallengesList"
         android:name="com.nicholasrutherford.chal.challenge.list.ChallengeListFragment"
         android:label="challenge_list_fragment"
         tools:layout="@layout/fragment_challenge_list">
@@ -23,6 +24,11 @@
         <action
             android:id="@+id/action_ChallengesListFragment_to_nav_graph_b"
             app:destination="@+id/nav_graph_challenge_list"
+            />
+
+        <action
+            android:id="@+id/action_moreFragment_to_nav_graph_6"
+            app:destination="@+id/nav_graph_more"
             />
 
     </fragment>

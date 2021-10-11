@@ -27,16 +27,14 @@ class MainViewModel @ViewModelInject constructor(
         when (item.itemId) {
             R.id.navigation_my_feed -> {
                 navigation.showNewsFeed()
-                //   launchNewsFeed()
                 return true
             }
             R.id.navigation_challenges -> {
                 navigation.showChallengesList()
-                //   launchChallenges()
                 return true
             }
             R.id.navigation_more -> {
-                //  launchMore()
+                navigation.showMore()
                 return true
             }
         }
