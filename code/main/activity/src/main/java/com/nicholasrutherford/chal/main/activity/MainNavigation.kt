@@ -6,4 +6,5 @@ import android.net.Uri
 interface MainNavigation {
     fun showNewsFeed()
     fun showChallengesList()
+    fun showMore()
 }

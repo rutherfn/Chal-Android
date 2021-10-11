@@ -13,4 +13,6 @@ class MainNavigationImpl @Inject constructor() : MainNavigation {
     override fun showNewsFeed() = navigator.navigate(R.id.nav_graph_news_feed)
 
     override fun showChallengesList() = navigator.navigate(R.id.nav_graph_challenge_list)
+
+    override fun showMore() = navigator.navigate(R.id.nav_graph_more)
 }

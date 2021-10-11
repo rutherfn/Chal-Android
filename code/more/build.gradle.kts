@@ -1,8 +1,7 @@
-apply(plugin = Dependencies.Plugin.GoogleServices)
-
 plugins {
     id (Dependencies.Plugin.Library)
     kotlin(Dependencies.Plugin.Android)
+    kotlin(Dependencies.Plugin.AndroidExtensions)
     kotlin(Dependencies.Plugin.Kapt)
     id(Dependencies.Plugin.DaggerHilt)
 }
@@ -29,12 +28,10 @@ android {
 }
 
 dependencies {
-    api(project(path = ":challenge:list"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":firebase:realtime-database:create"))
     api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":main:resources"))
-    api(project(path = ":more"))
     api(project(path = ":shared-preference:fetch"))
     api(project(path = ":shared-preference:remove"))
     api(project(path = ":ui:base-fragment"))

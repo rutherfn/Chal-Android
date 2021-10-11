@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_more"
+    app:startDestination="@id/fragmentMore">
+
+    <fragment
+        android:id="@+id/fragmentMore"
+        android:name="com.nicholarutherford.chal.more.MoreFragment"
+        android:label="fragment_more"
+        tools:layout="@layout/more_layout">
+
+    </fragment>
+</navigation>
