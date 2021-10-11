@@ -62,16 +62,18 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentNewsFeed -> {
                     showBottomNavigation()
                 }
+                R.id.fragmentChallengesList -> {
+                    showBottomNavigation()
+                }
+                R.id.fragmentMore -> {
+                    showBottomNavigation()
+                }
             }
         }
 
         binding?.let { binding ->
             setupBottomNavigation(binding = binding)
         }
-
-        // binding?.tbBack?.ibBack?.setOnClickListener {
-        //     navigator.navigateBack()
-        // }
     }
 
     private fun setupBottomNavigation(binding: ActivityMainBinding) {
@@ -127,6 +129,12 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                     )
                 }
                 R.id.fragmentNewsFeed -> {
+                    finish()
+                }
+                R.id.fragmentChallengesList -> {
+                    finish()
+                }
+                R.id.fragmentMore -> {
                     finish()
                 }
                 else -> {

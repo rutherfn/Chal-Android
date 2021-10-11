@@ -16,7 +16,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/fragmentChallengeList"
+        android:id="@+id/fragmentChallengesList"
         android:name="com.nicholasrutherford.chal.challenge.list.ChallengeListFragment"
         android:label="challenge_list_fragment"
         tools:layout="@layout/fragment_challenge_list">
