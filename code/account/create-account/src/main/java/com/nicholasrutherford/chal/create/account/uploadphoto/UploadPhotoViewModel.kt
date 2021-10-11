@@ -171,7 +171,8 @@ class UploadPhotoViewModel @ViewModelInject constructor(
             activeChallenges = null
         )
 
-        fetchFirebaseDatabase.fetchAllUsersDatabaseReference(firebaseAuth.uid ?: emptyString)
+
+        fetchFirebaseDatabase.fetchAllUsersDatabaseReference(firebaseAuth.auth.uid ?: emptyString)
             .setValue(newUser)
             .addOnCompleteListener {
                 firebaseAuth.sendEmailVerification()

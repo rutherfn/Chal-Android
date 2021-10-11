@@ -49,6 +49,7 @@
         <entry key="app/src/main/res/layout/toolbar_my_feed.xml" value="0.1" />
         <entry key="app/src/main/res/layout/toolbar_title_with_back_stack.xml" value="0.41354166666666664" />
         <entry key="challenge/list/src/main/res/layout/challenge_header_layout.xml" value="0.1887031408308004" />
+        <entry key="challenge/list/src/main/res/layout/challenge_list_header_layout.xml" value="0.1" />
         <entry key="challenge/list/src/main/res/layout/challenge_list_layout.xml" value="0.1887031408308004" />
         <entry key="challenge/list/src/main/res/layout/end_of_challenges_layout.xml" value="0.1887031408308004" />
         <entry key="challenge/list/src/main/res/layout/fragment_challenge_list.xml" value="0.1887031408308004" />
@@ -63,6 +64,7 @@
         <entry key="main/news-feed/src/main/res/layout/news_feed_banner_layout.xml" value="0.1824074074074074" />
         <entry key="main/news-feed/src/main/res/layout/news_feed_challenge_header_layout.xml" value="0.15579710144927536" />
         <entry key="main/news-feed/src/main/res/layout/news_feed_list_layout.xml" value="0.1887031408308004" />
+        <entry key="main/resources/src/main/res/drawable/circle.xml" value="0.22037037037037038" />
         <entry key="main/resources/src/main/res/drawable/ic_arrow.xml" value="0.1" />
         <entry key="main/resources/src/main/res/drawable/ic_bug.xml" value="0.22037037037037038" />
         <entry key="main/resources/src/main/res/drawable/ic_close.xml" value="0.13333333333333333" />

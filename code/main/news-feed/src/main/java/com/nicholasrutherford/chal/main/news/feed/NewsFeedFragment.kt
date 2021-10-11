@@ -76,6 +76,8 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
 
                     bindListAdapter(newsFeedList)
                     viewModel.waitBeforeWeDismissProgress()
+                } else {
+                    viewModel.setShouldShowDismissProgressAsUpdated()
                 }
             }
         }

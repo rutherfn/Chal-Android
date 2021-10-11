@@ -7,6 +7,8 @@ const val USERNAME = "username"
 const val EMAIL = "email"
 const val PASSWORD = "password"
 
+const val JSON_CHALLENGES_NAME = "challenges.json"
+
 val CURRENT_CATEGORY_LIST = arrayListOf("Health And Wellness", "Intellectual", "Lifestyle")
 
 // splash loading
@@ -15,9 +17,11 @@ const val LOADING_DELAY = 1000
 // hide keyboard flag 0
 const val KEYBOARD_FLAGS = 0
 
+const val CHALLENGE_HEADER_PLACEHOLDER_URL = "https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg"
+
 // Firebase Database Routes here
 const val ROUTE_USERS = "/users/"
-fun userDatabaseReference(uid: String) = ROUTE_USERS.plus(uid)
+fun userDatabaseReference(uid: String): String { return "/users/$uid"}
 
 const val ROUTE_ALL_ACTIVE_CHALLENGES = "/all-active-challenges/"
 

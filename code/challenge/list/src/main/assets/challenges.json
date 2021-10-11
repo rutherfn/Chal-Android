@@ -1,0 +1,105 @@
+[
+  {
+    "id": 0,
+    "category": "Health And Wellness",
+    "categoryNumber": 0,
+    "challenges": [
+      {
+        "title": "Push Up Challenge",
+        "category": "Health And Wellness",
+        "url": "https://i.ibb.co/N3wd5jw/test2.png",
+        "desc": "Push yourself and build upper strength by doing a set of push ups everyday. You choose however many reps but make sure you push yourself each day of the challenge.",
+        "time": "7 Days",
+        "duration": 7,
+        "categoryNumber": 0
+      },
+      {
+        "title": "Smoothie Challenge",
+        "category": "Health And Wellness",
+        "url": "https://i.ibb.co/rtDpS4X/SMOOTHIE.png",
+        "desc": "Blend all your favorite fruits and vegetables together and taste the variety of flavors. Make it a habit to intake healthy options by starting with drinking smoothies everyday.",
+        "time": "7 Days",
+        "duration": 7,
+        "categoryNumber": 0
+      },
+      {
+        "title": "Cardio Challenge",
+        "category": "Health And Wellness",
+        "url": "https://i.ibb.co/QH7qgm2/cardio.png",
+        "desc": "Jumping rope, dancing, jogging, boxing, swimming - you name it. Choose a cardio exercise to indulge in daily or even, choose a variety of cardio exercises to change it up everyday. Whatever it is, make sure you are enjoying yourself and your body is moving!",
+        "time": "7 Days",
+        "duration": 7,
+        "categoryNumber": 0
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "category": "Intellectual",
+    "categoryNumber": 1,
+    "challenges": [
+      {
+        "title": "Woman Leader Challenge",
+        "category": "Intellectual",
+        "url": "https://i.ibb.co/cvtyX5n/library-of-congress-IEj4pc-Yrs-HA-unsplash.png",
+        "desc": "Learn about a new woman leader everyday through books, online sources, videos, etc. There are multiple resources at your disposal. Utilize all to learn about powerful women and to stay inspired and motivated by their stories.",
+        "time": "7 Days",
+        "duration": 7,
+        "categoryNumber": 1
+      },
+      {
+        "title": "Podcast Challenge",
+        "category": "Intellectual",
+        "url": "https://i.ibb.co/6R6nZcV/podcast.png",
+        "desc": "Podcasting has increased in growth and has become a popular pastime. Find podcasts with topics or speakers you are interested in and listen away everyday while you are working on a long project, completing household duties or working out. Prepare to be engaged and learn!",
+        "time": "7 Days",
+        "duration": 7,
+        "categoryNumber": 1
+      },
+      {
+        "title": "Activist Challenge",
+        "category": "Intellectual",
+        "url": "https://i.ibb.co/4P5NHLm/activist.png",
+        "desc": "With everything going on in the world, stay uplifted and aware by learning about a new activist everyday. Learn more about their story, their campaigns, what they’ve done and so much more. Make use of your resources and prepare to be inspired!",
+        "time": "7 Days",
+        "duration": 7,
+        "categoryNumber": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "category": "Lifestyle",
+    "categoryNumber": 2,
+    "challenges": [
+      {
+        "title": "Meditation Challenge",
+        "category": "Lifestyle",
+        "url": "https://images.unsplash.com/photo-1554244933-d876deb6b2ff?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "desc": "Meditate everyday! Whether it’s for 5 minutes or 30 minutes a day, find time to slow down and bring yourself to a stable, calm and mindful state. Follow a meditation exercise of your choice or trust your body and create your own.",
+        "time": "7 Days",
+        "duration": 7,
+        "categoryNumber": 2
+      },
+      {
+        "title": "Nature Challenge",
+        "category": "Lifestyle",
+        "url": "https://i.ibb.co/n73kfdq/nature.png",
+        "desc": "There is nothing like breathing in the fresh air and seeing all the natural movements outdoors. Go outside for a walk around the neighborhood, take a breather outside during work or visit the nearest park. You’ll instantly feel better being in nature’s company.",
+        "time": "7 Days",
+        "duration": 7,
+        "categoryNumber": 2
+      },
+      {
+        "title": "Journaling Challenge",
+        "category": "Lifestyle",
+        "url": "https://i.ibb.co/f913xCR/fotografierende-333oj7z-Fsdg-unsplash.png",
+        "desc": "Pick up a writing utensil and write in a journal everyday. Search up journal entries for ideas to write about or write whatever comes to mind. Be creative and expressive in your own unique way.",
+        "time": "7 Days",
+        "duration": 7,
+        "categoryNumber": 2
+      }
+    ]
+  }
+
+]

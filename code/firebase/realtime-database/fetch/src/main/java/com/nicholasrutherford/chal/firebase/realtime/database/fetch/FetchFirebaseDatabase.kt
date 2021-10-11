@@ -16,6 +16,7 @@ interface FetchFirebaseDatabase {
     fun fetchAllUsersDatabaseReference(uid: String): DatabaseReference
 
     fun fetchLoggedInUsername(_loggedInUsername: MutableStateFlow<String>)
+    fun fetchLoggedInUserProfilePicture(_userProfilePicture: MutableStateFlow<String>)
 
     fun fetchAllChallenges(_allActiveChallengesList: MutableStateFlow<List<ActiveChallengesListResponse>>)
     fun fetchAllChallengesSize(_allActiveChallengesSize: MutableStateFlow<Int>)

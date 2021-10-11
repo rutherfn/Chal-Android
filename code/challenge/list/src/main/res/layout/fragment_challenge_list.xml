@@ -8,7 +8,7 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/tbRedesignChallenges"
+            android:id="@+id/tbChallenges"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             layout="@layout/stock_toolbar_with_image"
@@ -32,7 +32,7 @@
                     />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvRedesignChallenges"
+                    android:id="@+id/rvChallengesList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
