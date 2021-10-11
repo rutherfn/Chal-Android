@@ -87,7 +87,7 @@ class NewsFeedViewModel @ViewModelInject constructor(
 
     private fun fetchAllPosts() = fetchFirebaseDatabase.fetchAllPosts(_postList)
 
-    private fun fetchAllActiveChallenges() = fetchFirebaseDatabase.fetchAllChallenges(_allActiveChallengesList)
+    private fun fetchAllActiveChallenges() = fetchFirebaseDatabase.fetchAllUserActiveChallenges(_allActiveChallengesList)
 
     private fun fetchChallengeBannerType() = fetchFirebaseDatabase.fetchChallengeBannerType(_challengeBannerType)
 

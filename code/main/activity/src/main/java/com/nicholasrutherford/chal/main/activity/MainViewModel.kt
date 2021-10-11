@@ -12,22 +12,26 @@ import android.view.MenuItem
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.nicholasrutherford.chal.shared.preference.create.CreateSharedPreference
+import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import java.io.ByteArrayOutputStream
 
 class MainViewModel @ViewModelInject constructor(
     private val application: Application,
+    private val navigation: MainNavigation,
     private val createSharedPreference: CreateSharedPreference
-) : ViewModel() {
+) : BaseViewModel() {
 
     val viewState = MainViewStateImpl()
 
     fun navigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navigation_my_feed -> {
+                navigation.showNewsFeed()
                 //   launchNewsFeed()
                 return true
             }
             R.id.navigation_challenges -> {
+                navigation.showChallengesList()
                 //   launchChallenges()
                 return true
             }

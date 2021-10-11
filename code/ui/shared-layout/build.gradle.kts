@@ -19,5 +19,6 @@ dependencies {
     api(project(path = ":main:resources"))
 
     implementation(Dependencies.Libs.Android.AppCompat)
+    implementation(Dependencies.Libs.UI.CircleImageView)
     implementation(Dependencies.Libs.UI.ConstraintLayout)
 }

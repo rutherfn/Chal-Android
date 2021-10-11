@@ -19,6 +19,8 @@
             <option value="$PROJECT_DIR$/account/validation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/challenge" />
+            <option value="$PROJECT_DIR$/challenge/list" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/account-info" />
             <option value="$PROJECT_DIR$/data/challenges" />

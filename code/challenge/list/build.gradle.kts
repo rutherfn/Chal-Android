@@ -1,8 +1,7 @@
-apply(plugin = Dependencies.Plugin.GoogleServices)
-
 plugins {
     id (Dependencies.Plugin.Library)
     kotlin(Dependencies.Plugin.Android)
+    kotlin(Dependencies.Plugin.AndroidExtensions)
     kotlin(Dependencies.Plugin.Kapt)
     id(Dependencies.Plugin.DaggerHilt)
 }
@@ -29,13 +28,6 @@ android {
 }
 
 dependencies {
-    api(project(path = ":challenge:list"))
-    api(project(path = ":helper:fragment"))
-    api(project(path = ":firebase:realtime-database:create"))
-    api(project(path = ":firebase:realtime-database:fetch"))
-    api(project(path = ":main:resources"))
-    api(project(path = ":shared-preference:fetch"))
-    api(project(path = ":shared-preference:remove"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:shared-layout"))
@@ -44,14 +36,11 @@ dependencies {
     implementation(Dependencies.Libs.Android.AppCompat)
     implementation(Dependencies.Libs.Android.Ktx)
     implementation(Dependencies.Libs.UI.ConstraintLayout)
-    implementation(Dependencies.Libs.UI.CircleImageView)
 
     implementation(Dependencies.Libs.Navigation.NavigationFragment)
     implementation(Dependencies.Libs.Navigation.NavigationUi)
 
-    implementation(Dependencies.Libs.Image.Glide)
-    annotationProcessor(Dependencies.Libs.Image.GlideCompiler)
-    implementation(Dependencies.Libs.Image.Picasso)
+    implementation(Dependencies.Libs.Dagger.Android)
 
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
