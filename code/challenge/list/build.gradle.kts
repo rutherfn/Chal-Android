@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    api(project(path = ":challenge:detail"))
     api(project(path = ":data:challenges"))
     api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":ui:base-fragment"))

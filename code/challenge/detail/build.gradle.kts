@@ -45,7 +45,12 @@ dependencies {
 
     implementation(Dependencies.Libs.Image.Picasso)
 
+    implementation(Dependencies.Libs.Image.Glide)
+    annotationProcessor(Dependencies.Libs.Image.GlideCompiler)
+
     implementation(Dependencies.Libs.Dagger.Android)
+
+    implementation(Dependencies.Libs.Gson.Native)
 
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
