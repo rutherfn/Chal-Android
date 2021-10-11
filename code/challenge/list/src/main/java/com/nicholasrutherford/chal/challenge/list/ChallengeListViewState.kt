@@ -1,4 +1,7 @@
 package com.nicholasrutherford.chal.challenge.list
 
-class ChallengeListViewState {
+interface ChallengeListViewState {
+    var challengeHeaderImageUrl: String
+    var toolbarName: String
+    var toolbarImage: String
 }

@@ -1,3 +1,5 @@
+apply(plugin = Dependencies.Plugin.GoogleServices)
+
 plugins {
     id (Dependencies.Plugin.Library)
     kotlin(Dependencies.Plugin.Android)

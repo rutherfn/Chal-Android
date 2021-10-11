@@ -19,7 +19,7 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
 
     override val database = FirebaseDatabase.getInstance()
 
-    override val databaseUserReference = database.getReference(USERS)
+    override val databaseUserReference = FirebaseDatabase.getInstance().getReference(USERS)
     override val databaseAllActiveChallengesReference = database.getReference(ALL_ACTIVE_CHALLENGES)
     override val databasePostsReference = database.getReference(POSTS)
 
@@ -38,9 +38,29 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
+                            println("user namne test " + snapshot.child(USERNAME).value.toString())
                             _loggedInUsername.value = snapshot.child(USERNAME).value.toString()
                         } else {
+                            println("snapshot does not exist ")
                             _loggedInUsername.value = application.getString(R.string.empty_string)
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) = Unit
+                })
+        }
+    }
+
+    override fun fetchLoggedInUserProfilePicture(_userProfilePicture: MutableStateFlow<String>) {
+        firebaseAuth.uid?.let { firebaseUid ->
+            databaseUserReference.child(firebaseUid)
+                .addValueEventListener(object : ValueEventListener {
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            _userProfilePicture.value = snapshot.child(PROFILE_IMAGE).value.toString()
+                        } else {
+                            _userProfilePicture.value = application.getString(R.string.empty_string)
                         }
                     }
 

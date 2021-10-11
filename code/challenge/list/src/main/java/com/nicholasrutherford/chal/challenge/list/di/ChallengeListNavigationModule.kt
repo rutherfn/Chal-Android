@@ -7,14 +7,10 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 
-class ChallengeListModule  {
+@Module
+@InstallIn(ApplicationComponent::class)
+abstract class ChallengeListNavigationModule  {
 
+    @Binds
+    abstract fun bindChallengeListNavigationImpl(challengeListNavigationImpl: ChallengeListNavigationImpl): ChallengeListNavigation
 }
-//
-//@Module
-//@InstallIn(ApplicationComponent::class)
-//abstract class ChallengeListModule {
-//
-//    @Binds
-//    abstract fun bindChallengeListNavigation(challengeListNavigationImpl: ChallengeListNavigationImpl): ChallengeListNavigation
-//}

@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    api(project(path = ":data:challenges"))
+    api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:shared-layout"))
@@ -35,12 +37,20 @@ dependencies {
 
     implementation(Dependencies.Libs.Android.AppCompat)
     implementation(Dependencies.Libs.Android.Ktx)
+    implementation(Dependencies.Libs.UI.CircleImageView)
     implementation(Dependencies.Libs.UI.ConstraintLayout)
 
     implementation(Dependencies.Libs.Navigation.NavigationFragment)
     implementation(Dependencies.Libs.Navigation.NavigationUi)
 
+    implementation(Dependencies.Libs.Image.Picasso)
+
+    implementation(Dependencies.Libs.Image.Glide)
+    annotationProcessor(Dependencies.Libs.Image.GlideCompiler)
+
     implementation(Dependencies.Libs.Dagger.Android)
+
+    implementation(Dependencies.Libs.Gson.Native)
 
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
