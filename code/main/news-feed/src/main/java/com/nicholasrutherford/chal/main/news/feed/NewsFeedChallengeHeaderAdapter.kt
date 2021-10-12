@@ -46,6 +46,7 @@ class NewsFeedChallengeHeaderAdapter(
             updateTypefaces()
 
             val currentDay = listOfActiveUserChallenges[position].activeChallenges?.currentDay ?: 0
+            println(currentDay)
             val challengeExpired = listOfActiveUserChallenges[position].activeChallenges?.dateChallengeExpired?.toInt() ?: 0
 
             val currentChallengeDay = newsFeedViewModel.getRealCurrentDayOnChallenge(currentDay = currentDay, challengeExpired = challengeExpired)

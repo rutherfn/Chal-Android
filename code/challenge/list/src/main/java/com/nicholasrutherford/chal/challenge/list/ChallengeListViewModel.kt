@@ -42,7 +42,6 @@ class ChallengeListViewModel @ViewModelInject constructor(
     init {
         viewModelScope.launch {
             loggedInUsername.collect { toolbarName ->
-                println(toolbarName)
                 setToolbarNameFromResults(toolbarName)
             }
         }

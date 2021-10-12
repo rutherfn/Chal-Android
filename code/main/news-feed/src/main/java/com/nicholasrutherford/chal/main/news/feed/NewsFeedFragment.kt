@@ -89,8 +89,6 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
                 if (challengesList.isNotEmpty()) {
                     viewModel.updateMyChallengesVisible(challengesList)
 
-                    viewModel.setViewStateAsUpdated()
-
                     bindHeaderAdapter(challengesList)
                 }
             }
@@ -110,7 +108,9 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
                 typefaces,
                 listOfActiveChallenges
             )
-            binding.rvNewsFeedRedesign.adapter = newsFeedChallengeHeaderAdapter
+
+            println(listOfActiveChallenges.size)
+            binding.rvChallengeHeader.adapter = newsFeedChallengeHeaderAdapter
         }
     }
 

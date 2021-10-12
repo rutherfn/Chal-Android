@@ -10,8 +10,11 @@ import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebas
 import com.nicholasrutherford.chal.helper.constants.JSON_CHALLENGES_NAME
 import com.nicholasrutherford.chal.helper.constants.daysInChallengeActiveChallengePath
 import com.nicholasrutherford.chal.main.navigation.Navigator
+import com.nicholasrutherford.chal.shared.preference.create.CreateSharedPreference
+import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import con.nicholasrutherford.chal.data.challenges.*
+import con.nicholasrutherford.chal.data.challenges.banner.ChallengeBannerType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -25,14 +28,20 @@ const val DATE_FORMAT = "dd/M/yyyy hh:mm:ss"
 
 class ChallengeDetailViewModel @ViewModelInject constructor(
     private val application: Application,
+    private val createSharedPreference: CreateSharedPreference,
+    private val removeSharedPreference: RemoveSharedPreference,
     private val createFirebaseDatabase: CreateFirebaseDatabase,
     private val fetchFirebaseDatabase: FetchFirebaseDatabase,
     private val navigator: Navigator
 ) : BaseViewModel() {
 
     private var isAbleToEnroll: Boolean = true
+    private var username: String = application.getString(R.string.empty_string)
 
     var joinableFilterByChallenges = arrayListOf<JoinableChallenges>()
+
+    private val _loggedInUsername = MutableStateFlow(application.getString(R.string.empty_string))
+    private val loggedInUsername: StateFlow<String> = _loggedInUsername
 
     private val _allUserActiveChallengesList = MutableStateFlow(listOf<ActiveChallengesListResponse>())
     val allUserActiveChallengesList: StateFlow<List<ActiveChallengesListResponse>> = _allUserActiveChallengesList
@@ -47,11 +56,18 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
 
     init {
         viewModelScope.launch {
-        allUserActiveChallengesList.collect { userActiveChallengesList ->
-            allUserChallengesList = userActiveChallengesList
-            println(allUserChallengesList.size)
+            loggedInUsername.collect { name ->
+                username = name
             }
         }
+
+        viewModelScope.launch {
+        allUserActiveChallengesList.collect { userActiveChallengesList ->
+            allUserChallengesList = userActiveChallengesList
+            }
+        }
+
+        fetchFirebaseDatabase.fetchLoggedInUsername(_loggedInUsername)
 
         fetchAllUserActiveChallenges()
     }
@@ -167,23 +183,38 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
     private fun attemptToEnrollUserIntoActiveChallenge(joinChallenge: JoinChallenge) {
         if (joinChallenge.isAbleToEnroll) {
             val starterIndex = joinChallenge.size.toString()
-            println(starterIndex + " here is the starter index")
             val challengeExpire = this.dayInChallenge() + 8
 
             createFirebaseDatabase.createNewActiveChallenge(
                 allUserChallengesList.size,
                 starterIndex,
                 ActiveChallenge(
-                    name = "dada",
-                    bio = "dada",
-                    categoryName = "dad",
-                    numberOfDaysInChallenge = 11,
-                    challengeExpire ="dada",
-                    currentDay = 11,
-                    username = "dada"
+                    name = selectedAvailableChallenge?.title ?: application.getString(R.string.empty_string),
+                    bio = selectedAvailableChallenge?.desc ?: application.getString(R.string.empty_string),
+                    categoryName = selectedAvailableChallenge?.category ?: application.getString(R.string.empty_string),
+                    numberOfDaysInChallenge = selectedAvailableChallenge?.duration ?: 0,
+                    challengeExpire =challengeExpire.toString(),
+                    currentDay = this.dayInChallenge(),
+                    username = username
                 ))
+
+            removeSharedPreference.removeChallengeBannerPreferences()
+
+            createSharedPreference.createChallengeBannerTypeTitleSharedPreference("Success! You joined the")
+            createSharedPreference.createChallengeBannerTypeDescSharedPreference(
+                selectedAvailableChallenge?.title ?: application.getString(R.string.empty_string
+                ))
+            createSharedPreference.createChallengeBannerTypeIsVisible(true)
+            createSharedPreference.createChallengeBannerTypeIsCloseable(true)
+
+            createFirebaseDatabase.createChallengeBannerType(ChallengeBannerType.JOINED_CHALLENGE.value)
+
+            alertTitle = selectedAvailableChallenge?.title ?: application.getString(R.string.empty_string)
+            alertMessage = "You have just joined the ${selectedAvailableChallenge!!.duration} " +
+                    "Day ${selectedAvailableChallenge!!.title}! Get started by posting progress."
+
+            setShouldShowAlertAsUpdated()
         } else {
-            println("error ")
             alertTitle = application.getString(R.string.error_can_not_join_challenge)
             alertMessage = "It looks like your enrolled already in the ${selectedAvailableChallenge!!.duration}" +
                     " Day ${selectedAvailableChallenge!!.title}! Start posting progress on your challenge now! "

@@ -79,14 +79,13 @@ open class BaseViewModel : ViewModel() {
     }
 
     fun getRealCurrentDayOnChallenge(currentDay: Int, challengeExpired: Int): Int {
-        when (challengeExpired - currentDay) {
-            7 -> { return 0 }
-            6 -> { return 1 }
-            5 -> { return 2 }
+        when (currentDay) {
+            1 -> { return 0 }
+            2 -> { return 1 }
+            3 -> { return 2 }
             4 -> { return 3 }
-            3 -> { return 4 }
-            2 -> { return 5 }
-            1 -> { return 6 }
+            5 -> { return 4 }
+            6 -> { return 5 }
             else -> { return 7 }
         }
     }

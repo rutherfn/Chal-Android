@@ -19,7 +19,7 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
     override val databaseReferenceUsers = FirebaseDatabase.getInstance()
         .getReference(USERS)
     override val databaseReferenceActiveChallenges = FirebaseDatabase.getInstance()
-        .getReference(ROUTE_ALL_ACTIVE_CHALLENGES)
+        .getReference(USERS + ROUTE_ALL_ACTIVE_CHALLENGES)
 
     private fun createNameOfChallenge(
         allActiveChallengeIndex: Int,

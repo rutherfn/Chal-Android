@@ -31,6 +31,8 @@ dependencies {
     api(project(path = ":data:challenges"))
     api(project(path = ":firebase:realtime-database:create"))
     api(project(path = ":firebase:realtime-database:fetch"))
+    api(project(path = ":shared-preference:create"))
+    api(project(path = ":shared-preference:remove"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
     api(project(path = ":ui:shared-layout"))
