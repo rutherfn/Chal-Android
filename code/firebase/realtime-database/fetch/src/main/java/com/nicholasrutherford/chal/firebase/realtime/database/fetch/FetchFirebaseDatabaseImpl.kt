@@ -31,6 +31,27 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         return database.getReference(userDatabaseReference(uid))
     }
 
+    override fun fetchUserNameAndUrl(_userNameAndUrl: MutableStateFlow<List<String>>) {
+        firebaseAuth.uid?.let { firebaseUid ->
+            databaseUserReference.child(firebaseUid).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val userInfoList = arrayListOf<String>()
+                        val username = snapshot.child(USERNAME).value.toString()
+                        val profileImageUrl = snapshot.child(PROFILE_IMAGE).value.toString()
+
+                        userInfoList.add(username)
+                        userInfoList.add(profileImageUrl)
+
+                        _userNameAndUrl.value = userInfoList
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) = Unit
+            })
+        }
+    }
+
     override fun fetchLoggedInUsername(_loggedInUsername: MutableStateFlow<String>) {
         firebaseAuth.uid?.let { firebaseUid ->
             databaseUserReference.child(firebaseUid)

@@ -17,6 +17,13 @@ interface RemoveSharedPreference {
     // challenge banner shared preferences
     fun removeChallengeBannerPreferences()
 
+    // debug mode
+    fun removeChallengeModePreference()
+    fun removeTurnOnAllFeaturesPreference()
+    fun removeShowDeviceNotificationPreference()
+    fun removeShowUnActivatedAccountPreference()
+    fun removeShowOnBoardingPreference()
+
     // remove all shared preferences
     fun removeAllSharedPreferences()
 }

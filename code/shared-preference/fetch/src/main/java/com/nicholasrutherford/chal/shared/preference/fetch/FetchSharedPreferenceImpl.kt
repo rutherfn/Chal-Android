@@ -126,4 +126,24 @@ class FetchSharedPreferenceImpl @Inject constructor(
     override fun fetchChallengeBannerTypeIsCloseable(): Boolean {
         return getPreferenceBoolean(BANNER_TYPE_IS_CLOSEABLE)
     }
+
+    override fun fetchChallengeModeSharedPreference(): Boolean {
+        return getPreferenceBoolean(CHALLENGE_MODE_PREFERENCE)
+    }
+
+    override fun fetchTurnOnAllFeaturesSharedPreference(): Boolean {
+        return getPreferenceBoolean(TURN_ON_ALL_FEATURES_PREFERENCE)
+    }
+
+    override fun fetchShowDeviceNotificationPreference(): Boolean {
+        return getPreferenceBoolean(SHOW_DEVICE_NOTIFICATIONS)
+    }
+
+    override fun fetchShowUnActiviatedAccountPreference(): Boolean {
+        return getPreferenceBoolean(SHOW_UNACTIVATED_ACCOUNT)
+    }
+
+    override fun fetchShowOnBoarding(): Boolean {
+        return getPreferenceBoolean(SHOW_ON_BOARDING)
+    }
 }

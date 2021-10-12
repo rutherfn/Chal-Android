@@ -20,4 +20,11 @@ interface CreateSharedPreference {
     fun createChallengeBannerTypeDescSharedPreference(desc: String)
     fun createChallengeBannerTypeIsVisible(isVisible: Boolean)
     fun createChallengeBannerTypeIsCloseable(isCloseable: Boolean)
+
+    // debug mode preferences
+    fun createEnableChallengeModePreference(isChecked: Boolean)
+    fun createTurnOnAllFeaturesPreference(isChecked: Boolean)
+    fun createShowDeviceNotificationsPreference(isChecked: Boolean)
+    fun createUnActivatedAccountPreference(isChecked: Boolean)
+    fun createShowOnboardPreference(isChecked: Boolean)
 }

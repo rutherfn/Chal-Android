@@ -20,4 +20,11 @@ interface FetchSharedPreference {
     fun fetchChallengeBannerTypeDescription(): String?
     fun fetchChallengeBannerTypeIsVisible(): Boolean
     fun fetchChallengeBannerTypeIsCloseable(): Boolean
+
+    // debug mode
+    fun fetchChallengeModeSharedPreference(): Boolean
+    fun fetchTurnOnAllFeaturesSharedPreference(): Boolean
+    fun fetchShowDeviceNotificationPreference(): Boolean
+    fun fetchShowUnActiviatedAccountPreference(): Boolean
+    fun fetchShowOnBoarding(): Boolean
 }

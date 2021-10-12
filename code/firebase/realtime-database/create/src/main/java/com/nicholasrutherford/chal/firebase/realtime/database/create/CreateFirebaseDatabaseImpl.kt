@@ -133,7 +133,7 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
         }
     }
 
-    private fun createCurrentDayOfChallenge(
+    override fun createCurrentDayOfChallenge(
         allActiveChallengeIndex: Int,
         userChallengeIndex: String,
         currentDay: Int

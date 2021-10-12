@@ -90,7 +90,7 @@ class MoreViewModel @ViewModelInject constructor(
     }
 
     fun onDebugClicked() {
-        featureNotImplementedYetAlert()
+        navigation.showDebug()
     }
 
     fun onReportBugClicked() {

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Switch
+        android:id="@+id/swEnableChallengeMode"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enable_challenge_mode"
+        android:textSize="@dimen/sub_header_text_size"
+        android:padding="@dimen/padding_12dp"
+        android:checked="true"
+        android:gravity="left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Switch
+        android:id="@+id/swTurnOnAllFeatures"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/turn_on_all_features"
+        android:textSize="@dimen/sub_header_text_size"
+        android:padding="@dimen/padding_12dp"
+        android:checked="true"
+        android:gravity="left"
+        app:layout_constraintStart_toStartOf="@+id/swEnableChallengeMode"
+        app:layout_constraintTop_toBottomOf="@+id/swEnableChallengeMode"
+        />
+
+    <Switch
+        android:id="@+id/swShowDeviceNotifications"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_device_notifications"
+        android:textSize="@dimen/sub_header_text_size"
+        android:padding="@dimen/padding_12dp"
+        android:checked="true"
+        android:gravity="left"
+        app:layout_constraintStart_toStartOf="@+id/swTurnOnAllFeatures"
+        app:layout_constraintTop_toBottomOf="@+id/swTurnOnAllFeatures"
+        />
+
+    <Switch
+        android:id="@+id/swShowUnActivatedAccount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_unActivated_account"
+        android:textSize="@dimen/sub_header_text_size"
+        android:padding="@dimen/padding_12dp"
+        android:checked="true"
+        android:gravity="left"
+        app:layout_constraintStart_toStartOf="@+id/swShowDeviceNotifications"
+        app:layout_constraintTop_toBottomOf="@+id/swShowDeviceNotifications"
+        />
+
+    <Switch
+        android:id="@+id/swShowOnBoarding"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_onBoarding"
+        android:textSize="@dimen/sub_header_text_size"
+        android:padding="@dimen/padding_12dp"
+        android:checked="true"
+        android:gravity="left"
+        app:layout_constraintStart_toStartOf="@+id/swShowUnActivatedAccount"
+        app:layout_constraintTop_toBottomOf="@+id/swShowUnActivatedAccount"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

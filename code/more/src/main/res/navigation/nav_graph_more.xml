@@ -6,6 +6,7 @@
     app:startDestination="@id/fragmentMore">
 
     <include app:graph="@navigation/nav_graph_upload_progress" />
+    <include app:graph="@navigation/nav_graph_debug" />
 
     <fragment
         android:id="@+id/fragmentMore"
@@ -16,6 +17,11 @@
         <action
             android:id="@+id/action_UploadProgress"
             app:destination="@+id/nav_graph_upload_progress"
+            />
+
+        <action
+            android:id="@+id/action_Debug"
+            app:destination="@+id/nav_graph_debug"
             />
 
     </fragment>

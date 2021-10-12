@@ -13,4 +13,6 @@ class MoreNavigationImpl @Inject constructor() : MoreNavigation {
     override fun showLogin() {
 
     }
+
+    override fun showDebug() = navigator.navigate(R.id.nav_graph_debug)
 }

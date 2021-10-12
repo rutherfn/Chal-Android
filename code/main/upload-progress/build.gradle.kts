@@ -27,10 +27,12 @@ android {
 }
 
 dependencies {
+    api(project(path = ":data:post"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":firebase:realtime-database:create"))
     api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":main:resources"))
+    api(project(path = ":shared-preference:create"))
     api(project(path = ":shared-preference:fetch"))
     api(project(path = ":shared-preference:remove"))
     api(project(path = ":ui:base-fragment"))
@@ -46,6 +48,9 @@ dependencies {
     implementation(Dependencies.Libs.Navigation.NavigationUi)
 
     implementation(Dependencies.Libs.Image.Glide)
+    implementation("com.google.firebase:firebase-storage-ktx:20.0.0")
+    implementation("com.google.firebase:firebase-database-ktx:20.0.1")
+    implementation("com.google.firebase:firebase-auth-ktx:21.0.1")
     annotationProcessor(Dependencies.Libs.Image.GlideCompiler)
     implementation(Dependencies.Libs.Image.Picasso)
 

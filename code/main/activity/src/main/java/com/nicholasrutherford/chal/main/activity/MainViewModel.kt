@@ -48,7 +48,8 @@ class MainViewModel @ViewModelInject constructor(
                 createSharedPreference.createProfilePictureDirectorySharedPreference( uriData.toString())
             }
             // }
-        } else if (requestCode == 1888 && resultCode == Activity.RESULT_OK && data != null) { // hack needs to be updated down the road
+        } else if (requestCode == 1888 && resultCode == Activity.RESULT_OK && data != null) {
+            // hack needs to be updated down the road
             data.extras?.get("data").let {
                 val uri = getImageUri(application.applicationContext, it as Bitmap)
                 uri.let { uriData ->
