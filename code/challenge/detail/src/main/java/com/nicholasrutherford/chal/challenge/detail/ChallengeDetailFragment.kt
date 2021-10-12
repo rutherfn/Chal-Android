@@ -69,24 +69,31 @@ class ChallengeDetailFragment @Inject constructor(): BaseFragment<FragmentChalle
     }
 
     private fun bindAdapter(joinableChallenges: List<JoinableChallenges>) {
-        binding.rvRelatedChallenges.isNestedScrollingEnabled = false
-        binding.rvRelatedChallenges.layoutManager = LinearLayoutManager(activity)
-        adapter = ChallengeDetailAdapter(
-            viewModel,
-            application,
-            joinableChallenges,
-            typefaces
-        )
-        binding.rvRelatedChallenges.adapter = adapter
+        binding?.let { binding ->
+            binding.rvRelatedChallenges.isNestedScrollingEnabled = false
+            binding.rvRelatedChallenges.layoutManager = LinearLayoutManager(activity)
+            adapter = ChallengeDetailAdapter(
+                viewModel,
+                application,
+                joinableChallenges,
+                typefaces
+            )
+            binding.rvRelatedChallenges.adapter = adapter
+        }
     }
 
     override fun updateTypefaces() {
-        binding.tbhallengeDetails.tbStock.setTitleTextAppearance(application, R.style.ToolbarTextAppearance)
+        binding?.let { binding ->
+            binding.tbhallengeDetails.tbStock.setTitleTextAppearance(
+                application,
+                R.style.ToolbarTextAppearance
+            )
 
-        typefaces.setTextViewSubHeaderBoldTypeface(binding.clDetailChallengeHeader.tvChallengeCategory)
-        typefaces.setTextViewHeaderBoldTypeface(binding.clDetailChallengeHeader.tvChallengeTitle)
-        typefaces.setTextViewBodyItalicTypeface(binding.clDetailChallengeHeader.tvChallengeDescDetails)
-        typefaces.setTextViewHeaderBoldTypeface(binding.clDetailChallengeHeader.btnJoinChallenge)
+            typefaces.setTextViewSubHeaderBoldTypeface(binding.clDetailChallengeHeader.tvChallengeCategory)
+            typefaces.setTextViewHeaderBoldTypeface(binding.clDetailChallengeHeader.tvChallengeTitle)
+            typefaces.setTextViewBodyItalicTypeface(binding.clDetailChallengeHeader.tvChallengeDescDetails)
+            typefaces.setTextViewHeaderBoldTypeface(binding.clDetailChallengeHeader.btnJoinChallenge)
+        }
     }
 
     override fun collectAlertAsUpdated() {
@@ -101,26 +108,32 @@ class ChallengeDetailFragment @Inject constructor(): BaseFragment<FragmentChalle
     }
 
     override fun onListener() {
-        binding.clDetailChallengeHeader.btnJoinChallenge.setOnClickListener {
-            viewModel.onJoinChallengeClicked()
-        }
-        binding.tbhallengeDetails.tbStock.setOnClickListener {
-            viewModel.onBackClicked()
+        binding?.let { binding ->
+            binding.clDetailChallengeHeader.btnJoinChallenge.setOnClickListener {
+                viewModel.onJoinChallengeClicked()
+            }
+            binding.tbhallengeDetails.tbStock.setOnClickListener {
+                viewModel.onBackClicked()
+            }
         }
     }
 
     override fun updateView() {
-        binding.tbhallengeDetails.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
-        binding.tbhallengeDetails.tbStock.title = application.getString(R.string.challenge_details)
+        binding?.let { binding ->
+            binding.tbhallengeDetails.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
+            binding.tbhallengeDetails.tbStock.title =
+                application.getString(R.string.challenge_details)
 
-        binding.clDetailChallengeHeader.tvChallengeCategory.text = viewModel.viewState.category
-        binding.clDetailChallengeHeader.tvChallengeTitle.text = viewModel.viewState.title
-        binding.clDetailChallengeHeader.tvChallengeDescDetails.text = viewModel.viewState.description
+            binding.clDetailChallengeHeader.tvChallengeCategory.text = viewModel.viewState.category
+            binding.clDetailChallengeHeader.tvChallengeTitle.text = viewModel.viewState.title
+            binding.clDetailChallengeHeader.tvChallengeDescDetails.text =
+                viewModel.viewState.description
 
-        Glide.with(this).load(viewModel.viewState.categoryIcon)
-            .into(binding.clDetailChallengeHeader.ivChallengeCategory)
-        Glide.with(this).load(viewModel.viewState.challengeUrlImage)
-            .into(binding.clDetailChallengeHeader.ivChallengesDetailsHeader)
+            Glide.with(this).load(viewModel.viewState.categoryIcon)
+                .into(binding.clDetailChallengeHeader.ivChallengeCategory)
+            Glide.with(this).load(viewModel.viewState.challengeUrlImage)
+                .into(binding.clDetailChallengeHeader.ivChallengesDetailsHeader)
+        }
     }
 
 

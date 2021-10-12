@@ -49,7 +49,9 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tbMyFeed.inflateMenu(R.menu.navigation_news_feed)
+        binding?.let { binding ->
+            binding.tbMyFeed.inflateMenu(R.menu.navigation_news_feed)
+        }
 
         lifecycleScope.launch {
             collectViewStateResult(viewModel.viewStateUpdated, viewModel._viewStateUpdated)
@@ -96,7 +98,7 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
     }
 
     private fun bindHeaderAdapter(listOfActiveChallenges: List<ActiveChallengesListResponse>) {
-        if (binding != null) {
+        binding?.let { binding ->
             binding.rvChallengeHeader.isNestedScrollingEnabled =
                 viewModel.viewState.isNestedScrollEnabled
             binding.rvChallengeHeader.layoutManager =
@@ -113,11 +115,15 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
     }
 
     private fun bindListAdapter(newsFeedList: List<PostListResponse>) {
-//        binding.rvNewsFeedRedesign.isNestedScrollingEnabled = viewModel.viewState.isNestedScrollEnabled
-//        binding.rvNewsFeedRedesign.layoutManager = LinearLayoutManager(activity)
-//
-//        newsFeedListAdapter = NewsFeedListAdapter(application, newsFeedList, typefaces, viewModel)
-//        binding.rvNewsFeedRedesign.adapter = newsFeedListAdapter
+        binding?.let { binding ->
+            binding.rvNewsFeedRedesign.isNestedScrollingEnabled =
+                viewModel.viewState.isNestedScrollEnabled
+            binding.rvNewsFeedRedesign.layoutManager = LinearLayoutManager(activity)
+
+            newsFeedListAdapter =
+                NewsFeedListAdapter(application, newsFeedList, typefaces, viewModel)
+            binding.rvNewsFeedRedesign.adapter = newsFeedListAdapter
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -142,71 +148,88 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
     }
 
     override fun updateTypefaces() {
-//        typefaces.setTextViewSubHeaderBoldTypeface(binding.clEndOfFeed.tvEndOfFeed)
-//        typefaces.setTextViewSubHeaderBoldTypeface(binding.tvMyChallenges)
-//
-//        typefaces.setTextViewBodyBoldTypeface(binding.clChallengeFeed.btnAll)
-//        typefaces.setTextViewBodyBoldTypeface(binding.clChallengeFeed.btnFriends)
-//        typefaces.setTextViewBodyBoldTypeface(binding.clChallengeFeed.btnMyPosts)
-//
-//        typefaces.setTextViewHeaderBoldTypeface(binding.clNewsFeedBanner.tvTitle)
-//        typefaces.setTextViewHeaderBoldTypeface(binding.clNewsFeedBanner.tvDesc)
+        binding?.let { binding ->
+            typefaces.setTextViewSubHeaderBoldTypeface(binding.clEndOfFeed.tvEndOfFeed)
+            typefaces.setTextViewSubHeaderBoldTypeface(binding.tvMyChallenges)
+
+            typefaces.setTextViewBodyBoldTypeface(binding.clChallengeFeed.btnAll)
+            typefaces.setTextViewBodyBoldTypeface(binding.clChallengeFeed.btnFriends)
+            typefaces.setTextViewBodyBoldTypeface(binding.clChallengeFeed.btnMyPosts)
+
+            typefaces.setTextViewHeaderBoldTypeface(binding.clNewsFeedBanner.tvTitle)
+            typefaces.setTextViewHeaderBoldTypeface(binding.clNewsFeedBanner.tvDesc)
+        }
     }
 
     override fun onListener() {
-//        binding.clChallengeFeed.btnAll.setOnClickListener {
-//            viewModel.onAllClicked()
-//            bindListAdapter(allActiveNewsFeedList)
-//        }
-//        binding.clChallengeFeed.btnFriends.setOnClickListener {
-//            viewModel.onFriendsClicked()
-//        }
-//        binding.clChallengeFeed.btnMyPosts.setOnClickListener {
-//            viewModel.onMyPostsClicked()
-//            bindListAdapter(currentUserNewsFeedList)
-//        }
-//        binding.clFriendsEmptyState.btnAddFriendEmptyState.setOnClickListener {
-//            viewModel.onAddFriendsEmptyStateClicked()
-//        }
-//
-//        binding.tbMyFeed.setOnMenuItemClickListener {
-//            it?.let { item ->
-//                if (item.itemId == R.id.navigation_refresh) {
-//                    viewModel.onRefreshTabClicked()
-//                } else if (item.itemId == R.id.navigation_add_progress) {
-//                    viewModel.onAddProgressTabClicked()
-//                }
-//                true
-//            } == true
-//        }
-//        binding.clNewsFeedBanner.clBannerType.setOnClickListener {
-//            if (viewModel.viewState.bannerIsCloseable) {
-//                viewModel.onBannerDismissedClicked()
-//            }
-//        }
+        binding?.let { binding ->
+            binding.clChallengeFeed.btnAll.setOnClickListener {
+                viewModel.onAllClicked()
+                bindListAdapter(allActiveNewsFeedList)
+            }
+            binding.clChallengeFeed.btnFriends.setOnClickListener {
+                viewModel.onFriendsClicked()
+            }
+            binding.clChallengeFeed.btnMyPosts.setOnClickListener {
+                viewModel.onMyPostsClicked()
+                bindListAdapter(currentUserNewsFeedList)
+            }
+            binding.clFriendsEmptyState.btnAddFriendEmptyState.setOnClickListener {
+                viewModel.onAddFriendsEmptyStateClicked()
+            }
+
+            binding.tbMyFeed.setOnMenuItemClickListener {
+                it?.let { item ->
+                    if (item.itemId == R.id.navigation_refresh) {
+                        viewModel.onRefreshTabClicked()
+                    } else if (item.itemId == R.id.navigation_add_progress) {
+                        viewModel.onAddProgressTabClicked()
+                    }
+                    true
+                } == true
+            }
+            binding.clNewsFeedBanner.clBannerType.setOnClickListener {
+                if (viewModel.viewState.bannerIsCloseable) {
+                    viewModel.onBannerDismissedClicked()
+                }
+            }
+        }
     }
 
     override fun updateView() {
-//        binding.tvMyChallenges.visibleOrGone = viewModel.viewState.myChallengesVisible
-//        binding.clEndOfFeed.tvEndOfFeed.visibleOrGone = viewModel.viewState.isEndOfNewsFeedVisible
-//
-//        binding.rvNewsFeedRedesign.visibleOrGone = viewModel.viewState.recyclerNewsFeedVisible
-//        binding.clFriendsEmptyState.clAddFriend.visibleOrGone = viewModel.viewState.addFriendsEmptyStateVisible
-//
-//        binding.clChallengeFeed.btnAll.setTextColor(Color.parseColor(viewModel.viewState.btnAllTextColor))
-//        binding.clChallengeFeed.btnFriends.setTextColor(Color.parseColor(viewModel.viewState.btnFriendsTextColor))
-//        binding.clChallengeFeed.btnMyPosts.setTextColor(Color.parseColor(viewModel.viewState.btnMyPostsTextColor))
-//
-//        binding.clChallengeFeed.btnAll.background = ContextCompat.getDrawable(application.applicationContext, viewModel.viewState.btnAllBackgroundResId)
-//        binding.clChallengeFeed.btnFriends.background = ContextCompat.getDrawable(application.applicationContext, viewModel.viewState.btnFriendsBackgroundResId)
-//        binding.clChallengeFeed.btnMyPosts.background = ContextCompat.getDrawable(application.applicationContext, viewModel.viewState.btnMyPostsBackgroundResId)
-//
-//        binding.clNewsFeedBanner.clBannerType.visibleOrGone = viewModel.viewState.bannerVisible
-//        binding.clNewsFeedBanner.tvTitle.text = viewModel.viewState.bannerTitle
-//        binding.clNewsFeedBanner.tvDesc.text = viewModel.viewState.bannerDescription
-//
-//        binding.clEndOfFeed.tvEndOfFeed.visibleOrGone =
-//            viewModel.viewState.isEndOfNewsFeedVisible
+        binding?.let { binding ->
+            binding.tvMyChallenges.visibleOrGone = viewModel.viewState.myChallengesVisible
+            binding.clEndOfFeed.tvEndOfFeed.visibleOrGone =
+                viewModel.viewState.isEndOfNewsFeedVisible
+
+            binding.rvNewsFeedRedesign.visibleOrGone = viewModel.viewState.recyclerNewsFeedVisible
+            binding.clFriendsEmptyState.clAddFriend.visibleOrGone =
+                viewModel.viewState.addFriendsEmptyStateVisible
+
+            binding.clChallengeFeed.btnAll.setTextColor(Color.parseColor(viewModel.viewState.btnAllTextColor))
+            binding.clChallengeFeed.btnFriends.setTextColor(Color.parseColor(viewModel.viewState.btnFriendsTextColor))
+            binding.clChallengeFeed.btnMyPosts.setTextColor(Color.parseColor(viewModel.viewState.btnMyPostsTextColor))
+
+            binding.clChallengeFeed.btnAll.background = ContextCompat.getDrawable(
+                application.applicationContext,
+                viewModel.viewState.btnAllBackgroundResId
+            )
+            binding.clChallengeFeed.btnFriends.background = ContextCompat.getDrawable(
+                application.applicationContext,
+                viewModel.viewState.btnFriendsBackgroundResId
+            )
+            binding.clChallengeFeed.btnMyPosts.background = ContextCompat.getDrawable(
+                application.applicationContext,
+                viewModel.viewState.btnMyPostsBackgroundResId
+            )
+
+            binding.clNewsFeedBanner.clBannerType.visibleOrGone = viewModel.viewState.bannerVisible
+            binding.clNewsFeedBanner.tvTitle.text = viewModel.viewState.bannerTitle
+            binding.clNewsFeedBanner.tvDesc.text = viewModel.viewState.bannerDescription
+
+            binding.clEndOfFeed.tvEndOfFeed.visibleOrGone =
+                viewModel.viewState.isEndOfNewsFeedVisible
+        }
     }
 
 }

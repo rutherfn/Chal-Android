@@ -42,9 +42,7 @@ abstract class BaseFragment<VB: ViewBinding>(
     var colorSmokeWhite: Int? = null
 
     private var _binding: VB? = null
-    @Suppress("UNCHECKED_CAST")
-    protected val binding: VB
-        get() = _binding as VB
+    val binding get() = _binding ?: null
 
     private var fragmentNavigation: BaseFragmentNavigation? = null
 
@@ -155,17 +153,11 @@ abstract class BaseFragment<VB: ViewBinding>(
         updateTypefaces()
         onListener()
         updateView()
-        return binding.root
+        return binding?.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        println("on destroyed here")
         _binding = null
-    }
-
-    override fun onPause() {
-        super.onPause()
-        println("on pause")
     }
 }
