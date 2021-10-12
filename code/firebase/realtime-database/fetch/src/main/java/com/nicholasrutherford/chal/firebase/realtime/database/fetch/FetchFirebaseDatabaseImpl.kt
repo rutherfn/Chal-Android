@@ -38,10 +38,8 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
-                            println("user namne test " + snapshot.child(USERNAME).value.toString())
                             _loggedInUsername.value = snapshot.child(USERNAME).value.toString()
                         } else {
-                            println("snapshot does not exist ")
                             _loggedInUsername.value = application.getString(R.string.empty_string)
                         }
                     }
@@ -139,7 +137,7 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         firebaseAuth.uid?.let { firebaseUid ->
             val activeChallengesPathString = "$firebaseUid$ACTIVE_CHALLENGES"
 
-            databaseAllActiveChallengesReference.child(activeChallengesPathString).addValueEventListener(object: ValueEventListener {
+            databaseUserReference.child(activeChallengesPathString).addValueEventListener(object: ValueEventListener {
 
                 override fun onCancelled(error: DatabaseError) = Unit
 
@@ -192,6 +190,5 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
             })
         }
     }
-
 
 }

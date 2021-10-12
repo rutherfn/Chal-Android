@@ -41,6 +41,7 @@
             <option value="$PROJECT_DIR$/main/news-feed" />
             <option value="$PROJECT_DIR$/main/resources" />
             <option value="$PROJECT_DIR$/main/splash" />
+            <option value="$PROJECT_DIR$/main/upload-progress" />
             <option value="$PROJECT_DIR$/more" />
             <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/shared-preference" />

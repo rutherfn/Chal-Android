@@ -1,4 +1,6 @@
 package com.nicholarutherford.chal.more
 
-class MoreNavigation {
+interface MoreNavigation {
+    fun showUploadProgress()
+    fun showLogin()
 }

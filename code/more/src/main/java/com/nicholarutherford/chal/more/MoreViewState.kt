@@ -1,4 +1,5 @@
 package com.nicholarutherford.chal.more
 
-class MoreViewState {
+interface MoreViewState {
+    var toolbarImage: String
 }

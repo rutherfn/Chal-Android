@@ -7,4 +7,6 @@ class NewsFeedNavigationImpl @Inject constructor() : NewsFeedNavigation {
 
     @Inject
     lateinit var navigator: Navigator
+
+    override fun showUploadProgress() = navigator.navigate(R.id.nav_graph_upload_progress)
 }

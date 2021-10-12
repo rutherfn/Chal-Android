@@ -71,6 +71,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentChallengeDetail -> {
                     hideBottomNavigation()
                 }
+                R.id.fragmentUploadProgress -> {
+                    hideBottomNavigation()
+                }
             }
         }
 
@@ -141,6 +144,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                     finish()
                 }
                 R.id.fragmentChallengeDetail -> {
+                    navigator.navigateBack()
+                }
+                R.id.fragmentUploadProgress -> {
                     navigator.navigateBack()
                 }
                 else -> {

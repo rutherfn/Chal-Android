@@ -7,6 +7,7 @@
 
     <include app:graph="@navigation/nav_graph_challenges_list"/>
     <include app:graph="@navigation/nav_graph_more" />
+    <include app:graph="@navigation/nav_graph_upload_progress" />
 
     <fragment
         android:id="@+id/fragmentNewsFeed"
@@ -23,6 +24,11 @@
             android:id="@+id/action_moreFragment_to_nav_graph_6"
             app:destination="@+id/nav_graph_more"
             />
-    </fragment>
 
+        <action
+            android:id="@+id/action_UploadProgress"
+            app:destination="@+id/nav_graph_upload_progress"
+            />
+
+    </fragment>
 </navigation>

@@ -1,7 +1,6 @@
 plugins {
     id (Dependencies.Plugin.Library)
     kotlin(Dependencies.Plugin.Android)
-    kotlin(Dependencies.Plugin.AndroidExtensions)
     kotlin(Dependencies.Plugin.Kapt)
     id(Dependencies.Plugin.DaggerHilt)
 }
@@ -32,7 +31,6 @@ dependencies {
     api(project(path = ":firebase:realtime-database:create"))
     api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":main:resources"))
-    api(project(path = ":main:upload-progress"))
     api(project(path = ":shared-preference:fetch"))
     api(project(path = ":shared-preference:remove"))
     api(project(path = ":ui:base-fragment"))
@@ -43,7 +41,6 @@ dependencies {
     implementation(Dependencies.Libs.Android.AppCompat)
     implementation(Dependencies.Libs.Android.Ktx)
     implementation(Dependencies.Libs.UI.ConstraintLayout)
-    implementation(Dependencies.Libs.UI.CircleImageView)
 
     implementation(Dependencies.Libs.Navigation.NavigationFragment)
     implementation(Dependencies.Libs.Navigation.NavigationUi)
