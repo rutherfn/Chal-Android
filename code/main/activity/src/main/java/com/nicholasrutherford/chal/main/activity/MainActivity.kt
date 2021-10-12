@@ -68,6 +68,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentMore -> {
                     showBottomNavigation()
                 }
+                R.id.fragmentChallengeDetail -> {
+                    hideBottomNavigation()
+                }
             }
         }
 
@@ -136,6 +139,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 }
                 R.id.fragmentMore -> {
                     finish()
+                }
+                R.id.fragmentChallengeDetail -> {
+                    navigator.navigateBack()
                 }
                 else -> {
                     finish()

@@ -79,6 +79,7 @@
     <string name="iv_error_content_description_debug_password">Image View for not the correct password debug mode error</string>
     <string name="error_cant_log_in">Unable To Log In </string>
     <string name="error_cant_create_account">Unable To Create Account</string>
+    <string name="error_can_not_join_challenge">Can not join challenge</string>
     <string name="error_content_desc_creating_account">Error Creating Account</string>
     <string name="error_creating_create_account_fields">One of the require fields are incorrect. Press OK to try again.</string>
     <string name="error_creating_account_firebase">Error Creating Account. Please Check Your Internet Connection</string>

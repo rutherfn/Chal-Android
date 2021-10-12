@@ -13,13 +13,6 @@
         android:name="com.nicholasrutherford.chal.main.news.feed.NewsFeedFragment"
         android:label="news_feed_fragment"
         tools:layout="@layout/fragment_news_feed">
-    </fragment>
-
-    <fragment
-        android:id="@+id/fragmentChallengesList"
-        android:name="com.nicholasrutherford.chal.challenge.list.ChallengeListFragment"
-        android:label="challenge_list_fragment"
-        tools:layout="@layout/fragment_challenge_list">
 
         <action
             android:id="@+id/action_ChallengesListFragment_to_nav_graph_b"
@@ -30,6 +23,6 @@
             android:id="@+id/action_moreFragment_to_nav_graph_6"
             app:destination="@+id/nav_graph_more"
             />
-
     </fragment>
+
 </navigation>

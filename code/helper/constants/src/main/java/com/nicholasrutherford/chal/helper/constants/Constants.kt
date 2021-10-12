@@ -7,6 +7,15 @@ const val USERNAME = "username"
 const val EMAIL = "email"
 const val PASSWORD = "password"
 
+// challenge params
+const val CHALLENGE_TITLE = "challengeTitle"
+const val CHALLENGE_CATEGORY = "challengeCategory"
+const val CHALLENGE_URL = "challengeUrl"
+const val CHALLENGE_DESC = "challengeDesc"
+const val CHALLENGE_TIME = "challengeTime"
+const val CHALLENGE_DURATION = "challengeDuration"
+const val CHALLENGE_CATEGORY_NUMBER = "challengeCategoryNumber"
+
 const val JSON_CHALLENGES_NAME = "challenges.json"
 
 val CURRENT_CATEGORY_LIST = arrayListOf("Health And Wellness", "Intellectual", "Lifestyle")

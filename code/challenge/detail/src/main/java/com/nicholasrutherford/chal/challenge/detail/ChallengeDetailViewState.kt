@@ -1,4 +1,9 @@
 package com.nicholasrutherford.chal.challenge.detail
 
-class ChallengeDetailViewState {
+interface ChallengeDetailViewState {
+    val title: String
+    val description: String
+    val category: String
+    val categoryIcon: Int?
+    val challengeUrlImage: String
 }

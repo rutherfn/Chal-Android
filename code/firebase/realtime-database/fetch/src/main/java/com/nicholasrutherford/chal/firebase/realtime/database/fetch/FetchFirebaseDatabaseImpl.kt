@@ -115,7 +115,7 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         firebaseAuth.uid?.let { firebaseUid ->
             val activeChallengesPathString = "$firebaseUid$ACTIVE_CHALLENGES"
 
-            databaseAllActiveChallengesReference.child(activeChallengesPathString).addValueEventListener(object: ValueEventListener {
+            databaseUserReference.child(activeChallengesPathString).addValueEventListener(object: ValueEventListener {
 
                 override fun onCancelled(error: DatabaseError) = Unit
 

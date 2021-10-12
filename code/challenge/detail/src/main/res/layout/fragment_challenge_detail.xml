@@ -8,18 +8,10 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/tbRedesignChallengeDetails"
+            android:id="@+id/tbhallengeDetails"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            layout="@layout/more_toolbar_layout"
-            />
-
-        <SearchView
-            android:id="@+id/svMore"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:layout_height="50dp"
-            android:visibility="gone"
+            layout="@layout/stock_toolbar_with_text"
             />
 
         <androidx.core.widget.NestedScrollView
@@ -32,8 +24,8 @@
                 android:orientation="vertical">
 
                 <include
-                    android:id="@+id/clDetailsChallengeHeader"
-                    layout="@layout/challenge_details_layout"
+                    android:id="@+id/clDetailChallengeHeader"
+                    layout="@layout/challenge_detail_header_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:baselineAligned="false"
