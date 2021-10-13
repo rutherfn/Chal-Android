@@ -5,11 +5,28 @@
     android:id="@+id/nav_graph_upload_progress"
     app:startDestination="@id/fragmentUploadProgress">
 
+    <include app:graph="@navigation/nav_graph_added_progress_layout"/>
+
     <fragment
         android:id="@+id/fragmentUploadProgress"
         android:name="com.nicholasrutherford.chal.main.upload.progress.UploadProgressFragment"
         android:label="upload_progress_fragment"
         tools:layout="@layout/fragment_upload_progress">
+
+    <argument
+        android:name="challengeName"
+        app:argType="string"
+        />
+
+    <argument
+        android:name="dayOfChallenge"
+        app:argType="integer"
+        />
+
+    <action
+        android:id="@+id/action_AddedProgressFragment_to_nav_graph_b"
+        app:destination="@+id/nav_graph_added_progress"
+        />
 
     </fragment>
 </navigation>

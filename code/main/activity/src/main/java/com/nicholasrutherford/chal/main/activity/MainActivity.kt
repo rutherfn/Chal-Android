@@ -77,6 +77,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentDebug -> {
                     hideBottomNavigation()
                 }
+                R.id.fragmentAddedProgress -> {
+                    hideBottomNavigation()
+                }
             }
         }
 
@@ -154,6 +157,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 }
                 R.id.fragmentDebug -> {
                     navigator.navigateBack()
+                }
+                R.id.fragmentAddedProgress -> {
+                    finish()
                 }
                 else -> {
                     finish()

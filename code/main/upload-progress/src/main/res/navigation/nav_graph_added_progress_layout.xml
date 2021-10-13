@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_added_progress"
+    app:startDestination="@id/fragmentAddedProgress">
+
+    <fragment
+        android:id="@+id/fragmentAddedProgress"
+        android:name="com.nicholasrutherford.chal.main.upload.progress.addedprogress.AddedProgressFragment"
+        android:label="added_progress_fragment"
+        tools:layout="@layout/fragment_added_progress">
+
+    </fragment>
+</navigation>

@@ -323,6 +323,8 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         setShouldShowDismissProgressAsUpdated()
 
+   //     navigation.showAddedProgress(title, newCurrentDay)
+
         // navigate to new screen
        // navigateToAddedProgress(isChallengeCompleted)
     }

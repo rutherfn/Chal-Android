@@ -83,6 +83,8 @@
         <entry key="main/resources/src/main/res/menu/bottom_navigation.xml" value="0.382051282051282" />
         <entry key="main/splash/src/main/res/layout/dialog_fragment_splash.xml" value="0.10207700101317123" />
         <entry key="main/splash/src/main/res/layout/fragment_splash.xml" value="0.18439716312056736" />
+        <entry key="main/upload-progress/src/main/res/layout/added_progress_layout.xml" value="0.33" />
+        <entry key="main/upload-progress/src/main/res/layout/fragment_added_progress.xml" value="0.17983789260385005" />
         <entry key="main/upload-progress/src/main/res/layout/fragment_progress_upload.xml" value="0.189209726443769" />
         <entry key="main/upload-progress/src/main/res/layout/fragment_upload_progress.xml" value="0.1" />
         <entry key="main/upload-progress/src/main/res/layout/upload_progress_layout.xml" value="0.189209726443769" />

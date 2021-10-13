@@ -16,6 +16,9 @@ const val CHALLENGE_TIME = "challengeTime"
 const val CHALLENGE_DURATION = "challengeDuration"
 const val CHALLENGE_CATEGORY_NUMBER = "challengeCategoryNumber"
 
+const val CHALLENGE_ADDED_PROGRESS_TITLE = "challengeAddedProgressTitle"
+const val CHALLENGE_ADDED_PROGRESS_DAY = "challengeAddedProgressDay"
+
 const val JSON_CHALLENGES_NAME = "challenges.json"
 
 val CURRENT_CATEGORY_LIST = arrayListOf("Health And Wellness", "Intellectual", "Lifestyle")
