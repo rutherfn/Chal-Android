@@ -42,7 +42,7 @@ abstract class BaseFragment<VB: ViewBinding>(
     var colorSmokeWhite: Int? = null
 
     private var _binding: VB? = null
-    val binding get() = _binding!!
+    val binding get() = _binding ?: null
 
     private var fragmentNavigation: BaseFragmentNavigation? = null
 
@@ -153,7 +153,7 @@ abstract class BaseFragment<VB: ViewBinding>(
         updateTypefaces()
         onListener()
         updateView()
-        return binding.root
+        return binding?.root
     }
 
     override fun onDestroyView() {

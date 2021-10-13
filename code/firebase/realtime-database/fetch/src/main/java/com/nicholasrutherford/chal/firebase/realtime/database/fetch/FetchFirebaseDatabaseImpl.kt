@@ -31,6 +31,27 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         return database.getReference(userDatabaseReference(uid))
     }
 
+    override fun fetchUserNameAndUrl(_userNameAndUrl: MutableStateFlow<List<String>>) {
+        firebaseAuth.uid?.let { firebaseUid ->
+            databaseUserReference.child(firebaseUid).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val userInfoList = arrayListOf<String>()
+                        val username = snapshot.child(USERNAME).value.toString()
+                        val profileImageUrl = snapshot.child(PROFILE_IMAGE).value.toString()
+
+                        userInfoList.add(username)
+                        userInfoList.add(profileImageUrl)
+
+                        _userNameAndUrl.value = userInfoList
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) = Unit
+            })
+        }
+    }
+
     override fun fetchLoggedInUsername(_loggedInUsername: MutableStateFlow<String>) {
         firebaseAuth.uid?.let { firebaseUid ->
             databaseUserReference.child(firebaseUid)
@@ -38,10 +59,8 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
-                            println("user namne test " + snapshot.child(USERNAME).value.toString())
                             _loggedInUsername.value = snapshot.child(USERNAME).value.toString()
                         } else {
-                            println("snapshot does not exist ")
                             _loggedInUsername.value = application.getString(R.string.empty_string)
                         }
                     }
@@ -115,7 +134,7 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         firebaseAuth.uid?.let { firebaseUid ->
             val activeChallengesPathString = "$firebaseUid$ACTIVE_CHALLENGES"
 
-            databaseAllActiveChallengesReference.child(activeChallengesPathString).addValueEventListener(object: ValueEventListener {
+            databaseUserReference.child(activeChallengesPathString).addValueEventListener(object: ValueEventListener {
 
                 override fun onCancelled(error: DatabaseError) = Unit
 
@@ -139,7 +158,7 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         firebaseAuth.uid?.let { firebaseUid ->
             val activeChallengesPathString = "$firebaseUid$ACTIVE_CHALLENGES"
 
-            databaseAllActiveChallengesReference.child(activeChallengesPathString).addValueEventListener(object: ValueEventListener {
+            databaseUserReference.child(activeChallengesPathString).addValueEventListener(object: ValueEventListener {
 
                 override fun onCancelled(error: DatabaseError) = Unit
 
@@ -192,6 +211,5 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
             })
         }
     }
-
 
 }

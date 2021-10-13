@@ -88,6 +88,26 @@ class RemoveSharedPreferenceImpl @Inject constructor(
         removeChallengeBannerTypeIsCloseable()
     }
 
+    override fun removeChallengeModePreference() {
+        editor.remove(CHALLENGE_MODE_PREFERENCE).apply()
+    }
+
+    override fun removeTurnOnAllFeaturesPreference() {
+        editor.remove(TURN_ON_ALL_FEATURES_PREFERENCE).apply()
+    }
+
+    override fun removeShowDeviceNotificationPreference() {
+        editor.remove(SHOW_DEVICE_NOTIFICATIONS).apply()
+    }
+
+    override fun removeShowUnActivatedAccountPreference() {
+        editor.remove(SHOW_UNACTIVATED_ACCOUNT).apply()
+    }
+
+    override fun removeShowOnBoardingPreference() {
+        editor.remove(SHOW_ON_BOARDING).apply()
+    }
+
     override fun removeAllSharedPreferences() {
         editor.clear().apply()
     }

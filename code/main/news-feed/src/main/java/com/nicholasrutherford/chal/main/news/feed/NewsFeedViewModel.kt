@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NewsFeedViewModel @ViewModelInject constructor(
+    private val navigation: NewsFeedNavigation,
     private val createFirebaseDatabase: CreateFirebaseDatabase,
     private val fetchFirebaseDatabase: FetchFirebaseDatabase,
     private val removeSharedPreference: RemoveSharedPreference,
@@ -263,7 +264,7 @@ class NewsFeedViewModel @ViewModelInject constructor(
 
     fun onAddProgressTabClicked() {
         if (isUserEnrolledInAChallenge) {
-            // show progress fragment
+            navigation.showUploadProgress()
         } else {
             alertTitle = application.applicationContext.getString(R.string.not_enrolled_in_challenge)
             alertMessage = application.applicationContext.getString(R.string.not_enrolled_in_challenge_message)

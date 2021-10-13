@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_upload_profile_picture.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/added_progress_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/challenge_details_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/challenge_feed_layout.xml" value="0.1824074074074074" />
         <entry key="app/src/main/res/layout/challenges_header.xml" value="0.1" />
         <entry key="app/src/main/res/layout/challenges_list_layout.xml" value="0.1887031408308004" />
@@ -30,7 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2210144927536232" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.41354166666666664" />
         <entry key="app/src/main/res/layout/fragment_my_friends.xml" value="0.1887031408308004" />
-        <entry key="app/src/main/res/layout/fragment_progress_upload.xml" value="0.24139492753623187" />
+        <entry key="app/src/main/res/layout/fragment_progress_upload.xml" value="0.2153846153846154" />
         <entry key="app/src/main/res/layout/fragment_redesign_challenges.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/layout/fragment_redesign_my_feed.xml" value="0.13468013468013468" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.14159067882472137" />
@@ -48,6 +49,11 @@
         <entry key="app/src/main/res/layout/toolbar_challenges_post.xml" value="0.1887031408308004" />
         <entry key="app/src/main/res/layout/toolbar_my_feed.xml" value="0.1" />
         <entry key="app/src/main/res/layout/toolbar_title_with_back_stack.xml" value="0.41354166666666664" />
+        <entry key="challenge/detail/src/main/res/layout/challenge_detail_header_layout.xml" value="0.18161094224924013" />
+        <entry key="challenge/detail/src/main/res/layout/challenge_detail_layout.xml" value="0.1641337386018237" />
+        <entry key="challenge/detail/src/main/res/layout/challenge_detail_list.xml" value="0.18161094224924013" />
+        <entry key="challenge/detail/src/main/res/layout/fragment_challenge_detail.xml" value="0.1641337386018237" />
+        <entry key="challenge/detail/src/main/res/menu/nav_graph_challenge_detail.xml" value="0.262037037037037" />
         <entry key="challenge/list/src/main/res/layout/challenge_header_layout.xml" value="0.1887031408308004" />
         <entry key="challenge/list/src/main/res/layout/challenge_list_header_layout.xml" value="0.1" />
         <entry key="challenge/list/src/main/res/layout/challenge_list_layout.xml" value="0.1887031408308004" />
@@ -77,8 +83,17 @@
         <entry key="main/resources/src/main/res/menu/bottom_navigation.xml" value="0.382051282051282" />
         <entry key="main/splash/src/main/res/layout/dialog_fragment_splash.xml" value="0.10207700101317123" />
         <entry key="main/splash/src/main/res/layout/fragment_splash.xml" value="0.18439716312056736" />
+        <entry key="main/upload-progress/src/main/res/layout/added_progress_layout.xml" value="0.33" />
+        <entry key="main/upload-progress/src/main/res/layout/fragment_added_progress.xml" value="0.17983789260385005" />
+        <entry key="main/upload-progress/src/main/res/layout/fragment_progress_upload.xml" value="0.189209726443769" />
+        <entry key="main/upload-progress/src/main/res/layout/fragment_upload_progress.xml" value="0.1" />
+        <entry key="main/upload-progress/src/main/res/layout/upload_progress_layout.xml" value="0.189209726443769" />
+        <entry key="more/debug/src/main/res/layout/fragment_debug.xml" value="0.25" />
+        <entry key="more/src/main/res/layout/debug_layout.xml" value="0.18161094224924013" />
+        <entry key="more/src/main/res/layout/fragment_debug.xml" value="0.1887031408308004" />
         <entry key="more/src/main/res/layout/fragment_more.xml" value="0.1286727456940223" />
         <entry key="more/src/main/res/layout/more_fragment.xml" value="0.19630192502532928" />
+        <entry key="more/src/main/res/layout/more_layout.xml" value="0.189209726443769" />
         <entry key="ui/base-vm/src/main/res/layout/toolbar_back_button_with_title.xml" value="0.19630192502532928" />
         <entry key="ui/shared-layout/src/main/res/layout/end_of_challenges_layout.xml" value="0.1887031408308004" />
         <entry key="ui/shared-layout/src/main/res/layout/stock_toolbar_with_image.xml" value="0.1887031408308004" />

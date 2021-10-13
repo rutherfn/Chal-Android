@@ -48,24 +48,28 @@ class ChallengeListFragment @Inject constructor(): BaseFragment<FragmentChalleng
     }
 
     private fun bindChallengeListAdapter(joinableChallenges: List<JoinableChallenges>) {
-        binding.rvChallengesList.isNestedScrollingEnabled = false
-        binding.rvChallengesList.layoutManager = LinearLayoutManager(activity)
-        adapter = ChallengeListAdapter(
-            viewModel,
-            application,
-            joinableChallenges,
-            typefaces
-        )
-        binding.rvChallengesList.adapter = adapter
+        binding?.let { binding ->
+            binding.rvChallengesList.isNestedScrollingEnabled = false
+            binding.rvChallengesList.layoutManager = LinearLayoutManager(activity)
+            adapter = ChallengeListAdapter(
+                viewModel,
+                application,
+                joinableChallenges,
+                typefaces
+            )
+            binding.rvChallengesList.adapter = adapter
+        }
     }
 
     override fun updateTypefaces() {
-        typefaces.setTextViewHeaderBoldTypeface(binding.tbChallenges.tvTitle)
+        binding?.let { binding ->
+            typefaces.setTextViewHeaderBoldTypeface(binding.tbChallenges.tvTitle)
 
-        typefaces.setTextViewSubHeaderBoldTypeface(binding.clChallengesHeader.tvChallenges)
-        typefaces.setTextViewHeaderBoldTypeface(binding.clChallengesHeader.tvChallengesDescription)
+            typefaces.setTextViewSubHeaderBoldTypeface(binding.clChallengesHeader.tvChallenges)
+            typefaces.setTextViewHeaderBoldTypeface(binding.clChallengesHeader.tvChallengesDescription)
 
-        typefaces.setTextViewSubHeaderBoldTypeface(binding.clEndOfChallenges.tvEndOfChallenges)
+            typefaces.setTextViewSubHeaderBoldTypeface(binding.clEndOfChallenges.tvEndOfChallenges)
+        }
     }
 
     override fun collectAlertAsUpdated() {
@@ -80,21 +84,26 @@ class ChallengeListFragment @Inject constructor(): BaseFragment<FragmentChalleng
     }
 
     override fun onListener() {
-        binding.tbChallenges.ivUploadChallenges.setOnClickListener { viewModel.onUploadChallengeClicked() }
+        binding?.let { binding ->
+            binding.tbChallenges.ivUploadChallenges.setOnClickListener { viewModel.onUploadChallengeClicked() }
+        }
     }
 
     override fun updateView() {
-        binding.tbChallenges.tvTitle.text = viewModel.viewState.toolbarName
+        binding?.let { binding ->
+            binding.tbChallenges.tvTitle.text = viewModel.viewState.toolbarName
 
-        val options = RequestOptions()
-            .placeholder(R.drawable.circle)
-            .error(R.drawable.circle)
+            val options = RequestOptions()
+                .placeholder(R.drawable.circle)
+                .error(R.drawable.circle)
 
-        Glide.with(this).load(viewModel.viewState.toolbarImage).apply(options)
-            .into(binding.tbChallenges.cvProfile)
+            Glide.with(this).load(viewModel.viewState.toolbarImage).apply(options)
+                .into(binding.tbChallenges.cvProfile)
 
-        Picasso.get().load(viewModel.viewState.challengeHeaderImageUrl)
-            .into(binding.clChallengesHeader.ivChallengesHeader)
-        Glide.with(this).load(R.drawable.ic_question).into(binding.tbChallenges.ivUploadChallenges)
+            Picasso.get().load(viewModel.viewState.challengeHeaderImageUrl)
+                .into(binding.clChallengesHeader.ivChallengesHeader)
+            Glide.with(this).load(R.drawable.ic_question)
+                .into(binding.tbChallenges.ivUploadChallenges)
+        }
     }
 }

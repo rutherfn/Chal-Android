@@ -76,9 +76,11 @@
     <string name="email_to_reset_password_sent_please_check_your_email_for_directions_on_how_to_reset_password">Email to reset password sent! Please check your email, for directions on how to reset your password.</string>
     <string name="email_sent">Email Sent!</string>
     <string name="empty_string" />
+    <string name="enable_challenge_mode">Enable Challenge Mode</string>
     <string name="iv_error_content_description_debug_password">Image View for not the correct password debug mode error</string>
     <string name="error_cant_log_in">Unable To Log In </string>
     <string name="error_cant_create_account">Unable To Create Account</string>
+    <string name="error_can_not_join_challenge">Can not join challenge</string>
     <string name="error_content_desc_creating_account">Error Creating Account</string>
     <string name="error_creating_create_account_fields">One of the require fields are incorrect. Press OK to try again.</string>
     <string name="error_creating_account_firebase">Error Creating Account. Please Check Your Internet Connection</string>
@@ -210,6 +212,9 @@
     <string name="search_for_friends">Search For Friends</string>
     <string name="settings_bottom_nav">SETTINGS</string>
     <string name="settings">Settings</string>
+    <string name="show_device_notifications">Show Device Notifications</string>
+    <string name="show_onBoarding">Show Onboarding</string>
+    <string name="show_unActivated_account">Show UnActivated Account</string>
     <string name="sign_into_your_account_text">Sign into your account</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up_underline"><u>Sign Up?</u></string>
@@ -228,6 +233,7 @@
     <string name="to_reset_password">To Reset Password.</string>
     <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
     <string name="try_again">Try Again</string>
+    <string name="turn_on_all_features">Turn On All Features</string>
     <string name="username">Username</string>
     <string name="update_progress">Update Progress</string>
     <string name="upload">Upload</string>

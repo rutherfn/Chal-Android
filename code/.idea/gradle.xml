@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/challenge" />
+            <option value="$PROJECT_DIR$/challenge/detail" />
             <option value="$PROJECT_DIR$/challenge/list" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/account-info" />
@@ -40,6 +41,7 @@
             <option value="$PROJECT_DIR$/main/news-feed" />
             <option value="$PROJECT_DIR$/main/resources" />
             <option value="$PROJECT_DIR$/main/splash" />
+            <option value="$PROJECT_DIR$/main/upload-progress" />
             <option value="$PROJECT_DIR$/more" />
             <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/shared-preference" />

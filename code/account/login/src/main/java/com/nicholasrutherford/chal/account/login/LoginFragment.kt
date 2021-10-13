@@ -63,16 +63,18 @@ class LoginFragment @Inject constructor() : BaseFragment<FragmentLoginBinding>(
     }
 
     override fun updateTypefaces() {
-        typeface.setTextViewHeaderBoldTypeface(binding.tvTitle)
-        typeface.setTextViewSubHeaderItalicTypeface(binding.tvSubTitle)
+        binding?.let { binding ->
+            typeface.setTextViewHeaderBoldTypeface(binding.tvTitle)
+            typeface.setTextViewSubHeaderItalicTypeface(binding.tvSubTitle)
 
-        typeface.setTextViewSubHeaderBoldTypeface(binding.tvEmail)
-        typeface.setTextViewSubHeaderBoldTypeface(binding.tvPassword)
+            typeface.setTextViewSubHeaderBoldTypeface(binding.tvEmail)
+            typeface.setTextViewSubHeaderBoldTypeface(binding.tvPassword)
 
-        typeface.setTextViewSubHeaderRegularTypeface(binding.btLogIn)
+            typeface.setTextViewSubHeaderRegularTypeface(binding.btLogIn)
 
-        typeface.setTextViewBodyBoldTypeface(binding.tvForgotPassword)
-        typeface.setTextViewBodyBoldTypeface(binding.tvSignUp)
+            typeface.setTextViewBodyBoldTypeface(binding.tvForgotPassword)
+            typeface.setTextViewBodyBoldTypeface(binding.tvSignUp)
+        }
     }
 
     override fun collectAlertAsUpdated() {
@@ -87,53 +89,67 @@ class LoginFragment @Inject constructor() : BaseFragment<FragmentLoginBinding>(
     }
 
     override fun onListener() {
-        binding.etEmail.setOnEditorActionListener { _, actionId, _ ->
+        binding?.let { binding ->
+            binding.etEmail.setOnEditorActionListener { _, actionId, _ ->
 
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    view?.hideKeyboard()
+                }
+                false
+            }
+
+            binding.etEmail.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    viewModel.updateEmailAfterTextChanged(binding.etEmail.text.toString())
+                }
+            })
+
+            binding.etPassword.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    view?.hideKeyboard()
+                }
+                viewModel.passwordEditAction(
+                    binding.etEmail.text.toString(),
+                    binding.etPassword.text.toString(),
+                    actionId
+                )
+                false
+            }
+
+            binding.btLogIn.setOnClickListener {
                 view?.hideKeyboard()
+                val email = binding.etEmail.text.toString()
+                val password = binding.etPassword.text.toString()
+                viewModel.onLogInClicked(email = email, password = password)
+
+                val emptyString = application.getString(R.string.empty_string)
+                binding.etEmail.setText(emptyString)
+                binding.etPassword.setText(emptyString)
             }
-            false
-        }
-
-        binding.etEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                viewModel.updateEmailAfterTextChanged(binding.etEmail.text.toString())
+            binding.tvSignUp.setOnClickListener {
+                viewModel.onSignUpClicked()
             }
-        })
-
-        binding.etPassword.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                view?.hideKeyboard()
+            binding.tvForgotPassword.setOnClickListener {
+                viewModel.onForgotPasswordClicked()
             }
-            viewModel.passwordEditAction(binding.etEmail.text.toString(), binding.etPassword.text.toString(), actionId)
-            false
-        }
-
-        binding.btLogIn.setOnClickListener {
-            view?.hideKeyboard()
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
-            viewModel.onLogInClicked(email = email, password = password)
-
-            val emptyString = application.getString(R.string.empty_string)
-            binding.etEmail.setText(emptyString)
-            binding.etPassword.setText(emptyString)
-        }
-        binding.tvSignUp.setOnClickListener {
-            viewModel.onSignUpClicked()
-        }
-        binding.tvForgotPassword.setOnClickListener {
-            viewModel.onForgotPasswordClicked()
         }
     }
 
     override fun updateView() {
-        binding.tvErrorEmail.visibleOrGone = viewModel.viewState.emailErrorTextVisible
-        binding.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorImageVisible
+        binding?.let { binding ->
+            binding.tvErrorEmail.visibleOrGone = viewModel.viewState.emailErrorTextVisible
+            binding.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorImageVisible
+        }
     }
 
 }

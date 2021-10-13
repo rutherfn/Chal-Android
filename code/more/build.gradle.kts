@@ -32,6 +32,8 @@ dependencies {
     api(project(path = ":firebase:realtime-database:create"))
     api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":main:resources"))
+    api(project(path = ":main:upload-progress"))
+    api(project(path = ":shared-preference:create"))
     api(project(path = ":shared-preference:fetch"))
     api(project(path = ":shared-preference:remove"))
     api(project(path = ":ui:base-fragment"))

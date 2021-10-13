@@ -71,9 +71,15 @@ class ChallengeListAdapter(
             typefaces.setTextViewSubHeaderBoldTypeface(binding.tvChallengeThreeName)
             typefaces.setTextViewBodyItalicTypeface(binding.tvChallengeThreeLength)
 
-//            binding.ivChallengeOne.setOnClickListener { viewModel.showChallengeDetails(selectedChallenge(position, 0)) }
-//            binding.ivChallengeTwo.setOnClickListener { viewModel.showChallengeDetails(selectedChallenge(position, 1)) }
-//            binding.ivChallengeThree.setOnClickListener { viewModel.showChallengeDetails(selectedChallenge(position, 2) }
+            binding.ivChallengeOne.setOnClickListener {
+                viewModel.onShowChallengeDetailItemClicked(selectedChallenge(position, 0))
+            }
+            binding.ivChallengeTwo.setOnClickListener {
+                viewModel.onShowChallengeDetailItemClicked(selectedChallenge(position, 1))
+            }
+            binding.ivChallengeThree.setOnClickListener {
+                viewModel.onShowChallengeDetailItemClicked(selectedChallenge(position, 2))
+            }
         }
 
         private fun categoryChallengeIcon(pos: Int): Int {
@@ -93,6 +99,7 @@ class ChallengeListAdapter(
         private fun selectedChallenge(position: Int, index: Int): AvailableChallenges {
             return joinableChallengesList[position].challenges[index]
         }
+
     }
 
 }

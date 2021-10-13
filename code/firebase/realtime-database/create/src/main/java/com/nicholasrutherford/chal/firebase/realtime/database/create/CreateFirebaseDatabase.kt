@@ -10,6 +10,7 @@ interface CreateFirebaseDatabase {
     val databaseReferenceActiveChallenges: DatabaseReference
 
     // call this function to add a active challenge via firebase
+    fun createCurrentDayOfChallenge(allActiveChallengeIndex: Int, userChallengeIndex: String, currentDay: Int)
     fun createNewActiveChallenge(allActiveChallengeIndex: Int, userChallengeIndex: String, activeChallenge: ActiveChallenge)
     fun createChallengeBannerType(bannerType: Int)
 }

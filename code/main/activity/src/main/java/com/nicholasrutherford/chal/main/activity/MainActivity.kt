@@ -68,6 +68,18 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentMore -> {
                     showBottomNavigation()
                 }
+                R.id.fragmentChallengeDetail -> {
+                    hideBottomNavigation()
+                }
+                R.id.fragmentUploadProgress -> {
+                    hideBottomNavigation()
+                }
+                R.id.fragmentDebug -> {
+                    hideBottomNavigation()
+                }
+                R.id.fragmentAddedProgress -> {
+                    hideBottomNavigation()
+                }
             }
         }
 
@@ -135,6 +147,18 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                     finish()
                 }
                 R.id.fragmentMore -> {
+                    finish()
+                }
+                R.id.fragmentChallengeDetail -> {
+                    navigator.navigateBack()
+                }
+                R.id.fragmentUploadProgress -> {
+                    navigator.navigateBack()
+                }
+                R.id.fragmentDebug -> {
+                    navigator.navigateBack()
+                }
+                R.id.fragmentAddedProgress -> {
                     finish()
                 }
                 else -> {

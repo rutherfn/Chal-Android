@@ -72,7 +72,7 @@ class ProgressUploadFragment @Inject constructor(
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvAddCaption, application.applicationContext)
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvUploadImage, application.applicationContext)
 
-        typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.btnPostProgressToMyFeed, application.applicationContext)
+        typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.tvUploadImage, application.applicationContext)
         typeface.setTypefaceForSubHeaderRegular(bind.clPostProgress.btnCancelAndDiscardPost, application.applicationContext)
     }
 

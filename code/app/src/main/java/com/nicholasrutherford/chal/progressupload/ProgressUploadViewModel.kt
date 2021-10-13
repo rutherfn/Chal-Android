@@ -352,7 +352,6 @@ class ProgressUploadViewModel @Inject constructor(private val application: Appli
     }
 
     fun navigateToAddedProgress(isChallengeCompleted: Boolean) {
-        println(isChallengeCompleted)
         navigation.hideAcProgress()
         navigation.showAddedProgress(isChallengeComplete = isChallengeCompleted)
     }

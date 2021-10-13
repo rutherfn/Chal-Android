@@ -9,7 +9,9 @@ import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebas
 import com.nicholasrutherford.chal.helper.constants.CHALLENGE_HEADER_PLACEHOLDER_URL
 import com.nicholasrutherford.chal.helper.constants.JSON_CHALLENGES_NAME
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
+import con.nicholasrutherford.chal.data.challenges.ActiveChallenge
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
+import con.nicholasrutherford.chal.data.challenges.AvailableChallenges
 import con.nicholasrutherford.chal.data.challenges.JoinableChallenges
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,7 +42,6 @@ class ChallengeListViewModel @ViewModelInject constructor(
     init {
         viewModelScope.launch {
             loggedInUsername.collect { toolbarName ->
-                println(toolbarName)
                 setToolbarNameFromResults(toolbarName)
             }
         }
@@ -98,8 +99,8 @@ class ChallengeListViewModel @ViewModelInject constructor(
         setShouldShowAlertAsUpdated()
     }
 
-    fun onShowChallengeDetailsClicked() {
-
+    fun onShowChallengeDetailItemClicked(selectedAvailableChallenge: AvailableChallenges) {
+        navigation.showChallengeDetail(selectedAvailableChallenge)
     }
 
     inner class ChallengeListViewStateImpl : ChallengeListViewState {

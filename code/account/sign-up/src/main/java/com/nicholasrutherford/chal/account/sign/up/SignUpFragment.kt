@@ -29,52 +29,63 @@ class SignUpFragment @Inject constructor(): BaseFragment<SignUpFragmentBinding>(
     }
 
     private fun updateToobarUI() {
-        colorSmokeWhite?.let { whiteColor ->
-            binding.tbSignUp.tbStock.setBackgroundColor(whiteColor)
-        }
-        colorBlack?.let { blackColor ->
-            binding.tbSignUp.tbStock.setTitleTextColor(blackColor)
+        binding?.let { binding ->
+            colorSmokeWhite?.let { whiteColor ->
+                binding.tbSignUp.tbStock.setBackgroundColor(whiteColor)
+            }
+            colorBlack?.let { blackColor ->
+                binding.tbSignUp.tbStock.setTitleTextColor(blackColor)
+            }
         }
     }
 
     override fun updateTypefaces() {
-        typeface.setTextViewHeaderBoldTypeface(binding.tvSignUp)
-        typeface.setTextViewHeaderRegularTypeface(binding.tvSubHeader)
+        binding?.let { binding ->
+            typeface.setTextViewHeaderBoldTypeface(binding.tvSignUp)
+            typeface.setTextViewHeaderRegularTypeface(binding.tvSubHeader)
 
-        binding.tbSignUp.tbStock.setTitleTextAppearance(application, R.style.ToolbarTextAppearance)
+            binding.tbSignUp.tbStock.setTitleTextAppearance(
+                application,
+                R.style.ToolbarTextAppearance
+            )
 
-        typeface.setTextViewBodyBoldTypeface(binding.tvAlreadyHaveAccount)
-        typeface.setTextViewBodyBoldTypeface(binding.tvLogin)
+            typeface.setTextViewBodyBoldTypeface(binding.tvAlreadyHaveAccount)
+            typeface.setTextViewBodyBoldTypeface(binding.tvLogin)
+        }
     }
 
     override fun collectAlertAsUpdated() = Unit
 
     override fun onListener() {
-        binding.tbSignUp.tbStock.setOnClickListener {
-            viewModel.onBackClicked()
-        }
-        binding.btnSignUpRegular.setOnClickListener {
-            viewModel.onContinueWithEmailClicked()
-        }
-        binding.tvLogin.setOnClickListener {
-            viewModel.onLoginClicked()
-        }
-        binding.ivFacebook.setOnClickListener {
-            viewModel.onFacebookClicked()
-            navigateToUrl(viewModel.viewState.socialMediaUrl)
-        }
-        binding.ivLinkedin.setOnClickListener {
-            viewModel.onLinkedinClicked()
-            navigateToUrl(viewModel.viewState.socialMediaUrl)
-        }
-        binding.ivGram.setOnClickListener {
-            viewModel.onInstagramClicked()
-            navigateToUrl(viewModel.viewState.socialMediaUrl)
+        binding?.let { binding ->
+            binding.tbSignUp.tbStock.setOnClickListener {
+                viewModel.onBackClicked()
+            }
+            binding.btnSignUpRegular.setOnClickListener {
+                viewModel.onContinueWithEmailClicked()
+            }
+            binding.tvLogin.setOnClickListener {
+                viewModel.onLoginClicked()
+            }
+            binding.ivFacebook.setOnClickListener {
+                viewModel.onFacebookClicked()
+                navigateToUrl(viewModel.viewState.socialMediaUrl)
+            }
+            binding.ivLinkedin.setOnClickListener {
+                viewModel.onLinkedinClicked()
+                navigateToUrl(viewModel.viewState.socialMediaUrl)
+            }
+            binding.ivGram.setOnClickListener {
+                viewModel.onInstagramClicked()
+                navigateToUrl(viewModel.viewState.socialMediaUrl)
+            }
         }
     }
 
     override fun updateView() {
-        binding.tbSignUp.tbStock.setNavigationIcon(viewModel.toolbarBlackBackImage)
-        binding.tbSignUp.tbStock.title = viewModel.viewState.toolbarText
+        binding?.let { binding ->
+            binding.tbSignUp.tbStock.setNavigationIcon(viewModel.toolbarBlackBackImage)
+            binding.tbSignUp.tbStock.title = viewModel.viewState.toolbarText
+        }
     }
 }

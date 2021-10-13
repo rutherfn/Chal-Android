@@ -26,6 +26,8 @@ class SplashDialogFragment @Inject constructor() : BaseFragment<DialogFragmentSp
     override fun onListener() = Unit // not used
 
     override fun updateView() {
-        binding.ivSplashLogo.setImageResource(viewModel.viewState.splashImageRes)
+        binding?.let { binding ->
+            binding.ivSplashLogo.setImageResource(viewModel.viewState.splashImageRes)
+        }
     }
 }

@@ -72,31 +72,40 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
     }
 
     override fun updateTypefaces() {
-        typeface.setTextViewHeaderBoldTypeface(binding.tvTakeAPictureOrChooseFromLibrary)
-        binding.tbUploadPhoto.tbStock.setTitleTextAppearance(application, R.style.ToolbarTextAppearance)
+        binding?.let { binding ->
+            typeface.setTextViewHeaderBoldTypeface(binding.tvTakeAPictureOrChooseFromLibrary)
+            binding.tbUploadPhoto.tbStock.setTitleTextAppearance(
+                application,
+                R.style.ToolbarTextAppearance
+            )
 
-        typeface.setTextViewBodyBoldTypeface(binding.btnChooseFormLibrary)
-        typeface.setTextViewBodyBoldTypeface(binding.btnContinueUpload)
+            typeface.setTextViewBodyBoldTypeface(binding.btnChooseFormLibrary)
+            typeface.setTextViewBodyBoldTypeface(binding.btnContinueUpload)
+        }
     }
 
     override fun onListener() {
-        binding.btnChooseFormLibrary.setOnClickListener {
-            viewModel.updateIsPhotoReadyToBeUpdated(true)
-            openGallery()
-        }
-        binding.cvTakeAPhoto.setOnClickListener {
-            viewModel.updateIsPhotoReadyToBeUpdated(true)
-            openCamera()
-        }
-        binding.btnContinueUpload.setOnClickListener {
-            viewModel.onContinueClicked()
+        binding?.let { binding ->
+            binding.btnChooseFormLibrary.setOnClickListener {
+                viewModel.updateIsPhotoReadyToBeUpdated(true)
+                openGallery()
+            }
+            binding.cvTakeAPhoto.setOnClickListener {
+                viewModel.updateIsPhotoReadyToBeUpdated(true)
+                openCamera()
+            }
+            binding.btnContinueUpload.setOnClickListener {
+                viewModel.onContinueClicked()
+            }
         }
     }
 
     override fun updateView() {
-        binding.tbUploadPhoto.tbStock.title = viewModel.viewState.toolbarText
-        viewModel.viewState.imageTakeAPhotoBitmap?.let { bitmap ->
-            binding.cvTakeAPhoto.setImageBitmap(bitmap.rotate(ROTATE_IMAGE_360))
+        binding?.let { binding ->
+            binding.tbUploadPhoto.tbStock.title = viewModel.viewState.toolbarText
+            viewModel.viewState.imageTakeAPhotoBitmap?.let { bitmap ->
+                binding.cvTakeAPhoto.setImageBitmap(bitmap.rotate(ROTATE_IMAGE_360))
+            }
         }
     }
 }

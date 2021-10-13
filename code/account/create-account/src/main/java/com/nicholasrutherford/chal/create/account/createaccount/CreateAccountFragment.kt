@@ -60,19 +60,24 @@ class CreateAccountFragment @Inject constructor() : BaseFragment<CreateAccountFr
     }
 
     override fun updateTypefaces() {
-        typeface.setTextViewHeaderBoldTypeface(binding.tvCreate)
-        typeface.setTextViewHeaderBoldTypeface(binding.tvAccount)
+        binding?.let { binding ->
+            typeface.setTextViewHeaderBoldTypeface(binding.tvCreate)
+            typeface.setTextViewHeaderBoldTypeface(binding.tvAccount)
 
-        binding.tbCreateAccount.tbStock.setTitleTextAppearance(application, R.style.ToolbarTextAppearance)
+            binding.tbCreateAccount.tbStock.setTitleTextAppearance(
+                application,
+                R.style.ToolbarTextAppearance
+            )
 
-        typeface.setTextViewSubHeaderBoldTypeface(binding.tvUsername)
-        typeface.setTextViewBodyBoldTypeface(binding.tvErrorUsername)
+            typeface.setTextViewSubHeaderBoldTypeface(binding.tvUsername)
+            typeface.setTextViewBodyBoldTypeface(binding.tvErrorUsername)
 
-        typeface.setTextViewSubHeaderBoldTypeface(binding.tvEmail)
-        typeface.setTextViewBodyBoldTypeface(binding.tvErrorEmail)
+            typeface.setTextViewSubHeaderBoldTypeface(binding.tvEmail)
+            typeface.setTextViewBodyBoldTypeface(binding.tvErrorEmail)
 
-        typeface.setTextViewSubHeaderBoldTypeface(binding.tvPassword)
-        typeface.setTextViewBodyBoldTypeface(binding.tvErrorPassword)
+            typeface.setTextViewSubHeaderBoldTypeface(binding.tvPassword)
+            typeface.setTextViewBodyBoldTypeface(binding.tvErrorPassword)
+        }
     }
 
     override fun collectAlertAsUpdated() {
@@ -87,9 +92,11 @@ class CreateAccountFragment @Inject constructor() : BaseFragment<CreateAccountFr
     }
 
     private fun onDoneEditActionListener() {
-        etCloseKeyboardIfUserHitsDone(binding.etEmail)
-        etCloseKeyboardIfUserHitsDone(binding.etUsername)
-        etCloseKeyboardIfUserHitsDone(binding.etPassword)
+        binding?.let { binding ->
+            etCloseKeyboardIfUserHitsDone(binding.etEmail)
+            etCloseKeyboardIfUserHitsDone(binding.etUsername)
+            etCloseKeyboardIfUserHitsDone(binding.etPassword)
+        }
     }
 
     private fun etCloseKeyboardIfUserHitsDone(editText: EditText) {
@@ -102,59 +109,81 @@ class CreateAccountFragment @Inject constructor() : BaseFragment<CreateAccountFr
     }
 
     override fun onListener() {
-        onDoneEditActionListener()
-        binding.etEmail.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val email = binding.etEmail.text.toString()
-                viewModel.showOrDismissEmailError(email)
-            }
+        binding?.let { binding ->
+            onDoneEditActionListener()
+            binding.etEmail.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    val email = binding.etEmail.text.toString()
+                    viewModel.showOrDismissEmailError(email)
+                }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) = Unit
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
-        })
-        binding.etPassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val password = binding.etPassword.text.toString()
-                viewModel.showOrDismissErrorPassword(password)
-            }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) =
+                    Unit
+            })
+            binding.etPassword.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    val password = binding.etPassword.text.toString()
+                    viewModel.showOrDismissErrorPassword(password)
+                }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) = Unit
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
-        })
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) =
+                    Unit
+            })
 
-        binding.etUsername.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
+            binding.etUsername.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    val username = binding.etUsername.text.toString()
+                    viewModel.showOrDismissErrorUsername(username)
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) = Unit
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) =
+                    Unit
+            })
+            binding.btnContinueCreating.setOnClickListener {
                 val username = binding.etUsername.text.toString()
-                viewModel.showOrDismissErrorUsername(username)
+                val email = binding.etEmail.text.toString()
+                val password = binding.etPassword.text.toString()
+                viewModel.onClickOnContinue(email, username, password)
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
-        })
-        binding.btnContinueCreating.setOnClickListener {
-            val username = binding.etUsername.text.toString()
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
-            viewModel.onClickOnContinue(email, username, password)
-        }
-        binding.tbCreateAccount.tbStock.setOnClickListener {
-            viewModel.onBackClicked()
+            binding.tbCreateAccount.tbStock.setOnClickListener {
+                viewModel.onBackClicked()
+            }
         }
     }
 
     override fun updateView() {
-        binding.tbCreateAccount.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
-        binding.tbCreateAccount.tbStock.title = viewModel.viewState.toolbarText
-        binding.ivErrorUsername.visibleOrGone = viewModel.viewState.usernameErrorVisible
-        binding.tvErrorUsername.visibleOrGone = viewModel.viewState.usernameErrorVisible
+        binding?.let { binding ->
+            binding.tbCreateAccount.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
+            binding.tbCreateAccount.tbStock.title = viewModel.viewState.toolbarText
+            binding.ivErrorUsername.visibleOrGone = viewModel.viewState.usernameErrorVisible
+            binding.tvErrorUsername.visibleOrGone = viewModel.viewState.usernameErrorVisible
 
-        binding.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorVisible
-        binding.tvErrorEmail.visibleOrGone = viewModel.viewState.emailErrorVisible
+            binding.ivErrorEmail.visibleOrGone = viewModel.viewState.emailErrorVisible
+            binding.tvErrorEmail.visibleOrGone = viewModel.viewState.emailErrorVisible
 
-        binding.ivErrorPassword.visibleOrGone = viewModel.viewState.passwordErrorVisible
-        binding.tvErrorPassword.visibleOrGone = viewModel.viewState.passwordErrorVisible
+            binding.ivErrorPassword.visibleOrGone = viewModel.viewState.passwordErrorVisible
+            binding.tvErrorPassword.visibleOrGone = viewModel.viewState.passwordErrorVisible
+        }
     }
 }

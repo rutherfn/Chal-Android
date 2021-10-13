@@ -11,6 +11,8 @@ class ChalFirebaseAuthImpl @Inject constructor() : ChalFirebaseAuth {
 
     override val uid: String? = auth.uid
 
+    override fun logUserOut() = auth.signOut()
+
     override fun sendEmailVerification() {
         auth.currentUser?.sendEmailVerification()
     }

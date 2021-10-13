@@ -37,6 +37,10 @@ class BaseFragmentNavigation(private val fragmentActivity: FragmentActivity) {
         errorAlert.show()
     }
 
+    fun showYesAlert(title: String, message: String) {
+        val dialogBuilder = AlertDialog.Builder(fragmentActivity)
+    }
+
     fun showClosingOutAppProgressAlert(resId: Int, title: String, message: String) {
         val closingOutAppProgressAlertDialogBuilder = AlertDialog.Builder(fragmentActivity)
 

@@ -7,6 +7,18 @@ const val USERNAME = "username"
 const val EMAIL = "email"
 const val PASSWORD = "password"
 
+// challenge params
+const val CHALLENGE_TITLE = "challengeTitle"
+const val CHALLENGE_CATEGORY = "challengeCategory"
+const val CHALLENGE_URL = "challengeUrl"
+const val CHALLENGE_DESC = "challengeDesc"
+const val CHALLENGE_TIME = "challengeTime"
+const val CHALLENGE_DURATION = "challengeDuration"
+const val CHALLENGE_CATEGORY_NUMBER = "challengeCategoryNumber"
+
+const val CHALLENGE_ADDED_PROGRESS_TITLE = "challengeAddedProgressTitle"
+const val CHALLENGE_ADDED_PROGRESS_DAY = "challengeAddedProgressDay"
+
 const val JSON_CHALLENGES_NAME = "challenges.json"
 
 val CURRENT_CATEGORY_LIST = arrayListOf("Health And Wellness", "Intellectual", "Lifestyle")
@@ -147,3 +159,9 @@ const val BANNER_TYPE_TITLE = "BANNER_TYPE_TITLE_PREFERENCE"
 const val BANNER_TYPE_DESCRIPTION = "BANNER_TYPE_DESCRIPTION_PREFERENCE"
 const val BANNER_TYPE_IS_VISIBLE = "BANNER_TYPE_IS_VISIBLE_PREFERENCE"
 const val BANNER_TYPE_IS_CLOSEABLE = "BANNER_TYPE_IS_CLOSEABLE_PREFERENCE"
+
+const val CHALLENGE_MODE_PREFERENCE = "CHALLENGE_MODE_PREFERENCE"
+const val TURN_ON_ALL_FEATURES_PREFERENCE = "TURN_ON_ALL_FEATURES_PREFERENCE"
+const val SHOW_DEVICE_NOTIFICATIONS = "SHOW_DEVICE_NOTIFICATIONS"
+const val SHOW_UNACTIVATED_ACCOUNT = "SHOW_UNACTIVATED_ACCOUNT"
+const val SHOW_ON_BOARDING = "SHOW_ON_BOARDING"

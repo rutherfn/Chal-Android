@@ -2,21 +2,7 @@ package com.nicholasrutherford.chal.shared.preference.create
 
 import android.app.Application
 import android.content.Context
-import com.nicholasrutherford.chal.helper.constants.AGE_PREFERENCE
-import com.nicholasrutherford.chal.helper.constants.BANNER_TYPE_DESCRIPTION
-import com.nicholasrutherford.chal.helper.constants.BANNER_TYPE_IS_CLOSEABLE
-import com.nicholasrutherford.chal.helper.constants.BANNER_TYPE_IS_VISIBLE
-import com.nicholasrutherford.chal.helper.constants.BANNER_TYPE_PREFERENCE
-import com.nicholasrutherford.chal.helper.constants.BANNER_TYPE_TITLE
-import com.nicholasrutherford.chal.helper.constants.BIO_PREFERENCE
-import com.nicholasrutherford.chal.helper.constants.CHAL_PREFERENCES
-import com.nicholasrutherford.chal.helper.constants.EMAIL_PREFERENCE
-import com.nicholasrutherford.chal.helper.constants.FIRST_NAME_PREFERENCE
-import com.nicholasrutherford.chal.helper.constants.ID_PREFERENCE
-import com.nicholasrutherford.chal.helper.constants.LAST_NAME_PREFERENCE
-import com.nicholasrutherford.chal.helper.constants.PROFILE_PICTURE_DIRECTORY_PREFERENCE
-import com.nicholasrutherford.chal.helper.constants.PROFILE_PICTURE_PREFERENCE
-import com.nicholasrutherford.chal.helper.constants.USERNAME_PREFERENCE
+import com.nicholasrutherford.chal.helper.constants.*
 import javax.inject.Inject
 
 class CreateSharedPreferenceImpl @Inject constructor(
@@ -93,6 +79,31 @@ class CreateSharedPreferenceImpl @Inject constructor(
 
     override fun createChallengeBannerTypeIsCloseable(isCloseable: Boolean) {
         editor.putBoolean(BANNER_TYPE_IS_CLOSEABLE, isCloseable)
+        editor.apply()
+    }
+
+    override fun createEnableChallengeModePreference(isChecked: Boolean) {
+        editor.putBoolean(CHALLENGE_MODE_PREFERENCE, isChecked)
+        editor.apply()
+    }
+
+    override fun createTurnOnAllFeaturesPreference(isChecked: Boolean) {
+        editor.putBoolean(TURN_ON_ALL_FEATURES_PREFERENCE, isChecked)
+        editor.apply()
+    }
+
+    override fun createShowDeviceNotificationsPreference(isChecked: Boolean) {
+        editor.putBoolean(SHOW_DEVICE_NOTIFICATIONS, isChecked)
+        editor.apply()
+    }
+
+    override fun createUnActivatedAccountPreference(isChecked: Boolean) {
+        editor.putBoolean(SHOW_UNACTIVATED_ACCOUNT, isChecked)
+        editor.apply()
+    }
+
+    override fun createShowOnboardPreference(isChecked: Boolean) {
+        editor.putBoolean(SHOW_ON_BOARDING, isChecked)
         editor.apply()
     }
 }
