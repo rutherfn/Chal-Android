@@ -103,10 +103,8 @@ class UploadProgressViewModel @ViewModelInject constructor(
                 fetchSharedPreference.fetchProfilePictureDirectorySharedPreference()
 
             if (profilePictureDirectory.isNullOrEmpty()) {
-                println("null or empty set ")
                 viewState.imageTakeAPhotoBitmap = null
             } else {
-                println("not null")
                 profileUri = Uri.parse(profilePictureDirectory)
                 viewState.imageTakeAPhotoBitmap = getCapturedImage(profileUri as Uri)
 
@@ -260,7 +258,15 @@ class UploadProgressViewModel @ViewModelInject constructor(
                             savedUserLastIndexOfProgress = activeChallengesPostsIndex
                             isSelectedIndex = true
 
-                            writeNewPost(title, caption, selectedIndex, currentChallengeDay, currentChallengeExpireDay)
+                            if (fetchSharedPreference.fetchChallengeModeSharedPreference()) {
+                                writeNewPost(
+                                    title,
+                                    caption,
+                                    selectedIndex,
+                                    currentChallengeDay,
+                                    currentChallengeExpireDay
+                                )
+                            }
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
