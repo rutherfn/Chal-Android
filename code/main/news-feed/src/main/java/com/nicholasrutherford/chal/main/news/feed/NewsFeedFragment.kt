@@ -109,7 +109,6 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
                 listOfActiveChallenges
             )
 
-            println(listOfActiveChallenges.size)
             binding.rvChallengeHeader.adapter = newsFeedChallengeHeaderAdapter
         }
     }
@@ -121,7 +120,7 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
             binding.rvNewsFeedRedesign.layoutManager = LinearLayoutManager(activity)
 
             newsFeedListAdapter =
-                NewsFeedListAdapter(application, newsFeedList, typefaces, viewModel)
+                NewsFeedListAdapter(application, newsFeedList.reversed(), typefaces, viewModel)
             binding.rvNewsFeedRedesign.adapter = newsFeedListAdapter
         }
     }
