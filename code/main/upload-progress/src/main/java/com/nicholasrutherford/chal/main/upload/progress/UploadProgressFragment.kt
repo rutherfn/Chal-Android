@@ -106,11 +106,20 @@ class UploadProgressFragment @Inject constructor() : BaseFragment<FragmentUpload
     override fun collectAlertAsUpdated() {
         lifecycleScope.launch {
             viewModel.shouldShowAlert.collect { isShouldShowAlert ->
-                if (isShouldShowAlert) {
+                if (isShouldShowAlert && viewModel.alertType == 1) {
                     showOkAlert(title = viewModel.alertTitle, message = viewModel.alertMessage)
+                } else if (isShouldShowAlert && viewModel.alertType == 2) {
+                    showClosingOutAppProgressAlert(this@UploadProgressFragment.id, viewModel.alertTitle, viewModel.alertMessage)
                 }
                 viewModel.setShouldShowAlertAsNotUpdated()
             }
+        }
+    }
+
+    private fun clearUI() {
+        binding?.let { binding ->
+            binding.clPostProgress.etAddCaption.setText("")
+            binding.clPostProgress.ivUploadImage.setImageBitmap(null)
         }
     }
 
@@ -142,6 +151,11 @@ class UploadProgressFragment @Inject constructor() : BaseFragment<FragmentUpload
 
     override fun updateView() {
         binding?.let { binding ->
+
+            if (viewModel.viewState.isClearingUI) {
+                clearUI()
+            }
+
             binding.tbUploadProgress.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
             binding.tbUploadProgress.tbStock.title =
                 viewModel.viewState.toolbarTitle

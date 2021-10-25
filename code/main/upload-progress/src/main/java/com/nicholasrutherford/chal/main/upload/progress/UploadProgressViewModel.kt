@@ -56,6 +56,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
     var alertTitle = application.getString(R.string.empty_string)
     var alertMessage = application.getString(R.string.empty_string)
+    var alertType = 0
 
     private var profileUri: Uri? = null
 
@@ -108,8 +109,6 @@ class UploadProgressViewModel @ViewModelInject constructor(
                 profileUri = Uri.parse(profilePictureDirectory)
                 viewState.imageTakeAPhotoBitmap = getCapturedImage(profileUri as Uri)
 
-                println(viewState.imageTakeAPhotoBitmap)
-
                 removeSharedPreference.removeProfilePictureDirectorySharedPreference()
                 setViewStateAsUpdated()
             }
@@ -145,6 +144,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     fun onDiscardPostClicked() {
+        alertType = 0
         alertMessage = application.getString(R.string.discard_post_details)
         alertTitle = application.getString(R.string.are_you_sure_you_you_want_to_discard_the_post)
     }
@@ -152,6 +152,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
     fun onPostProgressClicked(title: String, caption: String, listOfChallenges: List<String>) {
         // todo do a check here to see if we have internet avivable
         var selectedIndex = 0
+        alertType = 0
 
         listOfChallenges.forEachIndexed { index, challenge ->
             if (title == challenge) {
@@ -193,6 +194,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
             .addOnFailureListener {
                 setShouldShowDismissProgressAsUpdated()
 
+                alertType = 0
                 alertTitle = application.applicationContext.getString(R.string.can_not_upload_image_to_server)
                 alertMessage = application.applicationContext.getString(R.string.issue_uploading_image_to_server)
 
@@ -227,6 +229,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
                     override fun onCancelled(error: DatabaseError) {
                         setShouldShowDismissProgressAsUpdated()
 
+                        alertType = 0
                         alertTitle = application.getString(R.string.error_updating_data_title)
                         alertMessage = application.getString(R.string.error_updating_data_desc)
 
@@ -245,6 +248,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
                     override fun onCancelled(error: DatabaseError) {
                         setShouldShowDismissProgressAsUpdated()
 
+                        alertType = 0
                         alertTitle = application.applicationContext.getString(R.string.error_updating_data_title)
                         alertMessage = application.applicationContext.getString(R.string.error_updating_data_desc)
 
@@ -272,6 +276,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
                     override fun onCancelled(error: DatabaseError) {
                         setShouldShowDismissProgressAsUpdated()
 
+                        alertType = 0
                         alertTitle = application.applicationContext.getString(R.string.error_updating_data_title)
                         alertMessage = application.applicationContext.getString(R.string.error_updating_data_desc)
 
@@ -283,6 +288,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
             override fun onCancelled(error: DatabaseError) {
                 setShouldShowDismissProgressAsUpdated()
 
+                alertType = 0
                 alertTitle = application.applicationContext.getString(R.string.error_updating_data_title)
                 alertMessage = application.applicationContext.getString(R.string.error_updating_data_desc)
 
@@ -301,38 +307,42 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         val isChallengeCompleted = newCurrentDay == currentChallengeExpireDay.toInt()
 
-        writeActivePost.writePost(uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
-            title = title,
-            description = body,
-            category = 0,
-            image = progressImageUrl ?: "",
-            currentDay = newCurrentDay.toString(),
-            username = username ?: "",
-            usernameUrl = usernameUrl ?: "",
-            dateChallengeExpired = currentChallengeExpireDay
-        ))
+        if (newCurrentDay != 7) {
+
+            writeActivePost.writePost(
+                uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
+                    title = title,
+                    description = body,
+                    category = 0,
+                    image = progressImageUrl ?: "",
+                    currentDay = newCurrentDay.toString(),
+                    username = username ?: "",
+                    usernameUrl = usernameUrl ?: "",
+                    dateChallengeExpired = currentChallengeExpireDay
+                )
+            )
+
+            writeNewActiveChallengeImpl.writeCurrentDay(
+                uid,
+                selectedIndex.toString(),
+                newCurrentDay
+            )
+
+            writeNewsFeedBanner(
+                title = "A new post has been updated for the",
+                desc = title,
+                isVisible = true,
+                isCloseable = true
+            )
+
+            setShouldShowDismissProgressAsUpdated()
+
+            showAddedProgressAlert(title, newCurrentDay)
+        } else {
+            // we need to take this challenge, remove it and then add the challenge in the user post list
 
 
-
-        writeNewActiveChallengeImpl.writeCurrentDay(
-            uid,
-            selectedIndex.toString(),
-            newCurrentDay
-        )
-
-        writeNewsFeedBanner(
-            title = "A new post has been updated for the",
-            desc = title,
-            isVisible = true,
-            isCloseable = true
-        )
-
-        setShouldShowDismissProgressAsUpdated()
-
-   //     navigation.showAddedProgress(title, newCurrentDay)
-
-        // navigate to new screen
-       // navigateToAddedProgress(isChallengeCompleted)
+        }
     }
 
     fun writeNewsFeedBanner(title: String, desc: String, isVisible: Boolean, isCloseable: Boolean) {
@@ -346,6 +356,34 @@ class UploadProgressViewModel @ViewModelInject constructor(
         createSharedPreference.createChallengeBannerTypeSharedPreference(ChallengeBannerType.JUST_POSTED.value)
     }
 
+    private fun showAddedProgressAlert(challengeTitle: String, newCurrentDay: Int) {
+        if (fetchSharedPreference.fetchChallengeModeSharedPreference()) {
+            alertType = 2
+            alertTitle = "Progress has been updated"
+            alertMessage = "Congrats! you have posted progress on the " +
+                    "$challengeTitle. And because you are on challenge mode, you are now on day $newCurrentDay of the challenge." +
+                    "Would you like to see your post on the news feed?" +
+                    "Clicking YES if you want to view post. Clicking NO will allow you to post more prorgess on your challenge."
+
+            setShouldShowAlertAsUpdated()
+        } else {
+            // copy here for actual challenge update
+        }
+
+        clearViewState()
+    }
+
+    private fun clearViewState() {
+        viewState.title = application.getString(R.string.empty_string)
+        viewState.body = application.getString(R.string.empty_string)
+        viewState.category = application.getString(R.string.empty_string)
+        viewState.image = application.getString(R.string.empty_string)
+        viewState.imageTakeAPhotoBitmap = null
+        viewState.isClearingUI = true
+
+        setViewStateAsUpdated()
+    }
+
     inner class UploadProgressViewStateImpl : UploadProgressViewState {
         override var toolbarTitle: String = application.getString(R.string.empty_string)
         override var title: String = application.getString(R.string.empty_string)
@@ -353,5 +391,6 @@ class UploadProgressViewModel @ViewModelInject constructor(
         override var category: String = application.getString(R.string.empty_string)
         override var image: String = application.getString(R.string.empty_string)
         override var imageTakeAPhotoBitmap: Bitmap? = null
+        override var isClearingUI: Boolean = false
     }
 }

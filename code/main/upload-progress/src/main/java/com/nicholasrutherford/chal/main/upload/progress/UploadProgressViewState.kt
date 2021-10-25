@@ -9,4 +9,5 @@ interface UploadProgressViewState {
     var category: String
     var image: String
     var imageTakeAPhotoBitmap: Bitmap?
+    var isClearingUI: Boolean
 }
