@@ -154,9 +154,6 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
             typefaces.setTextViewBodyBoldTypeface(binding.clChallengeFeed.btnAll)
             typefaces.setTextViewBodyBoldTypeface(binding.clChallengeFeed.btnFriends)
             typefaces.setTextViewBodyBoldTypeface(binding.clChallengeFeed.btnMyPosts)
-
-            typefaces.setTextViewHeaderBoldTypeface(binding.clNewsFeedBanner.tvTitle)
-            typefaces.setTextViewHeaderBoldTypeface(binding.clNewsFeedBanner.tvDesc)
         }
     }
 
@@ -188,9 +185,7 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
                 } == true
             }
             binding.clNewsFeedBanner.clBannerType.setOnClickListener {
-                if (viewModel.viewState.bannerIsCloseable) {
-                    viewModel.onBannerDismissedClicked()
-                }
+                viewModel.onBannerDismissedClicked()
             }
         }
     }

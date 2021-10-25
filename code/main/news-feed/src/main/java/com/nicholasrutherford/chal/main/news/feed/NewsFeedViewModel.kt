@@ -140,8 +140,11 @@ class NewsFeedViewModel @ViewModelInject constructor(
     }
 
     fun onBannerDismissedClicked() {
-        removeSharedPreference.removeChallengeBannerPreferences()
-        createFirebaseDatabase.createChallengeBannerType(bannerType = ChallengeBannerType.NONE.value)
+        if (viewState.bannerIsCloseable) {
+            removeSharedPreference.removeChallengeBannerPreferences()
+            createFirebaseDatabase.createChallengeBannerType(bannerType = ChallengeBannerType.NONE.value)
+            resetBannerState()
+        }
     }
 
     private fun resetBannerState() {
