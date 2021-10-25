@@ -46,14 +46,13 @@ class NewsFeedChallengeHeaderAdapter(
             updateTypefaces()
 
             val currentDay = listOfActiveUserChallenges[position].activeChallenges?.currentDay ?: 0
-            println(currentDay)
             val challengeExpired = listOfActiveUserChallenges[position].activeChallenges?.dateChallengeExpired?.toInt() ?: 0
 
             val currentChallengeDay = newsFeedViewModel.getRealCurrentDayOnChallenge(currentDay = currentDay, challengeExpired = challengeExpired)
             val challengeExpireDay = 7
 
             binding.tvChallengeHeaderTitle.text = listOfActiveUserChallenges[position].activeChallenges?.name
-            binding.tvChallengeHeaderDesc.text = application.getString(R.string.days_completed, currentChallengeDay, challengeExpireDay)
+            binding.tvChallengeHeaderDesc.text = application.getString(R.string.days_completed, currentDay, challengeExpireDay)
             Picasso.get().load(PLACEHOLDER_CHALLENGE_HEADER_IMAGE).into(binding.ivChallengeHeader)
 
             val options = RequestOptions()

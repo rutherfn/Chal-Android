@@ -193,8 +193,8 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
                     bio = selectedAvailableChallenge?.desc ?: application.getString(R.string.empty_string),
                     categoryName = selectedAvailableChallenge?.category ?: application.getString(R.string.empty_string),
                     numberOfDaysInChallenge = selectedAvailableChallenge?.duration ?: 0,
-                    challengeExpire =challengeExpire.toString(),
-                    currentDay = this.dayInChallenge(),
+                    challengeExpire = "7",
+                    currentDay = 0,
                     username = username
                 ))
 

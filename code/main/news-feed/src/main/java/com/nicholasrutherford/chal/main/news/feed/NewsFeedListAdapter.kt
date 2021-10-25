@@ -49,8 +49,6 @@ class NewsFeedListAdapter(
             val currentDay = newsFeedList[position].posts?.currentDay?.toInt() ?: 0
             val challengeExpired = newsFeedList[position].posts?.dateChallengeExpired?.toInt() ?: 0
 
-            val currentChallengeDay = newsFeedViewModel.getRealCurrentDayOnChallenge(currentDay = currentDay, challengeExpired = challengeExpired)
-
             binding.tvHomeUsername.text = newsFeedList[position].posts?.username
             Glide.with(application).load(newsFeedList[position].posts?.usernameUrl).apply(requestOption).into(binding.ivHomeProfilePicture)
 
@@ -58,7 +56,7 @@ class NewsFeedListAdapter(
             binding.tvHomeChallengeTitle.text = newsFeedList[position].posts?.title
             binding.tvChallengepostDesc.text = newsFeedList[position].posts?.description
 
-            binding.btnDayOfChallenge.text = "Day ".plus(currentChallengeDay) // TODO update this
+            binding.btnDayOfChallenge.text = "Day ".plus(currentDay) // TODO update this
 
             updateTypeface()
         }
