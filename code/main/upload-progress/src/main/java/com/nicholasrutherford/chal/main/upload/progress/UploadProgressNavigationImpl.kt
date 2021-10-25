@@ -13,14 +13,4 @@ class UploadProgressNavigationImpl @Inject constructor() : UploadProgressNavigat
 
     override fun onNavigateBack() = navigator.navigateBack()
 
-    override fun showAddedProgress(challengeTitle: String, currentDay: Int) {
-        val addedProgressBundle =
-            bundleOf(
-                CHALLENGE_ADDED_PROGRESS_TITLE to challengeTitle,
-                CHALLENGE_ADDED_PROGRESS_DAY to currentDay
-            )
-
-        navigator.navigateWithBundle(addedProgressBundle, R.id.nav_graph_added_progress)
-    }
-
 }
