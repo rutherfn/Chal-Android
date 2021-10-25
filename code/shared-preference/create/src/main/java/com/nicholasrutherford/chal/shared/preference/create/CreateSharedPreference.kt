@@ -27,4 +27,7 @@ interface CreateSharedPreference {
     fun createShowDeviceNotificationsPreference(isChecked: Boolean)
     fun createUnActivatedAccountPreference(isChecked: Boolean)
     fun createShowOnboardPreference(isChecked: Boolean)
+
+    // this is used for navigation purposes, for login
+    fun createLoginNavigationId(navigationId: Int)
 }

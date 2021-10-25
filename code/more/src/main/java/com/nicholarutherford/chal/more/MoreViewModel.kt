@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
+import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +16,7 @@ class MoreViewModel @ViewModelInject constructor(
     private val firebaseAuth: ChalFirebaseAuth,
     private val navigation: MoreNavigation,
     private val fetchFirebaseDatabase: FetchFirebaseDatabase,
+    private val fetchSharedPreference: FetchSharedPreference,
     private val application: Application
 ) : BaseViewModel() {
 
@@ -59,7 +61,12 @@ class MoreViewModel @ViewModelInject constructor(
         firebaseAuth.logUserOut()
 
         setShouldShowDismissProgressAsUpdated()
-        navigation.showLogin()
+
+        fetchSharedPreference.fetchLoginNavigationId()?.let { loginNavigationId ->
+            navigation.showLogin(loginNavigationId)
+        } ?: run {
+            featureNotImplementedYetAlert()
+        }
     }
 
     private fun featureNotImplementedYetAlert() {

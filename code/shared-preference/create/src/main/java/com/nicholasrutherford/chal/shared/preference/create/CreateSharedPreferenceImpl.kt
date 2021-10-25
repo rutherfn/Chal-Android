@@ -106,4 +106,9 @@ class CreateSharedPreferenceImpl @Inject constructor(
         editor.putBoolean(SHOW_ON_BOARDING, isChecked)
         editor.apply()
     }
+
+    override fun createLoginNavigationId(navigationId: Int) {
+        editor.putInt(LOGIN_NAVIGATION_ID, navigationId)
+        editor.apply()
+    }
 }

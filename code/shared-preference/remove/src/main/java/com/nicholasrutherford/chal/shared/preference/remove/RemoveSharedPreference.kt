@@ -24,6 +24,9 @@ interface RemoveSharedPreference {
     fun removeShowUnActivatedAccountPreference()
     fun removeShowOnBoardingPreference()
 
+    // login navigation id
+    fun removeLoginNavigationId()
+
     // remove all shared preferences
     fun removeAllSharedPreferences()
 }

@@ -27,4 +27,7 @@ interface FetchSharedPreference {
     fun fetchShowDeviceNotificationPreference(): Boolean
     fun fetchShowUnActiviatedAccountPreference(): Boolean
     fun fetchShowOnBoarding(): Boolean
+
+    // fetch login navigation id
+    fun fetchLoginNavigationId(): Int?
 }

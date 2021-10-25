@@ -108,6 +108,10 @@ class RemoveSharedPreferenceImpl @Inject constructor(
         editor.remove(SHOW_ON_BOARDING).apply()
     }
 
+    override fun removeLoginNavigationId() {
+        editor.remove(LOGIN_NAVIGATION_ID).apply()
+    }
+
     override fun removeAllSharedPreferences() {
         editor.clear().apply()
     }

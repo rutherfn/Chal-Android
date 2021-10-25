@@ -1,5 +1,6 @@
 package com.nicholasrutherford.chal.main.navigation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.core.os.bundleOf
@@ -22,5 +23,15 @@ class Navigator @Inject constructor() {
 
     fun navigateBack() {
         navController.popBackStack()
+    }
+
+    @SuppressLint("ResourceType")
+    fun navigateTest() {
+        val loginId = 2131296637
+
+        navController.navigate(2131296637)
+//        navController.graph.forEach {
+//            println(it.id)
+//        }
     }
 }

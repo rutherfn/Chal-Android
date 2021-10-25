@@ -146,4 +146,12 @@ class FetchSharedPreferenceImpl @Inject constructor(
     override fun fetchShowOnBoarding(): Boolean {
         return getPreferenceBoolean(SHOW_ON_BOARDING)
     }
+
+    override fun fetchLoginNavigationId(): Int? {
+        if (getPreferenceInt(LOGIN_NAVIGATION_ID) == STOCK_INT_PREFERENCE) {
+            return null
+        } else {
+            return getPreferenceInt(LOGIN_NAVIGATION_ID)
+        }
+    }
 }
