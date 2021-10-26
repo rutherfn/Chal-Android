@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2210144927536232" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.41354166666666664" />
         <entry key="app/src/main/res/layout/fragment_my_friends.xml" value="0.1887031408308004" />
+        <entry key="app/src/main/res/layout/fragment_profiles.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/fragment_progress_upload.xml" value="0.2153846153846154" />
         <entry key="app/src/main/res/layout/fragment_redesign_challenges.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/layout/fragment_redesign_my_feed.xml" value="0.13468013468013468" />
@@ -39,6 +40,7 @@
         <entry key="app/src/main/res/layout/friends_empty_state_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/more_layout.xml" value="0.41354166666666664" />
         <entry key="app/src/main/res/layout/my_challenges_header_layout.xml" value="0.359375" />
+        <entry key="app/src/main/res/layout/my_profile_layout.xml" value="0.3859375" />
         <entry key="app/src/main/res/layout/news_feed_banner_layout.xml" value="0.24096385542168675" />
         <entry key="app/src/main/res/layout/news_feed_notification_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/other_users_profile_layout.xml" value="0.23641304347826086" />
@@ -95,6 +97,8 @@
         <entry key="more/src/main/res/layout/fragment_more.xml" value="0.1286727456940223" />
         <entry key="more/src/main/res/layout/more_fragment.xml" value="0.19630192502532928" />
         <entry key="more/src/main/res/layout/more_layout.xml" value="0.189209726443769" />
+        <entry key="profile/src/main/res/layout/fragment_profile.xml" value="0.19630192502532928" />
+        <entry key="profile/src/main/res/layout/profile_layout.xml" value="0.19630192502532928" />
         <entry key="ui/base-vm/src/main/res/layout/toolbar_back_button_with_title.xml" value="0.19630192502532928" />
         <entry key="ui/shared-layout/src/main/res/layout/end_of_challenges_layout.xml" value="0.1887031408308004" />
         <entry key="ui/shared-layout/src/main/res/layout/stock_toolbar_with_image.xml" value="0.1887031408308004" />

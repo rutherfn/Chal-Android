@@ -31,6 +31,29 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         return database.getReference(userDatabaseReference(uid))
     }
 
+    override fun fetchProfileInfo(_profileInfo: MutableStateFlow<List<String>>, isUser: Boolean) {
+        if (isUser) {
+            firebaseAuth.uid?.let { firebaseUid ->
+                databaseUserReference.child(firebaseUid).addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            val profileInfoList = arrayListOf<String>()
+                            val age = snapshot.child(AGE).value.toString()
+                            println("here is the user false age $age")
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                })
+            }
+        } else {
+            // fetch info from another users info here???
+        }
+    }
+
     override fun fetchUserNameAndUrl(_userNameAndUrl: MutableStateFlow<List<String>>) {
         firebaseAuth.uid?.let { firebaseUid ->
             databaseUserReference.child(firebaseUid).addValueEventListener(object : ValueEventListener {

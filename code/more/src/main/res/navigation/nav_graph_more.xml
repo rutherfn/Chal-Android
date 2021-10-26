@@ -7,6 +7,7 @@
 
     <include app:graph="@navigation/nav_graph_upload_progress" />
     <include app:graph="@navigation/nav_graph_debug" />
+    <include app:graph="@navigation/nav_graph_profile" />
 
     <fragment
         android:id="@+id/fragmentMore"
@@ -22,6 +23,11 @@
         <action
             android:id="@+id/action_Debug"
             app:destination="@+id/nav_graph_debug"
+            />
+
+        <action
+            android:id="@+id/action_Profile"
+            app:destination="@+id/nav_graph_profile"
             />
 
     </fragment>

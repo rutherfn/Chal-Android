@@ -32,6 +32,10 @@ class MyProfileViewModel @Inject constructor(private val application: Applicatio
     }
 
     private fun setupProfilePage() {
+        // age
+        // bio
+        // username
+        // profile picture
         navigation.showAcProgress()
 
         viewState.age = readProfiledDetailsFirebase.getAge()

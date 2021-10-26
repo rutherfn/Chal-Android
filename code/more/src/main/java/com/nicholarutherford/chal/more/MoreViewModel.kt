@@ -77,6 +77,7 @@ class MoreViewModel @ViewModelInject constructor(
     }
 
     fun onMyProfileClicked() {
+        navigation.showProfile()
         // show my profile screen
     }
 

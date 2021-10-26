@@ -44,6 +44,7 @@
             <option value="$PROJECT_DIR$/main/upload-progress" />
             <option value="$PROJECT_DIR$/more" />
             <option value="$PROJECT_DIR$/network" />
+            <option value="$PROJECT_DIR$/profile" />
             <option value="$PROJECT_DIR$/shared-preference" />
             <option value="$PROJECT_DIR$/shared-preference/create" />
             <option value="$PROJECT_DIR$/shared-preference/fetch" />

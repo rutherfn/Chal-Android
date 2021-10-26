@@ -340,8 +340,6 @@ class UploadProgressViewModel @ViewModelInject constructor(
             showAddedProgressAlert(title, newCurrentDay)
         } else {
             // we need to take this challenge, remove it and then add the challenge in the user post list
-
-
         }
     }
 

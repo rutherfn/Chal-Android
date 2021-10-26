@@ -21,4 +21,6 @@ class MoreNavigationImpl @Inject constructor(
     }
 
     override fun showDebug() = navigator.navigate(R.id.nav_graph_debug)
+
+    override fun showProfile() = navigator.navigate(R.id.nav_graph_profile)
 }
