@@ -213,4 +213,52 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
                 }
         }
     }
+
+    override fun createUsername(username: String) {
+        uid?.let { firebaseUid ->
+            databaseReferenceUsers.child(usernameAccountPath(firebaseUid)).setValue(username)
+                .addOnFailureListener {
+                   // Timber.d("Error writing Firebase field $username to ${usernameAccountPath(uid)}")
+                }
+        }
+    }
+
+    override fun createFirstName(firstName: String) {
+        uid?.let { firebaseUid ->
+            databaseReferenceUsers.child(firstNameAccountPath(firebaseUid)).setValue(firstName)
+                .addOnFailureListener {
+                    // Timber.d("Error writing Firebase field $firstName to ${firstNameAccountPath(uid)}")
+                }
+        }
+    }
+
+    override fun createLastName(lastName: String) {
+        uid?.let { firebaseUid ->
+            databaseReferenceUsers.child(lastNameAccountPath(firebaseUid)).setValue(lastName)
+                .addOnSuccessListener {
+                    // Timber.d("Error writing Firebase field $lastName to ${lastNameAccountPath(uid)}")
+                }
+        }
+    }
+
+    override fun createBio(bio: String) {
+        uid?.let { firebaseUid ->
+            databaseReferenceUsers.child(bioAccountPath(firebaseUid)).setValue(bio)
+                .addOnSuccessListener {
+                    // Timber.d("Error writing Firebase field $bio to ${bioAccountPath(uid)}")
+                }
+        }
+    }
+
+    override fun createAccountinfo(
+        username: String,
+        firstName: String,
+        lastName: String,
+        bio: String
+    ) {
+        createUsername(username)
+        createFirstName(firstName)
+        createLastName(lastName)
+        createBio(bio)
+    }
 }

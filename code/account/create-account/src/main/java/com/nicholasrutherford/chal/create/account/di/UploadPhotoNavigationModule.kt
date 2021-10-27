@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ApplicationComponent
 
 @Module
 @InstallIn(ApplicationComponent::class)
-abstract class UploadPhotoNavigationImpl {
+abstract class UploadPhotoNavigationModule {
 
     @Binds
     abstract fun bindUploadPhotoNavigationImpl(uploadPhotoNavigationImpl: UploadPhotoNavigationImpl): UploadPhotoNavigation

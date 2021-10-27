@@ -83,7 +83,8 @@
         android:ems="15"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/tvEditProfileUsername"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditProfileUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEditProfileUsername"
+        />
 
     <TextView
         android:id="@+id/tvEditFirstName"
@@ -94,7 +95,8 @@
         android:textSize="@dimen/body_text_size"
         android:text="@string/first_name"
         app:layout_constraintStart_toStartOf="@+id/etEditProfileUsername"
-        app:layout_constraintTop_toBottomOf="@+id/etEditProfileUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/etEditProfileUsername"
+        />
 
     <EditText
         android:id="@+id/etFirstName"
@@ -115,7 +117,8 @@
         android:textSize="@dimen/body_text_size"
         android:text="@string/last_name"
         app:layout_constraintStart_toStartOf="@+id/etFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/etFirstName" />
+        app:layout_constraintTop_toBottomOf="@+id/etFirstName"
+        />
 
     <EditText
         android:id="@+id/etLastName"
@@ -125,7 +128,8 @@
         android:ems="15"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/tvLastName"
-        app:layout_constraintTop_toBottomOf="@+id/tvLastName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvLastName"
+        />
 
     <TextView
         android:id="@+id/tvEditBio"
@@ -136,7 +140,8 @@
         android:textSize="@dimen/body_text_size"
         android:text="@string/bio"
         app:layout_constraintStart_toStartOf="@+id/etLastName"
-        app:layout_constraintTop_toBottomOf="@+id/etLastName" />
+        app:layout_constraintTop_toBottomOf="@+id/etLastName"
+        />
 
     <EditText
         android:id="@+id/etBio"
@@ -147,7 +152,8 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="@+id/tvEditBio"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditBio" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEditBio"
+        />
 
     <Button
         android:id="@+id/btnEditProfile"
@@ -162,7 +168,8 @@
         android:textSize="@dimen/body_text_size"
         app:layout_constraintEnd_toEndOf="@+id/etBio"
         app:layout_constraintStart_toStartOf="@+id/etBio"
-        app:layout_constraintTop_toBottomOf="@+id/etBio" />
+        app:layout_constraintTop_toBottomOf="@+id/etBio"
+        />
 
     <TextView
         android:id="@+id/tvCancelEditProfile"
@@ -174,8 +181,8 @@
         android:text="Cancel and Discard Changes"
         app:layout_constraintEnd_toEndOf="@+id/btnEditProfile"
         app:layout_constraintStart_toStartOf="@+id/btnEditProfile"
-        app:layout_constraintTop_toBottomOf="@+id/btnEditProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEditProfile"
+        />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.core.widget.NestedScrollView>

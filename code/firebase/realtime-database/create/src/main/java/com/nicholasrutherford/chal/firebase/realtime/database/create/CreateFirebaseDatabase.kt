@@ -13,4 +13,13 @@ interface CreateFirebaseDatabase {
     fun createCurrentDayOfChallenge(allActiveChallengeIndex: Int, userChallengeIndex: String, currentDay: Int)
     fun createNewActiveChallenge(allActiveChallengeIndex: Int, userChallengeIndex: String, activeChallenge: ActiveChallenge)
     fun createChallengeBannerType(bannerType: Int)
+
+    // user account info
+    fun createUsername(username: String)
+    fun createFirstName(firstName: String)
+    fun createLastName(lastName: String)
+    fun createBio(bio: String)
+
+    fun createAccountinfo(username: String, firstName: String, lastName: String, bio: String)
+
 }

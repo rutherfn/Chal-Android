@@ -1,4 +1,6 @@
 package com.nicholasrutherford.chal.profile
 
-class ProfileNavigation {
+interface ProfileNavigation {
+    fun showEditProfile()
+    fun showPop()
 }

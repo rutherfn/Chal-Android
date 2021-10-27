@@ -38,19 +38,42 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
                             val profileInfoList = arrayListOf<String>()
-                            val age = snapshot.child(AGE).value.toString()
-                            println("here is the user false age $age")
+
+                            profileInfoList.add(snapshot.child(AGE).value.toString() ?: "0")
+                            profileInfoList.add(snapshot.child(BIO).value.toString())
+                            profileInfoList.add(snapshot.child(USERNAME).value.toString())
+                            profileInfoList.add(snapshot.child(PROFILE_IMAGE).value.toString())
+
+                            _profileInfo.value = profileInfoList
                         }
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-
                     }
 
                 })
             }
-        } else {
-            // fetch info from another users info here???
+        }
+    }
+
+    override fun fetchEditProfileInfo(_editProfileInfo: MutableStateFlow<List<String>>) {
+        firebaseAuth.uid?.let { firebaseUid ->
+            databaseUserReference.child(firebaseUid).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val editProfileList = arrayListOf<String>()
+
+                    editProfileList.add(snapshot.child(USERNAME).value.toString())
+                    editProfileList.add(snapshot.child(FIRST_NAME).value.toString())
+                    editProfileList.add(snapshot.child(LAST_NAME).value.toString())
+                    editProfileList.add(snapshot.child(BIO).value.toString())
+
+                    _editProfileInfo.value = editProfileList
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
         }
     }
 

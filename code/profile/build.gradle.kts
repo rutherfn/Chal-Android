@@ -37,6 +37,8 @@ dependencies {
     api(project(path = ":ui:shared-layout"))
     api(project(path = ":ui:typefaces"))
 
+    implementation(Dependencies.Libs.Debug.Timber)
+
     implementation(Dependencies.Libs.Android.AppCompat)
     implementation(Dependencies.Libs.Android.Ktx)
     implementation(Dependencies.Libs.UI.ConstraintLayout)

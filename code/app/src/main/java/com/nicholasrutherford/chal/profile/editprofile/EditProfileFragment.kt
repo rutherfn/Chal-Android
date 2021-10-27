@@ -52,8 +52,12 @@ class EditProfileFragment(private val application: Application) : DaggerFragment
             typeface.setTypefaceForBodyBold(bind.clEditProfile.tvEditProfileUsername, appContext)
             typeface.setTypefaceForBodyItalic(bind.clEditProfile.etEditProfileUsername, appContext)
 
+            // here
+
             typeface.setTypefaceForBodyBold(bind.clEditProfile.tvEditFirstName, appContext)
             typeface.setTypefaceForBodyItalic(bind.clEditProfile.etFirstName, appContext)
+
+            //1
 
             typeface.setTypefaceForBodyBold(bind.clEditProfile.tvLastName, appContext)
             typeface.setTypefaceForBodyItalic(bind.clEditProfile.etLastName, appContext)
