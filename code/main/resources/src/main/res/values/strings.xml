@@ -1,9 +1,9 @@
 <resources>
-    <string name="add_friends">Add Friends2</string>
+    <string name="add_friends">Add Friends</string>
     <string name="add_progress">Add Progress</string>
     <string name="added_progress">Added Progress</string>
     <string name="add_more_progress">Add More Progress</string>
-    <string name="active">Active(%s)</string>
+    <string name="active_x">Active(%d)</string>
     <string name="all">All</string>
     <string name="all_rights_reserved">All Rights Reserved, Chal LLC 2020</string>
     <string name="app_name">chal</string>

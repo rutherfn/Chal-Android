@@ -172,8 +172,7 @@
         android:layout_marginTop="@dimen/margin_10dp"
         android:layout_marginLeft="@dimen/margin_18dp"
         android:textColor="@color/colorBlack"
-        android:background="@color/colorLightGray"
-        android:text="@string/active"
+        android:background="@drawable/corner_button_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivProfile"
         />

@@ -7,6 +7,8 @@ const val USERNAME = "username"
 const val EMAIL = "email"
 const val PASSWORD = "password"
 
+const val INDEX = "index"
+
 // challenge params
 const val CHALLENGE_TITLE = "challengeTitle"
 const val CHALLENGE_CATEGORY = "challengeCategory"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_profile_challenges_posts"
+    app:startDestination="@id/fragmentProfileChallengesPosts">
+
+    <fragment
+        android:id="@+id/fragmentProfileChallengesPosts"
+        android:name="com.nicholasrutherford.chal.profile.profilechallengesposts.ProfileChallengesPostsFragment"
+        android:label="fragment_profile_challenge_posts_fragment"
+        tools:layout="@layout/fragment_profile_challenges_posts">
+
+        <argument
+            android:name="index"
+            app:argType="string"
+            />
+
+    </fragment>
+</navigation>

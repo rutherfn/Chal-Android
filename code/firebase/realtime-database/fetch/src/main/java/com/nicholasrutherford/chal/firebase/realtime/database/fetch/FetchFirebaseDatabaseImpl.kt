@@ -235,6 +235,33 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         })
     }
 
+    override fun fetchAllUsersPostsOfChallenge(
+        _postList: MutableStateFlow<List<PostListResponse>>,
+        index: String
+    ) {
+        firebaseAuth.uid?.let { firebaseUid ->
+            val activeChallengesPathString = "$firebaseUid$ACTIVE_CHALLENGES$index$ACTIVE_CHALLENGES_POSTS"
+
+            databaseUserReference.child(activeChallengesPathString).addValueEventListener(object: ValueEventListener {
+
+                override fun onCancelled(error: DatabaseError) = Unit
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val postList = arrayListOf<PostListResponse>()
+
+                    for (posts in snapshot.children) {
+                        posts.getValue(PostResponse::class.java).let { postResponse ->
+                            postResponse?.let { data ->
+                                postList.add(PostListResponse(data))
+                            }
+                        }
+                    }
+                    _postList.value = postList
+                }
+            })
+        }
+    }
+
     override fun fetchChallengeBannerType(_challengeBannerType: MutableStateFlow<Int>) {
         val unknownChallengeBannerType = 111 // TODO update this in the future
         firebaseAuth.uid?.let { firebaseUid ->

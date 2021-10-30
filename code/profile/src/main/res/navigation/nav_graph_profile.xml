@@ -6,6 +6,7 @@
     app:startDestination="@id/fragmentProfile">
 
     <include app:graph="@navigation/nav_graph_edit_profile"/>
+    <include app:graph="@navigation/nav_graph_profile_challenges_posts"/>
 
     <fragment
         android:id="@+id/fragmentProfile"
@@ -16,6 +17,11 @@
         <action
             android:id="@+id/action_EditProfile_fragment"
             app:destination="@+id/nav_graph_edit_profile"
+            />
+
+        <action
+            android:id="@+id/action_Profile_Challenges_Posts"
+            app:destination="@+id/nav_graph_profile_challenges_posts"
             />
 
     </fragment>

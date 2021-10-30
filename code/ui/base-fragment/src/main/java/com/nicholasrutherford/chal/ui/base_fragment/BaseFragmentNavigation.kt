@@ -49,9 +49,6 @@ class BaseFragmentNavigation(private val fragmentActivity: FragmentActivity) {
             .setPositiveButton(fragmentActivity.getString(R.string.yes)) { dialog, _ ->
                 fragmentActivity.findNavController(resId).navigateUp()
             }
-            .setNegativeButton(fragmentActivity.getString(R.string.no)) { dialog, _ ->
-                dialog.cancel()
-            }
 
         val appProgressAlert = closingOutAppProgressAlertDialogBuilder.create()
         appProgressAlert.setTitle(title)

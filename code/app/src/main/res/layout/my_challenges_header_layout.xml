@@ -22,12 +22,12 @@
                 android:id="@+id/ivChallengeHeader"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/challenges_background_height"
-                android:padding="@dimen/padding_4dp"
                 android:alpha="0.2"
+                android:padding="@dimen/padding_4dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/ivChallengeBackground"

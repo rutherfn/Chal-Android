@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
+import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -18,6 +19,9 @@ class ProfileViewModel @ViewModelInject constructor(
 
     private val _profileInfo = MutableStateFlow(listOf<String>())
     private val profileInfo: StateFlow<List<String>> = _profileInfo
+
+    private val _allUserActiveChallengesList = MutableStateFlow(listOf<ActiveChallengesListResponse>())
+    val allUserActiveChallengesList: StateFlow<List<ActiveChallengesListResponse>> = _allUserActiveChallengesList
 
     val viewState = ProfileViewStateImpl()
 
@@ -41,6 +45,7 @@ class ProfileViewModel @ViewModelInject constructor(
                 }
             }
         }
+        fetchAllUserActiveChallenges()
         fetchFirebaseDatabase.fetchProfileInfo(_profileInfo, true)
     }
 
@@ -58,6 +63,18 @@ class ProfileViewModel @ViewModelInject constructor(
         setViewStateAsUpdated()
     }
 
+    fun updateActiveChallengesSize(count: Int) {
+        viewState.activeChallengesSize = count
+
+        setViewStateAsUpdated()
+    }
+
+    fun onItemClicked(index: Int) {
+        navigation.showProfileChallengePosts(index.toString())
+    }
+
+    private fun fetchAllUserActiveChallenges() = fetchFirebaseDatabase.fetchAllUserActiveChallenges(_allUserActiveChallengesList)
+
     fun onToolbarBackClicked() = navigation.showPop()
 
     fun onEditProfileClicked() = navigation.showEditProfile()
@@ -69,5 +86,6 @@ class ProfileViewModel @ViewModelInject constructor(
         override var profileImage: String? = ""
         override var myChallengesTabActive = false
         override var myFriendsTabActive = false
+        override var activeChallengesSize: Int? = null
     }
 }

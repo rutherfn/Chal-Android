@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
@@ -12,7 +13,9 @@ import com.nicholasrutherford.chal.profile.databinding.FragmentProfileBinding
 import com.nicholasrutherford.chal.ui.base_fragment.BaseFragment
 import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import com.squareup.picasso.Picasso
+import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,12 +29,39 @@ class ProfileFragment @Inject constructor(): BaseFragment<FragmentProfileBinding
     @Inject
     lateinit var application: Application
 
+    private var profileListAdapter: ProfileListAdapter? = null
+
     private val viewModel: ProfileViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             collectViewStateResult(viewModel.viewStateUpdated, viewModel._viewStateUpdated)
+        }
+        lifecycleScope.launch {
+            viewModel.allUserActiveChallengesList.collect { challengesList ->
+                if (challengesList.isNotEmpty()) {
+                    viewModel.updateActiveChallengesSize(challengesList.size)
+                    bindProfileListAdapter(challengesList)
+                }
+            }
+        }
+    }
+
+    private fun bindProfileListAdapter(activeChallengesList: List<ActiveChallengesListResponse>) {
+        binding?.let { binding ->
+            binding.rvChallenges.isNestedScrollingEnabled = false
+            binding.rvChallenges.layoutManager =
+                LinearLayoutManager(application.applicationContext)
+
+            profileListAdapter = ProfileListAdapter(
+                application = application,
+                typefaces = typefaces,
+                activeChallengesListResponse = activeChallengesList,
+                viewModel = viewModel
+            )
+
+            binding.rvChallenges.adapter = profileListAdapter
         }
     }
 
@@ -84,6 +114,8 @@ class ProfileFragment @Inject constructor(): BaseFragment<FragmentProfileBinding
             binding.clProfile.tvDescription.text = viewModel.viewState.description
 
             binding.tbProfilePost.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
+
+            binding.clProfile.btnActive.text = application.getString(R.string.active_x, viewModel.viewState.activeChallengesSize)
         }
     }
 

@@ -7,4 +7,5 @@ interface ProfileViewState {
     var profileImage: String?
     var myChallengesTabActive: Boolean
     var myFriendsTabActive: Boolean
+    var activeChallengesSize: Int?
 }
