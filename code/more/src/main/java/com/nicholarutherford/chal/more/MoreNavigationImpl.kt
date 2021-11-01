@@ -16,6 +16,8 @@ class MoreNavigationImpl @Inject constructor(
     }
 
     override fun showLogin(loginNavigationId: Int) {
+
+        // known bug that needs to get fixed
         navigator.navigate(loginNavigationId)
         removeSharedPreference.removeLoginNavigationId()
     }
