@@ -15,13 +15,6 @@ class MoreNavigationImpl @Inject constructor(
         navigator.navigate(R.id.nav_graph_upload_progress)
     }
 
-    override fun showLogin(loginNavigationId: Int) {
-
-        // known bug that needs to get fixed
-        navigator.navigate(loginNavigationId)
-        removeSharedPreference.removeLoginNavigationId()
-    }
-
     override fun showDebug() = navigator.navigate(R.id.nav_graph_debug)
 
     override fun showProfile() = navigator.navigate(R.id.nav_graph_profile)

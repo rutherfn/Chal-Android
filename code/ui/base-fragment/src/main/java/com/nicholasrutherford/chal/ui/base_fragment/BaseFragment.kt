@@ -21,6 +21,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import android.os.Build
 import androidx.navigation.fragment.findNavController
+import com.nicholasrutherford.chal.data.elert.Alert
+import com.nicholasrutherford.chal.data.elert.AlertType
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
@@ -103,6 +105,16 @@ abstract class BaseFragment<VB: ViewBinding>(
         grantResults: IntArray) { // do some work here in the future
     }
 
+    fun showAlert(id: Int, title: String?, message: String?, shouldCloseApp: Boolean, alertType: AlertType?) {
+        if (alertType == AlertType.REGULAR_OK_ALERT) {
+            fragmentNavigation?.showOkAlert(title, message)
+        } else if (alertType == AlertType.YES_ALERT_WITH_ACTION) {
+            fragmentNavigation?.showYesAlert(id, title, message, shouldCloseApp)
+        } else if (alertType == AlertType.YES_NO_ALERT_WITH_ACTION) {
+            fragmentNavigation?.showYesAndNoAlert(id, title, message)
+        }
+    }
+
     fun showOkAlert(title: String, message: String) {
         // exapnd on this down the line
         fragmentNavigation?.showOkAlert(title, message)
@@ -113,8 +125,8 @@ abstract class BaseFragment<VB: ViewBinding>(
         return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
     }
 
-    fun showClosingOutAppProgressAlert(resId: Int, title: String, message: String) {
-        fragmentNavigation?.showClosingOutAppProgressAlert(resId, title, message)
+    fun showClosingOutAppProgressAlert(resId: Int, title: String, message: String, shouldCloseApp: Boolean) {
+        fragmentNavigation?.showYesAlert(resId, title, message, shouldCloseApp)
     }
 
     suspend fun collectViewStateResult(viewStateUpdated: StateFlow<Boolean>, _viewStateAsUpdated: MutableStateFlow<Boolean>) {
@@ -141,6 +153,25 @@ abstract class BaseFragment<VB: ViewBinding>(
                 fragmentNavigation?.hideFlowerProgress()
             }
             _shouldDismissProgress.value = false
+        }
+    }
+
+    suspend fun collectShouldShowAlertResult(
+        id: Int,
+        shouldShowAlert: StateFlow<Alert>,
+        _shouldShowAlert: MutableStateFlow<Alert>
+        ) {
+        shouldShowAlert.collect { isShouldShowAlertUpdated ->
+            if (isShouldShowAlertUpdated.type != null) {
+                showAlert(
+                    id = id,
+                    title = isShouldShowAlertUpdated.title,
+                    message = isShouldShowAlertUpdated.message,
+                    shouldCloseApp = isShouldShowAlertUpdated.shouldCloseAppAfterDone,
+                    alertType = isShouldShowAlertUpdated.type
+                )
+            }
+            _shouldShowAlert.value = Alert(null, null, null, false)
         }
     }
 

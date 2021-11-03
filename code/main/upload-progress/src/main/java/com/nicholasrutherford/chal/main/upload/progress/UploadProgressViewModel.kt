@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.nicholasrutherford.chal.data.elert.Alert
+import com.nicholasrutherford.chal.data.elert.AlertType
 import com.nicholasrutherford.chal.data.post.PostListResponse
 import com.nicholasrutherford.chal.firebase.realtime.database.create.CreateFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
@@ -53,10 +55,6 @@ class UploadProgressViewModel @ViewModelInject constructor(
     private var currentPostsSize: Int = 0
     private var username: String? = null
     private var usernameUrl: String? = null
-
-    var alertTitle = application.getString(R.string.empty_string)
-    var alertMessage = application.getString(R.string.empty_string)
-    var alertType = 0
 
     private var profileUri: Uri? = null
 
@@ -144,15 +142,18 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     fun onDiscardPostClicked() {
-        alertType = 0
-        alertMessage = application.getString(R.string.discard_post_details)
-        alertTitle = application.getString(R.string.are_you_sure_you_you_want_to_discard_the_post)
+        setShouldSetAlertAsUpdated(
+            title = application.getString(R.string.are_you_sure_you_you_want_to_discard_the_post),
+            message = application.getString(R.string.discard_post_details),
+            type = AlertType.YES_NO_ALERT_WITH_ACTION,
+            shouldCloseAppAfterDone = false
+        )
+        setShouldShowAlertAsUpdated()
     }
 
     fun onPostProgressClicked(title: String, caption: String, listOfChallenges: List<String>) {
         // todo do a check here to see if we have internet avivable
         var selectedIndex = 0
-        alertType = 0
 
         listOfChallenges.forEachIndexed { index, challenge ->
             if (title == challenge) {
@@ -164,16 +165,26 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         when (caption) {
             "" -> {
-                alertTitle = application.applicationContext.getString(R.string.missing_fields)
-                alertMessage = application.applicationContext.getString(R.string.looks_like_were_missing_caption)
+                setShouldSetAlertAsUpdated(
+                    title = application.getString(R.string.missing_fields),
+                    message = application.getString(R.string.looks_like_were_missing_caption),
+                    type = AlertType.REGULAR_OK_ALERT,
+                    shouldCloseAppAfterDone = false
+                )
+                setShouldShowDismissProgressAsUpdated()
                 setShouldShowAlertAsUpdated()
             }
             else -> {
                 profileUri?.let { photoUri ->
                     uploadProgressPhoto(title, caption, selectedIndex, photoUri)
                 } ?: run {
-                    alertTitle = application.applicationContext.getString(R.string.missing_fields)
-                    alertMessage = application.applicationContext.getString(R.string.looks_like_were_missing_image)
+                    setShouldSetAlertAsUpdated(
+                        title = application.getString(R.string.missing_fields),
+                        message = application.getString(R.string.looks_like_were_missing_image),
+                        type = AlertType.REGULAR_OK_ALERT,
+                        shouldCloseAppAfterDone = false
+                    )
+                    setShouldShowDismissProgressAsUpdated()
                     setShouldShowAlertAsUpdated()
                 }
             }
@@ -194,10 +205,13 @@ class UploadProgressViewModel @ViewModelInject constructor(
             .addOnFailureListener {
                 setShouldShowDismissProgressAsUpdated()
 
-                alertType = 0
-                alertTitle = application.applicationContext.getString(R.string.can_not_upload_image_to_server)
-                alertMessage = application.applicationContext.getString(R.string.issue_uploading_image_to_server)
-
+                setShouldSetAlertAsUpdated(
+                    title = application.getString(R.string.can_not_upload_image_to_server),
+                    message = application.getString(R.string.issue_uploading_image_to_server),
+                    type = AlertType.REGULAR_OK_ALERT,
+                    shouldCloseAppAfterDone = false
+                )
+                setShouldShowDismissProgressAsUpdated()
                 setShouldShowAlertAsUpdated()
             }
     }
@@ -229,10 +243,13 @@ class UploadProgressViewModel @ViewModelInject constructor(
                     override fun onCancelled(error: DatabaseError) {
                         setShouldShowDismissProgressAsUpdated()
 
-                        alertType = 0
-                        alertTitle = application.getString(R.string.error_updating_data_title)
-                        alertMessage = application.getString(R.string.error_updating_data_desc)
-
+                        setShouldSetAlertAsUpdated(
+                            title = application.getString(R.string.error_updating_data_title),
+                            message = application.getString(R.string.error_updating_data_desc),
+                            type = AlertType.REGULAR_OK_ALERT,
+                            shouldCloseAppAfterDone = false
+                        )
+                        setShouldShowDismissProgressAsUpdated()
                         setShouldShowAlertAsUpdated()
                     }
                 })
@@ -248,10 +265,13 @@ class UploadProgressViewModel @ViewModelInject constructor(
                     override fun onCancelled(error: DatabaseError) {
                         setShouldShowDismissProgressAsUpdated()
 
-                        alertType = 0
-                        alertTitle = application.applicationContext.getString(R.string.error_updating_data_title)
-                        alertMessage = application.applicationContext.getString(R.string.error_updating_data_desc)
-
+                        setShouldSetAlertAsUpdated(
+                            title = application.getString(R.string.error_updating_data_title),
+                            message = application.getString(R.string.error_updating_data_desc),
+                            type = AlertType.REGULAR_OK_ALERT,
+                            shouldCloseAppAfterDone = false
+                        )
+                        setShouldShowDismissProgressAsUpdated()
                         setShouldShowAlertAsUpdated()
                     }
                 })
@@ -276,10 +296,13 @@ class UploadProgressViewModel @ViewModelInject constructor(
                     override fun onCancelled(error: DatabaseError) {
                         setShouldShowDismissProgressAsUpdated()
 
-                        alertType = 0
-                        alertTitle = application.applicationContext.getString(R.string.error_updating_data_title)
-                        alertMessage = application.applicationContext.getString(R.string.error_updating_data_desc)
-
+                        setShouldSetAlertAsUpdated(
+                            title = application.getString(R.string.error_updating_data_title),
+                            message = application.getString(R.string.error_updating_data_desc),
+                            type = AlertType.REGULAR_OK_ALERT,
+                            shouldCloseAppAfterDone = false
+                        )
+                        setShouldShowDismissProgressAsUpdated()
                         setShouldShowAlertAsUpdated()
                     }
                 })
@@ -288,10 +311,13 @@ class UploadProgressViewModel @ViewModelInject constructor(
             override fun onCancelled(error: DatabaseError) {
                 setShouldShowDismissProgressAsUpdated()
 
-                alertType = 0
-                alertTitle = application.applicationContext.getString(R.string.error_updating_data_title)
-                alertMessage = application.applicationContext.getString(R.string.error_updating_data_desc)
-
+                setShouldSetAlertAsUpdated(
+                    title = application.getString(R.string.error_updating_data_title),
+                    message = application.getString(R.string.error_updating_data_desc),
+                    type = AlertType.REGULAR_OK_ALERT,
+                    shouldCloseAppAfterDone = false
+                )
+                setShouldShowDismissProgressAsUpdated()
                 setShouldShowAlertAsUpdated()
             }
         })
@@ -356,13 +382,16 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
     private fun showAddedProgressAlert(challengeTitle: String, newCurrentDay: Int) {
         if (fetchSharedPreference.fetchChallengeModeSharedPreference()) {
-            alertType = 2
-            alertTitle = "Progress has been updated"
-            alertMessage = "Congrats! you have posted progress on the " +
-                    "$challengeTitle. And because you are on challenge mode, you are now on day $newCurrentDay of the challenge." +
-                    "Would you like to see your post on the news feed?" +
-                    "Clicking YES if you want to view post. Clicking NO will allow you to post more prorgess on your challenge."
-
+            setShouldSetAlertAsUpdated(
+                title = "Progress has been updated",
+                message = "Congrats! you have posted progress on the " +
+                        "$challengeTitle. And because you are on challenge mode, you are now on day $newCurrentDay of the challenge." +
+                        "Would you like to see your post on the news feed?" +
+                        "Clicking YES if you want to view post. Clicking NO will allow you to post more prorgess on your challenge.",
+                type = AlertType.YES_ALERT_WITH_ACTION,
+                shouldCloseAppAfterDone = false
+            )
+            setShouldShowDismissProgressAsUpdated()
             setShouldShowAlertAsUpdated()
         } else {
             // copy here for actual challenge update

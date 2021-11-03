@@ -35,7 +35,9 @@ class UploadProgressFragment @Inject constructor() : BaseFragment<FragmentUpload
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            collectViewStateResult(viewModel.viewStateUpdated, viewModel._viewStateUpdated)
+            collectViewStateResult(
+                viewModel.viewStateUpdated,
+                viewModel._viewStateUpdated)
         }
         lifecycleScope.launch {
             collectShouldShowProgressResult(
@@ -49,8 +51,13 @@ class UploadProgressFragment @Inject constructor() : BaseFragment<FragmentUpload
                 viewModel._shouldDismissProgress
             )
         }
-        collectAlertAsUpdated()
-
+        lifecycleScope.launch {
+            collectShouldShowAlertResult(
+                this@UploadProgressFragment.id,
+                viewModel.alert,
+                viewModel._alert
+            )
+        }
         lifecycleScope.launch {
             viewModel.allUserActiveChallengesList.collect { userActiveChallengeList ->
                 updateSpinners(userActiveChallengeList)
@@ -103,18 +110,7 @@ class UploadProgressFragment @Inject constructor() : BaseFragment<FragmentUpload
         }
     }
 
-    override fun collectAlertAsUpdated() {
-        lifecycleScope.launch {
-            viewModel.shouldShowAlert.collect { isShouldShowAlert ->
-                if (isShouldShowAlert && viewModel.alertType == 1) {
-                    showOkAlert(title = viewModel.alertTitle, message = viewModel.alertMessage)
-                } else if (isShouldShowAlert && viewModel.alertType == 2) {
-                    showClosingOutAppProgressAlert(this@UploadProgressFragment.id, viewModel.alertTitle, viewModel.alertMessage)
-                }
-                viewModel.setShouldShowAlertAsNotUpdated()
-            }
-        }
-    }
+    override fun collectAlertAsUpdated() = Unit
 
     private fun clearUI() {
         binding?.let { binding ->
@@ -127,8 +123,6 @@ class UploadProgressFragment @Inject constructor() : BaseFragment<FragmentUpload
         binding?.let { binding ->
             binding.clPostProgress.btnCancelAndDiscardPost.setOnClickListener {
                 viewModel.onDiscardPostClicked()
-                // TODO come back to this down the line
-                showClosingOutAppProgressAlert(this.id, viewModel.alertTitle, viewModel.alertMessage)
             }
 
             binding.clPostProgress.ivUploadImage.setOnClickListener {

@@ -31,6 +31,8 @@ class MoreViewModel @ViewModelInject constructor(
     var alertTitle = application.getString(R.string.empty_string)
     var alertMessage = application.getString(R.string.empty_string)
 
+    var alertType = 0
+
     val viewState = MoreViewStateImpl()
 
     init {
@@ -60,18 +62,18 @@ class MoreViewModel @ViewModelInject constructor(
 
         firebaseAuth.logUserOut()
 
-        setShouldShowDismissProgressAsUpdated()
+        alertTitle = "Test here"
+        alertMessage = "alert one two three "
+        alertType = 2
 
-        fetchSharedPreference.fetchLoginNavigationId()?.let { loginNavigationId ->
-            navigation.showLogin(loginNavigationId)
-        } ?: run {
-            featureNotImplementedYetAlert()
-        }
+        setShouldShowAlertAsUpdated()
+        setShouldShowDismissProgressAsUpdated()
     }
 
     private fun featureNotImplementedYetAlert() {
         alertTitle = "Not yet implement"
         alertMessage = "Feature not implemented. Please check back later to see if feature gets implemented."
+        alertType = 1
 
         setShouldShowAlertAsUpdated()
     }
