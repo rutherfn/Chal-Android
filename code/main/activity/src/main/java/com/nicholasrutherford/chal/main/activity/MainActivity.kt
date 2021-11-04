@@ -83,6 +83,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                 R.id.fragmentEditProfile -> {
                     hideBottomNavigation()
                 }
+                R.id.fragmentBugReport -> {
+                    hideBottomNavigation()
+                }
             }
         }
 
@@ -165,6 +168,9 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
                     navigator.navigateBack()
                 }
                 R.id.fragmentEditProfile -> {
+                    navigator.navigateBack()
+                }
+                R.id.fragmentBugReport -> {
                     navigator.navigateBack()
                 }
                 else -> {

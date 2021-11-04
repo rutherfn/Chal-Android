@@ -4,4 +4,5 @@ interface MoreNavigation {
     fun showUploadProgress()
     fun showDebug()
     fun showProfile()
+    fun showBugReport()
 }

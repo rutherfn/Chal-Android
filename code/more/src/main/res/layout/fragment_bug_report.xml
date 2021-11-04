@@ -7,11 +7,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <include
             android:id="@+id/tbBugReport"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            layout="@layout/toolbar_challenges_post"
+            layout="@layout/stock_toolbar_with_text"
             />
 
         <androidx.core.widget.NestedScrollView
@@ -32,9 +33,7 @@
                     />
 
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
-
 </LinearLayout>

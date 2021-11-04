@@ -1,11 +1,14 @@
 package com.nicholasrutherford.chal.ui.base_fragment
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
+
+const val SEND_EMAIL_TYPE = "message/rfc822"
 
 class BaseFragmentNavigation(private val fragmentActivity: FragmentActivity) {
 
@@ -25,6 +28,24 @@ class BaseFragmentNavigation(private val fragmentActivity: FragmentActivity) {
     }
 
     fun hideFlowerProgress() = flowerLoadingDialog?.dismiss()
+
+    fun showCreateEmailForBug(reporterName: String, bugTitle: String, bugDesc: String, priorityLevel: String) {
+        try {
+            val intent = Intent(Intent.ACTION_SEND)
+
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(fragmentActivity.getString(R.string.dev_email)))
+            intent.putExtra(Intent.EXTRA_SUBJECT, "$bugTitle ${fragmentActivity.getString(R.string.priority_level)} $priorityLevel")
+            intent.putExtra(
+                Intent.EXTRA_TEXT,
+                "${fragmentActivity.getString(R.string.bug_descrption)} $bugDesc \n\n\n\t${fragmentActivity.getString(R.string.reporter_name)} $reporterName"
+            )
+
+            intent.type = SEND_EMAIL_TYPE
+            fragmentActivity.startActivity(Intent.createChooser(intent, fragmentActivity.getString(R.string.sending_email)))
+        } catch (t: Throwable) {
+            t.printStackTrace()
+        }
+    }
 
     fun showOkAlert(title: String?, message: String?, shouldCloseApp: Boolean) {
         val errorForgotPasswordDialogBuilder = AlertDialog.Builder(fragmentActivity)

@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_upload_profile_picture.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/added_progress_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/bug_report_layout.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/challenge_details_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/challenge_feed_layout.xml" value="0.1824074074074074" />
         <entry key="app/src/main/res/layout/challenges_header.xml" value="0.1" />
@@ -97,7 +98,9 @@
         <entry key="main/upload-progress/src/main/res/layout/fragment_upload_progress.xml" value="0.1" />
         <entry key="main/upload-progress/src/main/res/layout/upload_progress_layout.xml" value="0.189209726443769" />
         <entry key="more/debug/src/main/res/layout/fragment_debug.xml" value="0.25" />
+        <entry key="more/src/main/res/layout/bug_report_layout.xml" value="0.1887031408308004" />
         <entry key="more/src/main/res/layout/debug_layout.xml" value="0.18161094224924013" />
+        <entry key="more/src/main/res/layout/fragment_bug_report.xml" value="0.1887031408308004" />
         <entry key="more/src/main/res/layout/fragment_debug.xml" value="0.1887031408308004" />
         <entry key="more/src/main/res/layout/fragment_more.xml" value="0.1286727456940223" />
         <entry key="more/src/main/res/layout/more_fragment.xml" value="0.19630192502532928" />

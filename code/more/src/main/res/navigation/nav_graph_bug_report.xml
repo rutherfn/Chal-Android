@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_bug_report"
+    app:startDestination="@id/fragmentBugReport">
+
+    <fragment
+        android:id="@+id/fragmentBugReport"
+        android:name="com.nicholarutherford.chal.more.bugreport.BugReportFragment"
+        android:label="fragment_bug_report"
+        tools:layout="@layout/fragment_bug_report">
+
+    </fragment>
+</navigation>

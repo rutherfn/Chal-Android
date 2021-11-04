@@ -105,6 +105,10 @@ abstract class BaseFragment<VB: ViewBinding>(
         grantResults: IntArray) { // do some work here in the future
     }
 
+    fun showCreateEmailForBug(reporterName: String, bugTitle: String, bugDesc: String, priorityLevel: String) {
+        fragmentNavigation?.showCreateEmailForBug(reporterName, bugTitle, bugDesc, priorityLevel)
+    }
+
     fun showAlert(id: Int, title: String?, message: String?, shouldCloseApp: Boolean, alertType: AlertType?) {
         if (alertType == AlertType.REGULAR_OK_ALERT) {
             fragmentNavigation?.showOkAlert(title, message, shouldCloseApp)

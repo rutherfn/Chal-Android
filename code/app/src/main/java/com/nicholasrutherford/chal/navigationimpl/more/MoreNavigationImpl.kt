@@ -7,7 +7,6 @@ import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.nicholasrutherford.chal.main.MainActivity
 import com.nicholasrutherford.chal.R
-import com.nicholasrutherford.chal.bugreport.BugReportFragment
 import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.main.helper.MainActivityHelperImpl
 import com.nicholasrutherford.chal.more.MoreNavigation
@@ -34,16 +33,6 @@ class MoreNavigationImpl @Inject constructor(
     }
 
     override fun reportBug() {
-        mainActivity.binding?.bvNavigation?.visibleOrGone = true
-
-        mainActivity.supportFragmentManager.beginTransaction()
-            .replace(
-                container,
-                BugReportFragment(application),
-                BugReportFragment(application)::javaClass.name
-            )
-            .addToBackStack("")
-            .commit()
     }
 
     override fun showAlert(title: String, message: String) {
