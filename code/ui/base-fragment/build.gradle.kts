@@ -17,6 +17,7 @@ android {
 }
 
 dependencies {
+    api(project(path = ":data:alert"))
     api(project(path = ":main:navigation"))
     api(project(path = ":main:resources"))
 

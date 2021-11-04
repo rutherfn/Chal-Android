@@ -10,6 +10,7 @@ android {
 }
 
 dependencies {
+    api(project(path = ":data:alert"))
     api(project(path = ":main:resources"))
 
     implementation(Dependencies.Libs.Kotlin.Coroutines)

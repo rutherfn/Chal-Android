@@ -3,6 +3,7 @@ package com.nicholarutherford.chal.more
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
+import com.nicholasrutherford.chal.data.elert.AlertType
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
@@ -27,9 +28,6 @@ class MoreViewModel @ViewModelInject constructor(
 
     private val _loggedInProfilePicture = MutableStateFlow(application.getString(R.string.empty_string))
     private val loggedInProfilePicture: StateFlow<String> = _loggedInProfilePicture
-
-    var alertTitle = application.getString(R.string.empty_string)
-    var alertMessage = application.getString(R.string.empty_string)
 
     val viewState = MoreViewStateImpl()
 
@@ -59,19 +57,24 @@ class MoreViewModel @ViewModelInject constructor(
         setShouldShowProgressAsUpdated()
 
         firebaseAuth.logUserOut()
+        setShouldSetAlertAsUpdated(
+            title = "Logged out",
+            message = "We have currently logged you out. Press OK to confirm log out.",
+            type = AlertType.REGULAR_OK_ALERT,
+            shouldCloseAppAfterDone = true
+        )
 
+        setShouldShowAlertAsUpdated()
         setShouldShowDismissProgressAsUpdated()
-
-        fetchSharedPreference.fetchLoginNavigationId()?.let { loginNavigationId ->
-            navigation.showLogin(loginNavigationId)
-        } ?: run {
-            featureNotImplementedYetAlert()
-        }
     }
 
     private fun featureNotImplementedYetAlert() {
-        alertTitle = "Not yet implement"
-        alertMessage = "Feature not implemented. Please check back later to see if feature gets implemented."
+        setShouldSetAlertAsUpdated(
+            title = "Not yet implemented",
+            message = "Feature not implemented. please come back later to see if feature gets implemented..",
+            type = AlertType.REGULAR_OK_ALERT,
+            shouldCloseAppAfterDone = false
+        )
 
         setShouldShowAlertAsUpdated()
     }
@@ -109,9 +112,12 @@ class MoreViewModel @ViewModelInject constructor(
         if (isUserEnrolledInAChallenge) {
             navigation.showUploadProgress()
         } else {
-            alertTitle = application.getString(R.string.not_enrolled_in_challenge)
-            alertMessage = application.getString(R.string.not_enrolled_in_challenge_message)
-
+            setShouldSetAlertAsUpdated(
+                title = application.getString(R.string.not_enrolled_in_challenge),
+                message = application.getString(R.string.not_enrolled_in_challenge_message),
+                type = AlertType.REGULAR_OK_ALERT,
+                shouldCloseAppAfterDone = false
+            )
             setShouldShowAlertAsUpdated()
         }
     }

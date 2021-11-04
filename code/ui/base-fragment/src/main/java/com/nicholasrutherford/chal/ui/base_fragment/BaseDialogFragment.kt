@@ -31,7 +31,7 @@ abstract class BaseDialogFragment<VB: ViewBinding>(
 
     fun showAlert(title: String, message: String) {
         // exapnd on this down the line
-        fragmentNavigation?.showOkAlert(title, message)
+        fragmentNavigation?.showOkAlert(title, message, false)
     }
 
     suspend fun collectViewStateResult(viewStateUpdated: StateFlow<Boolean>, _viewStateAsUpdated: MutableStateFlow<Boolean>) {

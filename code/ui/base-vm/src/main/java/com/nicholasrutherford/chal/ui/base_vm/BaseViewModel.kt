@@ -1,6 +1,8 @@
 package com.nicholasrutherford.chal.ui.base_vm
 
 import androidx.lifecycle.ViewModel
+import com.nicholasrutherford.chal.data.elert.Alert
+import com.nicholasrutherford.chal.data.elert.AlertType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.*
@@ -25,11 +27,15 @@ open class BaseViewModel : ViewModel() {
     val _shouldShowAlert = MutableStateFlow(false)
     val shouldShowAlert: StateFlow<Boolean> = _shouldShowAlert
 
+    val _alert = MutableStateFlow(Alert(null, null, null, false))
+    val alert: StateFlow<Alert> = _alert
+
     init {
         setViewStateAsNotUpdated()
         setShouldShowProgressAsNotUpdated()
         setShouldDismissProgressAsNotUpdated()
         setShouldShowAlertAsNotUpdated()
+        setAlertAsNull()
     }
 
     fun setViewStateAsNotUpdated() {
@@ -62,6 +68,14 @@ open class BaseViewModel : ViewModel() {
 
     fun setShouldShowAlertAsUpdated() {
         _shouldShowAlert.value = true
+    }
+
+    fun setShouldSetAlertAsUpdated(title: String, message: String, type:AlertType, shouldCloseAppAfterDone: Boolean) {
+        _alert.value = Alert(title, message, type, shouldCloseAppAfterDone)
+    }
+
+    fun setAlertAsNull() {
+        _alert.value = Alert(null, null, null, false)
     }
 
     fun dayInChallenge(): Int {
