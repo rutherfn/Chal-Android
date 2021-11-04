@@ -364,6 +364,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
             setShouldShowDismissProgressAsUpdated()
 
             showAddedProgressAlert(title, newCurrentDay)
+            navigation.onNavigateBack()
         } else {
             // we need to take this challenge, remove it and then add the challenge in the user post list
         }
@@ -385,10 +386,8 @@ class UploadProgressViewModel @ViewModelInject constructor(
             setShouldSetAlertAsUpdated(
                 title = "Progress has been updated",
                 message = "Congrats! you have posted progress on the " +
-                        "$challengeTitle. And because you are on challenge mode, you are now on day $newCurrentDay of the challenge." +
-                        "Would you like to see your post on the news feed?" +
-                        "Clicking YES if you want to view post. Clicking NO will allow you to post more prorgess on your challenge.",
-                type = AlertType.YES_ALERT_WITH_ACTION,
+                        "$challengeTitle. Press OK to see progress on the news feed",
+                type = AlertType.REGULAR_OK_ALERT,
                 shouldCloseAppAfterDone = false
             )
             setShouldShowDismissProgressAsUpdated()
