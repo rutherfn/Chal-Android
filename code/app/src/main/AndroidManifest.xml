@@ -2,14 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nicholasrutherford.chal">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <application
-        android:name=".dagger.MyApplication"
+        android:name=".MyApplication"
         android:importantForAutofill="no"
         android:allowBackup="true"
         android:icon="@mipmap/chalappicon"
@@ -23,26 +17,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        
-        <activity android:name=".account.signup.SignUpActivity">
-        </activity>
 
-        <activity android:name=".account.socialmedia.SocialMediaWebActivity">
         </activity>
-
-        <activity android:name=".account.createaccount.CreateAccountActivity"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-
-        <activity android:name=".account.forgotpassword.ForgotPasswordActivity"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
-
-        <activity android:name=".account.uploadphoto.UploadPhotoActivity"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
-
     </application>
 
 </manifest>

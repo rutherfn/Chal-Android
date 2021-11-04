@@ -1,4 +1,4 @@
-package com.nicholasrutherford.chal.dagger
+package com.nicholasrutherford.chal
 
 import android.app.Application
 import com.nicholasrutherford.chal.BuildConfig

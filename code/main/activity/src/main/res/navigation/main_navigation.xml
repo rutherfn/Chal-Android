@@ -13,16 +13,16 @@
         android:name="com.nicholasrutherford.chal.main.splash.SplashDialogFragment">
 
         <action
-            android:id="@+id/action_homeFragment_to_nav_graph_b"
-            app:destination="@id/nav_graph_login"
-            app:popUpTo="@+id/nav_graph_login"
-            />
+            android:id="@+id/action_homeFragment_to_nav_graph_a"
+            app:destination="@id/nav_graph_splash" />
 
         <action
-            android:id="@+id/action_NewsFeedFragments_to_nav_graph_b"
-            app:destination="@+id/nav_graph_news_feed"
-            app:popUpTo="@navigation/nav_graph_news_feed"
-            />
+            android:id="@+id/action_homeFragment_to_nav_graph_b"
+            app:destination="@id/nav_graph_login" />
+
+        <action
+            android:id="@+id/action_newsFragment_to_nav_graph_b"
+            app:destination="@id/nav_graph_news_feed" />
 
     </fragment>
 </navigation>
