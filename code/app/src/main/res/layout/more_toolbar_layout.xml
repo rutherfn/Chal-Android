@@ -23,7 +23,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_menu"
+        android:text="dadadadad"
         android:layout_marginLeft="@dimen/margin_10dp"
         android:layout_marginStart="@dimen/margin_10dp"
         android:textColor="@color/colorSmokeWhite"

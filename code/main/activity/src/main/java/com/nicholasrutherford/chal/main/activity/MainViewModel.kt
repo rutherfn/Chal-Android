@@ -71,24 +71,6 @@ class MainViewModel @ViewModelInject constructor(
         return Uri.parse(path)
     }
 
-    private fun navigateToProgressUpload(bitmapDrawable: BitmapDrawable) {
-       // val title = readSharedPreference.readProgressTitle()
-       // val caption = readSharedPreference.readProgressCaption()
-
-        //   navigation.pop()
-
-        // navigation.showProgressUpload(
-        //     isUpdate = true,
-        //     title = title,
-        //     caption = caption,
-        //     photoUri = selectedPhotoUri,
-        //     bitmapDrawable = bitmapDrawable
-        // )
-
-      //  clearSharedPreference.clearProgressTitle()
-       // clearSharedPreference.clearProgressCaption()
-    }
-
    // private fun captureTestFairyScreenshot() = testFairy.takeScreenshot()
 
     fun onBackPressed(entryCount: Int) {
