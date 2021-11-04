@@ -107,7 +107,7 @@ abstract class BaseFragment<VB: ViewBinding>(
 
     fun showAlert(id: Int, title: String?, message: String?, shouldCloseApp: Boolean, alertType: AlertType?) {
         if (alertType == AlertType.REGULAR_OK_ALERT) {
-            fragmentNavigation?.showOkAlert(title, message)
+            fragmentNavigation?.showOkAlert(title, message, shouldCloseApp)
         } else if (alertType == AlertType.YES_ALERT_WITH_ACTION) {
             fragmentNavigation?.showYesAlert(id, title, message, shouldCloseApp)
         } else if (alertType == AlertType.YES_NO_ALERT_WITH_ACTION) {
@@ -117,7 +117,7 @@ abstract class BaseFragment<VB: ViewBinding>(
 
     fun showOkAlert(title: String, message: String) {
         // exapnd on this down the line
-        fragmentNavigation?.showOkAlert(title, message)
+        fragmentNavigation?.showOkAlert(title, message, false)
     }
 
     fun Bitmap.rotate(degrees: Float): Bitmap {

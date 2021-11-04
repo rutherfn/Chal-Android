@@ -26,13 +26,18 @@ class BaseFragmentNavigation(private val fragmentActivity: FragmentActivity) {
 
     fun hideFlowerProgress() = flowerLoadingDialog?.dismiss()
 
-    fun showOkAlert(title: String?, message: String?) {
+    fun showOkAlert(title: String?, message: String?, shouldCloseApp: Boolean) {
         val errorForgotPasswordDialogBuilder = AlertDialog.Builder(fragmentActivity)
 
         errorForgotPasswordDialogBuilder.setMessage(message)
             .setCancelable(false)
             .setPositiveButton(fragmentActivity.getString(R.string.ok)) { dialog, _ ->
-                dialog.cancel()
+                if (shouldCloseApp) {
+                    dialog.cancel()
+                    finish()
+                } else {
+                    dialog.cancel()
+                }
             }
 
         val errorAlert = errorForgotPasswordDialogBuilder.create()

@@ -44,8 +44,13 @@ class MoreFragment @Inject constructor(): BaseFragment<FragmentMoreBinding>(
                 viewModel._shouldDismissProgress
             )
         }
-
-        collectAlertAsUpdated()
+        lifecycleScope.launch {
+            collectShouldShowAlertResult(
+                this@MoreFragment.id,
+                viewModel.alert,
+                viewModel._alert
+            )
+        }
     }
 
     override fun updateTypefaces() {
@@ -64,23 +69,7 @@ class MoreFragment @Inject constructor(): BaseFragment<FragmentMoreBinding>(
         }
     }
 
-    override fun collectAlertAsUpdated() {
-        lifecycleScope.launch {
-            viewModel.shouldShowAlert.collect { isShouldShowAlert ->
-                if (isShouldShowAlert && viewModel.alertType == 1) {
-                    showOkAlert(title = viewModel.alertTitle, message = viewModel.alertMessage)
-                } else if (isShouldShowAlert && viewModel.alertType == 2) {
-                    showClosingOutAppProgressAlert(
-                        resId = this@MoreFragment.id,
-                        title = viewModel.alertTitle,
-                        message = viewModel.alertMessage,
-                        shouldCloseApp = true
-                    )
-                }
-                viewModel.setShouldShowAlertAsNotUpdated()
-            }
-        }
-    }
+    override fun collectAlertAsUpdated() = Unit
 
     override fun onListener() {
         binding?.let { binding ->
