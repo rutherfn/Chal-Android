@@ -56,9 +56,6 @@ class MoreFragment @Inject constructor(private val application: Application) : D
     }
 
     override fun clickListeners(bind: FragmentMoreBinding) {
-        bind.tbMore.ibMoreBack.setOnClickListener {
-            // take the user to the my feed menu
-        }
         bind.clMore.cvMyProfile.setOnClickListener {
             moreViewModel.onMyProfileClicked()
         }

@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nicholarutherford.chal.more.databinding.FragmentMoreBinding
+import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.ui.base_fragment.BaseFragment
 import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import dagger.hilt.android.AndroidEntryPoint

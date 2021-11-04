@@ -31,7 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/fragment_forgot_password.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2210144927536232" />
-        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.41354166666666664" />
+        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.10089686098654709" />
         <entry key="app/src/main/res/layout/fragment_my_friends.xml" value="0.1887031408308004" />
         <entry key="app/src/main/res/layout/fragment_profiles.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/fragment_progress_upload.xml" value="0.2153846153846154" />
@@ -41,6 +41,7 @@
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.2259963768115942" />
         <entry key="app/src/main/res/layout/friends_empty_state_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/more_layout.xml" value="0.41354166666666664" />
+        <entry key="app/src/main/res/layout/more_toolbar_layout.xml" value="0.18161094224924013" />
         <entry key="app/src/main/res/layout/my_challenges_header_layout.xml" value="0.14210526315789473" />
         <entry key="app/src/main/res/layout/my_profile_layout.xml" value="0.3148148148148148" />
         <entry key="app/src/main/res/layout/news_feed_banner_layout.xml" value="0.24096385542168675" />
