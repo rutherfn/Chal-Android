@@ -105,7 +105,7 @@ class MoreViewModel @ViewModelInject constructor(
     }
 
     fun onReportBugClicked() {
-        featureNotImplementedYetAlert()
+        navigation.showBugReport()
     }
 
     fun onUploadProgressClicked() {

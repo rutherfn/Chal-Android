@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ApplicationComponent
 
 @Module
 @InstallIn(ApplicationComponent::class)
-abstract class MoreModule {
+abstract class MoreNavigationModule {
 
     @Binds
     abstract fun bindMoreNavigation(moreNavigationImpl: MoreNavigationImpl): MoreNavigation
