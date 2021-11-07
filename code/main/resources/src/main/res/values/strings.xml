@@ -101,9 +101,12 @@
     <string name="error_updating_data_title">Error Updating Data</string>
     <string name="error_updating_data_desc">Error updating your progress! Please press OK and try again!</string>
     <string name="first_name">First Name</string>
+    <string name="from_caoture">From Capture</string>
+    <string name="from_gallery">From Gallery</string>
     <string name="header_font_bold_text_title">Header Bold Font</string>
     <string name="hex_black">#000000</string>
     <string name="hex_white">#FFFFFF</string>
+    <string name="how_would_you_like_to_upload_your_image">How would you like to upload your image? Select from capture if you want to take a picture. Or from gallery if you want to select a image from your devices saved photos.</string>
     <string name="high">High</string>
     <string name="issue_creating_your_account">Issue creating your account. Please try again</string>
     <string name="issue_uploading_image_to_server">Issue uploading image to server. Please Try Again</string>
@@ -238,6 +241,7 @@
     <string name="update_progress">Update Progress</string>
     <string name="upload">Upload</string>
     <string name="upload_image">Upload Image</string>
+    <string name="uploading_image">Uploading Image</string>
     <string name="upload_post">Upload Post</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
     <string name="yes">Yes</string>

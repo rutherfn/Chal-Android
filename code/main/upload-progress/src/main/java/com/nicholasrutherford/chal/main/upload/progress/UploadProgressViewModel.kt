@@ -139,8 +139,8 @@ class UploadProgressViewModel @ViewModelInject constructor(
     fun updateIsPhotoReadyToBeUpdated(isPhotoReadyToBeUpdated: Boolean) {
         this.isPhotoReadyToBeUpdated = isPhotoReadyToBeUpdated
         setShouldSetAlertAsUpdated(
-            title = "Some text ",
-            message = "Some alert",
+            title = application.getString(R.string.uploading_image),
+            message = application.getString(R.string.how_would_you_like_to_upload_your_image),
             type = AlertType.CAMERA_OR_GALLERY_ALERT,
             shouldCloseAppAfterDone = false
         )

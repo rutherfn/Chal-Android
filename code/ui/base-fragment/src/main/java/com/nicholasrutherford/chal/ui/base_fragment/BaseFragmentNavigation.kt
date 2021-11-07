@@ -134,11 +134,11 @@ class BaseFragmentNavigation(private val fragmentActivity: FragmentActivity) {
 
         alertBuilder.setMessage(message)
             .setCancelable(true)
-            .setPositiveButton("From Gallery") { dialog, _ ->
+            .setPositiveButton(fragmentActivity.getString(R.string.from_gallery)) { dialog, _ ->
                 dialog.cancel()
                 _shouldShowGallery.value = true
             }
-            .setNegativeButton("From Capture") { dialog, _ ->
+            .setNegativeButton(fragmentActivity.getString(R.string.from_caoture)) { dialog, _ ->
                 dialog.cancel()
                 _shouldShowCapture.value = true
             }
