@@ -144,8 +144,6 @@ class UploadProgressViewModel @ViewModelInject constructor(
             type = AlertType.CAMERA_OR_GALLERY_ALERT,
             shouldCloseAppAfterDone = false
         )
-        // TODO prompt to prompt me if i want to take a picture or choose one from my gallery
-//        this.isPhotoReadyToBeUpdated = isPhotoReadyToBeUpdated
     }
 
     fun onDiscardPostClicked() {

@@ -34,6 +34,7 @@
     <string name="chal_menu">Chal Menu</string>
     <string name="chat">Chat</string>
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>
+    <string name="click_image_to_take_a_picture_or_choose_from_library">Click image to take a picture or choose from your library.</string>
     <string name="click_to_refresh">Click to refresh</string>
     <string name="close">CLOSE</string>
     <string name="creating_your_account">Creating Your Account</string>
@@ -234,7 +235,6 @@
     <string name="success_you_joined_the">Success! You joined the</string>
     <string name="teaser_challenge">Teaser Challenge</string>
     <string name="to_reset_password">To Reset Password.</string>
-    <string name="take_a_picture_or_choose_from_library">Take a photo or choose from your library.</string>
     <string name="try_again">Try Again</string>
     <string name="turn_on_all_features">Turn On All Features</string>
     <string name="username">Username</string>
