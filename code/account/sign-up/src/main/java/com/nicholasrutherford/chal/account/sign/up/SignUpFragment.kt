@@ -69,15 +69,15 @@ class SignUpFragment @Inject constructor(): BaseFragment<SignUpFragmentBinding>(
             }
             binding.ivFacebook.setOnClickListener {
                 viewModel.onFacebookClicked()
-                navigateToUrl(viewModel.viewState.socialMediaUrl)
+                openUrl(viewModel.viewState.socialMediaUrl)
             }
             binding.ivLinkedin.setOnClickListener {
                 viewModel.onLinkedinClicked()
-                navigateToUrl(viewModel.viewState.socialMediaUrl)
+                openUrl(viewModel.viewState.socialMediaUrl)
             }
             binding.ivGram.setOnClickListener {
                 viewModel.onInstagramClicked()
-                navigateToUrl(viewModel.viewState.socialMediaUrl)
+                openUrl(viewModel.viewState.socialMediaUrl)
             }
         }
     }

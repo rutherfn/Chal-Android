@@ -52,6 +52,12 @@ class UploadProgressFragment @Inject constructor() : BaseFragment<FragmentUpload
             )
         }
         lifecycleScope.launch {
+            collectIsGalleryResult()
+        }
+        lifecycleScope.launch {
+            collectIsTakePictureResult()
+        }
+        lifecycleScope.launch {
             collectShouldShowAlertResult(
                 this@UploadProgressFragment.id,
                 viewModel.alert,
@@ -127,7 +133,7 @@ class UploadProgressFragment @Inject constructor() : BaseFragment<FragmentUpload
 
             binding.clPostProgress.ivUploadImage.setOnClickListener {
                 viewModel.updateIsPhotoReadyToBeUpdated(true)
-                openGallery()
+        //        openGallery()
             }
 
             binding.tbUploadProgress.tbStock.setOnClickListener {
