@@ -44,9 +44,15 @@ abstract class BaseFragment<VB: ViewBinding>(
     var colorSmokeWhite: Int? = null
 
     private var _binding: VB? = null
-    val binding get() = _binding ?: null
+    val binding get() = _binding
 
     private var fragmentNavigation: BaseFragmentNavigation? = null
+
+    private val _isGallery = MutableStateFlow(false)
+    private val isGallery: StateFlow<Boolean> = _isGallery
+
+    private val _isTakePicture = MutableStateFlow(false)
+    private val isTakePicture: StateFlow<Boolean> = _isTakePicture
 
     abstract fun updateTypefaces()
 
@@ -63,19 +69,15 @@ abstract class BaseFragment<VB: ViewBinding>(
     }
 
     fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = GALLERY_TYPE
-
-        activity?.startActivityForResult(intent, GALLERY_REQUEST_CODE)
+        // if doesn't have gallery permission, ask for it and then if they do open it
+        fragmentNavigation?.startActivityResultForGallerty()
     }
 
     fun openCamera() {
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
         if (!hasCameraPermission()) {
             requestCameraPermission()
         } else {
-            activity?.startActivityForResult(cameraIntent, CAMERA_CAPTURE_REQUEST)
+            fragmentNavigation?.startActivityResultForCamera()
         }
     }
 
@@ -94,10 +96,8 @@ abstract class BaseFragment<VB: ViewBinding>(
         )
     }
 
-    fun navigateToUrl(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = ((Uri.parse(url)))
-        activity?.startActivity(intent)
+    fun openUrl(url: String) {
+        fragmentNavigation?.startActivityForUrl(url)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,
@@ -116,6 +116,8 @@ abstract class BaseFragment<VB: ViewBinding>(
             fragmentNavigation?.showYesAlert(id, title, message, shouldCloseApp)
         } else if (alertType == AlertType.YES_NO_ALERT_WITH_ACTION) {
             fragmentNavigation?.showYesAndNoAlert(id, title, message)
+        } else if (alertType == AlertType.CAMERA_OR_GALLERY_ALERT) {
+            fragmentNavigation?.showCameraOrGalleryAlert(_isGallery, _isTakePicture, title, message)
         }
     }
 
@@ -176,6 +178,24 @@ abstract class BaseFragment<VB: ViewBinding>(
                 )
             }
             _shouldShowAlert.value = Alert(null, null, null, false)
+        }
+    }
+
+    suspend fun collectIsGalleryResult() {
+        isGallery.collect { isShouldShowGallery ->
+            if (isShouldShowGallery) {
+                openGallery()
+            }
+            _isGallery.value = false
+        }
+    }
+
+    suspend fun collectIsTakePictureResult() {
+        isTakePicture.collect { isShouldTakeAPicture ->
+            if (isShouldTakeAPicture) {
+                openCamera()
+            }
+            _isTakePicture.value = false
         }
     }
 

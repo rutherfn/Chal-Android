@@ -137,8 +137,13 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     fun updateIsPhotoReadyToBeUpdated(isPhotoReadyToBeUpdated: Boolean) {
-        // TODO prompt to prompt me if i want to take a picture or choose one from my gallery
         this.isPhotoReadyToBeUpdated = isPhotoReadyToBeUpdated
+        setShouldSetAlertAsUpdated(
+            title = application.getString(R.string.uploading_image),
+            message = application.getString(R.string.how_would_you_like_to_upload_your_image),
+            type = AlertType.CAMERA_OR_GALLERY_ALERT,
+            shouldCloseAppAfterDone = false
+        )
     }
 
     fun onDiscardPostClicked() {

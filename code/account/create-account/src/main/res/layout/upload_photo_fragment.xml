@@ -32,7 +32,7 @@
             android:layout_width="@dimen/tv_take_picture_or_choose_from_library_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20dp"
-            android:text="@string/take_a_picture_or_choose_from_library"
+            android:text="@string/click_image_to_take_a_picture_or_choose_from_library"
             android:gravity="center_horizontal"
             android:textSize="@dimen/header_text_size"
             android:textStyle="bold"
@@ -41,23 +41,6 @@
             app:layout_constraintHorizontal_bias="0.662"
             app:layout_constraintStart_toStartOf="@+id/cvTakeAPhoto"
             app:layout_constraintTop_toBottomOf="@+id/cvTakeAPhoto"
-            />
-
-        <Button
-            android:id="@+id/btnChooseFormLibrary"
-            android:layout_width="@dimen/btn_choose_from_library_width"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20dp"
-            android:background="@drawable/corner_button"
-            android:padding="@dimen/padding_10dp"
-            android:textStyle="bold"
-            android:textSize="@dimen/sub_header_text_size"
-            android:text="@string/choose_from_library"
-            android:gravity="center_horizontal"
-            android:textColor="@color/colorSmokeWhite"
-            app:layout_constraintEnd_toEndOf="@+id/tvTakeAPictureOrChooseFromLibrary"
-            app:layout_constraintStart_toStartOf="@+id/tvTakeAPictureOrChooseFromLibrary"
-            app:layout_constraintTop_toBottomOf="@+id/tvTakeAPictureOrChooseFromLibrary"
             />
 
         <Button
@@ -71,9 +54,9 @@
             android:textStyle="bold"
             android:padding="@dimen/padding_10dp"
             android:layout_marginTop="@dimen/margin_16dp"
-            app:layout_constraintEnd_toEndOf="@+id/btnChooseFormLibrary"
-            app:layout_constraintStart_toStartOf="@+id/btnChooseFormLibrary"
-            app:layout_constraintTop_toBottomOf="@+id/btnChooseFormLibrary"
+            app:layout_constraintEnd_toEndOf="@+id/tvTakeAPictureOrChooseFromLibrary"
+            app:layout_constraintStart_toStartOf="@+id/tvTakeAPictureOrChooseFromLibrary"
+            app:layout_constraintTop_toBottomOf="@+id/tvTakeAPictureOrChooseFromLibrary"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

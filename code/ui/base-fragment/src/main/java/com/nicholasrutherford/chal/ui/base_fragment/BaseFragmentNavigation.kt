@@ -3,10 +3,14 @@ package com.nicholasrutherford.chal.ui.base_fragment
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
+import android.provider.MediaStore
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 const val SEND_EMAIL_TYPE = "message/rfc822"
 
@@ -28,6 +32,24 @@ class BaseFragmentNavigation(private val fragmentActivity: FragmentActivity) {
     }
 
     fun hideFlowerProgress() = flowerLoadingDialog?.dismiss()
+
+    fun startActivityResultForGallerty() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = GALLERY_TYPE
+
+        fragmentActivity.startActivityForResult(intent, GALLERY_REQUEST_CODE)
+    }
+
+    fun startActivityResultForCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        fragmentActivity.startActivityForResult(cameraIntent, CAMERA_CAPTURE_REQUEST)
+    }
+
+    fun startActivityForUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = ((Uri.parse(url)))
+        fragmentActivity.startActivity(intent)
+    }
 
     fun showCreateEmailForBug(reporterName: String, bugTitle: String, bugDesc: String, priorityLevel: String) {
         try {
@@ -105,5 +127,25 @@ class BaseFragmentNavigation(private val fragmentActivity: FragmentActivity) {
         appProgressAlert.setTitle(title)
 
         appProgressAlert.show()
+    }
+
+    fun showCameraOrGalleryAlert(_shouldShowGallery: MutableStateFlow<Boolean>, _shouldShowCapture: MutableStateFlow<Boolean>, title: String?, message: String?) {
+        val alertBuilder = AlertDialog.Builder(fragmentActivity)
+
+        alertBuilder.setMessage(message)
+            .setCancelable(true)
+            .setPositiveButton(fragmentActivity.getString(R.string.from_gallery)) { dialog, _ ->
+                dialog.cancel()
+                _shouldShowGallery.value = true
+            }
+            .setNegativeButton(fragmentActivity.getString(R.string.from_caoture)) { dialog, _ ->
+                dialog.cancel()
+                _shouldShowCapture.value = true
+            }
+
+        val alertBuilderCreate = alertBuilder.create()
+        alertBuilderCreate.setTitle(title)
+
+        alertBuilderCreate.show()
     }
 }

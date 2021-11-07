@@ -52,17 +52,18 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
                 viewModel._shouldDismissProgress
             )
         }
-        collectAlertAsUpdated()
-    }
-
-    override fun collectAlertAsUpdated() {
         lifecycleScope.launch {
-            viewModel.shouldShowAlert.collect { isShouldShowAlert ->
-                if (isShouldShowAlert) {
-                    showOkAlert(title = viewModel.alertTitle, message = viewModel.alertMessage)
-                }
-                viewModel.setShouldShowAlertAsNotUpdated()
-            }
+            collectIsGalleryResult()
+        }
+        lifecycleScope.launch {
+            collectIsTakePictureResult()
+        }
+        lifecycleScope.launch {
+            collectShouldShowAlertResult(
+                this@UploadPhotoFragment.id,
+                viewModel.alert,
+                viewModel._alert
+            )
         }
     }
 
@@ -71,6 +72,8 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
         viewModel.onImageUpdate()
     }
 
+    override fun collectAlertAsUpdated() = Unit
+
     override fun updateTypefaces() {
         binding?.let { binding ->
             typeface.setTextViewHeaderBoldTypeface(binding.tvTakeAPictureOrChooseFromLibrary)
@@ -78,21 +81,14 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
                 application,
                 R.style.ToolbarTextAppearance
             )
-
-            typeface.setTextViewBodyBoldTypeface(binding.btnChooseFormLibrary)
             typeface.setTextViewBodyBoldTypeface(binding.btnContinueUpload)
         }
     }
 
     override fun onListener() {
         binding?.let { binding ->
-            binding.btnChooseFormLibrary.setOnClickListener {
-                viewModel.updateIsPhotoReadyToBeUpdated(true)
-                openGallery()
-            }
             binding.cvTakeAPhoto.setOnClickListener {
                 viewModel.updateIsPhotoReadyToBeUpdated(true)
-                openCamera()
             }
             binding.btnContinueUpload.setOnClickListener {
                 viewModel.onContinueClicked()
@@ -108,4 +104,5 @@ class UploadPhotoFragment @Inject constructor(): BaseFragment<UploadPhotoFragmen
             }
         }
     }
+
 }

@@ -12,6 +12,7 @@ import com.nicholasrutherford.chal.Network
 import com.nicholasrutherford.chal.create.account.R
 import com.nicholasrutherford.chal.data.account.info.AccountInfo
 import com.nicholasrutherford.chal.data.account.info.ProfileInfo
+import com.nicholasrutherford.chal.data.elert.AlertType
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.storage.ChalFirebaseStorage
@@ -55,6 +56,12 @@ class UploadPhotoViewModel @ViewModelInject constructor(
 
     fun updateIsPhotoReadyToBeUpdated(isPhotoReadyToBeUpdated: Boolean) {
         this.isPhotoReadyToBeUpdated = isPhotoReadyToBeUpdated
+        setShouldSetAlertAsUpdated(
+            title = application.getString(R.string.uploading_image),
+            message = application.getString(R.string.how_would_you_like_to_upload_your_image),
+            type = AlertType.CAMERA_OR_GALLERY_ALERT,
+            shouldCloseAppAfterDone = false
+        )
     }
 
     fun onImageUpdate() {
@@ -71,7 +78,6 @@ class UploadPhotoViewModel @ViewModelInject constructor(
                 removeSharedPreference.removeProfilePictureDirectorySharedPreference()
                 setViewStateAsUpdated()
             }
-            updateIsPhotoReadyToBeUpdated(false)
         }
     }
 
@@ -97,10 +103,14 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     }
 
     private fun showErrorState(desc: String) {
-        alertTitle = application.getString(R.string.error_cant_create_account)
-        alertMessage = desc
+        setShouldSetAlertAsUpdated(
+            title = application.getString(R.string.error_cant_create_account),
+            message = desc,
+            type = AlertType.REGULAR_OK_ALERT,
+            shouldCloseAppAfterDone = false
+        )
         setShouldShowDismissProgressAsUpdated()
-        setShouldShowAlertAsUpdated()
+        //setShouldShowAlertAsUpdated()
     }
 
     private fun showStockErrorState() {
