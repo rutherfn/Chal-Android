@@ -137,6 +137,23 @@
             />
 
         <Button
+            android:id="@+id/btnUploadImage"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:text="@string/upload_image"
+            android:padding="@dimen/padding_10dp"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sub_header_text_size"
+            app:layout_constraintEnd_toEndOf="@+id/ivUploadImage"
+            app:layout_constraintStart_toStartOf="@+id/ivUploadImage"
+            app:layout_constraintTop_toBottomOf="@+id/ivUploadImage"
+            />
+
+        <Button
             android:id="@+id/btnPostProgressToMyFeed"
             android:layout_width="390dp"
             android:layout_height="wrap_content"
@@ -148,9 +165,9 @@
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/sub_header_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/ivUploadImage"
-            app:layout_constraintStart_toStartOf="@+id/ivUploadImage"
-            app:layout_constraintTop_toBottomOf="@+id/ivUploadImage"
+            app:layout_constraintEnd_toEndOf="@+id/btnUploadImage"
+            app:layout_constraintStart_toStartOf="@+id/btnUploadImage"
+            app:layout_constraintTop_toBottomOf="@+id/btnUploadImage"
             />
 
         <Button

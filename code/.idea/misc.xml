@@ -86,7 +86,9 @@
         <entry key="main/resources/src/main/res/drawable/ic_health_wellness.xml" value="0.1" />
         <entry key="main/resources/src/main/res/drawable/ic_health_wellness_white.xml" value="0.1" />
         <entry key="main/resources/src/main/res/drawable/ic_home.xml" value="0.22037037037037038" />
+        <entry key="main/resources/src/main/res/drawable/ic_photo.xml" value="0.15925925925925927" />
         <entry key="main/resources/src/main/res/drawable/ic_toolbar_arrow.xml" value="0.1" />
+        <entry key="main/resources/src/main/res/drawable/ic_upload.xml" value="0.15925925925925927" />
         <entry key="main/resources/src/main/res/drawable/ic_upload_bkacj.xml" value="0.1" />
         <entry key="main/resources/src/main/res/drawable/ic_upload_white.xml" value="0.1" />
         <entry key="main/resources/src/main/res/menu/bottom_navigation.xml" value="0.382051282051282" />
@@ -121,10 +123,6 @@
         <entry key="ui/shared-layout/src/main/res/layout/toolbar_back_button_with_text.xml" value="0.1" />
       </map>
     </option>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/nicholasrutherford/chal/dagger/ViewModelFactory.kt" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/nicholasrutherford/chal/dagger/ViewModelKey.kt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

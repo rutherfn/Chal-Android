@@ -133,7 +133,10 @@ class UploadProgressFragment @Inject constructor() : BaseFragment<FragmentUpload
 
             binding.clPostProgress.ivUploadImage.setOnClickListener {
                 viewModel.updateIsPhotoReadyToBeUpdated(true)
-        //        openGallery()
+            }
+
+            binding.clPostProgress.btnUploadImage.setOnClickListener {
+                viewModel.updateIsPhotoReadyToBeUpdated(true)
             }
 
             binding.tbUploadProgress.tbStock.setOnClickListener {
