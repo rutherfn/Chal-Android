@@ -129,6 +129,7 @@
     <string name="join_challenge"><u> Join Challenge!</u></string>
     <string name="join_a_challenge">Join A Challenge!</string>
     <string name="join_a_challenge_message">Are you ready to join the challenge? Enroll in any time bound challenge for a period of time, by posting progress of the challenge for 7 days! </string>
+    <string name="it_looks_like_your_enrolled_already_in_the_x_day_x_start_posting_progress_on_your_challenge_now">It looks like your enrolled already in the %d Day %s. Start posting progress on your challenge now!</string>
     <string-array name="listOfFonts">
         <item>@string/font_1</item>
         <item>@string/font_2</item>
@@ -245,6 +246,7 @@
     <string name="upload_post">Upload Post</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
     <string name="yes">Yes</string>
+    <string name="you_have_just_joined_the_x_day_x_get_started_by_posting_progress">You have just joined the %d Day %s. Get started by posting progress</string>
     <string name="you_reached_the_end_of_the_challenges">You reached the end of the challenges</string>
     <string name="you_reached_the_end_of_the_feed">You reached the end of the feed</string>
     <string name="font_1">ClinicaPro-Italic</string>

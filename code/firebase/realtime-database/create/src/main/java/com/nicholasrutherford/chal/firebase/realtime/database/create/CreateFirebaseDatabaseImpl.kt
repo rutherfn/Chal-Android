@@ -185,6 +185,32 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
         }
     }
 
+    private fun createLastDateOfChallenge(
+        allActiveChallengeIndex: Int,
+        userChallengeIndex: String,
+        lastDateOfChallenge: String
+    ) {
+        uid?.let { firebaseUid ->
+            databaseReferenceUsers.child(lastDateOfActiveChallengePath(firebaseUid, userChallengeIndex))
+                .setValue(lastDateOfChallenge)
+                .addOnSuccessListener {
+                    // TODO timber log here
+                }
+                .addOnFailureListener {
+                    // TODO timber log here
+                }
+
+            databaseReferenceActiveChallenges.child(lastDateAllActiveChallengePath(allActiveChallengeIndex))
+                .setValue(lastDateOfChallenge)
+                .addOnSuccessListener {
+                    // TODO timber log here
+                }
+                .addOnFailureListener {
+                    // TODO timber log here
+                }
+        }
+    }
+
     override fun createNewActiveChallenge(
         allActiveChallengeIndex: Int,
         userChallengeIndex: String,
@@ -198,6 +224,7 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
         creatDateChallengeExpireOfChallenge(allActiveChallengeIndex, userChallengeIndex, activeChallenge.challengeExpire)
         createCurrentDayOfChallenge(allActiveChallengeIndex, userChallengeIndex, activeChallenge.currentDay)
         createUsernameEnrolledOfChallenge(allActiveChallengeIndex, userChallengeIndex, activeChallenge.username)
+        createLastDateOfChallenge(allActiveChallengeIndex, userChallengeIndex, activeChallenge.lastDateOfChallenge)
     }
 
     override fun createChallengeBannerType(bannerType: Int) {
