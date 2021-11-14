@@ -97,6 +97,7 @@
     <string name="error_password">One capital letter and one number.</string>
     <string name="error_updating_data_title">Error Updating Data</string>
     <string name="error_updating_data_desc">Error updating your progress! Please press OK and try again!</string>
+    <string name="feature_not_implemented_please_come_back_later_to_see_if_feature_gets_implemented">Feature not implemented. Please come back later to see if feature gets implemented.</string>
     <string name="first_name">First Name</string>
     <string name="from_caoture">From Capture</string>
     <string name="from_gallery">From Gallery</string>
@@ -128,6 +129,7 @@
     <string name="it_looks_like_your_enrolled_already_in_the_x_day_x_start_posting_progress_on_your_challenge_now">It looks like your enrolled already in the %d Day %s. Start posting progress on your challenge now!</string>
     <string name="last_name">Last Name</string>
     <string name="log_out">Log out</string>
+    <string name="logged_out">Logged Out</string>
     <string name="looks_like_you_dont_have_any_friends">Looks like you havent had any friends yet!</string>
     <string name="looks_like_the_system_cant_detect_internet">Looks like the system can not detect internet. Please try connecting to a tnetwork</string>
     <string name="looks_like_were_missing_caption">Looks like you are missing a caption. Please enter info for all fields, in order to post progress,</string>
@@ -152,6 +154,7 @@
     <string name="news_feed">News Feed</string>
     <string name="no">No</string>
     <string name="not_a_valid_email">Not a valid email</string>
+    <string name="not_yet_implemented">Not yet implemented</string>
     <string name="not_enrolled_in_challenge">Not Enrolled In Challenge</string>
     <string name="not_enrolled_in_challenge_message">Currently you are not enrolled into any challenges! In order to upload progress, you must be enrolled in a challenge!</string>
     <string name="ok">OK</string>
@@ -209,6 +212,7 @@
     <string name="uploading_image">Uploading Image</string>
     <string name="upload_post">Upload Post</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
+    <string name="we_have_currently_logged_you_out_press_ok_to_confirm_log_out">We have currently logged you out. Press OK to confirm log out.</string>
     <string name="yes">Yes</string>
     <string name="you_have_just_joined_the_x_day_x_get_started_by_posting_progress">You have just joined the %d Day %s. Get started by posting progress</string>
     <string name="you_reached_the_end_of_the_challenges">You reached the end of the challenges</string>
