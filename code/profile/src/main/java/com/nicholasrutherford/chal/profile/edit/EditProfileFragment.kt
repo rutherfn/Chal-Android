@@ -47,10 +47,10 @@ class EditProfileFragment @Inject constructor(): BaseFragment<FragmentEditProfil
 
     override fun updateTypefaces() {
         binding?.let { binding ->
-//            binding.tbEditProfile.tbStock.setTitleTextAppearance(
-//                application,
-//                R.style.ToolbarTextAppearance
-//            )
+            binding.tbEditProfile.tbStock.setTitleTextAppearance(
+                application,
+                R.style.ToolbarTextAppearance
+            )
 
             typeface.setTextViewSubHeaderBoldTypeface(binding.clEditProfile.tvEditMyProfile)
             typeface.setTextViewBodyItalicTypeface(binding.clEditProfile.tvEditMyProfileDescription)
@@ -72,9 +72,7 @@ class EditProfileFragment @Inject constructor(): BaseFragment<FragmentEditProfil
         }
     }
 
-    override fun collectAlertAsUpdated() {
-
-    }
+    override fun collectAlertAsUpdated() = Unit
 
     override fun onListener() {
         binding?.let { binding ->
@@ -88,12 +86,13 @@ class EditProfileFragment @Inject constructor(): BaseFragment<FragmentEditProfil
 
                 viewModel.onEditProfileClicked(username, firstName, lastName, bio)
             }
-           // binding.tbEditProfile.tbStock.setOnClickListener { viewModel.onToolbarBackClicked() }
+            binding.tbEditProfile.tbStock.setOnClickListener { viewModel.onToolbarBackClicked() }
         }
     }
 
     override fun updateView() {
         binding?.let { binding ->
+            binding.tbEditProfile.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
 
             // placeholder
             Glide.with(this)
@@ -105,9 +104,7 @@ class EditProfileFragment @Inject constructor(): BaseFragment<FragmentEditProfil
             binding.clEditProfile.etLastName.setText(viewModel.viewState.lastName)
             binding.clEditProfile.etBio.setText(viewModel.viewState.bio)
 
-           // binding.tbEditProfile.tbStock.title = "Edit Profile"
-
-           // binding.tbEditProfile.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
+            binding.tbEditProfile.tbStock.title = viewModel.viewState.toolbarText
         }
     }
 }

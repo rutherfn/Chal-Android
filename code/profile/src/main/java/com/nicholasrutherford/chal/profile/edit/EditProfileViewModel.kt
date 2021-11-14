@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.nicholasrutherford.chal.firebase.realtime.database.create.CreateFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
+import com.nicholasrutherford.chal.profile.R
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -75,5 +76,6 @@ class EditProfileViewModel @ViewModelInject constructor(
         override var bio: String? = null
         override var firstName: String? = null
         override var lastName: String? = null
+        override var toolbarText: String = application.getString(R.string.edit_profile)
     }
 }
