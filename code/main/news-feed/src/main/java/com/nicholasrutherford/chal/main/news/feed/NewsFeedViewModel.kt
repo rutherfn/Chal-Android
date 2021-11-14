@@ -55,7 +55,6 @@ class NewsFeedViewModel @ViewModelInject constructor(
     val viewState = NewsFeedViewStateImpl()
 
     init {
-        setShouldShowProgressAsUpdated()
         viewModelScope.launch {
             loggedInUsername.collect { loggedInUsername ->
                 username = loggedInUsername
@@ -74,6 +73,8 @@ class NewsFeedViewModel @ViewModelInject constructor(
                 setCurrentBannerType(bannerTypeValue)
             }
         }
+
+        setShouldShowProgressAsUpdated()
 
         fetchLoggedInUsername()
 
@@ -164,7 +165,7 @@ class NewsFeedViewModel @ViewModelInject constructor(
     fun waitBeforeWeDismissProgress() {
         Handler(Looper.getMainLooper()).postDelayed({
             setShouldShowDismissProgressAsUpdated()
-        }, 1500.toLong())
+        }, 1000.toLong())
     }
 
 //    fun updateDayOfAllActiveChallenges(activeChallenges: List<ActiveChallengesListResponse>) {
@@ -257,12 +258,6 @@ class NewsFeedViewModel @ViewModelInject constructor(
 
     fun onAddFriendsEmptyStateClicked() {
         // showPeoplkesList
-    }
-
-    fun onRefreshTabClicked() {
-        fetchUserEnrolledInAChallenge()
-        fetchAllPosts()
-        fetchAllUserActiveChallenges()
     }
 
     fun onAddProgressClicked() {
