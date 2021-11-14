@@ -23,8 +23,9 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-// not used
-const val DATE_FORMAT = "dd/M/yyyy hh:mm:ss"
+@Suppress("MagicNumber")
+const val DATE_FORMAT = "M/dd/yyyy hh:mm"
+const val CURRENT_FIRST_DAY = 0
 
 class ChallengeDetailViewModel @ViewModelInject constructor(
     private val application: Application,
@@ -155,7 +156,6 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
     }
 
     private fun dateChallengeExpires(daysAgo: Int): String {
-        // TODO not used, can be used to record actual date of a challenge down the line
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, +daysAgo)
 
@@ -183,7 +183,6 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
     private fun attemptToEnrollUserIntoActiveChallenge(joinChallenge: JoinChallenge) {
         if (joinChallenge.isAbleToEnroll) {
             val starterIndex = joinChallenge.size.toString()
-            val challengeExpire = this.dayInChallenge() + 8
 
             createFirebaseDatabase.createNewActiveChallenge(
                 allUserChallengesList.size,
@@ -193,14 +192,15 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
                     bio = selectedAvailableChallenge?.desc ?: application.getString(R.string.empty_string),
                     categoryName = selectedAvailableChallenge?.category ?: application.getString(R.string.empty_string),
                     numberOfDaysInChallenge = selectedAvailableChallenge?.duration ?: 0,
-                    challengeExpire = "7",
-                    currentDay = 0,
-                    username = username
+                    challengeExpire = selectedAvailableChallenge?.duration.toString(),
+                    currentDay = CURRENT_FIRST_DAY,
+                    username = username,
+                    lastDateOfChallenge = dateChallengeExpires(selectedAvailableChallenge?.duration ?: 0)
                 ))
 
             removeSharedPreference.removeChallengeBannerPreferences()
 
-            createSharedPreference.createChallengeBannerTypeTitleSharedPreference("Success! You joined the")
+            createSharedPreference.createChallengeBannerTypeTitleSharedPreference(application.getString(R.string.success_you_joined_the))
             createSharedPreference.createChallengeBannerTypeDescSharedPreference(
                 selectedAvailableChallenge?.title ?: application.getString(R.string.empty_string
                 ))
@@ -210,17 +210,21 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
             createFirebaseDatabase.createChallengeBannerType(ChallengeBannerType.JOINED_CHALLENGE.value)
 
             alertTitle = selectedAvailableChallenge?.title ?: application.getString(R.string.empty_string)
-            alertMessage = "You have just joined the ${selectedAvailableChallenge!!.duration} " +
-                    "Day ${selectedAvailableChallenge!!.title}! Get started by posting progress."
-
-            setShouldShowAlertAsUpdated()
+            alertMessage = selectedAvailableChallenge?.let { challenge ->
+                application.getString(R.string.you_have_just_joined_the_x_day_x_get_started_by_posting_progress, challenge.duration, challenge.title)
+            }?: run {
+                application.getString(R.string.empty_string)
+            }
         } else {
             alertTitle = application.getString(R.string.error_can_not_join_challenge)
-            alertMessage = "It looks like your enrolled already in the ${selectedAvailableChallenge!!.duration}" +
-                    " Day ${selectedAvailableChallenge!!.title}! Start posting progress on your challenge now! "
-
-            setShouldShowAlertAsUpdated()
+            alertMessage = selectedAvailableChallenge?.let { challenge ->
+                application.getString(R.string.it_looks_like_your_enrolled_already_in_the_x_day_x_start_posting_progress_on_your_challenge_now, challenge.duration, challenge.title)
+            }?: run {
+                application.getString(R.string.empty_string)
+            }
         }
+
+        setShouldShowAlertAsUpdated()
     }
 
     fun onBackClicked() = navigator.navigateBack()

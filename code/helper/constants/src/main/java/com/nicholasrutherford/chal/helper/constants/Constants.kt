@@ -66,6 +66,7 @@ const val CATEGORY_NAME = "categoryName"
 const val NAME = "name"
 const val NUMBER_OF_DAYS_OF_CHALLENGE = "numberOfDaysOfChallenge"
 const val DATE_CHALLENGE_EXPIRED = "dateChallengeExpired"
+const val LAST_DATE_OF_CHALLENGE = "lastDateOfChallenge"
 
 const val USER_CURRENT_DAY = "currentDay"
 
@@ -98,6 +99,7 @@ fun daysInChallengeActiveChallengePath(uid: String, index: String): String { ret
 fun dateChallengeExpireActiveChallengePath(uid: String, index: String): String { return "$uid$ACTIVE_CHALLENGES$index/$DATE_CHALLENGE_EXPIRED"}
 fun currentDayActiveChallengePath(uid: String, index: String): String { return "$uid$ACTIVE_CHALLENGES$index/$USER_CURRENT_DAY"}
 fun usernameActiveChallengePath(uid: String, index: String): String { return "$uid$ACTIVE_CHALLENGES$index/$USERNAME"}
+fun lastDateOfActiveChallengePath(uid: String, index: String): String { return "$uid$ACTIVE_CHALLENGES$index/$LAST_DATE_OF_CHALLENGE"}
 
 // active challenges in active-challenges table paths
 fun nameAllActiveChallengePath(allChallengesIndex: Int): String { return "$allChallengesIndex/$NAME" }
@@ -107,6 +109,7 @@ fun daysInChallengeAllActiveChallengePath(allChallengesIndex: Int): String { ret
 fun dateChallengeExpireAllActiveChallengePath(allChallengesIndex: Int): String { return "$allChallengesIndex/$DATE_CHALLENGE_EXPIRED"}
 fun currentDayAllActiveChallengePath(allChallengesIndex: Int): String { return "$allChallengesIndex/$USER_CURRENT_DAY"}
 fun usernameAllActiveChallengePath(allChallengesIndex: Int): String { return "$allChallengesIndex/$USERNAME"}
+fun lastDateAllActiveChallengePath(allChallengesIndex: Int): String { return "$allChallengesIndex/$LAST_DATE_OF_CHALLENGE"}
 
 // active challenges posts in user table paths
 fun titleActiveChallengeUserPostPath(uid: String, userActiveChallengeIndex: Int, userActiveChallengePostIndex: Int) : String {
