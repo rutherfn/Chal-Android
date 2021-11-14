@@ -33,7 +33,7 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
     private val removeSharedPreference: RemoveSharedPreference,
     private val createFirebaseDatabase: CreateFirebaseDatabase,
     private val fetchFirebaseDatabase: FetchFirebaseDatabase,
-    private val navigator: Navigator
+    private val navigation: ChallengeDetailNavigation
 ) : BaseViewModel() {
 
     private var isAbleToEnroll: Boolean = true
@@ -227,7 +227,11 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
         setShouldShowAlertAsUpdated()
     }
 
-    fun onBackClicked() = navigator.navigateBack()
+    fun onRelatedChallengeClicked(selectedAvailableChallenge: AvailableChallenges) {
+        navigation.showRelatedChallengeDetail(selectedAvailableChallenge = selectedAvailableChallenge)
+    }
+
+    fun onBackClicked() = navigation.onNavigateBack()
 
     inner class ChallengeDetailViewStateImpl: ChallengeDetailViewState {
         override var title: String = application.getString(R.string.empty_string)

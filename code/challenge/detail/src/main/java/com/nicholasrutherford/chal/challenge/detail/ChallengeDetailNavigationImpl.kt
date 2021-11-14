@@ -12,6 +12,8 @@ class ChallengeDetailNavigationImpl @Inject constructor() : ChallengeDetailNavig
     lateinit var navigator: Navigator
 
     override fun showRelatedChallengeDetail(selectedAvailableChallenge: AvailableChallenges) {
+        onNavigateBack()
+
         val challengeRelatedDetailBundle =
             bundleOf(
                 CHALLENGE_TITLE to selectedAvailableChallenge.title,
@@ -25,4 +27,6 @@ class ChallengeDetailNavigationImpl @Inject constructor() : ChallengeDetailNavig
 
         navigator.navigateWithBundle(challengeRelatedDetailBundle, R.id.nav_graph_challenge_detail)
     }
+
+    override fun onNavigateBack() = navigator.navigateBack()
 }

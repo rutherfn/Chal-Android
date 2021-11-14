@@ -67,6 +67,26 @@ class ChallengeDetailAdapter(
             Glide.with(application).load(joinableChallenges[position].challenges[2].url).into(binding.ivChallengeThree)
             binding.tvChallengeThreeName.text = joinableChallenges[position].challenges[2].title
             binding.tvChallengeThreeLength.text = joinableChallenges[position].challenges[2].time
+
+            onClickListeners(position)
+        }
+
+        private fun onClickListeners(position: Int) {
+            binding.ivChallengeOne.setOnClickListener {
+                viewModel.onRelatedChallengeClicked(
+                    selectedAvailableChallenge = joinableChallenges[position].challenges[0]
+                )
+            }
+            binding.ivChallengeTwo.setOnClickListener {
+                viewModel.onRelatedChallengeClicked(
+                    selectedAvailableChallenge = joinableChallenges[position].challenges[1]
+                )
+            }
+            binding.ivChallengeThree.setOnClickListener {
+                viewModel.onRelatedChallengeClicked(
+                    selectedAvailableChallenge = joinableChallenges[position].challenges[2]
+                )
+            }
         }
 
         private fun categoryChallengeIcon(pos: Int): Int {

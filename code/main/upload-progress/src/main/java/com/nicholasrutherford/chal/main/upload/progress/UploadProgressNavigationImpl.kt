@@ -12,5 +12,4 @@ class UploadProgressNavigationImpl @Inject constructor() : UploadProgressNavigat
     lateinit var navigator: Navigator
 
     override fun onNavigateBack() = navigator.navigateBack()
-
 }
