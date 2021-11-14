@@ -265,7 +265,7 @@ class NewsFeedViewModel @ViewModelInject constructor(
         fetchAllUserActiveChallenges()
     }
 
-    fun onAddProgressTabClicked() {
+    fun onAddProgressClicked() {
         if (isUserEnrolledInAChallenge) {
             navigation.showUploadProgress()
         } else {

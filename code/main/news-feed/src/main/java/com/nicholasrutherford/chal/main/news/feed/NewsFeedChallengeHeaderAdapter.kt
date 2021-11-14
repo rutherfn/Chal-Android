@@ -67,7 +67,7 @@ class NewsFeedChallengeHeaderAdapter(
 
         fun clickListeners() {
             binding.btnUpdateProgress.setOnClickListener {
-                newsFeedViewModel.onAddProgressTabClicked()
+                newsFeedViewModel.onAddProgressClicked()
             }
         }
 
