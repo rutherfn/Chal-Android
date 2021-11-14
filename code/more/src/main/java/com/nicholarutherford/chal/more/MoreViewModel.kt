@@ -7,6 +7,7 @@ import com.nicholasrutherford.chal.data.elert.AlertType
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
+import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,6 +19,7 @@ class MoreViewModel @ViewModelInject constructor(
     private val navigation: MoreNavigation,
     private val fetchFirebaseDatabase: FetchFirebaseDatabase,
     private val fetchSharedPreference: FetchSharedPreference,
+    private val removeSharedPreference: RemoveSharedPreference,
     private val application: Application
 ) : BaseViewModel() {
 
@@ -54,12 +56,13 @@ class MoreViewModel @ViewModelInject constructor(
     }
 
     fun onSignOutAccountClicked() {
+        removeSharedPreference.removeAllSharedPreferences()
         setShouldShowProgressAsUpdated()
 
         firebaseAuth.logUserOut()
         setShouldSetAlertAsUpdated(
-            title = "Logged out",
-            message = "We have currently logged you out. Press OK to confirm log out.",
+            title = application.getString(R.string.logged_out),
+            message = application.getString(R.string.we_have_currently_logged_you_out_press_ok_to_confirm_log_out),
             type = AlertType.REGULAR_OK_ALERT,
             shouldCloseAppAfterDone = true
         )
@@ -70,8 +73,8 @@ class MoreViewModel @ViewModelInject constructor(
 
     private fun featureNotImplementedYetAlert() {
         setShouldSetAlertAsUpdated(
-            title = "Not yet implemented",
-            message = "Feature not implemented. please come back later to see if feature gets implemented..",
+            title = application.getString(R.string.not_yet_implemented),
+            message = application.getString(R.string.feature_not_implemented_please_come_back_later_to_see_if_feature_gets_implemented),
             type = AlertType.REGULAR_OK_ALERT,
             shouldCloseAppAfterDone = false
         )

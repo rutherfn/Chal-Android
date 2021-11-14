@@ -53,11 +53,6 @@
     <string name="days_completed">%d out of %d days completed</string>
     <string name="do_not_have_account">Don\'t Have A Account?</string>
     <string name="debug">Debug</string>
-    <string-array name="debugOptions">
-        <item>Warning</item>
-        <item>Expired</item>
-        <item>@string/debug_change_configuration</item>
-    </string-array>
     <string name="debug_incorrect_password">Incorrect Password!</string>
     <string name="debug_change_configuration">•  Change App Configurations</string>
     <string name="debug_password_title">Please Enter Password In Order To Continue</string>
@@ -102,6 +97,7 @@
     <string name="error_password">One capital letter and one number.</string>
     <string name="error_updating_data_title">Error Updating Data</string>
     <string name="error_updating_data_desc">Error updating your progress! Please press OK and try again!</string>
+    <string name="feature_not_implemented_please_come_back_later_to_see_if_feature_gets_implemented">Feature not implemented. Please come back later to see if feature gets implemented.</string>
     <string name="first_name">First Name</string>
     <string name="from_caoture">From Capture</string>
     <string name="from_gallery">From Gallery</string>
@@ -131,40 +127,9 @@
     <string name="join_a_challenge">Join A Challenge!</string>
     <string name="join_a_challenge_message">Are you ready to join the challenge? Enroll in any time bound challenge for a period of time, by posting progress of the challenge for 7 days! </string>
     <string name="it_looks_like_your_enrolled_already_in_the_x_day_x_start_posting_progress_on_your_challenge_now">It looks like your enrolled already in the %d Day %s. Start posting progress on your challenge now!</string>
-    <string-array name="listOfFonts">
-        <item>@string/font_1</item>
-        <item>@string/font_2</item>
-        <item>@string/font_3</item>
-        <item>@string/font_4</item>
-        <item>@string/font_5</item>
-        <item>@string/font_6</item>
-        <item>@string/font_7</item>
-        <item>@string/font_8</item>
-        <item>@string/font_9</item>
-        <item>@string/font_10</item>
-        <item>@string/font_11</item>
-        <item>@string/font_12</item>
-        <item>@string/font_13</item>
-        <item>@string/font_14</item>
-    </string-array>
-    <string-array name="listOfFontsLocations">
-        <item>@string/font_1_location</item>
-        <item>@string/font_2_location</item>
-        <item>@string/font_3_location</item>
-        <item>@string/font_4_location</item>
-        <item>@string/font_5_location</item>
-        <item>@string/font_6_location</item>
-        <item>@string/font_7_location</item>
-        <item>@string/font_8_location</item>
-        <item>@string/font_9_location</item>
-        <item>@string/font_10_location</item>
-        <item>@string/font_11_location</item>
-        <item>@string/font_12_location</item>
-        <item>@string/font_13_location</item>
-        <item>@string/font_14_location</item>
-    </string-array>
     <string name="last_name">Last Name</string>
     <string name="log_out">Log out</string>
+    <string name="logged_out">Logged Out</string>
     <string name="looks_like_you_dont_have_any_friends">Looks like you havent had any friends yet!</string>
     <string name="looks_like_the_system_cant_detect_internet">Looks like the system can not detect internet. Please try connecting to a tnetwork</string>
     <string name="looks_like_were_missing_caption">Looks like you are missing a caption. Please enter info for all fields, in order to post progress,</string>
@@ -189,6 +154,7 @@
     <string name="news_feed">News Feed</string>
     <string name="no">No</string>
     <string name="not_a_valid_email">Not a valid email</string>
+    <string name="not_yet_implemented">Not yet implemented</string>
     <string name="not_enrolled_in_challenge">Not Enrolled In Challenge</string>
     <string name="not_enrolled_in_challenge_message">Currently you are not enrolled into any challenges! In order to upload progress, you must be enrolled in a challenge!</string>
     <string name="ok">OK</string>
@@ -246,36 +212,9 @@
     <string name="uploading_image">Uploading Image</string>
     <string name="upload_post">Upload Post</string>
     <string name="welcome_to_chal_text">Welcome to chal</string>
+    <string name="we_have_currently_logged_you_out_press_ok_to_confirm_log_out">We have currently logged you out. Press OK to confirm log out.</string>
     <string name="yes">Yes</string>
     <string name="you_have_just_joined_the_x_day_x_get_started_by_posting_progress">You have just joined the %d Day %s. Get started by posting progress</string>
     <string name="you_reached_the_end_of_the_challenges">You reached the end of the challenges</string>
     <string name="you_reached_the_end_of_the_feed">You reached the end of the feed</string>
-    <string name="font_1">ClinicaPro-Italic</string>
-    <string name="font_1_location">font/ClinicaPro-Italic.otf</string>
-    <string name="font_2">ClinicaPro-Regular</string>
-    <string name="font_2_location">font/ClinicaPro-Regular.otf</string>
-    <string name="font_3">NotoSans-Bold</string>
-    <string name="font_3_location">font/NotoSans-Bold.ttf</string>
-    <string name="font_4">NotoSans-Regular</string>
-    <string name="font_4_location">font/NotoSans-Regular.ttf</string>
-    <string name="font_5">OpenSans-Bold</string>
-    <string name="font_5_location">font/OpenSans-Bold.ttf</string>
-    <string name="font_6">OpenSans-Italic</string>
-    <string name="font_6_location">font/OpenSans-Italic.ttf</string>
-    <string name="font_7">OpenSans-Light</string>
-    <string name="font_7_location">font/OpenSans-Light.ttf</string>
-    <string name="font_8">OpenSans-Regular</string>
-    <string name="font_8_location">font/OpenSans-Regular.ttf</string>
-    <string name="font_9">Roboto-Bold</string>
-    <string name="font_9_location">font/Roboto-Bold.ttf</string>
-    <string name="font_10">Roboto-Italic</string>
-    <string name="font_10_location">font/Roboto-Italic.ttf</string>
-    <string name="font_11">Roboto-Light</string>
-    <string name="font_11_location">font/Roboto-Light.ttf</string>
-    <string name="font_12">Roboto-Regular</string>
-    <string name="font_12_location">font/Roboto-Regular.ttf</string>
-    <string name="font_13">UniNeue-HeavyItalic</string>
-    <string name="font_13_location">font/UniNeue-HeavyItalic.otf</string>
-    <string name="font_14">UniNeue-Light</string>
-    <string name="font_14_location">font/UniNeue-Light.otf</string>
 </resources>
