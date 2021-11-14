@@ -54,6 +54,7 @@ class MoreViewModel @ViewModelInject constructor(
     }
 
     fun onSignOutAccountClicked() {
+        // implement something here
         setShouldShowProgressAsUpdated()
 
         firebaseAuth.logUserOut()
