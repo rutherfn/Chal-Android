@@ -49,10 +49,6 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.let { binding ->
-            binding.tbMyFeed.inflateMenu(R.menu.navigation_news_feed)
-        }
-
         lifecycleScope.launch {
             collectViewStateResult(viewModel.viewStateUpdated, viewModel._viewStateUpdated)
         }
@@ -125,16 +121,6 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.navigation_refresh) {
-            viewModel.onRefreshTabClicked()
-            return true
-        } else if (item.itemId == R.id.navigation_add_progress) {
-            return true
-        }
-        return true
-    }
-
     override fun collectAlertAsUpdated() {
         lifecycleScope.launch {
             viewModel.shouldShowAlert.collect { isShouldShowAlert ->
@@ -173,19 +159,11 @@ class NewsFeedFragment @Inject constructor() : BaseFragment<FragmentNewsFeedBind
             binding.clFriendsEmptyState.btnAddFriendEmptyState.setOnClickListener {
                 viewModel.onAddFriendsEmptyStateClicked()
             }
-
-            binding.tbMyFeed.setOnMenuItemClickListener {
-                it?.let { item ->
-                    if (item.itemId == R.id.navigation_refresh) {
-                        viewModel.onRefreshTabClicked()
-                    } else if (item.itemId == R.id.navigation_add_progress) {
-                        viewModel.onAddProgressTabClicked()
-                    }
-                    true
-                } == true
-            }
             binding.clNewsFeedBanner.clBannerType.setOnClickListener {
                 viewModel.onBannerDismissedClicked()
+            }
+            binding.ivUpload.setOnClickListener {
+                viewModel.onAddProgressClicked()
             }
         }
     }

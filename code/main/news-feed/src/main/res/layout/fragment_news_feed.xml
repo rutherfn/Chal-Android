@@ -16,8 +16,19 @@
             app:titleTextColor="@color/colorSmokeWhite"
             app:title="@string/news_feed"
             android:gravity="center_horizontal"
-            app:popupTheme="@style/AppTheme"
+            app:popupTheme="@style/AppTheme">
+
+        <ImageView
+            android:id="@+id/ivUpload"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:src="@drawable/ic_upload_white"
+            android:layout_gravity="right"
             />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <SearchView
             android:id="@+id/svHome"
