@@ -5,4 +5,5 @@ interface EditProfileViewState {
     var firstName: String?
     var lastName: String?
     var bio: String?
+    var toolbarText: String
 }

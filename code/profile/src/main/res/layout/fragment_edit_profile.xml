@@ -8,6 +8,7 @@
         android:orientation="vertical">
 
         <include
+            android:id="@+id/tbEditProfile"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             layout="@layout/stock_toolbar_with_text"
