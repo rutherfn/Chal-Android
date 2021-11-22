@@ -24,8 +24,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("MagicNumber")
-const val DATE_FORMAT = "M/dd/yyyy hh:mm"
+const val DATE_FORMAT = "M/dd/yyyy"
 const val CURRENT_FIRST_DAY = 0
+
+// Function name: checkUserActiveChallenges
+// Steps for function
+
+// two functions for the script
+
+// 1st one: will loop through all the challenges, and check if the current days in between the current date the end date and the current date.
+// If the days in between, don't match up with the current day. Go ahead and auto increment that day. If the days in between are more then 1 from the current day, match the current days from the function
+// 2nd one: Will loop through all users, and check the current day field in each active challenge.
+    // if nay one of those fields are more then 7, then remove that whole active challenge(since the user then has not completed the challenge
 
 class ChallengeDetailViewModel @ViewModelInject constructor(
     private val application: Application,
