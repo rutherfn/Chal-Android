@@ -1,5 +1,5 @@
 plugins {
-    id (Dependencies.Plugin.Library)
+    id(Dependencies.Plugin.Library)
     kotlin(Dependencies.Plugin.Android)
     kotlin(Dependencies.Plugin.AndroidExtensions)
     kotlin(Dependencies.Plugin.Kapt)

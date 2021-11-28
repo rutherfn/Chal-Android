@@ -55,6 +55,7 @@
         <entry key="app/src/main/res/layout/toolbar_challenges_post.xml" value="0.1887031408308004" />
         <entry key="app/src/main/res/layout/toolbar_my_feed.xml" value="0.1" />
         <entry key="app/src/main/res/layout/toolbar_title_with_back_stack.xml" value="0.41354166666666664" />
+        <entry key="challenge-manager/src/main/res/layout/activity_challenge_manager.xml" value="0.1" />
         <entry key="challenge/detail/src/main/res/layout/challenge_detail_header_layout.xml" value="0.18161094224924013" />
         <entry key="challenge/detail/src/main/res/layout/challenge_detail_layout.xml" value="0.1641337386018237" />
         <entry key="challenge/detail/src/main/res/layout/challenge_detail_list.xml" value="0.18161094224924013" />
