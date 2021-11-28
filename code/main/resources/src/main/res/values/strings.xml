@@ -31,6 +31,7 @@
     <string name="challenge_feed">Challenge Feed</string>
     <string name="challenge_details">Challenge Details</string>
     <string name="challenge_description">A <b>new you begins here!</b> Browse through the different categories below to find the <b>#chal </b>journey that youd like to embark on.</string>
+    <string name="challenge_manager">Challenge Manager</string>
     <string name="chal_menu">Chal Menu</string>
     <string name="chat">Chat</string>
     <string name="cant_login_error">Can\'t find your account. Please try again or create a account!</string>

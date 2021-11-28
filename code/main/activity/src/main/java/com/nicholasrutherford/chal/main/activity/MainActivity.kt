@@ -21,7 +21,7 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
     @Inject
     lateinit var navigator: Navigator
 
-    var binding: ActivityMainBinding? = null
+    private var binding: ActivityMainBinding? = null
 
     private lateinit var navHostFragment: Fragment
 
