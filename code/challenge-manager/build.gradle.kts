@@ -53,6 +53,10 @@ dependencies {
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(Dependencies.Libs.Android.AppCompat)
+    implementation(Dependencies.Libs.Android.Ktx)
+    implementation(Dependencies.Libs.UI.ConstraintLayout)
+
     implementation(Dependencies.Libs.Debug.Timber)
 
     implementation(Dependencies.Libs.Navigation.NavigationFragment)

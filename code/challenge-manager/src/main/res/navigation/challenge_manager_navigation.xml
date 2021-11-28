@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/challenge_manager_navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/challenge_manager_navigation"
+    app:startDestination="@id/navChallengeManagerHome">
 
+    <include app:graph="@navigation/nav_graph_challenge_manager_home"/>
+
+    <fragment
+        android:id="@+id/navChallengeManagerHome"
+        android:name="com.nicholasrutherford.chal.challenge.manager.home.ChallengeManagerHomeFragment">
+
+    </fragment>
 </navigation>
