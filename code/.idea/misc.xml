@@ -5,7 +5,7 @@
       <map>
         <entry key="account/create-account/src/main/res/layout/create_account_fragment.xml" value="0.1" />
         <entry key="account/create-account/src/main/res/layout/upload_photo_fragment.xml" value="0.1286231884057971" />
-        <entry key="account/forgot-password/src/main/res/layout/dialog_fragment_forgot_password.xml" value="0.10891089108910891" />
+        <entry key="account/forgot-password/src/main/res/layout/dialog_fragment_forgot_password.xml" value="0.1" />
         <entry key="account/forgot-password/src/main/res/layout/forgot_password_toolbar_backl.xml" value="0.5" />
         <entry key="account/forgot-password/src/main/res/layout/fragment_forgot_password.xml" value="0.19630192502532928" />
         <entry key="account/login/src/main/res/layout/fragment_login.xml" value="0.12" />
@@ -56,6 +56,7 @@
         <entry key="app/src/main/res/layout/toolbar_my_feed.xml" value="0.1" />
         <entry key="app/src/main/res/layout/toolbar_title_with_back_stack.xml" value="0.41354166666666664" />
         <entry key="challenge-manager/src/main/res/layout/activity_challenge_manager.xml" value="0.1" />
+        <entry key="challenge-manager/src/main/res/layout/challenge_manager_home_fragment.xml" value="0.1" />
         <entry key="challenge-manager/src/main/res/layout/fragment_home.xml" value="0.1334853090172239" />
         <entry key="challenge-manager/src/main/res/layout/home_fragment.xml" value="0.1" />
         <entry key="challenge/detail/src/main/res/layout/challenge_detail_header_layout.xml" value="0.18161094224924013" />
