@@ -11,7 +11,9 @@ class ChallengeManagerHomeViewModel @ViewModelInject constructor(
     private val navigator: Navigator
 ) : BaseViewModel() {
 
+    val viewState = ChallengeManagerViewStateImpl()
+
     inner class ChallengeManagerViewStateImpl: ChallengeManagerHomeViewState {
-        override var toolbarText: String = application.getString(R.string.back)
+        override var toolbarText: String = application.getString(R.string.challenge_manager)
     }
 }
