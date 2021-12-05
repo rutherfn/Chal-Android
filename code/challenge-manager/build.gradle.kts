@@ -50,6 +50,8 @@ dependencies {
     api(project(path = ":firebase:realtime-database:create"))
     api(project(path = ":ui:base-fragment"))
     api(project(path = ":ui:base-vm"))
+    api(project(path = ":ui:shared-layout"))
+    api(project(path = ":ui:typefaces"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 

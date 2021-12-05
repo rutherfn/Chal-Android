@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/tbChallengeManagerHome"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/back_toolbar_height"
+        layout="@layout/stock_toolbar_with_text"
+        />
+
+    <Button
+        android:id="@+id/btnCheckAllChallenges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:background="@drawable/corner_button"
+        android:minHeight="48dp"
+        android:padding="@dimen/padding_12dp"
+        android:text="@string/check_all_challenges"
+        android:textColor="@color/colorSmokeWhite"
+        android:textSize="@dimen/sub_header_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tbChallengeManagerHome"
+        app:layout_constraintTop_toBottomOf="@+id/tbChallengeManagerHome"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
