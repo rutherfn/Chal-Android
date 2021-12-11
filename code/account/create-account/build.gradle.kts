@@ -37,6 +37,7 @@ dependencies {
     api(project(path = ":firebase:realtime-database:fetch"))
     api(project(path = ":firebase:storage"))
     api(project(path = ":helper:constants"))
+    api(project(path = ":helper:image"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":main:navigation"))
     api(project(path = ":network"))
