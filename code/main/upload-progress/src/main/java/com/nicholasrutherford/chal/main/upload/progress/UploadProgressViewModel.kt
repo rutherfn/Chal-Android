@@ -221,7 +221,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     private fun updateFirebaseUser(title: String, caption: String, selectedIndex: Int) {
-        // todo: Steps to refactor said class
+        // todo: Steps to refactor said function
 
         // todo: Step 1: take all of these firebase impl and abstract them over to impl methods
         // todo: Step 2: from there, each call can set a flow. the flow gets observed, and if its sucessful it goes to the next step
@@ -408,24 +408,18 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     private fun showAddedProgressAlert(challengeTitle: String, newCurrentDay: Int) {
-        if (fetchSharedPreference.fetchChallengeModeSharedPreference()) {
-
-            // two notes here :
-
-                // todo: get rid of hard copy
-                    // todo: this only gets to the if statement, if we are in challenge mode via shared preferences
-                        // todo: non challenge mode will be supported, in a future pull request but we should add note for this
+        if (fetchSharedPreference.fetchChallengeModeSharedPreference()) { // if we enable challenge mode from debug, show this copy
             setShouldSetAlertAsUpdated(
-                title = "Progress has been updated",
-                message = "Congrats! you have posted progress on the " +
-                        "$challengeTitle. Press OK to see progress on the news feed",
+                title = application.getString(R.string.progress_has_been_updated),
+                message = application.getString(
+                    R.string.congrats_you_have_posted_progress_on_the_x_press_ok_to_see_progress_on_the_news_feed, challengeTitle
+                ),
                 type = AlertType.REGULAR_OK_ALERT,
                 shouldCloseAppAfterDone = false
             )
             setShouldShowDismissProgressAsUpdated()
             setShouldShowAlertAsUpdated()
-        } else {
-            // copy here for actual challenge update
+        } else { // if we are not in challenge mode, then should possibly show new content in else statement
         }
 
         clearViewState()
