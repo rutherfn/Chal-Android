@@ -21,6 +21,7 @@ import com.nicholasrutherford.chal.data.post.PostListResponse
 import com.nicholasrutherford.chal.firebase.realtime.database.create.CreateFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.helper.constants.*
+import com.nicholasrutherford.chal.helper.image.Image
 import com.nicholasrutherford.chal.shared.preference.create.CreateSharedPreference
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
@@ -35,6 +36,7 @@ import java.util.*
 
 class UploadProgressViewModel @ViewModelInject constructor(
     private val application: Application,
+    private val image: Image,
     private val navigation: UploadProgressNavigation,
     private val createFirebaseDatabase: CreateFirebaseDatabase,
     private val createSharedPreference: CreateSharedPreference,
@@ -113,7 +115,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
                 viewState.imageTakeAPhotoBitmap = null
             } else {
                 profileUri = Uri.parse(profilePictureDirectory)
-                viewState.imageTakeAPhotoBitmap = getCapturedImage(profileUri as Uri)
+                viewState.imageTakeAPhotoBitmap = image.getCapturedImage(profileUri as Uri)
 
                 removeSharedPreference.removeProfilePictureDirectorySharedPreference()
                 setViewStateAsUpdated()
@@ -121,29 +123,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun getCapturedImage(selectedPhotoUri: Uri): Bitmap? {
-        // abstract this function and the other one, over to a helper function.
-        return when {
-            buildSdkVersion < 28 -> MediaStore.Images.Media.getBitmap(
-                application.contentResolver,
-                selectedPhotoUri
-            )
-            buildSdkVersion > 28 -> {
-                bitMapByImageDecoderSource(selectedPhotoUri)
-            }
-            else -> {
-                return null
-            }
-        }
-    }
-
     fun onBackClicked() = navigation.onNavigateBack()
-
-    @RequiresApi(Build.VERSION_CODES.P)
-    private fun bitMapByImageDecoderSource(selectedPhotoUri: Uri): Bitmap {
-        val source = ImageDecoder.createSource(application.contentResolver, selectedPhotoUri)
-        return ImageDecoder.decodeBitmap(source)
-    }
 
     fun updateIsPhotoReadyToBeUpdated(isPhotoReadyToBeUpdated: Boolean) {
         this.isPhotoReadyToBeUpdated = isPhotoReadyToBeUpdated
