@@ -209,6 +209,7 @@
     <string name="turn_on_all_features">Turn On All Features</string>
     <string name="username">Username</string>
     <string name="update_progress">Update Progress</string>
+    <string name="unable_to_post_progress">Unable To Post Progress</string>
     <string name="upload">Upload</string>
     <string name="upload_image">Upload Image</string>
     <string name="uploading_image">Uploading Image</string>

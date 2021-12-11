@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.nicholasrutherford.chal.Network
 import com.nicholasrutherford.chal.data.elert.Alert
 import com.nicholasrutherford.chal.data.elert.AlertType
 import com.nicholasrutherford.chal.data.post.PostListResponse
@@ -37,6 +38,7 @@ import java.util.*
 class UploadProgressViewModel @ViewModelInject constructor(
     private val application: Application,
     private val image: Image,
+    private val network: Network,
     private val navigation: UploadProgressNavigation,
     private val createFirebaseDatabase: CreateFirebaseDatabase,
     private val createSharedPreference: CreateSharedPreference,
@@ -144,41 +146,50 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     fun onPostProgressClicked(title: String, caption: String, listOfChallenges: List<String>) {
-        // todo do a check here to see if we have internet avivable
-        // todo need to import network module to check for said internet connection
-        var selectedIndex = 0
+        if (!network.isConnected()) {
+            setShouldSetAlertAsUpdated(
+                title = application.getString(R.string.unable_to_post_progress),
+                message = application.getString(R.string.error_no_internet_log_in),
+                type = AlertType.REGULAR_OK_ALERT,
+                shouldCloseAppAfterDone = false
+            )
+            setShouldShowDismissProgressAsUpdated()
+            setShouldShowAlertAsUpdated()
+        } else {
+            var selectedIndex = 0
 
-        listOfChallenges.forEachIndexed { index, challenge ->
-            if (title == challenge) {
-                selectedIndex = index
+            listOfChallenges.forEachIndexed { index, challenge ->
+                if (title == challenge) {
+                    selectedIndex = index
+                }
             }
-        }
 
-        setShouldShowProgressAsUpdated()
+            setShouldShowProgressAsUpdated()
 
-        when (caption) {
-            application.getString(R.string.empty_string) -> {
-                setShouldSetAlertAsUpdated(
-                    title = application.getString(R.string.missing_fields),
-                    message = application.getString(R.string.looks_like_were_missing_caption),
-                    type = AlertType.REGULAR_OK_ALERT,
-                    shouldCloseAppAfterDone = false
-                )
-                setShouldShowDismissProgressAsUpdated()
-                setShouldShowAlertAsUpdated()
-            }
-            else -> {
-                profileUri?.let { photoUri ->
-                    uploadProgressPhoto(title, caption, selectedIndex, photoUri)
-                } ?: run {
+            when (caption) {
+                application.getString(R.string.empty_string) -> {
                     setShouldSetAlertAsUpdated(
                         title = application.getString(R.string.missing_fields),
-                        message = application.getString(R.string.looks_like_were_missing_image),
+                        message = application.getString(R.string.looks_like_were_missing_caption),
                         type = AlertType.REGULAR_OK_ALERT,
                         shouldCloseAppAfterDone = false
                     )
                     setShouldShowDismissProgressAsUpdated()
                     setShouldShowAlertAsUpdated()
+                }
+                else -> {
+                    profileUri?.let { photoUri ->
+                        uploadProgressPhoto(title, caption, selectedIndex, photoUri)
+                    } ?: run {
+                        setShouldSetAlertAsUpdated(
+                            title = application.getString(R.string.missing_fields),
+                            message = application.getString(R.string.looks_like_were_missing_image),
+                            type = AlertType.REGULAR_OK_ALERT,
+                            shouldCloseAppAfterDone = false
+                        )
+                        setShouldShowDismissProgressAsUpdated()
+                        setShouldShowAlertAsUpdated()
+                    }
                 }
             }
         }
