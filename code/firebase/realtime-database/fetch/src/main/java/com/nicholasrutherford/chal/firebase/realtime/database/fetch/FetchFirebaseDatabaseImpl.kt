@@ -9,7 +9,6 @@ import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.helper.constants.*
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesResponse
-import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class FetchFirebaseDatabaseImpl @Inject constructor(
@@ -71,29 +70,8 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-
+                    _editProfileInfo.value = emptyList()
                 }
-            })
-        }
-    }
-
-    override fun fetchUserNameAndUrl(_userNameAndUrl: MutableStateFlow<List<String>>) {
-        firebaseAuth.uid?.let { firebaseUid ->
-            databaseUserReference.child(firebaseUid).addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        val userInfoList = arrayListOf<String>()
-                        val username = snapshot.child(USERNAME).value.toString()
-                        val profileImageUrl = snapshot.child(PROFILE_IMAGE).value.toString()
-
-                        userInfoList.add(username)
-                        userInfoList.add(profileImageUrl)
-
-                        _userNameAndUrl.value = userInfoList
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) = Unit
             })
         }
     }
@@ -111,25 +89,29 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
                         }
                     }
 
-                    override fun onCancelled(error: DatabaseError) = Unit
+                    override fun onCancelled(error: DatabaseError) {
+                        _loggedInUsername.value = application.getString(R.string.empty_string)
+                    }
                 })
         }
     }
 
-    override fun fetchLoggedInUserProfilePicture(_userProfilePicture: MutableStateFlow<String>) {
+    override fun fetchLoggedInUserProfilePicture(_loggedInUserProfilePicture: MutableStateFlow<String>) {
         firebaseAuth.uid?.let { firebaseUid ->
             databaseUserReference.child(firebaseUid)
                 .addValueEventListener(object : ValueEventListener {
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
-                            _userProfilePicture.value = snapshot.child(PROFILE_IMAGE).value.toString()
+                            _loggedInUserProfilePicture.value = snapshot.child(PROFILE_IMAGE).value.toString()
                         } else {
-                            _userProfilePicture.value = application.getString(R.string.empty_string)
+                            _loggedInUserProfilePicture.value = application.getString(R.string.empty_string)
                         }
                     }
 
-                    override fun onCancelled(error: DatabaseError) = Unit
+                    override fun onCancelled(error: DatabaseError) {
+                        _loggedInUserProfilePicture.value = application.getString(R.string.empty_string)
+                    }
                 })
         }
     }

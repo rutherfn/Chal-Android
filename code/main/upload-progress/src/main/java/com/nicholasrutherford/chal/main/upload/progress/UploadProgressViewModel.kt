@@ -49,8 +49,11 @@ class UploadProgressViewModel @ViewModelInject constructor(
     private val _postList = MutableStateFlow(listOf<PostListResponse>())
     private val postList: StateFlow<List<PostListResponse>> = _postList
 
-    private val _usernameAndUrl = MutableStateFlow(listOf<String>())
-    private val usernameAndUrl: StateFlow<List<String>> = _usernameAndUrl
+    private val _loggedInUsername = MutableStateFlow(application.getString(R.string.empty_string))
+    private val loggedInUsername: StateFlow<String> = _loggedInUsername
+
+    private val _loggedInUserProfilePicture = MutableStateFlow(application.getString(R.string.empty_string))
+    private val loggedInUserProfilePicture: StateFlow<String> = _loggedInUserProfilePicture
 
     private var currentPostsSize: Int = 0
     private var username: String? = null
@@ -80,15 +83,15 @@ class UploadProgressViewModel @ViewModelInject constructor(
             }
         }
 
-        // set username function
-        // ser usernameUrl function
+        viewModelScope.launch {
+            loggedInUsername.collect { loggedInUsername ->
+                username = loggedInUsername
+            }
+        }
 
         viewModelScope.launch {
-            usernameAndUrl.collect { data ->
-                if (data.size == 2) {
-                    username = data[0]
-                    usernameUrl = data[1]
-                }
+            loggedInUserProfilePicture.collect { loggedInUserProfilePicture ->
+                usernameUrl = loggedInUserProfilePicture
             }
         }
 
@@ -96,9 +99,9 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         fetchFirebaseDatabase.fetchAllUserActiveChallenges(_allUserActiveChallengesList)
         fetchFirebaseDatabase.fetchAllPosts(_postList)
-        fetchFirebaseDatabase.fetchUserNameAndUrl(_usernameAndUrl)
-        // fetchUsername
-        // fetchUsernameAndUrl
+
+        fetchFirebaseDatabase.fetchLoggedInUsername(_loggedInUsername)
+        fetchFirebaseDatabase.fetchLoggedInUserProfilePicture(_loggedInUserProfilePicture)
     }
 
     fun onImageUpdate() {
