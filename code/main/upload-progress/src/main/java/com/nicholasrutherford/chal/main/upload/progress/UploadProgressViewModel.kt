@@ -80,6 +80,9 @@ class UploadProgressViewModel @ViewModelInject constructor(
             }
         }
 
+        // set username function
+        // ser usernameUrl function
+
         viewModelScope.launch {
             usernameAndUrl.collect { data ->
                 if (data.size == 2) {
@@ -94,6 +97,8 @@ class UploadProgressViewModel @ViewModelInject constructor(
         fetchFirebaseDatabase.fetchAllUserActiveChallenges(_allUserActiveChallengesList)
         fetchFirebaseDatabase.fetchAllPosts(_postList)
         fetchFirebaseDatabase.fetchUserNameAndUrl(_usernameAndUrl)
+        // fetchUsername
+        // fetchUsernameAndUrl
     }
 
     fun onImageUpdate() {
@@ -114,6 +119,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     private fun getCapturedImage(selectedPhotoUri: Uri): Bitmap? {
+        // abstract this function and the other one, over to a helper function.
         return when {
             buildSdkVersion < 28 -> MediaStore.Images.Media.getBitmap(
                 application.contentResolver,
@@ -158,6 +164,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
     fun onPostProgressClicked(title: String, caption: String, listOfChallenges: List<String>) {
         // todo do a check here to see if we have internet avivable
+        // todo need to import network module to check for said internet connection
         var selectedIndex = 0
 
         listOfChallenges.forEachIndexed { index, challenge ->
@@ -169,7 +176,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
         setShouldShowProgressAsUpdated()
 
         when (caption) {
-            "" -> {
+            application.getString(R.string.empty_string) -> {
                 setShouldSetAlertAsUpdated(
                     title = application.getString(R.string.missing_fields),
                     message = application.getString(R.string.looks_like_were_missing_caption),
@@ -222,6 +229,26 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     private fun updateFirebaseUser(title: String, caption: String, selectedIndex: Int) {
+        // todo: Steps to refactor said class
+
+        // todo: Step 1: take all of these firebase impl and abstract them over to impl methods
+        // todo: Step 2: from there, each call can set a flow. the flow gets observed, and if its sucessful it goes to the next step
+        // todo: Step 3: check to see if we need both currentChallengeDay and currentChallengeExpireDate.
+
+        // todo: Steps for flows calls
+
+        // todo: Step 1 / call 1: Make a call to get the selected index active challenges posts.
+        // todo: continued: if the snapshot exists loop over children and increment activeChallengesPostIndex.
+        // todo: continued: if its empty, then just reset it back to 0
+        // todo: continued: if for any reason, this call hits the onCanclled method do the following
+        // todo: continued: build out a alert response, and then set a flow of said alert response.
+        // todo: continued: that alert response, gets observed by the view model which sets said alert data
+        // todo: outcome from this calls: this call should set a flow<Int> of activeChallengesPostsIndex
+        // todo: once that call is observed and it is set, we can then make the next call(:
+
+        // todo:  to be continued
+        // todo: Step 2 / call 2: Make a call on that selected index, of the current day of said challenge
+
         var activeChallengesPostsIndex = 0
         var currentChallengeDay = "0"
         var currentChallengeExpireDay = "0"
@@ -336,6 +363,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         val newCurrentDay = currentChallengeDay.toInt() + 1
 
+        // todo: figure out why we need this
         val isChallengeCompleted = newCurrentDay == currentChallengeExpireDay.toInt()
 
         if (newCurrentDay != 7) {
@@ -344,11 +372,11 @@ class UploadProgressViewModel @ViewModelInject constructor(
                 uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
                     title = title,
                     description = body,
-                    category = 0,
-                    image = progressImageUrl ?: "",
+                    category = 0, // todo: set this to actual data
+                    image = progressImageUrl ?: application.getString(R.string.empty_string),
                     currentDay = newCurrentDay.toString(),
-                    username = username ?: "",
-                    usernameUrl = usernameUrl ?: "",
+                    username = username ?: application.getString(R.string.empty_string),
+                    usernameUrl = usernameUrl ?: application.getString(R.string.empty_string),
                     dateChallengeExpired = currentChallengeExpireDay
                 )
             )
@@ -359,6 +387,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
                 newCurrentDay
             )
 
+            // todo: clean up hardcoded text
             writeNewsFeedBanner(
                 title = "A new post has been updated for the",
                 desc = title,
@@ -388,6 +417,12 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
     private fun showAddedProgressAlert(challengeTitle: String, newCurrentDay: Int) {
         if (fetchSharedPreference.fetchChallengeModeSharedPreference()) {
+
+            // two notes here :
+
+                // todo: get rid of hard copy
+                    // todo: this only gets to the if statement, if we are in challenge mode via shared preferences
+                        // todo: non challenge mode will be supported, in a future pull request but we should add note for this
             setShouldSetAlertAsUpdated(
                 title = "Progress has been updated",
                 message = "Congrats! you have posted progress on the " +
