@@ -36,7 +36,6 @@ class UploadPhotoViewModel @ViewModelInject constructor(
 ) : BaseViewModel() {
 
     private var isPhotoReadyToBeUpdated = false
-    private val buildSdkVersion = Build.VERSION.SDK_INT
 
     private var email: String? = null
     private var password: String? = null

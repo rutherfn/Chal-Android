@@ -70,8 +70,6 @@ class UploadProgressViewModel @ViewModelInject constructor(
     private val uid = FirebaseAuth.getInstance().uid ?: ""
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
 
-    private val buildSdkVersion = Build.VERSION.SDK_INT
-
     private var progressImageUrl: String? = ""
 
     private var isPhotoReadyToBeUpdated = false
