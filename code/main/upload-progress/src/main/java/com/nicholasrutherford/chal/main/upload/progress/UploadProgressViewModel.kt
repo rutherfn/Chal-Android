@@ -69,7 +69,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
     private var savedUserLastIndexOfProgress = 0
 
-    private val uid = FirebaseAuth.getInstance().uid ?: ""
+    private val uid = FirebaseAuth.getInstance().uid ?: application.getString(R.string.empty_string)
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
 
     private var progressImageUrl: String? = ""
@@ -241,19 +241,20 @@ class UploadProgressViewModel @ViewModelInject constructor(
         // todo:  to be continued
         // todo: Step 2 / call 2: Make a call on that selected index, of the current day of said challenge
 
-        var activeChallengesPostsIndex = 0
-        var currentChallengeDay = "0"
-        var currentChallengeExpireDay = "0"
+        val zero = application.getString(R.string.zero)
 
-        ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object :
-            ValueEventListener {
+        var activeChallengesPostsIndex = zero.toInt()
+        var currentChallengeDay = zero
+        var currentChallengeExpireDay = zero
+
+        ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (activeChallengesPosts in snapshot.children) {
                         activeChallengesPostsIndex++
                     }
                 } else {
-                    activeChallengesPostsIndex = 0
+                    activeChallengesPostsIndex = zero.toInt()
                 }
 
                 ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex/$CURRENT_DAY").addValueEventListener(object : ValueEventListener {
@@ -355,7 +356,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         val newCurrentDay = currentChallengeDay.toInt() + 1
 
-        // todo: figure out why we need this
+        // todo: figure out why we need this future ticket
         val isChallengeCompleted = newCurrentDay == currentChallengeExpireDay.toInt()
 
         if (newCurrentDay != 7) {
@@ -364,7 +365,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
                 uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
                     title = title,
                     description = body,
-                    category = 0, // todo: set this to actual data
+                    category = 0, // todo: set this to actual data future ticket
                     image = progressImageUrl ?: application.getString(R.string.empty_string),
                     currentDay = newCurrentDay.toString(),
                     username = username ?: application.getString(R.string.empty_string),
@@ -379,9 +380,8 @@ class UploadProgressViewModel @ViewModelInject constructor(
                 newCurrentDay
             )
 
-            // todo: clean up hardcoded text
             writeNewsFeedBanner(
-                title = "A new post has been updated for the",
+                title = application.getString(R.string.a_new_post_has_been_updated_fpr_the),
                 desc = title,
                 isVisible = true,
                 isCloseable = true

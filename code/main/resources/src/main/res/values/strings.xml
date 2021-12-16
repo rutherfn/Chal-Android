@@ -1,4 +1,5 @@
 <resources>
+    <string name="a_new_post_has_been_updated_fpr_the">A new post has been updated for the</string>
     <string name="add_friends">Add Friends</string>
     <string name="add_progress">Add Progress</string>
     <string name="added_progress">Added Progress</string>
@@ -222,4 +223,5 @@
     <string name="you_have_just_joined_the_x_day_x_get_started_by_posting_progress">You have just joined the %d Day %s. Get started by posting progress</string>
     <string name="you_reached_the_end_of_the_challenges">You reached the end of the challenges</string>
     <string name="you_reached_the_end_of_the_feed">You reached the end of the feed</string>
+    <string name="zero">0</string>
 </resources>
