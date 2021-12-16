@@ -27,6 +27,8 @@ interface FetchFirebaseDatabase {
     fun fetchIsUserEnrolledInAChallenge(_isUserEnrolledInChallenge: MutableStateFlow<Boolean>)
 
     fun fetchAllPosts(_postList: MutableStateFlow<List<PostListResponse>>)
+    fun fetchAllPostsBasedOnTitleAndUsername(challengeTitle: String, username: String, _postList: MutableStateFlow<List<PostListResponse>>)
+
     fun fetchAllUsersPostsOfChallenge(_postList: MutableStateFlow<List<PostListResponse>>, index: String)
 
     fun fetchChallengeBannerType(_challengeBannerType: MutableStateFlow<Int>)
