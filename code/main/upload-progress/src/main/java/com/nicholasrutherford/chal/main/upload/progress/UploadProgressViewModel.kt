@@ -81,9 +81,6 @@ class UploadProgressViewModel @ViewModelInject constructor(
     init {
         viewModelScope.launch {
             postList.collect { data ->
-                data.forEach {
-                    println(it.posts!!.description)
-                }
                 currentPostsSize = data.size
             }
         }
