@@ -37,6 +37,7 @@
             <option value="$PROJECT_DIR$/helper" />
             <option value="$PROJECT_DIR$/helper/constants" />
             <option value="$PROJECT_DIR$/helper/fragment" />
+            <option value="$PROJECT_DIR$/helper/image" />
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/main/activity" />
             <option value="$PROJECT_DIR$/main/navigation" />

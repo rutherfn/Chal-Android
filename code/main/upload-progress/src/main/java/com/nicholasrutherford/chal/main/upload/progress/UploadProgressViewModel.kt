@@ -15,12 +15,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.nicholasrutherford.chal.Network
 import com.nicholasrutherford.chal.data.elert.Alert
 import com.nicholasrutherford.chal.data.elert.AlertType
 import com.nicholasrutherford.chal.data.post.PostListResponse
 import com.nicholasrutherford.chal.firebase.realtime.database.create.CreateFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.helper.constants.*
+import com.nicholasrutherford.chal.helper.image.Image
 import com.nicholasrutherford.chal.shared.preference.create.CreateSharedPreference
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
@@ -35,6 +37,8 @@ import java.util.*
 
 class UploadProgressViewModel @ViewModelInject constructor(
     private val application: Application,
+    private val image: Image,
+    private val network: Network,
     private val navigation: UploadProgressNavigation,
     private val createFirebaseDatabase: CreateFirebaseDatabase,
     private val createSharedPreference: CreateSharedPreference,
@@ -49,8 +53,11 @@ class UploadProgressViewModel @ViewModelInject constructor(
     private val _postList = MutableStateFlow(listOf<PostListResponse>())
     private val postList: StateFlow<List<PostListResponse>> = _postList
 
-    private val _usernameAndUrl = MutableStateFlow(listOf<String>())
-    private val usernameAndUrl: StateFlow<List<String>> = _usernameAndUrl
+    private val _loggedInUsername = MutableStateFlow(application.getString(R.string.empty_string))
+    private val loggedInUsername: StateFlow<String> = _loggedInUsername
+
+    private val _loggedInUserProfilePicture = MutableStateFlow(application.getString(R.string.empty_string))
+    private val loggedInUserProfilePicture: StateFlow<String> = _loggedInUserProfilePicture
 
     private var currentPostsSize: Int = 0
     private var username: String? = null
@@ -62,10 +69,8 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
     private var savedUserLastIndexOfProgress = 0
 
-    private val uid = FirebaseAuth.getInstance().uid ?: ""
+    private val uid = FirebaseAuth.getInstance().uid ?: application.getString(R.string.empty_string)
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
-
-    private val buildSdkVersion = Build.VERSION.SDK_INT
 
     private var progressImageUrl: String? = ""
 
@@ -81,11 +86,14 @@ class UploadProgressViewModel @ViewModelInject constructor(
         }
 
         viewModelScope.launch {
-            usernameAndUrl.collect { data ->
-                if (data.size == 2) {
-                    username = data[0]
-                    usernameUrl = data[1]
-                }
+            loggedInUsername.collect { loggedInUsername ->
+                username = loggedInUsername
+            }
+        }
+
+        viewModelScope.launch {
+            loggedInUserProfilePicture.collect { loggedInUserProfilePicture ->
+                usernameUrl = loggedInUserProfilePicture
             }
         }
 
@@ -93,7 +101,9 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         fetchFirebaseDatabase.fetchAllUserActiveChallenges(_allUserActiveChallengesList)
         fetchFirebaseDatabase.fetchAllPosts(_postList)
-        fetchFirebaseDatabase.fetchUserNameAndUrl(_usernameAndUrl)
+
+        fetchFirebaseDatabase.fetchLoggedInUsername(_loggedInUsername)
+        fetchFirebaseDatabase.fetchLoggedInUserProfilePicture(_loggedInUserProfilePicture)
     }
 
     fun onImageUpdate() {
@@ -105,7 +115,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
                 viewState.imageTakeAPhotoBitmap = null
             } else {
                 profileUri = Uri.parse(profilePictureDirectory)
-                viewState.imageTakeAPhotoBitmap = getCapturedImage(profileUri as Uri)
+                viewState.imageTakeAPhotoBitmap = image.getCapturedImage(profileUri as Uri)
 
                 removeSharedPreference.removeProfilePictureDirectorySharedPreference()
                 setViewStateAsUpdated()
@@ -113,28 +123,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun getCapturedImage(selectedPhotoUri: Uri): Bitmap? {
-        return when {
-            buildSdkVersion < 28 -> MediaStore.Images.Media.getBitmap(
-                application.contentResolver,
-                selectedPhotoUri
-            )
-            buildSdkVersion > 28 -> {
-                bitMapByImageDecoderSource(selectedPhotoUri)
-            }
-            else -> {
-                return null
-            }
-        }
-    }
-
     fun onBackClicked() = navigation.onNavigateBack()
-
-    @RequiresApi(Build.VERSION_CODES.P)
-    private fun bitMapByImageDecoderSource(selectedPhotoUri: Uri): Bitmap {
-        val source = ImageDecoder.createSource(application.contentResolver, selectedPhotoUri)
-        return ImageDecoder.decodeBitmap(source)
-    }
 
     fun updateIsPhotoReadyToBeUpdated(isPhotoReadyToBeUpdated: Boolean) {
         this.isPhotoReadyToBeUpdated = isPhotoReadyToBeUpdated
@@ -157,40 +146,50 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     fun onPostProgressClicked(title: String, caption: String, listOfChallenges: List<String>) {
-        // todo do a check here to see if we have internet avivable
-        var selectedIndex = 0
+        if (!network.isConnected()) {
+            setShouldSetAlertAsUpdated(
+                title = application.getString(R.string.unable_to_post_progress),
+                message = application.getString(R.string.error_no_internet_log_in),
+                type = AlertType.REGULAR_OK_ALERT,
+                shouldCloseAppAfterDone = false
+            )
+            setShouldShowDismissProgressAsUpdated()
+            setShouldShowAlertAsUpdated()
+        } else {
+            var selectedIndex = 0
 
-        listOfChallenges.forEachIndexed { index, challenge ->
-            if (title == challenge) {
-                selectedIndex = index
+            listOfChallenges.forEachIndexed { index, challenge ->
+                if (title == challenge) {
+                    selectedIndex = index
+                }
             }
-        }
 
-        setShouldShowProgressAsUpdated()
+            setShouldShowProgressAsUpdated()
 
-        when (caption) {
-            "" -> {
-                setShouldSetAlertAsUpdated(
-                    title = application.getString(R.string.missing_fields),
-                    message = application.getString(R.string.looks_like_were_missing_caption),
-                    type = AlertType.REGULAR_OK_ALERT,
-                    shouldCloseAppAfterDone = false
-                )
-                setShouldShowDismissProgressAsUpdated()
-                setShouldShowAlertAsUpdated()
-            }
-            else -> {
-                profileUri?.let { photoUri ->
-                    uploadProgressPhoto(title, caption, selectedIndex, photoUri)
-                } ?: run {
+            when (caption) {
+                application.getString(R.string.empty_string) -> {
                     setShouldSetAlertAsUpdated(
                         title = application.getString(R.string.missing_fields),
-                        message = application.getString(R.string.looks_like_were_missing_image),
+                        message = application.getString(R.string.looks_like_were_missing_caption),
                         type = AlertType.REGULAR_OK_ALERT,
                         shouldCloseAppAfterDone = false
                     )
                     setShouldShowDismissProgressAsUpdated()
                     setShouldShowAlertAsUpdated()
+                }
+                else -> {
+                    profileUri?.let { photoUri ->
+                        uploadProgressPhoto(title, caption, selectedIndex, photoUri)
+                    } ?: run {
+                        setShouldSetAlertAsUpdated(
+                            title = application.getString(R.string.missing_fields),
+                            message = application.getString(R.string.looks_like_were_missing_image),
+                            type = AlertType.REGULAR_OK_ALERT,
+                            shouldCloseAppAfterDone = false
+                        )
+                        setShouldShowDismissProgressAsUpdated()
+                        setShouldShowAlertAsUpdated()
+                    }
                 }
             }
         }
@@ -222,19 +221,40 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     private fun updateFirebaseUser(title: String, caption: String, selectedIndex: Int) {
-        var activeChallengesPostsIndex = 0
-        var currentChallengeDay = "0"
-        var currentChallengeExpireDay = "0"
+        // todo: Steps to refactor said function
 
-        ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object :
-            ValueEventListener {
+        // todo: Step 1: take all of these firebase impl and abstract them over to impl methods
+        // todo: Step 2: from there, each call can set a flow. the flow gets observed, and if its sucessful it goes to the next step
+        // todo: Step 3: check to see if we need both currentChallengeDay and currentChallengeExpireDate.
+
+        // todo: Steps for flows calls
+
+        // todo: Step 1 / call 1: Make a call to get the selected index active challenges posts.
+        // todo: continued: if the snapshot exists loop over children and increment activeChallengesPostIndex.
+        // todo: continued: if its empty, then just reset it back to 0
+        // todo: continued: if for any reason, this call hits the onCanclled method do the following
+        // todo: continued: build out a alert response, and then set a flow of said alert response.
+        // todo: continued: that alert response, gets observed by the view model which sets said alert data
+        // todo: outcome from this calls: this call should set a flow<Int> of activeChallengesPostsIndex
+        // todo: once that call is observed and it is set, we can then make the next call(:
+
+        // todo:  to be continued
+        // todo: Step 2 / call 2: Make a call on that selected index, of the current day of said challenge
+
+        val zero = application.getString(R.string.zero)
+
+        var activeChallengesPostsIndex = zero.toInt()
+        var currentChallengeDay = zero
+        var currentChallengeExpireDay = zero
+
+        ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex$ACTIVE_CHALLENGES_POSTS").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (activeChallengesPosts in snapshot.children) {
                         activeChallengesPostsIndex++
                     }
                 } else {
-                    activeChallengesPostsIndex = 0
+                    activeChallengesPostsIndex = zero.toInt()
                 }
 
                 ref.child("$uid$ACTIVE_CHALLENGES$selectedIndex/$CURRENT_DAY").addValueEventListener(object : ValueEventListener {
@@ -336,6 +356,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         val newCurrentDay = currentChallengeDay.toInt() + 1
 
+        // todo: figure out why we need this future ticket
         val isChallengeCompleted = newCurrentDay == currentChallengeExpireDay.toInt()
 
         if (newCurrentDay != 7) {
@@ -344,11 +365,11 @@ class UploadProgressViewModel @ViewModelInject constructor(
                 uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
                     title = title,
                     description = body,
-                    category = 0,
-                    image = progressImageUrl ?: "",
+                    category = 0, // todo: set this to actual data future ticket
+                    image = progressImageUrl ?: application.getString(R.string.empty_string),
                     currentDay = newCurrentDay.toString(),
-                    username = username ?: "",
-                    usernameUrl = usernameUrl ?: "",
+                    username = username ?: application.getString(R.string.empty_string),
+                    usernameUrl = usernameUrl ?: application.getString(R.string.empty_string),
                     dateChallengeExpired = currentChallengeExpireDay
                 )
             )
@@ -360,7 +381,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
             )
 
             writeNewsFeedBanner(
-                title = "A new post has been updated for the",
+                title = application.getString(R.string.a_new_post_has_been_updated_fpr_the),
                 desc = title,
                 isVisible = true,
                 isCloseable = true
@@ -387,18 +408,18 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     private fun showAddedProgressAlert(challengeTitle: String, newCurrentDay: Int) {
-        if (fetchSharedPreference.fetchChallengeModeSharedPreference()) {
+        if (fetchSharedPreference.fetchChallengeModeSharedPreference()) { // if we enable challenge mode from debug, show this copy
             setShouldSetAlertAsUpdated(
-                title = "Progress has been updated",
-                message = "Congrats! you have posted progress on the " +
-                        "$challengeTitle. Press OK to see progress on the news feed",
+                title = application.getString(R.string.progress_has_been_updated),
+                message = application.getString(
+                    R.string.congrats_you_have_posted_progress_on_the_x_press_ok_to_see_progress_on_the_news_feed, challengeTitle
+                ),
                 type = AlertType.REGULAR_OK_ALERT,
                 shouldCloseAppAfterDone = false
             )
             setShouldShowDismissProgressAsUpdated()
             setShouldShowAlertAsUpdated()
-        } else {
-            // copy here for actual challenge update
+        } else { // if we are not in challenge mode, then should possibly show new content in else statement
         }
 
         clearViewState()

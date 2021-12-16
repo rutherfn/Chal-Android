@@ -17,6 +17,7 @@ import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.firebase.storage.ChalFirebaseStorage
 import com.nicholasrutherford.chal.helper.constants.PROFILE_PICTURE_DIRECTORY_PREFERENCE
+import com.nicholasrutherford.chal.helper.image.Image
 import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
@@ -25,6 +26,7 @@ import java.util.*
 class UploadPhotoViewModel @ViewModelInject constructor(
     private val fetchSharedPreference: FetchSharedPreference,
     private val network: Network,
+    private val image: Image,
     private val removeSharedPreference: RemoveSharedPreference,
     private val navigation: UploadPhotoNavigation,
     private val firebaseAuth: ChalFirebaseAuth,
@@ -34,7 +36,6 @@ class UploadPhotoViewModel @ViewModelInject constructor(
 ) : BaseViewModel() {
 
     private var isPhotoReadyToBeUpdated = false
-    private val buildSdkVersion = Build.VERSION.SDK_INT
 
     private var email: String? = null
     private var password: String? = null
@@ -73,33 +74,12 @@ class UploadPhotoViewModel @ViewModelInject constructor(
                 viewState.imageTakeAPhotoBitmap = null
             } else {
                 profileUri = Uri.parse(profilePictureDirectory)
-                viewState.imageTakeAPhotoBitmap = getCapturedImage(profileUri as Uri)
+                viewState.imageTakeAPhotoBitmap = image.getCapturedImage(profileUri as Uri)
 
                 removeSharedPreference.removeProfilePictureDirectorySharedPreference()
                 setViewStateAsUpdated()
             }
         }
-    }
-
-    private fun getCapturedImage(selectedPhotoUri: Uri): Bitmap? {
-        return when {
-            buildSdkVersion < 28 -> MediaStore.Images.Media.getBitmap(
-                application.contentResolver,
-                selectedPhotoUri
-            )
-            buildSdkVersion > 28 -> {
-                bitMapByImageDecoderSource(selectedPhotoUri)
-            }
-            else -> {
-                return null
-            }
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.P)
-    private fun bitMapByImageDecoderSource(selectedPhotoUri: Uri): Bitmap {
-        val source = ImageDecoder.createSource(application.contentResolver, selectedPhotoUri)
-        return ImageDecoder.decodeBitmap(source)
     }
 
     private fun showErrorState(desc: String) {

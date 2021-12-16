@@ -1,4 +1,5 @@
 <resources>
+    <string name="a_new_post_has_been_updated_fpr_the">A new post has been updated for the</string>
     <string name="add_friends">Add Friends</string>
     <string name="add_progress">Add Progress</string>
     <string name="added_progress">Added Progress</string>
@@ -47,6 +48,7 @@
     <string name="click_here_to_add_a_description"><u>Click Here</u> To Add A Description</string>
     <string name="click_me_to_take_a_picture">Click Me To Take A Picture</string>
     <string name="closing_out_app">Closing Out App</string>
+    <string name="congrats_you_have_posted_progress_on_the_x_press_ok_to_see_progress_on_the_news_feed">Congrats! you have posted progress on the %s . Press OK to see progress on the news feed </string>
     <string name="continue_creating">Continue</string>
     <string name="challenges_bottom_nav">Challenges</string>
     <string name="choose_from_library">Choose From Library</string>
@@ -172,6 +174,7 @@
     <string name="priority_level"> - Priority Level -</string>
     <string name="progress_added_title">Progress Added</string>
     <string name="progress_added_desc">Progress has been added to your challenge. Click Add More Progress to Add More Progress towards your goals, or Continue to view your progress!</string>
+    <string name="progress_has_been_updated">Progress has been updated</string>
     <string name="qa_tester_1">Nick</string>
     <string name="qa_tester_2">Marina</string>
     <string name="qa_tester_3">Patrick</string>
@@ -209,6 +212,7 @@
     <string name="turn_on_all_features">Turn On All Features</string>
     <string name="username">Username</string>
     <string name="update_progress">Update Progress</string>
+    <string name="unable_to_post_progress">Unable To Post Progress</string>
     <string name="upload">Upload</string>
     <string name="upload_image">Upload Image</string>
     <string name="uploading_image">Uploading Image</string>
@@ -219,4 +223,5 @@
     <string name="you_have_just_joined_the_x_day_x_get_started_by_posting_progress">You have just joined the %d Day %s. Get started by posting progress</string>
     <string name="you_reached_the_end_of_the_challenges">You reached the end of the challenges</string>
     <string name="you_reached_the_end_of_the_feed">You reached the end of the feed</string>
+    <string name="zero">0</string>
 </resources>
