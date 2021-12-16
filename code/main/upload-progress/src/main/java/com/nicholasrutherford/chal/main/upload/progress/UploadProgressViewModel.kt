@@ -59,7 +59,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
     private val _loggedInUserProfilePicture = MutableStateFlow(application.getString(R.string.empty_string))
     private val loggedInUserProfilePicture: StateFlow<String> = _loggedInUserProfilePicture
 
-    private var currentPostsSize: Int = 0
+    private var currentPostsSize: Int = application.getString(R.string.zero).toInt()
     private var username: String? = null
     private var usernameUrl: String? = null
 
@@ -67,12 +67,12 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
     private var isSelectedIndex = false
 
-    private var savedUserLastIndexOfProgress = 0
+    private var savedUserLastIndexOfProgress = application.getString(R.string.zero).toInt()
 
     private val uid = FirebaseAuth.getInstance().uid ?: application.getString(R.string.empty_string)
     private val ref = FirebaseDatabase.getInstance().getReference(USERS)
 
-    private var progressImageUrl: String? = ""
+    private var progressImageUrl: String? = application.getString(R.string.empty_string)
 
     private var isPhotoReadyToBeUpdated = false
 
@@ -81,6 +81,9 @@ class UploadProgressViewModel @ViewModelInject constructor(
     init {
         viewModelScope.launch {
             postList.collect { data ->
+                data.forEach {
+                    println(it.posts!!.description)
+                }
                 currentPostsSize = data.size
             }
         }

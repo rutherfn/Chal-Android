@@ -217,6 +217,29 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         })
     }
 
+    override fun fetchAllPostsBasedOnTitleAndUsername(challengeTitle: String, username: String, _postList: MutableStateFlow<List<PostListResponse>>) {
+        databasePostsReference.addValueEventListener(object: ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val postList = arrayListOf<PostListResponse>()
+
+                for (posts in snapshot.children) {
+                    posts.getValue(PostResponse::class.java).let { postResponse ->
+                        postResponse?.let { data ->
+                            if (data.username == username && data.title == challengeTitle) {
+                                postList.add(PostListResponse(data))
+                            }
+                        }
+                    }
+                }
+                _postList.value = postList
+            }
+
+            override fun onCancelled(error: DatabaseError) = Unit
+        }
+        )
+    }
+
     override fun fetchAllUsersPostsOfChallenge(
         _postList: MutableStateFlow<List<PostListResponse>>,
         index: String
