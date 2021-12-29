@@ -24,6 +24,8 @@ class ProfileViewModel @ViewModelInject constructor(
     private val _allUserActiveChallengesList = MutableStateFlow(listOf<ActiveChallengesListResponse>())
     val allUserActiveChallengesList: StateFlow<List<ActiveChallengesListResponse>> = _allUserActiveChallengesList
 
+    val clickHereToAddADescriptionDescription = application.getString(R.string.click_here_to_add_a_description)
+
     val viewState = ProfileViewStateImpl()
 
     init {
@@ -45,7 +47,7 @@ class ProfileViewModel @ViewModelInject constructor(
         viewState.age = age
 
         if (description.isEmpty()) {
-            viewState.description = application.getString(R.string.click_here_to_add_a_description)
+            viewState.description = clickHereToAddADescriptionDescription
         } else {
             viewState.description = description
         }
@@ -65,6 +67,12 @@ class ProfileViewModel @ViewModelInject constructor(
         val newIndex = index.toString()
 
         navigation.showProfileChallengePosts(newIndex)
+    }
+
+    fun onDescriptionClicked(description: String) {
+        if (description == clickHereToAddADescriptionDescription) {
+            navigation.showEditProfile()
+        }
     }
 
     private fun fetchAllUserActiveChallenges() = fetchFirebaseDatabase.fetchAllUserActiveChallenges(_allUserActiveChallengesList)

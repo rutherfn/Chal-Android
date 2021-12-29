@@ -91,6 +91,10 @@ class ProfileFragment @Inject constructor(): BaseFragment<FragmentProfileBinding
         binding?.let { binding ->
             binding.tbProfilePost.tbStock.setOnClickListener { viewModel.onToolbarBackClicked() }
             binding.clProfile.tvProfileEdit.setOnClickListener { viewModel.onEditProfileClicked() }
+            binding.clProfile.tvDescription.setOnClickListener {
+                val description = binding.clProfile.tvDescription.text.toString()
+                viewModel.onDescriptionClicked(description = description)
+            }
         }
     }
 
