@@ -46,8 +46,10 @@ class ProfileListAdapter(
             typefaces.setTextViewBodyItalicTypeface(binding.tvChallengeCategory)
             typefaces.setTextViewBodyItalicTypeface(binding.tvChallengeCurrentDay)
 
-            binding.tvChallengeTitle.text = activeChallengesListResponse[position].activeChallenges?.name ?: ""
-            binding.tvChallengeCategory.text = "Category $categoryName"
+            binding.tvChallengeTitle.text = activeChallengesListResponse[position].activeChallenges?.name
+                ?: application.getString(R.string.empty_string)
+
+            binding.tvChallengeCategory.text = application.getString(R.string.category_x, categoryName)
             binding.tvChallengeCurrentDay.text =
                 application.getString(R.string.days_completed, challengeCurrentDay!!.toInt(), daysOfChallenge!!.toInt())
 
@@ -55,12 +57,8 @@ class ProfileListAdapter(
                 .placeholder(R.drawable.circle)
                 .error(R.drawable.circle)
 
-           // Picasso.get().load(challengeTypeImage(position)).into(binding.cvChallengeCategory)
-
             Glide.with(application).load(challengeTypeImage(position)).apply(options)
                 .into(binding.cvChallengeCategory)
-
-            println(challengeTypeImage(position))
 
             binding.ll.setOnClickListener {
                 viewModel.onItemClicked(index = position)

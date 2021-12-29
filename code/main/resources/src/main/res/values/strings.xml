@@ -25,6 +25,7 @@
     <string name="sample_challenge_title">Sample Challenge</string>
     <string name="can_not_upload_image_to_server">Can Not Upload Image To Server</string>
     <string name="cancel_and_discard_post">Cancel and Discard Post</string>
+    <string name="category_x">Category: %s</string>
     <string name="category_fitness">Fitness</string>
     <string name="category_education">Education</string>
     <string name="category_travel">Education</string>
