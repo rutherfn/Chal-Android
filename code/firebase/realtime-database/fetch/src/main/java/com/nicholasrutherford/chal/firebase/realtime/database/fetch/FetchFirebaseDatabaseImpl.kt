@@ -48,11 +48,7 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
                                 username = username,
                                 profileImage = profileImage
                             )
-
-                            println("snapshot exists")
-                            println(username)
                         } else {
-                            println("it does not exist for this user")
                             _profileInfo.value = ProfileInfo(
                                 age = application.getString(R.string.zero).toInt(),
                                 description = application.getString(R.string.empty_string),
@@ -63,7 +59,6 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        println("on cancelled")
                         _profileInfo.value = ProfileInfo(
                             age = application.getString(R.string.zero).toInt(),
                             description = application.getString(R.string.empty_string),
