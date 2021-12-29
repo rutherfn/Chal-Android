@@ -41,19 +41,25 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
                             val description = snapshot.child(BIO).value.toString()
                             val username = snapshot.child(USERNAME).value.toString()
                             val profileImage = snapshot.child(PROFILE_IMAGE).value.toString()
+                            val firstName = snapshot.child(FIRST_NAME).value.toString()
+                            val lastName = snapshot.child(LAST_NAME).value.toString()
 
                             _profileInfo.value = ProfileInfo(
                                 age = age.toInt(),
                                 description = description,
                                 username = username,
-                                profileImage = profileImage
+                                profileImage = profileImage,
+                                firstName = firstName,
+                                lastName = lastName
                             )
                         } else {
                             _profileInfo.value = ProfileInfo(
                                 age = application.getString(R.string.zero).toInt(),
                                 description = application.getString(R.string.empty_string),
                                 username = application.getString(R.string.empty_string),
-                                profileImage = application.getString(R.string.empty_string)
+                                profileImage = application.getString(R.string.empty_string),
+                                firstName = application.getString(R.string.empty_string),
+                                lastName = application.getString(R.string.empty_string)
                             )
                         }
                     }
@@ -63,33 +69,14 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
                             age = application.getString(R.string.zero).toInt(),
                             description = application.getString(R.string.empty_string),
                             username = application.getString(R.string.empty_string),
-                            profileImage = application.getString(R.string.empty_string)
+                            profileImage = application.getString(R.string.empty_string),
+                            firstName = application.getString(R.string.empty_string),
+                            lastName = application.getString(R.string.empty_string)
                         )
                     }
 
                 })
             }
-        }
-    }
-
-    override fun fetchEditProfileInfo(_editProfileInfo: MutableStateFlow<List<String>>) {
-        firebaseAuth.uid?.let { firebaseUid ->
-            databaseUserReference.child(firebaseUid).addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val editProfileList = arrayListOf<String>()
-
-                    editProfileList.add(snapshot.child(USERNAME).value.toString())
-                    editProfileList.add(snapshot.child(FIRST_NAME).value.toString())
-                    editProfileList.add(snapshot.child(LAST_NAME).value.toString())
-                    editProfileList.add(snapshot.child(BIO).value.toString())
-
-                    _editProfileInfo.value = editProfileList
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    _editProfileInfo.value = emptyList()
-                }
-            })
         }
     }
 

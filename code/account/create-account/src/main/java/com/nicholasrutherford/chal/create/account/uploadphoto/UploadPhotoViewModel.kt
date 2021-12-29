@@ -149,7 +149,14 @@ class UploadPhotoViewModel @ViewModelInject constructor(
         val name = username ?: empty
         val newUser = AccountInfo(
             id = 0, // TODO update later
-            profileInfo = ProfileInfo(age = 0, description = empty, username = name, profileImage = profileImageUrl) ,
+            profileInfo = ProfileInfo(
+                age = 0,
+                description = empty,
+                username = name,
+                profileImage = profileImageUrl,
+                firstName = empty,
+                lastName = empty
+            ),
             username = username,
             email = email,
             profileImage = profileImageUrl,

@@ -4,5 +4,7 @@ data class ProfileInfo(
     var age: Int = 0,
     var description: String = "",
     var username: String = "",
-    var profileImage: String = ""
+    var profileImage: String = "",
+    var firstName: String = "",
+    var lastName: String = ""
 )
