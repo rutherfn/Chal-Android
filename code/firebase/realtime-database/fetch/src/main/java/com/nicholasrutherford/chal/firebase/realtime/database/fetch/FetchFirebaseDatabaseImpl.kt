@@ -6,6 +6,7 @@ import com.nicholasrutherford.chal.data.post.PostListResponse
 import com.nicholasrutherford.chal.data.post.PostResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
+import com.nicholasrutherford.chal.data.account.info.ProfileInfo
 import com.nicholasrutherford.chal.helper.constants.*
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesResponse
@@ -30,24 +31,40 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
         return database.getReference(userDatabaseReference(uid))
     }
 
-    override fun fetchProfileInfo(_profileInfo: MutableStateFlow<List<String>>, isUser: Boolean) {
+    override fun fetchProfileInfo(_profileInfo: MutableStateFlow<ProfileInfo>, isUser: Boolean) {
         if (isUser) {
             firebaseAuth.uid?.let { firebaseUid ->
                 databaseUserReference.child(firebaseUid).addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
-                            val profileInfoList = arrayListOf<String>()
+                            val age = snapshot.child(AGE).value.toString()
+                            val description = snapshot.child(BIO).value.toString()
+                            val username = snapshot.child(USERNAME).value.toString()
+                            val profileImage = snapshot.child(PROFILE_IMAGE).value.toString()
 
-                            profileInfoList.add(snapshot.child(AGE).value.toString() ?: "0")
-                            profileInfoList.add(snapshot.child(BIO).value.toString())
-                            profileInfoList.add(snapshot.child(USERNAME).value.toString())
-                            profileInfoList.add(snapshot.child(PROFILE_IMAGE).value.toString())
-
-                            _profileInfo.value = profileInfoList
+                            _profileInfo.value = ProfileInfo(
+                                age = age.toInt(),
+                                description = description,
+                                username = username,
+                                profileImage = profileImage
+                            )
+                        } else {
+                            _profileInfo.value = ProfileInfo(
+                                age = application.getString(R.string.zero).toInt(),
+                                description = application.getString(R.string.empty_string),
+                                username = application.getString(R.string.empty_string),
+                                profileImage = application.getString(R.string.empty_string)
+                            )
                         }
                     }
 
                     override fun onCancelled(error: DatabaseError) {
+                        _profileInfo.value = ProfileInfo(
+                            age = application.getString(R.string.zero).toInt(),
+                            description = application.getString(R.string.empty_string),
+                            username = application.getString(R.string.empty_string),
+                            profileImage = application.getString(R.string.empty_string)
+                        )
                     }
 
                 })

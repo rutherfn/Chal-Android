@@ -2,6 +2,7 @@ package com.nicholasrutherford.chal.firebase.realtime.database.fetch
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.nicholasrutherford.chal.data.account.info.ProfileInfo
 import com.nicholasrutherford.chal.data.post.PostListResponse
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +16,7 @@ interface FetchFirebaseDatabase {
 
     fun fetchAllUsersDatabaseReference(uid: String): DatabaseReference
 
-    fun fetchProfileInfo(_profileInfo: MutableStateFlow<List<String>>, isUser: Boolean)
+    fun fetchProfileInfo(_profileInfo: MutableStateFlow<ProfileInfo>, isUser: Boolean)
     fun fetchEditProfileInfo(_editProfileInfo: MutableStateFlow<List<String>>)
 
     fun fetchLoggedInUsername(_loggedInUsername: MutableStateFlow<String>)
