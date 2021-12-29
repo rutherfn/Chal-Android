@@ -68,5 +68,6 @@ class EditProfileViewModel @ViewModelInject constructor(
         override var firstName: String? = null
         override var lastName: String? = null
         override var toolbarText: String = application.getString(R.string.edit_profile)
+        override var profileImageHeaderBackground: String = application.getString(R.string.placeholder_image)
     }
 }

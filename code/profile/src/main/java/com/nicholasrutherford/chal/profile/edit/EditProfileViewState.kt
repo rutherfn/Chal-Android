@@ -6,4 +6,5 @@ interface EditProfileViewState {
     var lastName: String?
     var bio: String?
     var toolbarText: String
+    var profileImageHeaderBackground: String
 }
