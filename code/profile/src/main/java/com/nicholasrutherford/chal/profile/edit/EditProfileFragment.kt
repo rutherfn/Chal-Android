@@ -94,9 +94,8 @@ class EditProfileFragment @Inject constructor(): BaseFragment<FragmentEditProfil
         binding?.let { binding ->
             binding.tbEditProfile.tbStock.setNavigationIcon(viewModel.toolbarBackImage)
 
-            // placeholder
             Glide.with(this)
-                .load("https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg")
+                .load(viewModel.viewState.profileImageHeaderBackground)
                 .into(binding.clEditProfile.ivEditMyProfile)
 
             binding.clEditProfile.etEditProfileUsername.setText(viewModel.viewState.username)

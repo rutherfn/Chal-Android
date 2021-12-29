@@ -17,7 +17,6 @@ interface FetchFirebaseDatabase {
     fun fetchAllUsersDatabaseReference(uid: String): DatabaseReference
 
     fun fetchProfileInfo(_profileInfo: MutableStateFlow<ProfileInfo>, isUser: Boolean)
-    fun fetchEditProfileInfo(_editProfileInfo: MutableStateFlow<List<String>>)
 
     fun fetchLoggedInUsername(_loggedInUsername: MutableStateFlow<String>)
     fun fetchLoggedInUserProfilePicture(_loggedInUserProfilePicture: MutableStateFlow<String>)

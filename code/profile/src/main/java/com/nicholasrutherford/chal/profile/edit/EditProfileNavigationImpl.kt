@@ -8,5 +8,5 @@ class EditProfileNavigationImpl @Inject constructor() : EditProfileNavigation {
     @Inject
     lateinit var navigator: Navigator
 
-    override fun showPop() = navigator.navigateBack()
+    override fun navigateBack() = navigator.navigateBack()
 }
