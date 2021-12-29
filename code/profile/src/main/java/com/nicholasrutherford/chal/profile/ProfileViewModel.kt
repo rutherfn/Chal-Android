@@ -36,9 +36,9 @@ class ProfileViewModel @ViewModelInject constructor(
                     profileImage = info.profileImage
                 )
             }
-            fetchAllUserActiveChallenges()
-            fetchFirebaseDatabase.fetchProfileInfo(_profileInfo, true)
         }
+        fetchAllUserActiveChallenges()
+        fetchFirebaseDatabase.fetchProfileInfo(_profileInfo, true)
     }
 
     private fun updateProfilePage(age: Int?, description: String, username: String, profileImage: String) {
@@ -74,6 +74,8 @@ class ProfileViewModel @ViewModelInject constructor(
     fun onEditProfileClicked() = navigation.showEditProfile()
 
     inner class ProfileViewStateImpl: ProfileViewState {
+        override var toolbarText: String = application.getString(R.string.my_profile)
+        override var profileImageHeaderBackground: String = application.getString(R.string.placeholder_image)
         override var age: Int? = application.getString(R.string.zero).toInt()
         override var description: String? = application.getString(R.string.empty_string)
         override var username: String? = application.getString(R.string.empty_string)
