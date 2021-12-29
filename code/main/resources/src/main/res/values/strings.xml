@@ -168,6 +168,7 @@
     <string name="post_progress_to_my_feed">Post Progress to My Feed</string>
     <string name="post_your_progress">Post Your Progress</string>
     <string name="post_your_progress_description">To <b>complete a challenge</b>, you must post an update to your page. It holds you accountable and counts towards your daily goal</string>
+    <string name="placeholder_image">https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg</string>
     <string name="please_check_email">Please Check Your Email</string>
     <string name="please_enter_your_email">Please Enter Your Email</string>
     <string name="primary_logo_content_desc">Primary Logo For Chal.</string>

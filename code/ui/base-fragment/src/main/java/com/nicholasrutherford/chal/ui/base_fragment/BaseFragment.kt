@@ -36,6 +36,9 @@ const val GALLERY_REQUEST_CODE = 0
 const val CAMERA_CAPTURE_REQUEST = 1888
 const val CAMERA_PERMISSION_CODE = 100
 
+const val IS_NESTED_SCROLLING_ENABLED = true
+const val IS_NEWSTED_SCROLLING_DISABLED = false
+
 abstract class BaseFragment<VB: ViewBinding>(
     private val inflate: Inflate<VB>
 ) : Fragment() {

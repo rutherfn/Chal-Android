@@ -16,6 +16,7 @@ android {
 }
 
 dependencies {
+    api(project(path = ":data:account-info"))
     api(project(path = ":data:challenges"))
     api(project(path = ":data:post"))
     api(project(path = ":firebase:auth"))

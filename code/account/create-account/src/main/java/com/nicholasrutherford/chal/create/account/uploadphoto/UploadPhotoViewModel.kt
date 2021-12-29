@@ -145,16 +145,17 @@ class UploadPhotoViewModel @ViewModelInject constructor(
     }
 
     private fun createDbUser(profileImageUrl: String) {
-        val emptyString = application.getString(R.string.empty_string)
+        val empty = application.getString(R.string.empty_string)
+        val name = username ?: empty
         val newUser = AccountInfo(
             id = 0, // TODO update later
-            profileInfo = username?.let { name -> ProfileInfo(username = name, profileImage = profileImageUrl) },
+            profileInfo = ProfileInfo(age = 0, description = empty, username = name, profileImage = profileImageUrl) ,
             username = username,
             email = email,
             profileImage = profileImageUrl,
-            firstName = emptyString,
-            lastName = emptyString,
-            bio = emptyString,
+            firstName = empty,
+            lastName = empty,
+            bio = empty,
             age = 0, // TODO update later
             challengeBannerType = 0, // TODO update later
             friends = null,
@@ -162,7 +163,7 @@ class UploadPhotoViewModel @ViewModelInject constructor(
         )
 
 
-        fetchFirebaseDatabase.fetchAllUsersDatabaseReference(firebaseAuth.auth.uid ?: emptyString)
+        fetchFirebaseDatabase.fetchAllUsersDatabaseReference(firebaseAuth.auth.uid ?: empty)
             .setValue(newUser)
             .addOnCompleteListener {
                 firebaseAuth.sendEmailVerification()

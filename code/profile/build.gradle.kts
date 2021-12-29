@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    api(project(path = ":data:account-info"))
     api(project(path = ":helper:fragment"))
     api(project(path = ":firebase:realtime-database:create"))
     api(project(path = ":firebase:realtime-database:fetch"))

@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.nicholasrutherford.chal.helper.fragment.visibleOrGone
 import com.nicholasrutherford.chal.profile.databinding.FragmentProfileBinding
 import com.nicholasrutherford.chal.ui.base_fragment.BaseFragment
+import com.nicholasrutherford.chal.ui.base_fragment.IS_NEWSTED_SCROLLING_DISABLED
 import com.nicholasrutherford.chal.ui.typefaces.Typefaces
 import com.squareup.picasso.Picasso
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
@@ -40,8 +41,8 @@ class ProfileFragment @Inject constructor(): BaseFragment<FragmentProfileBinding
         }
         lifecycleScope.launch {
             viewModel.allUserActiveChallengesList.collect { challengesList ->
+                viewModel.updateActiveChallengesSize(challengesList.size)
                 if (challengesList.isNotEmpty()) {
-                    viewModel.updateActiveChallengesSize(challengesList.size)
                     bindProfileListAdapter(challengesList)
                 }
             }
@@ -50,7 +51,7 @@ class ProfileFragment @Inject constructor(): BaseFragment<FragmentProfileBinding
 
     private fun bindProfileListAdapter(activeChallengesList: List<ActiveChallengesListResponse>) {
         binding?.let { binding ->
-            binding.rvChallenges.isNestedScrollingEnabled = false
+            binding.rvChallenges.isNestedScrollingEnabled = IS_NEWSTED_SCROLLING_DISABLED
             binding.rvChallenges.layoutManager =
                 LinearLayoutManager(application.applicationContext)
 
@@ -84,8 +85,7 @@ class ProfileFragment @Inject constructor(): BaseFragment<FragmentProfileBinding
         }
     }
 
-    override fun collectAlertAsUpdated() {
-    }
+    override fun collectAlertAsUpdated() = Unit
 
     override fun onListener() {
         binding?.let { binding ->
@@ -96,11 +96,9 @@ class ProfileFragment @Inject constructor(): BaseFragment<FragmentProfileBinding
 
     override fun updateView() {
         binding?.let { binding ->
+            binding.tbProfilePost.tbStock.title = viewModel.viewState.toolbarText
 
-            binding.tbProfilePost.tbStock.title = "My Profile"
-
-            // place holder for now
-            Picasso.get().load("https://tsico.com/wp-content/uploads/2019/05/3-Unique-Debt-Collection-Challenges.jpg")
+            Picasso.get().load(viewModel.viewState.profileImageHeaderBackground)
                 .into(binding.clProfile.ivProfile)
 
             val options = RequestOptions()
@@ -118,6 +116,5 @@ class ProfileFragment @Inject constructor(): BaseFragment<FragmentProfileBinding
             binding.clProfile.btnActive.text = application.getString(R.string.active_x, viewModel.viewState.activeChallengesSize)
         }
     }
-
 
 }
