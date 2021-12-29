@@ -60,7 +60,7 @@ class ProfileListAdapter(
             Glide.with(application).load(challengeTypeImage(position)).apply(options)
                 .into(binding.cvChallengeCategory)
 
-            binding.ll.setOnClickListener {
+            binding.clProfileChallengesList.setOnClickListener {
                 viewModel.onItemClicked(index = position)
             }
         }
