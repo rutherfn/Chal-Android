@@ -2,9 +2,7 @@ package com.nicholasrutherford.chal.challenge.manager.home
 
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.viewModelScope
 import com.nicholasrutherford.chal.challenge.manager.R
-import com.nicholasrutherford.chal.firebase.realtime.database.delete.DeleteFirebaseDatabase
 import com.nicholasrutherford.chal.main.navigation.Navigator
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 
