@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/challenge" />
             <option value="$PROJECT_DIR$/challenge-manager" />
             <option value="$PROJECT_DIR$/challenge/detail" />
+            <option value="$PROJECT_DIR$/challenge/helper" />
             <option value="$PROJECT_DIR$/challenge/list" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/account-info" />
