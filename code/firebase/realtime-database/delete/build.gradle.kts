@@ -15,6 +15,7 @@ android {
 
 dependencies {
     api(project(path = ":data:challenges"))
+    api(project(path = ":helper:constants"))
 
     implementation(Dependencies.Libs.Dagger.Android)
 
