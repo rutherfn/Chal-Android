@@ -14,11 +14,12 @@ android {
 }
 
 dependencies {
-    //TODO: add new dependencies
+    api(project(path = ":data:challenges"))
 
     implementation(Dependencies.Libs.Dagger.Android)
 
     implementation(Dependencies.Libs.Firebase.Database)
+    implementation(Dependencies.Libs.Kotlin.Coroutines)
 
     implementation(Dependencies.Libs.Hilt.DaggerHiltAndroid)
     kapt(Dependencies.Libs.Hilt.DaggerHiltAndroidCompiler)
