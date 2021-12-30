@@ -32,6 +32,7 @@
             <option value="$PROJECT_DIR$/firebase/auth" />
             <option value="$PROJECT_DIR$/firebase/realtime-database" />
             <option value="$PROJECT_DIR$/firebase/realtime-database/create" />
+            <option value="$PROJECT_DIR$/firebase/realtime-database/delete" />
             <option value="$PROJECT_DIR$/firebase/realtime-database/fetch" />
             <option value="$PROJECT_DIR$/firebase/storage" />
             <option value="$PROJECT_DIR$/helper" />
