@@ -12,4 +12,11 @@ interface DeleteFirebaseDatabase {
     // the all-active challenge node in firebase
     // and it gets removed, simply by its index
     fun deleteAChallengeInAllActive(index: String, _status: MutableStateFlow<FirebaseStatus>)
+
+    // this simply removes a challenge by
+    // the all active challenge node in firebase
+    // and it gets removed, by the list of indexes.
+    // it will loop throught he size of the index
+    // and remove it one index at a time
+    fun deleteBulkChallengesInAllActive(listIndexes: List<String>, _status: MutableStateFlow<FirebaseStatus>)
 }
