@@ -18,7 +18,7 @@ object Dependencies {
         const val TargetSdkVersion = 30
         const val TestInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         const val VersionCode = 1
-        const val VersionName = "1.3"
+        const val VersionName = "1.0"
 
         object BuildTypes  {
             const val Debug = "debug"
