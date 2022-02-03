@@ -4,5 +4,5 @@ data class CompletedChallengesResponse (
     val name: String = "",
     val bio: String = "",
     val categoryName: String = "",
-    val currentDay: Int = 0,
+    val numberOfDaysInChallenge: Int = 0,
 )

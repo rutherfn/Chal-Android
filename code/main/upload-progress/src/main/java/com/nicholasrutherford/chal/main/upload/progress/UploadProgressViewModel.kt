@@ -28,6 +28,7 @@ import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
+import con.nicholasrutherford.chal.data.challenges.CompletedChallenge
 import con.nicholasrutherford.chal.data.challenges.CompletedChallengesListResponse
 import con.nicholasrutherford.chal.data.challenges.banner.ChallengeBannerType
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -80,6 +81,8 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
     private var isPhotoReadyToBeUpdated = false
 
+    private var newCompletedChallengeIndex = application.getString(R.string.zero)
+
     val viewState = UploadProgressViewStateImpl()
 
     init {
@@ -103,7 +106,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         viewModelScope.launch {
             allUserCompletedChallengesList.collect { completedChallengeList ->
-                println("here is that default size: ${completedChallengeList.size}")
+                newCompletedChallengeIndex = completedChallengeList.size.toString()
                 _allUserCompletedChallengesList.value = completedChallengeList
             }
         }
@@ -372,37 +375,56 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         if (newCurrentDay != 7) {
 
-            writeActivePost.writePost(
-                uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
-                    title = title,
-                    description = body,
-                    category = 0, // todo: set this to actual data future ticket
-                    image = progressImageUrl ?: application.getString(R.string.empty_string),
-                    currentDay = newCurrentDay.toString(),
-                    username = username ?: application.getString(R.string.empty_string),
-                    usernameUrl = usernameUrl ?: application.getString(R.string.empty_string),
-                    dateChallengeExpired = currentChallengeExpireDay
-                )
+            val completedChallenge = CompletedChallenge(
+                name = "fake name 1",
+                bio = "Fake bio 1",
+                categoryName = "Fake category name 1",
+                numberOfDaysInChallenge = 7
             )
 
-            writeNewActiveChallengeImpl.writeCurrentDay(
-                uid,
-                selectedIndex.toString(),
-                newCurrentDay
+            val completedActiveChallengeIndex = if (newCompletedChallengeIndex == "0") {
+                newCompletedChallengeIndex
+            } else {
+                newCompletedChallengeIndex.toInt().plus(1).toString()
+            }
+
+            createFirebaseDatabase.createCompletedChallenge(
+                completedChallenge = completedChallenge,
+                completedActiveChallengeIndex = completedActiveChallengeIndex
             )
 
-            writeNewsFeedBanner(
-                title = application.getString(R.string.a_new_post_has_been_updated_fpr_the),
-                desc = title,
-                isVisible = true,
-                isCloseable = true
-            )
+//            writeActivePost.writePost(
+//                uid, selectedIndex, savedUserLastIndexOfProgress, currentPostsSize, ActivePost(
+//                    title = title,
+//                    description = body,
+//                    category = 0, // todo: set this to actual data future ticket
+//                    image = progressImageUrl ?: application.getString(R.string.empty_string),
+//                    currentDay = newCurrentDay.toString(),
+//                    username = username ?: application.getString(R.string.empty_string),
+//                    usernameUrl = usernameUrl ?: application.getString(R.string.empty_string),
+//                    dateChallengeExpired = currentChallengeExpireDay
+//                )
+//            )
+//
+//            writeNewActiveChallengeImpl.writeCurrentDay(
+//                uid,
+//                selectedIndex.toString(),
+//                newCurrentDay
+//            )
+//
+//            writeNewsFeedBanner(
+//                title = application.getString(R.string.a_new_post_has_been_updated_fpr_the),
+//                desc = title,
+//                isVisible = true,
+//                isCloseable = true
+//            )
 
             setShouldShowDismissProgressAsUpdated()
 
             showAddedProgressAlert(title, newCurrentDay)
             navigation.onNavigateBack()
         } else {
+
             // we need to take this challenge, remove it and then add the challenge in the user post list
         }
     }
