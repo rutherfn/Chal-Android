@@ -307,15 +307,13 @@ class UploadProgressViewModel @ViewModelInject constructor(
                             savedUserLastIndexOfProgress = activeChallengesPostsIndex
                             isSelectedIndex = true
 
-                            if (fetchSharedPreference.fetchChallengeModeSharedPreference()) {
-                                writeNewPost(
-                                    title,
-                                    caption,
-                                    selectedIndex,
-                                    currentChallengeDay,
-                                    currentChallengeExpireDay
-                                )
-                            }
+                            writeNewPost(
+                                title,
+                                caption,
+                                selectedIndex,
+                                currentChallengeDay,
+                                currentChallengeExpireDay
+                            )
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
@@ -408,19 +406,16 @@ class UploadProgressViewModel @ViewModelInject constructor(
     }
 
     private fun showAddedProgressAlert(challengeTitle: String, newCurrentDay: Int) {
-        if (fetchSharedPreference.fetchChallengeModeSharedPreference()) { // if we enable challenge mode from debug, show this copy
-            setShouldSetAlertAsUpdated(
-                title = application.getString(R.string.progress_has_been_updated),
-                message = application.getString(
-                    R.string.congrats_you_have_posted_progress_on_the_x_press_ok_to_see_progress_on_the_news_feed, challengeTitle
-                ),
-                type = AlertType.REGULAR_OK_ALERT,
-                shouldCloseAppAfterDone = false
-            )
-            setShouldShowDismissProgressAsUpdated()
-            setShouldShowAlertAsUpdated()
-        } else { // if we are not in challenge mode, then should possibly show new content in else statement
-        }
+        setShouldSetAlertAsUpdated(
+            title = application.getString(R.string.progress_has_been_updated),
+            message = application.getString(
+                R.string.congrats_you_have_posted_progress_on_the_x_press_ok_to_see_progress_on_the_news_feed, challengeTitle
+            ),
+            type = AlertType.REGULAR_OK_ALERT,
+            shouldCloseAppAfterDone = false
+        )
+        setShouldShowDismissProgressAsUpdated()
+        setShouldShowAlertAsUpdated()
 
         clearViewState()
     }
