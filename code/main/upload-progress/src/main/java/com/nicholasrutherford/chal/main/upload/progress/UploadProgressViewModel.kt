@@ -28,6 +28,7 @@ import com.nicholasrutherford.chal.shared.preference.fetch.FetchSharedPreference
 import com.nicholasrutherford.chal.shared.preference.remove.RemoveSharedPreference
 import com.nicholasrutherford.chal.ui.base_vm.BaseViewModel
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
+import con.nicholasrutherford.chal.data.challenges.CompletedChallengesListResponse
 import con.nicholasrutherford.chal.data.challenges.banner.ChallengeBannerType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -58,6 +59,9 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
     private val _loggedInUserProfilePicture = MutableStateFlow(application.getString(R.string.empty_string))
     private val loggedInUserProfilePicture: StateFlow<String> = _loggedInUserProfilePicture
+
+    private val _allUserCompletedChallengesList = MutableStateFlow(listOf<CompletedChallengesListResponse>())
+    val allUserCompletedChallengesList: StateFlow<List<CompletedChallengesListResponse>> = _allUserCompletedChallengesList
 
     private var currentPostsSize: Int = application.getString(R.string.zero).toInt()
     private var username: String? = null
@@ -97,6 +101,13 @@ class UploadProgressViewModel @ViewModelInject constructor(
             }
         }
 
+        viewModelScope.launch {
+            allUserCompletedChallengesList.collect { completedChallengeList ->
+                println("here is that default size: ${completedChallengeList.size}")
+                _allUserCompletedChallengesList.value = completedChallengeList
+            }
+        }
+
         viewState.toolbarTitle = application.getString(R.string.post_your_progress)
 
         fetchFirebaseDatabase.fetchAllUserActiveChallenges(_allUserActiveChallengesList)
@@ -104,6 +115,8 @@ class UploadProgressViewModel @ViewModelInject constructor(
 
         fetchFirebaseDatabase.fetchLoggedInUsername(_loggedInUsername)
         fetchFirebaseDatabase.fetchLoggedInUserProfilePicture(_loggedInUserProfilePicture)
+
+        fetchFirebaseDatabase.fetchAllUserCompletedChallenges(_allUserCompletedChallengesList)
     }
 
     fun onImageUpdate() {
@@ -224,7 +237,7 @@ class UploadProgressViewModel @ViewModelInject constructor(
         // todo: Steps to refactor said function
 
         // todo: Step 1: take all of these firebase impl and abstract them over to impl methods
-        // todo: Step 2: from there, each call can set a flow. the flow gets observed, and if its sucessful it goes to the next step
+        // todo: Step 2: from there, each call can set a flow. the flow gets observed, and if its successful it goes to the next step
         // todo: Step 3: check to see if we need both currentChallengeDay and currentChallengeExpireDate.
 
         // todo: Steps for flows calls

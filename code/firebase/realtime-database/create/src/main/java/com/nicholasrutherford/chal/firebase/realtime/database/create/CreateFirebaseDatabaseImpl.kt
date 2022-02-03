@@ -6,6 +6,7 @@ import com.nicholasrutherford.chal.firebase.auth.ChalFirebaseAuth
 import com.nicholasrutherford.chal.firebase.realtime.database.fetch.FetchFirebaseDatabase
 import com.nicholasrutherford.chal.helper.constants.*
 import con.nicholasrutherford.chal.data.challenges.ActiveChallenge
+import con.nicholasrutherford.chal.data.challenges.CompletedChallenge
 import javax.inject.Inject
 
 // TODO we need to add on failure timber logs as we ass sucess timber logs in the future!
@@ -20,6 +21,19 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
         .getReference(USERS)
     override val databaseReferenceActiveChallenges = FirebaseDatabase.getInstance()
         .getReference(USERS + ROUTE_ALL_ACTIVE_CHALLENGES)
+
+    private fun createNameOfCompletedChallenge(
+        completedActiveChallengeIndex: String,
+        name: String
+    ) {
+        uid?.let { firebaseUid ->
+            databaseReferenceUsers.child(nameOfCompletedChallengePath(firebaseUid, completedActiveChallengeIndex))
+                .setValue(name)
+                .addOnFailureListener {
+                    // TODO timber log here
+                }
+        }
+    }
 
     private fun createNameOfChallenge(
         allActiveChallengeIndex: Int,
@@ -39,6 +53,19 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
             .addOnFailureListener {
                 // TODO timber log here
             }
+    }
+
+    private fun createBioOfCompletedChallenge(
+        completedActiveChallengeIndex: String,
+        bio: String
+    ) {
+        uid?.let { firebaseUid ->
+            databaseReferenceUsers.child(bioCompletedChallengePath(firebaseUid, completedActiveChallengeIndex))
+                .setValue(bio)
+                .addOnFailureListener {
+                    // TODO timber log here
+                }
+        }
     }
 
     private fun createBioOfChallenge(
@@ -61,6 +88,19 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
         }
     }
 
+    private fun createCategoryNameOfCompletedChallenge(
+        completedActiveChallengeIndex: String,
+        categoryName: String
+    ) {
+        uid?.let { firebaseUid ->
+            databaseReferenceUsers.child(categoryNameCompletedChallengePath(firebaseUid, completedActiveChallengeIndex))
+                .setValue(categoryName)
+                .addOnFailureListener {
+                    // TODO timber log here
+                }
+        }
+    }
+
     private fun createCategoryNameOfChallenge(
         allActiveChallengeIndex: Int,
         userChallengeIndex: String,
@@ -75,6 +115,19 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
 
             databaseReferenceActiveChallenges.child(categoryAllActiveChallengePath(allActiveChallengeIndex))
                 .setValue(categoryName)
+                .addOnFailureListener {
+                    // TODO timber log here
+                }
+        }
+    }
+
+    private fun createDayOfCompletedChallenge(
+        completedActiveChallengeIndex: String,
+        numberOfDaysInChallenge: Int
+    ) {
+        uid?.let { firebaseUid ->
+            databaseReferenceUsers.child(daysInChallengeCompletedChallengePath(firebaseUid, completedActiveChallengeIndex))
+                .setValue(numberOfDaysInChallenge)
                 .addOnFailureListener {
                     // TODO timber log here
                 }
@@ -239,6 +292,14 @@ class CreateFirebaseDatabaseImpl @Inject constructor(
                     // timber log here
                 }
         }
+    }
+
+    override fun createCompletedChallenge(completedActiveChallengeIndex: String, completedChallenge: CompletedChallenge) {
+        createNameOfCompletedChallenge(completedActiveChallengeIndex = completedActiveChallengeIndex, name = completedChallenge.name)
+        createBioOfCompletedChallenge(completedActiveChallengeIndex = completedActiveChallengeIndex, bio = completedChallenge.bio)
+        createCategoryNameOfCompletedChallenge(completedActiveChallengeIndex = completedActiveChallengeIndex, categoryName = completedChallenge.categoryName)
+
+        createDayOfCompletedChallenge(completedActiveChallengeIndex = completedActiveChallengeIndex, numberOfDaysInChallenge = completedChallenge.numberOfDaysInChallenge)
     }
 
     override fun createUsername(username: String) {

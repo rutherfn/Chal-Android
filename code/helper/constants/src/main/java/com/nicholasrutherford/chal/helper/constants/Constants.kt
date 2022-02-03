@@ -62,6 +62,7 @@ const val CHALLENGE_BANNER_TYPE = "challengeBannerType"
 
 const val PROFILE_INFO = "/profileInfo/"
 const val ACTIVE_CHALLENGES = "/activeChallenges/"
+const val COMPLETED_CHALLENGES = "/completedChallenges/"
 const val CATEGORY_NAME = "categoryName"
 const val NAME = "name"
 const val NUMBER_OF_DAYS_OF_CHALLENGE = "numberOfDaysOfChallenge"
@@ -90,6 +91,12 @@ fun lastNameAccountPath(uid: String): String { return "$uid/$LAST_NAME" }
 fun bioAccountPath(uid: String): String { return "$uid/$BIO" }
 fun ageAccountPath(uid: String): String { return "$uid/$AGE" }
 fun challengeBannerTypePath(uid: String): String { return "$uid/$CHALLENGE_BANNER_TYPE"}
+
+// completed challenge paths
+fun nameOfCompletedChallengePath(uid: String, index: String): String { return "$uid$COMPLETED_CHALLENGES$index/$NAME"}
+fun bioCompletedChallengePath(uid: String, index: String): String { return "$uid$COMPLETED_CHALLENGES$index/$BIO"}
+fun categoryNameCompletedChallengePath(uid: String, index: String): String { return "$uid$COMPLETED_CHALLENGES$index/$CATEGORY_NAME"}
+fun daysInChallengeCompletedChallengePath(uid: String, index: String): String { return "$uid$COMPLETED_CHALLENGES$index$NUMBER_OF_DAYS_OF_CHALLENGE"}
 
 // active challenges paths
 fun nameOfChallengePath(uid: String, index: String): String { return "$uid$ACTIVE_CHALLENGES$index/$NAME"}

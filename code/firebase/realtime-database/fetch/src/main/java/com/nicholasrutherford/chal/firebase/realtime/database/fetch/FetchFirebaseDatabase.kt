@@ -5,6 +5,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.nicholasrutherford.chal.data.account.info.ProfileInfo
 import com.nicholasrutherford.chal.data.post.PostListResponse
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
+import con.nicholasrutherford.chal.data.challenges.CompletedChallengesListResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 
 interface FetchFirebaseDatabase {
@@ -24,6 +25,7 @@ interface FetchFirebaseDatabase {
     fun fetchAllChallenges(_allActiveChallengesList: MutableStateFlow<List<ActiveChallengesListResponse>>)
     fun fetchAllChallengesSize(_allActiveChallengesSize: MutableStateFlow<Int>)
     fun fetchAllUserActiveChallenges(_activeChallengesList: MutableStateFlow<List<ActiveChallengesListResponse>>)
+    fun fetchAllUserCompletedChallenges(_completedChallengesList: MutableStateFlow<List<CompletedChallengesListResponse>>)
     fun fetchIsUserEnrolledInAChallenge(_isUserEnrolledInChallenge: MutableStateFlow<Boolean>)
 
     fun fetchAllPosts(_postList: MutableStateFlow<List<PostListResponse>>)

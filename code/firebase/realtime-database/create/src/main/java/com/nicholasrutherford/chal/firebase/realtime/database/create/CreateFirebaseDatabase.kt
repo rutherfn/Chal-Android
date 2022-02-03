@@ -3,6 +3,7 @@ package com.nicholasrutherford.chal.firebase.realtime.database.create
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import con.nicholasrutherford.chal.data.challenges.ActiveChallenge
+import con.nicholasrutherford.chal.data.challenges.CompletedChallenge
 
 interface CreateFirebaseDatabase {
     val uid: String?
@@ -13,6 +14,8 @@ interface CreateFirebaseDatabase {
     fun createCurrentDayOfChallenge(allActiveChallengeIndex: Int, userChallengeIndex: String, currentDay: Int)
     fun createNewActiveChallenge(allActiveChallengeIndex: Int, userChallengeIndex: String, activeChallenge: ActiveChallenge)
     fun createChallengeBannerType(bannerType: Int)
+
+    fun createCompletedChallenge(completedActiveChallengeIndex: String, completedChallenge: CompletedChallenge)
 
     // user account info
     fun createUsername(username: String)

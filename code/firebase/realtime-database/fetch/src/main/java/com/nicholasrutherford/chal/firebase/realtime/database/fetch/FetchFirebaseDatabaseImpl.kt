@@ -10,6 +10,8 @@ import com.nicholasrutherford.chal.data.account.info.ProfileInfo
 import com.nicholasrutherford.chal.helper.constants.*
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesListResponse
 import con.nicholasrutherford.chal.data.challenges.ActiveChallengesResponse
+import con.nicholasrutherford.chal.data.challenges.CompletedChallengesListResponse
+import con.nicholasrutherford.chal.data.challenges.CompletedChallengesResponse
 import javax.inject.Inject
 
 class FetchFirebaseDatabaseImpl @Inject constructor(
@@ -182,6 +184,35 @@ class FetchFirebaseDatabaseImpl @Inject constructor(
                     }
                     _activeChallengesList.value = allChallengesList
                 }
+            })
+        }
+    }
+
+    override fun fetchAllUserCompletedChallenges(_completedChallengesList: MutableStateFlow<List<CompletedChallengesListResponse>>) {
+        firebaseAuth.uid?.let { firbeaseUid ->
+            val completedChallengesPathString = "$firbeaseUid$COMPLETED_CHALLENGES"
+
+            databaseUserReference.child(completedChallengesPathString).addValueEventListener(object: ValueEventListener {
+                override fun onCancelled(error: DatabaseError) = Unit
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val allCompletedChallengeList = arrayListOf<CompletedChallengesListResponse>()
+
+                    if (snapshot.exists()) {
+                        println("snapshot does not exist")
+                    } else {
+                        println("snaapshot exists")
+                    }
+
+                    for (completedChallenges in snapshot.children) {
+                        completedChallenges.getValue(CompletedChallengesResponse::class.java).let { completedChallengeResponse ->
+                            completedChallengeResponse?.let { data ->
+                                allCompletedChallengeList.add(CompletedChallengesListResponse(completedChallenges = data))
+                            }
+                        }
+                    }
+                }
+
             })
         }
     }

@@ -74,6 +74,7 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
 
         viewModelScope.launch {
         allUserActiveChallengesList.collect { userActiveChallengesList ->
+            println("here is the size: ${userActiveChallengesList.size}")
             allUserChallengesList = userActiveChallengesList
             }
         }
@@ -193,6 +194,8 @@ class ChallengeDetailViewModel @ViewModelInject constructor(
     private fun attemptToEnrollUserIntoActiveChallenge(joinChallenge: JoinChallenge) {
         if (joinChallenge.isAbleToEnroll) {
             val starterIndex = joinChallenge.size.toString()
+
+            println("here is a default size: $starterIndex")
 
             createFirebaseDatabase.createNewActiveChallenge(
                 allUserChallengesList.size,
